@@ -1,0 +1,97 @@
+﻿Bolsa_Quartzite_Material
+       rdfs:type 	Rock_Material;
+		rdfs:label  'Bolas Quartzite, basal arkose';
+        hasConstituent    	Quartz_grains;
+		hasConstituent    	Feldspar_grains;
+		hasConstituent    	Clay_matrix;
+        isConstituentOf  	Bolsa_Quartzite_Formation;
+        hasPhysicalProperty 	constituent_part1
+		hasPhysicalProperty 	constituent_part2.
+		
+		
+		
+Quartz_grains
+		rdfs:type Granular_Material;
+		hasConstituent Quartz_mineral;
+		hasPhysicalProperty 	
+			[rdfs:type   	GrainShape 
+       		     hasValue  	<http://geosciml.org/particleShape/subangular>];
+		hasPhysicalProperty 	
+			[rdfs:type   	GrainSizeMin 
+       		     hasValue  	.05 
+       		     hasUOM	[rdfs:type mm]];
+		hasPhysicalProperty 	
+			[rdfs:type   	GrainSizeMax 
+       		     hasValue  	8 
+       		     hasUOM	[rdfs:type mm]];	
+		hasPhysicalProperty 
+			[rdfs:type   	GrainSizeAverage 
+				hasPart
+					[rdfs:type MeanValue
+					 hasValue 3;
+					 hasUOM [rdfs:type mm]];
+				hasPart
+					[rdfs:type StandardDeviation
+					hasValue .06;
+					hasUOM [rdfs:type mm]]].
+		
+Feldspar_grains
+		rdfs:type Granular_Material;
+		hasConstituent Feldspar_mineral;
+		hasPhysicalProperty 	
+			[rdfs:type   	GrainShape 
+       		     hasValue  	<http://geosciml.org/particleShape/subangular>];
+		hasPhysicalProperty 	
+			[rdfs:type   	GrainSizeMin 
+       		     hasValue  	.02 
+       		     hasUOM	[rdfs:type mm]];
+		hasPhysicalProperty 	
+			[rdfs:type   	GrainSizeMax 
+       		     hasValue  	5 
+       		     hasUOM	[rdfs:type mm]].
+			
+Clay_matrix
+		rdfs:type Granular_Material;
+		hasConstituent Clay_mineral;		
+		hasPhysicalProperty 	
+			[rdfs:type   	GrainSizeMax 
+       		     hasValue  	.005 
+       		     hasUOM	[rdfs:type mm]].
+				 
+				 
+Quartz_mineral
+       	rdfs:type 		Mineral;
+		hasConstituent  Silicon_element;
+		hasConstituent  Oxygen_element; 
+		sameAs <https://en.wikipedia.org/wiki/Quartz>.
+
+		
+Feldspar_mineral
+       	rdfs:type 		Mineral;
+		hasConstituent  Silicon_element;
+		hasConstituent  Oxygen_element; 
+		hasConstituent  Sodium_element; 
+		hasConstituent  Calcium_element; 
+		hasConstituent  Potassium_element; 
+		sameAs <https://en.wikipedia.org/wiki/Feldspar>.
+       	
+
+constituent_part1
+	rdfs:type Proportion;
+	proportionOf Quartz_grains;
+	proportionFor Bolsa_Quarzite_Material;
+	hasValue 45;
+	hasUOM [rdfs:type uom:percent];
+	
+constituent_part2
+	rdfs:type Proportion;
+	proportionOf Feldspar_grains;
+	proportionFor Bolsa_Quarzite_Material;
+	hasValue 50;
+	hasUOM [rdfs:type uom:percent];
+	
+rdfs:type Proportion;
+	proportionOf Clay_matrix;
+	proportionFor Bolsa_Quarzite_Material;
+	hasValue 5;
+	hasUOM [rdfs:type uom:percent].
