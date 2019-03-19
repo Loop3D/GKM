@@ -1,13 +1,23 @@
 ﻿Bolsa_Quartzite_Material
        rdfs:type 	Rock_Material;
-		rdfs:label  'Bolas Quartzite, basal arkose';
+		rdfs:label  'Bolsa Quartzite, basal arkose';
         hasConstituent    	Quartz_grains;
 		hasConstituent    	Feldspar_grains;
 		hasConstituent    	Clay_matrix;
         isConstituentOf  	Bolsa_Quartzite_Formation;
-        hasPhysicalProperty 	constituent_part1
-		hasPhysicalProperty 	constituent_part2.
-		
+        hasPhysicalProperty 	
+			[rdfs:type Proportion;
+				proportionOf Feldspar_grains;
+				proportionFor Bolsa_Quarzite_Material;
+				hasValue 50;
+				hasUOM [rdfs:type uom:percent]];
+	
+		hasPhysicalProperty 	_:constituent_part2;
+		hasPhysicalProperty 	_:constituent_part3;
+		hasPhysicalProperty 	
+			[rdfs:type color;
+				hasValue <http://colors.org/maroonbrown>].
+	
 		
 		
 Quartz_grains
@@ -37,7 +47,7 @@ Quartz_grains
 		
 Feldspar_grains
 		rdfs:type Granular_Material;
-		hasConstituent Feldspar_mineral;
+		hasConstituent _:Feldspar_mineral;
 		hasPhysicalProperty 	
 			[rdfs:type   	GrainShape 
        		     hasValue  	<http://geosciml.org/particleShape/subangular>];
@@ -73,15 +83,10 @@ Feldspar_mineral
 		hasConstituent  Sodium_element; 
 		hasConstituent  Calcium_element; 
 		hasConstituent  Potassium_element; 
-		sameAs <https://en.wikipedia.org/wiki/Feldspar>.
+		sdo:seeAlso <https://en.wikipedia.org/wiki/Feldspar>.
        	
 
-constituent_part1
-	rdfs:type Proportion;
-	proportionOf Quartz_grains;
-	proportionFor Bolsa_Quarzite_Material;
-	hasValue 45;
-	hasUOM [rdfs:type uom:percent];
+
 	
 constituent_part2
 	rdfs:type Proportion;
@@ -90,7 +95,8 @@ constituent_part2
 	hasValue 50;
 	hasUOM [rdfs:type uom:percent];
 	
-rdfs:type Proportion;
+constituent_part3
+	rdfs:type Proportion;
 	proportionOf Clay_matrix;
 	proportionFor Bolsa_Quarzite_Material;
 	hasValue 5;
