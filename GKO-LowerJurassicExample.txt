@@ -1,65 +1,36 @@
 Lower_Jurassic_Epoch
-		rdfs:type 	Epoch;
-		rdfs:label  'Lower Jurassic time interval';
-		isPartOf  <http://resource.geosciml.org/vocabulary/timescale/isc2017>;
-		hasYoungerDate 
-			[rdfs:type Geologic Time Date;
-			hasDate 	174.1 ;
-			hasUncertainty 1.0;
-			hasUOM [rdfs:type uom:MillionYearsBP]
-			];
-		hasOlderDate 
-			[rdfs:type Geologic Time Date;
-			hasDate 201.3 ;
-			hasUncertainty 0.2;
-			hasUOM [rdfs:type uom:MillionYearsBP]
-			];
-		isRealizedBy Lower_Jurassic_Chronostrat_Unit.
+	rdf:type Epoch;
+	rdfs:comment 'Epoch is a subclass of Geochronologic Era';
+	rdfs:label  'Lower Jurassic time interval';
+	rdfs:comment 'This is a temporal interval';
+	isPartOf  <http://resource.geosciml.org/vocabulary/timescale/isc2017>;
+	hasYoungerDate 
+		[rdfs:type Geochronologic Boundary;
+		hasDate 	174.1 ;
+		hasUncertainty 1.0;
+		hasUOM [rdfs:type uom:MillionYearsBP];
+		isRealizedBy <http://resource.geosciml.org/classifier/ics/ischart/BaseMiddleJurassic>;
+		rdfs:comment 'the Base Middle Jurassic class represents all rock body surfaces correlated with the surface at the Global Stratotype Point';
+		stratotype <http://resource.geosciml.org/classifier/ics/ischart/BaseMiddleJurassicSP>
+		];
+	hasOlderDate 
+		[rdfs:type Geochronologic Boundary;
+		hasDate 201.3 ;
+		hasUncertainty 0.2;
+		hasUOM [rdfs:type uom:MillionYearsBP];
+		isRealizedBy  <http://resource.geosciml.org/classifier/ics/ischart/BaseJurassic>;
+		stratotype <http://resource.geosciml.org/classifier/ics/ischart/BaseJurassicSP>
+		].
 		
 		
 		
 		
 Lower_Jurassic_Chronostrat_Unit
-	rdfs:type Series;
+	rdf:type Series;
 	realizes Lower_Jurassic_Epoch;
 	rdfs:label 'Lower Jurassic rocks';
-	skos:note 'see Table 3 in http://www.stratigraphy.org/upload/bak/chron.htm for hierarchy of chronostrat and geochron unit names';
-	hasPart [
-		rdfs:type GSSP, RockBodyBottom;
-		referenceEndurant [
-			rdfs:type StratigraphicPoint;
-			hasSpatialLocation [
-				lat ;
-				long ;
-				hasUncertainty 
-			];
-		hasEventHistory [
-		#FO of ammonite Psiloceras spelae tirolicum, FO of aragonitic foraminifer Praegubkinella turgescens
-		
-		]
-		] ;
-		hasTemporalProperty [
-			rdfs:type geolgoicAge
-		]
+	rdfs:comment 'see Table 3 in http://www.stratigraphy.org/upload/bak/chron.htm for hierarchy of chronostrat and geochron unit names'
+	rdfs:comment 'ISC2017 time scale does not define stratotypes for the Geochronologic Eras it defines'.
+
 	
-	]
 		
-		
-		
-		
-        hasConstituent    	Quartz_grains;
-		hasConstituent    	Feldspar_grains;
-		hasConstituent    	Clay_matrix;
-        isConstituentOf  	Bolsa_Quartzite_Formation;
-        hasPhysicalProperty 	
-			[rdfs:type Proportion;
-				proportionOf Feldspar_grains;
-				proportionFor Bolsa_Quarzite_Material;
-				hasValue 50;
-				hasUOM [rdfs:type uom:percent]];
-	
-		hasPhysicalProperty 	_:constituent_part2;
-		hasPhysicalProperty 	_:constituent_part3;
-		hasPhysicalProperty 	
-			[rdfs:type color;
-				hasValue <http://colors.org/maroonbrown>].
