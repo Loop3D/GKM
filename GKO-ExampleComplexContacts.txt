@@ -1,4 +1,5 @@
 rdfs:comment 'this example references the GeologyScenarioForTesting diagram';
+rdfs:comment 'Focus is Js, a Jurassic age sedimentary unit that has a lower clastic part with an internal tuff marker bed, and an upper limestone part. The unit unconformably overlies tilted Paleozoic strata that overly Early Proterozoic metamorphic rocks; it is intruded by a Cretaceous granite, and the granite and Js are intruded by a Cretaceous diorite dike. After the igneous activity a period of exumation and erosion removed the cover on the Jurassic sediment and Cretaceous igneous rocks, and Late Miocene sediment covered this unconformity.'
 
 MsFormation
 	rdf:type Formation;
@@ -6,28 +7,29 @@ MsFormation
 	rdfs:comment 'fine-grained sandstone, minor marl, some coquina';
 
 	hasConstituent  [
-		rdf:type Rock Material
+		rdf:type Rock Material;
+		rdfs:comment 'TBD'.
 		];
 	hasPart _:baseMs-2;
-	hasPart _:topMs.
+	hasPart _:topMs-1.
 	
 topMs-1
-	rdf:type Rock Body Top, Depositional Surface;
-	
+	rdf:type Rock Body Top;
 	rdfs:comment 'top of Ms formation';
 	rdfs:label  'Top Ms';
 	rdfs:comment 'This is a simple disconformable contact';
-	
 	host _:MsFormation.
 	
 
 baseMs-2
-	rdf:type Rock Body Bottom, Depositional Surface;
+	rdf:type Rock Body Bottom;
 	
 	rdfs:comment 'base of Ms formation';
 	rdfs:label  'Base Ms';
 	rdfs:comment 'This is an unconformity; Ms overlies Jurassic sediment, Cretaceous dike and granite';
-	
+	participatesIn [
+		rdf:type Deposition.
+	];
 	host _:MsFormation
 	hasPart [
 		baseMs-2.1
@@ -51,99 +53,53 @@ baseMs-2
 JsFormation
 	rdf:type Formation;
 	rdfs:label 'Js Formation';
-	rdfs:comment 'upper part is massive limestone with abundant ammonites';
-	rdfs:comment 'lower part is fining-upward sequence from conglomeratic sandstone to fine grained sandstone';
-	rdfs:comment 'marker bed is a tuff in the upper part of the lower clastic interval';
-	rdfs:comment 'clasts of Cs Quartzite are abundant in the lower part of the unit';
+	rdfs:comment 'details of unit description are in a separate Example: GKO-ExampleFormationJs.txt';
+
 	
 	hasTemporalProperty [
 		rdf:type ChronostratigraphicAge
 		hasYoungerAge <http://resource.geosciml.org/classifier/ics/ischart/Jurassic>;
 		hasOlderAge <http://resource.geosciml.org/classifier/ics/ischart/Jurassic>.
 	];
-	hasPart [
-		JsFormation-lower
-			rdf:type Rock Body Part;
-			underlies _:JsFormation-upper;
-			rdfs:comment 'underlies, overlies, within are subproperty of relatedTo';
-			hasConstituent  [
-				lith_1
-					rdf:type Conglomeratic Sandstone;
-					rdfs:comment 'need to capture gradational fining upward relationship';
-					hasPart [
-						rdf:type Rock Body Top, Depositional Surface, Gradational Boundary Surface.					
-						];
-					underlies _:lith_2.
-			];
-			hasConstituent  [
-				lith_2
-					rdf:type Sandstone;
-					hasPart [
-						rdf:type Rock Body Top, Depositional Surface, Gradational Boundary Surface.					
-						];
-					underlies _:lith_3;
-					overlies _:lith_1.
-			];
-			hasConstituent  [
-				lith_3
-				 rdf:type Fine-grained Sandstone
-				 overlies _:lith_2.
-			];
-			hasPart [
-				JsFormationMarker-6.4
-					rdf:type Bed;
-					rdfs:comment 'Bed is viewed as a degenerate volume, considered a surface that has a hasConstiuent property, and hasPart that represents contacts of the bed';
-					hasConstituent  <http:\\uri.org\Ballyloghlin_tuff>;
-					hasPart [
-						rdf:type Rock Body Top, Depositional Surface, Sharp Boundary Surface.					
-						];
-					hasPart [
-						rdf:type Rock Body Bottom, Depositional Surface, Sharp Boundary Surface.					
-						];
-					within _:lith_3.
-				]
-			hasPart _:baseJs-6.
-		];
-	hasPart [
-		JsFormation-upper
-			rdf:type Rock Body Part;
-			hasConstituent  [
-				lith_4
-					rdf:type Limestone.
-			];
-			overlies _:JsFormation-lower
-			hasPart [
-				rdf:type Rock Body Bottom, Depositional Surface, Sharp Boundary Surface.					
-			];
-			hasPart _:topJs-2.
-		];
+
 	hasPart _:baseJs-6;
 	hasPart _:topJs-2;
-	rdfs:comment 'the following parts are not elucidated in this example, but are referenced in the Contact instances below';
+	rdfs:comment 'the following parts are not elucidated in this example, but are referenced in the Contact instances below. These surfaces would participate in intrusion and also contact metamorphism processes';
 	hasPart _:KdInJsDikeContact-3.2.4;
 	hasPart _:KdInJsDikeContact-3.1.4;
 	hasPart _:KgInJsIntrusiveContact-4.2.
 	
+
+	
 baseJs-6
 	rdf:type Rock Body Bottom, Depositional Surface;
-	haspart [
-		baseJs-6.1;
-		rdf:type Rock Body Bottom, Depositional Surface;
-		rdfs:comment 'Js on Ss surface'.
+	hasPart [
+		baseJs-6.1
+			rdf:type Rock Body Bottom;
+			rdfs:comment 'Js on Ss surface';
+			participatesIn [
+				rdf:type Deposition.].
 		];
-	haspart [
-		baseJs-6.2;
-		rdf:type Rock Body Bottom, Depositional Surface;
-		rdfs:comment 'Js on Os surface'.
+	hasPart [
+		baseJs-6.2
+			rdf:type Rock Body Bottom;
+			rdfs:comment 'Js on Os surface';
+			participatesIn [
+				rdf:type  Deposition.].
 		];
-	haspart [
-		baseJs-6.3;
-		rdf:type Rock Body Bottom, Depositional Surface;
-		rdfs:comment 'Js on Xm surface'.
+	hasPart [
+		baseJs-6.3
+			rdf:type Rock Body Bottom;
+			rdfs:comment 'Js on Xm surface';
+			participatesIn [
+				rdf:type  Deposition.].
 		].
 		
 topJs-2.1
-	rdf:type Rock Body Top, Erosion Surface.
+	rdf:type Rock Body Top;
+	participatesIn [
+		rdf:type Erosion.
+	].
 	
 		
 KdDike
@@ -160,58 +116,62 @@ KdDike
 		];
 	haspart [
 		upSideKd-3.2
-			rdf:type Intrusive Surface;
+			rdf:type Rock Body Surface;
 			rdfs:comment 'upper side of dike';
-			haspart [
-				upSideKd-3.2.1;
-					rdf:type Intrusive Surface;
+			participatesIn [
+				rdf:type Intrusion.
+			];
+			hasPart [
+				upSideKd-3.2.1
 					rdfs:comment 'dike intrudes Xm'.
 				];
-			haspart [
-				upSideKd-3.2.2;
-					rdf:type Intrusive Surface;
+			hasPart [
+				upSideKd-3.2.2
 					rdfs:comment 'dike intrudes Cb'.
 				];
-			haspart [
-				upSideKd-3.2.3;
-					rdf:type Intrusive Surface;
+			hasPart [
+				upSideKd-3.2.3
 					rdfs:comment 'dike intrudes Kg'.
 				];
-			haspart [
-				upSideKd-3.2.4;
-					rdf:type Intrusive Surface;
+			hasPart [
+				upSideKd-3.2.4
 					rdfs:comment 'dike intrudes Js'.
 				]
 			];
 	hasPart [
 		downSideKd-3.1
-			rdf:type Intrusive Surface;
+			rdf:type Rock Body Surface;
 			rdfs:comment 'lower side of dike';
+			participatesIn [
+				rdf:type Intrusion.
+				];
 			haspart [
-				downSideKd-3.1.1;
-					rdf:type Intrusive Surface;
+				downSideKd-3.1.1 
+					rdf:type Rock Body Surface;
 					rdfs:comment 'could have more properties describing contact effectw sith Xm here'.
 				];
 			haspart [
-				downSideKd-3.1.2;
-					rdf:type Intrusive Surface.
+				downSideKd-3.1.2 
+					rdf:type Rock Body Surface.
 				];
 			haspart [
-				downSideKd-3.1.3;
-					rdf:type Intrusive Surface.
+				downSideKd-3.1.3 
+					rdf:type Rock Body Surface.
 				];
 			haspart [
-				downSideKd-3.1.4;
-					rdf:type Intrusive Surface;
+				downSideKd-3.1.4 
+					rdf:type Rock Body Surface;
 					rdfs:comment 'dike intrudes Js'.
 				].
 		];
 	hasPart [
 		KdUnderMs
-			rdf:type Erosion Surface;
-			rdfs:comment 'Eroded surface under Ms'.
+			rdf:type Rock Body Surface;
+			rdfs:comment 'Eroded surface under Ms';
+			participatesIn [
+				rdf:type Erosion.
+			].
 		].
-	].
 	
 KgGranite
 	rdf:type Rock Body;	
@@ -228,43 +188,48 @@ KgGranite
 	rdfs:comment 'contacts are complicated! Here are the parts:';
 	hasPart [
 		KgIntrusiveBoundary-4.1
-			rdf:type Intrusive Surface
+			rdf:type Rock Body Surface;
 			rdfs:comment 'Kg intruding the tilted Xm-Cb-Os-Ss sequence';
+			participatesIn Intrusion;
 			hasPart	[
 				KgIntrusiveBoundary-4.1.1
-					rdf:type Intrusive Surface
+					rdf:type Rock Body Surface;
 					rdfs:comment 'Kg intruding the tilted Xm'
 				];
 			hasPart	[
 				KgIntrusiveBoundary-4.1.2
-					rdf:type Intrusive Surface
+					rdf:type Rock Body Surface;
 					rdfs:comment 'Kg intruding tilted Cb'
 				];
 			hasPart	[
 				KgIntrusiveBoundary-4.1.3
-					rdf:type Intrusive Surface
+					rdf:type Rock Body Surface;
 					rdfs:comment 'Kg intruding tilted Os'
-				]
+				].
 			];
 	hasPart [
 		KgIntrusiveBoundary-3.1.3
 			rdfs:comment 'Kg in footwall wall of Kd contacts';
-			rdf:type Intrusive Surface.
+			rdf:type Rock Body Surface;
+			participatesIn Intrusion.
 		];
 	hasPart [
 		KgIntrusiveBoundary-3.2.3
 			rdfs:comment 'Kg in Hanging wall of Kd';
-			rdf:type Intrusive Surface.
+			rdf:type Rock Body Surface;
+			participatesIn Intrusion.
 		];
 	hasPart [
 		KgIntrusiveBoundary-4.2
 			rdfs:comment 'Kg intruding Js';
-			rdf:type Intrusive Surface.
+			rdf:type Rock Body Surface;
+			participatesIn Intrusion.
 		];
 	hasPart [
 		KgErosionSurface-2.3
 			rdfs:comment 'Kg erosion surface overlain by Ms';
-			rdf:type Erosion Surface.
+			rdf:type Rock Body Surface;
+			participatesIn Erosion.
 		].
 		
 contact_Ms_on_Js
@@ -290,7 +255,7 @@ contact_Kd_in_Js
 	
 contact_Kg_in_Js
 	rdf:type Contact;
-	rdfs:label 'relational feature, Ms formation overlies Js formation';
+	rdfs:label 'relational feature, Kg granite intrudes Js formation';
 	realizedBy _:KgIntrusiveBoundary-4.2, _:KgInJsIntrusiveContact-4.2;
 	youngerHost _:KgGranite;
 	olderHost _:JsFormation.
@@ -300,7 +265,7 @@ rdfs:comment 'Xm, Cb, Os, and Ss and their boundary surfaces not elucidated here
 contact_Js_on_Xm
 	rdf:type Contact;
 	rdfs:label 'relational feature, Js formation overlies Xm Rock Body';
-	realizedBy _:baseJs-6.3, _:XmBoundary-6.3;
+	host _:baseJs-6.3, _:XmBoundary-6.3;
 	youngerHost _:JsFormation;
 	olderHost _:XmFormation.
 	
