@@ -25,46 +25,11 @@
     
 
 
-    <!-- http://geoscience.ca/3D/ontology/2019/1/causedBy -->
-
-    <owl:ObjectProperty rdf:about="http://geoscience.ca/3D/ontology/2019/1/causedBy">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://geoscience.ca/3D/ontology/2019/1/hasHost -->
-
-    <owl:ObjectProperty rdf:about="http://geoscience.ca/3D/ontology/2019/1/hasHost">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
-        <rdfs:comment xml:lang="en">object property between two entities wherein  one entity is specifically dependent on the other.</rdfs:comment>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://geoscience.ca/3D/ontology/2019/1/isPartOf -->
-
-    <owl:ObjectProperty rdf:about="http://geoscience.ca/3D/ontology/2019/1/isPartOf">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
-        <owl:inverseOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/common/hasPart"/>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://geoscience.ca/3D/ontology/2019/1/numericAge -->
-
-    <owl:ObjectProperty rdf:about="http://geoscience.ca/3D/ontology/2019/1/numericAge">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
-        <rdfs:comment xml:lang="en">Association from  a Geochronologic age to a Numeric Age Range Object</rdfs:comment>
-        <rdfs:label xml:lang="en">numeric age</rdfs:label>
-    </owl:ObjectProperty>
-    
-
-
     <!-- http://geoscience.ca/3D/ontology/2019/1/common/hasPart -->
 
     <owl:ObjectProperty rdf:about="http://geoscience.ca/3D/ontology/2019/1/common/hasPart">
         <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <owl:inverseOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/geologicfeature/isPartOf"/>
     </owl:ObjectProperty>
     
 
@@ -94,6 +59,41 @@
     
 
 
+    <!-- http://geoscience.ca/3D/ontology/2019/1/geologicfeature/causedBy -->
+
+    <owl:ObjectProperty rdf:about="http://geoscience.ca/3D/ontology/2019/1/geologicfeature/causedBy">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/geologicfeature/hasHost -->
+
+    <owl:ObjectProperty rdf:about="http://geoscience.ca/3D/ontology/2019/1/geologicfeature/hasHost">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:comment xml:lang="en">object property between two entities wherein  one entity is specifically dependent on the other.</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/geologicfeature/isPartOf -->
+
+    <owl:ObjectProperty rdf:about="http://geoscience.ca/3D/ontology/2019/1/geologicfeature/isPartOf">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/geologicfeature/numericAge -->
+
+    <owl:ObjectProperty rdf:about="http://geoscience.ca/3D/ontology/2019/1/geologicfeature/numericAge">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:comment xml:lang="en">Association from  a Geochronologic age to a Numeric Age Range Object</rdfs:comment>
+        <rdfs:label xml:lang="en">numeric age</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
     <!-- http://www.w3.org/2002/07/owl#topObjectProperty -->
 
     <rdf:Description rdf:about="http://www.w3.org/2002/07/owl#topObjectProperty">
@@ -114,30 +114,27 @@ A boundary in 3D space that is neither line nor point, but area</rdfs:comment>
     
 
 
-    <!-- http://geoscience.ca/3D/ontology/2019/1/Dissective_Morphologic_Feature -->
+    <!-- http://geoscience.ca/3D/ontology/2019/1/common/Categorical_Value -->
 
-    <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/Dissective_Morphologic_Feature">
-        <rdfs:subClassOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/common/Morphologic_Feature"/>
-        <rdfs:comment xml:lang="en">Dissective Material Feature (DMF): 
-is homomerous (penetrative): all parts of an object host the same type of feature (the feature penetrates the host&apos;s material).
-
-Includes:
---- grain  / wood
---- honeycomb pattern / beehive
---- geological texture, fabric, foliation
-DMF(x) &lt;--&gt;  exists z forall y [hasHost(z,x) ^ isPartOf(y,z) --&gt; exists x1 [hasHost(y,x1) ^ DMF(x1)]]</rdfs:comment>
+    <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/common/Categorical_Value">
+        <rdfs:label xml:lang="en">Categorical Value</rdfs:label>
     </owl:Class>
     
 
 
-    <!-- http://geoscience.ca/3D/ontology/2019/1/common/Time_Interval -->
+    <!-- http://geoscience.ca/3D/ontology/2019/1/common/Corner -->
 
-    <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/common/Time_Interval">
-        <rdfs:subClassOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/common/TemporalRegion"/>
-        <rdfs:label xml:lang="en">Time Interval</rdfs:label>
+    <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/common/Corner">
+        <rdfs:subClassOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/common/Physical_Boundary"/>
     </owl:Class>
     
 
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/common/Edge -->
+
+    <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/common/Edge">
+        <rdfs:subClassOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/common/Physical_Boundary"/>
+    </owl:Class>
     
 
 
@@ -158,47 +155,6 @@ Includes:
 
 NDMF(x) &lt;--&gt;  exists z, y [hasHost(z,x) ^ isPartOf(y,z) --&gt; not exists x1 [hasHost(y,x1) ^ NDMF(x1)]]</rdfs:comment>
         <rdfs:label xml:lang="en">Indissective Morphologic Feature</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://geoscience.ca/3D/ontology/2019/1/common/SpatialEntity -->
-
-    <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/common/SpatialEntity">
-        <rdfs:comment xml:lang="en">Class of objects that represent locations within the Earth.</rdfs:comment>
-        <rdfs:label xml:lang="en">Spatial Entity</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://geoscience.ca/3D/ontology/2019/1/common/Surface -->
-
-    <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/common/Surface">
-        <rdfs:subClassOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/common/Physical_Boundary"/>
-    </owl:Class>
-    
-
-
-    <!-- http://geoscience.ca/3D/ontology/2019/1/common/TemporalRegion -->
-
-    <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/common/TemporalRegion">
-        <rdfs:label xml:lang="en">Temporal Region</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://geoscience.ca/3D/ontology/2019/1/common/Corner -->
-
-    <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/common/Corner">
-        <rdfs:subClassOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/common/Physical_Boundary"/>
-    </owl:Class>
-    
-
-
-    <!-- http://geoscience.ca/3D/ontology/2019/1/common/Edge -->
-
-    <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/common/Edge">
-        <rdfs:subClassOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/common/Physical_Boundary"/>
     </owl:Class>
     
 
@@ -243,10 +199,36 @@ PB(x) &lt;--&gt; RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, co
     
 
 
-    <!-- http://geoscience.ca/3D/ontology/2019/1/common/abstractvalue -->
+    <!-- http://geoscience.ca/3D/ontology/2019/1/common/SpatialEntity -->
 
-    <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/common/abstractvalue">
-        <rdfs:label xml:lang="en">Categorical Value</rdfs:label>
+    <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/common/SpatialEntity">
+        <rdfs:comment xml:lang="en">Class of objects that represent locations within the Earth.</rdfs:comment>
+        <rdfs:label xml:lang="en">Spatial Entity</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/common/Surface -->
+
+    <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/common/Surface">
+        <rdfs:subClassOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/common/Physical_Boundary"/>
+    </owl:Class>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/common/Temporal_Region -->
+
+    <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/common/Temporal_Region">
+        <rdfs:label xml:lang="en">Temporal Region</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/common/Time_Interval -->
+
+    <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/common/Time_Interval">
+        <rdfs:subClassOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/common/Temporal_Region"/>
+        <rdfs:label xml:lang="en">Time Interval</rdfs:label>
     </owl:Class>
     
 
@@ -278,15 +260,27 @@ PB(x) &lt;--&gt; RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, co
     
 
 
-
-
-
-
     <!-- http://geoscience.ca/3D/ontology/2019/1/common/uom -->
 
     <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/common/uom">
-        <rdfs:subClassOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/common/abstractvalue"/>
+        <rdfs:subClassOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/common/Categorical_Value"/>
         <rdfs:label xml:lang="en">Unit of Measurement</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/geologicfeature/Dissective_Morphologic_Feature -->
+
+    <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/geologicfeature/Dissective_Morphologic_Feature">
+        <rdfs:subClassOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/common/Morphologic_Feature"/>
+        <rdfs:comment xml:lang="en">Dissective Material Feature (DMF): 
+is homomerous (penetrative): all parts of an object host the same type of feature (the feature penetrates the host&apos;s material).
+
+Includes:
+--- grain  / wood
+--- honeycomb pattern / beehive
+--- geological texture, fabric, foliation
+DMF(x) &lt;--&gt;  exists z forall y [hasHost(z,x) ^ isPartOf(y,z) --&gt; exists x1 [hasHost(y,x1) ^ DMF(x1)]]</rdfs:comment>
     </owl:Class>
 </rdf:RDF>
 
