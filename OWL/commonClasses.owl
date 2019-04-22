@@ -25,6 +25,16 @@
     
 
 
+    <!-- http://geoscience.ca/3D/ontology/2019/1/common/hasConstituent -->
+
+    <owl:ObjectProperty rdf:about="http://geoscience.ca/3D/ontology/2019/1/common/hasConstituent">
+        <owl:inverseOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/common/isConstituentOf"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+        <rdfs:domain rdf:resource="http://geoscience.ca/3D/ontology/2019/1/common/Amount_Of_Material"/>
+    </owl:ObjectProperty>
+    
+
+
     <!-- http://geoscience.ca/3D/ontology/2019/1/common/hasPart -->
 
     <owl:ObjectProperty rdf:about="http://geoscience.ca/3D/ontology/2019/1/common/hasPart">
@@ -39,6 +49,15 @@
     <owl:ObjectProperty rdf:about="http://geoscience.ca/3D/ontology/2019/1/common/hasParticipant">
         <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
         <owl:inverseOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/common/participantIn"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/common/isConstituentOf -->
+
+    <owl:ObjectProperty rdf:about="http://geoscience.ca/3D/ontology/2019/1/common/isConstituentOf">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+        <rdfs:range rdf:resource="http://geoscience.ca/3D/ontology/2019/1/common/Amount_Of_Material"/>
     </owl:ObjectProperty>
     
 
@@ -114,6 +133,20 @@ A boundary in 3D space that is neither line nor point, but area</rdfs:comment>
     
 
 
+    <!-- http://geoscience.ca/3D/ontology/2019/1/common/Amount_Of_Material -->
+
+    <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/common/Amount_Of_Material">
+        <rdfs:subClassOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/common/Amount_Of_Matter"/>
+    </owl:Class>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/common/Amount_Of_Matter -->
+
+    <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/common/Amount_Of_Matter"/>
+    
+
+
     <!-- http://geoscience.ca/3D/ontology/2019/1/common/Categorical_Value -->
 
     <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/common/Categorical_Value">
@@ -134,6 +167,30 @@ A boundary in 3D space that is neither line nor point, but area</rdfs:comment>
 
     <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/common/Edge">
         <rdfs:subClassOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/common/Physical_Boundary"/>
+    </owl:Class>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/common/Element -->
+
+    <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/common/Element">
+        <rdfs:subClassOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/common/Amount_Of_Material"/>
+    </owl:Class>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/common/Fluid -->
+
+    <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/common/Fluid">
+        <rdfs:subClassOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/common/State_Of_Material"/>
+    </owl:Class>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/common/Gas -->
+
+    <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/common/Gas">
+        <rdfs:subClassOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/common/Fluid"/>
     </owl:Class>
     
 
@@ -159,10 +216,26 @@ NDMF(x) &lt;--&gt;  exists z, y [hasHost(z,x) ^ isPartOf(y,z) --&gt; not exists 
     
 
 
+    <!-- http://geoscience.ca/3D/ontology/2019/1/common/Liquid -->
+
+    <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/common/Liquid">
+        <rdfs:subClassOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/common/Fluid"/>
+    </owl:Class>
+    
+
+
     <!-- http://geoscience.ca/3D/ontology/2019/1/common/Materially_Dependent_Feature -->
 
     <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/common/Materially_Dependent_Feature">
         <rdfs:label xml:lang="en">Materially Dependent Feature</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/common/Measurement_Method -->
+
+    <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/common/Measurement_Method">
+        <rdfs:subClassOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/common/Process"/>
     </owl:Class>
     
 
@@ -199,11 +272,44 @@ PB(x) &lt;--&gt; RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, co
     
 
 
+    <!-- http://geoscience.ca/3D/ontology/2019/1/common/Plasma -->
+
+    <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/common/Plasma">
+        <rdfs:subClassOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/common/Fluid"/>
+    </owl:Class>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/common/Process -->
+
+    <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/common/Process">
+        <rdfs:comment xml:lang="en">HIgh level class for any process; use to represent measurement methods. This will probably evolve to some mapping to W3C Prov Activity</rdfs:comment>
+        <rdfs:label xml:lang="en">Process</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/common/Solid -->
+
+    <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/common/Solid">
+        <rdfs:subClassOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/common/State_Of_Material"/>
+    </owl:Class>
+    
+
+
     <!-- http://geoscience.ca/3D/ontology/2019/1/common/SpatialEntity -->
 
     <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/common/SpatialEntity">
         <rdfs:comment xml:lang="en">Class of objects that represent locations within the Earth.</rdfs:comment>
         <rdfs:label xml:lang="en">Spatial Entity</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/common/State_Of_Material -->
+
+    <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/common/State_Of_Material">
+        <rdfs:subClassOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/common/Amount_Of_Matter"/>
     </owl:Class>
     
 
