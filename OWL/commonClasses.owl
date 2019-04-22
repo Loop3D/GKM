@@ -1,0 +1,257 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://geoscience.ca/3D/ontology/2019/1/common#"
+     xml:base="http://geoscience.ca/3D/ontology/2019/1/common"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+    <owl:Ontology rdf:about="http://geoscience.ca/3D/ontology/2019/1/common">
+        <rdfs:comment xml:lang="en">Unary predicates are represented by classes, binary predicates by object properties</rdfs:comment>
+        <rdfs:comment xml:lang="en">ontology of shared objectProperties and high level classes used to define geologic features</rdfs:comment>
+        <rdfs:label xml:lang="en">Shared elements for geoscience ontology</rdfs:label>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/causedBy -->
+
+    <owl:ObjectProperty rdf:about="http://geoscience.ca/3D/ontology/2019/1/causedBy">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/hasHost -->
+
+    <owl:ObjectProperty rdf:about="http://geoscience.ca/3D/ontology/2019/1/hasHost">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:comment xml:lang="en">object property between two entities wherein  one entity is specifically dependent on the other.</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/isPartOf -->
+
+    <owl:ObjectProperty rdf:about="http://geoscience.ca/3D/ontology/2019/1/isPartOf">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <owl:inverseOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/common/hasPart"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/numericAge -->
+
+    <owl:ObjectProperty rdf:about="http://geoscience.ca/3D/ontology/2019/1/numericAge">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:comment xml:lang="en">Association from  a Geochronologic age to a Numeric Age Range Object</rdfs:comment>
+        <rdfs:label xml:lang="en">numeric age</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/common/hasPart -->
+
+    <owl:ObjectProperty rdf:about="http://geoscience.ca/3D/ontology/2019/1/common/hasPart">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/common/hasParticipant -->
+
+    <owl:ObjectProperty rdf:about="http://geoscience.ca/3D/ontology/2019/1/common/hasParticipant">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <owl:inverseOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/common/participantIn"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/common/participantIn -->
+
+    <owl:ObjectProperty rdf:about="http://geoscience.ca/3D/ontology/2019/1/common/participantIn">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/common/relatedto -->
+
+    <owl:ObjectProperty rdf:about="http://geoscience.ca/3D/ontology/2019/1/common/relatedto">
+        <rdfs:label xml:lang="en">related to</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3.org/2002/07/owl#topObjectProperty -->
+
+    <rdf:Description rdf:about="http://www.w3.org/2002/07/owl#topObjectProperty">
+        <rdfs:comment xml:lang="en">Surface (SF):
+A boundary in 3D space that is neither line nor point, but area</rdfs:comment>
+    </rdf:Description>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/DissectiveMaterialFeature -->
+
+    <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/DissectiveMaterialFeature">
+        <rdfs:comment xml:lang="en">Dissective Material Feature (DMF): 
+is homomerous (penetrative): all parts of an object host the same type of feature (the feature penetrates the host&apos;s material).
+
+Includes:
+--- grain  / wood
+--- honeycomb pattern / beehive
+--- geological texture, fabric, foliation
+DMF(x) &lt;--&gt;  exists z forall y [hasHost(z,x) ^ isPartOf(y,z) --&gt; exists x1 [hasHost(y,x1) ^ DMF(x1)]]</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/NonDissectiveMaterialFeature -->
+
+    <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/NonDissectiveMaterialFeature">
+        <rdfs:comment xml:lang="en">Non-Dissective Material Feature (NDMF): 
+Not homomerous (non-pentrative) entity: spatial subdivisions (parts) are not instances of this feature
+
+Includes:
+--- smile or frown /  lips
+--- strips / zebra
+--- checkerboard / wood
+--- ocean waves / ocean
+--- geological fold
+
+
+NDMF(x) &lt;--&gt;  exists z, y [hasHost(z,x) ^ isPartOf(y,z) --&gt; not exists x1 [hasHost(y,x1) ^ NDMF(x1)]]</rdfs:comment>
+        <rdfs:label xml:lang="en">Non-Dissective Material Feature</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/NumericAgeRange -->
+
+    <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/NumericAgeRange">
+        <rdfs:subClassOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/TimeInterval"/>
+        <rdfs:comment xml:lang="en">Representation of a time intervel in terms of younger and older bounding time coordinates.</rdfs:comment>
+        <rdfs:label xml:lang="en">Numeric Age Range</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/SpatialEntity -->
+
+    <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/SpatialEntity">
+        <rdfs:comment xml:lang="en">Class of objects that represent locations within the Earth.</rdfs:comment>
+        <rdfs:label xml:lang="en">Spatial Entity</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/Surface -->
+
+    <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/Surface"/>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/TemporalRegion -->
+
+    <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/TemporalRegion">
+        <rdfs:label xml:lang="en">Temporal Region</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/TimeInterval -->
+
+    <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/TimeInterval">
+        <rdfs:subClassOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/TemporalRegion"/>
+        <rdfs:label xml:lang="en">Time Interval</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/common/abstractvalue -->
+
+    <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/common/abstractvalue">
+        <rdfs:label xml:lang="en">Categorical Value</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/common/ma -->
+
+    <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/common/ma">
+        <rdfs:subClassOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/common/uom"/>
+        <rdfs:label xml:lang="en">million years</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/common/meter -->
+
+    <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/common/meter">
+        <rdfs:subClassOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/common/uom"/>
+        <rdfs:label xml:lang="en">meter</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/common/percent -->
+
+    <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/common/percent">
+        <rdfs:subClassOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/common/uom"/>
+        <rdfs:label xml:lang="en">percent</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/common/shape -->
+
+    <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/common/shape">
+        <rdfs:subClassOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/common/abstractvalue"/>
+        <rdfs:label xml:lang="en">any shape</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/common/subangular -->
+
+    <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/common/subangular">
+        <rdfs:subClassOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/common/shape"/>
+    </owl:Class>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/common/uom -->
+
+    <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/common/uom">
+        <rdfs:subClassOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/common/abstractvalue"/>
+        <rdfs:label xml:lang="en">Unit of Measurement</rdfs:label>
+    </owl:Class>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
+
