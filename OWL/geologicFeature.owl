@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 <rdf:RDF xmlns="http://geoscience.ca/3D/ontology/2019/1/geologicffeature#"
      xml:base="http://geoscience.ca/3D/ontology/2019/1/geologicffeature"
-     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
      xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
      xmlns:xml="http://www.w3.org/XML/1998/namespace"
      xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
     <owl:Ontology rdf:about="http://geoscience.ca/3D/ontology/2019/1/geologicffeature">
-        <owl:imports rdf:resource="http://geoscience.ca/3D/ontology/2019/1/predicates"/>
+        <owl:imports rdf:resource="http://geoscience.ca/3D/ontology/2019/1/common"/>
         <rdfs:comment xml:lang="en">Base geologic feature classes and high level constraints and relationships</rdfs:comment>
     </owl:Ontology>
     
@@ -24,20 +24,201 @@
     
 
 
-    <!-- http://geoscience.ca/3D/ontology/2019/1/spatialExtent -->
+    <!-- http://geoscience.ca/3D/ontology/2019/1/hasHost -->
 
-    <owl:ObjectProperty rdf:about="http://geoscience.ca/3D/ontology/2019/1/spatialExtent">
+    <rdf:Description rdf:about="http://geoscience.ca/3D/ontology/2019/1/hasHost">
         <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain rdf:resource="http://geoscience.ca/3D/ontology/2019/1/GeologicFeature"/>
+    </rdf:Description>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/hasSpatialExtent -->
+
+    <owl:ObjectProperty rdf:about="http://geoscience.ca/3D/ontology/2019/1/hasSpatialExtent">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain rdf:resource="http://geoscience.ca/3D/ontology/2019/1/GeologicEndurant"/>
     </owl:ObjectProperty>
     
 
 
-    <!-- http://geoscience.ca/3D/ontology/2019/1/spatialLocation -->
+    <!-- http://geoscience.ca/3D/ontology/2019/1/hasSpatialLocation -->
 
-    <owl:ObjectProperty rdf:about="http://geoscience.ca/3D/ontology/2019/1/spatialLocation">
+    <owl:ObjectProperty rdf:about="http://geoscience.ca/3D/ontology/2019/1/hasSpatialLocation">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#InverseFunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://geoscience.ca/3D/ontology/2019/1/GeologicEndurant"/>
         <rdfs:comment xml:lang="en">Geographic disposition of an endurant.</rdfs:comment>
     </owl:ObjectProperty>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/common/hasPart -->
+
+    <rdf:Description rdf:about="http://geoscience.ca/3D/ontology/2019/1/common/hasPart">
+        <rdfs:domain rdf:resource="http://geoscience.ca/3D/ontology/2019/1/GeologicEndurant"/>
+    </rdf:Description>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/common/hasParticipant -->
+
+    <rdf:Description rdf:about="http://geoscience.ca/3D/ontology/2019/1/common/hasParticipant">
+        <rdfs:domain rdf:resource="http://geoscience.ca/3D/ontology/2019/1/GeologicPerdurant"/>
+    </rdf:Description>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/common/participantIn -->
+
+    <rdf:Description rdf:about="http://geoscience.ca/3D/ontology/2019/1/common/participantIn">
+        <rdfs:domain rdf:resource="http://geoscience.ca/3D/ontology/2019/1/GeologicEndurant"/>
+    </rdf:Description>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/common/relatedto -->
+
+    <rdf:Description rdf:about="http://geoscience.ca/3D/ontology/2019/1/common/relatedto">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain rdf:resource="http://geoscience.ca/3D/ontology/2019/1/GeologicEndurant"/>
+    </rdf:Description>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/geologicffeature/hasAbstractProperty -->
+
+    <owl:ObjectProperty rdf:about="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/hasAbstractProperty"/>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/geologicffeature/hasConstituent -->
+
+    <owl:ObjectProperty rdf:about="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/hasConstituent">
+        <rdfs:range rdf:resource="http://geoscience.ca/3D/ontology/2019/1/RockMaterial"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/geologicffeature/hasDisplacement -->
+
+    <owl:ObjectProperty rdf:about="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/hasDisplacement"/>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/geologicffeature/hasOlderHost -->
+
+    <owl:ObjectProperty rdf:about="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/hasOlderHost">
+        <rdfs:subPropertyOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/hasHost"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/geologicffeature/hasPhysicalProperty -->
+
+    <owl:ObjectProperty rdf:about="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/hasPhysicalProperty"/>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/geologicffeature/hasTermValue -->
+
+    <owl:ObjectProperty rdf:about="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/hasTermValue"/>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/geologicffeature/hasUOM -->
+
+    <owl:ObjectProperty rdf:about="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/hasUOM">
+        <rdfs:range rdf:resource="http://geoscience.ca/3D/ontology/2019/1/common/uom"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/geologicffeature/hasYoungerHost -->
+
+    <owl:ObjectProperty rdf:about="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/hasYoungerHost">
+        <rdfs:subPropertyOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/hasHost"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/geologicffeature/haseventhistory -->
+
+    <owl:ObjectProperty rdf:about="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/haseventhistory">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain rdf:resource="http://geoscience.ca/3D/ontology/2019/1/GeologicEndurant"/>
+        <rdfs:range rdf:resource="http://geoscience.ca/3D/ontology/2019/1/GeologicEvent"/>
+        <rdfs:label xml:lang="en">hasEventHistory</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/geologicffeature/hasmethod -->
+
+    <owl:ObjectProperty rdf:about="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/hasmethod">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#InverseFunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/geologicproperty"/>
+        <rdfs:label xml:lang="en">hasMethod</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/geologicffeature/hassetting -->
+
+    <owl:ObjectProperty rdf:about="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/hassetting">
+        <rdfs:domain rdf:resource="http://geoscience.ca/3D/ontology/2019/1/GeologicEndurant"/>
+        <rdfs:range rdf:resource="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/geologicsetting"/>
+        <rdfs:label xml:lang="en">hasSetting</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/geologicffeature/ispropertyof -->
+
+    <owl:ObjectProperty rdf:about="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/ispropertyof">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain rdf:resource="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/geologicproperty"/>
+        <rdfs:range rdf:resource="http://geoscience.ca/3D/ontology/2019/1/GeologicEndurant"/>
+        <rdfs:range rdf:resource="http://geoscience.ca/3D/ontology/2019/1/GeologicPerdurant"/>
+        <rdfs:label xml:lang="en">isPropertyOf</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/geologicffeature/proportionFor -->
+
+    <owl:ObjectProperty rdf:about="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/proportionFor">
+        <rdfs:range rdf:resource="http://geoscience.ca/3D/ontology/2019/1/GeologicEndurant"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/geologicffeature/proportionOf -->
+
+    <owl:ObjectProperty rdf:about="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/proportionOf">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:range rdf:resource="http://geoscience.ca/3D/ontology/2019/1/GeologicEndurant"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/geologicffeature/hasValue -->
+
+    <owl:DatatypeProperty rdf:about="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/hasValue">
+        <rdfs:label xml:lang="en">has numeric value</rdfs:label>
+    </owl:DatatypeProperty>
     
 
 
@@ -65,6 +246,9 @@
 
     <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/Contact">
         <rdfs:subClassOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/GeologicStructure"/>
+        <rdfs:comment>Contact (CT): Feature hosted by 2 or more rock bodies that touch; not a part of any of the touching rock bodies.
+A contact is realizedBy 2 Rock Body Surfaces; each is a part of a different Rock Body host that is in contact. 
+Contact(x) &lt;--&gt; exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RBS (z)]</rdfs:comment>
         <rdfs:label xml:lang="en">Contact</rdfs:label>
     </owl:Class>
     
@@ -73,6 +257,18 @@
     <!-- http://geoscience.ca/3D/ontology/2019/1/DuctileShearZone -->
 
     <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/DuctileShearZone">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://geoscience.ca/3D/ontology/2019/1/common/participantIn"/>
+                <owl:someValuesFrom rdf:resource="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/Ductile_Deformation"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/hasDisplacement"/>
+                <owl:someValuesFrom rdf:resource="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/Displacement"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/GeologicStructure"/>
         <rdfs:label xml:lang="en">Ductile Shear Zone</rdfs:label>
     </owl:Class>
@@ -91,6 +287,12 @@
     <!-- http://geoscience.ca/3D/ontology/2019/1/Fault -->
 
     <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/Fault">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/hasDisplacement"/>
+                <owl:someValuesFrom rdf:resource="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/Displacement"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/Fracture"/>
         <rdfs:label xml:lang="en">Fault</rdfs:label>
     </owl:Class>
@@ -118,6 +320,19 @@
     <!-- http://geoscience.ca/3D/ontology/2019/1/Fracture -->
 
     <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/Fracture">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://geoscience.ca/3D/ontology/2019/1/common/participantIn"/>
+                <owl:someValuesFrom rdf:resource="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/Brittle_Deformation"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/hasDisplacement"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/Displacement"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/GeologicStructure"/>
         <rdfs:label xml:lang="en">Fracture</rdfs:label>
     </owl:Class>
@@ -186,11 +401,11 @@ causedBy (x,y) ^ GeologicEvent (x) ^ GeologicProcess (y) --&gt; forall z  [parti
     <!-- http://geoscience.ca/3D/ontology/2019/1/GeologicFeature -->
 
     <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/GeologicFeature">
-        <rdfs:subClassOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/GeologicEndurant"/>
+        <rdfs:subClassOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/DissectiveMaterialFeature"/>
         <rdfs:comment xml:lang="en">Geologic Feature (GF):
-Geologic features that are specifially dependent on their hosts -  that is, the hosts relation is a subrelation of specific dependence.
+Geologic features that are specifially dependent on their host -  that is, the host relation is a subrelation of specific dependence.
 
-GF(x) &lt;--&gt; exists y [hosts(y,x)] and geologic(x)</rdfs:comment>
+GF(x) &lt;--&gt; exists y [hasHost(y,x)] and geologic(x)</rdfs:comment>
         <rdfs:label xml:lang="en">Geologic Feature</rdfs:label>
     </owl:Class>
     
@@ -198,7 +413,9 @@ GF(x) &lt;--&gt; exists y [hosts(y,x)] and geologic(x)</rdfs:comment>
 
     <!-- http://geoscience.ca/3D/ontology/2019/1/GeologicPerdurant -->
 
-    <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/GeologicPerdurant"/>
+    <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/GeologicPerdurant">
+        <rdfs:label xml:lang="en">Geologic Perdurant</rdfs:label>
+    </owl:Class>
     
 
 
@@ -206,15 +423,7 @@ GF(x) &lt;--&gt; exists y [hosts(y,x)] and geologic(x)</rdfs:comment>
 
     <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/GeologicProcess">
         <rdfs:subClassOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/GeologicPerdurant"/>
-    </owl:Class>
-    
-
-
-    <!-- http://geoscience.ca/3D/ontology/2019/1/GeologicRole -->
-
-    <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/GeologicRole">
-        <rdfs:comment xml:lang="en">Non-physical endurant</rdfs:comment>
-        <rdfs:label xml:lang="en">Geologic Role</rdfs:label>
+        <rdfs:label xml:lang="en">Geologic Process</rdfs:label>
     </owl:Class>
     
 
@@ -222,6 +431,24 @@ GF(x) &lt;--&gt; exists y [hosts(y,x)] and geologic(x)</rdfs:comment>
     <!-- http://geoscience.ca/3D/ontology/2019/1/GeologicStructure -->
 
     <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/GeologicStructure">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://geoscience.ca/3D/ontology/2019/1/hasHost"/>
+                <owl:allValuesFrom rdf:resource="http://geoscience.ca/3D/ontology/2019/1/RockBody"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://geoscience.ca/3D/ontology/2019/1/isPartOf"/>
+                <owl:allValuesFrom rdf:resource="http://geoscience.ca/3D/ontology/2019/1/GeologicStructure"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://geoscience.ca/3D/ontology/2019/1/common/hasPart"/>
+                <owl:allValuesFrom rdf:resource="http://geoscience.ca/3D/ontology/2019/1/GeologicStructure"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/GeologicFeature"/>
         <rdfs:label xml:lang="en">Geologic Structure</rdfs:label>
     </owl:Class>
@@ -257,6 +484,13 @@ GF(x) &lt;--&gt; exists y [hosts(y,x)] and geologic(x)</rdfs:comment>
     <!-- http://geoscience.ca/3D/ontology/2019/1/Joint -->
 
     <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/Joint">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/hasDisplacement"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/Displacement"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/Fracture"/>
         <rdfs:label xml:lang="en">Joint</rdfs:label>
     </owl:Class>
@@ -276,7 +510,6 @@ GF(x) &lt;--&gt; exists y [hosts(y,x)] and geologic(x)</rdfs:comment>
     <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/RockBody">
         <rdfs:subClassOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/GeologicEndurant"/>
         <rdfs:comment xml:lang="en">An endurant in which some Rock Material inheres, either as an &apos;amount of matter&apos; (disembodied matter), or as a geologic unit.</rdfs:comment>
-        <rdfs:label xml:lang="en">Geologic Material Endurant</rdfs:label>
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#token">RB</rdfs:label>
         <rdfs:label xml:lang="en">Rock Body</rdfs:label>
     </owl:Class>
@@ -289,7 +522,7 @@ GF(x) &lt;--&gt; exists y [hosts(y,x)] and geologic(x)</rdfs:comment>
         <rdfs:subClassOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/rockbodysurface"/>
         <rdfs:comment xml:lang="en">Rock Body Bottom (RBB):
 The bottom surface of a rock body.
-RBT (x) &lt;--&gt; RBS (x) ^ exists z forall y [partOf (y,z) ^ hosts (z,x) -&gt; above (y,x) v partOf (y,x)]</rdfs:comment>
+RBT (x) &lt;--&gt; RBS (x) ^ exists z forall y [isPartOf (y,z) ^ hasHost (z,x) -&gt; above (y,x) v isPartOf (y,x)]</rdfs:comment>
         <rdfs:label xml:lang="en">Rock Body Bottom</rdfs:label>
     </owl:Class>
     
@@ -308,6 +541,7 @@ RBT (x) &lt;--&gt; RBS (x) ^ exists z forall y [partOf (y,z) ^ hosts (z,x) -&gt;
 
     <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/RockMaterial">
         <rdfs:subClassOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/RockBody"/>
+        <rdfs:subClassOf rdf:resource="http://minervaintelligence.com/ontology/2019/4/geologicmaterial"/>
         <rdfs:label xml:lang="en">Rock Material</rdfs:label>
     </owl:Class>
     
@@ -328,7 +562,7 @@ RBT (x) &lt;--&gt; RBS (x) ^ exists z forall y [partOf (y,z) ^ hosts (z,x) -&gt;
     <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/rockbodysurface">
         <rdfs:subClassOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/GeologicFeature"/>
         <rdfs:comment xml:lang="en">Rock Body Surface (RBS):  RBS is a physical surface hosted by a rock body.
-RBS (x) &lt;--&gt; SF (x) ^ exists y [RB (y) ^ hosts (y,x)]</rdfs:comment>
+RBS (x) &lt;--&gt; SF (x) ^ exists y [RB (y) ^ hasHost (y,x)]</rdfs:comment>
         <rdfs:label xml:lang="en">Rock Body Surface</rdfs:label>
     </owl:Class>
     
@@ -340,8 +574,338 @@ RBS (x) &lt;--&gt; SF (x) ^ exists y [RB (y) ^ hosts (y,x)]</rdfs:comment>
         <rdfs:subClassOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/rockbodysurface"/>
         <rdfs:comment xml:lang="en">Rock Body Top (RBT):
 The top surface of a rock body.
-RBT (x) &lt;--&gt; RBS (x) ^ exists z forall y [(partOf (y,z) ^ hosts (z,x)) -&gt; (below (y,x) v partOf (y,x))]</rdfs:comment>
+RBT (x) &lt;--&gt; RBS (x) ^ exists z forall y [(isPartOf (y,z) ^ hasHost (z,x)) -&gt; (below (y,x) v isPartOf (y,x))]</rdfs:comment>
         <rdfs:label xml:lang="en">Rock Body Top</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/geologicffeature/Amount -->
+
+    <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/Amount">
+        <rdfs:subClassOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/Numeric_Physical_Geologic_Property"/>
+    </owl:Class>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/geologicffeature/Brittle_Deformation -->
+
+    <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/Brittle_Deformation">
+        <rdfs:subClassOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/Deformation"/>
+    </owl:Class>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/geologicffeature/Categorical_Physical_Geologic_Property -->
+
+    <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/Categorical_Physical_Geologic_Property">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/hasTermValue"/>
+                <owl:someValuesFrom rdf:resource="http://geoscience.ca/3D/ontology/2019/1/common/abstractvalue"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/physicalgeologicproperty"/>
+    </owl:Class>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/geologicffeature/Complex_Physical_Geologic_Property -->
+
+    <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/Complex_Physical_Geologic_Property">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/hasPhysicalProperty"/>
+                <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">2</owl:minQualifiedCardinality>
+                <owl:onClass rdf:resource="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/physicalgeologicproperty"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/physicalgeologicproperty"/>
+    </owl:Class>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/geologicffeature/Contact_Metamorphism -->
+
+    <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/Contact_Metamorphism">
+        <rdfs:subClassOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/Metamorphism"/>
+    </owl:Class>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/geologicffeature/Deformation -->
+
+    <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/Deformation">
+        <rdfs:subClassOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/GeologicProcess"/>
+    </owl:Class>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/geologicffeature/Deposition -->
+
+    <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/Deposition">
+        <rdfs:subClassOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/GeologicProcess"/>
+    </owl:Class>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/geologicffeature/Displacement -->
+
+    <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/Displacement">
+        <rdfs:subClassOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/Complex_Physical_Geologic_Property"/>
+    </owl:Class>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/geologicffeature/Ductile_Deformation -->
+
+    <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/Ductile_Deformation">
+        <rdfs:subClassOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/Deformation"/>
+    </owl:Class>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/geologicffeature/Faulting -->
+
+    <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/Faulting">
+        <rdfs:subClassOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/Deformation"/>
+    </owl:Class>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/geologicffeature/Folding -->
+
+    <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/Folding">
+        <rdfs:subClassOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/Deformation"/>
+    </owl:Class>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/geologicffeature/Gradational_Contact -->
+
+    <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/Gradational_Contact">
+        <rdfs:subClassOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/Contact"/>
+    </owl:Class>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/geologicffeature/Grain_Shape -->
+
+    <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/Grain_Shape">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/hasTermValue"/>
+                <owl:someValuesFrom rdf:resource="http://geoscience.ca/3D/ontology/2019/1/common/shape"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/Categorical_Physical_Geologic_Property"/>
+    </owl:Class>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/geologicffeature/Grain_Size -->
+
+    <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/Grain_Size">
+        <rdfs:subClassOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/Numeric_Physical_Geologic_Property"/>
+    </owl:Class>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/geologicffeature/Intrusion -->
+
+    <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/Intrusion">
+        <rdfs:subClassOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/GeologicProcess"/>
+    </owl:Class>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/geologicffeature/Metamorphism -->
+
+    <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/Metamorphism">
+        <rdfs:subClassOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/GeologicProcess"/>
+    </owl:Class>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/geologicffeature/Metasomatism -->
+
+    <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/Metasomatism">
+        <rdfs:subClassOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/GeologicProcess"/>
+    </owl:Class>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/geologicffeature/Numeric_Physical_Geologic_Property -->
+
+    <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/Numeric_Physical_Geologic_Property">
+        <rdfs:subClassOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/physicalgeologicproperty"/>
+        <rdfs:label xml:lang="en">numeric physical geologic property</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/geologicffeature/Orientation -->
+
+    <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/Orientation">
+        <rdfs:subClassOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/Complex_Physical_Geologic_Property"/>
+    </owl:Class>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/geologicffeature/Proportion -->
+
+    <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/Proportion">
+        <rdfs:subClassOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/Numeric_Physical_Geologic_Property"/>
+    </owl:Class>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/geologicffeature/Sharp_Contact -->
+
+    <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/Sharp_Contact">
+        <rdfs:subClassOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/Contact"/>
+    </owl:Class>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/geologicffeature/Thickness -->
+
+    <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/Thickness">
+        <rdfs:subClassOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/Numeric_Physical_Geologic_Property"/>
+    </owl:Class>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/geologicffeature/clast -->
+
+    <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/clast">
+        <rdfs:subClassOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/rockbodypart"/>
+        <rdfs:label xml:lang="en">Clast</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/geologicffeature/facies -->
+
+    <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/facies">
+        <rdfs:subClassOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/rockbodypart"/>
+        <rdfs:label xml:lang="en">Facies</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/geologicffeature/fossil -->
+
+    <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/fossil">
+        <rdfs:subClassOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/rockbodypart"/>
+        <rdfs:label xml:lang="en">Fossil</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/geologicffeature/geologicproperty -->
+
+    <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/geologicproperty">
+        <rdfs:comment xml:lang="en">A characteristic of a Geologic Endurant or Perdurant.</rdfs:comment>
+        <rdfs:label xml:lang="en">Geologic Property</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/geologicffeature/geologicsetting -->
+
+    <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/geologicsetting">
+        <rdfs:label xml:lang="en">Geologic Setting</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/geologicffeature/inclusion -->
+
+    <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/inclusion">
+        <rdfs:subClassOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/rockbodypart"/>
+        <rdfs:label xml:lang="en">Inclusion</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/geologicffeature/outcrop -->
+
+    <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/outcrop">
+        <rdfs:subClassOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/rockbodypart"/>
+        <rdfs:label xml:lang="en">Rock Material Outcrop</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/geologicffeature/physicalgeologicproperty -->
+
+    <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/physicalgeologicproperty">
+        <rdfs:subClassOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/geologicproperty"/>
+        <rdfs:label xml:lang="en">Physical Geologic Property</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/geologicffeature/rockbodypart -->
+
+    <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/rockbodypart">
+        <rdfs:subClassOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/RockBody"/>
+        <rdfs:label xml:lang="en">Rock Body Part</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/geologicffeature/specimen -->
+
+    <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/specimen">
+        <rdfs:subClassOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/rockbodypart"/>
+        <rdfs:label xml:lang="en">Rock Material Specimen</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/geologicffeature/stratigraphicsection -->
+
+    <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/stratigraphicsection">
+        <rdfs:subClassOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/rockbodypart"/>
+        <rdfs:label xml:lang="en">Stratigraphic Section</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/geologicffeature/stratotype -->
+
+    <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/stratotype">
+        <rdfs:subClassOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/stratigraphicsection"/>
+        <rdfs:label xml:lang="en">Stratotype</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/geologicffeature/temporalgeologicproperty -->
+
+    <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/temporalgeologicproperty">
+        <rdfs:subClassOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/geologicproperty"/>
+        <rdfs:label xml:lang="en">Temporal Geologic Property</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/geologicffeature/xenolith -->
+
+    <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/xenolith">
+        <rdfs:subClassOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/geologicffeature/rockbodypart"/>
+        <rdfs:label xml:lang="en">Xenolith</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://minervaintelligence.com/ontology/2019/4/geologicmaterial -->
+
+    <owl:Class rdf:about="http://minervaintelligence.com/ontology/2019/4/geologicmaterial">
+        <rdfs:subClassOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/GeologicEndurant"/>
+        <rdfs:label xml:lang="en">Geologic Material</rdfs:label>
     </owl:Class>
     
 
@@ -361,5 +925,5 @@ RBT (x) &lt;--&gt; RBS (x) ^ exists z forall y [(partOf (y,z) ^ hosts (z,x)) -&g
 
 
 
-<!-- Generated by the OWL API (version 4.2.5.20160517-0735) https://github.com/owlcs/owlapi -->
+<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
 
