@@ -74,6 +74,39 @@
     
 
 
+    <!-- http://geoscience.ca/3D/ontology/2019/1/geologicfeature/Age_Equivalent_To -->
+
+    <owl:ObjectProperty rdf:about="http://geoscience.ca/3D/ontology/2019/1/geologicfeature/Age_Equivalent_To">
+        <rdfs:subPropertyOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/geologicfeature/temporallyRelatedTo"/>
+        <rdfs:comment xml:lang="en">A is equivalent to B if they represent expressions of the same event</rdfs:comment>
+        <rdfs:comment xml:lang="en">One of six binary relations between geolgoic events defined by Burns (1975)</rdfs:comment>
+        <rdfs:label xml:lang="en">age equivalent</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/geologicfeature/age_covers -->
+
+    <owl:ObjectProperty rdf:about="http://geoscience.ca/3D/ontology/2019/1/geologicfeature/age_covers">
+        <rdfs:subPropertyOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/geologicfeature/temporallyRelatedTo"/>
+        <rdfs:comment xml:lang="en">A covers B is a is immediately younger than B (there are no events between A and B)</rdfs:comment>
+        <rdfs:comment xml:lang="en">One of six binary relations between geolgoic events defined by Burns (1975)</rdfs:comment>
+        <rdfs:label xml:lang="en">age covers</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/geologicfeature/age_incomparable_to -->
+
+    <owl:ObjectProperty rdf:about="http://geoscience.ca/3D/ontology/2019/1/geologicfeature/age_incomparable_to">
+        <rdfs:subPropertyOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/geologicfeature/temporallyRelatedTo"/>
+        <rdfs:comment xml:lang="en">A is incomparable to be if there is not enough information to determine an age relationship</rdfs:comment>
+        <rdfs:comment xml:lang="en">One of six binary relations between geolgoic events defined by Burns (1975)</rdfs:comment>
+        <rdfs:label xml:lang="en">age incomparable</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
     <!-- http://geoscience.ca/3D/ontology/2019/1/geologicfeature/hasAbstractProperty -->
 
     <owl:ObjectProperty rdf:about="http://geoscience.ca/3D/ontology/2019/1/geologicfeature/hasAbstractProperty"/>
@@ -152,6 +185,21 @@
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#InverseFunctionalProperty"/>
         <rdfs:domain rdf:resource="http://geoscience.ca/3D/ontology/2019/1/geologicfeature/Geologic_Endurant"/>
         <rdfs:comment xml:lang="en">Geographic disposition of an endurant.</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/geologicfeature/hasTemporalProperty -->
+
+    <owl:ObjectProperty rdf:about="http://geoscience.ca/3D/ontology/2019/1/geologicfeature/hasTemporalProperty">
+        <rdfs:range>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://geoscience.ca/3D/ontology/2019/1/geologicfeature/Geologic_Time_Date"/>
+                    <rdf:Description rdf:about="http://geoscience.ca/3D/ontology/2019/1/geologicfeature/Geologic_Time_Interval"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:range>
     </owl:ObjectProperty>
     
 
@@ -261,6 +309,28 @@
     
 
 
+    <!-- http://geoscience.ca/3D/ontology/2019/1/geologicfeature/not_older_than -->
+
+    <owl:ObjectProperty rdf:about="http://geoscience.ca/3D/ontology/2019/1/geologicfeature/not_older_than">
+        <rdfs:subPropertyOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/geologicfeature/temporallyRelatedTo"/>
+        <rdfs:label xml:lang="en">A is either younger than or equivalent to B</rdfs:label>
+        <rdfs:label xml:lang="en">One of six binary relations between geolgoic events defined by Burns (1975)</rdfs:label>
+        <rdfs:label xml:lang="en">not older than</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/geologicfeature/olderThan -->
+
+    <owl:ObjectProperty rdf:about="http://geoscience.ca/3D/ontology/2019/1/geologicfeature/olderThan">
+        <rdfs:subPropertyOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/geologicfeature/temporallyRelatedTo"/>
+        <rdfs:comment xml:lang="en">A is older than B if A occurred before B</rdfs:comment>
+        <rdfs:comment xml:lang="en">One of six binary relations between geolgoic events defined by Burns (1975)</rdfs:comment>
+        <rdfs:label xml:lang="en">older than</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
     <!-- http://geoscience.ca/3D/ontology/2019/1/geologicfeature/proportionFor -->
 
     <owl:ObjectProperty rdf:about="http://geoscience.ca/3D/ontology/2019/1/geologicfeature/proportionFor">
@@ -282,6 +352,25 @@
 
     <owl:ObjectProperty rdf:about="http://geoscience.ca/3D/ontology/2019/1/geologicfeature/realizes">
         <rdfs:label xml:lang="en">realizes</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/geologicfeature/temporallyRelatedTo -->
+
+    <owl:ObjectProperty rdf:about="http://geoscience.ca/3D/ontology/2019/1/geologicfeature/temporallyRelatedTo">
+        <rdfs:range rdf:resource="http://geoscience.ca/3D/ontology/2019/1/geologicfeature/Geologic_Event"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/geologicfeature/youngerThan -->
+
+    <owl:ObjectProperty rdf:about="http://geoscience.ca/3D/ontology/2019/1/geologicfeature/youngerThan">
+        <rdfs:subPropertyOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/geologicfeature/temporallyRelatedTo"/>
+        <rdfs:comment xml:lang="en">A is younger than B if B occurred before A</rdfs:comment>
+        <rdfs:comment xml:lang="en">One of six binary relations between geolgoic events defined by Burns (1975)</rdfs:comment>
+        <rdfs:label xml:lang="en">younger than</rdfs:label>
     </owl:ObjectProperty>
     
 
@@ -1536,6 +1625,27 @@ RBT (x) &lt;--&gt; RBS (x) ^ exists z forall y [(isPartOf (y,z) ^ hasHost (z,x))
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:comment xml:lang="en">The stage includes all rocks formed during an age. A stage is normally the lowest ranking unit in the chronostratigraphic hierarchy that can be recognized on a global scale. The stage has been called the basic working unit of chronostratigraphy because it is suited in scope and rank to the practical needs and purposes of intraregional chronostratigraphic classification. It is a subdivision of a series.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://geoscience.ca/3D/ontology/2019/1/geologicfeature/Stratigraphic_Point -->
+
+    <owl:Class rdf:about="http://geoscience.ca/3D/ontology/2019/1/geologicfeature/Stratigraphic_Point">
+        <rdfs:subClassOf rdf:resource="http://geoscience.ca/3D/ontology/2019/1/geologicfeature/Contact"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://geoscience.ca/3D/ontology/2019/1/geologicfeature/hasReference"/>
+                <owl:someValuesFrom rdf:resource="http://geoscience.ca/3D/ontology/2019/1/geologicfeature/Stratotype"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://geoscience.ca/3D/ontology/2019/1/geologicfeature/hasSpatialLocation"/>
+                <owl:someValuesFrom rdf:resource="http://geoscience.ca/3D/ontology/2019/1/common/SpatialEntity"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:label xml:lang="en">Stratigraphic Point</rdfs:label>
     </owl:Class>
     
 
