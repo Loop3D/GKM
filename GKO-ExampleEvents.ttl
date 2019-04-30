@@ -1,0 +1,159 @@
+@prefix : <http://geoscience.ca/3D/ontology/2019/1/example_events2#> .
+@prefix exp: <http://geoscience.ca/3D/ontology/2019/1/example_events2/> .
+@prefix gkm: <http://geoscience.ca/3D/ontology/2019/1/geologicfeature/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix common: <http://geoscience.ca/3D/ontology/2019/1/common/> .
+@base <http://geoscience.ca/3D/ontology/2019/1/example_events2> .
+
+<http://geoscience.ca/3D/ontology/2019/1/example_events2> rdf:type owl:Ontology ;
+                                                           owl:versionIRI <http://geoscience.ca/3D/ontology/2019/1/example_events2> ;
+                                                           owl:imports <http://geoscience.ca/3D/ontology/2019/1/eventenvironment> ,
+                                                                       <http://geoscience.ca/3D/ontology/2019/1/geologicfeature> ;
+                                                           rdfs:comment "export after import to see what happens to anonymous nodes."@en ;
+                                                           rdfs:label "Example to test a simple approach to event instances"@en .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://geoscience.ca/3D/ontology/2019/1/geologicfeature/hasMethod
+gkm:hasMethod rdf:type owl:AnnotationProperty .
+
+
+###  http://geoscience.ca/3D/ontology/2019/1/geologicfeature/hasSetting
+gkm:hasSetting rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/description
+<http://purl.org/dc/terms/description> rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/hasVersion
+<http://purl.org/dc/terms/hasVersion> rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/issued
+<http://purl.org/dc/terms/issued> rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/modified
+<http://purl.org/dc/terms/modified> rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/publisher
+<http://purl.org/dc/terms/publisher> rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/title
+<http://purl.org/dc/terms/title> rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/1999/02/22-rdf-syntax-ns#type
+rdf:type rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2004/02/skos/core#note
+<http://www.w3.org/2004/02/skos/core#note> rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Datatypes
+#################################################################
+
+###  http://www.w3.org/2001/XMLSchema#date
+xsd:date rdf:type rdfs:Datatype .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://geoscience.ca/3D/ontology/2019/1/example_events2/Biostratigraphic_Age_Assignment
+exp:Biostratigraphic_Age_Assignment rdf:type owl:NamedIndividual ,
+                                             common:Measurement_Method .
+
+
+###  http://geoscience.ca/3D/ontology/2019/1/example_events2/Hs_genesis
+exp:Hs_genesis rdf:type owl:NamedIndividual ,
+                        gkm:Geologic_Event ;
+               gkm:hasTemporalProperty exp:holocene_age ;
+               gkm:hassetting <http://resource.geosciml.org/classifier/cgi/eventenvironment/alluvial_fan> ;
+               gkm:isManifestationOf exp:sedimentary_deposition ;
+               rdfs:comment "Process.. make the setting a link for now--not modeled in detail here" .
+
+
+###  http://geoscience.ca/3D/ontology/2019/1/example_events2/Js_genesis
+exp:Js_genesis rdf:type owl:NamedIndividual ,
+                        gkm:Geologic_Event ;
+               gkm:hasTemporalProperty exp:jurassic_age ;
+               gkm:hassetting <http://resource.geosciml.org/classifier/cgi/eventenvironment/earth_surface_setting> ;
+               gkm:isManifestationOf exp:sedimentary_deposition .
+
+
+###  http://geoscience.ca/3D/ontology/2019/1/example_events2/Ms_genesis
+exp:Ms_genesis rdf:type owl:NamedIndividual ,
+                        gkm:Geologic_Event ;
+               gkm:hasTemporalProperty exp:miocene_age ;
+               gkm:hassetting <http://resource.geosciml.org/classifier/cgi/eventenvironment/lacustrine_setting> ;
+               gkm:isManifestationOf exp:sedimentary_deposition .
+
+
+###  http://geoscience.ca/3D/ontology/2019/1/example_events2/holocene_age
+exp:holocene_age rdf:type owl:NamedIndividual ,
+                          gkm:Chronostratigraphic_Age ;
+                 gkm:hasOlderAge <http://resource.geosciml.org/classifier/ics/ischart/Holocene> ;
+                 gkm:hasYoungerAge <http://resource.geosciml.org/classifier/ics/ischart/Holocene> ;
+                 gkm:hasmethod exp:Biostratigraphic_Age_Assignment ;
+                 rdfs:label "Holocene stratigraphic age"@en .
+
+
+###  http://geoscience.ca/3D/ontology/2019/1/example_events2/jurassic_age
+exp:jurassic_age rdf:type owl:NamedIndividual ,
+                          gkm:Chronostratigraphic_Age ;
+                 gkm:hasOlderAge <http://resource.geosciml.org/classifier/ics/ischart/Jurassic> ;
+                 gkm:hasYoungerAge <http://resource.geosciml.org/classifier/ics/ischart/Jurassic> ;
+                 gkm:hasmethod exp:Biostratigraphic_Age_Assignment ;
+                 rdfs:label "Jurassic stratigraphic age"@en .
+
+
+###  http://geoscience.ca/3D/ontology/2019/1/example_events2/miocene_age
+exp:miocene_age rdf:type owl:NamedIndividual ,
+                         gkm:Chronostratigraphic_Age ;
+                gkm:hasOlderAge <http://resource.geosciml.org/classifier/ics/ischart/Miocene> ;
+                gkm:hasYoungerAge <http://resource.geosciml.org/classifier/ics/ischart/Miocene> ;
+                gkm:hasmethod exp:Biostratigraphic_Age_Assignment ;
+                rdfs:label "Miocene Stratigraphic Age"@en .
+
+
+###  http://geoscience.ca/3D/ontology/2019/1/example_events2/sedimentary_deposition
+exp:sedimentary_deposition rdf:type owl:NamedIndividual ,
+                                    gkm:Deposition .
+
+
+###  http://resource.geosciml.org/classifier/ics/ischart/Holocene
+<http://resource.geosciml.org/classifier/ics/ischart/Holocene> rdf:type owl:NamedIndividual ,
+                                                                        gkm:Epoch .
+
+
+###  http://resource.geosciml.org/classifier/ics/ischart/Jurassic
+<http://resource.geosciml.org/classifier/ics/ischart/Jurassic> rdf:type owl:NamedIndividual ,
+                                                                        gkm:Period .
+
+
+###  http://resource.geosciml.org/classifier/ics/ischart/Miocene
+<http://resource.geosciml.org/classifier/ics/ischart/Miocene> rdf:type owl:NamedIndividual ,
+                                                                       gkm:Epoch .
+
+
+#################################################################
+#    Annotations
+#################################################################
+
+<http://geoscience.ca/3D/ontology/2019/1/example_events/comment1> rdfs:comment "example geologic history" .
+
+
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
