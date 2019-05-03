@@ -14,13 +14,11 @@ com:Surface
   rdfs:label "Surface"@en ;
 .
 com:hasConstituent
-  rdfs:range [
-      a owl:Class ;
-      owl:unionOf (
-          geo:Geologic_Endurant
-          geo:Geologic_Perdurant
-        ) ;
-    ] ;
+  rdfs:comment "leave domain and range unconstrained; would need to add more of the high level ontologic entities (Physical Endurant, Perdurant) to specify here."@en ;
+  rdfs:label "hasConstituent"@en ;
+.
+com:hasHost
+  rdfs:domain geo:Geologic_Feature ;
 .
 com:hasPart
   a owl:ObjectProperty ;
@@ -36,7 +34,6 @@ com:participantIn
 .
 com:relatedto
   rdfs:domain geo:Geologic_Endurant ;
-  rdfs:subPropertyOf owl:topObjectProperty ;
 .
 com:uom
   rdfs:comment "PRobably need to specialize for units of length, mass, time, etc.  Use QUDT unit types? (http://www.qudt.org/doc/2017/DOC_SCHEMA-QUDT-SCIENCE-v2.0.html)"@en ;
@@ -45,6 +42,12 @@ com:uom
   a owl:Ontology ;
   rdfs:comment "Base geologic feature classes and high level constraints and relationships"@en ;
   owl:imports <http://geoscience.ca/3D/ontology/2019/1/common> ;
+.
+:Conglomeratic_Sandstone
+  a owl:Class ;
+  rdfs:comment "coarse grained to conglomeratic sandstone "@en ;
+  rdfs:label "Conglomeratic Sandstone "@en ;
+  rdfs:subClassOf geo:Rock_Material ;
 .
 geo:Age_Rank
   a owl:Class ;
@@ -134,6 +137,17 @@ geo:Clastic_Granular_Material
 Also for deformation-producted clasts in tectonic breccia."""@en ;
   rdfs:subClassOf geo:Granular_Material ;
 .
+geo:Clay_Mineral
+  a owl:Class ;
+  rdfs:comment "general class for all clay minerals "@en ;
+  rdfs:label "Clay Mineral "@en ;
+  rdfs:subClassOf geo:Mineral ;
+.
+geo:Complex
+  a owl:Class ;
+  rdfs:label "Complex"@en ;
+  rdfs:subClassOf geo:LIthostratigraphic_Unit ;
+.
 geo:Complex_Physical_Geologic_Property
   a owl:Class ;
   rdfs:subClassOf geo:Physical_Geologic_Property ;
@@ -146,9 +160,8 @@ geo:Complex_Physical_Geologic_Property
 .
 geo:Contact
   a owl:Class ;
-  rdfs:comment """Contact (CT): Feature hosted by 2 or more rock bodies that touch; not a part of any of the touching rock bodies.
-A contact is realizedBy 2 Rock Body Surfaces; each is a part of a different Rock Body host that is in contact. 
-Contact(x) <--> exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RBS (z)]""" ;
+  rdfs:comment """Contact (CT): Feature hosted by 2 or more rock bodies that touch; not a part of any of the touching rock bodies. A contact is realizedBy 2 Rock Body Surfaces; each is a part of a different Rock Body host that is in contact. 
+Contact(x) <--> exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RBS (z)]"""@en ;
   rdfs:label "Contact"@en ;
   rdfs:subClassOf geo:Geologic_Structure ;
 .
@@ -173,6 +186,11 @@ geo:Deformation_Unit
 geo:Deposition
   a owl:Class ;
   rdfs:subClassOf geo:Geologic_Process ;
+.
+geo:Diorite
+  a owl:Class ;
+  rdfs:label "Diorite" ;
+  rdfs:subClassOf geo:Rock_Material ;
 .
 geo:Displacement
   a owl:Class ;
@@ -201,6 +219,22 @@ geo:Ductile_Shear_Zone
       a owl:Restriction ;
       owl:onProperty geo:hasDisplacement ;
       owl:someValuesFrom geo:Displacement ;
+    ] ;
+.
+geo:Earth_Material_Color
+  a owl:Class ;
+  rdfs:comment "Property for specification of color of rocks, minerals, other Earth Material "@en ;
+  rdfs:label "Earth Material Color"@en ;
+  rdfs:subClassOf geo:Categorical_Physical_Geologic_Property ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom geo:Geologic_Endurant ;
+      owl:onProperty geo:isPropertyOf ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty geo:hasTermValue ;
+      owl:someValuesFrom com:Color_Terms ;
     ] ;
 .
 geo:Eon
@@ -252,6 +286,11 @@ geo:Erathem
       owl:someValuesFrom geo:Era ;
     ] ;
 .
+geo:Erosion
+  a owl:Class ;
+  rdfs:label "Erosion" ;
+  rdfs:subClassOf geo:Geologic_Process ;
+.
 geo:Facies
   a owl:Class ;
   rdfs:label "Facies"@en ;
@@ -272,6 +311,17 @@ geo:Faulting
   a owl:Class ;
   rdfs:subClassOf geo:Deformation ;
 .
+geo:Feldspar
+  a owl:Class ;
+  rdfs:label "Feldspar "@en ;
+  rdfs:subClassOf geo:Mineral ;
+.
+geo:Fine_Grained_Sandstone
+  a owl:Class ;
+  rdfs:comment "fine-grained sandstone "@en ;
+  rdfs:label "Fine-grained Sandstone "@en ;
+  rdfs:subClassOf geo:Rock_Material ;
+.
 geo:Fold
   a owl:Class ;
   rdfs:label "Fold"@en ;
@@ -284,7 +334,7 @@ geo:Folding
 geo:Foliation
   a owl:Class ;
   rdfs:label "Foliation"@en ;
-  rdfs:subClassOf geo:Dissective_Morphologic_Feature ;
+  rdfs:subClassOf com:Dissective_Morphologic_Feature ;
   rdfs:subClassOf geo:Geologic_Structure ;
 .
 geo:Formation
@@ -406,7 +456,7 @@ GF(x) <--> exists y [hasHost(y,x)] and geologic(x)"""@en ;
   rdfs:subClassOf geo:Geologic_Endurant ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty geo:hasHost ;
+      owl:onProperty com:hasHost ;
       owl:someValuesFrom geo:Rock_Body ;
     ] ;
 .
@@ -458,7 +508,7 @@ geo:Geologic_Property
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom com:Measurement_Method ;
-      owl:onProperty geo:hasmethod ;
+      owl:onProperty geo:hasMethod ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
@@ -469,7 +519,7 @@ geo:Geologic_Property
               geo:Geologic_Perdurant
             ) ;
         ] ;
-      owl:onProperty geo:ispropertyof ;
+      owl:onProperty geo:isPropertyOf ;
     ] ;
 .
 geo:Geologic_Setting
@@ -484,7 +534,7 @@ geo:Geologic_Setting
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom geo:Geologic_Setting ;
-      owl:onProperty geo:isPartOf ;
+      owl:onProperty com:isPartOf ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
@@ -521,12 +571,12 @@ geo:Geologic_Structure
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom geo:Geologic_Structure ;
-      owl:onProperty geo:isPartOf ;
+      owl:onProperty com:isPartOf ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom geo:Rock_Body ;
-      owl:onProperty geo:hasHost ;
+      owl:onProperty com:hasHost ;
     ] ;
 .
 geo:Geologic_Time_Date
@@ -547,7 +597,7 @@ geo:Geologic_Time_Date
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty geo:hasUOM ;
+      owl:onProperty com:hasUOM ;
       owl:someValuesFrom com:uom ;
     ] ;
 .
@@ -597,7 +647,7 @@ geo:Geologic_Unit
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom geo:Geologic_Unit ;
-      owl:onProperty geo:isPartOf ;
+      owl:onProperty com:isPartOf ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
@@ -649,6 +699,29 @@ geo:Grain_Shape
 geo:Grain_Size
   a owl:Class ;
   rdfs:subClassOf geo:Numeric_Physical_Geologic_Property ;
+.
+geo:Grain_Size_Average
+  a owl:Class ;
+  rdfs:comment "mean diameter for grain size distribution "@en ;
+  rdfs:label "Grain Size Average "@en ;
+  rdfs:subClassOf geo:Grain_Size ;
+.
+geo:Grain_Size_Max
+  a owl:Class ;
+  rdfs:comment "upper bound of 95% interval for grain size distribution "@en ;
+  rdfs:label "Grain Size Maximum "@en ;
+  rdfs:subClassOf geo:Grain_Size ;
+.
+geo:Grain_Size_Min
+  a owl:Class ;
+  rdfs:comment "lower bound of 95% interval for grain size distribution "@en ;
+  rdfs:label "Grain Size Minimum "@en ;
+  rdfs:subClassOf geo:Grain_Size ;
+.
+geo:Granitoid
+  a owl:Class ;
+  rdfs:label "Granitoid" ;
+  rdfs:subClassOf geo:Rock_Material ;
 .
 geo:Granular_Material
   a owl:Class ;
@@ -705,7 +778,7 @@ geo:LIthostratigraphic_Unit
 .
 geo:Lineation
   a owl:Class ;
-  rdfs:subClassOf geo:Dissective_Morphologic_Feature ;
+  rdfs:subClassOf com:Dissective_Morphologic_Feature ;
   rdfs:subClassOf geo:Geologic_Structure ;
 .
 geo:Marine_Setting
@@ -744,6 +817,16 @@ geo:Numeric_Physical_Geologic_Property
   a owl:Class ;
   rdfs:label "Numeric physical geologic property"@en ;
   rdfs:subClassOf geo:Physical_Geologic_Property ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty com:hasUOM ;
+      owl:someValuesFrom com:uom ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty geo:hasNumericValue ;
+      owl:someValuesFrom xsd:decimal ;
+    ] ;
 .
 geo:Orientation
   a owl:Class ;
@@ -782,6 +865,11 @@ geo:Pyroclastic_Granular_Material
   rdfs:comment "Use for description of pyroclastic rocks"@en ;
   rdfs:subClassOf geo:Granular_Material ;
 .
+geo:Quartz
+  a owl:Class ;
+  rdfs:label "Quartz "@en ;
+  rdfs:subClassOf geo:Mineral ;
+.
 geo:Rock_Body
   a owl:Class ;
   rdfs:comment "An endurant in which some Rock Material inheres, either as an 'amount of matter' (disembodied matter), or as a geologic unit."@en ;
@@ -813,7 +901,7 @@ geo:Rock_Body_Part
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty geo:isPartOf ;
+      owl:onProperty com:isPartOf ;
       owl:someValuesFrom [
           a owl:Class ;
           owl:unionOf (
@@ -871,6 +959,12 @@ geo:Rock_Material
       owl:onProperty geo:hasMaterialConstituent ;
     ] ;
 .
+geo:Sandstone
+  a owl:Class ;
+  rdfs:comment "generic sandstone "@en ;
+  rdfs:label "Sandstone "@en ;
+  rdfs:subClassOf geo:Rock_Material ;
+.
 geo:Series
   a owl:Class ;
   rdfs:subClassOf geo:Chronostratigraphic_Unit ;
@@ -901,7 +995,7 @@ geo:Stage
   rdfs:subClassOf geo:Chronostratigraphic_Unit ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty geo:isPartOf ;
+      owl:onProperty com:isPartOf ;
       owl:someValuesFrom geo:Series ;
     ] ;
   rdfs:subClassOf [
@@ -922,7 +1016,7 @@ geo:Stratigraphic_Point
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty geo:hasSpatialLocation ;
-      owl:someValuesFrom com:SpatialEntity ;
+      owl:someValuesFrom com:Spatial_Entity ;
     ] ;
 .
 geo:Stratigraphic_Section
@@ -1010,10 +1104,17 @@ geo:age_incomparable_to
 geo:hasAbstractProperty
   a owl:ObjectProperty ;
 .
+geo:hasBoundaryThickness
+  a owl:ObjectProperty ;
+  rdfs:comment "thickness (length) of boundary zone at a gradational contact "@en ;
+  rdfs:domain geo:Gradational_Contact ;
+  rdfs:label "has boundary thickness "@en ;
+  rdfs:range geo:Thickness ;
+.
 geo:hasDate
   a owl:DatatypeProperty ;
   rdfs:comment "numeric value for a time coordinate. Associated hasUOM property asserts the units of measure; the temporal reference system used to assert dates should be explained in metadata for the data instances."@en ;
-  rdfs:subPropertyOf geo:hasValue ;
+  rdfs:subPropertyOf geo:hasNumericValue ;
 .
 geo:hasDisplacement
   a owl:ObjectProperty ;
@@ -1026,14 +1127,26 @@ geo:hasDisplacement
     ] ;
   rdfs:range geo:Displacement ;
 .
-geo:hasHost
-  rdfs:domain geo:Geologic_Feature ;
-  rdfs:subPropertyOf owl:topObjectProperty ;
+geo:hasEventHistory
+  a owl:ObjectProperty ;
+  rdfs:domain geo:Geologic_Endurant ;
+  rdfs:label "hasEventHistory"@en ;
+  rdfs:range geo:Geologic_Event ;
 .
 geo:hasMaterialConstituent
   a owl:ObjectProperty ;
   rdfs:range geo:Rock_Material ;
   rdfs:subPropertyOf com:hasConstituent ;
+.
+geo:hasMethod
+  a owl:ObjectProperty ;
+  rdfs:domain geo:Geologic_Property ;
+  rdfs:label "hasMethod"@en ;
+.
+geo:hasNumericValue
+  a owl:DatatypeProperty ;
+  rdfs:label "has numeric value"@en ;
+  rdfs:range xsd:decimal ;
 .
 geo:hasOlderAge
   a owl:ObjectProperty ;
@@ -1045,7 +1158,7 @@ geo:hasOlderAgeDate
 .
 geo:hasOlderHost
   a owl:ObjectProperty ;
-  rdfs:subPropertyOf geo:hasHost ;
+  rdfs:subPropertyOf com:hasHost ;
 .
 geo:hasPhysicalProperty
   a owl:ObjectProperty ;
@@ -1071,33 +1184,29 @@ geo:hasSetting
 geo:hasSpatialExtent
   a owl:ObjectProperty ;
   rdfs:domain geo:Geologic_Endurant ;
-  rdfs:subPropertyOf owl:topObjectProperty ;
 .
 geo:hasSpatialLocation
   a owl:InverseFunctionalProperty ;
   a owl:ObjectProperty ;
   rdfs:comment "Geographic disposition of an endurant."@en ;
   rdfs:domain geo:Geologic_Endurant ;
-  rdfs:subPropertyOf owl:topObjectProperty ;
 .
 geo:hasTemporalProperty
   a owl:ObjectProperty ;
 .
 geo:hasTermValue
   a owl:ObjectProperty ;
+  rdfs:range com:Categorical_Value ;
 .
 geo:hasUOM
   a owl:ObjectProperty ;
   rdfs:range com:uom ;
+  owl:equivalentProperty com:hasUOM ;
 .
 geo:hasUncertainty
   a owl:DatatypeProperty ;
   rdfs:comment "numeric assertion of the one-side confidence interval for a measured value. The statistic used to assert this uncertainty interval should be explained in the metadata for instances using this property."@en ;
-  rdfs:subPropertyOf geo:hasValue ;
-.
-geo:hasValue
-  a owl:DatatypeProperty ;
-  rdfs:label "has numeric value"@en ;
+  rdfs:subPropertyOf geo:hasNumericValue ;
 .
 geo:hasYoungerAge
   a owl:ObjectProperty ;
@@ -1110,23 +1219,22 @@ geo:hasYoungerAgeDate
 .
 geo:hasYoungerHost
   a owl:ObjectProperty ;
-  rdfs:subPropertyOf geo:hasHost ;
-.
-geo:haseventhistory
-  a owl:ObjectProperty ;
-  rdfs:domain geo:Geologic_Endurant ;
-  rdfs:label "hasEventHistory"@en ;
-  rdfs:range geo:Geologic_Event ;
-  rdfs:subPropertyOf owl:topObjectProperty ;
-.
-geo:hasmethod
-  a owl:ObjectProperty ;
-  rdfs:domain geo:Geologic_Property ;
-  rdfs:label "hasMethod"@en ;
-  rdfs:subPropertyOf owl:topObjectProperty ;
+  rdfs:subPropertyOf com:hasHost ;
 .
 geo:isManifestationOf
   a owl:ObjectProperty ;
+.
+geo:isPropertyOf
+  a owl:ObjectProperty ;
+  rdfs:domain geo:Geologic_Property ;
+  rdfs:label "isPropertyOf"@en ;
+  rdfs:range [
+      a owl:Class ;
+      owl:unionOf (
+          geo:Geologic_Endurant
+          geo:Geologic_Perdurant
+        ) ;
+    ] ;
 .
 geo:isRealizedBy
   a owl:ObjectProperty ;
@@ -1147,14 +1255,6 @@ geo:isSettingFor
     ] ;
   owl:inverseOf geo:hasSetting ;
 .
-geo:ispropertyof
-  a owl:ObjectProperty ;
-  rdfs:domain geo:Geologic_Property ;
-  rdfs:label "isPropertyOf"@en ;
-  rdfs:range geo:Geologic_Endurant ;
-  rdfs:range geo:Geologic_Perdurant ;
-  rdfs:subPropertyOf owl:topObjectProperty ;
-.
 geo:manifests
   a owl:ObjectProperty ;
 .
@@ -1172,6 +1272,14 @@ geo:older_than
   rdfs:label "older than"@en ;
   rdfs:subPropertyOf geo:temporallyRelatedTo ;
 .
+geo:overlies
+  a owl:ObjectProperty ;
+  rdfs:comment "relationship between striatified geologic units "@en ;
+  rdfs:domain geo:Geologic_Unit ;
+  rdfs:label "overlies "@en ;
+  rdfs:range geo:Geologic_Unit ;
+  rdfs:subPropertyOf com:relatedto ;
+.
 geo:proportionFor
   a owl:ObjectProperty ;
   rdfs:range geo:Geologic_Endurant ;
@@ -1179,7 +1287,6 @@ geo:proportionFor
 geo:proportionOf
   a owl:ObjectProperty ;
   rdfs:range geo:Geologic_Endurant ;
-  rdfs:subPropertyOf owl:topObjectProperty ;
 .
 geo:realizes
   a owl:ObjectProperty ;
@@ -1188,6 +1295,22 @@ geo:realizes
 geo:temporallyRelatedTo
   a owl:ObjectProperty ;
   rdfs:range geo:Geologic_Event ;
+.
+geo:underlies
+  a owl:ObjectProperty ;
+  rdfs:comment "relationship between stratified geologic units "@en ;
+  rdfs:domain geo:Geologic_Unit ;
+  rdfs:label "underlies "@en ;
+  rdfs:range geo:Geologic_Unit ;
+  rdfs:subPropertyOf com:relatedto ;
+.
+geo:within
+  a owl:ObjectProperty ;
+  rdfs:comment "relationship between stratified geologic units "@en ;
+  rdfs:domain geo:Geologic_Unit ;
+  rdfs:label "within "@en ;
+  rdfs:range geo:Geologic_Unit ;
+  rdfs:subPropertyOf com:relatedto ;
 .
 geo:younger_than
   a owl:ObjectProperty ;
