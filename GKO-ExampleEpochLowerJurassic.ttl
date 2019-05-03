@@ -1,0 +1,57 @@
+# baseURI: http://geoscience.ca/3D/ontology/2019/1/ex-timescale
+# imports: http://geoscience.ca/3D/ontology/2019/1/geologicfeature
+# imports: http://purl.org/dc/elements/1.1/
+# prefix: tim
+
+@prefix common: <http://geoscience.ca/3D/ontology/2019/1/common/> .
+@prefix tim: <http://geoscience.ca/3D/ontology/2019/1/ex-timescale#> .
+@prefix geo: <http://geoscience.ca/3D/ontology/2019/1/geologicfeature/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://geoscience.ca/3D/ontology/2019/1/ex-timescale>
+  a owl:Ontology ;
+  rdfs:comment "Example encoding of a geochronologic time interval" ;
+  owl:imports <http://geoscience.ca/3D/ontology/2019/1/geologicfeature> ;
+  owl:imports <http://purl.org/dc/elements/1.1/> ;
+ .
+
+tim:Lower_Jurassic_Epoch
+	rdf:type geo:Epoch;
+	rdfs:comment 'Epoch is a subclass of Geochronologic Era';
+	rdfs:label  'Lower Jurassic time interval';
+	rdfs:comment 'This is a temporal interval';
+	common:isPartOf  <http://resource.geosciml.org/vocabulary/timescale/isc2017>;
+	geo:hasYoungerDate 
+		[rdfs:type geo:Geochronologic_Boundary;
+		geo:hasDate 	174.1 ;
+		geo:hasUncertainty 1.0;
+		geo:hasUOM [rdfs:type common:ma];
+		geo:isRealizedBy <http://resource.geosciml.org/classifier/ics/ischart/BaseMiddleJurassic>;
+		rdfs:comment 'the Base Middle Jurassic class represents all rock body surfaces correlated with the surface at the Global Stratotype Point';
+		geo:stratotype <http://resource.geosciml.org/classifier/ics/ischart/BaseMiddleJurassicSP>
+		];
+	geo:hasOlderDate 
+		[rdfs:type geo:Geochronologic_Boundary;
+		geo:hasDate 201.3 ;
+		geo:hasUncertainty 0.2;
+		geo:hasUOM [rdfs:type common:ma];
+		geo:isRealizedBy  <http://resource.geosciml.org/classifier/ics/ischart/BaseJurassic>;
+		geo:stratotype <http://resource.geosciml.org/classifier/ics/ischart/BaseJurassicSP>
+		].
+		
+		
+		
+		
+tim:Lower_Jurassic_Chronostrat_Unit
+	rdf:type geo:Series;
+	geo:realizes tim:Lower_Jurassic_Epoch;
+	rdfs:label 'Lower Jurassic rocks';
+	rdfs:comment 'see Table 3 in http://www.stratigraphy.org/upload/bak/chron.htm for hierarchy of chronostrat and geochron unit names';
+	rdfs:comment 'ISC2017 time scale does not define stratotypes for the Geochronologic Eras it defines'.
+
+	
+		
