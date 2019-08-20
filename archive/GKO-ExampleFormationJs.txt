@@ -1,0 +1,158 @@
+
+# baseURI: http://geoscience.ca/3D/ontology/2019/1/ex-formationJs
+# imports: http://geoscience.ca/3D/ontology/2019/1/geologicfeature
+# imports: http://purl.org/dc/elements/1.1/
+# prefix: ejs
+
+@prefix common: <http://geoscience.ca/3D/ontology/2019/1/common/> .
+@prefix con: <http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#> .
+@prefix ejs: <http://geoscience.ca/3D/ontology/2019/1/ex-formationJs#> .
+@prefix geo: <http://geoscience.ca/3D/ontology/2019/1/geologicfeature/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix tim: <http://geoscience.ca/3D/ontology/2019/1/ex-timescale#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://geoscience.ca/3D/ontology/2019/1/ex-formationJs>
+  a owl:Ontology ;
+  rdfs:comment "Example encoding of a geochronologic time interval" ;
+  owl:imports <http://geoscience.ca/3D/ontology/2019/1/geologicfeature> ;
+  owl:imports <http://purl.org/dc/elements/1.1/> ;
+  owl:imports <http://geoscience.ca/3D/ontology/2019/1/ex-timescale> ;
+  owl:imports <http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact> ;
+	rdfs:comment 'details of description of Js unit in GeologyScenarioForTesting.pptx';
+	rdfs:comment 'Stephen M. Richard 2019-03-28'.
+
+ejs:JsFormation
+	rdf:type geo:Formation;
+	rdfs:label 'Js Formation';
+	rdfs:comment 'upper part is massive limestone with abundant ammonites';
+	rdfs:comment 'lower part is fining-upward sequence from conglomeratic sandstone to fine grained sandstone';
+	rdfs:comment 'marker bed is a tuff in the upper part of the lower clastic interval';
+	rdfs:comment 'clasts of Cb Quartzite are abundant in the lower part of the unit';
+	
+	geo:hasTemporalProperty [
+		rdf:type geo:Chronostratigraphic_Age
+		geo:hasYoungerAge tim:Lower_Jurassic_Epoch;
+		geo:hasOlderAge tim:Lower_Jurassic_Epoch
+		];
+	common:hasPart esp:JsFormation-lower;
+	common:hasPart esp:baseJs-6;
+	common:hasPart ejs:JsFormation-upper;
+	common:hasPart ejs:topJs-2; 
+	rdfs:comment 'the following parts are not elucidated in this example, but are referenced in the Contact instances below. These surfaces would participate in intrusion and also ?contact metamorphism? processes';
+	hasPart con:KdInJsDikeContact-3.2.4;
+	hasPart con:KdInJsDikeContact-3.1.4;
+	hasPart con:KgInJsIntrusiveContact-4.2.
+	
+	
+JsFormation-lower
+	rdf:type geo:Rock_Body_Part;
+	underlies _:JsFormation-upper;
+	rdfs:comment 'underlies, overlies, within are subproperty of relatedTo';
+	common:hasPart  ejs:lith_1;
+	common:hasPart  ejs:lith_2;
+	common:hasPart  ejs:lith_3;
+	common:hasPart ejs:JsFormationMarker-6.4;
+	common:hasPart ejs:baseJs-6.
+	
+	
+ejs:JsFormationMarker-6.4
+	rdf:type geo:Bed;
+	rdfs:comment 'Bed is viewed as a degenerate volume, considered a surface that has a hasConstiuent property, and hasPart that represents contacts of the bed';
+	common:hasConstituent  <http:\\uri.org\Ballyloghlin_tuff>;
+	common:hasPart [
+		rdf:type geo:Rock_Body_Top					
+		];
+	common:hasPart [
+		rdf:type geo:Rock_Body_Bottom;
+		common:participantIn [rdf:type geo:Deposition];				
+		];
+	geo:within ejs:lith_3.
+	
+ejs:lith_1
+	rdf:type geo:Rock_Body_Part;
+	common:hasConstituent [
+		rdf:type geo:Conglomeratic_Sandstone;
+		rdfs:comment 'need to capture gradational fining upward relationship'	
+	];
+	geo:underlies ejs:lith_2;
+	common:hasPart eejs:baseJs-6.
+	
+ejs:lith_2
+	rdf:type geo:Rock_Body_Part;
+	common:hasConstituent [
+		rdf:type Sandstone ];
+	common:hasPart [
+		rdf:type geo:Rock_Body_Bottom;
+		common:participatesIn [
+			rdf:type geo:Deposition.
+			]					
+		];
+	geo:underlies ejs:lith_3;
+	geo:overlies ejs:lith_1.
+	
+ejs:lith_3
+	rdf:type geo:Rock_Body_Part;
+	common:hasConstituent [
+	rdf:type geo:Fine_Grained_Sandstone ];
+	common:hasPart [
+		rdf:type geo:Rock_Body_Bottom;
+		participatesIn [
+			rdf:type geo:Deposition
+			]			
+		];
+	geo:overlies ejs:lith_2.
+	
+ejs:contactJs-lith_1-lith_2
+	rdf:type geo:Gradational_Contact;
+	rdfs:label 'internal gradational contact ';
+	geo:hasBoundaryThickness [
+		rdf:type geo:Thickness;
+		geo:hasNumericValue 10;
+		common:hasUOM [rdf:type common:meter]
+	];
+	geo:hasYoungerHost ejs:lith_2;
+	geo:hasOlderHost ejs:lith_1.	
+	
+ejs:contactJs-lith_2-lith_3
+	rdf:type geo:Gradational_Contact;
+	rdfs:label 'internal gradational contact ';
+	geo:hasBoundaryThickness [
+		rdf:type geo:Thickness;
+		geo:hasNumericValue 4;
+		common:hasUOM [rdf:type common:meter].
+	];
+	youngerHost ejs:lith_3;
+	olderHost ejs:lith_2.	
+	
+baseJs-6
+	rdf:type Rock Body Bottom, Depositional Surface;
+	common:hasPart ejs:baseJs-6.1;	
+	common:hasPart ejs:baseJs-6.2 ;
+	common:hasPart ejs:baseJs-6.3 .
+		
+ejs:baseJs-6.1
+	rdf:type geo:Rock_Body_Bottom;
+	rdfs:comment 'Js on Ss surface';
+	common:participatesIn [
+		rdf:type geo:Deposition].
+ejs:baseJs-6.2
+	rdf:type geo:Rock_Body_Bottom;
+	rdfs:comment 'Js on Os surface';
+	common:participatesIn [
+		rdf:type  geo:Deposition].		
+ejs:baseJs-6.3
+	rdf:type geo:Rock_Body_Bottom;
+	rdfs:comment 'Js on Xm surface';
+	common:participatesIn [
+		rdf:type  geo:Deposition].
+				
+ejs:topJs-2.1
+	rdf:type geo:Rock_Body_Top;
+	common:participatesIn [
+		rdf:type geo:Erosion.
+	].
+	

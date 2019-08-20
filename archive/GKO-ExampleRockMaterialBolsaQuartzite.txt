@@ -1,0 +1,128 @@
+﻿
+# baseURI: http://geoscience.ca/3D/ontology/2019/1/ex-formationJs
+# imports: http://geoscience.ca/3D/ontology/2019/1/geologicfeature
+# imports: http://purl.org/dc/elements/1.1/
+# prefix: bol
+
+@prefix common: <http://geoscience.ca/3D/ontology/2019/1/common/> .
+@prefix bol: <http://geoscience.ca/3D/ontology/2019/1/ex-bolsaquartzite#> .
+@prefix geo: <http://geoscience.ca/3D/ontology/2019/1/geologicfeature/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix tim: <http://geoscience.ca/3D/ontology/2019/1/ex-timescale#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://geoscience.ca/3D/ontology/2019/1/ex-formationJs>
+  a owl:Ontology ;
+  rdfs:comment "Example encoding of a lithology description for a formation" ;
+  owl:imports <http://geoscience.ca/3D/ontology/2019/1/geologicfeature> ;
+  owl:imports <http://purl.org/dc/elements/1.1/> ;
+  owl:imports <http://geoscience.ca/3D/ontology/2019/1/ex-timescale> ;
+  owl:imports <http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact> ;
+	rdfs:comment 'details of description of Js unit in GeologyScenarioForTesting.pptx';
+	rdfs:comment 'Stephen M. Richard 2019-03-28'.
+
+
+bol:Bolsa_Quartzite_Material
+       rdfs:type 	geo:Rock_Material;
+		rdfs:label  'Bolsa Quartzite, basal arkose';
+        common:hasConstituent    	bol:Quartz_grains;
+		common:hasConstituent    	bol:Feldspar_grains;
+		common:hasConstituent    	bol:Clay_matrix;
+        common:isConstituentOf  	bol:Bolsa_Quartzite_Formation;
+        geo:hasPhysicalProperty 	
+			[rdfs:type geo:Proportion;
+				geo:proportionOf geo:Feldspar_grains;
+				geo:proportionFor geo:Bolsa_Quarzite_Material;
+				geo:hasNumericValue 50;
+				geo:hasUOM [rdfs:type common:percent]];
+	
+		geo:hasPhysicalProperty 	bol:constituent_part2;
+		geo:hasPhysicalProperty 	bol:constituent_part3;
+		geo:hasPhysicalProperty 	
+			[rdfs:type common:Color;
+				common:hasValue <http://colors.org/maroonbrown>].
+	
+		
+		
+bol:Quartz_grains
+		rdfs:type Granular_Material;
+		common:hasConstituent Quartz_mineral;
+		geo:hasPhysicalProperty 	
+			[rdfs:type   	geo:Grain_Shape ;
+       		     geo:hasTermValue  	<http://geosciml.org/particleShape/subangular>];
+		geo:hasPhysicalProperty 	
+			[rdfs:type   	geo:Grain_Size_Min ;
+       		     geo:hasNumericValue  	.05 ;
+       		     geo:hasUOM	[rdfs:type common:mm]];
+		geo:hasPhysicalProperty 	
+			[rdfs:type   	geo:Grain_Size_Max ;
+       		     geo:hasNumericValue  	8 ;
+       		     geo:hasUOM	[rdfs:type common:mm]];	
+		geo:hasPhysicalProperty 
+			[rdfs:type   	geo:Grain_Size_Average ;
+				 geo:hasNumericValue 3;
+				 geo:hasUOM [rdfs:type common:mm]];
+				common:hasAbstractProperty
+					[rdfs:type common:First_Standard_Deviation ;
+					hasValue .06;
+					hasUOM [rdfs:type common;mm]]].
+		
+Feldspar_grains
+		rdfs:type Granular_Material;
+		hasConstituent _:Feldspar_mineral;
+		hasPhysicalProperty 	
+			[rdfs:type   	GrainShape 
+       		     hasValue  	<http://geosciml.org/particleShape/subangular>];
+		hasPhysicalProperty 	
+			[rdfs:type   	GrainSizeMin 
+       		     hasValue  	.02 
+       		     hasUOM	[rdfs:type mm]];
+		hasPhysicalProperty 	
+			[rdfs:type   	GrainSizeMax 
+       		     hasValue  	5 
+       		     hasUOM	[rdfs:type mm]].
+			
+Clay_matrix
+		rdfs:type Granular_Material;
+		hasConstituent Clay_mineral;		
+		hasPhysicalProperty 	
+			[rdfs:type   	GrainSizeMax 
+       		     hasValue  	.005 
+       		     hasUOM	[rdfs:type mm]].
+				 
+				 
+Quartz_mineral
+       	rdfs:type 		Mineral;
+		hasConstituent  Silicon_element;
+		hasConstituent  Oxygen_element; 
+		sameAs <https://en.wikipedia.org/wiki/Quartz>.
+
+		
+Feldspar_mineral
+       	rdfs:type 		Mineral;
+		hasConstituent  Silicon_element;
+		hasConstituent  Oxygen_element; 
+		hasConstituent  Sodium_element; 
+		hasConstituent  Calcium_element; 
+		hasConstituent  Potassium_element; 
+		sdo:seeAlso <https://en.wikipedia.org/wiki/Feldspar>.
+       	
+
+
+	
+constituent_part2
+	rdfs:type Proportion;
+	proportionOf Feldspar_grains;
+	proportionFor Bolsa_Quarzite_Material;
+	hasValue 50;
+	hasUOM [rdfs:type uom:percent];
+	
+constituent_part3
+	rdfs:type Proportion;
+	proportionOf Clay_matrix;
+	proportionFor Bolsa_Quarzite_Material;
+	hasValue 5;
+	hasUOM [rdfs:type uom:percent].
