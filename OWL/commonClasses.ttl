@@ -1,6 +1,8 @@
 # baseURI: http://geoscience.ca/3D/ontology/2019/1/common
+# imports: http://www.ontologydesignpatterns.org/ont/dul/DLP_397.owl
 
 @prefix : <http://geoscience.ca/3D/ontology/2019/1/common#> .
+@prefix DLP_397: <http://www.ontologydesignpatterns.org/ont/dlp/DLP_397.owl#> .
 @prefix common: <http://geoscience.ca/3D/ontology/2019/1/common/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -13,12 +15,12 @@
   rdfs:comment "Unary predicates are represented by classes, binary predicates by object properties"@en ;
   rdfs:comment "ontology of shared objectProperties and high level classes used to define geologic features"@en ;
   rdfs:label "Shared elements for geoscience ontology"@en ;
+  owl:imports <http://www.ontologydesignpatterns.org/ont/dul/DLP_397.owl> ;
 .
 common:Abstract_Property
   a owl:Class ;
   rdfs:comment "abstract class for any kind of property"@en ;
   rdfs:label "Abstract Property "@en ;
-  rdfs:subClassOf owl:Thing ;
 .
 common:Amount_Of_Material
   a owl:Class ;
@@ -29,6 +31,12 @@ common:Amount_Of_Matter
   rdfs:comment "The amount of matter type can be subdivided into [a volume] of (1) material (rock material), or (2) state of a material (solid, fluid), to enable designation of lumps of rock or lumps of fluid."@en ;
   rdfs:label "Amount of Matter"@en ;
 .
+common:Any_Color
+  a owl:Class ;
+  rdfs:comment "color vocabulary "@en ;
+  rdfs:label "Color "@en ;
+  rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dlp/DOLCE-Lite.owl#physical-region> ;
+.
 common:Calcium_Element
   a owl:Class ;
   rdfs:label "Calcium "@en ;
@@ -38,66 +46,27 @@ common:Categorical_Value
   a owl:Class ;
   rdfs:label "Categorical Value"@en ;
 .
-common:Color_Terms
-  a owl:Class ;
-  rdfs:comment "color vocabulary "@en ;
-  rdfs:label "Color "@en ;
-  rdfs:subClassOf common:Categorical_Value ;
-.
-common:Corner
-  a owl:Class ;
-  rdfs:subClassOf common:Physical_Boundary ;
-.
-common:Dissective_Morphologic_Feature
-  a owl:Class ;
-  rdfs:comment """Dissective Material Feature (DMF): 
-is homomerous (penetrative): all parts of an object host the same type of feature (the feature penetrates the host's material).
-
-Includes:
---- grain  / wood
---- honeycomb pattern / beehive
---- geological texture, fabric, foliation
-DMF(x) <-->  exists z forall y [hasHost(z,x) ^ isPartOf(y,z) --> exists x1 [hasHost(y,x1) ^ DMF(x1)]]"""@en ;
-  rdfs:subClassOf common:Morphologic_Feature ;
-.
-common:Edge
-  a owl:Class ;
-  rdfs:subClassOf common:Physical_Boundary ;
-.
 common:Element
   a owl:Class ;
-  rdfs:subClassOf common:Amount_Of_Material ;
+  rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dlp/DOLCE-Lite.owl#amount-of-matter> ;
 .
-common:First_Standard_Deviation
+common:First_Standard_Deviation_Calculation
   a owl:Class ;
   rdfs:comment "report a standard deviation value for a value range "@en ;
-  rdfs:label "First Standard Deviation "@en ;
-  rdfs:subClassOf common:Statistical_Property ;
+  rdfs:label "First Standard Deviation Calculation"@en ;
+  rdfs:subClassOf common:Statistical_Calculation ;
 .
 common:Fluid
   a owl:Class ;
-  rdfs:subClassOf common:State_Of_Material ;
+  rdfs:subClassOf common:State_Of_Matter ;
 .
 common:Gas
   a owl:Class ;
   rdfs:subClassOf common:Fluid ;
 .
-common:Indissective_Morphologic_Feature
-  a owl:Class ;
-  rdfs:comment """Non-Dissective Material Feature (NDMF): 
-Not homomerous (non-pentrative) entity: spatial subdivisions (parts) are not instances of this feature
-
-Includes:
---- smile or frown /  lips
---- strips / zebra
---- checkerboard / wood
---- ocean waves / ocean
---- geological fold
-
-
-NDMF(x) <-->  exists z, y [hasHost(z,x) ^ isPartOf(y,z) --> not exists x1 [hasHost(y,x1) ^ NDMF(x1)]]"""@en ;
-  rdfs:label "Indissective Morphologic Feature"@en ;
-  rdfs:subClassOf common:Morphologic_Feature ;
+common:HostedBy
+  a owl:ObjectProperty ;
+  rdfs:comment "object property between two entities wherein  one entity is specifically dependent on the other."@en ;
 .
 common:Liquid
   a owl:Class ;
@@ -107,27 +76,27 @@ common:Materially_Dependent_Feature
   a owl:Class ;
   rdfs:label "Materially Dependent Feature"@en ;
 .
-common:Maximum_Value
+common:Maximum_Value_Calculation
   a owl:Class ;
   rdfs:comment "report a maximum value for a value range "@en ;
-  rdfs:label "Maximum Value "@en ;
-  rdfs:subClassOf common:Statistical_Property ;
+  rdfs:label "Maximum Value Calculation"@en ;
+  rdfs:subClassOf common:Statistical_Calculation ;
 .
-common:Mean_Value
+common:Mean_Value_Calculation
   a owl:Class ;
   rdfs:comment "report a mean value for a value range "@en ;
-  rdfs:label "Mean Value "@en ;
-  rdfs:subClassOf common:Statistical_Property ;
+  rdfs:label "Mean Value Calculation"@en ;
+  rdfs:subClassOf common:Statistical_Calculation ;
 .
 common:Measurement_Method
   a owl:Class ;
   rdfs:subClassOf common:Process ;
 .
-common:Minimum_Value
+common:Minimum_Value_Calculation
   a owl:Class ;
   rdfs:comment "report a minimum value for a value range "@en ;
-  rdfs:label "Minimum Value "@en ;
-  rdfs:subClassOf common:Statistical_Property ;
+  rdfs:label "Minimum Value Calculation"@en ;
+  rdfs:subClassOf common:Statistical_Calculation ;
 .
 common:Morphologic_Feature
   a owl:Class ;
@@ -143,7 +112,7 @@ Morphological features can have morphological properties e.g. orientation, thick
 
 MF(x) --> MDF (x) ^ exist y [hosts (y,x) ^ not partOf (x,y)]"""@en ;
   rdfs:label "Morphologic Feature"@en ;
-  rdfs:subClassOf common:Materially_Dependent_Feature ;
+  rdfs:subClassOf common:Inherent_Feature ;
 .
 common:Oxygen_Element
   a owl:Class ;
@@ -169,7 +138,7 @@ common:Potassium_Element
 .
 common:Process
   a owl:Class ;
-  rdfs:comment "HIgh level class for any process; use to represent measurement methods. This will probably evolve to some mapping to W3C Prov Activity"@en ;
+  rdfs:comment "High level class for any process; use to represent measurement methods. This will probably evolve to some mapping to W3C Prov Activity or dolce:process?"@en ;
   rdfs:label "Process"@en ;
 .
 common:Silicon_Element
@@ -184,49 +153,32 @@ common:Sodium_Element
 .
 common:Solid
   a owl:Class ;
-  rdfs:subClassOf common:State_Of_Material ;
+  rdfs:subClassOf common:State_Of_Matter ;
 .
-common:Spatial_Entity
+common:Spatial_Extent
   a owl:Class ;
   rdfs:comment "Class of objects that represent locations within the Earth."@en ;
-  rdfs:label "Spatial Entity"@en ;
+  rdfs:label "Spatial Extent"@en ;
 .
-common:State_Of_Material
+common:State_Of_Matter
   a owl:Class ;
-  rdfs:subClassOf common:Amount_Of_Matter ;
+  rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dlp/DOLCE-Lite.owl#physical-region> ;
 .
-common:Statistical_Property
+common:Statistical_Calculation
   a owl:Class ;
-  rdfs:comment "Specification of statistics associated with a measured value, e.g. minimum, maximum, mean, mode, standard deviation. "@en ;
-  rdfs:label "Statistical Property "@en ;
-  rdfs:subClassOf common:Abstract_Property ;
+  rdfs:comment "Determination of statistics associated with a measured value, e.g. minimum, maximum, mean, mode, standard deviation."@en ;
+  rdfs:label "Statistical Calculation"@en ;
+  rdfs:subClassOf common:Calculation ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty common:hasUOM ;
       owl:someValuesFrom common:uom ;
     ] ;
 .
-common:Surface
-  a owl:Class ;
-  rdfs:subClassOf common:Physical_Boundary ;
-.
-common:Temporal_Region
-  a owl:Class ;
-  rdfs:label "Temporal Region"@en ;
-.
-common:Time_Interval
-  a owl:Class ;
-  rdfs:label "Time Interval"@en ;
-  rdfs:subClassOf common:Temporal_Region ;
-.
 common:hasConstituent
   a owl:ObjectProperty ;
   a owl:TransitiveProperty ;
   owl:inverseOf common:isConstituentOf ;
-.
-common:hasHost
-  a owl:ObjectProperty ;
-  rdfs:comment "object property between two entities wherein  one entity is specifically dependent on the other."@en ;
 .
 common:hasPart
   a owl:ObjectProperty ;
@@ -250,7 +202,16 @@ common:hasValue
 common:isConstituentOf
   a owl:ObjectProperty ;
   a owl:TransitiveProperty ;
-  rdfs:range common:Amount_Of_Material ;
+  rdfs:range [
+      a owl:Class ;
+      owl:unionOf (
+          common:Element
+          <http://geoscience.ca/3D/ontology/2019/1/geologicfeature/Mineral>
+          <http://geoscience.ca/3D/ontology/2019/1/geologicfeature/Rock_Material>
+          <http://geoscience.ca/3D/ontology/2019/1/geologicfeature/Granular_Material>
+          <http://geoscience.ca/3D/ontology/2019/1/geologicfeature/Glass>
+        ) ;
+    ] ;
 .
 common:isPartOf
   a owl:ObjectProperty ;
@@ -280,5 +241,5 @@ common:relatedto
 common:uom
   a owl:Class ;
   rdfs:label "Unit of Measurement"@en ;
-  rdfs:subClassOf common:Categorical_Value ;
+  rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dlp/DOLCE-Lite.owl#abstract-region> ;
 .
