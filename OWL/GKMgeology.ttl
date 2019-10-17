@@ -1,10 +1,10 @@
 # baseURI: http://geoscience.ca/3D/ontology/2019/1/geologicfeature
 # imports: http://geoscience.ca/3D/ontology/2019/1/common
-# imports: http://www.ontologydesignpatterns.org/ont/dul/DLP_397.owl
+# imports: http://www.ontologydesignpatterns.org/ont/dlp/DOLCE-Lite.owl
 
 @prefix : <http://geoscience.ca/3D/ontology/2019/1/geologicfeature#> .
-@prefix DLP_397: <http://www.ontologydesignpatterns.org/ont/dlp/DLP_397.owl#> .
 @prefix com: <http://geoscience.ca/3D/ontology/2019/1/common/> .
+@prefix dol: <http://www.ontologydesignpatterns.org/ont/dlp/DOLCE-Lite.owl#> .
 @prefix geo: <http://geoscience.ca/3D/ontology/2019/1/geologicfeature/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -33,7 +33,7 @@ com:Calculation
   rdfs:subClassOf com:Determining_Event ;
 .
 com:Categorical_Value
-  rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dlp/DOLCE-Lite.owl#physical-region> ;
+  rdfs:subClassOf dol:physical-region ;
 .
 com:Complex_Feature
   a owl:Class ;
@@ -45,7 +45,7 @@ com:Determining_Event
   a owl:Class ;
   rdfs:comment "An observation, calculation, or inference envent used to determine the value of one or more properties"@en ;
   rdfs:label "Determining Event "@en ;
-  rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dlp/DOLCE-Lite.owl#event> ;
+  rdfs:subClassOf dol:event ;
 .
 com:HostedBy
   rdfs:domain geo:Geologic_Feature ;
@@ -55,7 +55,7 @@ com:Immaterial_Feature
   a owl:Class ;
   rdfs:comment "" ;
   rdfs:label "Immaterial_Feature "@en ;
-  rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dlp/DOLCE-Lite.owl#feature> ;
+  rdfs:subClassOf dol:feature ;
 .
 com:Inference
   a owl:Class ;
@@ -67,13 +67,13 @@ com:Inherent_Feature
   a owl:Class ;
   rdfs:comment "" ;
   rdfs:label "Inherent Feature "@en ;
-  rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dlp/DOLCE-Lite.owl#feature> ;
+  rdfs:subClassOf dol:feature ;
 .
 com:Integral_Feature
   a owl:Class ;
   rdfs:comment "Integral features are dissective - every part of a foliation is also a foliation (at a scale of observation). "@en ;
   rdfs:label "Integral Feature "@en ;
-  rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dlp/DOLCE-Lite.owl#feature> ;
+  rdfs:subClassOf dol:feature ;
 .
 com:Low_Dimension_Feature
   a owl:Class ;
@@ -100,7 +100,7 @@ com:Part_Feature
   a owl:Class ;
   rdfs:comment "" ;
   rdfs:label "Part Feature "@en ;
-  rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dlp/DOLCE-Lite.owl#feature> ;
+  rdfs:subClassOf dol:feature ;
 .
 com:Physical_Boundary
   rdfs:subClassOf com:Part_Feature ;
@@ -115,7 +115,7 @@ com:Place_Feature
   a owl:Class ;
   rdfs:comment "" ;
   rdfs:label "Place Feature "@en ;
-  rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dlp/DOLCE-Lite.owl#feature> ;
+  rdfs:subClassOf dol:feature ;
 .
 com:Spatial_Extent
   rdfs:comment "renamed from SpatialEntity in previous version"@en ;
@@ -124,7 +124,7 @@ com:Spatial_Feature
   a owl:Class ;
   rdfs:comment "" ;
   rdfs:label "Spatial Feature "@en ;
-  rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dlp/DOLCE-Lite.owl#feature> ;
+  rdfs:subClassOf dol:feature ;
 .
 com:State_Of_Matter
   rdfs:label "State of Matter"@en ;
@@ -163,7 +163,7 @@ com:hasParticipant
       a owl:Class ;
       owl:unionOf (
           geo:Geologic_Endurant
-          <http://www.ontologydesignpatterns.org/ont/dlp/DOLCE-Lite.owl#endurant>
+          dol:endurant
         ) ;
     ] ;
 .
@@ -185,7 +185,7 @@ com:uom
   a owl:Ontology ;
   rdfs:comment "Base geologic feature classes and high level constraints and relationships"@en ;
   owl:imports <http://geoscience.ca/3D/ontology/2019/1/common> ;
-  owl:imports <http://www.ontologydesignpatterns.org/ont/dul/DLP_397.owl> ;
+  owl:imports <http://www.ontologydesignpatterns.org/ont/dlp/DOLCE-Lite.owl> ;
 .
 :Bedding_Package
   a owl:Class ;
@@ -628,7 +628,7 @@ geo:Geologic_Endurant
   a owl:Class ;
   rdfs:comment "A Physical Endurant that is part of the Earth."@en ;
   rdfs:label "Geologic Endurant"@en ;
-  rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dlp/DOLCE-Lite.owl#endurant> ;
+  rdfs:subClassOf dol:endurant ;
 .
 geo:Geologic_Event
   a owl:Class ;
@@ -680,7 +680,7 @@ part only perdurant;
 participant only endurant;
 specific-constant-constituent only perdurant."""@en ;
   rdfs:label "Geologic Perdurant"@en ;
-  rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dlp/DOLCE-Lite.owl#perdurant> ;
+  rdfs:subClassOf dol:perdurant ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom geo:Geologic_Perdurant ;
@@ -743,7 +743,7 @@ geo:Geologic_Time_Date
   rdfs:comment """A temporal coordinate value, located either by a point position (with uncertainty) on a time line, specified by a numeric coordinate (generally MYPB, but definitions of 'present' vary), or a GeochronologicBoundary if it is associated with a location in a particular stratigraphic section, or a GSSA if the numeric time coordinate is arbitrarily assigned.
 Probably should specify a Temporal Reference System used to assign coordinate values."""@en ;
   rdfs:label "Geologic Time Date"@en ;
-  rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dlp/DOLCE-Lite.owl#time-interval> ;
+  rdfs:subClassOf dol:time-interval ;
   rdfs:subClassOf [
       a owl:Class ;
       owl:unionOf (
@@ -782,7 +782,7 @@ Probably should specify a Temporal Reference System used to assign coordinate va
 geo:Geologic_Time_Interval
   a owl:Class ;
   rdfs:label "Geologic Time Interval"@en ;
-  rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dlp/DOLCE-Lite.owl#time-interval> ;
+  rdfs:subClassOf dol:time-interval ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom geo:Geologic_Time_Interval ;
@@ -818,7 +818,7 @@ geo:Geologic_Time_Scale
   a owl:Class ;
   rdfs:comment "A collection of Geochronologic Age entities that obey a special topology (Cox and Richard, 2010)."@en ;
   rdfs:label "Geologic Time Scale"@en ;
-  rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dlp/DOLCE-Lite.owl#temporal-region> ;
+  rdfs:subClassOf dol:temporal-region ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom geo:Geologic_Time_Interval ;
@@ -871,7 +871,7 @@ geo:Geologic_Unit
 geo:Glass
   a owl:Class ;
   rdfs:comment "amorphous product of rapid coolign of melted earth material. Generally product of igneous activity, frictional melting or bolide impact."@en ;
-  rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dlp/DOLCE-Lite.owl#amount-of-matter> ;
+  rdfs:subClassOf dol:amount-of-matter ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom com:Element ;
@@ -936,7 +936,7 @@ geo:Granular_Material
   rdfs:comment "Represents a rock body constituent composed of particles that share a set of characteristics, e.g. particle size (distribution), mineralogy, shape.  E.g. the sand that is a constituent in a sandstone, or the feldspar phenocrysts that are a constituent in a granite"@en ;
   rdfs:comment "example top level subclasses shown (probably not complete); differentiated based on genesis for the most part."@en ;
   rdfs:label "Granular Material"@en ;
-  rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dlp/DOLCE-Lite.owl#amount-of-matter> ;
+  rdfs:subClassOf dol:amount-of-matter ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom [
@@ -1020,7 +1020,7 @@ geo:Mineral
   rdfs:comment "\"A mineral is an element or chemical compound that is normally crystalline and that has been formed as a result of geological processes.\" Nickel, Ernest H. (1995), The definition of a mineral,  The Canadian Mineralogist. 33 (3): 689–90."@en ;
   rdfs:comment "we need to find a decent ontology of minerals with the species defined as classes. Could use dbPedia or wikipedia URIs.  Check RRUFF project. Clinton Smyth has one, but it has ALL minerals, probably 75% of which we'll never need."@en ;
   rdfs:label "Mineral"@en ;
-  rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dlp/DOLCE-Lite.owl#amount-of-matter> ;
+  rdfs:subClassOf dol:amount-of-matter ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom com:Element ;
@@ -1066,8 +1066,8 @@ geo:Physical_Property
       owl:allValuesFrom [
           a owl:Class ;
           owl:unionOf (
-              <http://www.ontologydesignpatterns.org/ont/dlp/DOLCE-Lite.owl#endurant>
-              <http://www.ontologydesignpatterns.org/ont/dlp/DOLCE-Lite.owl#perdurant>
+              dol:endurant
+              dol:perdurant
               geo:Physical_Property
             ) ;
         ] ;
@@ -1079,6 +1079,7 @@ geo:Physical_Setting
   rdfs:comment "characterization of a geologic context in which some geologic endurant or perdurant is situated.  The ontology for settings will ramify into into a complex separate resource; leave for later!  Each of the subclasses (e.g. Marine, Alluvial Fan) will have a set of properties that in the long run can be useful for inferencing."@en ;
   rdfs:comment "rename from UML  more general class-- 'Physical Setting', subclass of dolce:particular. smr 2019-10-15"@en ;
   rdfs:label "Physical Setting"@en ;
+  rdfs:subClassOf dol:particular ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom geo:Physical_Setting ;
@@ -1090,9 +1091,9 @@ geo:Physical_Setting
           a owl:Class ;
           owl:unionOf (
               geo:Physical_Setting
-              <http://www.ontologydesignpatterns.org/ont/dlp/DOLCE-Lite.owl#perdurant>
-              <http://www.ontologydesignpatterns.org/ont/dlp/DOLCE-Lite.owl#physical-endurant>
-              <http://www.ontologydesignpatterns.org/ont/dlp/DOLCE-Lite.owl#physical-quality>
+              dol:perdurant
+              dol:physical-endurant
+              dol:physical-quality
             ) ;
         ] ;
       owl:onProperty com:hasPart ;
@@ -1102,8 +1103,8 @@ geo:Physical_Setting
       owl:allValuesFrom [
           a owl:Class ;
           owl:unionOf (
-              <http://www.ontologydesignpatterns.org/ont/dlp/DOLCE-Lite.owl#physical-endurant>
-              <http://www.ontologydesignpatterns.org/ont/dlp/DOLCE-Lite.owl#perdurant>
+              dol:physical-endurant
+              dol:perdurant
             ) ;
         ] ;
       owl:onProperty geo:isSettingFor ;
@@ -1127,16 +1128,16 @@ geo:Property
   a owl:Class ;
   rdfs:comment "A characteristic of an Endurant or Perdurant."@en ;
   rdfs:label "Property"@en ;
-  rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dlp/DOLCE-Lite.owl#particular> ;
+  rdfs:subClassOf dol:particular ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onClass <http://www.ontologydesignpatterns.org/ont/dlp/DOLCE-Lite.owl#particular> ;
+      owl:onClass dol:particular ;
       owl:onProperty com:hasPart ;
       owl:qualifiedCardinality "0"^^xsd:nonNegativeInteger ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onClass <http://www.ontologydesignpatterns.org/ont/dlp/DOLCE-Lite.owl#particular> ;
+      owl:onClass dol:particular ;
       owl:onProperty com:isPartOf ;
       owl:qualifiedCardinality "0"^^xsd:nonNegativeInteger ;
     ] ;
@@ -1248,7 +1249,7 @@ geo:Rock_Material
   rdfs:comment "hook into CGI simple lithology ontology. SMR has one, and Clinton Smyth has an extension of that with more rock types."@en ;
   rdfs:label "Rock Material"@en ;
   rdfs:subClassOf geo:Rock_Body ;
-  rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dlp/DOLCE-Lite.owl#amount-of-matter> ;
+  rdfs:subClassOf dol:amount-of-matter ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom geo:Rock_Body_Part ;
@@ -1303,7 +1304,7 @@ geo:Series
 geo:Shape
   a owl:Class ;
   rdfs:label "Any Shape"@en ;
-  rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dlp/DOLCE-Lite.owl#physical-region> ;
+  rdfs:subClassOf dol:physical-region ;
 .
 geo:Sharp_Contact
   a owl:Class ;
@@ -1430,8 +1431,8 @@ geo:Temporal_Property
       owl:allValuesFrom [
           a owl:Class ;
           owl:unionOf (
-              <http://www.ontologydesignpatterns.org/ont/dlp/DOLCE-Lite.owl#endurant>
-              <http://www.ontologydesignpatterns.org/ont/dlp/DOLCE-Lite.owl#perdurant>
+              dol:endurant
+              dol:perdurant
               geo:Temporal_Property
             ) ;
         ] ;
@@ -1708,13 +1709,10 @@ geo:younger_than
   rdfs:label "younger than"@en ;
   rdfs:subPropertyOf geo:temporallyRelatedTo ;
 .
-<http://www.ontologydesignpatterns.org/ont/dlp/DOLCE-Lite.owl#particular>
+dol:particular
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom com:Determining_Event ;
       owl:onProperty com:determinedBy ;
     ] ;
-.
-<http://www.ontologydesignpatterns.org/ont/dlp/Systems.owl#production-workflow-execution>
-  rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dlp/Systems.owl#system-as-artifact> ;
 .
