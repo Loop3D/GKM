@@ -1,8 +1,8 @@
 # baseURI: http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact
 # imports: http://geoscience.ca/3D/ontology/2019/1/geologicfeature
 # imports: http://purl.org/dc/elements/1.1/
-# prefix: con
 
+@prefix : <http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#> .
 @prefix common: <http://geoscience.ca/3D/ontology/2019/1/common/> .
 @prefix con: <http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
@@ -29,11 +29,15 @@ con:CbFormation
   a geo:Formation ;
   rdfs:label "Bolsa Quartzite (Cambrian)"@en ;
 .
+con:JsDeposition
+  a geo:Deposition ;
+  rdfs:label "Deposition of Unit Js"@en ;
+.
 con:JsFormation
   a geo:Formation ;
-  common:hasPart <http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#KdInJsDikeContact-3.1.4> ;
-  common:hasPart <http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#KdInJsDikeContact-3.2.4> ;
-  common:hasPart <http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#KgInJsIntrusiveContact-4.2> ;
+  common:hasPart con:KdInJsDikeContact-3_1_4 ;
+  common:hasPart con:KdInJsDikeContact-3_2_4 ;
+  common:hasPart con:KgInJsIntrusiveContact-4_2 ;
   common:hasPart con:baseJs-6 ;
   common:hasPart con:topJs-2 ;
   geo:hasTemporalProperty [
@@ -58,8 +62,8 @@ con:KdDike
         ] ;
     ] ;
   common:hasPart con:KdUnderMs ;
-  common:hasPart <http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#downSideKd-3.1> ;
-  common:hasPart <http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#upSideKd-3.2> ;
+  common:hasPart con:downSideKd-3_1 ;
+  common:hasPart con:upSideKd-3_2 ;
   geo:Intrudes con:CbFormation ;
   geo:Intrudes con:JsFormation ;
   geo:Intrudes con:KgGranite ;
@@ -68,10 +72,10 @@ con:KdDike
   rdfs:comment "intrudes is subproperty of relatedTo"@en ;
   rdfs:label "Mafic Dike (Cretaceous)"@en ;
 .
-<http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#KdInJsDikeContact-3.1.4>
+con:KdInJsDikeContact-3_1_4
   a geo:Rock_Body_Boundary ;
 .
-<http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#KdInJsDikeContact-3.2.4>
+con:KdInJsDikeContact-3_2_4
   a geo:Rock_Body_Boundary ;
 .
 con:KdUnderMs
@@ -81,7 +85,7 @@ con:KdUnderMs
     ] ;
   rdfs:comment "Eroded surface under Ms"@en ;
 .
-<http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#KgErosionSurface-2.3>
+con:KgErosionSurface-2_3
   a geo:Rock_Body_Boundary ;
   common:participantIn geo:Erosion ;
   rdfs:comment "Kg erosion surface overlain by Ms"@en ;
@@ -98,11 +102,11 @@ con:KgGranite
           rdfs:type geo:GrainSizeAverage ;
         ] ;
     ] ;
-  common:hasPart <http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#KgErosionSurface-2.3> ;
-  common:hasPart <http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#KgIntrusiveBoundary-3.1.3> ;
-  common:hasPart <http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#KgIntrusiveBoundary-3.2.3> ;
-  common:hasPart <http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#KgIntrusiveBoundary-4.1> ;
-  common:hasPart <http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#KgIntrusiveBoundary-4.2> ;
+  common:hasPart con:KgErosionSurface-2_3 ;
+  common:hasPart con:KgIntrusiveBoundary-3_1_3 ;
+  common:hasPart con:KgIntrusiveBoundary-3_2_3 ;
+  common:hasPart con:KgIntrusiveBoundary-4_1 ;
+  common:hasPart con:KgIntrusiveBoundary-4_2 ;
   geo:Intrudes con:CbFormation ;
   geo:Intrudes con:JsFormation ;
   geo:Intrudes con:OsFormation ;
@@ -112,41 +116,41 @@ con:KgGranite
   rdfs:comment "intrusion has lots of intrusive contacts, each contact is with a different unit, also an erosion surface at the top, overlain by Ms."@en ;
   rdfs:label "Granite (Cretaceous)"@en ;
 .
-<http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#KgInJsIntrusiveContact-4.2>
+con:KgInJsIntrusiveContact-4_2
   a geo:Rock_Body_Boundary ;
 .
-<http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#KgIntrusiveBoundary-3.1.3>
+con:KgIntrusiveBoundary-3_1_3
   a geo:Rock_Body_Boundary ;
   common:participantIn geo:Intrusion ;
   rdfs:comment "Kg in footwall wall of Kd contacts"@en ;
 .
-<http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#KgIntrusiveBoundary-3.2.3>
+con:KgIntrusiveBoundary-3_2_3
   a geo:Rock_Body_Boundary ;
   common:participantIn geo:Intrusion ;
   rdfs:comment "Kg in Hanging wall of Kd"@en ;
 .
-<http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#KgIntrusiveBoundary-4.1>
+con:KgIntrusiveBoundary-4_1
   a geo:Rock_Body_Boundary ;
-  common:hasPart <http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#KgIntrusiveBoundary-4.1.1> ;
-  common:hasPart <http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#KgIntrusiveBoundary-4.1.2> ;
-  common:hasPart <http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#KgIntrusiveBoundary-4.1.3> ;
+  common:hasPart con:KgIntrusiveBoundary-4_1_1 ;
+  common:hasPart con:KgIntrusiveBoundary-4_1_2 ;
+  common:hasPart con:KgIntrusiveBoundary-4_1_3 ;
   common:participantIn geo:Intrusion ;
   rdfs:comment "Kg intruding the tilted Xm-Cb-Os-Ss sequence"@en ;
 .
-<http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#KgIntrusiveBoundary-4.1.1>
+con:KgIntrusiveBoundary-4_1_1
   a geo:Rock_Body_Boundary ;
   common:HostedBy con:KgGranite ;
   rdfs:comment "Kg intruding the tilted Xm"@en ;
 .
-<http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#KgIntrusiveBoundary-4.1.2>
+con:KgIntrusiveBoundary-4_1_2
   a geo:Rock_Body_Boundary ;
   rdfs:comment "Kg intruding tilted Cb"@en ;
 .
-<http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#KgIntrusiveBoundary-4.1.3>
+con:KgIntrusiveBoundary-4_1_3
   a geo:Rock_Body_Boundary ;
   rdfs:comment "Kg intruding tilted Os"@en ;
 .
-<http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#KgIntrusiveBoundary-4.2>
+con:KgIntrusiveBoundary-4_2
   a geo:Rock_Body_Boundary ;
   common:participantIn geo:Intrusion ;
   rdfs:comment "Kg intruding Js"@en ;
@@ -162,17 +166,17 @@ con:MsFormation
   rdfs:comment "fine-grained sandstone, minor marl, some coquina"@en ;
   rdfs:label "Ms Formation"@en ;
 .
-<http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#OsBoundary-6.2>
+con:OsBoundary-6_2
   a geo:Rock_Body_Boundary ;
 .
 con:OsFormation
   a geo:Formation ;
   rdfs:label "Sedimentary Rocks (Ordovician)"@en ;
 .
-<http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#SsBoundary-6.1>
+con:SsBoundary-6_1
   a geo:Rock_Body_Boundary ;
 .
-<http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#XmBoundary-6.3>
+con:XmBoundary-6_3
   a geo:Rock_Body_Boundary ;
   common:participantIn [
       a geo:Erosion ;
@@ -188,37 +192,31 @@ con:XmRockBody
 .
 con:baseJs-6
   a geo:Rock_Body_Bottom ;
-  common:hasPart <http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#baseJs-6.1> ;
-  common:hasPart <http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#baseJs-6.2> ;
-  common:hasPart <http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#baseJs-6.3> ;
+  common:hasPart con:baseJs-6_1 ;
+  common:hasPart con:baseJs-6_2 ;
+  common:hasPart con:baseJs-6_3 ;
 .
-<http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#baseJs-6.1>
+con:baseJs-6_1
   a geo:Rock_Body_Bottom ;
-  common:participantIn [
-      a geo:Deposition ;
-    ] ;
+  common:participantIn con:JsDeposition ;
   rdfs:comment "Js on Ss surface"@en ;
 .
-<http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#baseJs-6.2>
+con:baseJs-6_2
   a geo:Rock_Body_Bottom ;
-  common:participantIn [
-      a geo:Deposition ;
-    ] ;
+  common:participantIn con:JsDeposition ;
   rdfs:comment "Js on Os surface"@en ;
 .
-<http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#baseJs-6.3>
+con:baseJs-6_3
   a geo:Rock_Body_Bottom ;
-  common:participantIn [
-      a geo:Deposition ;
-    ] ;
+  common:participantIn con:JsDeposition ;
   rdfs:comment "Js on Xm surface"@en ;
 .
 con:baseMs-2
   a geo:Rock_Body_Bottom ;
   common:HostedBy con:MsFormation ;
-  common:hasPart <http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#baseMs-2.1> ;
-  common:hasPart <http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#baseMs-2.2> ;
-  common:hasPart <http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#baseMs-2.3> ;
+  common:hasPart con:baseMs-2_1 ;
+  common:hasPart con:baseMs-2_2 ;
+  common:hasPart con:baseMs-2_3 ;
   common:participantIn [
       a geo:Deposition ;
     ] ;
@@ -226,43 +224,43 @@ con:baseMs-2
   rdfs:comment "base of Ms formation"@en ;
   rdfs:label "Base Ms"@en ;
 .
-<http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#baseMs-2.1>
+con:baseMs-2_1
   a geo:Rock_Body_Bottom ;
   rdfs:comment "surface separating Ms on top of Js"@en ;
   rdfs:label "Ms overlies Js"@en ;
 .
-<http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#baseMs-2.2>
+con:baseMs-2_2
   a geo:Rock_Body_Bottom ;
   rdfs:comment "surface separating Ms on top of Kd"@en ;
   rdfs:label "Ms overlies Kd dike"@en ;
 .
-<http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#baseMs-2.3>
+con:baseMs-2_3
   a geo:Rock_Body_Bottom ;
   rdfs:comment "surface separating Ms on top of Kg"@en ;
   rdfs:label "Ms overlies Kg"@en ;
 .
 con:contact_Js_on_Os
   a geo:Contact ;
-  geo:hasOlderHost <http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#OsBoundary-6.2> ;
+  geo:hasOlderHost con:OsBoundary-6_2 ;
   geo:hasOlderHost con:OsFormation ;
   geo:hasYoungerHost con:JsFormation ;
-  geo:hasYoungerHost <http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#baseJs-6.2> ;
-  rdfs:comment "OsBoundary-6.2 is Erosional Surface"@en ;
+  geo:hasYoungerHost con:baseJs-6_2 ;
+  rdfs:comment "OsBoundary-6_2 is Erosional Surface"@en ;
   rdfs:label "relational feature, Js formation overlies Os Formation"@en ;
 .
 con:contact_Js_on_Ss
   a geo:Contact ;
-  geo:hasOlderHost <http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#SsBoundary-6.1> ;
+  geo:hasOlderHost con:SsBoundary-6_1 ;
   geo:hasOlderHost con:SsFormation ;
   geo:hasYoungerHost con:JsFormation ;
-  geo:hasYoungerHost <http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#baseJs-6.1> ;
-  rdfs:comment "SsBoundary-6.1 is Erosional Surface"@en ;
+  geo:hasYoungerHost con:baseJs-6_1 ;
+  rdfs:comment "SsBoundary-6_1 is Erosional Surface"@en ;
   rdfs:label "relational feature, Js formation overlies Ss Formation"@en ;
 .
 con:contact_Js_on_Xm
   a geo:Contact ;
-  common:HostedBy <http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#XmBoundary-6.3> ;
-  common:HostedBy <http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#baseJs-6.3> ;
+  common:HostedBy con:XmBoundary-6_3 ;
+  common:HostedBy con:baseJs-6_3 ;
   geo:hasOlderHost con:XmFormation ;
   geo:hasYoungerHost con:JsFormation ;
   rdfs:label "relational feature, Js formation overlies Xm Rock Body"@en ;
@@ -270,68 +268,68 @@ con:contact_Js_on_Xm
 con:contact_Kd_in_Js
   a geo:Contact ;
   geo:hasOlderHost con:JsFormation ;
-  geo:hasOlderHost <http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#KdInJsDikeContact-3.1.4> ;
-  geo:hasOlderHost <http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#KdInJsDikeContact-3.2.4> ;
+  geo:hasOlderHost con:KdInJsDikeContact-3_1_4 ;
+  geo:hasOlderHost con:KdInJsDikeContact-3_2_4 ;
   geo:hasYoungerHost con:KdDike ;
-  geo:hasYoungerHost <http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#downSide-3.1.4> ;
-  geo:hasYoungerHost <http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#upSideKd-3.2.4> ;
+  geo:hasYoungerHost con:downSide-3_1_4 ;
+  geo:hasYoungerHost con:upSideKd-3_2_4 ;
   rdfs:label "relational feature, Kd dike intrudes Js formation"@en ;
 .
 con:contact_Kg_in_Js
   a geo:Contact ;
   geo:hasOlderHost con:JsFormation ;
-  geo:hasOlderHost <http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#KgInJsIntrusiveContact-4.2> ;
+  geo:hasOlderHost con:KgInJsIntrusiveContact-4_2 ;
   geo:hasYoungerHost con:KgGranite ;
-  geo:hasYoungerHost <http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#KgIntrusiveBoundary-4.2> ;
+  geo:hasYoungerHost con:KgIntrusiveBoundary-4_2 ;
   rdfs:label "relational feature, Kg granite intrudes Js formation"@en ;
 .
 con:contact_Ms_on_Js
   a geo:Contact ;
   geo:hasOlderHost con:JsFormation ;
-  geo:hasOlderHost <http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#topJs-2.1> ;
+  geo:hasOlderHost con:topJs-2_1 ;
   geo:hasYoungerHost con:MsFormation ;
-  geo:hasYoungerHost <http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#baseMs-2.1> ;
+  geo:hasYoungerHost con:baseMs-2_1 ;
   rdfs:label "relational feature, Ms formation overlies Js formation"@en ;
 .
 con:contact_Ms_on_Kg
   a geo:Contact ;
-  geo:hasOlderHost <http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#KgErosionSurface-2.3> ;
+  geo:hasOlderHost con:KgErosionSurface-2_3 ;
   geo:hasOlderHost con:KgGranite ;
   geo:hasYoungerHost con:MsFormation ;
-  geo:hasYoungerHost <http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#baseMs-2.3> ;
+  geo:hasYoungerHost con:baseMs-2_3 ;
   rdfs:label "relational feature, Ms formation overlies Kg Granite on erosion surface"@en ;
 .
-<http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#downSide-3.1.4>
+con:downSide-3_1_4
   a geo:Rock_Body_Boundary ;
   rdfs:comment "surface separating dike from rocks beneath it"@en ;
   rdfs:label "dike intrudes Js, lower"@en ;
 .
-<http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#downSideKd-3.1>
+con:downSideKd-3_1
   a geo:Rock_Body_Boundary ;
-  common:hasPart <http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#downSideKd-3.1.1> ;
-  common:hasPart <http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#downSideKd-3.1.2> ;
-  common:hasPart <http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#downSideKd-3.1.3> ;
-  common:hasPart <http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#downSideKd-3.1.4> ;
+  common:hasPart con:downSideKd-3_1_1 ;
+  common:hasPart con:downSideKd-3_1_2 ;
+  common:hasPart con:downSideKd-3_1_3 ;
+  common:hasPart con:downSideKd-3_1_4 ;
   common:participantIn [
       a geo:Intrusion ;
     ] ;
   rdfs:comment "lower side of dike"@en ;
 .
-<http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#downSideKd-3.1.1>
+con:downSideKd-3_1_1
   a geo:Rock_Body_Boundary ;
   rdfs:comment "could have more properties describing contact effectw sith Xm here"@en ;
 .
-<http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#downSideKd-3.1.2>
+con:downSideKd-3_1_2
   a geo:Rock_Body_Boundary ;
 .
-<http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#downSideKd-3.1.3>
+con:downSideKd-3_1_3
   a geo:Rock_Body_Boundary ;
 .
-<http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#downSideKd-3.1.4>
+con:downSideKd-3_1_4
   a geo:Rock_Body_Boundary ;
   rdfs:comment "dike intrudes Js"@en ;
 .
-<http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#topJs-2.1>
+con:topJs-2_1
   a geo:Rock_Body_Top ;
   common:participantIn [
       a geo:Erosion ;
@@ -344,30 +342,30 @@ con:topMs-1
   rdfs:comment "top of Ms formation"@en ;
   rdfs:label "Top Ms"@en ;
 .
-<http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#upSideKd-3.2>
+con:upSideKd-3_2
   a geo:Rock_Body_Boundary ;
-  common:hasPart <http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#upSideKd-3.2.1> ;
-  common:hasPart <http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#upSideKd-3.2.2> ;
-  common:hasPart <http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#upSideKd-3.2.3> ;
-  common:hasPart <http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#upSideKd-3.2.4> ;
+  common:hasPart con:upSideKd-3_2_1 ;
+  common:hasPart con:upSideKd-3_2_2 ;
+  common:hasPart con:upSideKd-3_2_3 ;
+  common:hasPart con:upSideKd-3_2_4 ;
   common:participantIn [
       a geo:Intrusion ;
     ] ;
   rdfs:comment "upper side of dike"@en ;
 .
-<http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#upSideKd-3.2.1>
+con:upSideKd-3_2_1
   a geo:Rock_Body_Boundary ;
   rdfs:comment "dike intrudes Xm"@en ;
 .
-<http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#upSideKd-3.2.2>
+con:upSideKd-3_2_2
   a geo:Rock_Body_Boundary ;
   rdfs:comment "dike intrudes Cb"@en ;
 .
-<http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#upSideKd-3.2.3>
+con:upSideKd-3_2_3
   a geo:Rock_Body_Boundary ;
   rdfs:comment "dike intrudes Kg"@en ;
 .
-<http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#upSideKd-3.2.4>
+con:upSideKd-3_2_4
   a geo:Rock_Body_Boundary ;
   rdfs:comment "dike intrudes Js"@en ;
 .
