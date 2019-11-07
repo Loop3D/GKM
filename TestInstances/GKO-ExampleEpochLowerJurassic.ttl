@@ -1,6 +1,8 @@
 # baseURI: http://geoscience.ca/3D/ontology/2019/1/ex-timescale
+# imports: http://geoscience.ca/3D/ontology/2019/1/common
 # imports: http://geoscience.ca/3D/ontology/2019/1/geologicfeature
 # imports: http://purl.org/dc/elements/1.1/
+# prefix: tim
 
 @prefix : <http://geoscience.ca/3D/ontology/2019/1/ex-timescale#> .
 @prefix common: <http://geoscience.ca/3D/ontology/2019/1/common/> .
@@ -8,13 +10,53 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix tim: <http://geoscience.ca/3D/ontology/2019/1/ex-timescale#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
+common:Dynamic_Feature
+  a owl:Class ;
+  rdfs:comment "" ;
+  rdfs:label "Dynamic Feature" ;
+  rdfs:subClassOf <http://geoscience.ca/3D/ontology/2019/1/gkmtop#physical-feature> ;
+  skos:prefLabel "Dynamic Feature" ;
+.
+common:Gap
+  a owl:Class ;
+  rdfs:comment """A physical void with a scattered (disconnected) host, consisting of the spaces between the scattered parts of the host.  G(x) <--> exists y [hosts-v(y,x) ^ not ICon (y)].   ICon (x): x is interior connected (continuous, not scattered)   {@en}
+""" ;
+  rdfs:label "Gap" ;
+  rdfs:subClassOf common:Physical_Void ;
+  skos:prefLabel "Gap" ;
+.
+common:Hole
+  a owl:Class ;
+  rdfs:comment """A physical void with a self-connected (non-scattered) host, consisting of some depression or cavity within the host. H(x) <--> exists y [hosts-v(y,x) ^ ICon (y)].  ICon (x): x is interior connected (continuous, not scattered)  {@en}
+""" ;
+  rdfs:label "Hole" ;
+  rdfs:subClassOf common:Physical_Void ;
+  skos:prefLabel "Hole" ;
+.
+common:Inherent_Feature
+  rdfs:subClassOf <http://geoscience.ca/3D/ontology/2019/1/gkmtop#physical-feature> ;
+.
+common:Integral_Feature
+  rdfs:subClassOf <http://geoscience.ca/3D/ontology/2019/1/gkmtop#physical-feature> ;
+.
+common:Part_Feature
+  rdfs:subClassOf <http://geoscience.ca/3D/ontology/2019/1/gkmtop#physical-feature> ;
+.
+common:Process
+  owl:equivalentClass <http://geoscience.ca/3D/ontology/2019/1/gkmtop#Process> ;
+.
+common:Spatial_Feature
+  rdfs:subClassOf <http://geoscience.ca/3D/ontology/2019/1/gkmtop#physical-feature> ;
+.
 <http://geoscience.ca/3D/ontology/2019/1/ex-timescale>
   a owl:Ontology ;
   rdfs:comment "Example encoding of a geochronologic time interval" ;
+  owl:imports <http://geoscience.ca/3D/ontology/2019/1/common> ;
   owl:imports <http://geoscience.ca/3D/ontology/2019/1/geologicfeature> ;
   owl:imports <http://purl.org/dc/elements/1.1/> ;
 .
@@ -52,4 +94,56 @@ tim:Lower_Jurassic_Epoch
   rdfs:comment "Epoch is a subclass of Geochronologic Era" ;
   rdfs:comment "This is a temporal interval" ;
   rdfs:label "Lower Jurassic time interval" ;
+.
+geo:Geologic_Structure
+  rdfs:comment "A pattern in a rock body (foliation, fold), or a feature occurring between rock bodies (contact, fracture). GeoSciML 3.2: A configuration of matter in the Earth based on describable inhomogeneity, pattern, or fracture in a Rock Body. The identity of a GeologicStructure is independent of the material that is the substrate for the structure.    Properties like \"clast-supported\",  \"matrix-supported\", and \"graded bed\" that do not involve orientation are considered kinds of GeologicStructure because they depend on the configuration of parts of a rock body. Includes sedimentary structures."@en ;
+  rdfs:subClassOf <http://geoscience.ca/3D/ontology/2019/1/gkmtop#physical-feature> ;
+.
+geo:Geologic_Unit
+  rdfs:subClassOf <http://geoscience.ca/3D/ontology/2019/1/gkmtop#Physical_Object> ;
+.
+<http://geoscience.ca/3D/ontology/2019/1/gkmtop#Event>
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom <http://geoscience.ca/3D/ontology/2019/1/gkmtop#Process> ;
+      owl:onProperty geo:isManifestationOf ;
+    ] ;
+.
+<http://geoscience.ca/3D/ontology/2019/1/gkmtop#Perdurant>
+  rdfs:subClassOf <http://geoscience.ca/3D/ontology/2019/1/gkmtop#Particular> ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom common:Spatial_Extent ;
+      owl:onProperty geo:hasSpatialProperty ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom geo:Physical_Setting ;
+      owl:onProperty geo:hasSetting ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom geo:Temporal_Property ;
+      owl:onProperty geo:hasTemporalProperty ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom <http://geoscience.ca/3D/ontology/2019/1/gkmtop#Perdurant> ;
+      owl:onProperty common:isPartOf ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom <http://geoscience.ca/3D/ontology/2019/1/gkmtop#Perdurant> ;
+      owl:onProperty geo:isTemporallyRelatedTo ;
+    ] ;
+.
+<http://geoscience.ca/3D/ontology/2019/1/gkmtop#physical-feature>
+  a owl:Class ;
+  rdfs:comment "All features are specifically dependent on their hosts -  that is, the hosts relation is a subrelation of specific dependence.  F(x) <--> exists y [hosts(y,x)]"@en ;
+  rdfs:label "Physical Feature"@en ;
+  rdfs:subClassOf <http://geoscience.ca/3D/ontology/2019/1/gkmtop#Physical_Endurant> ;
+  skos:prefLabel "Physical Feature"@en ;
+.
+<http://geoscience.ca/3D/ontology/2019/1/gkmtop#space-region>
+  rdfs:label "Spatial Region"@en ;
 .
