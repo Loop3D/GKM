@@ -273,6 +273,11 @@ com:Perdurant
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
+      owl:onProperty com:hasParticipant ;
+      owl:someValuesFrom com:Physical_Endurant ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
       owl:onProperty com:hasSetting ;
       owl:someValuesFrom com:Physical_Setting ;
     ] ;
@@ -410,7 +415,7 @@ com:Physical_Setting
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty com:hasProperty ;
+      owl:onProperty com:hasSpatialProperty ;
       owl:someValuesFrom com:Spatial_Extent ;
     ] ;
   rdfs:subClassOf [
@@ -441,7 +446,7 @@ com:Plasma
   a owl:Class ;
   rdfs:subClassOf com:Fluid ;
 .
-com:Potassium_Element
+com:Potassium_F
   a owl:Class ;
   rdfs:label "Potassium "@en ;
   rdfs:subClassOf com:Element ;
@@ -721,6 +726,7 @@ com:isManifestationOf
 .
 com:isPartOf
   a owl:ObjectProperty ;
+  owl:inverseOf com:hasPart ;
 .
 com:isPhysicallyRelatedTo
   a owl:ObjectProperty ;
@@ -775,6 +781,11 @@ com:proportionOf
   a owl:ObjectProperty ;
   rdfs:comment "" ;
   rdfs:label "proportion of" ;
+.
+com:realizes
+  a rdf:Property ;
+  rdfs:comment "" ;
+  rdfs:label "realizes" ;
 .
 com:relatedto
   a owl:ObjectProperty ;
