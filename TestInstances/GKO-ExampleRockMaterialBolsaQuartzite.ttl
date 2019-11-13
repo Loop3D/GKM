@@ -7,7 +7,7 @@
 # prefix: bol
 
 @prefix bol: <http://geoscience.ca/3D/ontology/2019/1/ex-materialCb#> .
-@prefix common: <http://geoscience.ca/3D/ontology/2019/1/common/> .
+@prefix com: <http://geoscience.ca/3D/ontology/2019/1/common/> .
 @prefix con: <http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#> .
 @prefix geo: <http://geoscience.ca/3D/ontology/2019/1/geologicfeature/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
@@ -30,145 +30,153 @@
 .
 bol:Bolsa_Quartzite_Material
   a geo:Rock_Material ;
-  common:hasConstituent bol:Clay_matrix ;
-  common:hasConstituent bol:Feldspar_grains ;
-  common:hasConstituent bol:Quartz_grains ;
-  common:isConstituentOf con:CbFormation ;
-  geo:hasPhysicalProperty bol:constituent_part2 ;
-  geo:hasPhysicalProperty bol:constituent_part3 ;
-  geo:hasPhysicalProperty [
-      a geo:Earth_Material_Color ;
-      common:hasTermValue <http://colors.org/maroonbrown> ;
-    ] ;
-  geo:hasPhysicalProperty [
+  com:hasConstituent bol:Clay_matrix ;
+  com:hasConstituent bol:Feldspar_grains ;
+  com:hasConstituent bol:Quartz_grains ;
+  com:isConstituentOf con:CbFormation ;
+  com:hasPhysicalProperty bol:constituent_part2 ;
+  com:hasPhysicalProperty bol:constituent_part3 ;
+  com:hasPhysicalProperty [
       a geo:Proportion ;
-      geo:hasNumericValue 50 ;
-      geo:hasUOM [
-          a common:percent ;
+      com:hasUOM [
+          a com:percent ;
         ] ;
-      geo:proportionFor bol:Bolsa_Quarzite_Material ;
-      geo:proportionOf bol:Feldspar_grains ;
+      com:hasValue 50 ;
+      com:proportionFor bol:Bolsa_Quarzite_Material ;
+      com:proportionOf bol:Feldspar_grains ;
+      rdfs:label "proportion of feldspar grains"@en ;
+    ] ;
+  com:hasPhysicalProperty [
+      a geo:Rock_Material_Color ;
+      com:hasValue <http://colors.org/maroonbrown> ;
     ] ;
   rdfs:comment "describe proportions of constituents, feldspar with blank node, quartz and matrix with label nodes to test variations"@en ;
   rdfs:label "Bolsa Quartzite, basal arkose"@en ;
 .
 bol:Clay_matrix
   a geo:Granular_Material ;
-  common:hasConstituent geo:Clay_Mineral ;
-  geo:hasPhysicalProperty [
+  com:hasConstituent geo:Clay_Mineral ;
+  com:hasPhysicalProperty [
       a geo:Grain_Size_Max ;
-      geo:hasNumericValue .005 ;
-      geo:hasUOM [
-          a common:mm ;
+      com:hasValue .005 ;
+      com:hasUOM [
+          a com:mm ;
         ] ;
     ] ;
   rdfs:label "Clay matrix constituent"@en ;
 .
 bol:Feldspar_grains
   a geo:Granular_Material ;
-  common:hasConstituent bol:Feldspar_mineral ;
-  geo:hasPhysicalProperty [
+  com:hasConstituent bol:Feldspar_mineral ;
+  com:hasPhysicalProperty [
       a geo:Grain_Shape ;
-      geo:hasTermValue <http://geosciml.org/particleShape/subangular> ;
+      com:hasValue <http://geosciml.org/particleShape/subangular> ;
     ] ;
-  geo:hasPhysicalProperty [
+  com:hasPhysicalProperty [
       a geo:Grain_Size_Max ;
-      geo:hasNumericValue 5 ;
-      geo:hasUOM [
-          a common:mm ;
+      com:hasValue 5 ;
+      com:hasUOM [
+          a com:mm ;
         ] ;
       rdfs:label "5 mm maximum"@en ;
     ] ;
-  geo:hasPhysicalProperty [
+  com:hasPhysicalProperty [
       a geo:Grain_Size_Min ;
-      geo:hasNumericValue .02 ;
-      geo:hasUOM [
-          a common:mm ;
+      com:hasValue .02 ;
+      com:hasUOM [
+          a com:mm ;
         ] ;
       rdfs:label "0.02 mm minimum"@en ;
     ] ;
 .
 bol:Feldspar_mineral
   a geo:Feldspar ;
-  common:hasConstituent [
-      a common:Calcium_Element ;
+  com:hasConstituent [
+      a com:Calcium_Element ;
     ] ;
-  common:hasConstituent [
-      a common:Oxygen_Element ;
+  com:hasConstituent [
+      a com:Oxygen_Element ;
     ] ;
-  common:hasConstituent [
-      a common:Potassium_Element ;
+  com:hasConstituent [
+      a com:Potassium_Element ;
     ] ;
-  common:hasConstituent [
-      a common:Silicon_Element ;
+  com:hasConstituent [
+      a com:Silicon_Element ;
     ] ;
-  common:hasConstituent [
-      a common:Sodium_Element ;
+  com:hasConstituent [
+      a com:Sodium_Element ;
     ] ;
   rdfs:label "specifc feldspar in this material" ;
 .
 bol:Quartz_grains
   a geo:Granular_Material ;
-  common:hasConstituent bol:Quartz_mineral ;
-  geo:hasPhysicalProperty [
+  com:hasConstituent bol:Quartz_mineral ;
+  com:hasPhysicalProperty [
       a geo:Grain_Shape ;
-      geo:hasTermValue <http://geosciml.org/particleShape/subangular> ;
+	  rdfs:label "subangular" ;
+      com:hasValue <http://geosciml.org/particleShape/subangular> ;
     ] ;
-  geo:hasPhysicalProperty [
+  com:hasPhysicalProperty [
       a geo:Grain_Size_Average ;
-      common:hasAbstractProperty [
-          a common:First_Standard_Deviation_Calculation ;
-          geo:hasNumericValue .06 ;
-          geo:hasUOM [
-              a common:mm ;
+      com:determinedBy [
+          a com:First_Standard_Deviation_Calculation ;
+          com:hasValue .06 ;
+          com:hasUOM [
+		  rdfs:label "mm" ;
+              a com:mm ;
             ] ;
         ] ;
-      geo:hasNumericValue 3 ;
-      geo:hasUOM [
-          a common:mm ;
+      com:hasValue 3 ;
+      com:hasUOM [
+	  rdfs:label "mm" ;
+          a com:mm ;
         ] ;
     ] ;
-  geo:hasPhysicalProperty [
+  com:hasPhysicalProperty [
       a geo:Grain_Size_Max ;
-      geo:hasNumericValue 8 ;
-      geo:hasUOM [
-          a common:mm ;
+      com:hasValue 8 ;
+      com:hasUOM [
+          a com:mm ;
         ] ;
     ] ;
-  geo:hasPhysicalProperty [
+  com:hasPhysicalProperty [
       a geo:Grain_Size_Min ;
-      geo:hasNumericValue .05 ;
-      geo:hasUOM [
-          a common:mm ;
+      com:hasValue .05 ;
+      com:hasUOM [
+          a com:mm ;
         ] ;
     ] ;
 .
 bol:Quartz_mineral
   a geo:Quartz ;
-  common:hasConstituent [
-      a common:Oxygen_Element ;
+  com:hasConstituent [
+      a com:Oxygen_Element ;
     ] ;
-  common:hasConstituent [
-      a common:Silicon_Element ;
+  com:hasConstituent [
+      a com:Silicon_Element ;
     ] ;
   rdfs:comment "include instance of mineral to describe particular physical character and composition of mineral in this material" ;
   rdfs:label "specific quartz in this material" ;
 .
 bol:constituent_part2
   a geo:Proportion ;
-  geo:hasNumericValue 45 ;
-  geo:hasUOM [
-      a common:percent ;
+  com:hasValue 45 ;
+  com:hasUOM [
+      a com:percent ;
+      rdfs:label "percent of quartz grains"@en ;
     ] ;
-  geo:proportionFor bol:Bolsa_Quarzite_Material ;
-  geo:proportionOf bol:Quartz_grains ;
+  com:proportionFor bol:Bolsa_Quarzite_Material ;
+  com:proportionOf bol:Quartz_grains ;
 .
 bol:constituent_part3
   a geo:Proportion ;
-  geo:hasNumericValue 5 ;
-  geo:hasUOM [
-      a common:percent ;
+  com:hasValue 5 ;
+  com:hasUOM [
+      a com:percent ;
     ] ;
-  geo:proportionFor bol:Bolsa_Quarzite_Material ;
-  geo:proportionOf bol:Clay_matrix ;
+  com:proportionFor bol:Bolsa_Quarzite_Material ;
+  com:proportionOf bol:Clay_matrix ;
 .
+[
+  rdfs:label "Jurassic deposition of Js Formation"@en ;
+].

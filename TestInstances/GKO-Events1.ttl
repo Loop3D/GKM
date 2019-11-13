@@ -4,61 +4,46 @@
 # imports: http://geoscience.ca/3D/ontology/2019/1/geologicfeature
 # imports: http://purl.org/dc/elements/1.1/
 
-@prefix : <http://geoscience.ca/3D/ontology/2019/1/gkoinstancetests#> .
-@prefix common: <http://geoscience.ca/3D/ontology/2019/1/common/> .
+@prefix evn1: <http://geoscience.ca/3D/ontology/2019/1/gkoinstancetests/> .
+@prefix com: <http://geoscience.ca/3D/ontology/2019/1/common/> .
 @prefix eventenvironment: <http://geoscience.ca/3D/ontology/2019/1/eventenvironment#> .
 @prefix geo: <http://geoscience.ca/3D/ontology/2019/1/geologicfeature/> .
 @prefix gkm: <http://geoscience.ca/3D/ontology/2019/1/geologicfeature> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix env: <http://resource.geosciml.org/classifier/cgi/eventenvironment/> .
 
-common:hasParticipant
-  rdfs:range geo:Geologic_Endurant ;
-.
-geo:Earth_Interior_Setting
-  a owl:Class ;
-  rdfs:label "Earth Interior Setting" ;
-  rdfs:subClassOf geo:Geologic_Setting ;
-.
-geo:Lacustrine_Setting
-  a owl:Class ;
-  rdfs:label "Lacustrine Setting" ;
-  rdfs:subClassOf geo:Geologic_Setting ;
-.
-geo:hasTemporalProperty
-  rdfs:range geo:Geologic_Age ;
-.
+
+
 <http://geoscience.ca/3D/ontology/2019/1/gkoinstancetests>
   a owl:Ontology ;
   owl:imports <http://geoscience.ca/3D/ontology/2019/1/common> ;
   owl:imports <http://geoscience.ca/3D/ontology/2019/1/eventenvironment> ;
   owl:imports <http://geoscience.ca/3D/ontology/2019/1/geologicfeature> ;
-  owl:imports <http://purl.org/dc/elements/1.1/> ;
   owl:versionIRI <http://geoscience.ca/3D/ontology/2019/1/gkoinstancetests> ;
 .
-:Cretaceous90Ma
+evn1:Cretaceous90Ma
   a geo:Geochronologic_Age ;
   geo:hasOlderAgeDate [
       a geo:Geologic_Time_Date ;
-      geo:hasDate "90 Ma" ;
-      geo:hasUOM [
-          a common:ma ;
+      geo:hasDate "90" ;
+      com:hasUOM [
+          a com:ma ;
         ] ;
       geo:hasUncertainty "8" ;
     ] ;
   rdfs:label "90 Ma" ;
 .
-:Cretaceous_Age_date
+evn1:Cretaceous_Age_date
   a geo:Geochronologic_Age ;
   geo:hasOlderAgeDate :Date110Ma ;
   geo:hasYoungerAgeDate :Date110Ma ;
   geo:hasmethod :upbconcordantanalysis ;
   rdfs:label "Cretaceous110AgeDate" ;
 .
-:Cretaceous_dike_intrusion
+evn1:Cretaceous_dike_intrusion
   a geo:Geologic_Event ;
   geo:hasSetting <http://resource.geosciml.org/classifier/cgi/eventenvironment/upper_continental_crustal_setting> ;
   geo:hasSetting [
@@ -71,29 +56,29 @@ geo:hasTemporalProperty
   geo:younger_than :Kg_Intrusion ;
   rdfs:label "90 Ma Dike Intrusion"@en ;
 .
-:Date110Ma
+evn1:Date110Ma
   a geo:Geologic_Time_Date ;
   geo:hasDate "110" ;
-  geo:hasUOM [
-      a common:ma ;
+  com:hasUOM [
+      a com:ma ;
     ] ;
   geo:hasUncertainty "9" ;
   rdfs:label "110 Ma" ;
 .
-:Earth_Interior_Setting
+evn1:Earth_Interior_Setting
   a geo:Geologic_Setting ;
   rdfs:label "Earth Interior Setting" ;
 .
-:HoloceneEpoch
+evn1:HoloceneEpoch
   a geo:Epoch ;
   a owl:NamedIndividual ;
   rdfs:label "Holocene Epoch" ;
 .
-:HsGenesis
+evn1:HsGenesis
   a geo:Geologic_Event ;
   a owl:NamedIndividual ;
   geo:hasSetting [
-      a geo:Alluvial_Fan_Setting ;
+      a env:alluvial_fan ;
     ] ;
   geo:hasTemporalProperty :HoloceneEpoch ;
   geo:isManifestationOf [
@@ -105,7 +90,7 @@ geo:hasTemporalProperty
   rdfs:comment "Deposition of Holocene sediments"@en ;
   rdfs:label "Holocene sediment deposition"@en ;
 .
-:JsGenesis
+evn1:JsGenesis
   a geo:Geologic_Event ;
   geo:hasSetting <http://resource.geosciml.org/classifier/cgi/eventenvironment/coastal_plain_setting> ;
   geo:hasSetting <http://resource.geosciml.org/classifier/cgi/eventenvironment/inner_neritic> ;
@@ -116,13 +101,13 @@ geo:hasTemporalProperty
     ] ;
   rdfs:label "Jurassic sediment Deposition"@en ;
 .
-:Jurassic_Age
+evn1:Jurassic_Age
   a geo:Chronostratigraphic_Age ;
   geo:hasOlderAge <http://geoscience.ca/3D/ontology/2019/1/gkoinstancetests/JurassicPeriod> ;
   geo:hasYoungerAge <http://geoscience.ca/3D/ontology/2019/1/gkoinstancetests/JurassicPeriod> ;
   rdfs:label "Jurassic Age" ;
 .
-:Kg_Intrusion
+evn1:Kg_Intrusion
   a geo:Geologic_Event ;
   geo:hasSetting <http://resource.geosciml.org/classifier/cgi/eventenvironment/middle_continental_crust_setting> ;
   geo:hasSetting [
@@ -135,7 +120,7 @@ geo:hasTemporalProperty
   geo:younger_than :JsGenesis ;
   rdfs:label "Cretaceous Intrusion Event"@en ;
 .
-:MioceneEpoch
+evn1:MioceneEpoch
   a geo:Epoch ;
   a owl:NamedIndividual ;
   rdfs:label "Miocence Epoch" ;
@@ -146,7 +131,7 @@ geo:hasTemporalProperty
   geo:hasYoungerAge :MioceneEpoch ;
   rdfs:label "Miocene Age" ;
 .
-:MsGenesis
+evn1:MsGenesis
   a geo:Geologic_Event ;
   a owl:NamedIndividual ;
   geo:hasSetting [
@@ -159,25 +144,25 @@ geo:hasTemporalProperty
   geo:younger_than :Cretaceous_dike_intrusion ;
   rdfs:label "Miocene sediment Deposition"@en ;
 .
-:Pre_Cretaceous_Burial
+evn1:Pre_Cretaceous_Burial
   a geo:Geologic_Event ;
   rdfs:comment "Burial of Js to depth of Kg intrusion, must predate Kg "@en ;
   rdfs:label "Pre Kg burial "@en ;
 .
-:Pre_Jurassic_Erosion
+evn1:Pre_Jurassic_Erosion
   a geo:Geologic_Event ;
   rdfs:comment "Erosional unroofing of tilted Xm, Cb, Os and Ss "@en ;
   rdfs:label "Pre Jurassic Erosion "@en ;
 .
-:Pre_Miocene_Erosion
+evn1:Pre_Miocene_Erosion
   a geo:Geologic_Event ;
   geo:older_than :MsGenesis ;
   geo:younger_than :Cretaceous_dike_intrusion ;
   rdfs:comment "Erosional unroofing of Kg and Js "@en ;
   rdfs:label "Pre Miocene Erosion "@en ;
 .
-:upbconcordantanalysis
-  a common:Measurement_Method ;
+evn1:upbconcordantanalysis
+  a com:Measurement_Method ;
   rdfs:label "U-Pb isotopic analysis, concordant" ;
 .
 <http://geoscience.ca/3D/ontology/2019/1/gkoinstancetests/CretaceousPeriod>

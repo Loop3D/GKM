@@ -5,7 +5,7 @@
 # prefix: con
 
 @prefix : <http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#> .
-@prefix common: <http://geoscience.ca/3D/ontology/2019/1/common/> .
+@prefix com: <http://geoscience.ca/3D/ontology/2019/1/common/> .
 @prefix con: <http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix geo: <http://geoscience.ca/3D/ontology/2019/1/geologicfeature/> .
@@ -16,9 +16,6 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-common:Surface
-  rdfs:comment "Surface (SF): A boundary in 3D space that is neither line nor point, but area"@en ;
-.
 <http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact>
   a owl:Ontology ;
   rdfs:comment "Focus is Js, a Jurassic age sedimentary unit that has a lower clastic part with an internal tuff marker bed, and an upper limestone part. The unit unconformably overlies tilted Paleozoic strata that overly Early Proterozoic metamorphic rocks; it is intruded by a Cretaceous granite, and the granite and Js are intruded by a Cretaceous diorite dike. After the igneous activity a period of exumation and erosion removed the cover on the Jurassic sediment and Cretaceous igneous rocks, and Late Miocene sediment covered this unconformity."@en ;
@@ -38,11 +35,11 @@ con:JsDeposition
 .
 con:JsFormation
   a geo:Formation ;
-  common:hasPart con:KdInJsDikeContact-3_1_4 ;
-  common:hasPart con:KdInJsDikeContact-3_2_4 ;
-  common:hasPart con:KgInJsIntrusiveContact-4_2 ;
-  common:hasPart con:baseJs-6 ;
-  common:hasPart con:topJs-2 ;
+  com:hasPart con:KdInJsDikeContact-3_1_4 ;
+  com:hasPart con:KdInJsDikeContact-3_2_4 ;
+  com:hasPart con:KgInJsIntrusiveContact-4_2 ;
+  com:hasPart con:baseJs-6 ;
+  com:hasPart con:topJs-2 ;
   geo:hasTemporalProperty [
       a geo:Chronostratigraphic_Age_Interval ;
       geo:hasOlderAge <http://resource.geosciml.org/classifier/ics/ischart/Jurassic> ;
@@ -54,19 +51,19 @@ con:JsFormation
 .
 con:KdDike
   a geo:Formation ;
-  common:hasConstituent [
+  com:hasConstituent [
       a geo:Diorite ;
-      geo:hasPhysicalProperty [
-          geo:hasNumericValue .05 ;
-          geo:hasUOM [
+      com:hasPhysicalProperty [
+          com:hasValue .05 ;
+          com:hasUOM [
               rdfs:type geo:mm ;
             ] ;
           rdfs:type geo:GrainSizeAverage ;
         ] ;
     ] ;
-  common:hasPart con:KdUnderMs ;
-  common:hasPart con:downSideKd-3_1 ;
-  common:hasPart con:upSideKd-3_2 ;
+  com:hasPart con:KdUnderMs ;
+  com:hasPart con:downSideKd-3_1 ;
+  com:hasPart con:upSideKd-3_2 ;
   geo:Intrudes con:CbFormation ;
   geo:Intrudes con:JsFormation ;
   geo:Intrudes con:KgGranite ;
@@ -83,33 +80,33 @@ con:KdInJsDikeContact-3_2_4
 .
 con:KdUnderMs
   a geo:Rock_Body_Boundary ;
-  common:participantIn [
+  com:participantIn [
       a geo:Erosion ;
     ] ;
   rdfs:comment "Eroded surface under Ms"@en ;
 .
 con:KgErosionSurface-2_3
   a geo:Rock_Body_Boundary ;
-  common:participantIn geo:Erosion ;
+  com:participantIn geo:Erosion ;
   rdfs:comment "Kg erosion surface overlain by Ms"@en ;
 .
 con:KgGranite
   a geo:Formation ;
-  common:hasConstituent [
+  com:hasConstituent [
       a geo:Granitoid ;
-      geo:hasPhysicalProperty [
-          geo:hasNumericValue 5 ;
-          geo:hasUOM [
+      com:hasPhysicalProperty [
+          com:hasValue 5 ;
+          com:hasUOM [
               rdfs:type geo:mm ;
             ] ;
           rdfs:type geo:GrainSizeAverage ;
         ] ;
     ] ;
-  common:hasPart con:KgErosionSurface-2_3 ;
-  common:hasPart con:KgIntrusiveBoundary-3_1_3 ;
-  common:hasPart con:KgIntrusiveBoundary-3_2_3 ;
-  common:hasPart con:KgIntrusiveBoundary-4_1 ;
-  common:hasPart con:KgIntrusiveBoundary-4_2 ;
+  com:hasPart con:KgErosionSurface-2_3 ;
+  com:hasPart con:KgIntrusiveBoundary-3_1_3 ;
+  com:hasPart con:KgIntrusiveBoundary-3_2_3 ;
+  com:hasPart con:KgIntrusiveBoundary-4_1 ;
+  com:hasPart con:KgIntrusiveBoundary-4_2 ;
   geo:Intrudes con:CbFormation ;
   geo:Intrudes con:JsFormation ;
   geo:Intrudes con:OsFormation ;
@@ -124,25 +121,25 @@ con:KgInJsIntrusiveContact-4_2
 .
 con:KgIntrusiveBoundary-3_1_3
   a geo:Rock_Body_Boundary ;
-  common:participantIn geo:Intrusion ;
+  com:participantIn geo:Intrusion ;
   rdfs:comment "Kg in footwall wall of Kd contacts"@en ;
 .
 con:KgIntrusiveBoundary-3_2_3
   a geo:Rock_Body_Boundary ;
-  common:participantIn geo:Intrusion ;
+  com:participantIn geo:Intrusion ;
   rdfs:comment "Kg in Hanging wall of Kd"@en ;
 .
 con:KgIntrusiveBoundary-4_1
   a geo:Rock_Body_Boundary ;
-  common:hasPart con:KgIntrusiveBoundary-4_1_1 ;
-  common:hasPart con:KgIntrusiveBoundary-4_1_2 ;
-  common:hasPart con:KgIntrusiveBoundary-4_1_3 ;
-  common:participantIn geo:Intrusion ;
+  com:hasPart con:KgIntrusiveBoundary-4_1_1 ;
+  com:hasPart con:KgIntrusiveBoundary-4_1_2 ;
+  com:hasPart con:KgIntrusiveBoundary-4_1_3 ;
+  com:participantIn geo:Intrusion ;
   rdfs:comment "Kg intruding the tilted Xm-Cb-Os-Ss sequence"@en ;
 .
 con:KgIntrusiveBoundary-4_1_1
   a geo:Rock_Body_Boundary ;
-  common:HostedBy con:KgGranite ;
+  com:HostedBy con:KgGranite ;
   rdfs:comment "Kg intruding the tilted Xm"@en ;
 .
 con:KgIntrusiveBoundary-4_1_2
@@ -155,17 +152,17 @@ con:KgIntrusiveBoundary-4_1_3
 .
 con:KgIntrusiveBoundary-4_2
   a geo:Rock_Body_Boundary ;
-  common:participantIn geo:Intrusion ;
+  com:participantIn geo:Intrusion ;
   rdfs:comment "Kg intruding Js"@en ;
 .
 con:MsFormation
   a geo:Formation ;
-  common:hasConstituent [
+  com:hasConstituent [
       a geo:Rock_Material ;
       rdfs:comment "TBD"@en ;
     ] ;
-  common:hasPart con:baseMs-2 ;
-  common:hasPart con:topMs-1 ;
+  com:hasPart con:baseMs-2 ;
+  com:hasPart con:topMs-1 ;
   rdfs:comment "fine-grained sandstone, minor marl, some coquina"@en ;
   rdfs:label "Ms Formation"@en ;
 .
@@ -181,7 +178,7 @@ con:SsBoundary-6_1
 .
 con:XmBoundary-6_3
   a geo:Rock_Body_Boundary ;
-  common:participantIn [
+  com:participantIn [
       a geo:Erosion ;
     ] ;
   geo:hasOlderHost con:XmFormation ;
@@ -195,32 +192,32 @@ con:XmRockBody
 .
 con:baseJs-6
   a geo:Rock_Body_Bottom ;
-  common:hasPart con:baseJs-6_1 ;
-  common:hasPart con:baseJs-6_2 ;
-  common:hasPart con:baseJs-6_3 ;
+  com:hasPart con:baseJs-6_1 ;
+  com:hasPart con:baseJs-6_2 ;
+  com:hasPart con:baseJs-6_3 ;
 .
 con:baseJs-6_1
   a geo:Rock_Body_Bottom ;
-  common:participantIn con:JsDeposition ;
+  com:participantIn con:JsDeposition ;
   rdfs:comment "Js on Ss surface"@en ;
 .
 con:baseJs-6_2
   a geo:Rock_Body_Bottom ;
-  common:participantIn con:JsDeposition ;
+  com:participantIn con:JsDeposition ;
   rdfs:comment "Js on Os surface"@en ;
 .
 con:baseJs-6_3
   a geo:Rock_Body_Bottom ;
-  common:participantIn con:JsDeposition ;
+  com:participantIn con:JsDeposition ;
   rdfs:comment "Js on Xm surface"@en ;
 .
 con:baseMs-2
   a geo:Rock_Body_Bottom ;
-  common:HostedBy con:MsFormation ;
-  common:hasPart con:baseMs-2_1 ;
-  common:hasPart con:baseMs-2_2 ;
-  common:hasPart con:baseMs-2_3 ;
-  common:participantIn [
+  com:HostedBy con:MsFormation ;
+  com:hasPart con:baseMs-2_1 ;
+  com:hasPart con:baseMs-2_2 ;
+  com:hasPart con:baseMs-2_3 ;
+  com:participantIn [
       a geo:Deposition ;
     ] ;
   rdfs:comment "This is an unconformity; Ms overlies Jurassic sediment, Cretaceous dike and granite"@en ;
@@ -262,8 +259,8 @@ con:contact_Js_on_Ss
 .
 con:contact_Js_on_Xm
   a geo:Contact ;
-  common:HostedBy con:XmBoundary-6_3 ;
-  common:HostedBy con:baseJs-6_3 ;
+  com:HostedBy con:XmBoundary-6_3 ;
+  com:HostedBy con:baseJs-6_3 ;
   geo:hasOlderHost con:XmFormation ;
   geo:hasYoungerHost con:JsFormation ;
   rdfs:label "relational feature, Js formation overlies Xm Rock Body"@en ;
@@ -309,11 +306,11 @@ con:downSide-3_1_4
 .
 con:downSideKd-3_1
   a geo:Rock_Body_Boundary ;
-  common:hasPart con:downSideKd-3_1_1 ;
-  common:hasPart con:downSideKd-3_1_2 ;
-  common:hasPart con:downSideKd-3_1_3 ;
-  common:hasPart con:downSideKd-3_1_4 ;
-  common:participantIn [
+  com:hasPart con:downSideKd-3_1_1 ;
+  com:hasPart con:downSideKd-3_1_2 ;
+  com:hasPart con:downSideKd-3_1_3 ;
+  com:hasPart con:downSideKd-3_1_4 ;
+  com:participantIn [
       a geo:Intrusion ;
     ] ;
   rdfs:comment "lower side of dike"@en ;
@@ -334,24 +331,24 @@ con:downSideKd-3_1_4
 .
 con:topJs-2_1
   a geo:Rock_Body_Top ;
-  common:participantIn [
+  com:participantIn [
       a geo:Erosion ;
     ] ;
 .
 con:topMs-1
   a geo:Rock_Body_Top ;
-  common:HostedBy con:MsFormation ;
+  com:HostedBy con:MsFormation ;
   rdfs:comment "This is a simple disconformable contact"@en ;
   rdfs:comment "top of Ms formation"@en ;
   rdfs:label "Top Ms"@en ;
 .
 con:upSideKd-3_2
   a geo:Rock_Body_Boundary ;
-  common:hasPart con:upSideKd-3_2_1 ;
-  common:hasPart con:upSideKd-3_2_2 ;
-  common:hasPart con:upSideKd-3_2_3 ;
-  common:hasPart con:upSideKd-3_2_4 ;
-  common:participantIn [
+  com:hasPart con:upSideKd-3_2_1 ;
+  com:hasPart con:upSideKd-3_2_2 ;
+  com:hasPart con:upSideKd-3_2_3 ;
+  com:hasPart con:upSideKd-3_2_4 ;
+  com:participantIn [
       a geo:Intrusion ;
     ] ;
   rdfs:comment "upper side of dike"@en ;
@@ -385,21 +382,21 @@ geo:Lithostratigraphic_Unit
 geo:Quantified_Physical_Property
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty geo:hasNumericValue ;
+      owl:onProperty com:hasValue ;
       owl:someValuesFrom xsd:double ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty geo:hasUOM ;
-      owl:someValuesFrom common:uom ;
+      owl:onProperty com:hasUOM ;
+      owl:someValuesFrom com:uom ;
     ] ;
 .
 geo:hasMethod
-  rdfs:range common:Measurement_Method ;
+  rdfs:range com:Measurement_Method ;
 .
 geo:hasSpatialProperty
-  rdfs:range common:Spatial_Extent ;
+  rdfs:range com:Spatial_Extent ;
 .
-geo:proportionOf
+com:proportionOf
   rdfs:domain geo:Proportion ;
 .
