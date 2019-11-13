@@ -1,0 +1,106 @@
+# baseURI: http://geoscience.ca/3D/ontology/2019/1/gkmtop
+
+@prefix : <http://geoscience.ca/3D/ontology/2019/1/gkmtop#> .
+@prefix daml: <http://www.daml.org/2001/03/daml+oil#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://geoscience.ca/3D/ontology/2019/1/gkmtop>
+  a owl:Ontology ;
+  rdfs:comment "BAsed on DOLCE and DnS ontologies. This version is modified for local use in Loop3D Geologic knowledge model development SMR 2019-11-05" ;
+  owl:versionInfo "397-01" ;
+  owl:versionInfo "Loop3D local" ;
+.
+:Abstract
+  a owl:Class ;
+  rdfs:comment "The main characteristic of abstract entities is that  they do not have spatial nor temporal qualities, and they are not qualities themselves.  The only class of abstract entities we consider in the present version of the upper  ontology is that of quality regions (or simply regions). Quality spaces are special  kinds of quality regions, being mereological sums of all the regions related to a certain quality type. The other examples of abstract entities (sets and facts) are only  indicative." ;
+  rdfs:subClassOf :Particular ;
+  owl:disjointWith :Endurant ;
+  owl:disjointWith :Perdurant ;
+.
+:Amount_Of_Matter
+  a owl:Class ;
+  rdfs:comment "The common trait of amounts of matter is that they are endurants with no unity (according to Gangemi et a. 2001 none of them is an essential  whole). Amounts of matter - 'stuffs' referred to by mass nouns like 'gold', 'iron', 'wood',  'sand', 'meat', etc. - are mereologically  invariant, in the sense that they change their  identity when they change some parts." ;
+  rdfs:subClassOf :Physical_Endurant ;
+  owl:disjointWith :Physical_Object ;
+.
+:Endurant
+  a owl:Class ;
+  rdfs:comment "The main characteristic of endurants is that all of them are independent essential wholes. This does not mean that the corresponding property (being an endurant) carries proper unity, since there is  no common unity criterion for endurants. Endurants can 'genuinely' change in time,  in the sense that the very same endurant as a whole can have incompatible properties at different times. To see this, suppose that an endurant - say 'this paper' - has a  property at a time t 'it's white', and a different, incompatible property at time t'  'it's yellow': in both cases we refer to the whole object, without picking up any  particular part of it. Within endurants, we distinguish between physical and non-physical  endurants, according to whether they have direct spatial qualities. Within physical  endurants, we distinguish between amounts of matter, objects, and features." ;
+  rdfs:subClassOf :Particular ;
+  owl:disjointWith :Abstract ;
+  owl:disjointWith :Perdurant ;
+.
+:Event
+  a owl:Class ;
+  rdfs:comment "An occurrence-type is stative or eventive according  to whether it holds of the mereological sum of two of its instances, i.e. if it is cumulative or not. A sitting occurrence is stative since the sum of two sittings is still a sitting occurrence.In general, events differ from situations because they are not assumed to have a description from which they depend. They can be sequenced by some course, but they do not require a description as a unifying criterion.On the other hand, at any time, one can conceive a description that asserts the constraints by which an event of a certian type is such, and in this case, it becomes a situation.Since the decision of designing an explicit description that unifies a perdurant depends on context, task, interest, application, etc., when aligning an ontology do DLP, there can be indecision on where to align an event-oriented class. For example, in the WordNet alignment, we have decided to put only some physical events under 'event', e.g. 'discharge', in order to stress the social orientedness of DLP. But whereas we need to talk explicitly of the criteria by which we conceive discharge events, these will be put under 'situation'.Similar considerations are made for the other types of perdurants in DOLCE.A different notion of event (dealing with change) is currently investigated for further developments: being 'achievement', 'accomplishment', 'state', 'event', etc. can be also considered 'aspects' of processes or of parts of them. For example, the same process 'rock erosion in the Sinni valley' can be conceptualized as an accomplishment (what has brought the current state that e.g. we are trying to explain), as an achievement (the erosion process as the result of a previous accomplishment), as a state (if we collapse the time interval of the erosion into a time point), or as an event (what has changed our focus from a state to another).In the erosion case, we could have good motivations to shift from one aspect to another: a) causation focus, b) effectual focus, c) condensation d) transition (causality).If we want to consider all the aspects of a process together, we need to postulate a unifying descriptive set of criteria (i.e. a 'description'), according to which that process is circumstantiated in a 'situation'. The different aspects will arise as a parts of a same situation." ;
+  rdfs:subClassOf :Perdurant ;
+.
+:Particular
+  a owl:Class ;
+  rdfs:comment "AKA 'entity'.Any individual in the DOLCE domain of discourse. The extensional coverage of DOLCE is as large as possible, since it ranges on 'possibilia', i.e all possible individuals that can be postulated by means of DOLCE axioms. Possibilia include physical objects, substances, processes, qualities,  conceptual regions, non-physical objects, collections and even arbitrary sums of objects.The class 'particular' features a covering partition that includes: endurant, perdurant, quality, and abstract. There are also some subclasses defined as unions of subclasses of 'particular' for special purposes: spatio-temporal-particular (any particular except abstracts)- physical-realization (any realization of an information object, defined in the ExtendedDnS ontology)." ;
+.
+:Perdurant
+  a owl:Class ;
+  rdfs:comment "Perdurants (AKA occurrences) comprise what are variously called events, processes, phenomena, activities and states. They can have temporal parts or spatial parts. For instance, the first movement of (an execution of) a symphony is a temporal part of the symphony. On the other hand, the play performed by the left side of the orchestra is a spatial part. In both cases, these parts are occurrences themselves. We assume that objects cannot be parts of occurrences, but rather they participate in them. Perdurants extend in time by accumulating different temporal parts, so that, at any time they are present, they are only partially present, in  the sense that some of their proper temporal parts (e.g., their previous or future phases) may be not present. E.g., the piece of paper you are reading now is wholly present, while some temporal parts of your reading are not present yet, or any more. Philosophers say that endurants are entities that are in time, while lacking temporal parts (so to speak, all their parts flow with them in time). Perdurants, on the contrary, are entities that happen in time, and can have temporal parts (all their parts are fixed in time)."@en ;
+  rdfs:subClassOf :Particular ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom :Perdurant ;
+      owl:onProperty <http://geoscience.ca/3D/ontology/2019/1/common/hasPart> ;
+    ] ;
+  owl:disjointWith :Abstract ;
+  owl:disjointWith :Endurant ;
+.
+:Physical_Endurant
+  a owl:Class ;
+  rdfs:comment "An endurant having a direct physical (at least spatial) quality." ;
+  rdfs:subClassOf :Endurant ;
+.
+:Physical_Feature
+  a owl:Class ;
+  rdfs:comment "Physical Feature" ;
+  rdfs:label "Physical Feature" ;
+  rdfs:subClassOf :Physical_Endurant ;
+.
+:Physical_Object
+  a owl:Class ;
+  rdfs:comment "The main characteristic of physical objects is that  they are endurants with unity. However, they have no common unity criterion, since  different subtypes of objects may  have different unity criteria. Differently from  aggregates, (most) physical objects change some of their parts while keeping their  identity, they can have therefore temporary parts. Often physical objects (indeed,  all endurants) are ontologically independent from occurrences (discussed below).  However, if we admit that every object has a life, it is hard to exclude a mutual  specific constant dependence between the two. Nevertheless, we may still use the  notion of dependence to (weakly) characterize objects as being not specifically  constantly dependent on other objects." ;
+  rdfs:subClassOf :Physical_Endurant ;
+  owl:disjointWith :Amount_Of_Matter ;
+.
+:Physical_Property
+  a owl:Class ;
+  rdfs:comment "Physical Property" ;
+  rdfs:label "Physical Property" ;
+  rdfs:subClassOf :Property ;
+.
+:Process
+  a owl:Class ;
+  rdfs:comment "Within stative occurrences, we distinguish between states and processes     according to homeomericity: sitting is classified as a state but running     is classified as a process, since there are (very short) temporal parts of     a running that are not themselves runnings. In general, processes differ     from situations because they are not assumed to have a description from     which they depend. They can be sequenced by some course, but they do not     require a description as a unifying criterion. On the other hand, at any     time, one can conceive a description that asserts the constraints by which     a process of a certian type is such, and in this case, it becomes a     situation. Since the decision of designing an explicit description that     unifies a perdurant depends on context, task, interest, application, etc.,     when aligning an ontology do DLP, there can be indecision on where to     align a process-oriented class. For example, in the WordNet alignment, we     have decided to put only some physical processes under 'process', e.g.     'organic process', in order to stress the social orientedness of DLP. But     whereas we need to talk explicitly of the criteria by which we conceive     organic processes, these will be put under 'situation'. Similar     considerations are made for the other types of perdurants in DOLCE. A     different notion of event (dealing with change) is currently investigated     for further developments: being 'achievement', 'accomplishment', 'state',     'event', etc. can be also considered 'aspects' of processes or of parts of     them. For example, the same process 'rock erosion in the Sinni valley' can     be conceptualized as an accomplishment (what has brought the current state     that e.g. we are trying to explain), as an achievement (the erosion     process as the result of a previous accomplishment), as a state (if we     collapse the time interval of the erosion into a time point), or as an     event (what has changed our focus from a state to another). In the erosion     case, we could have good motivations to shift from one aspect to another:     a) causation focus, b) effectual focus, c) condensation d) transition     (causality). If we want to consider all the aspects of a process together,     we need to postulate a unifying descriptive set of criteria (i.e. a     'description'), according to which that process is circumstantiated in a     'situation'. The different aspects will arise as a parts of a same situation." ;
+  rdfs:subClassOf :Perdurant ;
+.
+:Property
+  a owl:Class ;
+  rdfs:comment "Property" ;
+  rdfs:label "Property" ;
+  rdfs:subClassOf :Particular ;
+.
+:Temporal_Property
+  a owl:Class ;
+  rdfs:comment "Temporal Property" ;
+  rdfs:label "Temporal Property" ;
+  rdfs:subClassOf :Property ;
+.
+:temporal-region
+  a owl:Class ;
+  rdfs:comment "A region at which only temporal qualities can be  directly located. It assumes a metrics for time." ;
+  rdfs:subClassOf :Abstract ;
+.
+:time-interval
+  a owl:Class ;
+  rdfs:comment "A temporal region, measured according to a calendar." ;
+  rdfs:subClassOf :temporal-region ;
+.
