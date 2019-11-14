@@ -3,14 +3,15 @@
 # imports: http://geoscience.ca/3D/ontology/2019/1/geologicfeature
 
 @prefix : <http://geoscience.ca/3D/ontology/2019/1/eventenvironment#> .
-@prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix com: <http://geoscience.ca/3D/ontology/2019/1/common/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix env: <http://resource.geosciml.org/classifier/cgi/eventenvironment/> .
 @prefix geo: <http://geoscience.ca/3D/ontology/2019/1/geologicfeature/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <http://geoscience.ca/3D/ontology/2019/1/eventenvironment>
   a owl:Ontology ;
@@ -34,7 +35,7 @@ dcterms:title
 .
 env:abandoned_channel
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   com:isPartOf env:river_plain_system_setting ;
   dcterms:source "Neuendorf et al., 2005"@en ;
@@ -45,7 +46,7 @@ env:abandoned_channel
 .
 env:above_carbonate_compensation_depth_setting
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "this vocabulary"@en ;
   skos:broader env:marine_setting ;
@@ -55,7 +56,7 @@ env:above_carbonate_compensation_depth_setting
 .
 env:abyssal
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "Neuendorf et al., 2005"@en ;
   skos:broader env:marine_setting ;
@@ -65,7 +66,7 @@ env:abyssal
 .
 env:active_continental_margin_setting
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "This vocabulary"@en ;
   skos:broader env:plate_margin_setting ;
@@ -75,7 +76,7 @@ env:active_continental_margin_setting
 .
 env:active_spreading_center
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "this vocabulary"@en ;
   skos:broader env:plate_margin_setting ;
@@ -89,7 +90,7 @@ env:active_spreading_center
 .
 env:aeolian_process_setting
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "this vocabulary"@en ;
   skos:broader env:subaerial_setting ;
@@ -102,7 +103,7 @@ env:aeolian_process_setting
 .
 env:algal_flat_setting
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "http://www.audubonofflorida.org/main/wetlands/chp3.htm, Reading, 1978"@en ;
   skos:broader env:low_energy_shoreline_setting ;
@@ -111,8 +112,7 @@ env:algal_flat_setting
   skos:prefLabel "algal flat setting"@en ;
 .
 env:alluvial_fan
-  a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+  a geo:Alluvial_Fan_Setting ;
   a skos:Concept ;
   dcterms:source "Neuendorf et al., 2005"@en ;
   skos:broader env:piedmont_slope_system_setting ;
@@ -122,7 +122,7 @@ env:alluvial_fan
 .
 env:alluvial_plain
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "North American Geologic-map Data Model Science Language Technical Team, 2004, Sedimentary materials:science language for their classification, description, and interpretation in digital geologic-map databases, Version 1.0 (12/18/2004): U.S. Geological Survey Open-File Report 2004-1451 appendix C, 595 p., accessed at http://pubs.usgs.gov/of/2004/1451/sltt/appendixC/,"@en ;
   skos:broader env:piedmont_slope_system_setting ;
@@ -132,7 +132,7 @@ env:alluvial_plain
 .
 env:anoxic_setting
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "this vocabulary"@en ;
   skos:broader env:earth_surface_setting ;
@@ -142,7 +142,7 @@ env:anoxic_setting
 .
 env:arid_or_semi_arid_environment_setting
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "North American Geologic-map Data Model Science Language Technical Team, 2004, Sedimentary materials:science language for their classification, description, and interpretation in digital geologic-map databases, Version 1.0 (12/18/2004): U.S. Geological Survey Open-File Report 2004-1451 appendix C, 595 p., accessed at http://pubs.usgs.gov/of/2004/1451/sltt/appendixC/,"@en ;
   skos:broader env:earth_surface_setting ;
@@ -156,7 +156,7 @@ env:arid_or_semi_arid_environment_setting
 .
 env:back_arc_setting
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "this vocabulary"@en ;
   skos:broader env:tectonic_setting ;
@@ -166,9 +166,9 @@ env:back_arc_setting
 .
 env:backreef
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
-  <http://geoscience.ca/3D/ontology/2019/1/common/isPartOf> env:biological_reef_setting ;
+  com:isPartOf env:biological_reef_setting ;
   dcterms:source "Neuendorf et al., 2005"@en ;
   skos:broader env:biological_reef_setting ;
   skos:definition "The landward side of a reef. The term is often used adjectivally to refer to deposits within the restricted lagoon behind a barrier reef, such as the back-reef facies of lagoonal deposits. In some places, as on a platform-edge reef tract, back reef refers to the side of the reef away from the open sea, even though no land may be nearby"@en ;
@@ -177,7 +177,7 @@ env:backreef
 .
 env:barrier_beach
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "Neuendorf et al., 2005"@en ;
   skos:broader env:barrier_island_coastline_setting ;
@@ -188,7 +188,7 @@ env:barrier_beach
 .
 env:barrier_island_coastline_setting
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "this vocabulary"@en ;
   skos:broader env:shoreline_settings ;
@@ -200,7 +200,7 @@ env:barrier_island_coastline_setting
 .
 env:barrier_lagoon
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "Neuendorf et al., 2005"@en ;
   skos:broader env:barrier_island_coastline_setting ;
@@ -211,7 +211,7 @@ env:barrier_lagoon
 .
 env:basin_bog
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "1-GE WP3; Neuendorf et al.(2005), p. 451"@en ;
   skos:broader env:bog ;
@@ -221,7 +221,7 @@ env:basin_bog
 .
 env:basin_plain_setting
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "Bates & Jackson, 1987, Heezen & Laughton, 1963, Reading, 1978, p. 390"@en ;
   skos:broader env:marine_setting ;
@@ -231,7 +231,7 @@ env:basin_plain_setting
 .
 env:bathyal
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "Neuendorf et al., 2005"@en ;
   skos:broader env:marine_setting ;
@@ -244,7 +244,7 @@ env:bathyal
 .
 env:beach
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "Neuendorf et al., 2005"@en ;
   skos:broader env:shoreline_settings ;
@@ -255,7 +255,7 @@ env:beach
 .
 env:below_carbonate_compensation_depth_setting
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "this vocabulary"@en ;
   skos:broader env:marine_setting ;
@@ -265,7 +265,7 @@ env:below_carbonate_compensation_depth_setting
 .
 env:biological_reef_setting
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "Neuendorf et al., 2005"@en ;
   skos:broader env:marine_setting ;
@@ -278,7 +278,7 @@ env:biological_reef_setting
 .
 env:blanket_bog
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "1-GE WP3; Neuendorf et al.(2005), p. 675"@en ;
   skos:broader env:bog ;
@@ -288,7 +288,7 @@ env:blanket_bog
 .
 env:bog
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "Jackson, 1997, North American Geologic-map Data Model Science Language Technical Team, 2004, Sedimentary materials:science language for their classification, description, and interpretation in digital geologic-map databases, Version 1.0 (12/18/2004): U.S. Geological Survey Open-File Report 2004-1451 appendix C, 595 p., accessed at http://pubs.usgs.gov/of/2004/1451/sltt/appendixC/,"@en ;
   skos:broader env:terrestrial_setting ;
@@ -301,7 +301,7 @@ env:bog
 .
 env:braided_channel
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "Neuendorf et al., 2005"@en ;
   skos:broader env:river_channel ;
@@ -311,7 +311,7 @@ env:braided_channel
 .
 env:carbonate_dominated_shoreline_setting
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "this vocabulary"@en ;
   skos:broader env:shoreline_settings ;
@@ -321,7 +321,7 @@ env:carbonate_dominated_shoreline_setting
 .
 env:cave
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "Neuendorf et al., 2005"@en ;
   skos:broader env:earth_surface_setting ;
@@ -331,7 +331,7 @@ env:cave
 .
 env:coastal_dune_field
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "Neuendorf et al., 2005"@en ;
   skos:broader env:dunefield ;
@@ -341,7 +341,7 @@ env:coastal_dune_field
 .
 env:coastal_plain_setting
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "based on Neuendorf et al, 2005, p. 125"@en ;
   skos:broader env:shoreline_settings ;
@@ -352,7 +352,7 @@ env:coastal_plain_setting
 .
 env:collisional_setting
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "this vocabulary"@en ;
   skos:broader env:continental_crust ;
@@ -363,7 +363,7 @@ env:collisional_setting
 .
 env:contact_metamorphic_origin
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "NADM metamorphic rock vocabulary SLTTm1.0, 2004"@en ;
   skos:broader env:earth_interior_setting ;
@@ -373,7 +373,7 @@ env:contact_metamorphic_origin
 .
 env:continental_borderland_setting
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "North American Geologic-map Data Model Science Language Technical Team, 2004, Sedimentary materials:science language for their classification, description, and interpretation in digital geologic-map databases, Version 1.0 (12/18/2004): U.S. Geological Survey Open-File Report 2004-1451 appendix C, 595 p., accessed at http://pubs.usgs.gov/of/2004/1451/sltt/appendixC/"@en ;
   skos:broader env:marine_setting ;
@@ -383,7 +383,7 @@ env:continental_borderland_setting
 .
 env:continental_crust
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "Neuendorf et al., 2005"@en ;
   skos:broader env:crust ;
@@ -399,7 +399,7 @@ env:continental_crust
 .
 env:continental_rift_setting
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "this vocabulary"@en ;
   skos:broader env:extended_terrane ;
@@ -409,7 +409,7 @@ env:continental_rift_setting
 .
 env:continental_shelf_setting
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "North American Geologic-map Data Model Science Language Technical Team, 2004, Sedimentary materials:science language for their classification, description, and interpretation in digital geologic-map databases, Version 1.0 (12/18/2004): U.S. Geological Survey Open-File Report 2004-1451 appendix C, 595 p., accessed at http://pubs.usgs.gov/of/2004/1451/sltt/appendixC/"@en ;
   skos:broader env:marine_setting ;
@@ -419,7 +419,7 @@ env:continental_shelf_setting
 .
 env:crust
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "Neuendorf et al., 2005"@en ;
   skos:broader env:earth_interior_setting ;
@@ -433,7 +433,7 @@ env:crust
 .
 env:cutoff_meander
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "Neuendorf et al., 2005"@en ;
   skos:broader env:river_plain_system_setting ;
@@ -443,7 +443,7 @@ env:cutoff_meander
 .
 env:deep_sea_trench
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "Reading 1978"@en ;
   skos:broader env:marine_setting ;
@@ -453,7 +453,7 @@ env:deep_sea_trench
 .
 env:delta_front
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "Neuendorf et al., 2005"@en ;
   skos:broader env:deltaic_system_setting ;
@@ -463,7 +463,7 @@ env:delta_front
 .
 env:delta_plain
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "Neuendorf et al., 2005"@en ;
   skos:broader env:deltaic_system_setting ;
@@ -475,7 +475,7 @@ env:delta_plain
 .
 env:deltaic_system_setting
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "North American Geologic-map Data Model Science Language Technical Team, 2004, Sedimentary materials:science language for their classification, description, and interpretation in digital geologic-map databases, Version 1.0 (12/18/2004): U.S. Geological Survey Open-File Report 2004-1451 appendix C, 595 p., accessed at http://pubs.usgs.gov/of/2004/1451/sltt/appendixC/"@en ;
   skos:broader env:shoreline_settings ;
@@ -493,7 +493,7 @@ env:deltaic_system_setting
 .
 env:distributary_channel
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "Neuendorf et al., 2005"@en ;
   skos:broader env:deltaic_system_setting ;
@@ -503,7 +503,7 @@ env:distributary_channel
 .
 env:distributary_mouth
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "Neuendorf et al., 2005"@en ;
   skos:broader env:deltaic_system_setting ;
@@ -513,7 +513,7 @@ env:distributary_mouth
 .
 env:dunefield
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "Neuendorf et al., 2005"@en ;
   skos:broader env:aeolian_process_setting ;
@@ -523,8 +523,7 @@ env:dunefield
   skos:prefLabel "dunefield setting"@en ;
 .
 env:earth_interior_setting
-  a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+  a geo:Earth_Interior_Setting ;
   a skos:Concept ;
   dcterms:source "this vocabulary"@en ;
   skos:definition "Geologic environments within the solid Earth."@en ;
@@ -542,7 +541,7 @@ env:earth_interior_setting
 .
 env:earth_surface_setting
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "this vocabulary"@en ;
   skos:definition "Geologic environments on the surface of the solid Earth. Hierarchy presented here is based on assumption that a particular setting may be specified by a combination of a climatic setting with one or more process or geomorphically defined settings.."@en ;
@@ -565,7 +564,7 @@ env:earth_surface_setting
 .
 env:englacial_setting
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "Neuendorf et al., 2005"@en ;
   skos:broader env:glacier_related_setting ;
@@ -575,7 +574,7 @@ env:englacial_setting
 .
 env:epicontinental_marine_setting
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "North American Geologic-map Data Model Science Language Technical Team, 2004, Sedimentary materials:science language for their classification, description, and interpretation in digital geologic-map databases, Version 1.0 (12/18/2004): U.S. Geological Survey Open-File Report 2004-1451 appendix C, 595 p., accessed at http://pubs.usgs.gov/of/2004/1451/sltt/appendixC/"@en ;
   skos:broader env:marine_setting ;
@@ -585,7 +584,7 @@ env:epicontinental_marine_setting
 .
 env:estuarine_delta
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "Neuendorf et al., 2005"@en ;
   skos:broader env:deltaic_system_setting ;
@@ -596,7 +595,7 @@ env:estuarine_delta
 .
 env:estuarine_lagoon
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "Neuendorf et al., 2005"@en ;
   skos:broader env:estuary_setting ;
@@ -607,7 +606,7 @@ env:estuarine_lagoon
 .
 env:estuary_setting
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "North American Geologic-map Data Model Science Language Technical Team, 2004, Sedimentary materials:science language for their classification, description, and interpretation in digital geologic-map databases, Version 1.0 (12/18/2004): U.S. Geological Survey Open-File Report 2004-1451 appendix C, 595 p., accessed at http://pubs.usgs.gov/of/2004/1451/sltt/appendixC/"@en ;
   skos:broader env:shoreline_settings ;
@@ -619,7 +618,7 @@ env:estuary_setting
 .
 env:extended_terrane
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "This vocabulary"@en ;
   skos:broader env:tectonic_setting ;
@@ -630,7 +629,7 @@ env:extended_terrane
 .
 env:extra_terrestrial_origin
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "Neuendorf et al 2005,"@en ;
   skos:definition "Material originated outside of the Earth or its atmosphere."@en ;
@@ -640,7 +639,7 @@ env:extra_terrestrial_origin
 .
 env:fast_spreading_center_setting
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "Macdonald 1982"@en ;
   skos:broader env:active_spreading_center ;
@@ -650,7 +649,7 @@ env:fast_spreading_center_setting
 .
 env:floodplain
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "Neuendorf et al., 2005"@en ;
   skos:broader env:river_plain_system_setting ;
@@ -660,7 +659,7 @@ env:floodplain
 .
 env:forearc_setting
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "1-GE WP3, Neuendorf et al.(2005), p. 249"@en ;
   skos:broader env:plate_margin_setting ;
@@ -670,7 +669,7 @@ env:forearc_setting
 .
 env:foreland_setting
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "1-GE WP3, Neuendorf et al.(2005), p. 250"@en ;
   skos:broader env:continental_crust ;
@@ -681,7 +680,7 @@ env:foreland_setting
 .
 env:forereef
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "Neuendorf et al., 2005"@en ;
   skos:broader env:biological_reef_setting ;
@@ -691,7 +690,7 @@ env:forereef
 .
 env:gibber_plain
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "Neuendorf et al., 2005"@en ;
   skos:broader env:arid_or_semi_arid_environment_setting ;
@@ -703,7 +702,7 @@ env:gibber_plain
 .
 env:glacial_outwash_plain_setting
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "North American Geologic-map Data Model Science Language Technical Team, 2004, Sedimentary materials:science language for their classification, description, and interpretation in digital geologic-map databases, Version 1.0 (12/18/2004): U.S. Geological Survey Open-File Report 2004-1451 appendix C, 595 p., accessed at http://pubs.usgs.gov/of/2004/1451/sltt/appendixC/"@en ;
   skos:broader env:glacier_related_setting ;
@@ -714,7 +713,7 @@ env:glacial_outwash_plain_setting
 .
 env:glacier_lateral_setting
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "this vocabulary"@en ;
   skos:broader env:glacier_related_setting ;
@@ -724,7 +723,7 @@ env:glacier_lateral_setting
 .
 env:glacier_related_setting
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "this vocabulary"@en ;
   skos:broader env:earth_surface_setting ;
@@ -741,7 +740,7 @@ env:glacier_related_setting
 .
 env:glacier_terminus_setting
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "NADM SLTTs, 2004"@en ;
   skos:broader env:proglacial_setting ;
@@ -751,7 +750,7 @@ env:glacier_terminus_setting
 .
 env:hadal
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "Neuendorf et al., 2005"@en ;
   skos:broader env:marine_setting ;
@@ -761,7 +760,7 @@ env:hadal
 .
 env:high_pressure_low_temperature_earth_interior_setting
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "this vocabulary"@en ;
   skos:broader env:earth_interior_setting ;
@@ -771,7 +770,7 @@ env:high_pressure_low_temperature_earth_interior_setting
 .
 env:hillslope_setting
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "North American Geologic-map Data Model Science Language Technical Team, 2004, Sedimentary materials:science language for their classification, description, and interpretation in digital geologic-map databases, Version 1.0 (12/18/2004): U.S. Geological Survey Open-File Report 2004-1451 appendix C, 595 p., accessed at http://pubs.usgs.gov/of/2004/1451/sltt/appendixC/, Hawley, J.W., and Parsons, R.B. 1980. Glossary of selected geomorphic and geologic terms. Mimeo. USDA Soil Conservation Service, West National Technical Center, Portland, OR. 30 p."@en ;
   skos:broader env:earth_surface_setting ;
@@ -781,7 +780,7 @@ env:hillslope_setting
 .
 env:hinterland_setting
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "this vocabulary"@en ;
   skos:broader env:continental_crust ;
@@ -792,7 +791,7 @@ env:hinterland_setting
 .
 env:hot_spot_setting
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "this vocabulary"@en ;
   skos:broader env:tectonic_setting ;
@@ -802,7 +801,7 @@ env:hot_spot_setting
 .
 env:humid_temperate_climatic_setting
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "Cleland, D.T., Avers, P.E., McNab, W.H., Jensen, M.E., Bailey, R.G., King, T., Russell, W.E. 1997. National Hierarchical Framework of Ecological Units, in Boyce, M. S., Haney, A., ed., Ecosystem Management Applications for Sustainable Forest and WildlifeResources: Yale University Press, New Haven, CT. pp. 181-200."@en ;
   skos:broader env:earth_surface_setting ;
@@ -812,7 +811,7 @@ env:humid_temperate_climatic_setting
 .
 env:humid_tropical_climatic_setting
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "Cleland, D.T., Avers, P.E., McNab, W.H., Jensen, M.E., Bailey, R.G., King, T., Russell, W.E. 1997. National Hierarchical Framework of Ecological Units, in Boyce, M. S., Haney, A., ed., Ecosystem Management Applications for Sustainable Forest and WildlifeResources: Yale University Press, New Haven, CT. pp. 181-200."@en ;
   skos:broader env:earth_surface_setting ;
@@ -822,7 +821,7 @@ env:humid_tropical_climatic_setting
 .
 env:hypabyssal_setting
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "this vocabulary"@en ;
   skos:broader env:earth_interior_setting ;
@@ -832,7 +831,7 @@ env:hypabyssal_setting
 .
 env:inactive_spreading_center
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "This vocabulary"@en ;
   skos:broader env:intraplate_tectonic_setting ;
@@ -843,7 +842,7 @@ env:inactive_spreading_center
 .
 env:inner_neritic
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "this vocabulary"@en ;
   skos:broader env:neritic ;
@@ -853,7 +852,7 @@ env:inner_neritic
 .
 env:interdistributary_bay
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "Neuendorf et al., 2005"@en ;
   skos:broader env:deltaic_system_setting ;
@@ -864,7 +863,7 @@ env:interdistributary_bay
 .
 env:intertidal
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "Neuendorf et al., 2005"@en ;
   skos:broader env:subaqueous_setting ;
@@ -875,7 +874,7 @@ env:intertidal
 .
 env:intraplate_tectonic_setting
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "This vocabulary"@en ;
   skos:broader env:tectonic_setting ;
@@ -887,7 +886,7 @@ env:intraplate_tectonic_setting
 .
 env:lacustrine_delta
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "Neuendorf et al., 2005"@en ;
   skos:broader env:deltaic_system_setting ;
@@ -897,8 +896,7 @@ env:lacustrine_delta
   skos:prefLabel "lacustrine delta setting"@en ;
 .
 env:lacustrine_setting
-  a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+  a geo:Lacustrine_Setting ;
   a skos:Concept ;
   dcterms:source "this vocabulary"@en ;
   skos:broader env:terrestrial_setting ;
@@ -909,7 +907,7 @@ env:lacustrine_setting
 .
 env:lagoonal_setting
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "generalize from Jackson 1997 and North American Geologic-map Data Model Science Language Technical Team, 2004, Sedimentary materials:science language for their classification, description, and interpretation in digital geologic-map databases, Version 1.0 (12/18/2004): U.S. Geological Survey Open-File Report 2004-1451 appendix C, 595 p., accessed at http://pubs.usgs.gov/of/2004/1451/sltt/appendixC/"@en ;
   skos:broader env:shoreline_settings ;
@@ -921,7 +919,7 @@ env:lagoonal_setting
 .
 env:low_energy_shoreline_setting
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "this vocabulary"@en ;
   skos:broader env:shoreline_settings ;
@@ -934,7 +932,7 @@ env:low_energy_shoreline_setting
 .
 env:low_pressure_high_temperature_setting
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "this vocabulary"@en ;
   skos:broader env:earth_interior_setting ;
@@ -944,7 +942,7 @@ env:low_pressure_high_temperature_setting
 .
 env:lower_bathyal
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "Neuendorf, K.K.E., Mehl, J.P. & Jackson, J.A. (eds), 2005. Glossary of geology, 5th Edition. American Geological Institute, Alexandria, 779 p., Berggren, W.A. & Miller, K.G., 1989. Cenozoic bathyal and abyssal calcareous benthic foraminiferal zonation. Micropalaeontology 35, 308-320"@en ;
   skos:broader env:bathyal ;
@@ -954,7 +952,7 @@ env:lower_bathyal
 .
 env:lower_continental_crust
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "this vocabulary"@en ;
   skos:broader env:continental_crust ;
@@ -964,7 +962,7 @@ env:lower_continental_crust
 .
 env:lower_delta_plain
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "Readingh.G. & Collinson, J.D., 1996. Clastic coasts. 154-231 in Readingh.G. (ed.), Sedimentary Environments: Processses, Facies and Stratigraphy, third edition. Blackwell Science, Oxford"@en ;
   skos:broader env:delta_plain ;
@@ -975,7 +973,7 @@ env:lower_delta_plain
 .
 env:lower_mantle
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "Neuendorf et al., 2005"@en ;
   skos:broader env:mantle ;
@@ -985,7 +983,7 @@ env:lower_mantle
 .
 env:lower_oceanic_crustal_setting
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "this vocabulary"@en ;
   skos:broader env:oceanic_crust ;
@@ -995,7 +993,7 @@ env:lower_oceanic_crustal_setting
 .
 env:mantle
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "Neuendorf et al., 2005"@en ;
   skos:broader env:earth_interior_setting ;
@@ -1008,7 +1006,7 @@ env:mantle
 .
 env:marginal_marine_sabkha_setting
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "North American Geologic-map Data Model Science Language Technical Team, 2004, Sedimentary materials:science language for their classification, description, and interpretation in digital geologic-map databases, Version 1.0 (12/18/2004): U.S. Geological Survey Open-File Report 2004-1451 appendix C, 595 p., accessed at http://pubs.usgs.gov/of/2004/1451/sltt/appendixC/, based on Jackson 1997, Neuendorf et al. 2005"@en ;
   skos:broader env:arid_or_semi_arid_environment_setting ;
@@ -1019,7 +1017,7 @@ env:marginal_marine_sabkha_setting
 .
 env:marine_carbonate_platform_setting
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "this vocabulary"@en ;
   skos:broader env:marine_setting ;
@@ -1028,8 +1026,7 @@ env:marine_carbonate_platform_setting
   skos:prefLabel "marine carbonate platform setting"@en ;
 .
 env:marine_setting
-  a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+  a geo:Marine_Setting ;
   a skos:Concept ;
   dcterms:source "North American Geologic-map Data Model Science Language Technical Team, 2004, Sedimentary materials:science language for their classification, description, and interpretation in digital geologic-map databases, Version 1.0 (12/18/2004): U.S. Geological Survey Open-File Report 2004-1451 appendix C, 595 p., accessed at http://pubs.usgs.gov/of/2004/1451/sltt/appendixC/, Webster's Encyclopedic Unabridged Dictionary of the English Language, 2001, p. 1894."@en ;
   skos:broader env:subaqueous_setting ;
@@ -1055,7 +1052,7 @@ env:marine_setting
 .
 env:meandering_channel
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "Neuendorf et al., 2005"@en ;
   skos:broader env:river_channel ;
@@ -1065,7 +1062,7 @@ env:meandering_channel
 .
 env:medium_spreading_center_setting
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "Macdonald 1982"@en ;
   skos:broader env:active_spreading_center ;
@@ -1075,7 +1072,7 @@ env:medium_spreading_center_setting
 .
 env:mid_ocean_ridge_setting
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "this vocabulary"@en ;
   skos:broader env:ocean_highland_setting ;
@@ -1085,7 +1082,7 @@ env:mid_ocean_ridge_setting
 .
 env:middle_bathyal
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "Berggren, W.A. & Miller, K.G., 1989. Cenozoic bathyal and abyssal calcareous benthic foraminiferal zonation. Micropalaeontology 35, 308-320"@en ;
   skos:broader env:bathyal ;
@@ -1095,7 +1092,7 @@ env:middle_bathyal
 .
 env:middle_continental_crust_setting
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "this vocabulary"@en ;
   skos:broader env:continental_crust ;
@@ -1105,7 +1102,7 @@ env:middle_continental_crust_setting
 .
 env:middle_neritic
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "this vocabulary"@en ;
   skos:broader env:neritic ;
@@ -1115,7 +1112,7 @@ env:middle_neritic
 .
 env:mud_flat_setting
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "North American Geologic-map Data Model Science Language Technical Team, 2004, Sedimentary materials:science language for their classification, description, and interpretation in digital geologic-map databases, Version 1.0 (12/18/2004): U.S. Geological Survey Open-File Report 2004-1451 appendix C, 595 p., accessed at http://pubs.usgs.gov/of/2004/1451/sltt/appendixC/, Jackson, 1997"@en ;
   skos:broader env:low_energy_shoreline_setting ;
@@ -1125,7 +1122,7 @@ env:mud_flat_setting
 .
 env:neritic
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "Neuendorf et al., 2005"@en ;
   skos:broader env:marine_setting ;
@@ -1138,7 +1135,7 @@ env:neritic
 .
 env:ocean_highland_setting
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "this vocabulary"@en ;
   skos:broader env:marine_setting ;
@@ -1151,7 +1148,7 @@ env:ocean_highland_setting
 .
 env:oceanic_crust
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "Neuendorf et al., 2005"@en ;
   skos:broader env:crust ;
@@ -1163,7 +1160,7 @@ env:oceanic_crust
 .
 env:oceanic_plateau_setting
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "Reading 1978"@en ;
   skos:broader env:ocean_highland_setting ;
@@ -1173,7 +1170,7 @@ env:oceanic_plateau_setting
 .
 env:outer_neritic
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "this vocabulary"@en ;
   skos:broader env:neritic ;
@@ -1183,7 +1180,7 @@ env:outer_neritic
 .
 env:passive_continental_margin_setting
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "This vocabulary"@en ;
   skos:broader env:tectonic_setting ;
@@ -1193,7 +1190,7 @@ env:passive_continental_margin_setting
 .
 env:pediment_setting
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "North American Geologic-map Data Model Science Language Technical Team, 2004, Sedimentary materials:science language for their classification, description, and interpretation in digital geologic-map databases, Version 1.0 (12/18/2004): U.S. Geological Survey Open-File Report 2004-1451 appendix C, 595 p., accessed at http://pubs.usgs.gov/of/2004/1451/sltt/appendixC/, NRCS, 2001"@en ;
   skos:broader env:piedmont_slope_system_setting ;
@@ -1203,7 +1200,7 @@ env:pediment_setting
 .
 env:piedmont_slope_system_setting
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "Hawley and Parsons, 1980+F98"@en ;
   skos:broader env:subaerial_setting ;
@@ -1217,7 +1214,7 @@ env:piedmont_slope_system_setting
 .
 env:plate_margin_setting
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "This vocabulary"@en ;
   skos:broader env:tectonic_setting ;
@@ -1233,7 +1230,7 @@ env:plate_margin_setting
 .
 env:plate_spreading_center
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "this vocabulary"@en ;
   skos:broader env:tectonic_setting ;
@@ -1245,7 +1242,7 @@ env:plate_spreading_center
 .
 env:playa_setting
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "Based on Hawley and Parsons, 1980"@en ;
   skos:broader env:arid_or_semi_arid_environment_setting ;
@@ -1257,7 +1254,7 @@ env:playa_setting
 .
 env:polar_climatic_setting
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "Cleland, D.T., Avers, P.E., McNab, W.H., Jensen, M.E., Bailey, R.G., King, T., Russell, W.E. 1997. National Hierarchical Framework of Ecological Units, in Boyce, M. S., Haney, A., ed., Ecosystem Management Applications for Sustainable Forest and WildlifeResources: Yale University Press, New Haven, CT. pp. 181-200."@en ;
   skos:broader env:earth_surface_setting ;
@@ -1268,7 +1265,7 @@ env:polar_climatic_setting
 .
 env:prodelta
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "Neuendorf et al., 2005"@en ;
   skos:broader env:deltaic_system_setting ;
@@ -1279,7 +1276,7 @@ env:prodelta
 .
 env:proglacial_setting
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "Neuendorf et al., 2005"@en ;
   skos:broader env:glacier_related_setting ;
@@ -1290,7 +1287,7 @@ env:proglacial_setting
 .
 env:reef_flat
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "Neuendorf et al., 2005"@en ;
   skos:broader env:biological_reef_setting ;
@@ -1300,7 +1297,7 @@ env:reef_flat
 .
 env:regional_metamorphic_origin
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "NADM metamorphic rock vocabulary SLTTm1.0, 2004"@en ;
   skos:broader env:earth_interior_setting ;
@@ -1310,7 +1307,7 @@ env:regional_metamorphic_origin
 .
 env:river_channel
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "Neuendorf et al., 2005"@en ;
   skos:broader env:river_plain_system_setting ;
@@ -1322,7 +1319,7 @@ env:river_channel
 .
 env:river_plain_system_setting
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "this vocabulary"@en ;
   skos:broader env:subaerial_setting ;
@@ -1337,7 +1334,7 @@ env:river_plain_system_setting
 .
 env:rocky_coast_setting
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "North American Geologic-map Data Model Science Language Technical Team, 2004, Sedimentary materials:science language for their classification, description, and interpretation in digital geologic-map databases, Version 1.0 (12/18/2004): U.S. Geological Survey Open-File Report 2004-1451 appendix C, 595 p., accessed at http://pubs.usgs.gov/of/2004/1451/sltt/appendixC/"@en ;
   skos:broader env:shoreline_settings ;
@@ -1347,7 +1344,7 @@ env:rocky_coast_setting
 .
 env:sand_plain
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "Neuendorf et al., 2005"@en ;
   skos:broader env:aeolian_process_setting ;
@@ -1359,7 +1356,7 @@ env:sand_plain
 .
 env:seamount_setting
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "Reading 1978"@en ;
   skos:broader env:intraplate_tectonic_setting ;
@@ -1370,7 +1367,7 @@ env:seamount_setting
 .
 env:shoreline_settings
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "based on Neuendorf et al, 2005"@en ;
   skos:broader env:earth_surface_setting ;
@@ -1392,7 +1389,7 @@ env:shoreline_settings
 .
 env:slope_rise_setting
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "based on NADM SLTTs, 2004"@en ;
   skos:broader env:marine_setting ;
@@ -1402,7 +1399,7 @@ env:slope_rise_setting
 .
 env:slow_spreading_center_setting
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "Macdonald 1982"@en ;
   skos:broader env:active_spreading_center ;
@@ -1412,7 +1409,7 @@ env:slow_spreading_center_setting
 .
 env:strandplain_setting
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "based on Jackson 1997, p. 626"@en ;
   skos:broader env:shoreline_settings ;
@@ -1423,7 +1420,7 @@ env:strandplain_setting
 .
 env:subaerial_setting
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "Neuendorf et al., 2005"@en ;
   skos:broader env:earth_surface_setting ;
@@ -1441,7 +1438,7 @@ env:subaerial_setting
 .
 env:subaqueous_setting
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "based on North American Geologic-map Data Model Science Language Technical Team, 2004, Sedimentary materials:science language for their classification, description, and interpretation in digital geologic-map databases, Version 1.0 (12/18/2004): U.S. Geological Survey Open-File Report 2004-1451 appendix C, 595 p., accessed at http://pubs.usgs.gov/of/2004/1451/sltt/appendixC/,"@en ;
   skos:broader env:earth_surface_setting ;
@@ -1456,7 +1453,7 @@ env:subaqueous_setting
 .
 env:subduction_zone_setting
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   skos:broader env:plate_margin_setting ;
   skos:definition "Tectonic setting at which a tectonic plate, usually oceanic, is moving down into the mantle beneath another overriding plate."@en ;
@@ -1465,7 +1462,7 @@ env:subduction_zone_setting
 .
 env:subglacial_setting
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "Neuendorf et al., 2005"@en ;
   skos:broader env:glacier_related_setting ;
@@ -1475,7 +1472,7 @@ env:subglacial_setting
 .
 env:submarine_fan_setting
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "this vocabulary"@en ;
   skos:broader env:marine_setting ;
@@ -1485,7 +1482,7 @@ env:submarine_fan_setting
 .
 env:supraglacial_setting
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "North American Geologic-map Data Model Science Language Technical Team, 2004, Sedimentary materials:science language for their classification, description, and interpretation in digital geologic-map databases, Version 1.0 (12/18/2004): U.S. Geological Survey Open-File Report 2004-1451 appendix C, 595 p., accessed at http://pubs.usgs.gov/of/2004/1451/sltt/appendixC/"@en ;
   skos:broader env:glacier_related_setting ;
@@ -1495,7 +1492,7 @@ env:supraglacial_setting
 .
 env:supratidal
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "Neuendorf et al., 2005"@en ;
   skos:broader env:shoreline_settings ;
@@ -1506,7 +1503,7 @@ env:supratidal
 .
 env:swamp_or_marsh_setting
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "Neuendorf et al 2005, Soil Science Society of America, 1997."@en ;
   skos:broader env:wetland_setting ;
@@ -1517,7 +1514,7 @@ env:swamp_or_marsh_setting
 .
 env:tectonic_setting
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "This vocabulary"@en ;
   skos:definition "Setting defined by relationships to tectonic plates on or in the Earth."@en ;
@@ -1539,7 +1536,7 @@ env:tectonic_setting
 .
 env:terrestrial_setting
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "this vocabulary"@en ;
   skos:broader env:earth_surface_setting ;
@@ -1559,7 +1556,7 @@ env:terrestrial_setting
 .
 env:tidal_channel
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "Neuendorf et al., 2005"@en ;
   skos:broader env:subaqueous_setting ;
@@ -1570,7 +1567,7 @@ env:tidal_channel
 .
 env:tidal_flat_setting
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "Neuendorf et al., 2005"@en ;
   skos:broader env:tidal_setting ;
@@ -1580,7 +1577,7 @@ env:tidal_flat_setting
 .
 env:tidal_marsh
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "Neuendorf et al., 2005"@en ;
   skos:broader env:swamp_or_marsh_setting ;
@@ -1592,7 +1589,7 @@ env:tidal_marsh
 .
 env:tidal_setting
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "this vocabulary"@en ;
   skos:broader env:shoreline_settings ;
@@ -1606,7 +1603,7 @@ env:tidal_setting
 .
 env:transform_plate_boundary_setting
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "This vocabulary"@en ;
   skos:broader env:plate_margin_setting ;
@@ -1616,7 +1613,7 @@ env:transform_plate_boundary_setting
 .
 env:transitional_crust
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "Neuendorf et al., 2005"@en ;
   skos:broader env:crust ;
@@ -1626,7 +1623,7 @@ env:transitional_crust
 .
 env:ultra_high_pressure_crustal_setting
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "this vocabulary"@en ;
   skos:broader env:earth_interior_setting ;
@@ -1636,7 +1633,7 @@ env:ultra_high_pressure_crustal_setting
 .
 env:upper_bathyal
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "Berggren, W.A. & Miller, K.G., 1989. Cenozoic bathyal and abyssal calcareous benthic foraminiferal zonation. Micropalaeontology 35, 308-320"@en ;
   skos:broader env:bathyal ;
@@ -1646,7 +1643,7 @@ env:upper_bathyal
 .
 env:upper_continental_crustal_setting
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "this vocabulary"@en ;
   skos:broader env:continental_crust ;
@@ -1656,7 +1653,7 @@ env:upper_continental_crustal_setting
 .
 env:upper_delta_plain
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "Readingh.G. & Collinson, J.D., 1996. Clastic coasts. 154-231 in Readingh.G. (ed.), Sedimentary Environments: Processses, Facies and Stratigraphy, third edition. Blackwell Science, Oxford"@en ;
   skos:broader env:delta_plain ;
@@ -1667,7 +1664,7 @@ env:upper_delta_plain
 .
 env:upper_mantle
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "Neuendorf et al., 2005"@en ;
   skos:broader env:mantle ;
@@ -1677,7 +1674,7 @@ env:upper_mantle
 .
 env:upper_oceanic_crustal_setting
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "this vocabulary"@en ;
   skos:broader env:oceanic_crust ;
@@ -1687,7 +1684,7 @@ env:upper_oceanic_crustal_setting
 .
 env:volcanic_arc_setting
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "1-GE WP3, Neuendorf et al.(2005), p. 710"@en ;
   skos:broader env:plate_margin_setting ;
@@ -1697,7 +1694,7 @@ env:volcanic_arc_setting
 .
 env:wetland_setting
   a com:Physical_Setting ;
-  a owl:NamedIndividual ;
+
   a skos:Concept ;
   dcterms:source "this vocabulary"@en ;
   skos:broader env:earth_surface_setting ;
