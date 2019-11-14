@@ -108,7 +108,7 @@ geo:Alteration_Zone
 .
 geo:Amount
   a owl:Class ;
-  rdfs:subClassOf geo:Quantified_Physical_Property ;
+  rdfs:subClassOf com:Quantified_Physical_Property ;
 .
 geo:Bed
   a owl:Class ;
@@ -643,12 +643,12 @@ geo:Geologic_Time_Interval
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom geo:Geologic_Time_Interval ;
-      owl:onProperty geo:nextTimeInterval ;
+      owl:onProperty com:nextTimeInterval ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom geo:Geologic_Time_Interval ;
-      owl:onProperty geo:previousTimeInterval ;
+      owl:onProperty com:previousTimeInterval ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
@@ -755,7 +755,7 @@ geo:Grain_Shape
 .
 geo:Grain_Size
   a owl:Class ;
-  rdfs:subClassOf geo:Quantified_Physical_Property ;
+  rdfs:subClassOf com:Quantified_Physical_Property ;
 .
 geo:Grain_Size_Average
   a owl:Class ;
@@ -953,10 +953,6 @@ geo:Period
 geo:Porespace
   a owl:Class ;
   rdfs:subClassOf geo:Rock_Body_Void ;
-.
-geo:Proportion
-  a owl:Class ;
-  rdfs:subClassOf geo:Quantified_Physical_Property ;
 .
 geo:Pyroclastic_Granular_Material
   a owl:Class ;
@@ -1219,61 +1215,18 @@ geo:Tectonic_Unit
   rdfs:label "Tectonic Unit "@en ;
   rdfs:subClassOf geo:Geologic_Unit ;
 .
-geo:Temporal_Property
-  a owl:Class ;
-  rdfs:label "Temporal Property"@en ;
-  rdfs:subClassOf com:Property ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom geo:Temporal_Property ;
-      owl:onProperty com:hasProperty ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom [
-          a owl:Class ;
-          owl:unionOf (
-              geo:Temporal_Property
-              com:Endurant
-              com:Perdurant
-            ) ;
-        ] ;
-      owl:onProperty geo:isPropertyOf ;
-    ] ;
-.
 geo:Thickness
   a owl:Class ;
-  rdfs:subClassOf geo:Quantified_Physical_Property ;
+  rdfs:subClassOf com:Quantified_Physical_Property ;
 .
 geo:Xenolith
   a owl:Class ;
   rdfs:label "Xenolith"@en ;
   rdfs:subClassOf geo:Rock_Body_Part ;
 .
-geo:age_covers
-  a owl:ObjectProperty ;
-  rdfs:comment "A covers B -- A is immediately younger than B (there are no events between A and B)"@en ;
-  rdfs:comment "One of six binary relations between geologic events defined by Burns (1975)"@en ;
-  rdfs:label "age covers"@en ;
-  rdfs:subPropertyOf geo:isTemporallyRelatedTo ;
-.
-geo:age_equivalent_To
-  a owl:ObjectProperty ;
-  rdfs:comment "A is equivalent to B if they represent expressions of the same event"@en ;
-  rdfs:comment "One of six binary relations between geologic events defined by Burns (1975)"@en ;
-  rdfs:label "age equivalent"@en ;
-  rdfs:subPropertyOf geo:isTemporallyRelatedTo ;
-.
-geo:age_incomparable_to
-  a owl:ObjectProperty ;
-  rdfs:comment "A is incomparable to be if there is not enough information to determine an age relationship"@en ;
-  rdfs:comment "One of six binary relations between geolgoic events defined by Burns (1975)"@en ;
-  rdfs:label "age incomparable"@en ;
-  rdfs:subPropertyOf geo:isTemporallyRelatedTo ;
-.
 geo:containedBy
   a rdf:Property ;
-  rdfs:comment "" ;
+  rdfs:comment "Links a stratigraphic point to a stratigraphic section or rock body" ;
   rdfs:label "contained by" ;
 .
 geo:hasAbstractProperty
@@ -1295,7 +1248,7 @@ geo:hasBoundaryThickness
 geo:hasDate
   a owl:DatatypeProperty ;
   rdfs:comment "numeric value for a time coordinate. Associated hasUOM property asserts the units of measure; the temporal reference system used to assert dates should be explained in metadata for the data instances."@en ;
-  rdfs:subPropertyOf geo:hasNumericValue ;
+  rdfs:subPropertyOf com:hasNumericValue ;
 .
 geo:hasDisplacement
   a owl:ObjectProperty ;
@@ -1308,25 +1261,10 @@ geo:hasDisplacement
     ] ;
   rdfs:range geo:Displacement ;
 .
-geo:hasEventHistory
-  a owl:ObjectProperty ;
-  rdfs:label "hasEventHistory"@en ;
-  rdfs:range geo:Geologic_Event ;
-.
 geo:hasMaterialConstituent
   a owl:ObjectProperty ;
   rdfs:range geo:Rock_Material ;
   rdfs:subPropertyOf com:hasConstituent ;
-.
-geo:hasMethod
-  a owl:ObjectProperty ;
-  rdfs:domain com:Property ;
-  rdfs:label "hasMethod"@en ;
-.
-geo:hasNumericValue
-  a owl:DatatypeProperty ;
-  rdfs:label "has numeric value"@en ;
-  rdfs:range xsd:decimal ;
 .
 geo:hasOlderAge
   a owl:ObjectProperty ;
@@ -1350,23 +1288,6 @@ geo:hasSpatialProperty
   rdfs:comment "Geographic disposition of an endurant."@en ;
   rdfs:subPropertyOf geo:hasProperty ;
 .
-geo:hasTemporalProperty
-  a owl:ObjectProperty ;
-  rdfs:subPropertyOf geo:hasProperty ;
-.
-geo:hasTermValue
-  a owl:ObjectProperty ;
-  rdfs:range com:Physical_Region ;
-.
-geo:hasUOM
-  a owl:ObjectProperty ;
-  rdfs:range com:uom ;
-.
-geo:hasUncertainty
-  a owl:DatatypeProperty ;
-  rdfs:comment "numeric assertion of the one-side confidence interval for a measured value. The statistic used to assert this uncertainty interval should be explained in the metadata for instances using this property."@en ;
-  rdfs:subPropertyOf geo:hasNumericValue ;
-.
 geo:hasYoungerAge
   a owl:ObjectProperty ;
 .
@@ -1380,20 +1301,12 @@ geo:hasYoungerHost
   a owl:ObjectProperty ;
   rdfs:subPropertyOf com:HostedBy ;
 .
-geo:isManifestationOf
-  a owl:ObjectProperty ;
-.
 geo:isPartOfTimeScale
   a owl:ObjectProperty ;
   rdfs:comment "" ;
   rdfs:label "in Time Scale "@en ;
   rdfs:range geo:Geologic_Time_Scale ;
   rdfs:subPropertyOf com:isPartOf ;
-.
-geo:isPropertyOf
-  a owl:ObjectProperty ;
-  rdfs:domain com:Property ;
-  rdfs:label "isPropertyOf"@en ;
 .
 geo:isRealizedBy
   a owl:ObjectProperty ;
@@ -1406,18 +1319,6 @@ geo:isReferenceFor
 geo:isSettingFor
   a owl:ObjectProperty ;
   rdfs:domain com:Physical_Setting ;
-.
-geo:isTemporallyRelatedTo
-  a owl:ObjectProperty ;
-  rdfs:range geo:Geologic_Event ;
-.
-geo:manifests
-  a owl:ObjectProperty ;
-.
-geo:nextTimeInterval
-  a owl:ObjectProperty ;
-  rdfs:comment "" ;
-  rdfs:label "next time interval "@en ;
 .
 geo:not_older_than
   a owl:ObjectProperty ;
@@ -1441,21 +1342,10 @@ geo:overlies
   rdfs:range geo:Geologic_Unit ;
   rdfs:subPropertyOf com:relatedto ;
 .
-geo:previousTimeInterval
-  a owl:ObjectProperty ;
-  rdfs:comment "" ;
-  rdfs:label "previous time interval "@en ;
-.
-geo:proportionFor
-  a owl:ObjectProperty ;
-.
-geo:proportionOf
-  a owl:ObjectProperty ;
-.
 geo:realizes
-  a owl:ObjectProperty ;
+  a rdf:Property ;
+  rdfs:comment "" ;
   rdfs:label "realizes"@en ;
-  rdfs:subPropertyOf com:realizes ;
 .
 geo:underlies
   a owl:ObjectProperty ;

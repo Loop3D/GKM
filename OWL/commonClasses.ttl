@@ -363,7 +363,7 @@ com:Physical_Property
   rdfs:subClassOf com:Property ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:allValuesFrom com:Physical_Property ;
+      owl:allValuesFrom com:Property ;
       owl:onProperty com:hasProperty ;
     ] ;
   rdfs:subClassOf [
@@ -614,6 +614,27 @@ com:Time_Interval
   rdfs:label "Time Interval" ;
   rdfs:subClassOf com:Temporal_Region ;
 .
+com:age_covers
+  a owl:ObjectProperty ;
+  rdfs:comment "A covers B -- A is immediately younger than B (there are no events between A and B)"@en ;
+  rdfs:comment "One of six binary relations between geologic events defined by Burns (1975)"@en ;
+  rdfs:label "age covers"@en ;
+  rdfs:subPropertyOf com:isTemporallyRelatedTo ;
+.
+com:age_equivalent_To
+  a owl:ObjectProperty ;
+  rdfs:comment "A is equivalent to B if they represent expressions of the same event"@en ;
+  rdfs:comment "One of six binary relations between geologic events defined by Burns (1975)"@en ;
+  rdfs:label "age equivalent"@en ;
+  rdfs:subPropertyOf com:isTemporallyRelatedTo ;
+.
+com:age_incomparable_to
+  a owl:ObjectProperty ;
+  rdfs:comment "A is incomparable to be if there is not enough information to determine an age relationship"@en ;
+  rdfs:comment "One of six binary relations between geolgoic events defined by Burns (1975)"@en ;
+  rdfs:label "age incomparable"@en ;
+  rdfs:subPropertyOf com:isTemporallyRelatedTo ;
+.
 com:determinedBy
   a owl:ObjectProperty ;
   rdfs:comment "link from a particular to an event that defines that particular"@en ;
@@ -682,12 +703,17 @@ com:hasSpatialProperty
 com:hasTemporalProperty
   a owl:ObjectProperty ;
   rdfs:comment "" ;
-  rdfs:label "has Temporal Property" ;
+  rdfs:label "has Temporal Property"@en ;
 .
 com:hasUOM
   a owl:ObjectProperty ;
   rdfs:comment "top level property for assigning property values; subtype for associating values with measurement units "@en ;
   rdfs:label "has unit of measure "@en ;
+.
+com:hasUncertainty
+  a owl:DatatypeProperty ;
+  rdfs:comment "numeric assertion of the one-side confidence interval for a measured value. The statistic used to assert this uncertainty interval should be explained in the metadata for instances using this property."@en ;
+  rdfs:subPropertyOf com:hasNumericValue ;
 .
 com:hasValue
   a owl:ObjectProperty ;
@@ -764,6 +790,17 @@ com:meter
   rdfs:label "meter"@en ;
   rdfs:subClassOf com:uom ;
 .
+com:millimeter
+  a owl:Class ;
+  rdfs:comment "millimeter" ;
+  rdfs:label "mm" ;
+  rdfs:subClassOf com:uom ;
+.
+com:nextTimeInterval
+  a owl:ObjectProperty ;
+  rdfs:comment "" ;
+  rdfs:label "next time interval "@en ;
+.
 com:participantIn
   a owl:ObjectProperty ;
 .
@@ -771,6 +808,11 @@ com:percent
   a owl:Class ;
   rdfs:label "percent"@en ;
   rdfs:subClassOf com:uom ;
+.
+com:previousTimeInterval
+  a owl:ObjectProperty ;
+  rdfs:comment "" ;
+  rdfs:label "previous time interval "@en ;
 .
 com:proportionFor
   a owl:ObjectProperty ;
@@ -781,11 +823,6 @@ com:proportionOf
   a owl:ObjectProperty ;
   rdfs:comment "" ;
   rdfs:label "proportion of" ;
-.
-com:realizes
-  a rdf:Property ;
-  rdfs:comment "" ;
-  rdfs:label "realizes" ;
 .
 com:relatedto
   a owl:ObjectProperty ;
