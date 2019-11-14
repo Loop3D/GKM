@@ -19,9 +19,9 @@
 
 <http://geoscience.ca/3D/ontology/2019/1/ex-materialCb>
   a owl:Ontology ;
-  rdfs:comment "Example encoding of a lithology description for a formation" ;
+  rdfs:comment "Example encoding of a lithology description for a formation"@en ;
   rdfs:comment "Stephen M. Richard 2019-05-03" ;
-  rdfs:comment "description of rock material constituents of Bolsa Quartzite Formation" ;
+  rdfs:comment "description of rock material constituents of Bolsa Quartzite Formation"@en ;
   owl:imports <http://geoscience.ca/3D/ontology/2019/1/common> ;
   owl:imports <http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact> ;
   owl:imports <http://geoscience.ca/3D/ontology/2019/1/ex-timescale> ;
@@ -33,11 +33,10 @@ bol:Bolsa_Quartzite_Material
   com:hasConstituent bol:Clay_matrix ;
   com:hasConstituent bol:Feldspar_grains ;
   com:hasConstituent bol:Quartz_grains ;
-  com:isConstituentOf con:CbFormation ;
   com:hasPhysicalProperty bol:constituent_part2 ;
   com:hasPhysicalProperty bol:constituent_part3 ;
   com:hasPhysicalProperty [
-      a geo:Proportion ;
+      a com:Proportion ;
       com:hasUOM [
           a com:percent ;
         ] ;
@@ -50,6 +49,7 @@ bol:Bolsa_Quartzite_Material
       a geo:Rock_Material_Color ;
       com:hasValue <http://colors.org/maroonbrown> ;
     ] ;
+  com:isConstituentOf con:CbFormation ;
   rdfs:comment "describe proportions of constituents, feldspar with blank node, quartz and matrix with label nodes to test variations"@en ;
   rdfs:label "Bolsa Quartzite, basal arkose"@en ;
 .
@@ -58,10 +58,10 @@ bol:Clay_matrix
   com:hasConstituent geo:Clay_Mineral ;
   com:hasPhysicalProperty [
       a geo:Grain_Size_Max ;
-      com:hasValue .005 ;
       com:hasUOM [
           a com:mm ;
         ] ;
+      com:hasValue .005 ;
     ] ;
   rdfs:label "Clay matrix constituent"@en ;
 .
@@ -74,18 +74,18 @@ bol:Feldspar_grains
     ] ;
   com:hasPhysicalProperty [
       a geo:Grain_Size_Max ;
-      com:hasValue 5 ;
       com:hasUOM [
           a com:mm ;
         ] ;
+      com:hasValue 5 ;
       rdfs:label "5 mm maximum"@en ;
     ] ;
   com:hasPhysicalProperty [
       a geo:Grain_Size_Min ;
-      com:hasValue .02 ;
       com:hasUOM [
           a com:mm ;
         ] ;
+      com:hasValue .02 ;
       rdfs:label "0.02 mm minimum"@en ;
     ] ;
 .
@@ -113,38 +113,38 @@ bol:Quartz_grains
   com:hasConstituent bol:Quartz_mineral ;
   com:hasPhysicalProperty [
       a geo:Grain_Shape ;
-	  rdfs:label "subangular" ;
       com:hasValue <http://geosciml.org/particleShape/subangular> ;
+      rdfs:label "subangular" ;
     ] ;
   com:hasPhysicalProperty [
       a geo:Grain_Size_Average ;
-      com:determinedBy [
+      com:hasProperty [
           a com:First_Standard_Deviation_Calculation ;
-          com:hasValue .06 ;
           com:hasUOM [
-		  rdfs:label "mm" ;
               a com:mm ;
+              rdfs:label "mm" ;
             ] ;
+          com:hasValue .06 ;
+        ] ;
+      com:hasUOM [
+          a com:mm ;
+          rdfs:label "mm" ;
         ] ;
       com:hasValue 3 ;
-      com:hasUOM [
-	  rdfs:label "mm" ;
-          a com:mm ;
-        ] ;
     ] ;
   com:hasPhysicalProperty [
       a geo:Grain_Size_Max ;
-      com:hasValue 8 ;
       com:hasUOM [
           a com:mm ;
         ] ;
+      com:hasValue 8 ;
     ] ;
   com:hasPhysicalProperty [
       a geo:Grain_Size_Min ;
-      com:hasValue .05 ;
       com:hasUOM [
           a com:mm ;
         ] ;
+      com:hasValue .05 ;
     ] ;
 .
 bol:Quartz_mineral
@@ -159,21 +159,21 @@ bol:Quartz_mineral
   rdfs:label "specific quartz in this material" ;
 .
 bol:constituent_part2
-  a geo:Proportion ;
-  com:hasValue 45 ;
+  a com:Proportion ;
   com:hasUOM [
       a com:percent ;
       rdfs:label "percent of quartz grains"@en ;
     ] ;
+  com:hasValue 45 ;
   com:proportionFor bol:Bolsa_Quarzite_Material ;
   com:proportionOf bol:Quartz_grains ;
 .
 bol:constituent_part3
-  a geo:Proportion ;
-  com:hasValue 5 ;
+  a com:Proportion ;
   com:hasUOM [
       a com:percent ;
     ] ;
+  com:hasValue 5 ;
   com:proportionFor bol:Bolsa_Quarzite_Material ;
   com:proportionOf bol:Clay_matrix ;
 .

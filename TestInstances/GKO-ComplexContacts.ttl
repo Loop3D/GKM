@@ -2,6 +2,7 @@
 # imports: http://geoscience.ca/3D/ontology/2019/1/common
 # imports: http://geoscience.ca/3D/ontology/2019/1/geologicfeature
 # imports: http://purl.org/dc/elements/1.1/
+# imports: http://resource.geosciml.org/ontology/timescale/gts
 # prefix: con
 
 @prefix : <http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#> .
@@ -16,6 +17,9 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
+com:proportionOf
+  rdfs:domain com:Proportion ;
+.
 <http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact>
   a owl:Ontology ;
   rdfs:comment "Focus is Js, a Jurassic age sedimentary unit that has a lower clastic part with an internal tuff marker bed, and an upper limestone part. The unit unconformably overlies tilted Paleozoic strata that overly Early Proterozoic metamorphic rocks; it is intruded by a Cretaceous granite, and the granite and Js are intruded by a Cretaceous diorite dike. After the igneous activity a period of exumation and erosion removed the cover on the Jurassic sediment and Cretaceous igneous rocks, and Late Miocene sediment covered this unconformity."@en ;
@@ -24,6 +28,7 @@
   owl:imports <http://geoscience.ca/3D/ontology/2019/1/common> ;
   owl:imports <http://geoscience.ca/3D/ontology/2019/1/geologicfeature> ;
   owl:imports dc: ;
+  owl:imports <http://resource.geosciml.org/ontology/timescale/gts> ;
 .
 con:CbFormation
   a geo:Formation ;
@@ -40,7 +45,7 @@ con:JsFormation
   com:hasPart con:KgInJsIntrusiveContact-4_2 ;
   com:hasPart con:baseJs-6 ;
   com:hasPart con:topJs-2 ;
-  geo:hasTemporalProperty [
+  com:hasTemporalProperty [
       a geo:Chronostratigraphic_Age_Interval ;
       geo:hasOlderAge <http://resource.geosciml.org/classifier/ics/ischart/Jurassic> ;
       geo:hasYoungerAge <http://resource.geosciml.org/classifier/ics/ischart/Jurassic> ;
@@ -54,10 +59,10 @@ con:KdDike
   com:hasConstituent [
       a geo:Diorite ;
       com:hasPhysicalProperty [
-          com:hasValue .05 ;
           com:hasUOM [
-              rdfs:type geo:mm ;
+              rdfs:type com:millimeter ;
             ] ;
+          com:hasValue .05 ;
           rdfs:type geo:GrainSizeAverage ;
         ] ;
     ] ;
@@ -95,10 +100,10 @@ con:KgGranite
   com:hasConstituent [
       a geo:Granitoid ;
       com:hasPhysicalProperty [
-          com:hasValue 5 ;
           com:hasUOM [
-              rdfs:type geo:mm ;
+              rdfs:type com:millimeter ;
             ] ;
+          com:hasValue 5 ;
           rdfs:type geo:GrainSizeAverage ;
         ] ;
     ] ;
@@ -382,21 +387,15 @@ geo:Lithostratigraphic_Unit
 geo:Quantified_Physical_Property
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty com:hasValue ;
-      owl:someValuesFrom xsd:double ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
       owl:onProperty com:hasUOM ;
       owl:someValuesFrom com:uom ;
     ] ;
-.
-geo:hasMethod
-  rdfs:range com:Measurement_Method ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty com:hasValue ;
+      owl:someValuesFrom xsd:double ;
+    ] ;
 .
 geo:hasSpatialProperty
   rdfs:range com:Spatial_Extent ;
-.
-com:proportionOf
-  rdfs:domain geo:Proportion ;
 .
