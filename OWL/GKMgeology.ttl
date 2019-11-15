@@ -10,70 +10,6 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-com:Physical_Setting
-  a owl:Class ;
-  rdfs:comment "characterization of a physical context in which some endurant or perdurant is situated.  The ontology for settings will ramify into into a complex separate resource; leave for later!  Each of the subclasses (e.g. Marine, Alluvial Fan) will have a set of properties that in the long run can be useful for inferencing."@en ;
-  rdfs:comment "rename from UML  more general class-- 'Physical Setting', subclass of dolce:particular. smr 2019-10-15"@en ;
-  rdfs:label "Physical Setting"@en ;
-  rdfs:subClassOf com:Particular ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom com:Physical_Setting ;
-      owl:onProperty com:isPartOf ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom [
-          a owl:Class ;
-          owl:unionOf (
-              com:Perdurant
-              com:Physical_Endurant
-            ) ;
-        ] ;
-      owl:onProperty geo:isSettingFor ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom [
-          a owl:Class ;
-          owl:unionOf (
-              com:Physical_Setting
-              com:Perdurant
-              com:Physical_Endurant
-              com:physical-quality
-            ) ;
-        ] ;
-      owl:onProperty com:hasPart ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty com:hasProperty ;
-      owl:someValuesFrom com:Property ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty geo:hasSpatialProperty ;
-      owl:someValuesFrom com:Spatial_Extent ;
-    ] ;
-.
-com:Property
-  a owl:Class ;
-  rdfs:comment "A characteristic of an Endurant or Perdurant."@en ;
-  rdfs:label "Property"@en ;
-  rdfs:subClassOf com:Particular ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onClass com:Particular ;
-      owl:onProperty com:hasPart ;
-      owl:qualifiedCardinality "0"^^xsd:nonNegativeInteger ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onClass com:Particular ;
-      owl:onProperty com:isPartOf ;
-      owl:qualifiedCardinality "0"^^xsd:nonNegativeInteger ;
-    ] ;
-.
 <http://geoscience.ca/3D/ontology/2019/1/geologicfeature>
   a owl:Ontology ;
   rdfs:comment "Base geologic feature classes, constraints, and relationships"@en ;
@@ -482,7 +418,7 @@ geo:GSSA
   a owl:Class ;
   rdfs:comment "A Geochronologic Age defined by the International Stratigraphic Commission, based on fiat selection of defined older and younger bounding time coordinates"@en ;
   rdfs:label "GSSA"@en ;
-  rdfs:subClassOf geo:Geologic_Time_Date ;
+  rdfs:subClassOf geo:Geochronologic_Boundary ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:maxQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
@@ -524,10 +460,15 @@ geo:Geochronologic_Age_Interval
 geo:Geochronologic_Boundary
   a owl:Class ;
   rdfs:label "Geochronologic Boundary"@en ;
-  rdfs:subClassOf geo:Geologic_Time_Date ;
+  rdfs:subClassOf com:Time_Instant ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:allValuesFrom geo:Contact ;
+      owl:allValuesFrom geo:Geologic_Time_Date ;
+      owl:onProperty geo:position ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom geo:Stratigraphic_Point ;
       owl:onProperty geo:isRealizedBy ;
     ] ;
 .
@@ -606,7 +547,7 @@ geo:Geologic_Time_Date
   rdfs:comment """A temporal coordinate value, located either by a point position (with uncertainty) on a time line, specified by a numeric coordinate (generally MYPB, but definitions of 'present' vary), or a GeochronologicBoundary if it is associated with a location in a particular stratigraphic section, or a GSSA if the numeric time coordinate is arbitrarily assigned.
 Probably should specify a Temporal Reference System used to assign coordinate values."""@en ;
   rdfs:label "Geologic Time Date"@en ;
-  rdfs:subClassOf com:Time_Interval ;
+  rdfs:subClassOf com:Time_Instant ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom com:Statistical_Calculation ;
@@ -1341,6 +1282,11 @@ geo:overlies
   rdfs:label "overlies "@en ;
   rdfs:range geo:Geologic_Unit ;
   rdfs:subPropertyOf com:relatedto ;
+.
+geo:position
+  a owl:ObjectProperty ;
+  rdfs:comment "implement temporal location for GeochronologicBoundary" ;
+  rdfs:label "position" ;
 .
 geo:realizes
   a rdf:Property ;
