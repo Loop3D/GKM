@@ -1,0 +1,284 @@
+@prefix : <http://geoscience.ca/3D/ontology/2019/1/eventtest2#> .
+@prefix com: <http://geoscience.ca/3D/ontology/2019/1/common/> .
+@prefix env: <http://resource.geosciml.org/classifier/cgi/eventenvironment/> .
+@prefix geo: <http://geoscience.ca/3D/ontology/2019/1/geologicfeature/> .
+@prefix gkm: <http://geoscience.ca/3D/ontology/2019/1/geologicfeature> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix evn1: <http://geoscience.ca/3D/ontology/2019/1/gkoinstancetests/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix eventenvironment: <http://geoscience.ca/3D/ontology/2019/1/eventenvironment#> .
+@base <http://geoscience.ca/3D/ontology/2019/1/eventtest2> .
+
+<http://geoscience.ca/3D/ontology/2019/1/eventtest2> rdf:type owl:Ontology ;
+                                                      owl:versionIRI <http://geoscience.ca/3D/ontology/2019/1/eventtest2> ;
+                                                      owl:imports <http://geoscience.ca/3D/ontology/2019/1/common> ,
+                                                                  <http://geoscience.ca/3D/ontology/2019/1/geologicfeature> .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://geoscience.ca/3D/ontology/2019/1/common/determinedBy
+com:determinedBy rdf:type owl:AnnotationProperty .
+
+
+###  http://geoscience.ca/3D/ontology/2019/1/common/hasTemporalProperty
+com:hasTemporalProperty rdf:type owl:AnnotationProperty .
+
+
+###  http://geoscience.ca/3D/ontology/2019/1/common/hasUOM
+com:hasUOM rdf:type owl:AnnotationProperty .
+
+
+###  http://geoscience.ca/3D/ontology/2019/1/common/isManifestationOf
+com:isManifestationOf rdf:type owl:AnnotationProperty .
+
+
+###  http://geoscience.ca/3D/ontology/2019/1/geologicfeature/hasAgeDate
+geo:hasAgeDate rdf:type owl:AnnotationProperty .
+
+
+###  http://geoscience.ca/3D/ontology/2019/1/geologicfeature/hasDate
+geo:hasDate rdf:type owl:AnnotationProperty .
+
+
+###  http://geoscience.ca/3D/ontology/2019/1/geologicfeature/hasOlderAge
+geo:hasOlderAge rdf:type owl:AnnotationProperty .
+
+
+###  http://geoscience.ca/3D/ontology/2019/1/geologicfeature/hasSetting
+geo:hasSetting rdf:type owl:AnnotationProperty .
+
+
+###  http://geoscience.ca/3D/ontology/2019/1/geologicfeature/hasUncertainty
+geo:hasUncertainty rdf:type owl:AnnotationProperty .
+
+
+###  http://geoscience.ca/3D/ontology/2019/1/geologicfeature/hasYoungerAge
+geo:hasYoungerAge rdf:type owl:AnnotationProperty .
+
+
+###  http://geoscience.ca/3D/ontology/2019/1/geologicfeature/older_than
+geo:older_than rdf:type owl:AnnotationProperty .
+
+
+###  http://geoscience.ca/3D/ontology/2019/1/geologicfeature/younger_than
+geo:younger_than rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://geoscience.ca/3D/ontology/2019/1/geologicfeature/Geologic_Setting
+geo:Geologic_Setting rdf:type owl:Class .
+
+
+###  http://resource.geosciml.org/classifier/cgi/eventenvironment/alluvial_fan
+env:alluvial_fan rdf:type owl:Class .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://geoscience.ca/3D/ontology/2019/1/eventtest2/Cretaceous90Ma
+<http://geoscience.ca/3D/ontology/2019/1/eventtest2/Cretaceous90Ma> rdf:type owl:NamedIndividual ,
+                                                                             geo:Geologic_Age_Instant ;
+                                                                    geo:hasAgeDate [ ] ;
+rdfs:label "90 Ma" .
+
+
+###  http://geoscience.ca/3D/ontology/2019/1/eventtest2/CretaceousPeriod
+<http://geoscience.ca/3D/ontology/2019/1/eventtest2/CretaceousPeriod> rdf:type owl:NamedIndividual ,
+                                                                               geo:Period ;
+                                                                      rdfs:label "Cretaceous Period"@en .
+
+
+###  http://geoscience.ca/3D/ontology/2019/1/eventtest2/Cretaceous_Age_date
+<http://geoscience.ca/3D/ontology/2019/1/eventtest2/Cretaceous_Age_date> rdf:type owl:NamedIndividual ,
+                                                                                  geo:Geologic_Age_Instant ;
+                                                                         com:determinedBy <http://geoscience.ca/3D/ontology/2019/1/eventtest2/upbconcordantanalysis> ;
+                                                                         geo:hasAgeDate <http://geoscience.ca/3D/ontology/2019/1/eventtest2/Date110Ma> ;
+                                                                         rdfs:label "Cretaceous 110 Ma Age Date"@en .
+
+
+###  http://geoscience.ca/3D/ontology/2019/1/eventtest2/Cretaceous_dike_intrusion
+<http://geoscience.ca/3D/ontology/2019/1/eventtest2/Cretaceous_dike_intrusion> rdf:type owl:NamedIndividual ,
+                                                                                        geo:Geologic_Event ;
+                                                                               com:isManifestationOf [ ] ;
+com:hasTemporalProperty <http://geoscience.ca/3D/ontology/2019/1/eventtest2/Cretaceous90Ma> ;
+geo:hasSetting env:upper_continental_crustal_setting ,
+               [ ] ;
+geo:younger_than <http://geoscience.ca/3D/ontology/2019/1/eventtest2/Kg_Intrusion> ;
+rdfs:label "90 Ma Dike Intrusion"@en .
+
+
+###  http://geoscience.ca/3D/ontology/2019/1/eventtest2/Date110Ma
+<http://geoscience.ca/3D/ontology/2019/1/eventtest2/Date110Ma> rdf:type owl:NamedIndividual ,
+                                                                        geo:Geologic_Time_Date ;
+                                                               com:hasUOM [ ] ;
+geo:hasDate 110 ;
+geo:hasUncertainty 9 ;
+rdfs:label "110 Ma" .
+
+
+###  http://geoscience.ca/3D/ontology/2019/1/eventtest2/Earth_Interior_Setting
+<http://geoscience.ca/3D/ontology/2019/1/eventtest2/Earth_Interior_Setting> rdf:type owl:NamedIndividual ,
+                                                                                     geo:Geologic_Setting ;
+                                                                            rdfs:label "Earth Interior Setting" .
+
+
+###  http://geoscience.ca/3D/ontology/2019/1/eventtest2/HoloceneEpoch
+<http://geoscience.ca/3D/ontology/2019/1/eventtest2/HoloceneEpoch> rdf:type owl:NamedIndividual ,
+                                                                            geo:Epoch ;
+                                                                   rdfs:label "Holocene Epoch" .
+
+
+###  http://geoscience.ca/3D/ontology/2019/1/eventtest2/HsGenesis
+<http://geoscience.ca/3D/ontology/2019/1/eventtest2/HsGenesis> rdf:type owl:NamedIndividual ,
+                                                                        geo:Geologic_Event ;
+                                                               com:isManifestationOf [ ] ;
+com:hasTemporalProperty <http://geoscience.ca/3D/ontology/2019/1/eventtest2/HoloceneEpoch> ;
+geo:hasSetting [ ] ;
+geo:younger_than <http://geoscience.ca/3D/ontology/2019/1/eventtest2/MsGenesis> ;
+rdfs:comment "Deposition of Holocene sediments"@en ;
+rdfs:label "Holocene sediment deposition"@en .
+
+
+###  http://geoscience.ca/3D/ontology/2019/1/eventtest2/JsGenesis
+<http://geoscience.ca/3D/ontology/2019/1/eventtest2/JsGenesis> rdf:type owl:NamedIndividual ,
+                                                                        geo:Geologic_Event ;
+                                                               com:isManifestationOf [ ] ;
+com:hasTemporalProperty <http://geoscience.ca/3D/ontology/2019/1/eventtest2/Jurassic_Age> ;
+geo:hasSetting env:coastal_plain_setting ,
+               env:inner_neritic ,
+               env:shoreline_settings ;
+rdfs:label "Jurassic sediment Deposition"@en .
+
+
+###  http://geoscience.ca/3D/ontology/2019/1/eventtest2/JurassicPeriod
+<http://geoscience.ca/3D/ontology/2019/1/eventtest2/JurassicPeriod> rdf:type owl:NamedIndividual ,
+                                                                             geo:Period ;
+                                                                    rdfs:label "Jurassic Period"@en .
+
+
+###  http://geoscience.ca/3D/ontology/2019/1/eventtest2/Jurassic_Age
+<http://geoscience.ca/3D/ontology/2019/1/eventtest2/Jurassic_Age> rdf:type owl:NamedIndividual ,
+                                                                           geo:Chronostratigraphic_Age_Interval ;
+                                                                  geo:hasOlderAge <http://geoscience.ca/3D/ontology/2019/1/eventtest2/JurassicPeriod> ;
+                                                                  geo:hasYoungerAge <http://geoscience.ca/3D/ontology/2019/1/eventtest2/JurassicPeriod> ;
+                                                                  rdfs:label "Jurassic Age" .
+
+
+###  http://geoscience.ca/3D/ontology/2019/1/eventtest2/Kg_Intrusion
+<http://geoscience.ca/3D/ontology/2019/1/eventtest2/Kg_Intrusion> rdf:type owl:NamedIndividual ,
+                                                                           geo:Geologic_Event ;
+                                                                  com:isManifestationOf [ ] ;
+com:hasTemporalProperty <http://geoscience.ca/3D/ontology/2019/1/eventtest2/Cretaceous_Age_date> ;
+geo:hasSetting env:middle_continental_crust_setting ,
+               [ ] ;
+geo:younger_than <http://geoscience.ca/3D/ontology/2019/1/eventtest2/JsGenesis> ;
+rdfs:label "Cretaceous Intrusion Event"@en .
+
+
+###  http://geoscience.ca/3D/ontology/2019/1/eventtest2/MioceneEpoch
+<http://geoscience.ca/3D/ontology/2019/1/eventtest2/MioceneEpoch> rdf:type owl:NamedIndividual ,
+                                                                           geo:Epoch ;
+                                                                  rdfs:label "Miocence Epoch"@en .
+
+
+###  http://geoscience.ca/3D/ontology/2019/1/eventtest2/Miocene_Age
+<http://geoscience.ca/3D/ontology/2019/1/eventtest2/Miocene_Age> rdf:type owl:NamedIndividual ,
+                                                                          geo:Chronostratigraphic_Age_Interval ;
+                                                                 geo:hasOlderAge <http://geoscience.ca/3D/ontology/2019/1/eventtest2/MioceneEpoch> ;
+                                                                 geo:hasYoungerAge <http://geoscience.ca/3D/ontology/2019/1/eventtest2/MioceneEpoch> ;
+                                                                 rdfs:label "Miocene Age"@en .
+
+
+###  http://geoscience.ca/3D/ontology/2019/1/eventtest2/MsDeposition
+<http://geoscience.ca/3D/ontology/2019/1/eventtest2/MsDeposition> rdf:type owl:NamedIndividual ,
+                                                                           geo:Deposition .
+
+
+###  http://geoscience.ca/3D/ontology/2019/1/eventtest2/MsGenesis
+<http://geoscience.ca/3D/ontology/2019/1/eventtest2/MsGenesis> rdf:type owl:NamedIndividual ,
+                                                                        geo:Geologic_Event ;
+                                                               com:isManifestationOf [ ] ;
+com:hasTemporalProperty <http://geoscience.ca/3D/ontology/2019/1/eventtest2/Miocene_Age> ;
+geo:hasSetting [ ] ;
+geo:younger_than <http://geoscience.ca/3D/ontology/2019/1/eventtest2/Cretaceous_dike_intrusion> ;
+rdfs:label "Miocene sediment Deposition"@en .
+
+
+###  http://geoscience.ca/3D/ontology/2019/1/eventtest2/Pre_Cretaceous_Burial
+<http://geoscience.ca/3D/ontology/2019/1/eventtest2/Pre_Cretaceous_Burial> rdf:type owl:NamedIndividual ,
+                                                                                    geo:Geologic_Event ;
+                                                                           rdfs:comment "Burial of Js to depth of Kg intrusion, must predate Kg "@en ;
+                                                                           rdfs:label "Pre Kg burial "@en .
+
+
+###  http://geoscience.ca/3D/ontology/2019/1/eventtest2/Pre_Jurassic_Erosion
+<http://geoscience.ca/3D/ontology/2019/1/eventtest2/Pre_Jurassic_Erosion> rdf:type owl:NamedIndividual ,
+                                                                                   geo:Geologic_Event ;
+                                                                          rdfs:comment "Erosional unroofing of tilted Xm, Cb, Os and Ss "@en ;
+                                                                          rdfs:label "Pre Jurassic Erosion "@en .
+
+
+###  http://geoscience.ca/3D/ontology/2019/1/eventtest2/Pre_Miocene_Erosion
+<http://geoscience.ca/3D/ontology/2019/1/eventtest2/Pre_Miocene_Erosion> rdf:type owl:NamedIndividual ,
+                                                                                  geo:Geologic_Event ;
+                                                                         geo:older_than <http://geoscience.ca/3D/ontology/2019/1/eventtest2/MsGenesis> ;
+                                                                         geo:younger_than <http://geoscience.ca/3D/ontology/2019/1/eventtest2/Cretaceous_dike_intrusion> ;
+                                                                         rdfs:comment "Erosional unroofing of Kg and Js "@en ;
+                                                                         rdfs:label "Pre Miocene Erosion "@en .
+
+
+###  http://geoscience.ca/3D/ontology/2019/1/eventtest2/upbconcordantanalysis
+<http://geoscience.ca/3D/ontology/2019/1/eventtest2/upbconcordantanalysis> rdf:type owl:NamedIndividual ,
+                                                                                    com:Determining_Event ;
+                                                                           rdfs:label "U-Pb isotopic analysis, concordant"@en .
+
+
+[ rdf:type geo:Geologic_Time_Date ;
+  com:hasUOM [ rdf:type com:ma
+             ] ;
+  geo:hasDate 90 ;
+  geo:hasUncertainty 8
+] .
+
+[ rdf:type geo:Intrusion
+ ] .
+
+[ rdf:type geo:Earth_Interior_Setting
+ ] .
+
+[ rdf:type com:ma
+ ] .
+
+[ rdf:type geo:Deposition ;
+   rdfs:label "process of sedimentary deposition"@en
+ ] .
+
+[ rdf:type env:alluvial_fan
+ ] .
+
+[ rdf:type geo:Deposition
+ ] .
+
+[ rdf:type geo:Intrusion
+ ] .
+
+[ rdf:type geo:Earth_Interior_Setting
+ ] .
+
+[ rdf:type geo:Deposition
+ ] .
+
+[ rdf:type geo:Lacustrine_Setting
+ ] .
+
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
