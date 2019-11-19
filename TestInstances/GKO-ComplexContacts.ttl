@@ -14,12 +14,10 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix unit: <http://qudt.org/vocab/unit#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-com:proportionOf
-  rdfs:domain com:Proportion ;
-.
 <http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact>
   a owl:Ontology ;
   rdfs:comment "Focus is Js, a Jurassic age sedimentary unit that has a lower clastic part with an internal tuff marker bed, and an upper limestone part. The unit unconformably overlies tilted Paleozoic strata that overly Early Proterozoic metamorphic rocks; it is intruded by a Cretaceous granite, and the granite and Js are intruded by a Cretaceous diorite dike. After the igneous activity a period of exumation and erosion removed the cover on the Jurassic sediment and Cretaceous igneous rocks, and Late Miocene sediment covered this unconformity."@en ;
@@ -59,9 +57,7 @@ con:KdDike
   com:hasConstituent [
       a geo:Diorite ;
       com:hasPhysicalProperty [
-          com:hasUOM [
-              rdfs:type com:millimeter ;
-            ] ;
+          com:hasUOM unit:Millimeter ;
           com:hasValue .05 ;
           rdfs:type geo:GrainSizeAverage ;
         ] ;
@@ -87,6 +83,7 @@ con:KdUnderMs
   a geo:Rock_Body_Boundary ;
   com:participantIn [
       a geo:Erosion ;
+      rdfs:comment "pre-Miocene erosion event" ;
     ] ;
   rdfs:comment "Eroded surface under Ms"@en ;
 .
@@ -100,9 +97,7 @@ con:KgGranite
   com:hasConstituent [
       a geo:Granitoid ;
       com:hasPhysicalProperty [
-          com:hasUOM [
-              rdfs:type com:millimeter ;
-            ] ;
+          com:hasUOM com:millimeter ;
           com:hasValue 5 ;
           rdfs:type geo:GrainSizeAverage ;
         ] ;
@@ -383,19 +378,4 @@ geo:Formation
 .
 geo:Lithostratigraphic_Unit
   dc:description "A body of rocks that is defined and recognized on the basis of its lithologic properties or combination of lithologic properties and stratigraphic relations. A lithostratigraphic unit may consist of sedimentary, or igneous, or metamorphic rocks. Lithostratigraphic units are defined and recognized by observable physical features and not by their inferred age, the time span they represent, inferred geologic history, or manner of formation. The geographic extent of a lithostratigraphic unit is controlled entirely by the continuity and extent of its diagnostic lithologic features.  http://www.stratigraphy.org/upload/bak/litho.htm"@en ;
-.
-geo:Quantified_Physical_Property
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty com:hasUOM ;
-      owl:someValuesFrom com:uom ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty com:hasValue ;
-      owl:someValuesFrom xsd:double ;
-    ] ;
-.
-geo:hasSpatialProperty
-  rdfs:range com:Spatial_Extent ;
 .
