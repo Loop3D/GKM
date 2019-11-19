@@ -14,6 +14,7 @@
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix tim: <http://geoscience.ca/3D/ontology/2019/1/ex-timescale#> .
+@prefix unit:    <http://qudt.org/vocab/unit#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
@@ -37,9 +38,7 @@ bol:Bolsa_Quartzite_Material
   com:hasPhysicalProperty bol:constituent_part3 ;
   com:hasPhysicalProperty [
       a com:Proportion ;
-      com:hasUOM [
-          a com:percent ;
-        ] ;
+      com:hasUOM unit:Percent ;
       com:hasValue 50 ;
       com:proportionFor bol:Bolsa_Quarzite_Material ;
       com:proportionOf bol:Feldspar_grains ;
@@ -58,9 +57,7 @@ bol:Clay_matrix
   com:hasConstituent geo:Clay_Mineral ;
   com:hasPhysicalProperty [
       a geo:Grain_Size_Max ;
-      com:hasUOM [
-          a com:mm ;
-        ] ;
+      com:hasUOM unit:Millimeter ;
       com:hasValue .005 ;
     ] ;
   rdfs:label "Clay matrix constituent"@en ;
@@ -74,17 +71,13 @@ bol:Feldspar_grains
     ] ;
   com:hasPhysicalProperty [
       a geo:Grain_Size_Max ;
-      com:hasUOM [
-          a com:mm ;
-        ] ;
+      com:hasUOM unit:Millimeter ;
       com:hasValue 5 ;
       rdfs:label "5 mm maximum"@en ;
     ] ;
   com:hasPhysicalProperty [
       a geo:Grain_Size_Min ;
-      com:hasUOM [
-          a com:mm ;
-        ] ;
+      com:hasUOM unit:Millimeter ;
       com:hasValue .02 ;
       rdfs:label "0.02 mm minimum"@en ;
     ] ;
@@ -120,30 +113,20 @@ bol:Quartz_grains
       a geo:Grain_Size_Average ;
       com:hasProperty [
           a com:First_Standard_Deviation_Calculation ;
-          com:hasUOM [
-              a com:mm ;
-              rdfs:label "mm" ;
-            ] ;
+          com:hasUOM unit:Millimeter ;
           com:hasValue .06 ;
         ] ;
-      com:hasUOM [
-          a com:mm ;
-          rdfs:label "mm" ;
-        ] ;
+      com:hasUOM unit:Millimeter ;
       com:hasValue 3 ;
     ] ;
   com:hasPhysicalProperty [
       a geo:Grain_Size_Max ;
-      com:hasUOM [
-          a com:mm ;
-        ] ;
+      com:hasUOM unit:Millimeter ;
       com:hasValue 8 ;
     ] ;
   com:hasPhysicalProperty [
       a geo:Grain_Size_Min ;
-      com:hasUOM [
-          a com:mm ;
-        ] ;
+      com:hasUOM unit:Millimeter ;
       com:hasValue .05 ;
     ] ;
 .
@@ -160,19 +143,14 @@ bol:Quartz_mineral
 .
 bol:constituent_part2
   a com:Proportion ;
-  com:hasUOM [
-      a com:percent ;
-      rdfs:label "percent of quartz grains"@en ;
-    ] ;
+  com:hasUOM unit:Percent ;
   com:hasValue 45 ;
   com:proportionFor bol:Bolsa_Quarzite_Material ;
   com:proportionOf bol:Quartz_grains ;
 .
 bol:constituent_part3
   a com:Proportion ;
-  com:hasUOM [
-      a com:percent ;
-    ] ;
+  com:hasUOM unit:Percent ;
   com:hasValue 5 ;
   com:proportionFor bol:Bolsa_Quarzite_Material ;
   com:proportionOf bol:Clay_matrix ;
