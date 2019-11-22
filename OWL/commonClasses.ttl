@@ -853,6 +853,7 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   rdfs:comment "object property between two entities wherein one entity is specifically dependent on the other."@en ;
   rdfs:label "Hosted By"@en ;
 .
+
 :hosts
   a owl:ObjectProperty ;
   rdfs:comment "" ;
@@ -912,8 +913,23 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
 :isTemporallyRelatedTo
   a owl:ObjectProperty ;
   rdfs:comment "" ;
+  rdfs:domain [
+      a owl:Class ;
+      owl:unionOf (
+          :Endurant
+          :Perdurant
+          :Temporal_Region
+        ) ;
+    ] ;
   rdfs:label "is Temporally Related To" ;
-  rdfs:range :Perdurant ;
+  rdfs:range [
+      a owl:Class ;
+      owl:unionOf (
+          :Endurant
+          :Perdurant
+          :Temporal_Region
+        ) ;
+    ] ;
   rdfs:subPropertyOf :relatedto ;
 .
 :ma
