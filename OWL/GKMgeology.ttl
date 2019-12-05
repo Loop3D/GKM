@@ -1,9 +1,7 @@
 # baseURI: http://geoscience.ca/3D/ontology/2019/1/geologicfeature
 # imports: http://geoscience.ca/3D/ontology/2019/1/common
-# imports: http://geoscience.ca/3D/ontology/2019/1/timescale/Loop3DTimeScale
 
 @prefix : <http://geoscience.ca/3D/ontology/2019/1/geologicfeature/> .
-@prefix Loop3DTimeScale: <http://geoscience.ca/3D/ontology/2019/1/timescale/Loop3DTimeScale#> .
 @prefix com: <http://geoscience.ca/3D/ontology/2019/1/common/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -11,11 +9,22 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
+com:isConstituentOf
+  rdfs:range [
+      a owl:Class ;
+      owl:unionOf (
+          com:Element
+          :Glass
+          :Mineral
+          :Rock_Material
+          :Granular_Material
+        ) ;
+    ] ;
+.
 <http://geoscience.ca/3D/ontology/2019/1/geologicfeature>
   a owl:Ontology ;
   rdfs:comment "Base geologic feature classes, constraints, and relationships"@en ;
   owl:imports <http://geoscience.ca/3D/ontology/2019/1/common> ;
-  owl:imports <http://geoscience.ca/3D/ontology/2019/1/timescale/Loop3DTimeScale> ;
 .
 :Age_Rank
   a owl:Class ;
@@ -34,10 +43,6 @@
       owl:onProperty com:hasPart ;
       owl:qualifiedCardinality "0"^^xsd:nonNegativeInteger ;
     ] ;
-.
-:Alluvial_Fan_Setting
-  a owl:Class ;
-  rdfs:subClassOf com:Physical_Setting ;
 .
 :Alteration_Zone
   a owl:Class ;
@@ -146,6 +151,11 @@ Also for deformation-producted clasts in tectonic breccia."""@en ;
   rdfs:subClassOf :Lithostratigraphic_Unit ;
 .
 :Conglomeratic_Sandstone
+  a :Conglomeratic_Sandstone_class ;
+  rdfs:comment "Generic conglomeratic sandstone instance." ;
+  rdfs:label "Conglomeratic sandstone" ;
+.
+:Conglomeratic_Sandstone_class
   a owl:Class ;
   rdfs:comment "coarse grained to conglomeratic sandstone "@en ;
   rdfs:label "Conglomeratic Sandstone "@en ;
@@ -426,7 +436,7 @@ Contact(x) <--> exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RB
   a owl:Class ;
   rdfs:comment "A Geochronologic Age defined by the International Stratigraphic Commission, based on fiat selection of defined older and younger bounding time coordinates"@en ;
   rdfs:label "GSSA"@en ;
-  rdfs:subClassOf :Geochronologic_Boundary ;
+  rdfs:subClassOf :Geologic_Time_Date ;
   owl:disjointWith :Geologic_Time_Date ;
 .
 :GSSP
@@ -451,23 +461,18 @@ Contact(x) <--> exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RB
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom :Geologic_Time_Date ;
-      owl:onProperty :hasOlderDate ;
+      owl:onProperty :hasOlderBound ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom :Geologic_Time_Date ;
-      owl:onProperty :hasYoungerDate ;
+      owl:onProperty :hasYoungerBound ;
     ] ;
 .
 :Geochronologic_Boundary
   a owl:Class ;
   rdfs:label "Geochronologic Boundary"@en ;
-  rdfs:subClassOf com:Time_Instant ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom :Geologic_Time_Date ;
-      owl:onProperty :position ;
-    ] ;
+  rdfs:subClassOf :Geologic_Time_Date ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom :Stratigraphic_Point ;
@@ -551,8 +556,14 @@ Probably should specify a Temporal Reference System used to assign coordinate va
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:allValuesFrom com:uom ;
+      owl:allValuesFrom xsd:double ;
+      owl:onProperty com:hasUncertainty ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onClass com:uom ;
       owl:onProperty com:hasUOM ;
+      owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
@@ -595,12 +606,12 @@ Probably should specify a Temporal Reference System used to assign coordinate va
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty :hasOlderDate ;
+      owl:onProperty :hasOlderBound ;
       owl:someValuesFrom :Geologic_Time_Date ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty :hasYoungerDate ;
+      owl:onProperty :hasYoungerBound ;
       owl:someValuesFrom :Geologic_Time_Date ;
     ] ;
 .
@@ -1135,7 +1146,20 @@ RBT (x) <--> RBD (x) ^ exists z forall y [(isPartOf (y,z) ^ hasHost (z,x)) -> (b
   rdfs:subClassOf :Stratigraphic_Section ;
 .
 :Sub-Period
+  a owl:Class ;
+  rdfs:comment "Named rank for geochronologic time interval. Sub-Periods may be subdivided into Epochs. Sub-Periods are grouped into a period."@en ;
   rdfs:subClassOf :Geologic_Time_Interval ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom :Epoch ;
+      owl:onProperty com:hasPart ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onClass :Period ;
+      owl:onProperty com:isPartOf ;
+      owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+    ] ;
 .
 :Subangular
   a owl:Class ;
@@ -1258,10 +1282,10 @@ RBT (x) <--> RBD (x) ^ exists z forall y [(isPartOf (y,z) ^ hasHost (z,x)) -> (b
 :hasOlderAge
   a owl:ObjectProperty ;
 .
-:hasOlderDate
+:hasOlderBound
   a owl:ObjectProperty ;
-  rdfs:label "has Older Date"@en ;
-  rdfs:range :Geologic_Time_Date ;
+  rdfs:label "has Older Bounding Age"@en ;
+  rdfs:range com:Time_Instant ;
 .
 :hasOlderHost
   a owl:ObjectProperty ;
@@ -1286,11 +1310,11 @@ RBT (x) <--> RBD (x) ^ exists z forall y [(isPartOf (y,z) ^ hasHost (z,x)) -> (b
 :hasYoungerAge
   a owl:ObjectProperty ;
 .
-:hasYoungerDate
+:hasYoungerBound
   a owl:ObjectProperty ;
   rdfs:comment "assign a younger age boundary for a time interval"@en ;
-  rdfs:label "has Younger Date"@en ;
-  rdfs:range :Geologic_Time_Date ;
+  rdfs:label "has Younger Bounding Age"@en ;
+  rdfs:range com:Time_Instant ;
 .
 :hasYoungerHost
   a owl:ObjectProperty ;

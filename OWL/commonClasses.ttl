@@ -302,7 +302,6 @@ A part of a physical object or amount of matter that touches the exterior in 3D 
 PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, complement(y))]"""@en ;
   rdfs:label "Physical Boundary"@en ;
   rdfs:subClassOf :Part_Feature ;
-  rdfs:subClassOf :Physical_Feature ;
 .
 :Physical_Endurant
   a owl:Class ;
@@ -810,6 +809,7 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   a owl:ObjectProperty ;
   rdfs:comment "" ;
   rdfs:label "has Physical Property" ;
+  rdfs:subPropertyOf :hasProperty ;
 .
 :hasProperty
   a owl:ObjectProperty ;
@@ -826,11 +826,13 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   a owl:ObjectProperty ;
   rdfs:comment "" ;
   rdfs:label "has Spatial Property" ;
+  rdfs:subPropertyOf :hasProperty ;
 .
 :hasTemporalProperty
   a owl:ObjectProperty ;
   rdfs:comment "" ;
   rdfs:label "has Temporal Property"@en ;
+  rdfs:subPropertyOf :hasProperty ;
 .
 :hasUOM
   a owl:ObjectProperty ;
@@ -853,7 +855,6 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   rdfs:comment "object property between two entities wherein one entity is specifically dependent on the other."@en ;
   rdfs:label "Hosted By"@en ;
 .
-
 :hosts
   a owl:ObjectProperty ;
   rdfs:comment "" ;
@@ -862,30 +863,7 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
 :isConstituentOf
   a owl:ObjectProperty ;
   a owl:TransitiveProperty ;
-  rdfs:range [
-      a owl:Class ;
-      owl:unionOf [
-          a rdf:List ;
-          rdf:first :Element ;
-          rdf:rest [
-              a rdf:List ;
-              rdf:first <http://geoscience.ca/3D/ontology/2019/1/geologicfeature/Glass> ;
-              rdf:rest [
-                  a rdf:List ;
-                  rdf:first <http://geoscience.ca/3D/ontology/2019/1/geologicfeature/Granular_Material> ;
-                  rdf:rest [
-                      a rdf:List ;
-                      rdf:first <http://geoscience.ca/3D/ontology/2019/1/geologicfeature/Mineral> ;
-                      rdf:rest [
-                          a rdf:List ;
-                          rdf:first <http://geoscience.ca/3D/ontology/2019/1/geologicfeature/Rock_Material> ;
-                          rdf:rest () ;
-                        ] ;
-                    ] ;
-                ] ;
-            ] ;
-        ] ;
-    ] ;
+  rdfs:range :Amount_Of_Matter ;
 .
 :isManifestationOf
   a owl:ObjectProperty ;
@@ -894,6 +872,8 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
 .
 :isPartOf
   a owl:ObjectProperty ;
+  a owl:TransitiveProperty ;
+  owl:inverseOf :hasPart ;
 .
 :isPhysicallyRelatedTo
   a owl:ObjectProperty ;
