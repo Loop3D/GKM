@@ -2,12 +2,10 @@
 # imports: http://geoscience.ca/3D/ontology/2019/1/common
 # imports: http://geoscience.ca/3D/ontology/2019/1/geologicfeature
 # imports: http://purl.org/dc/elements/1.1/
-# imports: http://resource.geosciml.org/ontology/timescale/gts
-# prefix: con
 
 @prefix : <http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#> .
 @prefix com: <http://geoscience.ca/3D/ontology/2019/1/common/> .
-@prefix con: <http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact#> .
+@prefix con: <http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact/> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix geo: <http://geoscience.ca/3D/ontology/2019/1/geologicfeature/> .
 @prefix gkm: <http://geoscience.ca/3D/ontology/2019/1/geologicfeature> .
@@ -26,23 +24,22 @@
   owl:imports <http://geoscience.ca/3D/ontology/2019/1/common> ;
   owl:imports <http://geoscience.ca/3D/ontology/2019/1/geologicfeature> ;
   owl:imports dc: ;
-  owl:imports <http://resource.geosciml.org/ontology/timescale/gts> ;
 .
-con:CbFormation
+:CbFormation
   a geo:Formation ;
   rdfs:label "Bolsa Quartzite (Cambrian)"@en ;
 .
-con:JsDeposition
+:JsDeposition
   a geo:Deposition ;
   rdfs:label "Deposition of Unit Js"@en ;
 .
-con:JsFormation
+:JsFormation
   a geo:Formation ;
-  com:hasPart con:KdInJsDikeContact-3_1_4 ;
-  com:hasPart con:KdInJsDikeContact-3_2_4 ;
-  com:hasPart con:KgInJsIntrusiveContact-4_2 ;
-  com:hasPart con:baseJs-6 ;
-  com:hasPart con:topJs-2 ;
+  com:hasPart :KdInJsDikeContact-3_1_4 ;
+  com:hasPart :KdInJsDikeContact-3_2_4 ;
+  com:hasPart :KgInJsIntrusiveContact-4_2 ;
+  com:hasPart :baseJs-6 ;
+  com:hasPart :topJs-2 ;
   com:hasTemporalProperty [
       a geo:Chronostratigraphic_Age_Interval ;
       geo:hasOlderAge <http://resource.geosciml.org/classifier/ics/ischart/Jurassic> ;
@@ -52,7 +49,7 @@ con:JsFormation
   rdfs:comment "the following parts are not elucidated in this example, but are referenced in the Contact instances below. These surfaces would participate in intrusion and also contact metamorphism processes"@en ;
   rdfs:label "Js Formation"@en ;
 .
-con:KdDike
+:KdDike
   a geo:Formation ;
   com:hasConstituent [
       a geo:Diorite ;
@@ -62,24 +59,24 @@ con:KdDike
           rdfs:type geo:GrainSizeAverage ;
         ] ;
     ] ;
-  com:hasPart con:KdUnderMs ;
-  com:hasPart con:downSideKd-3_1 ;
-  com:hasPart con:upSideKd-3_2 ;
-  geo:Intrudes con:CbFormation ;
-  geo:Intrudes con:JsFormation ;
-  geo:Intrudes con:KgGranite ;
-  geo:Intrudes con:XmRockBody ;
+  com:hasPart :KdUnderMs ;
+  com:hasPart :downSideKd-3_1 ;
+  com:hasPart :upSideKd-3_2 ;
+  geo:Intrudes :CbFormation ;
+  geo:Intrudes :JsFormation ;
+  geo:Intrudes :KgGranite ;
+  geo:Intrudes :XmRockBody ;
   rdfs:comment "dike has lots of intrusive contacts, on the hanging wall (up) and footwall (down) side of the dike, each contact is with a different unit."@en ;
   rdfs:comment "intrudes is subproperty of relatedTo"@en ;
   rdfs:label "Mafic Dike (Cretaceous)"@en ;
 .
-con:KdInJsDikeContact-3_1_4
+:KdInJsDikeContact-3_1_4
   a geo:Rock_Body_Boundary ;
 .
-con:KdInJsDikeContact-3_2_4
+:KdInJsDikeContact-3_2_4
   a geo:Rock_Body_Boundary ;
 .
-con:KdUnderMs
+:KdUnderMs
   a geo:Rock_Body_Boundary ;
   com:participantIn [
       a geo:Erosion ;
@@ -87,12 +84,12 @@ con:KdUnderMs
     ] ;
   rdfs:comment "Eroded surface under Ms"@en ;
 .
-con:KgErosionSurface-2_3
+:KgErosionSurface-2_3
   a geo:Rock_Body_Boundary ;
   com:participantIn geo:Erosion ;
   rdfs:comment "Kg erosion surface overlain by Ms"@en ;
 .
-con:KgGranite
+:KgGranite
   a geo:Formation ;
   com:hasConstituent [
       a geo:Granitoid ;
@@ -102,121 +99,121 @@ con:KgGranite
           rdfs:type geo:GrainSizeAverage ;
         ] ;
     ] ;
-  com:hasPart con:KgErosionSurface-2_3 ;
-  com:hasPart con:KgIntrusiveBoundary-3_1_3 ;
-  com:hasPart con:KgIntrusiveBoundary-3_2_3 ;
-  com:hasPart con:KgIntrusiveBoundary-4_1 ;
-  com:hasPart con:KgIntrusiveBoundary-4_2 ;
-  geo:Intrudes con:CbFormation ;
-  geo:Intrudes con:JsFormation ;
-  geo:Intrudes con:OsFormation ;
-  geo:Intrudes con:XmRockBody ;
+  com:hasPart :KgErosionSurface-2_3 ;
+  com:hasPart :KgIntrusiveBoundary-3_1_3 ;
+  com:hasPart :KgIntrusiveBoundary-3_2_3 ;
+  com:hasPart :KgIntrusiveBoundary-4_1 ;
+  com:hasPart :KgIntrusiveBoundary-4_2 ;
+  geo:Intrudes :CbFormation ;
+  geo:Intrudes :JsFormation ;
+  geo:Intrudes :OsFormation ;
+  geo:Intrudes :XmRockBody ;
   rdfs:comment "contacts are complicated! Here are the parts:"@en ;
   rdfs:comment "intrudes is subproperty of relatedTo"@en ;
   rdfs:comment "intrusion has lots of intrusive contacts, each contact is with a different unit, also an erosion surface at the top, overlain by Ms."@en ;
   rdfs:label "Granite (Cretaceous)"@en ;
 .
-con:KgInJsIntrusiveContact-4_2
+:KgInJsIntrusiveContact-4_2
   a geo:Rock_Body_Boundary ;
 .
-con:KgIntrusiveBoundary-3_1_3
+:KgIntrusiveBoundary-3_1_3
   a geo:Rock_Body_Boundary ;
   com:participantIn geo:Intrusion ;
   rdfs:comment "Kg in footwall wall of Kd contacts"@en ;
 .
-con:KgIntrusiveBoundary-3_2_3
+:KgIntrusiveBoundary-3_2_3
   a geo:Rock_Body_Boundary ;
   com:participantIn geo:Intrusion ;
   rdfs:comment "Kg in Hanging wall of Kd"@en ;
 .
-con:KgIntrusiveBoundary-4_1
+:KgIntrusiveBoundary-4_1
   a geo:Rock_Body_Boundary ;
-  com:hasPart con:KgIntrusiveBoundary-4_1_1 ;
-  com:hasPart con:KgIntrusiveBoundary-4_1_2 ;
-  com:hasPart con:KgIntrusiveBoundary-4_1_3 ;
+  com:hasPart :KgIntrusiveBoundary-4_1_1 ;
+  com:hasPart :KgIntrusiveBoundary-4_1_2 ;
+  com:hasPart :KgIntrusiveBoundary-4_1_3 ;
   com:participantIn geo:Intrusion ;
   rdfs:comment "Kg intruding the tilted Xm-Cb-Os-Ss sequence"@en ;
 .
-con:KgIntrusiveBoundary-4_1_1
+:KgIntrusiveBoundary-4_1_1
   a geo:Rock_Body_Boundary ;
-  com:HostedBy con:KgGranite ;
+  com:HostedBy :KgGranite ;
   rdfs:comment "Kg intruding the tilted Xm"@en ;
 .
-con:KgIntrusiveBoundary-4_1_2
+:KgIntrusiveBoundary-4_1_2
   a geo:Rock_Body_Boundary ;
   rdfs:comment "Kg intruding tilted Cb"@en ;
 .
-con:KgIntrusiveBoundary-4_1_3
+:KgIntrusiveBoundary-4_1_3
   a geo:Rock_Body_Boundary ;
   rdfs:comment "Kg intruding tilted Os"@en ;
 .
-con:KgIntrusiveBoundary-4_2
+:KgIntrusiveBoundary-4_2
   a geo:Rock_Body_Boundary ;
   com:participantIn geo:Intrusion ;
   rdfs:comment "Kg intruding Js"@en ;
 .
-con:MsFormation
+:MsFormation
   a geo:Formation ;
   com:hasConstituent [
       a geo:Rock_Material ;
       rdfs:comment "TBD"@en ;
     ] ;
-  com:hasPart con:baseMs-2 ;
-  com:hasPart con:topMs-1 ;
+  com:hasPart :baseMs-2 ;
+  com:hasPart :topMs-1 ;
   rdfs:comment "fine-grained sandstone, minor marl, some coquina"@en ;
   rdfs:label "Ms Formation"@en ;
 .
-con:OsBoundary-6_2
+:OsBoundary-6_2
   a geo:Rock_Body_Boundary ;
 .
-con:OsFormation
+:OsFormation
   a geo:Formation ;
   rdfs:label "Sedimentary Rocks (Ordovician)"@en ;
 .
-con:SsBoundary-6_1
+:SsBoundary-6_1
   a geo:Rock_Body_Boundary ;
 .
-con:XmBoundary-6_3
+:XmBoundary-6_3
   a geo:Rock_Body_Boundary ;
   com:participantIn [
       a geo:Erosion ;
     ] ;
-  geo:hasOlderHost con:XmFormation ;
-  geo:hasYoungerHost con:JsFormation ;
+  geo:hasOlderHost :XmFormation ;
+  geo:hasYoungerHost :JsFormation ;
 .
-con:XmFormation
+:XmFormation
   a geo:Complex ;
 .
-con:XmRockBody
+:XmRockBody
   a geo:Complex ;
 .
-con:baseJs-6
+:baseJs-6
   a geo:Rock_Body_Bottom ;
-  com:hasPart con:baseJs-6_1 ;
-  com:hasPart con:baseJs-6_2 ;
-  com:hasPart con:baseJs-6_3 ;
+  com:hasPart :baseJs-6_1 ;
+  com:hasPart :baseJs-6_2 ;
+  com:hasPart :baseJs-6_3 ;
 .
-con:baseJs-6_1
+:baseJs-6_1
   a geo:Rock_Body_Bottom ;
-  com:participantIn con:JsDeposition ;
+  com:participantIn :JsDeposition ;
   rdfs:comment "Js on Ss surface"@en ;
 .
-con:baseJs-6_2
+:baseJs-6_2
   a geo:Rock_Body_Bottom ;
-  com:participantIn con:JsDeposition ;
+  com:participantIn :JsDeposition ;
   rdfs:comment "Js on Os surface"@en ;
 .
-con:baseJs-6_3
+:baseJs-6_3
   a geo:Rock_Body_Bottom ;
-  com:participantIn con:JsDeposition ;
+  com:participantIn :JsDeposition ;
   rdfs:comment "Js on Xm surface"@en ;
 .
-con:baseMs-2
+:baseMs-2
   a geo:Rock_Body_Bottom ;
-  com:HostedBy con:MsFormation ;
-  com:hasPart con:baseMs-2_1 ;
-  com:hasPart con:baseMs-2_2 ;
-  com:hasPart con:baseMs-2_3 ;
+  com:HostedBy :MsFormation ;
+  com:hasPart :baseMs-2_1 ;
+  com:hasPart :baseMs-2_2 ;
+  com:hasPart :baseMs-2_3 ;
   com:participantIn [
       a geo:Deposition ;
     ] ;
@@ -224,148 +221,155 @@ con:baseMs-2
   rdfs:comment "base of Ms formation"@en ;
   rdfs:label "Base Ms"@en ;
 .
-con:baseMs-2_1
+:baseMs-2_1
   a geo:Rock_Body_Bottom ;
   rdfs:comment "surface separating Ms on top of Js"@en ;
   rdfs:label "Ms overlies Js"@en ;
 .
-con:baseMs-2_2
+:baseMs-2_2
   a geo:Rock_Body_Bottom ;
   rdfs:comment "surface separating Ms on top of Kd"@en ;
   rdfs:label "Ms overlies Kd dike"@en ;
 .
-con:baseMs-2_3
+:baseMs-2_3
   a geo:Rock_Body_Bottom ;
   rdfs:comment "surface separating Ms on top of Kg"@en ;
   rdfs:label "Ms overlies Kg"@en ;
 .
-con:contact_Js_on_Os
+:contact_Js_on_Os
   a geo:Contact ;
-  geo:hasOlderHost con:OsBoundary-6_2 ;
-  geo:hasOlderHost con:OsFormation ;
-  geo:hasYoungerHost con:JsFormation ;
-  geo:hasYoungerHost con:baseJs-6_2 ;
+  geo:hasOlderHost :OsBoundary-6_2 ;
+  geo:hasOlderHost :OsFormation ;
+  geo:hasYoungerHost :JsFormation ;
+  geo:hasYoungerHost :baseJs-6_2 ;
   rdfs:comment "OsBoundary-6_2 is Erosional Surface"@en ;
   rdfs:label "relational feature, Js formation overlies Os Formation"@en ;
 .
-con:contact_Js_on_Ss
+:contact_Js_on_Ss
   a geo:Contact ;
-  geo:hasOlderHost con:SsBoundary-6_1 ;
-  geo:hasOlderHost con:SsFormation ;
-  geo:hasYoungerHost con:JsFormation ;
-  geo:hasYoungerHost con:baseJs-6_1 ;
+  geo:hasOlderHost :SsBoundary-6_1 ;
+  geo:hasOlderHost :SsFormation ;
+  geo:hasYoungerHost :JsFormation ;
+  geo:hasYoungerHost :baseJs-6_1 ;
   rdfs:comment "SsBoundary-6_1 is Erosional Surface"@en ;
   rdfs:label "relational feature, Js formation overlies Ss Formation"@en ;
 .
-con:contact_Js_on_Xm
+:contact_Js_on_Xm
   a geo:Contact ;
-  com:HostedBy con:XmBoundary-6_3 ;
-  com:HostedBy con:baseJs-6_3 ;
-  geo:hasOlderHost con:XmFormation ;
-  geo:hasYoungerHost con:JsFormation ;
+  com:HostedBy :XmBoundary-6_3 ;
+  com:HostedBy :baseJs-6_3 ;
+  geo:hasOlderHost :XmFormation ;
+  geo:hasYoungerHost :JsFormation ;
   rdfs:label "relational feature, Js formation overlies Xm Rock Body"@en ;
 .
-con:contact_Kd_in_Js
+:contact_Kd_in_Js
   a geo:Contact ;
-  geo:hasOlderHost con:JsFormation ;
-  geo:hasOlderHost con:KdInJsDikeContact-3_1_4 ;
-  geo:hasOlderHost con:KdInJsDikeContact-3_2_4 ;
-  geo:hasYoungerHost con:KdDike ;
-  geo:hasYoungerHost con:downSide-3_1_4 ;
-  geo:hasYoungerHost con:upSideKd-3_2_4 ;
+  geo:hasOlderHost :JsFormation ;
+  geo:hasOlderHost :KdInJsDikeContact-3_1_4 ;
+  geo:hasOlderHost :KdInJsDikeContact-3_2_4 ;
+  geo:hasYoungerHost :KdDike ;
+  geo:hasYoungerHost :downSide-3_1_4 ;
+  geo:hasYoungerHost :upSideKd-3_2_4 ;
   rdfs:label "relational feature, Kd dike intrudes Js formation"@en ;
 .
-con:contact_Kg_in_Js
+:contact_Kg_in_Js
   a geo:Contact ;
-  geo:hasOlderHost con:JsFormation ;
-  geo:hasOlderHost con:KgInJsIntrusiveContact-4_2 ;
-  geo:hasYoungerHost con:KgGranite ;
-  geo:hasYoungerHost con:KgIntrusiveBoundary-4_2 ;
+  geo:hasOlderHost :JsFormation ;
+  geo:hasOlderHost :KgInJsIntrusiveContact-4_2 ;
+  geo:hasYoungerHost :KgGranite ;
+  geo:hasYoungerHost :KgIntrusiveBoundary-4_2 ;
   rdfs:label "relational feature, Kg granite intrudes Js formation"@en ;
 .
-con:contact_Ms_on_Js
+:contact_Ms_on_Js
   a geo:Contact ;
-  geo:hasOlderHost con:JsFormation ;
-  geo:hasOlderHost con:topJs-2_1 ;
-  geo:hasYoungerHost con:MsFormation ;
-  geo:hasYoungerHost con:baseMs-2_1 ;
+  geo:hasOlderHost :JsFormation ;
+  geo:hasOlderHost :topJs-2_1 ;
+  geo:hasYoungerHost :MsFormation ;
+  geo:hasYoungerHost :baseMs-2_1 ;
   rdfs:label "relational feature, Ms formation overlies Js formation"@en ;
 .
-con:contact_Ms_on_Kg
+:contact_Ms_on_Kg
   a geo:Contact ;
-  geo:hasOlderHost con:KgErosionSurface-2_3 ;
-  geo:hasOlderHost con:KgGranite ;
-  geo:hasYoungerHost con:MsFormation ;
-  geo:hasYoungerHost con:baseMs-2_3 ;
+  geo:hasOlderHost :KgErosionSurface-2_3 ;
+  geo:hasOlderHost :KgGranite ;
+  geo:hasYoungerHost :MsFormation ;
+  geo:hasYoungerHost :baseMs-2_3 ;
   rdfs:label "relational feature, Ms formation overlies Kg Granite on erosion surface"@en ;
 .
-con:downSide-3_1_4
+:downSide-3_1_4
   a geo:Rock_Body_Boundary ;
   rdfs:comment "surface separating dike from rocks beneath it"@en ;
   rdfs:label "dike intrudes Js, lower"@en ;
 .
-con:downSideKd-3_1
+:downSideKd-3_1
   a geo:Rock_Body_Boundary ;
-  com:hasPart con:downSideKd-3_1_1 ;
-  com:hasPart con:downSideKd-3_1_2 ;
-  com:hasPart con:downSideKd-3_1_3 ;
-  com:hasPart con:downSideKd-3_1_4 ;
+  com:hasPart :downSideKd-3_1_1 ;
+  com:hasPart :downSideKd-3_1_2 ;
+  com:hasPart :downSideKd-3_1_3 ;
+  com:hasPart :downSideKd-3_1_4 ;
   com:participantIn [
       a geo:Intrusion ;
     ] ;
   rdfs:comment "lower side of dike"@en ;
 .
-con:downSideKd-3_1_1
+:downSideKd-3_1_1
   a geo:Rock_Body_Boundary ;
   rdfs:comment "could have more properties describing contact effectw sith Xm here"@en ;
 .
-con:downSideKd-3_1_2
+:downSideKd-3_1_2
   a geo:Rock_Body_Boundary ;
 .
-con:downSideKd-3_1_3
+:downSideKd-3_1_3
   a geo:Rock_Body_Boundary ;
 .
-con:downSideKd-3_1_4
+:downSideKd-3_1_4
   a geo:Rock_Body_Boundary ;
   rdfs:comment "dike intrudes Js"@en ;
 .
-con:topJs-2_1
+:topJs-2_1
   a geo:Rock_Body_Top ;
   com:participantIn [
       a geo:Erosion ;
     ] ;
 .
-con:topMs-1
+:topJs-2
   a geo:Rock_Body_Top ;
-  com:HostedBy con:MsFormation ;
+  com:hasPart :topJs-2_1 ;
+  com:participantIn [
+      a geo:Erosion ;
+    ] ;
+.
+:topMs-1
+  a geo:Rock_Body_Top ;
+  com:HostedBy :MsFormation ;
   rdfs:comment "This is a simple disconformable contact"@en ;
   rdfs:comment "top of Ms formation"@en ;
   rdfs:label "Top Ms"@en ;
 .
-con:upSideKd-3_2
+:upSideKd-3_2
   a geo:Rock_Body_Boundary ;
-  com:hasPart con:upSideKd-3_2_1 ;
-  com:hasPart con:upSideKd-3_2_2 ;
-  com:hasPart con:upSideKd-3_2_3 ;
-  com:hasPart con:upSideKd-3_2_4 ;
+  com:hasPart :upSideKd-3_2_1 ;
+  com:hasPart :upSideKd-3_2_2 ;
+  com:hasPart :upSideKd-3_2_3 ;
+  com:hasPart :upSideKd-3_2_4 ;
   com:participantIn [
       a geo:Intrusion ;
     ] ;
   rdfs:comment "upper side of dike"@en ;
 .
-con:upSideKd-3_2_1
+:upSideKd-3_2_1
   a geo:Rock_Body_Boundary ;
   rdfs:comment "dike intrudes Xm"@en ;
 .
-con:upSideKd-3_2_2
+:upSideKd-3_2_2
   a geo:Rock_Body_Boundary ;
   rdfs:comment "dike intrudes Cb"@en ;
 .
-con:upSideKd-3_2_3
+:upSideKd-3_2_3
   a geo:Rock_Body_Boundary ;
   rdfs:comment "dike intrudes Kg"@en ;
 .
-con:upSideKd-3_2_4
+:upSideKd-3_2_4
   a geo:Rock_Body_Boundary ;
   rdfs:comment "dike intrudes Js"@en ;
 .

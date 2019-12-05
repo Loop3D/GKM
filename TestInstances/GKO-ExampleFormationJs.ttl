@@ -1,7 +1,7 @@
 # baseURI: http://geoscience.ca/3D/ontology/2019/1/ex-formationJs
 # imports: http://geoscience.ca/3D/ontology/2019/1/common
 # imports: http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact
-# imports: http://geoscience.ca/3D/ontology/2019/1/ex-timescale
+# imports: http://geoscience.ca/3D/ontology/2019/1/ischart/Loop3DTimeScale
 # imports: http://geoscience.ca/3D/ontology/2019/1/geologicfeature
 # imports: http://purl.org/dc/elements/1.1/
 # prefix: ejs
@@ -13,10 +13,11 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix tim: <http://geoscience.ca/3D/ontology/2019/1/ex-timescale#> .
-@prefix unit:    <http://qudt.org/vocab/unit#> .
+@prefix isca: <http://geoscience.ca/3D/ontology/2019/1/ischart/> .
+@prefix unit: <http://qudt.org/vocab/unit#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix lith: <http://geoscience.ca/3D/ontology/2019/1/lithology/> .
 
 <http://geoscience.ca/3D/ontology/2019/1/ex-formationJs>
   a owl:Ontology ;
@@ -25,8 +26,8 @@
   rdfs:comment "details of description of Js unit in GeologyScenarioForTesting.pptx" ;
   owl:imports <http://geoscience.ca/3D/ontology/2019/1/common> ;
   owl:imports <http://geoscience.ca/3D/ontology/2019/1/ex-complexcontact> ;
-  owl:imports <http://geoscience.ca/3D/ontology/2019/1/ex-timescale> ;
   owl:imports <http://geoscience.ca/3D/ontology/2019/1/geologicfeature> ;
+  owl:imports <http://geoscience.ca/3D/ontology/2019/1/ischart/Loop3DTimeScale> ;
   owl:imports <http://purl.org/dc/elements/1.1/> ;
 .
 ejs:JsFormation
@@ -40,8 +41,8 @@ ejs:JsFormation
   com:hasPart ejs:topJs-2 ;
   com:hasTemporalProperty [
       a geo:Chronostratigraphic_Age_Interval ;
-      geo:hasOlderAge tim:Lower_Jurassic_Epoch ;
-      geo:hasYoungerAge tim:Lower_Jurassic_Epoch ;
+      geo:hasOlderBound isca:LowerJurassic ;
+      geo:hasYoungerBound isca:LowerJurassic ;
     ] ;
   rdfs:comment "clasts of Cb Quartzite are abundant in the lower part of the unit"@en ;
   rdfs:comment "lower part is fining-upward sequence from conglomeratic sandstone to fine grained sandstone"@en ;
@@ -106,7 +107,7 @@ ejs:contactJs-lith_1-lith_2
   a geo:Gradational_Contact_Zone ;
   geo:hasBoundaryThickness [
       a geo:Thickness ;
-      com:hasUOM  unit:Meter ;
+      com:hasUOM unit:Meter ;
       com:hasValue 10 ;
     ] ;
   geo:hasOlderHost ejs:lith_1 ;
@@ -126,10 +127,8 @@ ejs:contactJs-lith_2-lith_3
 .
 ejs:lith_1
   a geo:Rock_Body_Part ;
-  com:hasConstituent [
-      a geo:Conglomeratic_Sandstone ;
-      rdfs:comment "need to capture gradational fining upward relationship" ;
-    ] ;
+  com:hasConstituent lith:clastic_conglomerate, lith:arenite ;
+  rdfs:comment "need to capture gradational fining upward relationship" ;
   com:hasPart ejs:baseJs-6 ;
   geo:underlies ejs:lith_2 ;
 .
