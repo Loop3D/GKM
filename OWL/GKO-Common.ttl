@@ -3,20 +3,18 @@
 
 @prefix : <http://geoscience.ca/3D/ontology/2019/1/common/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix qudt: <http://qudt.org/schema/qudt#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix unit: <http://qudt.org/vocab/unit#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<http://geoscience.ca/3D/ontology/2019/1/common>
+<http://geoscience.ca/3D/ontology/2019/1/common> 
   a owl:Ontology ;
   rdfs:comment "Unary predicates are represented by classes, binary predicates by object properties"@en ;
   rdfs:comment "ontology of shared objectProperties and high level classes used to define geologic features"@en ;
-  rdfs:label "Shared elements for geoscience ontology"@en ;
-  owl:imports <http://qudt.org/1.1/vocab/unit> ;
+  rdfs:label "Shared elements for geoscience ontology"@en 
 .
+
 :Abstract
   a owl:Class ;
   rdfs:comment "The main characteristic of abstract entities is that they do not have spatial nor temporal qualities, and they are not qualities themselves. The only class of abstract entities we consider in the present version of the upper ontology is that of quality regions (or simply regions). Quality spaces are special kinds of quality regions, being mereological sums of all the regions related to a certain quality type. The other examples of abstract entities (sets and facts) are only indicative." ;
@@ -537,7 +535,7 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty :hasUOM ;
-      owl:someValuesFrom :uom ;
+      owl:someValuesFrom :UOM ;
     ] ;
 .
 :Shape
@@ -603,7 +601,7 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty :hasUOM ;
-      owl:someValuesFrom :uom ;
+      owl:someValuesFrom :UOM ;
     ] ;
 .
 :Temporal_Property
@@ -912,21 +910,7 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
     ] ;
   rdfs:subPropertyOf :relatedto ;
 .
-:ma
-  a :ma_uom ;
-  qudt:abbreviation "Ma" ;
-  qudt:conversionMultiplier "1000000"^^xsd:double ;
-  qudt:conversionOffset "0"^^xsd:double ;
-  qudt:description "a unit of time equal to one million, or 1 E6 yr., measured from 1950 as 'present' {@en}" ;
-  rdfs:comment "a unit of time equal to one million, or 1 E6 yr., measured from 1950 as 'present'"@en ;
-  rdfs:label "Million years before present"@en ;
-.
-:ma_uom
-  a owl:Class ;
-  rdfs:comment "Define Ma here because it is not defined in qudt Units vocabulary."@en ;
-  rdfs:label "million years"@en ;
-  rdfs:subClassOf :uom ;
-.
+
 :manifests
   a owl:ObjectProperty ;
   rdfs:comment "" ;
@@ -959,22 +943,10 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   a owl:ObjectProperty ;
   rdfs:label "related to"@en ;
 .
-:uom
+:UOM
   a owl:Class ;
-  rdfs:comment "Use QUDT unit types http://qudt.org/vocab/unit {@en}. Units are instances of dimension types. qudt:Unit is declared an equivalent class so instances (all 1445 of them) of qudt units (v1.1) vocabulary should be available to populate instance documents."@en ;
+  rdfs:comment "super class for all unit of measure."@en ;
   rdfs:label "Unit of Measurement"@en ;
   rdfs:subClassOf :Abstract_Region ;
-  owl:equivalentClass qudt:Unit ;
 .
-<http://geoscience.ca/3D/ontology/2019/1/geologicfeature/Glass>
-  a owl:Class ;
-.
-<http://geoscience.ca/3D/ontology/2019/1/geologicfeature/Granular_Material>
-  a owl:Class ;
-.
-<http://geoscience.ca/3D/ontology/2019/1/geologicfeature/Mineral>
-  a owl:Class ;
-.
-<http://geoscience.ca/3D/ontology/2019/1/geologicfeature/Rock_Material>
-  a owl:Class ;
-.
+
