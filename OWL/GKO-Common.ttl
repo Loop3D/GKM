@@ -1,5 +1,4 @@
 # baseURI: http://geoscience.ca/3D/ontology/2019/1/common
-# imports: http://qudt.org/1.1/vocab/unit
 
 @prefix : <http://geoscience.ca/3D/ontology/2019/1/common/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
@@ -8,13 +7,12 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<http://geoscience.ca/3D/ontology/2019/1/common> 
+<http://geoscience.ca/3D/ontology/2019/1/common>
   a owl:Ontology ;
   rdfs:comment "Unary predicates are represented by classes, binary predicates by object properties"@en ;
   rdfs:comment "ontology of shared objectProperties and high level classes used to define geologic features"@en ;
-  rdfs:label "Shared elements for geoscience ontology"@en 
+  rdfs:label "Shared elements for geoscience ontology"@en ;
 .
-
 :Abstract
   a owl:Class ;
   rdfs:comment "The main characteristic of abstract entities is that they do not have spatial nor temporal qualities, and they are not qualities themselves. The only class of abstract entities we consider in the present version of the upper ontology is that of quality regions (or simply regions). Quality spaces are special kinds of quality regions, being mereological sums of all the regions related to a certain quality type. The other examples of abstract entities (sets and facts) are only indicative." ;
@@ -145,6 +143,16 @@
   a owl:Class ;
   rdfs:subClassOf :Fluid ;
 .
+:Glass
+  a owl:Class ;
+  rdfs:comment "amorphous product of rapid cooling of melted material. Includes natural glasses in Earth and extraterrestrial material, as well as anthromophomorphic manufactured material"@en ;
+  rdfs:subClassOf :Amount_Of_Matter ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom :Element ;
+      owl:onProperty :hasConstituent ;
+    ] ;
+.
 :Hole
   a owl:Class ;
   rdfs:comment "A physical void with a self-connected (non-scattered) host, consisting of some depression or cavity within the host.    H(x) <--> exists y [hosts-v(y,x) ^ ICon (y)].   ICon (x): x is interior connected (continuous, not scattered)"@en ;
@@ -245,7 +253,7 @@
 .
 :Particular
   a owl:Class ;
-  rdfs:comment "AKA 'entity'.Any individual in the DOLCE domain of discourse. The extensional coverage of DOLCE is as large as possible, since it ranges on 'possibilia', i.e all possible individuals that can be postulated by means of DOLCE axioms. Possibilia include physical objects, substances, processes, qualities, conceptual regions, non-physical objects, collections and even arbitrary sums of objects.The class 'particular' features a covering partition that includes: endurant, perdurant, quality, and abstract. There are also some subclasses defined as unions of subclasses of 'particular' for special purposes: spatio-temporal-particular (any particular except abstracts)- physical-realization (any realization of an information object, defined in the ExtendedDnS ontology)." ;
+  rdfs:comment "AKA 'entity'. Any individual in the DOLCE domain of discourse. The extensional coverage of DOLCE is as large as possible, since it ranges on 'possibilia', i.e all possible individuals that can be postulated by means of DOLCE axioms. Possibilia include physical objects, substances, processes, qualities, conceptual regions, non-physical objects, collections and even arbitrary sums of objects.The class 'particular' features a covering partition that includes: endurant, perdurant, quality, and abstract. There are also some subclasses defined as unions of subclasses of 'particular' for special purposes: spatio-temporal-particular (any particular except abstracts)- physical-realization (any realization of an information object, defined in the ExtendedDnS ontology)."@en ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom :Determining_Event ;
@@ -471,7 +479,7 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   a owl:Class ;
   rdfs:subClassOf :Fluid ;
 .
-:Potassium_F
+:Potassium_Element
   a owl:Class ;
   rdfs:label "Potassium "@en ;
   rdfs:subClassOf :Element ;
@@ -490,7 +498,7 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
 .
 :Property
   a owl:Class ;
-  rdfs:comment "Property" ;
+  rdfs:comment "A concept that specifies some aspect that inheres in instances of some Particular.  Note that the value of the determiningEvent  property on Property is used to specify metadata about how a property value is assigned"@en ;
   rdfs:label "Property" ;
   rdfs:subClassOf :Particular ;
   rdfs:subClassOf [
@@ -524,8 +532,8 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
 .
 :Quantified_Physical_Property
   a owl:Class ;
-  rdfs:comment "A physical property that is quantified by a measured numeric value." ;
-  rdfs:label "Quantified Physical Property" ;
+  rdfs:comment "A physical property that is quantified by a measured numeric value."@en ;
+  rdfs:label "Quantified Physical Property"@en ;
   rdfs:subClassOf :Physical_Property ;
   rdfs:subClassOf [
       a owl:Restriction ;
@@ -652,6 +660,12 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   rdfs:comment "" ;
   rdfs:label "Time Interval" ;
   rdfs:subClassOf :Temporal_Region ;
+.
+:UOM
+  a owl:Class ;
+  rdfs:comment "super class for all unit of measure."@en ;
+  rdfs:label "Unit of Measurement"@en ;
+  rdfs:subClassOf :Abstract_Region ;
 .
 :age_disjoint
   a owl:ObjectProperty ;
@@ -801,7 +815,6 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
 .
 :hasParticipant
   a owl:ObjectProperty ;
-  owl:inverseOf :participantIn ;
 .
 :hasPhysicalProperty
   a owl:ObjectProperty ;
@@ -852,6 +865,7 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   a owl:ObjectProperty ;
   rdfs:comment "object property between two entities wherein one entity is specifically dependent on the other."@en ;
   rdfs:label "Hosted By"@en ;
+  owl:inverseOf :hosts ;
 .
 :hosts
   a owl:ObjectProperty ;
@@ -873,10 +887,16 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   a owl:TransitiveProperty ;
   owl:inverseOf :hasPart ;
 .
+:isParticipantIn
+  a owl:ObjectProperty ;
+  rdfs:domain :Endurant ;
+  rdfs:range :Perdurant ;
+.
 :isPhysicallyRelatedTo
   a owl:ObjectProperty ;
   rdfs:comment "" ;
   rdfs:label "is Physically Related To" ;
+  rdfs:subPropertyOf :relatedto ;
 .
 :isPropertyOf
   a owl:ObjectProperty ;
@@ -910,7 +930,6 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
     ] ;
   rdfs:subPropertyOf :relatedto ;
 .
-
 :manifests
   a owl:ObjectProperty ;
   rdfs:comment "" ;
@@ -920,9 +939,6 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   a owl:ObjectProperty ;
   rdfs:comment "" ;
   rdfs:label "next time interval "@en ;
-.
-:participantIn
-  a owl:ObjectProperty ;
 .
 :previousTimeInterval
   a owl:ObjectProperty ;
@@ -943,10 +959,3 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   a owl:ObjectProperty ;
   rdfs:label "related to"@en ;
 .
-:UOM
-  a owl:Class ;
-  rdfs:comment "super class for all unit of measure."@en ;
-  rdfs:label "Unit of Measurement"@en ;
-  rdfs:subClassOf :Abstract_Region ;
-.
-
