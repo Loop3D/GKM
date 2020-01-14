@@ -896,17 +896,38 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   a owl:ObjectProperty ;
   rdfs:comment "" ;
   rdfs:label "is Physically Related To" ;
-  rdfs:subPropertyOf :relatedto ;
 .
 :isPropertyOf
   a owl:ObjectProperty ;
   rdfs:comment "" ;
   rdfs:label "is Property Of" ;
 .
+:isRelatedto
+  a owl:ObjectProperty ;
+  rdfs:label "related to"@en ;
+.
 :isSettingFor
   a owl:ObjectProperty ;
   rdfs:comment "" ;
   rdfs:label "is Setting For" ;
+.
+:isSpatiallyRelatedTo
+  a owl:ObjectProperty ;
+  rdfs:domain [
+      a owl:Class ;
+      owl:unionOf (
+          :Spatial_Region
+          :Physical_Endurant
+        ) ;
+    ] ;
+  rdfs:label "Spatially related to "@en ;
+  rdfs:range [
+      a owl:Class ;
+      owl:unionOf (
+          :Spatial_Region
+          :Physical_Endurant
+        ) ;
+    ] ;
 .
 :isTemporallyRelatedTo
   a owl:ObjectProperty ;
@@ -928,7 +949,6 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
           :Temporal_Region
         ) ;
     ] ;
-  rdfs:subPropertyOf :relatedto ;
 .
 :manifests
   a owl:ObjectProperty ;
@@ -954,8 +974,4 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   a owl:ObjectProperty ;
   rdfs:comment "" ;
   rdfs:label "proportion of" ;
-.
-:relatedto
-  a owl:ObjectProperty ;
-  rdfs:label "related to"@en ;
 .
