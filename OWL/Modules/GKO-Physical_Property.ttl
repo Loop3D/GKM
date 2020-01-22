@@ -120,39 +120,6 @@ gkop:Fabric_Intensity
   rdfs:label "Fabric intensity" ;
   rdfs:subClassOf gkoc:Discrete_Physical_Property ;
 .
-gkop:Fold_Amplitude
-  a owl:Class ;
-  rdfs:comment "" ;
-  rdfs:label "Fold Amplitude"@en ;
-  rdfs:subClassOf gkoc:Quantified_Physical_Property ;
-.
-gkop:Fold_Genetic_Model
-  a owl:Class ;
-  rdfs:comment "e.g. similar, parallel" ;
-  rdfs:isDefinedBy "GeoSciML v3" ;
-  rdfs:label "Fold genetic model" ;
-  rdfs:subClassOf gkoc:Discrete_Physical_Property ;
-.
-gkop:Fold_Limb_Shape
-  a owl:Class ;
-  rdfs:comment "Straight vs curved limbs, eg kink, chevron, sinusoidal, box" ;
-  rdfs:isDefinedBy "GeoSciML v4" ;
-  rdfs:label "Fold limb shape" ;
-  rdfs:subClassOf gkoc:Discrete_Physical_Property ;
-.
-gkop:Fold_Symmetry
-  a owl:Class ;
-  rdfs:comment "Concordance or discordance of bisecting surface and axial surface, or ratio of length of limbs. Folded surface may have asymmetry defined by limb length ratio if inflection points are defined. Defintion based on bisecting surface/axial surface angle depends on having multiple surfaces defined such that the axial surface may be identified. (symmetric, assymetric)" ;
-  rdfs:isDefinedBy "GeoSciML v4" ;
-  rdfs:label "Fold symmetry" ;
-  rdfs:subClassOf gkoc:Discrete_Physical_Property ;
-.
-gkop:Fold_Wavelength
-  a owl:Class ;
-  rdfs:comment "" ;
-  rdfs:label "Fold wavelength"@en ;
-  rdfs:subClassOf gkoc:Quantified_Physical_Property ;
-.
 gkop:Geologic_Unit_Body_Morphology
   a owl:Class ;
   rdfs:comment "The geometry or form of a GeologicUnit.  Examples include: dike (dyke), cone, fan, sheet, etc. Morphology is independent of the substance (EarthMaterial) that composes the GeologicUnit or process that formed it." ;
@@ -212,20 +179,6 @@ gkop:Grain_Size_Min
   rdfs:comment "lower bound of 95% interval for grain size distribution "@en ;
   rdfs:label "Grain Size Minimum "@en ;
   rdfs:subClassOf gkop:Grain_Size ;
-.
-gkop:Hinge_Line_Curvature
-  a owl:Class ;
-  rdfs:comment "Variation in orientation of fold hinge along trend of fold, distinguish sheath from cylindrical folds. Specify with terminology eg sheath, dome, basin, cylindrical."@en ;
-  rdfs:isDefinedBy "GeoSciML v4" ;
-  rdfs:label "Fold hinge line curvature" ;
-  rdfs:subClassOf gkoc:Discrete_Physical_Property ;
-.
-gkop:Hinge_Shape
-  a owl:Class ;
-  rdfs:comment "Rounded vs. angular hinge zones; has to do with the proportion of the wavelength that is considered part of hinge" ;
-  rdfs:isDefinedBy "GeoSciML v4" ;
-  rdfs:label "Fold hinge shape" ;
-  rdfs:subClassOf gkoc:Discrete_Physical_Property ;
 .
 gkop:LineOrientation
   a owl:Class ;
@@ -289,22 +242,6 @@ gkop:Peak_Temperature
   rdfs:label "Peak temperature" ;
   rdfs:subClassOf gkoc:Quantified_Physical_Property ;
 .
-gkop:PlaneOrientationStrikeDip
-  a owl:Class ;
-  rdfs:comment "specification of the orientation of a plane in space, using a strike (bearing of relative to geographic north of the intersection of plane with local horzontal) and dip (inclination of line normal to strike contained in the plane, measured positive downward in degrees from local horizontal)" ;
-  rdfs:label "Plane orientation (strike and dip)" ;
-  rdfs:subClassOf gkop:Orientation ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty gkoc:hasPhysicalProperty ;
-      owl:someValuesFrom gkop:Dip ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty gkoc:hasPhysicalProperty ;
-      owl:someValuesFrom gkop:Strike ;
-    ] ;
-.
 gkop:Plane_OrientationDipDipDirection
   a owl:Class ;
   rdfs:comment "specification of the orientation of a plane in space, using a dip (inclination of line of maximum imnclination contained in the plane, measured positive downward in degrees from local horizontal) and dip direction (bearing relative to geographic north of the horizontal projection of the dip line)"@en ;
@@ -319,6 +256,22 @@ gkop:Plane_OrientationDipDipDirection
       a owl:Restriction ;
       owl:onProperty gkoc:hasPhysicalProperty ;
       owl:someValuesFrom gkop:Dip_Direction ;
+    ] ;
+.
+gkop:Plane_OrientationStrikeDip
+  a owl:Class ;
+  rdfs:comment "specification of the orientation of a plane in space, using a strike (bearing of relative to geographic north of the intersection of plane with local horzontal) and dip (inclination of line normal to strike contained in the plane, measured positive downward in degrees from local horizontal)" ;
+  rdfs:label "Plane orientation (strike and dip)" ;
+  rdfs:subClassOf gkop:Orientation ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gkoc:hasPhysicalProperty ;
+      owl:someValuesFrom gkop:Dip ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gkoc:hasPhysicalProperty ;
+      owl:someValuesFrom gkop:Strike ;
     ] ;
 .
 gkop:Plunge
