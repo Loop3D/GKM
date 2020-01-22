@@ -826,7 +826,6 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   a owl:ObjectProperty ;
   rdfs:comment "" ;
   rdfs:label "has Property "@en ;
-  rdfs:label "has Property" ;
 .
 :hasSetting
   a owl:ObjectProperty ;
@@ -837,7 +836,8 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   a owl:ObjectProperty ;
   rdfs:comment "" ;
   rdfs:label "has Spatial Property" ;
-  rdfs:subPropertyOf :hasProperty ;
+  rdfs:range :Spatial_Location ;
+  rdfs:subPropertyOf :hasPhysicalProperty ;
 .
 :hasTemporalProperty
   a owl:ObjectProperty ;
@@ -892,6 +892,13 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   rdfs:domain :Endurant ;
   rdfs:range :Perdurant ;
 .
+:isPhysicalPropertyOf
+  a owl:ObjectProperty ;
+  rdfs:comment "link from physical property to a class that exhibits the property" ;
+  rdfs:label "is physical property of " ;
+  rdfs:subPropertyOf :isPropertyOf ;
+  owl:inverseOf :hasPhysicalProperty ;
+.
 :isPhysicallyRelatedTo
   a owl:ObjectProperty ;
   rdfs:comment "" ;
@@ -911,6 +918,13 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   rdfs:comment "" ;
   rdfs:label "is Setting For" ;
 .
+:isSpatialPropertyOf
+  a owl:ObjectProperty ;
+  rdfs:comment "link from spatial property to a class that exhibits the property" ;
+  rdfs:label "is spatial property of " ;
+  rdfs:subPropertyOf :isPhysicalPropertyOf ;
+  owl:inverseOf :hasSpatialProperty ;
+.
 :isSpatiallyRelatedTo
   a owl:ObjectProperty ;
   rdfs:domain [
@@ -928,6 +942,13 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
           :Physical_Endurant
         ) ;
     ] ;
+.
+:isTemporalPropertyOf
+  a owl:ObjectProperty ;
+  rdfs:comment "link from spatial property to a class that exhibits the property" ;
+  rdfs:label "is temporal property of " ;
+  rdfs:subPropertyOf :isPropertyOf ;
+  owl:inverseOf :hasTemporalProperty ;
 .
 :isTemporallyRelatedTo
   a owl:ObjectProperty ;
@@ -974,4 +995,8 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   a owl:ObjectProperty ;
   rdfs:comment "" ;
   rdfs:label "proportion of" ;
+.
+
+:isPropertyOf
+  owl:inverseOf :hasProperty ;
 .
