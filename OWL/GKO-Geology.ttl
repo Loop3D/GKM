@@ -11,9 +11,7 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-gkoc:HostedBy
-  a owl:ObjectProperty ;
-.
+
 <http://loop3d.org/GKO/ontology/2019/1/geologicfeature>
   a owl:Ontology ;
   rdfs:comment "Base geologic feature classes, constraints, and relationships"@en ;
@@ -1246,39 +1244,3 @@ owl:qualifiedCardinality
 [
   owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
 ].
-
-
-:Fold_Hinge
-  a owl:Class ;
-  rdfs:comment "the line linking points of maximum curvature on a folded surface (http://www.geosci.usyd.edu.au/users/prey/Teaching/Geos-2123/Folds/Sld22.html)"@en ;
-  rdfs:label "Fold Hinge"@en ;
-  rdfs:subClassOf :Geologic_Structure ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom :Fold ;
-      owl:onProperty gkoc:isPartOf ;
-    ] ;
-.
-:Fold_Limb
-  a owl:Class ;
-
-  rdfs:comment "The generally planar region of a fold which lies between two adjacent hinge lines and is confined between the zones of maximum curvature. (" ;
-  rdfs:label "Fold Limb" ;
-  rdfs:subClassOf :Geologic_Structure ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom :Fold ;
-      owl:onProperty gkoc:isPartOf ;
-    ] ;
-.
-:Fold_System
-  a owl:Class ;
-  rdfs:comment "A collection of congruent folds  (axis and axial surface are parallel) produced by the same tectonic event. Sometimes referred to as a \"Fold Train\". (GeoSciML 4.0.1)" ;
-  rdfs:label "Fold System" ;
-  rdfs:subClassOf :Geologic_Structure ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom :Fold ;
-      owl:onProperty gkoc:hasPart ;
-    ] ;
-.
