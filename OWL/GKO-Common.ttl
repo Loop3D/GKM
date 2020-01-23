@@ -68,34 +68,14 @@
   rdfs:label "Complex Feature "@en ;
   rdfs:subClassOf :Part_Feature ;
 .
-:Complex_Physical_Property
-  a owl:Class ;
-  rdfs:comment "a property specified by a data object that can be decomposed into separate components or dimensions. For example the orientation of bedding is specified by a strike direction (in compass coordinates) and a dip magnitude in degrees."@en ;
-  rdfs:label "Complex Physical Property"@en ;
-  rdfs:subClassOf :Physical_Property ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty :hasPhysicalProperty ;
-      owl:someValuesFrom :Physical_Property ;
-    ] ;
-.
+
 :Determining_Event
   a owl:Class ;
   rdfs:comment "An observation, calculation, or inference envent used to determine the value of one or more properties"@en ;
   rdfs:label "Determining Event "@en ;
   rdfs:subClassOf :Event ;
 .
-:Discrete_Physical_Property
-  a owl:Class ;
-  rdfs:comment "A physical property that is quantified by a category from a classification scheme."@en ;
-  rdfs:label "Discrete Physical Property"@en ;
-  rdfs:subClassOf :Physical_Property ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty :hasValue ;
-      owl:someValuesFrom :Physical_Region ;
-    ] ;
-.
+
 :Dynamic_Feature
   a owl:Class ;
   rdfs:comment "" ;
@@ -203,7 +183,7 @@
   a owl:Class ;
   rdfs:comment "" ;
   rdfs:label "Material State" ;
-  rdfs:subClassOf :Discrete_Physical_Property ;
+  rdfs:subClassOf :Physical_Property ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty :hasValue ;
@@ -518,7 +498,7 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   a owl:Class ;
   rdfs:comment "A numeric property value used to express the fraction of a whole that is composed of some part. Values will range from 0 to 1 (0 to 100%)."@en ;
   rdfs:label "Proportion"@en ;
-  rdfs:subClassOf :Quantified_Physical_Property ;
+  rdfs:subClassOf :Physical_Property ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty :proportionFor ;
@@ -530,22 +510,7 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
       owl:someValuesFrom :Endurant ;
     ] ;
 .
-:Quantified_Physical_Property
-  a owl:Class ;
-  rdfs:comment "A physical property that is quantified by a measured numeric value."@en ;
-  rdfs:label "Quantified Physical Property"@en ;
-  rdfs:subClassOf :Physical_Property ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty :hasNumericValue ;
-      owl:someValuesFrom xsd:double ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty :hasUOM ;
-      owl:someValuesFrom :UOM ;
-    ] ;
-.
+
 :Shape
   a owl:Class ;
   rdfs:comment "" ;
@@ -583,7 +548,7 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   a owl:Class ;
   rdfs:comment "A physical property that is quantified by a category from a classification scheme." ;
   rdfs:label "Spatial Location" ;
-  rdfs:subClassOf :Discrete_Physical_Property ;
+  rdfs:subClassOf :Physical_Property ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty :hasValue ;
@@ -808,6 +773,27 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   rdfs:label "Output "@en ;
   rdfs:subPropertyOf :hasParticipant ;
 .
+
+:hasParticipant
+  owl:inverseOf :isParticipantIn ;
+.
+
+:isInputFor 
+  a owl:ObjectProperty ;
+  rdfs:comment "relation from Endurant to Perdurant event or process for which the endurant is a precursor" ;
+  rdfs:label "is input for" ;
+  rdfs:subPropertyOf :isParticipantIn ;
+  owl:inverseOf :hasInput ;
+.
+:isOutputOf 
+  a owl:ObjectProperty ;
+  rdfs:comment "relation from Endurant to Perdurant event or process for which the endurant is a result" ;
+  rdfs:label "is output of" ;
+  rdfs:subPropertyOf :isParticipantIn ;
+  owl:inverseOf :hasOutput ;
+.
+
+
 :hasPart
   a owl:ObjectProperty ;
   a owl:TransitiveProperty ;
