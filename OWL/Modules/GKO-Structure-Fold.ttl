@@ -1,5 +1,4 @@
 # baseURI: http://loop3d.org/GKO/ontology/2019/1/geologicstructurefold/ontology
-# imports: http://datashapes.org/dash
 # imports: http://loop3d.org/GKO/ontology/2019/1/common
 # imports: http://loop3d.org/GKO/ontology/2019/1/geologicfeature
 # imports: http://www.w3.org/ns/shacl#
@@ -16,53 +15,61 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<http://loop3d.org/GKO/ontology/2019/1/geologicstructurefold/ontology>
-  a owl:Ontology ;
-  rdfs:comment "extension module for properties related to folds"@en ;
-  owl:imports <http://loop3d.org/GKO/ontology/2019/1/common> ;
-  owl:imports <http://loop3d.org/GKO/ontology/2019/1/geologicfeature> ;
-  owl:imports sh: ;
-.
-gkof:Fold-properties
-  a rdfs:Class ;
-  a sh:PropertyShape ;
-  rdfs:comment "shape defines base properties for a gkog:Fold" ;
-  rdfs:label "Fold - properties" ;
-  rdfs:subClassOf rdfs:Resource ;
-  sh:property [
-      sh:path gkoc:hasPhysicalProperty ;
-      sh:class gkof:Fold_Limb_Shape ;
-      sh:minCount 0 ;
+gkog:Fold
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom gkog:Geologic_Structure ;
+      owl:onProperty gkof:definingElement ;
     ] ;
-  sh:property [
-      sh:path gkoc:hasPhysicalProperty ;
-      sh:class gkof:Fold_Profile_Type ;
-      sh:minCount 0 ;
-    ] ;
-  sh:targetClass gkog:Fold ;
 .
-
 gkof:Fold_Amplitude
   a owl:Class ;
   rdfs:comment "" ;
   rdfs:label "Fold Amplitude"@en ;
-  rdfs:subClassOf gkoc:Quantified_Physical_Property ;
+  rdfs:subClassOf gkoc:Physical_Property ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom gkog:Fold ;
       owl:onProperty gkoc:isPhysicalPropertyOf ;
     ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gkoc:hasNumericValue ;
+      owl:someValuesFrom xsd:float ;
+    ] ;
 .
-gkof:Fold_Genetic_Model
+gkof:Fold_Axial_Surface_Orientation
   a owl:Class ;
-  rdfs:comment "e.g. similar, parallel" ;
-  rdfs:isDefinedBy "GeoSciML v3" ;
-  rdfs:label "Fold genetic model" ;
-  rdfs:subClassOf gkoc:Discrete_Physical_Property ;
+  rdfs:comment "Abstract surface that bisects the limbs of a fold or is the normal to a surface defined by the poles to the folded surface (typically visualized on a stereonet).  The axial surface of a particular fold may be located based on observations of the folded geologic structure, but in general it has no direct physical manifestation. Contrast with hinge surface, which is defined as the surface containing a set of hinge lines in the stack of folded surfaces defining a fold structure.  As a geologic surface, the axial surface has geometric properties, including orientation, which may be specified by observations at one or more locations, or generalized using terminology (upright, inclined, reclined, recumbent, overturned). Dip and Dip Direction are one approach to specifying the value. (revised from GeoSciML 3.2)" ;
+  rdfs:isDefinedBy "Revised from GeoSciML v3.2" ;
+  rdfs:label "Fold axial surface orientation term" ;
+  rdfs:subClassOf gkoc:Physical_Property ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom gkog:Fold ;
       owl:onProperty gkoc:isPhysicalPropertyOf ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gkoc:hasValue ;
+      owl:someValuesFrom xsd:string ;
+    ] ;
+.
+gkof:Fold_Genetic_Model
+  a owl:Class ;
+  rdfs:comment "Specification of genetic model for fold, e.g. flexural slip, parallel (GeoSciML 3.2) TBD: need vocabulary" ;
+  rdfs:isDefinedBy "GeoSciML v3.2" ;
+  rdfs:label "Fold genetic model" ;
+  rdfs:subClassOf gkoc:Physical_Property ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom gkog:Fold ;
+      owl:onProperty gkoc:isPhysicalPropertyOf ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gkoc:hasValue ;
+      owl:someValuesFrom xsd:string ;
     ] ;
 .
 gkof:Fold_Hinge
@@ -76,6 +83,30 @@ gkof:Fold_Hinge
       owl:onProperty gkoc:isPartOf ;
     ] ;
 .
+gkof:Fold_Hinge_Orientation
+  a owl:Class ;
+  rdfs:comment "Trend and plunge measure of a single hinge orientation" ;
+  rdfs:isDefinedBy "GeoSciML v3.2" ;
+  rdfs:label "Fold hinge orientation" ;
+  rdfs:subClassOf gkoc:Physical_Property ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom gkog:Fold ;
+      owl:onProperty gkoc:isPhysicalPropertyOf ;
+    ] ;
+.
+gkof:Fold_Hinge_Plunge
+  a owl:Class ;
+  rdfs:comment "Term to categorize plunge of fold hinge(s) in fold structure. Hinge plunge term examples: sub-vertical, steeply plunging, ... sub-horizontal, reclined and vertical for special cases in which hinge plunge is close to axial surface dip.  (from GeoSciML v3.2).  Individual fold hinge measurements shoudl be represented as instances of Fold_Hinge (GeoSciML v3.2)" ;
+  rdfs:isDefinedBy "GeoSciML v3.2" ;
+  rdfs:label "Fold hinge plunge term" ;
+  rdfs:subClassOf gkoc:Physical_Property ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom gkog:Fold ;
+      owl:onProperty gkoc:isPhysicalPropertyOf ;
+    ] ;
+.
 gkof:Fold_Hinge_Surface
   a owl:Class ;
   rdfs:comment "Surface that contains the hinge lines in a stack of folded layers" ;
@@ -85,6 +116,35 @@ gkof:Fold_Hinge_Surface
       a owl:Restriction ;
       owl:allValuesFrom gkog:Fold ;
       owl:onProperty gkoc:isPartOf ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom gkof:Fold_Hinge ;
+      owl:onProperty gkof:definingElement ;
+    ] ;
+.
+gkof:Fold_Hinge_Surface_Orientation
+  a owl:Class ;
+  rdfs:comment "Strike and dip of hinge surface to fold" ;
+  rdfs:isDefinedBy "GeoSciML v3.2" ;
+  rdfs:label "Fold hinge surface orientation" ;
+  rdfs:subClassOf gkoc:Physical_Property ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom gkog:Fold_Hinge_Surface ;
+      owl:onProperty gkoc:isPhysicalPropertyOf ;
+    ] ;
+.
+gkof:Fold_InterLimb_Angle
+  a owl:Class ;
+  rdfs:comment "Straight vs curved limbs, eg kink, chevron, sinusoidal, box" ;
+  rdfs:isDefinedBy "GeoSciML v4" ;
+  rdfs:label "Fold limb shape" ;
+  rdfs:subClassOf gkoc:Physical_Property ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom gkog:Fold ;
+      owl:onProperty gkoc:isPhysicalPropertyOf ;
     ] ;
 .
 gkof:Fold_Limb
@@ -97,13 +157,18 @@ gkof:Fold_Limb
       owl:allValuesFrom gkog:Fold ;
       owl:onProperty gkoc:isPartOf ;
     ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom gkog:Geologic_Structure ;
+      owl:onProperty gkof:definingElement ;
+    ] ;
 .
 gkof:Fold_Limb_Shape
   a owl:Class ;
   rdfs:comment "Straight vs curved limbs, eg kink, chevron, sinusoidal, box" ;
   rdfs:isDefinedBy "GeoSciML v4" ;
   rdfs:label "Fold limb shape" ;
-  rdfs:subClassOf gkoc:Discrete_Physical_Property ;
+  rdfs:subClassOf gkoc:Physical_Property ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom gkog:Fold ;
@@ -114,7 +179,19 @@ gkof:Fold_Profile_Type
   a owl:Class ;
   rdfs:comment "categories  to specify fold profile type property" ;
   rdfs:label "Fold - profile type category" ;
-  rdfs:subClassOf gkoc:Discrete_Physical_Property ;
+  rdfs:subClassOf gkoc:Physical_Property ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom gkog:Fold ;
+      owl:onProperty gkoc:isPhysicalPropertyOf ;
+    ] ;
+.
+gkof:Fold_Span
+  a owl:Class ;
+  rdfs:comment "linear distance between inflection points in a single fold (GeoSciML v3.2)" ;
+  rdfs:isDefinedBy "GeoSciML v3.2" ;
+  rdfs:label "Fold span" ;
+  rdfs:subClassOf gkoc:Physical_Property ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom gkog:Fold ;
@@ -126,7 +203,7 @@ gkof:Fold_Symmetry
   rdfs:comment "Concordance or discordance of bisecting surface and axial surface, or ratio of length of limbs. Folded surface may have asymmetry defined by limb length ratio if inflection points are defined. Defintion based on bisecting surface/axial surface angle depends on having multiple surfaces defined such that the axial surface may be identified. (symmetric, assymetric)" ;
   rdfs:isDefinedBy "GeoSciML v4" ;
   rdfs:label "Fold symmetry" ;
-  rdfs:subClassOf gkoc:Discrete_Physical_Property ;
+  rdfs:subClassOf gkoc:Physical_Property ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom gkog:Fold ;
@@ -148,10 +225,10 @@ gkof:Fold_Wavelength
   a owl:Class ;
   rdfs:comment "" ;
   rdfs:label "Fold wavelength"@en ;
-  rdfs:subClassOf gkoc:Quantified_Physical_Property ;
+  rdfs:subClassOf gkoc:Physical_Property ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:allValuesFrom gkog:Fold ;
+      owl:allValuesFrom gkog:Fold_System ;
       owl:onProperty gkoc:isPhysicalPropertyOf ;
     ] ;
 .
@@ -160,7 +237,7 @@ gkof:Hinge_Line_Curvature
   rdfs:comment "Variation in orientation of fold hinge along trend of fold, distinguish sheath from cylindrical folds. Specify with terminology eg sheath, dome, basin, cylindrical."@en ;
   rdfs:isDefinedBy "GeoSciML v4" ;
   rdfs:label "Fold hinge line curvature" ;
-  rdfs:subClassOf gkoc:Discrete_Physical_Property ;
+  rdfs:subClassOf gkoc:Physical_Property ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom gkog:Fold ;
@@ -172,11 +249,40 @@ gkof:Hinge_Shape
   rdfs:comment "Rounded vs. angular hinge zones; has to do with the proportion of the wavelength that is considered part of hinge" ;
   rdfs:isDefinedBy "GeoSciML v4" ;
   rdfs:label "Fold hinge shape" ;
-  rdfs:subClassOf gkoc:Discrete_Physical_Property ;
+  rdfs:subClassOf gkoc:Physical_Property ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom gkog:Fold ;
       owl:onProperty gkoc:isPhysicalPropertyOf ;
     ] ;
 .
-
+gkof:Is_Periodic
+  a owl:Class ;
+  rdfs:comment "" ;
+  rdfs:label "Fold wavelength"@en ;
+  rdfs:subClassOf gkoc:Physical_Property ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom gkog:Fold_System ;
+      owl:onProperty gkoc:isPhysicalPropertyOf ;
+    ] ;
+.
+gkof:defines
+  a rdf:Property ;
+  rdfs:comment "property that specifies a structure that is the basis for identifying another structure, e.g. bedding defines a fold." ;
+  rdfs:domain gkog:Geologic_Structure ;
+  rdfs:label "defines" ;
+  owl:inverseOf gkof:definingElement ;
+.
+gkof:definingElement
+  a rdf:Property ;
+  rdfs:comment "property that specifies a structure that is the basis for identifying another structure, e.g. fold definingElement is foliation" ;
+  rdfs:label "definingElement" ;
+.
+gkof:ontology
+  a owl:Ontology ;
+  rdfs:comment "extension module for properties related to folds"@en ;
+  owl:imports <http://loop3d.org/GKO/ontology/2019/1/common> ;
+  owl:imports <http://loop3d.org/GKO/ontology/2019/1/geologicfeature> ;
+  owl:imports sh: ;
+.
