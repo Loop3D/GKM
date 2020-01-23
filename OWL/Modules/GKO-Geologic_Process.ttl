@@ -5,6 +5,7 @@
 @prefix : <http://loop3d.org/GKO/ontology/2019/1/geologicprocess/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix gkog: <http://loop3d.org/GKO/ontology/2019/1/geologicfeature/> .
+@prefix gkop: <http://loop3d.org/GKO/ontology/2019/1/common/>
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix pro: <http://loop3d.org/GKO/ontology/2019/1/geologicprocess/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -13,41 +14,8 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<http://loop3d.org/GKO/ontology/2019/1/common/hasParticipant>
-  owl:inverseOf <http://loop3d.org/GKO/ontology/2019/1/common/isParticipantIn> ;
-.
-<http://loop3d.org/GKO/ontology/2019/1/common/isInputFor>
-  a owl:ObjectProperty ;
-  rdfs:comment "relation from Endurant to Perdurant event or process for which the endurant is a precursor" ;
-  rdfs:label "is input for" ;
-  rdfs:subPropertyOf <http://loop3d.org/GKO/ontology/2019/1/common/isParticipantIn> ;
-  owl:inverseOf <http://loop3d.org/GKO/ontology/2019/1/common/hasInput> ;
-.
-<http://loop3d.org/GKO/ontology/2019/1/common/isOutputOf>
-  a owl:ObjectProperty ;
-  rdfs:comment "relation from Endurant to Perdurant event or process for which the endurant is a result" ;
-  rdfs:label "is output of" ;
-  rdfs:subPropertyOf <http://loop3d.org/GKO/ontology/2019/1/common/isParticipantIn> ;
-  owl:inverseOf <http://loop3d.org/GKO/ontology/2019/1/common/hasOutput> ;
-.
-gkog:Geologic_Process
-  a owl:Class ;
-.
-gkog:Thickness
-  rdfs:subClassOf <http://loop3d.org/GKO/ontology/2019/1/common/Quantified_Physical_Property> ;
-.
-gkog:Transformation
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom <http://loop3d.org/GKO/ontology/2019/1/common/Amount_Of_Matter> ;
-      owl:onProperty <http://loop3d.org/GKO/ontology/2019/1/common/hasInput> ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom <http://loop3d.org/GKO/ontology/2019/1/common/Amount_Of_Matter> ;
-      owl:onProperty <http://loop3d.org/GKO/ontology/2019/1/common/hasOutput> ;
-    ] ;
-.
+
+
 <http://loop3d.org/GKO/ontology/2019/1/geologicprocess>
   a owl:NamedIndividual ;
   a owl:Ontology ;
@@ -60,6 +28,25 @@ gkog:Transformation
   owl:imports <http://loop3d.org/GKO/ontology/2019/1/geologicfeature> ;
   owl:imports dcterms: ;
 .
+
+gkog:Geologic_Process
+  a owl:Class ;
+.
+
+gkog:Transformation
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom <http://loop3d.org/GKO/ontology/2019/1/common/Amount_Of_Matter> ;
+      owl:onProperty <http://loop3d.org/GKO/ontology/2019/1/common/hasInput> ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom <http://loop3d.org/GKO/ontology/2019/1/common/Amount_Of_Matter> ;
+      owl:onProperty <http://loop3d.org/GKO/ontology/2019/1/common/hasOutput> ;
+    ] ;
+.
+
+
 pro:Evolution
   a owl:Class ;
   rdfs:label "Evolution" ;
