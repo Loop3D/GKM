@@ -1,0 +1,116 @@
+# baseURI: http://loop3d.org/GSO/ontology/2020/1/consolidationdegree/ontology
+# imports: http://purl.org/dc/terms/
+
+@prefix cnsd: <http://loop3d.org/GSO/ontology/2020/1/consolidationdegree/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix gsop: <http://loop3d.org/GSO/ontology/2019/1/geologicproperty/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xlink: <http://www.w3.org/1999/xlink> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+cnsd:any_consolidation
+  a owl:Class ;
+  dcterms:source "CGI consolidationdegree SKOS vocabulary 2012-11-24"@en ;
+  rdfs:comment "In normative descriptions, indicates that consolidation state is not a determining factor in identification, it may have any value."@en ;
+  rdfs:label "consolidation not specified"@en ;
+  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Physical_Region> ;
+.
+cnsd:consolidated
+  a owl:Class ;
+  dcterms:source "CGI consolidationdegree SKOS vocabulary 2012-11-24"@en ;
+  rdfs:comment "Particulate constituents of a compound material adhere to each other strongly enough that the aggregate can be considered a solid material in its own right."@en ;
+  rdfs:label "consolidated"@en ;
+  rdfs:subClassOf cnsd:any_consolidation ;
+.
+cnsd:consolidation_variable
+  a owl:Class ;
+  dcterms:source "CGI consolidationdegree SKOS vocabulary 2012-11-24"@en ;
+  rdfs:comment "Consolidation ranges from unconsolidated to indurated on scale of description"@en ;
+  rdfs:label "consolidation variable"@en ;
+  rdfs:subClassOf cnsd:any_consolidation ;
+.
+cnsd:incipient_consolidation
+  a owl:Class ;
+  dcterms:source "NADM sedimentary rock vocabulary NADM sedimentary rock vocabulary (https://pubs.usgs.gov/of/2004/1451/sltt/appendixC/appendixC_pdf.zip)  SLTTs 2004,  after Bowles 1986"@en ;
+  rdfs:comment "Shoveled with difficulty, relative density 0.4 - 0.7."@en ;
+  rdfs:label "incipient consolidation"@en ;
+  rdfs:subClassOf cnsd:unconsolidated ;
+.
+cnsd:indurated
+  a owl:Class ;
+  dcterms:source "NADM sedimentary rock vocabulary NADM sedimentary rock vocabulary (https://pubs.usgs.gov/of/2004/1451/sltt/appendixC/appendixC_pdf.zip)  SLTTs 2004,  after Bowles 1987"@en ;
+  rdfs:comment "Requires blasting or heavy equipment to loosen, Relative density 0.9-1.0. Rings to blow of hammer."@en ;
+  rdfs:label "indurated"@en ;
+  rdfs:subClassOf cnsd:consolidated ;
+.
+cnsd:moderately_indurated
+  a owl:Class ;
+  dcterms:source "CGI consolidationdegree SKOS vocabulary 2012-11-24"@en ;
+  rdfs:comment "Multiple blows with standard rock hammer (less than 1 kg) are required to break rock."@en ;
+  rdfs:label "moderately indurated"@en ;
+  rdfs:subClassOf cnsd:indurated ;
+.
+cnsd:ontology
+  a owl:ontology ;
+  dcterms:creator "CGI Geoscience Terminology Working Group, Stephen M. Richard for Loop3d project" ;
+  dcterms:date "2012-11-24" ;
+  dcterms:description "This vocabulary specifies the concept space for Earth Material Consolidation Degree concepts, as defined by the IUGS Commission for Geoscience Information (CGI) Geoscience Terminology Working Group. ORingally developed for populating the consolidationDegree property in GeoSciML RockMaterialDescription elements."@en ;
+  dcterms:modified "2020-01-29" ;
+  rdfs:comment "This file contains the 2016 SKOS-RDF version of the CGI Consolidation Degree vocabulary. Compilation and review in MS Excel spreadsheet, converted to MS Excel for SKOS generation using GSML_SKOS_fromXLS_2016.01.xslt."@en ;
+  rdfs:label "Consolidation Degree"@en ;
+  owl:imports dcterms: ;
+.
+cnsd:slightly_indurated
+  a owl:Class ;
+  dcterms:source "CGI consolidationdegree SKOS vocabulary 2012-11-24"@en ;
+  rdfs:comment "Rock can be broken with single blow from standard rock hammer (less than 1 kg mass)."@en ;
+  rdfs:label "slightly indurated"@en ;
+  rdfs:subClassOf cnsd:indurated ;
+.
+cnsd:unconsolidated
+  a owl:Class ;
+  dcterms:source "CGI consolidationdegree SKOS vocabulary 2012-11-24"@en ;
+  rdfs:comment "Particulate constituents of a compound material do not adhere to each other strongly enough that the aggregate can be considered a solid in its own right."@en ;
+  rdfs:label "unconsolidated"@en ;
+  rdfs:subClassOf cnsd:any_consolidation ;
+.
+cnsd:unconsolidated_loose
+  a owl:Class ;
+  dcterms:source "NADM sedimentary rock vocabulary NADM sedimentary rock vocabulary (https://pubs.usgs.gov/of/2004/1451/sltt/appendixC/appendixC_pdf.zip)  SLTTs 2004,  after Bowles 1985"@en ;
+  rdfs:comment "Easily shoveled, can be indented with fingers, Relative density 0.2-0.4."@en ;
+  rdfs:label "unconsolidated loose"@en ;
+  rdfs:subClassOf cnsd:unconsolidated ;
+.
+cnsd:unconsolidated_very_loose
+  a owl:Class ;
+  dcterms:source "NADM sedimentary rock vocabulary NADM sedimentary rock vocabulary (https://pubs.usgs.gov/of/2004/1451/sltt/appendixC/appendixC_pdf.zip)  SLTTs 2004,  after Bowles 1984"@en ;
+  rdfs:comment "Easily indented with fingers, Relative density 0.0-0.2."@en ;
+  rdfs:label "unconsolidated very loose"@en ;
+  rdfs:subClassOf cnsd:unconsolidated ;
+.
+cnsd:variable_induration
+  a owl:Class ;
+  dcterms:source "CGI consolidationdegree SKOS vocabulary 2012-11-24"@en ;
+  rdfs:comment "Material is lithified, but induration varies at scale of description."@en ;
+  rdfs:label "variable induration"@en ;
+  rdfs:subClassOf cnsd:indurated ;
+.
+cnsd:well_consolidated
+  a owl:Class ;
+  dcterms:source "NADM sedimentary rock vocabulary NADM sedimentary rock vocabulary (https://pubs.usgs.gov/of/2004/1451/sltt/appendixC/appendixC_pdf.zip)  SLTTs 2004,  after Bowles 1986"@en ;
+  rdfs:comment "Requires pick to loosen for shoveling, relative density 0.7-0.9."@en ;
+  rdfs:label "well consolidated"@en ;
+  rdfs:subClassOf cnsd:consolidated ;
+.
+cnsd:well_indurated
+  a owl:Class ;
+  dcterms:source "CGI consolidationdegree SKOS vocabulary 2012-11-24"@en ;
+  rdfs:comment "Particles in the rock are strongly bound together such that rock surface can only be broken with great difficulty using standard rock hammer (less than 1 kg mass)."@en ;
+  rdfs:label "well indurated"@en ;
+  rdfs:subClassOf cnsd:indurated ;
+.

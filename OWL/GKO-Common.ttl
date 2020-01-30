@@ -1,18 +1,12 @@
-# baseURI: http://loop3d.org/GKO/ontology/2019/1/common
+# baseURI: http://loop3d.org/GSO/ontology/2019/1/common/ontology
 
-@prefix : <http://loop3d.org/GKO/ontology/2019/1/common/> .
+@prefix : <http://loop3d.org/GSO/ontology/2019/1/common/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<http://loop3d.org/GKO/ontology/2019/1/common>
-  a owl:Ontology ;
-  rdfs:comment "Unary predicates are represented by classes, binary predicates by object properties"@en ;
-  rdfs:comment "ontology of shared objectProperties and high level classes used to define geologic features"@en ;
-  rdfs:label "Shared elements for geoscience ontology"@en ;
-.
 :Abstract
   a owl:Class ;
   rdfs:comment "The main characteristic of abstract entities is that they do not have spatial nor temporal qualities, and they are not qualities themselves. The only class of abstract entities we consider in the present version of the upper ontology is that of quality regions (or simply regions). Quality spaces are special kinds of quality regions, being mereological sums of all the regions related to a certain quality type. The other examples of abstract entities (sets and facts) are only indicative." ;
@@ -59,7 +53,7 @@
 :Color
   a owl:Class ;
   rdfs:comment "upper level class that represents any conceptual space for quantifying color, e.g. RGB, Munsell, CMYK, US NBS Color (NBS Special Pub 440)"@en ;
-  rdfs:label "Color"@en ;
+  rdfs:label "Any Color"@en ;
   rdfs:subClassOf :Physical_Region ;
 .
 :Complex_Feature
@@ -68,14 +62,12 @@
   rdfs:label "Complex Feature "@en ;
   rdfs:subClassOf :Part_Feature ;
 .
-
 :Determining_Event
   a owl:Class ;
   rdfs:comment "An observation, calculation, or inference envent used to determine the value of one or more properties"@en ;
   rdfs:label "Determining Event "@en ;
   rdfs:subClassOf :Event ;
 .
-
 :Dynamic_Feature
   a owl:Class ;
   rdfs:comment "" ;
@@ -94,7 +86,7 @@
 .
 :Event
   a owl:Class ;
-  rdfs:comment "An occurrence-type is stative or eventive according to whether it holds of the mereological sum of two of its instances, i.e. if it is cumulative or not. A sitting occurrence is stative since the sum of two sittings is still a sitting occurrence.In general, events differ from situations because they are not assumed to have a description from which they depend. They can be sequenced by some course, but they do not require a description as a unifying criterion.On the other hand, at any time, one can conceive a description that asserts the constraints by which an event of a certian type is such, and in this case, it becomes a situation.Since the decision of designing an explicit description that unifies a perdurant depends on context, task, interest, application, etc., when aligning an ontology do DLP, there can be indecision on where to align an event-oriented class. For example, in the WordNet alignment, we have decided to put only some physical events under 'event', e.g. 'discharge', in order to stress the social orientedness of DLP. But whereas we need to talk explicitly of the criteria by which we conceive discharge events, these will be put under 'situation'.Similar considerations are made for the other types of perdurants in DOLCE.A different notion of event (dealing with change) is currently investigated for further developments: being 'achievement', 'accomplishment', 'state', 'event', etc. can be also considered 'aspects' of processes or of parts of them. For example, the same process 'rock erosion in the Sinni valley' can be conceptualized as an accomplishment (what has brought the current state that e.g. we are trying to explain), as an achievement (the erosion process as the result of a previous accomplishment), as a state (if we collapse the time interval of the erosion into a time point), or as an event (what has changed our focus from a state to another).In the erosion case, we could have good motivations to shift from one aspect to another: a) causation focus, b) effectual focus, c) condensation d) transition (causality).If we want to consider all the aspects of a process together, we need to postulate a unifying descriptive set of criteria (i.e. a 'description'), according to which that process is circumstantiated in a 'situation'. The different aspects will arise as a parts of a same situation." ;
+  rdfs:comment "A event is an occurence that involves a change in state of some system.  \"Something that occurs in a certain place during a particular interval of time\" (https://www.dictionary.com/browse/event);  \"an occurrence; something that happens\" (https://wikidiff.com/event/process)."@en ;
   rdfs:subClassOf :Perdurant ;
   rdfs:subClassOf [
       a owl:Restriction ;
@@ -378,7 +370,7 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
 .
 :Physical_Region
   a owl:Class ;
-  rdfs:comment "" ;
+  rdfs:comment "A region at which only physical qualities can be directly located. It assumes some metrics for physical properties. Quantified by a controlled vocabulary that provides labels for the regions of interest in the concept space for the quality (property)."@en ;
   rdfs:label "Physical Region" ;
   rdfs:subClassOf :Abstract ;
 .
@@ -466,8 +458,7 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
 .
 :Process
   a owl:Class ;
-  rdfs:comment "High level class for any process; use to represent measurement methods. This will probably evolve to some mapping to W3C Prov Activity or dolce:process?"@en ;
-  rdfs:comment "Within stative occurrences, we distinguish between states and processes according to homeomericity: sitting is classified as a state but running is classified as a process, since there are (very short) temporal parts of a running that are not themselves runnings. In general, processes differ from situations because they are not assumed to have a description from which they depend. They can be sequenced by some course, but they do not require a description as a unifying criterion. On the other hand, at any time, one can conceive a description that asserts the constraints by which a process of a certian type is such, and in this case, it becomes a situation. Since the decision of designing an explicit description that unifies a perdurant depends on context, task, interest, application, etc., when aligning an ontology do DLP, there can be indecision on where to align a process-oriented class. For example, in the WordNet alignment, we have decided to put only some physical processes under 'process', e.g. 'organic process', in order to stress the social orientedness of DLP. But whereas we need to talk explicitly of the criteria by which we conceive organic processes, these will be put under 'situation'. Similar considerations are made for the other types of perdurants in DOLCE. A different notion of event (dealing with change) is currently investigated for further developments: being 'achievement', 'accomplishment', 'state', 'event', etc. can be also considered 'aspects' of processes or of parts of them. For example, the same process 'rock erosion in the Sinni valley' can be conceptualized as an accomplishment (what has brought the current state that e.g. we are trying to explain), as an achievement (the erosion process as the result of a previous accomplishment), as a state (if we collapse the time interval of the erosion into a time point), or as an event (what has changed our focus from a state to another). In the erosion case, we could have good motivations to shift from one aspect to another: a) causation focus, b) effectual focus, c) condensation d) transition (causality). If we want to consider all the aspects of a process together, we need to postulate a unifying descriptive set of criteria (i.e. a 'description'), according to which that process is circumstantiated in a 'situation'. The different aspects will arise as a parts of a same situation."@en ;
+  rdfs:comment "In Basic Formal Ontology: An occurrent entity that exists in time by occurring or happening, has temporal (proper) parts, and always depends on some material (continuant) entity (Arp et al., 2015, p. 121; Notes in parenthesis () from Mustafa Jarrar https://www.slideshare.net/jarrar02/classifying-processes-and-basic-formal-ontology) Processes are not necessarily homeomeric or cumulative.  \" process is a series of events to produce a result\" (https://wikidiff.com/event/process)  \"A process may also be defined as the workflows and sequence of events inherent in processes such as manufacturing, engineering and business processes.\" (https://en.wikipedia.org/wiki/Process_ontology)"@en ;
   rdfs:label "Process"@en ;
   rdfs:subClassOf :Perdurant ;
   rdfs:subClassOf [
@@ -510,11 +501,10 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
       owl:someValuesFrom :Endurant ;
     ] ;
 .
-
 :Shape
   a owl:Class ;
   rdfs:comment "" ;
-  rdfs:label "Shape" ;
+  rdfs:label "Any Shape"@en ;
   rdfs:subClassOf :Physical_Region ;
 .
 :Silicon_Element
@@ -761,6 +751,7 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   rdfs:comment "A participant in a process that must be present before the process can operate "@en ;
   rdfs:label "Input "@en ;
   rdfs:subPropertyOf :hasParticipant ;
+  owl:inverseOf :isInputFor ;
 .
 :hasNumericValue
   a owl:DatatypeProperty ;
@@ -772,28 +763,8 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   rdfs:comment "A participant in a process that is produced by the action of the process and is present when the process is complete "@en ;
   rdfs:label "Output "@en ;
   rdfs:subPropertyOf :hasParticipant ;
+  owl:inverseOf :isOutputOf ;
 .
-
-:hasParticipant
-  owl:inverseOf :isParticipantIn ;
-.
-
-:isInputFor 
-  a owl:ObjectProperty ;
-  rdfs:comment "relation from Endurant to Perdurant event or process for which the endurant is a precursor" ;
-  rdfs:label "is input for" ;
-  rdfs:subPropertyOf :isParticipantIn ;
-  owl:inverseOf :hasInput ;
-.
-:isOutputOf 
-  a owl:ObjectProperty ;
-  rdfs:comment "relation from Endurant to Perdurant event or process for which the endurant is a result" ;
-  rdfs:label "is output of" ;
-  rdfs:subPropertyOf :isParticipantIn ;
-  owl:inverseOf :hasOutput ;
-.
-
-
 :hasPart
   a owl:ObjectProperty ;
   a owl:TransitiveProperty ;
@@ -801,17 +772,20 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
 .
 :hasParticipant
   a owl:ObjectProperty ;
+  owl:inverseOf :isParticipantIn ;
 .
 :hasPhysicalProperty
   a owl:ObjectProperty ;
   rdfs:comment "" ;
   rdfs:label "has Physical Property" ;
   rdfs:subPropertyOf :hasProperty ;
+  owl:inverseOf :isPhysicalPropertyOf ;
 .
 :hasProperty
   a owl:ObjectProperty ;
   rdfs:comment "" ;
   rdfs:label "has Property "@en ;
+  owl:inverseOf :isPropertyOf ;
 .
 :hasSetting
   a owl:ObjectProperty ;
@@ -824,12 +798,14 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   rdfs:label "has Spatial Property" ;
   rdfs:range :Spatial_Location ;
   rdfs:subPropertyOf :hasPhysicalProperty ;
+  owl:inverseOf :isSpatialPropertyOf ;
 .
 :hasTemporalProperty
   a owl:ObjectProperty ;
   rdfs:comment "" ;
   rdfs:label "has Temporal Property"@en ;
   rdfs:subPropertyOf :hasProperty ;
+  owl:inverseOf :isTemporalPropertyOf ;
 .
 :hasUOM
   a owl:ObjectProperty ;
@@ -847,31 +823,50 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   rdfs:domain :Abstract_Property ;
   rdfs:label "hasValue "@en ;
 .
-:hostedBy
-  a owl:ObjectProperty ;
-  rdfs:comment "object property between two entities wherein one entity is specifically dependent on the other."@en ;
-  rdfs:label "Hosted By"@en ;
-  owl:inverseOf :hosts ;
-.
 :hosts
   a owl:ObjectProperty ;
   rdfs:comment "" ;
   rdfs:label "hosts" ;
+.
+:isColocatedWith
+  a rdf:Property ;
+  rdfs:comment "links material spatial feature to Endurant or Perdurant or Physical Property that shares the same location"@en ;
+  rdfs:domain :Physical_Feature ;
+  rdfs:label "is colocated with"@en ;
+  rdfs:range [
+      a owl:Class ;
+      owl:unionOf (
+          :Endurant
+          :Perdurant
+          :Physical_Property
+        ) ;
+    ] ;
 .
 :isConstituentOf
   a owl:ObjectProperty ;
   a owl:TransitiveProperty ;
   rdfs:range :Amount_Of_Matter ;
 .
+:isInputFor
+  a owl:ObjectProperty ;
+  rdfs:comment "relation from Endurant to Perdurant event or process for which the endurant is a precursor" ;
+  rdfs:label "is input for" ;
+  rdfs:subPropertyOf :isParticipantIn ;
+.
 :isManifestationOf
   a owl:ObjectProperty ;
   rdfs:comment "" ;
   rdfs:label "is Manifestation Of" ;
 .
+:isOutputOf
+  a owl:ObjectProperty ;
+  rdfs:comment "relation from Endurant to Perdurant event or process for which the endurant is a result" ;
+  rdfs:label "is output of" ;
+  rdfs:subPropertyOf :isParticipantIn ;
+.
 :isPartOf
   a owl:ObjectProperty ;
   a owl:TransitiveProperty ;
-  owl:inverseOf :hasPart ;
 .
 :isParticipantIn
   a owl:ObjectProperty ;
@@ -883,7 +878,6 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   rdfs:comment "link from physical property to a class that exhibits the property" ;
   rdfs:label "is physical property of " ;
   rdfs:subPropertyOf :isPropertyOf ;
-  owl:inverseOf :hasPhysicalProperty ;
 .
 :isPhysicallyRelatedTo
   a owl:ObjectProperty ;
@@ -909,24 +903,33 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   rdfs:comment "link from spatial property to a class that exhibits the property" ;
   rdfs:label "is spatial property of " ;
   rdfs:subPropertyOf :isPhysicalPropertyOf ;
-  owl:inverseOf :hasSpatialProperty ;
 .
 :isSpatiallyRelatedTo
   a owl:ObjectProperty ;
   rdfs:domain [
       a owl:Class ;
-      owl:unionOf (
-          :Spatial_Region
-          :Physical_Endurant
-        ) ;
+      owl:unionOf [
+          a rdf:List ;
+          rdf:first :Physical_Endurant ;
+          rdf:rest [
+              a rdf:List ;
+              rdf:first :Spatial_Region ;
+              rdf:rest () ;
+            ] ;
+        ] ;
     ] ;
   rdfs:label "Spatially related to "@en ;
   rdfs:range [
       a owl:Class ;
-      owl:unionOf (
-          :Spatial_Region
-          :Physical_Endurant
-        ) ;
+      owl:unionOf [
+          a rdf:List ;
+          rdf:first :Physical_Endurant ;
+          rdf:rest [
+              a rdf:List ;
+              rdf:first :Spatial_Region ;
+              rdf:rest () ;
+            ] ;
+        ] ;
     ] ;
 .
 :isTemporalPropertyOf
@@ -934,27 +937,42 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   rdfs:comment "link from spatial property to a class that exhibits the property" ;
   rdfs:label "is temporal property of " ;
   rdfs:subPropertyOf :isPropertyOf ;
-  owl:inverseOf :hasTemporalProperty ;
 .
 :isTemporallyRelatedTo
   a owl:ObjectProperty ;
   rdfs:comment "" ;
   rdfs:domain [
       a owl:Class ;
-      owl:unionOf (
-          :Endurant
-          :Perdurant
-          :Temporal_Region
-        ) ;
+      owl:unionOf [
+          a rdf:List ;
+          rdf:first :Endurant ;
+          rdf:rest [
+              a rdf:List ;
+              rdf:first :Perdurant ;
+              rdf:rest [
+                  a rdf:List ;
+                  rdf:first :Temporal_Region ;
+                  rdf:rest () ;
+                ] ;
+            ] ;
+        ] ;
     ] ;
   rdfs:label "is Temporally Related To" ;
   rdfs:range [
       a owl:Class ;
-      owl:unionOf (
-          :Endurant
-          :Perdurant
-          :Temporal_Region
-        ) ;
+      owl:unionOf [
+          a rdf:List ;
+          rdf:first :Endurant ;
+          rdf:rest [
+              a rdf:List ;
+              rdf:first :Perdurant ;
+              rdf:rest [
+                  a rdf:List ;
+                  rdf:first :Temporal_Region ;
+                  rdf:rest () ;
+                ] ;
+            ] ;
+        ] ;
     ] ;
 .
 :manifests
@@ -966,6 +984,12 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   a owl:ObjectProperty ;
   rdfs:comment "" ;
   rdfs:label "next time interval "@en ;
+.
+:ontology
+  a owl:Ontology ;
+  rdfs:comment "Unary predicates are represented by classes, binary predicates by object properties"@en ;
+  rdfs:comment "ontology of shared objectProperties and high level classes used to define geologic features"@en ;
+  rdfs:label "Shared elements for geoscience ontology"@en ;
 .
 :previousTimeInterval
   a owl:ObjectProperty ;
@@ -981,8 +1005,4 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   a owl:ObjectProperty ;
   rdfs:comment "" ;
   rdfs:label "proportion of" ;
-.
-
-:isPropertyOf
-  owl:inverseOf :hasProperty ;
 .
