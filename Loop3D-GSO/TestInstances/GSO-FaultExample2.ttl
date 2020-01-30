@@ -1,0 +1,208 @@
+# baseURI: http://loop3d.org/GSO/ontology/2019/1/faultexample2
+# imports: http://loop3d.org/GSO/ontology/2019/1/eventenvironment
+# imports: http://loop3d.org/GSO/ontology/2019/1/geologicfeature
+# imports: http://loop3d.org/GSO/ontology/2019/1/geologicprocess
+# imports: http://loop3d.org/GSO/ontology/2019/1/ischart
+
+@prefix : <http://loop3d.org/GSO/ontology/2019/1/faultexample2#> .
+@prefix gsoc: <http://loop3d.org/GSO/ontology/2019/1/common/> .
+@prefix gsen: <http://loop3d.org/GSO/ontology/2019/1/eventenvironment/> .
+@prefix fau2: <http://loop3d.org/GSO/ontology/2019/1/faultstest2/> .
+@prefix gsog: <http://loop3d.org/GSO/ontology/2019/1/geologicfeature/> .
+@prefix gstime: <http://loop3d.org/GSO/ontology/2019/1/ischart/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix gspr: <http://loop3d.org/GSO/ontology/2019/1/geologicprocess/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix gsuom: <http://qudt.org/vocab/unit#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://loop3d.org/GSO/ontology/2019/1/faultexample2>
+  a owl:Ontology ;
+  owl:imports <http://loop3d.org/GSO/ontology/2019/1/loop3dmaster> ;
+  owl:versionIRI <http://loop3d.org/GSO/ontology/2019/1/faultexample2> ;
+.
+fau2:Basement_Cover_Shear_Event
+  a gsog:Geologic_Event ;
+  gsoc:hasTemporalProperty fau2:LaramideDuctileBasementInterval ;
+  gsoc:isManifestationOf [
+      a gspr:ductile_flow ;
+      rdfs:label "Shear along basement-cover contact"@en ;
+    ] ;
+  gsoc:isPartOf fau2:Laramide_Ductile_deformation ;
+  gsog:hasSetting [
+      a gsen:hinterland_setting ;
+      a gsen:middle_continental_crustal_setting ;
+    ] ;
+  rdfs:comment "Strain localization at the boundary between Proterozoic crytalline rock and overlying Paleozoic sediments, apparently coeval with intrusion of two-mica granitoid (Wilderness Suite)" ;
+  rdfs:label "Late Laramide Shear along basement-cover contact"@en ;
+.
+fau2:Basin_Fill_Tilting_Event
+  a gsog:Geologic_Event ;
+  gsoc:hasTemporalProperty fau2:TertiaryExtensionBasinFillInterval ;
+  gsoc:isManifestationOf [
+      a gspr:ductile_flow ;
+      rdfs:label "Shear along basement-cover contact"@en ;
+    ] ;
+  gsog:hasSetting [
+      a gsen:extended_terrane ;
+    ] ;
+  rdfs:comment "Strain localization at the boundary between Proterozoic crytalline rock and overlying Paleozoic sediments, apparently coeval with intrusion of two-mica granitoid (Wilderness Suite)" ;
+  rdfs:label "Late Laramide Shear along basement-cover contact"@en ;
+.
+fau2:EarlyProterozoic1780-1690
+  a gsog:Geologic_Age_Interval ;
+  gsog:hasOlderAgeDate [
+      a gsog:Geologic_Time_Date ;
+      gsoc:hasUOM [a gsuom:ma ];
+      gsog:hasDate "1780"^^xsd:decimal ;
+      gsog:hasUncertainty "12"^^xsd:decimal ;
+    ] ;
+  gsog:hasYoungerAgeDate [
+      a gsog:Geologic_Time_Date ;
+      gsoc:hasUOM [a gsuom:ma ] ;
+      gsog:hasDate "1690"^^xsd:decimal ;
+      gsog:hasUncertainty "18"^^xsd:decimal ;
+    ] ;
+  rdfs:label "Early Proterozoic 1780-1690 Ma" ;
+.
+fau2:LaramideDuctileBasementInterval
+  a gsog:Geologic_Age_Interval ;
+  gsog:hasOlderAgeDate [
+      a gsog:Geologic_Time_Date ;
+      gsoc:hasUOM [a gsuom:ma ] ;
+      gsog:hasDate "61"^^xsd:decimal ;
+      gsog:hasUncertainty .04 ;
+    ] ;
+  gsog:hasYoungerAgeDate [
+      a gsog:Geologic_Time_Date ;
+      gsoc:hasUOM [a gsuom:ma ] ;
+      gsog:hasDate "45"^^xsd:decimal ;
+      gsog:hasUncertainty 1.0 ;
+    ] ;
+  rdfs:label "Laramide 61-45 Ma" ;
+.
+fau2:LaramideFaultingInterval
+  a gsog:Chronostratigraphic_Age_Interval ;
+  gsog:hasOlderAge gstime:Campanian ;
+  gsog:hasYoungerAge gstime:Danian ;
+  rdfs:label "Early Laramide" ;
+.
+fau2:Laramide_Ductile_deformation
+  a gsog:Geologic_Event ;
+  gsoc:hasTemporalProperty fau2:LaramideDuctileBasementInterval ;
+  gsoc:isManifestationOf [
+      a gspr:ductile_flow ;
+      rdfs:label "Mid-crustal remobilization"@en ;
+    ] ;
+  gsog:hasSetting [
+      a gsen:hinterland_setting ;
+      a gsen:middle_continental_crustal_setting ;
+    ] ;
+  rdfs:label "Late Laramide ductile flow in basement"@en ;
+.
+fau2:MesozoicDepositionInterval
+  a gsog:Chronostratigraphic_Age_Interval ;
+  gsog:hasOlderAge gstime:MiddleTriassic ;
+  gsog:hasYoungerAge gstime:Campanian ;
+  rdfs:label "Middle Triassic to Campanian" ;
+.
+fau2:MesozoicFaultingInterval
+  a gsog:Chronostratigraphic_Age_Interval ;
+  gsog:hasOlderAge gstime:MiddleTriassic ;
+  gsog:hasYoungerAge gstime:LateJurassic ;
+  rdfs:label "Middle Triassic to LateJurassic" ;
+.
+fau2:Mesozoic_Basin_Formation
+  a gsog:Geologic_Event ;
+  gsoc:hasTemporalProperty fau2:MesozoicFaultingInterval ;
+  gsoc:isManifestationOf [
+      a gspr:faulting ;
+      rdfs:label "Intra or back arc basin formation"@en ;
+    ] ;
+  gsog:hasSetting [
+      a gsen:back_arc_setting ;
+      a gsen:extended_terrane ;
+    ] ;
+  rdfs:label "Mesozoic basin formation faulting"@en ;
+.
+fau2:Mesozoic_Sediment_Deposition
+  a gsog:Geologic_Event ;
+  gsoc:hasTemporalProperty fau2:MesozoicDepositionInterval ;
+  gsoc:isManifestationOf [
+      a gspr:deposition ;
+      rdfs:label "Intra and back arc sediment accumulation"@en ;
+    ] ;
+  gsog:hasSetting [
+      a gsen:alluvial_fan ;
+      a gsen:alluvial_plain ;
+      a gsen:floodplain ;
+    ] ;
+  rdfs:label "Mesozoic basin sediment deposition"@en ;
+.
+fau2:PaleozoicDepositionInterval
+  a gsog:Chronostratigraphic_Age_Interval ;
+  gsog:hasOlderAge gstime:Cambrian ;
+  gsog:hasYoungerAge gstime:Permian ;
+  rdfs:label "Paleozoic" ;
+.
+fau2:Paleozoic_Sediment_Deposition
+  a gsog:Geologic_Event ;
+  gsoc:hasTemporalProperty fau2:PaleozoicDepositionInterval ;
+  gsoc:isManifestationOf [
+      a gspr:deposition ;
+      rdfs:label "Passive margin sediment accumulation"@en ;
+    ] ;
+  gsog:hasSetting gsen:passive_continental_margin_setting ;
+  rdfs:label "Paleozoic passive margin sediment deposition"@en ;
+.
+fau2:Proterozoic_igneous_intrusion
+  a gsog:Geologic_Event ;
+  gsoc:hasTemporalProperty fau2:EarlyProterozoic1780-1690 ;
+  gsoc:isManifestationOf [
+      a gspr:intrusion ;
+    ] ;
+  gsog:hasSetting [
+      a gsen:earth_interior_setting ;
+    ] ;
+  gsog:hasSetting [
+      a gsen:middle_continental_crustal_setting ;
+    ] ;
+  rdfs:label "Early Proterozoic granitoid intrusion"@en ;
+.
+fau2:TertiaryExtensionBasinFillInterval
+  a gsog:Chronostratigraphic_Age_Interval ;
+  gsog:hasOlderAge gstime:Chattian ;
+  gsog:hasYoungerAge gstime:Burdigalian ;
+  rdfs:label "Mid-Tertiary extensional basin formation interval" ;
+.
+fau2:WildernessGraniteIntrusionInterval
+  a gsog:Geologic_Age_Interval ;
+  gsog:hasOlderAgeDate [
+      a gsog:Geologic_Time_Date ;
+      gsoc:hasUOM [a gsuom:ma ] ;
+      gsog:hasDate "55"^^xsd:decimal ;
+      gsog:hasUncertainty 0.3 ;
+    ] ;
+  gsog:hasYoungerAgeDate [
+      a gsog:Geologic_Time_Date ;
+      gsoc:hasUOM [a gsuom:ma ] ;
+      gsog:hasDate "42"^^xsd:decimal ;
+      gsog:hasUncertainty 1.7 ;
+    ] ;
+  rdfs:label "Laramide 55-42 Ma" ;
+.
+fau2:Wilderness_Granite_Intrusion_Event
+  a gsog:Geologic_Event ;
+  gsoc:hasTemporalProperty fau2:WildernessGraniteIntrusionInterval ;
+  gsoc:isManifestationOf [
+      a gspr:intrusion ;
+      rdfs:label "granitoid intrusion"@en ;
+    ] ;
+  gsoc:isPartOf fau2:Laramide_Ductile_deformation ;
+  gsog:hasSetting [
+      a gsen:hinterland_setting ;
+      a gsen:middle_continental_crustal_setting ;
+    ] ;
+  rdfs:label "Two-mica granite intrusion"@en ;
+.
