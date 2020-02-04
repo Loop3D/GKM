@@ -5,9 +5,9 @@
 
 @prefix : <http://loop3d.org/GSO/ontology/2019/1/geologicstructurefold/> .
 @prefix gsoc: <http://loop3d.org/GSO/ontology/2019/1/common/> .
-@prefix gssf: <http://loop3d.org/GSO/ontology/2019/1/geologicstructurefold/> .
 @prefix gsog: <http://loop3d.org/GSO/ontology/2019/1/geologicfeature/> .
 @prefix gsop: <http://loop3d.org/GSO/ontology/2019/1/geologicproperty/> .
+@prefix gssf: <http://loop3d.org/GSO/ontology/2019/1/geologicstructurefold/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -67,6 +67,9 @@ gsog:Fold
       owl:someValuesFrom gsog:Geologic_Structure ;
     ] ;
 .
+gsop:Metamorphic_Grade
+  rdfs:subClassOf gsoc:Physical_Property ;
+.
 gssf:Fold_Amplitude
   a owl:Class ;
   rdfs:comment "" ;
@@ -80,7 +83,7 @@ gssf:Fold_Amplitude
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty gsoc:hasNumericValue ;
-      owl:someValuesFrom xsd:float ;
+      owl:someValuesFrom xsd:decimal ;
     ] ;
 .
 gssf:Fold_Axial_Surface_Orientation
@@ -144,6 +147,11 @@ gssf:Fold_Hinge_Orientation
       owl:allValuesFrom gssf:Fold_Hinge ;
       owl:onProperty gsoc:isPhysicalPropertyOf ;
     ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasValue ;
+      owl:someValuesFrom gsop:Line_Orientation ;
+    ] ;
 .
 gssf:Fold_Hinge_Plunge
   a owl:Class ;
@@ -179,6 +187,11 @@ gssf:Fold_Hinge_Surface_Orientation
   rdfs:isDefinedBy "GeoSciML v3.2" ;
   rdfs:label "Fold hinge surface orientation" ;
   rdfs:subClassOf gsoc:Physical_Property ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasValue ;
+      owl:someValuesFrom gsop:Plane_Orientation ;
+    ] ;
 .
 gssf:Fold_InterLimb_Angle
   a owl:Class ;
@@ -298,8 +311,8 @@ gssf:Hinge_Shape
 .
 gssf:Is_Periodic
   a owl:Class ;
-  rdfs:comment "" ;
-  rdfs:label "Fold wavelength"@en ;
+  rdfs:comment "boolean value, true if wavelength of folds in a fold system is approximately the same"@en ;
+  rdfs:label "Folds are periodic"@en ;
   rdfs:subClassOf gsoc:Physical_Property ;
 .
 gssf:ontology

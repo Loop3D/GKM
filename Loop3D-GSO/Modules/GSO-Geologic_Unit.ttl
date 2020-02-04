@@ -1,254 +1,113 @@
 # baseURI: http://loop3d.org/GSO/ontology/2020/1/geologicunit/ontology
-# imports: http://purl.org/dc/terms/
+# imports: http://loop3d.org/GSO/ontology/2019/1/common/ontology
+# imports: http://loop3d.org/GSO/ontology/2020/1/geologicunit/rockbodypart/ontology
+# imports: http://loop3d.org/GSO/ontology/2020/1/metamorphicfacies/ontology
+# imports: http://loop3d.org/GSO/ontology/2020/1/metamorphicgrade/ontology
 
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
-@prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix xml: <http://www.w3.org/XML/1998/namespace> .
-@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix gsgu: <http://loop3d.org/GSO/ontology/2020/1/geologicunit/> .
 @prefix gsoc: <http://loop3d.org/GSO/ontology/2019/1/common/> .
 @prefix gsog: <http://loop3d.org/GSO/ontology/2019/1/geologicfeature/> .
 @prefix gsop: <http://loop3d.org/GSO/ontology/2019/1/geologicproperty/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xlink: <http://www.w3.org/1999/xlink> .
-@prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix gsgu: <http://loop3d.org/GSO/ontology/2020/1/geologicunit/> .
-@base <http://www.w3.org/2002/07/owl#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-
-
-###  http://loop3d.org/GSO/ontology/2020/1/geologicunit/allostratigraphic_unit
-<http://loop3d.org/GSO/ontology/2020/1/geologicunit/allostratigraphic_unit> rdf:type 
-                          owl:Class ; 
-                 dcterms:source "This vocabulary, Salvador, 1994, Donovon 2004 IUGS abstract."@en ;
-                 rdfs:subClassOf  gsog:Geologic_Unit ;
-                 rdfs:comment "Geologic unit defined by bounding surfaces. Not necessarily stratified. Donovon (2004, IUGS abstract Florence) makes good case for use of a noncommittal term for the bounding surface. While there may be no agreement that a given stratal boundary is a discontinuity, there is consensus that all the identified boundaries are stratal surfaces. Includes: 1. Unconformity bounded units (Salvador 1994), defined by bounding stratigraphic discontinuities ('significant unconformities', unconformity is defined as surface of erosion in Salvador 1994). 2. Sequence stratigraphic unit, an allostratigraphic unit that is used to interpret the depositional origin of sedimentary strata and assumes, though this is not always stated, an implicit connection to base level change. It does this by establishing how the sequence of strata accumulated in order in the sedimentary section over a subdividing framework of surfaces."@en ;
-                 
-                 rdfs:label "allostratigraphic unit"@en .
-
-
-###  http://loop3d.org/GSO/ontology/2020/1/geologicunit/alteration_unit
-<http://loop3d.org/GSO/ontology/2020/1/geologicunit/alteration_unit> rdf:type 
-                   owl:Class ; 
-          dcterms:source "CGI geologicunittype SKOS vocabulary 2012-11-24"@en ;
-          rdfs:subClassOf  gsog:Geologic_Unit ;
-          rdfs:comment "Geologic unit defined by alteration process."@en ;
-          
-          rdfs:label "alteration unit"@en .
-
-
-###  http://loop3d.org/GSO/ontology/2020/1/geologicunit/artificial_ground
-<http://loop3d.org/GSO/ontology/2020/1/geologicunit/artificial_ground> rdf:type 
-                     owl:Class ; 
-            dcterms:source "CGI geologicunittype SKOS vocabulary 2012-11-24"@en ;
-            rdfs:subClassOf <http://loop3d.org/GSO/ontology/2020/1/geologicunit/lithogenetic_unit> ;
-            rdfs:comment "Geologic unit defined by genesis involving direct human action to deposit or modify material."@en ;
-            
-            rdfs:label "artificial ground"@en .
-
-
-###  http://loop3d.org/GSO/ontology/2020/1/geologicunit/biostratigraphic_unit
-<http://loop3d.org/GSO/ontology/2020/1/geologicunit/biostratigraphic_unit> rdf:type 
-                         owl:Class ; 
-                dcterms:source "Lenz et al., 2000, Note 64 (see AAPG Bulletin, v. 89, no. 11, November 2005), North American Stratigraphic Code, 1983"@en ;
-                rdfs:subClassOf  gsog:Geologic_Unit ;
-                rdfs:comment "Geologic unit defined based on fossil content. Five kinds of biozones are recognized by the revised NACSN (Lenz et al., 2000, Note 64, a recommended complete replacement of Articles 48 through 54 of the North American Stratigraphic Code (NACSN, 1983) accepted for publication 2000.): range biozone, interval biozone, lineage biozone, assemblage biozone, and abundance biozone. These represent different approaches to defining and recognizing biozones."@en ;
-                
-                rdfs:label "biostratigraphic unit"@en .
-
-
-###  http://loop3d.org/GSO/ontology/2020/1/geologicunit/chronostratigraphic_unit
-<http://loop3d.org/GSO/ontology/2020/1/geologicunit/chronostratigraphic_unit> rdf:type 
-                            owl:Class ; 
-                   dcterms:source "Salvador, A., 1994, International Stratigraphic Guide, Second Edition"@en ;
-                   rdfs:subClassOf  gsog:Geologic_Unit ;
-                   rdfs:comment "Geologic unit that includes all rocks formed during a specific interval of geologic time"@en ;
-                   
-                   rdfs:label "chronostratigraphic unit"@en .
-
-
-###  http://loop3d.org/GSO/ontology/2020/1/geologicunit/deformation_unit
-<http://loop3d.org/GSO/ontology/2020/1/geologicunit/deformation_unit> rdf:type 
-                    owl:Class ; 
-           dcterms:source "CGI geologicunittype SKOS vocabulary 2012-11-24"@en ;
-           rdfs:subClassOf <http://loop3d.org/GSO/ontology/2020/1/geologicunit/lithotectonic_unit> ;
-           rdfs:comment "Lithotectonic unit defined by deformation style or characteristic geologic structure observable in outcrop."@en ;
-           
-           rdfs:label "deformation unit"@en .
-
-
-###  http://loop3d.org/GSO/ontology/2020/1/geologicunit/excavation_unit
-<http://loop3d.org/GSO/ontology/2020/1/geologicunit/excavation_unit> rdf:type 
-                   owl:Class ; 
-          dcterms:source "CGI geologicunittype SKOS vocabulary 2012-11-24"@en ;
-          rdfs:subClassOf <http://loop3d.org/GSO/ontology/2020/1/geologicunit/lithogenetic_unit> ;
-          rdfs:comment "Geologic unit defined by human-made genesis involving excavation. Not necessarily defined by landform (a hole...), as they could have been subsequently filled/landscaped etc. If the excavation is filled becomes an excavation with artificial ground wholly or partly superimposed on it. This sort of thing can become quite important in urban geology where an excavation can be filled and landscaped."@en ;
-          
-          rdfs:label "excavation unit"@en .
-
-
-
-
-
-###  http://loop3d.org/GSO/ontology/2020/1/geologicunit/geomorphologic_unit
-<http://loop3d.org/GSO/ontology/2020/1/geologicunit/geomorphologic_unit> rdf:type 
-                       owl:Class ; 
-              rdfs:subClassOf  gsog:Geologic_Unit ;
-              rdfs:comment "Geologic unit defined by surface landform, e.g. hummocky moraine"@en ;
-              dcterms:source "CGI geologicunittype SKOS vocabulary 2012-11-24"@en ;
-              rdfs:label "geomorphologic unit"@en .
-
-
-###  http://loop3d.org/GSO/ontology/2020/1/geologicunit/geophysical_unit
-<http://loop3d.org/GSO/ontology/2020/1/geologicunit/geophysical_unit> rdf:type 
-                    owl:Class ; 
-           dcterms:source "CGI geologicunittype SKOS vocabulary 2012-11-24"@en ;
-           rdfs:subClassOf  gsog:Geologic_Unit ;
-           rdfs:comment "Geologic unit defined by its geophysical characteristics. Denotes that the properties used to define the unit are measured by intrumental techniques, not directly observable by humans, e.g. density, magnetic susceptibility, magnetization, electrical conductivity."@en ;
-           
-           rdfs:label "geophysical unit"@en .
-
-
-###  http://loop3d.org/GSO/ontology/2020/1/geologicunit/lithodemic_unit
-<http://loop3d.org/GSO/ontology/2020/1/geologicunit/lithodemic_unit> rdf:type 
-                   owl:Class ; 
-          dcterms:source "North American Commission on Stratigraphic Nomenclature, 1983"@en ;
-          rdfs:subClassOf <http://loop3d.org/GSO/ontology/2020/1/geologicunit/lithostratigraphic_unit> ;
-          rdfs:comment "Lithostratigraphic unit that lacks stratification"@en ;
-          
-          rdfs:label "lithodemic unit"@en .
-
-
-###  http://loop3d.org/GSO/ontology/2020/1/geologicunit/lithogenetic_unit
-<http://loop3d.org/GSO/ontology/2020/1/geologicunit/lithogenetic_unit> rdf:type 
-                     owl:Class ; 
-            dcterms:source "CGI geologicunittype SKOS vocabulary 2012-11-24"@en ;
-            rdfs:subClassOf  gsog:Geologic_Unit ;
-            rdfs:comment "Geologic unit defined by genesis. The genesis is manifested by material properties, but the material is not the defining property. Example-- alluvial deposits, glacial deposits."@en ;
-            
-            rdfs:label "lithogenetic unit"@en .
-
-
-###  http://loop3d.org/GSO/ontology/2020/1/geologicunit/lithologic_unit
-<http://loop3d.org/GSO/ontology/2020/1/geologicunit/lithologic_unit> rdf:type 
-                   owl:Class ; 
-          dcterms:source "CGI geologicunittype SKOS vocabulary 2012-11-24"@en ;
-          rdfs:subClassOf  gsog:Geologic_Unit ;
-          rdfs:comment "Geologic unit defined by lithology independent of relationships to other units. Denotes a 'kind' of rock body characterized by lithology, e.g. basaltic rocks."@en ;
-          
-          rdfs:label "lithologic unit"@en .
-
-
-###  http://loop3d.org/GSO/ontology/2020/1/geologicunit/lithostratigraphic_unit
-<http://loop3d.org/GSO/ontology/2020/1/geologicunit/lithostratigraphic_unit> rdf:type 
-                           owl:Class ; 
-                  dcterms:source "Salvador, A., 1994, International Stratigraphic Guide, Second Edition"@en ;
-                  rdfs:subClassOf  gsog:Geologic_Unit ;
-                  rdfs:comment "Geologic unit defined on the basis of observable and distinctive lithologic properties or combination of lithologic properties and stratigraphic relationships. Denotes a particular body of rock."@en ;
- 
-                  rdfs:label "lithostratigraphic unit"@en .
-
-
-###  http://loop3d.org/GSO/ontology/2020/1/geologicunit/lithotectonic_unit
-<http://loop3d.org/GSO/ontology/2020/1/geologicunit/lithotectonic_unit> rdf:type 
-                      owl:Class ; 
-             dcterms:source "Neuendorf, K.K.E., Mehl Jr., J.P. & Jackson, J.A., 2011: Glossary of Geology, 5th ed., revised. Alexandria, VA, American Geological Institute, 800 pp."@en ;
-             rdfs:subClassOf  gsog:Geologic_Unit ;
-             rdfs:comment "Geologic unit defined defined on basis of structural or deformation features, mutual relations, origin or historical evolution. Contained material may be igneous, sedimentary, or metamorphic."@en ;
-
-             rdfs:label "lithotectonic unit"@en .
-
-
-###  http://loop3d.org/GSO/ontology/2020/1/geologicunit/magnetostratigraphic_unit
-<http://loop3d.org/GSO/ontology/2020/1/geologicunit/magnetostratigraphic_unit> rdf:type 
-                             owl:Class ; 
-                    dcterms:source "Salvador, A., 1994, International Stratigraphic Guide, Second Edition"@en ;
-                    rdfs:subClassOf <http://loop3d.org/GSO/ontology/2020/1/geologicunit/geophysical_unit> ;
-                    rdfs:comment "Geologic unit defined by magnetic characteristics."@en ;
-                    
-                    rdfs:label "magnetostratigraphic unit"@en .
-
-
-###  http://loop3d.org/GSO/ontology/2020/1/geologicunit/mass_movement_unit
-<http://loop3d.org/GSO/ontology/2020/1/geologicunit/mass_movement_unit> rdf:type 
-                      owl:Class ; 
-             dcterms:source "CGI geologicunittype SKOS vocabulary 2012-11-24"@en ;
-             rdfs:subClassOf <http://loop3d.org/GSO/ontology/2020/1/geologicunit/lithogenetic_unit> ;
-             rdfs:comment "Geologic unit produced by gravity driven, down-slope displacemnt of material, and characterized by the type of movement giving rise to the deposit, and by how the individual movement types present in the deposit are related in time and space."@en ;
-             
-             rdfs:label "mass movement unit"@en .
-
-
-###  http://loop3d.org/GSO/ontology/2020/1/geologicunit/pedoderm
-<http://loop3d.org/GSO/ontology/2020/1/geologicunit/pedoderm> rdf:type 
-            owl:Class ; 
-   dcterms:source "CGI geologicunittype SKOS vocabulary 2012-11-24"@en ;
-   rdfs:subClassOf  gsog:Geologic_Unit ;
-   rdfs:comment "Geologic unit defined based on soil development and character. Pedoderm is not a surface classification unit because soil classification requires knowledge of the soil profile, which always extends some distance beneath the surface."@en ;
-   
-   rdfs:label "pedoderm"@en .
-
-
-###  http://loop3d.org/GSO/ontology/2020/1/geologicunit/pedostratigraphic_unit
-<http://loop3d.org/GSO/ontology/2020/1/geologicunit/pedostratigraphic_unit> rdf:type 
-                          owl:Class ; 
-                 dcterms:source "North American Commission on Stratigraphic Nomenclature, 1983, Morrison, 1995, INQUA/ISSS newsletter, Nov. 1995http://fadr.msu.ru/inqua/nl-archive/nl-8-11/howcan.html, ISSN 0256-2340."@en ;
-                 rdfs:subClassOf  gsog:Geologic_Unit ;
-                 rdfs:comment "Geologic unit that represents a single pedologic horizon in a sequence of strata (consolidated or non-consolidated). The presence of an overlying geologic unit is required, but locally the soil horizon may be at the Earth surface (in which case is may be coincident with a Pedoderm). See discussion at https://www.seegrid.csiro.au/twiki/bin/view/CGIModel/PedostratigraphicUnit"@en ;
-                 
-                 rdfs:label "pedostratigraphic unit"@en .
-
-
-###  http://loop3d.org/GSO/ontology/2020/1/geologicunit/polarity_chronostratigraphic_unit
-<http://loop3d.org/GSO/ontology/2020/1/geologicunit/polarity_chronostratigraphic_unit> rdf:type 
-                                     owl:Class ; 
-                            dcterms:source "North American Commission on Stratigraphic Nomenclature, 1983"@en ;
-                            rdfs:subClassOf  gsog:Geologic_Unit ;
-                            rdfs:comment "Geologic unit defined by primary magnetic-polarity record imposed whien the rock was deposited or crystallized during a specific interval of geolgoic time. Kind of chronostratigraphic unit and kind of geophysical unit."@en ;
-                            
-                            rdfs:label "polarity chronostratigraphic unit"@en .
-
-
-###  http://loop3d.org/GSO/ontology/2020/1/geologicunit/ontology
-<http://loop3d.org/GSO/ontology/2020/1/geologicunit/ontology> rdf:type 
-                 owl:ontology ;
-        dcterms:creator "CGI Geoscience Terminology Working Group, OWL conversion by Stephen Richard" ;
-        dcterms:date "2012-11-24" ;
-		dcterms:modified "2020-01-30" ;
-        dcterms:description "This ontology specifies concepts for description of Geologic Unit, as defined by the IUGS Commission for Geoscience Information (CGI) Geoscience Terminology Working Group. These classes and properties extend the base GSO-Geology ontology for more detailed descriptions. Unit types are differentiated based on their defining lithological, stratigraphic, or other physical properties."@en ;
-        rdfs:label "Geologic Unit"@en ;
-        rdfs:comment  "This file based on the CGI Geologic Unit type vocabulary. Compilation and review in MS Excel spreadsheet, converted to MS Excel for SKOS generation using GSML_SKOS_fromXLS_2016.02.xslt."@en ;
-         .
-
-# property binding
-gsgu:Alteration_Degree
+gsog:Chronostratigraphic_Unit
   a owl:Class ;
-  rdfs:comment "Specification of the strength of observed alteration." ;
-  rdfs:isDefinedBy "GeoSciML v4" ;
-  rdfs:label "Alteration degree" ;
-  rdfs:subClassOf gsoc:Physical_Property ;
+  dcterms:source "Salvador, A., 1994, International Stratigraphic Guide, Second Edition"@en ;
+  rdfs:comment "Geologic unit that includes all rocks formed during a specific interval of geologic time"@en ;
+  rdfs:label "chronostratigraphic unit"@en ;
+  rdfs:subClassOf gsog:Geologic_Unit ;
 .
-gsgu:Alteration_Distribution
+gsog:Geologic_Unit
   a owl:Class ;
-  rdfs:comment "AlterationDistribution describes the spatial distribution or geometry of alteration zones. eg: patchy, spotted, banded, viens, vein breccia, pervasive, disseminated, etc" ;
-  rdfs:isDefinedBy "GeoSciML v4" ;
-  rdfs:label "Alteration distribution" ;
-  rdfs:subClassOf gsoc:Physical_Property ;
+  rdfs:comment "Geologic unit properties are bound in the Geologic_Unit module"@en ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasPhysicalProperty ;
+      owl:someValuesFrom gsop:Alteration_Degree ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasPhysicalProperty ;
+      owl:someValuesFrom gsop:Alteration_Distribution ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasPhysicalProperty ;
+      owl:someValuesFrom gsop:Alteration_Type ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasPhysicalProperty ;
+      owl:someValuesFrom gsop:Metamorphic_Facies ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasPhysicalProperty ;
+      owl:someValuesFrom gsop:Metamorphic_Grade ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasPhysicalProperty ;
+      owl:someValuesFrom gsgu:Bedding_Pattern ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasPhysicalProperty ;
+      owl:someValuesFrom gsgu:Bedding_Style ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasPhysicalProperty ;
+      owl:someValuesFrom gsgu:Bedding_Thickness_Category ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasPhysicalProperty ;
+      owl:someValuesFrom gsgu:Geologic_Unit_Body_Morphology ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasPhysicalProperty ;
+      owl:someValuesFrom gsgu:Geologic_Unit_Composition_Category ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasPhysicalProperty ;
+      owl:someValuesFrom gsgu:Geologic_Unit_Outcrop_Character ;
+    ] ;
 .
-gsgu:Alteration_Type
+gsog:Lithostratigraphic_Unit
   a owl:Class ;
-  rdfs:comment "Specification of alteration types (eg; potassic, argillic, advanced argillic)"@en ;
-  rdfs:isDefinedBy "GeoSciML v4" ;
-  rdfs:label "Alteration type" ;
-  rdfs:subClassOf gsoc:Physical_Property ;
+  dcterms:source "Salvador, A., 1994, International Stratigraphic Guide, Second Edition"@en ;
+  rdfs:comment "Geologic unit defined on the basis of observable and distinctive lithologic properties or combination of lithologic properties and stratigraphic relationships. Denotes a particular body of rock."@en ;
+  rdfs:label "lithostratigraphic unit"@en ;
+  rdfs:subClassOf gsog:Geologic_Unit ;
 .
-
+gsop:Metamorphic_Facies
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasValue ;
+      owl:someValuesFrom gsop:Metamorphic_Facies_Space ;
+    ] ;
+.
 gsgu:Bedding_Pattern
   a owl:Class ;
   rdfs:comment "Term(s) specifying patterns of bedding thickness or relationships between bedding packages. (eg; thinning upward, thickening upward)" ;
   rdfs:isDefinedBy "GeoSciML v4" ;
   rdfs:label "Bedding pattern" ;
   rdfs:subClassOf gsoc:Physical_Property ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasValue ;
+      owl:someValuesFrom xsd:string ;
+    ] ;
 .
 gsgu:Bedding_Style
   a owl:Class ;
@@ -256,6 +115,11 @@ gsgu:Bedding_Style
   rdfs:isDefinedBy "GeoSciML v4" ;
   rdfs:label "Bedding style" ;
   rdfs:subClassOf gsoc:Physical_Property ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasValue ;
+      owl:someValuesFrom xsd:string ;
+    ] ;
 .
 gsgu:Bedding_Thickness_Category
   a owl:Class ;
@@ -263,14 +127,23 @@ gsgu:Bedding_Thickness_Category
   rdfs:isDefinedBy "GeoSciML v4" ;
   rdfs:label "Bedding thickness" ;
   rdfs:subClassOf gsoc:Physical_Property ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasValue ;
+      owl:someValuesFrom xsd:string ;
+    ] ;
 .
-
 gsgu:Geologic_Unit_Body_Morphology
   a owl:Class ;
   rdfs:comment "The geometry or form of a GeologicUnit.  Examples include: dike (dyke), cone, fan, sheet, etc. Morphology is independent of the substance (EarthMaterial) that composes the GeologicUnit or process that formed it." ;
   rdfs:isDefinedBy "GeoSciML v4" ;
   rdfs:label "Body morphology" ;
   rdfs:subClassOf gsoc:Physical_Property ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasValue ;
+      owl:someValuesFrom xsd:string ;
+    ] ;
 .
 gsgu:Geologic_Unit_Composition_Category
   a owl:Class ;
@@ -278,15 +151,153 @@ gsgu:Geologic_Unit_Composition_Category
   rdfs:isDefinedBy "GeoSciML v4" ;
   rdfs:label "Composition category" ;
   rdfs:subClassOf gsoc:Physical_Property ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasValue ;
+      owl:someValuesFrom xsd:string ;
+    ] ;
 .
 gsgu:Geologic_Unit_Outcrop_Character
   a owl:Class ;
-  rdfs:comment "Describes the nature of outcrops formed by a geologic unit. Examples: bouldery, cliff-forming, ledge-forming, slope-forming, poorly exposed" ;
+  rdfs:comment "Describes the nature of outcrops formed by a geologic unit. Examples: bouldery, cliff-forming, ledge-forming, slope-forming, poorly exposed. Assign free text string value for now, controlled vocabulary is the goal." ;
   rdfs:isDefinedBy "GeoSciML v4" ;
   rdfs:label "Outcrop character" ;
   rdfs:subClassOf gsoc:Physical_Property ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasValue ;
+      owl:someValuesFrom xsd:string ;
+    ] ;
 .
-
-# vocabulary concept spaces for property value ranges.
-
-###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
+gsgu:allostratigraphic_unit
+  a owl:Class ;
+  dcterms:source "This vocabulary, Salvador, 1994, Donovon 2004 IUGS abstract."@en ;
+  rdfs:comment "Geologic unit defined by bounding surfaces. Not necessarily stratified. Donovon (2004, IUGS abstract Florence) makes good case for use of a noncommittal term for the bounding surface. While there may be no agreement that a given stratal boundary is a discontinuity, there is consensus that all the identified boundaries are stratal surfaces. Includes: 1. Unconformity bounded units (Salvador 1994), defined by bounding stratigraphic discontinuities ('significant unconformities', unconformity is defined as surface of erosion in Salvador 1994). 2. Sequence stratigraphic unit, an allostratigraphic unit that is used to interpret the depositional origin of sedimentary strata and assumes, though this is not always stated, an implicit connection to base level change. It does this by establishing how the sequence of strata accumulated in order in the sedimentary section over a subdividing framework of surfaces."@en ;
+  rdfs:label "allostratigraphic unit"@en ;
+  rdfs:subClassOf gsog:Geologic_Unit ;
+.
+gsgu:alteration_unit
+  a owl:Class ;
+  dcterms:source "CGI geologicunittype SKOS vocabulary 2012-11-24"@en ;
+  rdfs:comment "Geologic unit defined by alteration process."@en ;
+  rdfs:label "alteration unit"@en ;
+  rdfs:subClassOf gsog:Geologic_Unit ;
+.
+gsgu:artificial_ground
+  a owl:Class ;
+  dcterms:source "CGI geologicunittype SKOS vocabulary 2012-11-24"@en ;
+  rdfs:comment "Geologic unit defined by genesis involving direct human action to deposit or modify material."@en ;
+  rdfs:label "artificial ground"@en ;
+  rdfs:subClassOf gsgu:lithogenetic_unit ;
+.
+gsgu:biostratigraphic_unit
+  a owl:Class ;
+  dcterms:source "Lenz et al., 2000, Note 64 (see AAPG Bulletin, v. 89, no. 11, November 2005), North American Stratigraphic Code, 1983"@en ;
+  rdfs:comment "Geologic unit defined based on fossil content. Five kinds of biozones are recognized by the revised NACSN (Lenz et al., 2000, Note 64, a recommended complete replacement of Articles 48 through 54 of the North American Stratigraphic Code (NACSN, 1983) accepted for publication 2000.): range biozone, interval biozone, lineage biozone, assemblage biozone, and abundance biozone. These represent different approaches to defining and recognizing biozones."@en ;
+  rdfs:label "biostratigraphic unit"@en ;
+  rdfs:subClassOf gsog:Geologic_Unit ;
+.
+gsgu:deformation_unit
+  a owl:Class ;
+  dcterms:source "CGI geologicunittype SKOS vocabulary 2012-11-24"@en ;
+  rdfs:comment "Lithotectonic unit defined by deformation style or characteristic geologic structure observable in outcrop."@en ;
+  rdfs:label "deformation unit"@en ;
+  rdfs:subClassOf gsgu:lithotectonic_unit ;
+.
+gsgu:excavation_unit
+  a owl:Class ;
+  dcterms:source "CGI geologicunittype SKOS vocabulary 2012-11-24"@en ;
+  rdfs:comment "Geologic unit defined by human-made genesis involving excavation. Not necessarily defined by landform (a hole...), as they could have been subsequently filled/landscaped etc. If the excavation is filled becomes an excavation with artificial ground wholly or partly superimposed on it. This sort of thing can become quite important in urban geology where an excavation can be filled and landscaped."@en ;
+  rdfs:label "excavation unit"@en ;
+  rdfs:subClassOf gsgu:lithogenetic_unit ;
+.
+gsgu:geomorphologic_unit
+  a owl:Class ;
+  dcterms:source "CGI geologicunittype SKOS vocabulary 2012-11-24"@en ;
+  rdfs:comment "Geologic unit defined by surface landform, e.g. hummocky moraine"@en ;
+  rdfs:label "geomorphologic unit"@en ;
+  rdfs:subClassOf gsog:Geologic_Unit ;
+.
+gsgu:geophysical_unit
+  a owl:Class ;
+  dcterms:source "CGI geologicunittype SKOS vocabulary 2012-11-24"@en ;
+  rdfs:comment "Geologic unit defined by its geophysical characteristics. Denotes that the properties used to define the unit are measured by intrumental techniques, not directly observable by humans, e.g. density, magnetic susceptibility, magnetization, electrical conductivity."@en ;
+  rdfs:label "geophysical unit"@en ;
+  rdfs:subClassOf gsog:Geologic_Unit ;
+.
+gsgu:lithodemic_unit
+  a owl:Class ;
+  dcterms:source "North American Commission on Stratigraphic Nomenclature, 1983"@en ;
+  rdfs:comment "Lithostratigraphic unit that lacks stratification"@en ;
+  rdfs:label "lithodemic unit"@en ;
+  rdfs:subClassOf gsog:Lithostratigraphic_Unit ;
+.
+gsgu:lithogenetic_unit
+  a owl:Class ;
+  dcterms:source "CGI geologicunittype SKOS vocabulary 2012-11-24"@en ;
+  rdfs:comment "Geologic unit defined by genesis. The genesis is manifested by material properties, but the material is not the defining property. Example-- alluvial deposits, glacial deposits."@en ;
+  rdfs:label "lithogenetic unit"@en ;
+  rdfs:subClassOf gsog:Geologic_Unit ;
+.
+gsgu:lithologic_unit
+  a owl:Class ;
+  dcterms:source "CGI geologicunittype SKOS vocabulary 2012-11-24"@en ;
+  rdfs:comment "Geologic unit defined by lithology independent of relationships to other units. Denotes a 'kind' of rock body characterized by lithology, e.g. basaltic rocks."@en ;
+  rdfs:label "lithologic unit"@en ;
+  rdfs:subClassOf gsog:Geologic_Unit ;
+.
+gsgu:lithotectonic_unit
+  a owl:Class ;
+  dcterms:source "Neuendorf, K.K.E., Mehl Jr., J.P. & Jackson, J.A., 2011: Glossary of Geology, 5th ed., revised. Alexandria, VA, American Geological Institute, 800 pp."@en ;
+  rdfs:comment "Geologic unit defined defined on basis of structural or deformation features, mutual relations, origin or historical evolution. Contained material may be igneous, sedimentary, or metamorphic."@en ;
+  rdfs:label "lithotectonic unit"@en ;
+  rdfs:subClassOf gsog:Geologic_Unit ;
+.
+gsgu:magnetostratigraphic_unit
+  a owl:Class ;
+  dcterms:source "Salvador, A., 1994, International Stratigraphic Guide, Second Edition"@en ;
+  rdfs:comment "Geologic unit defined by magnetic characteristics."@en ;
+  rdfs:label "magnetostratigraphic unit"@en ;
+  rdfs:subClassOf gsgu:geophysical_unit ;
+.
+gsgu:mass_movement_unit
+  a owl:Class ;
+  dcterms:source "CGI geologicunittype SKOS vocabulary 2012-11-24"@en ;
+  rdfs:comment "Geologic unit produced by gravity driven, down-slope displacemnt of material, and characterized by the type of movement giving rise to the deposit, and by how the individual movement types present in the deposit are related in time and space."@en ;
+  rdfs:label "mass movement unit"@en ;
+  rdfs:subClassOf gsgu:lithogenetic_unit ;
+.
+gsgu:ontology
+  a owl:Ontology ;
+  dcterms:creator "CGI Geoscience Terminology Working Group, OWL conversion by Stephen Richard" ;
+  dcterms:date "2012-11-24" ;
+  dcterms:description "This ontology specifies concepts for description of Geologic Unit, as defined by the IUGS Commission for Geoscience Information (CGI) Geoscience Terminology Working Group. These classes and properties extend the base GSO-Geology ontology for more detailed descriptions. Unit types are differentiated based on their defining lithological, stratigraphic, or other physical properties."@en ;
+  dcterms:modified "2020-01-30" ;
+  rdfs:comment "This file based on the CGI Geologic Unit type vocabulary. Compilation and review in MS Excel spreadsheet, converted to MS Excel for SKOS generation using GSML_SKOS_fromXLS_2016.02.xslt."@en ;
+  rdfs:label "Geologic Unit"@en ;
+  owl:imports gsoc:ontology ;
+  owl:imports <http://loop3d.org/GSO/ontology/2020/1/geologicunit/rockbodypart/ontology> ;
+  owl:imports <http://loop3d.org/GSO/ontology/2020/1/metamorphicfacies/ontology> ;
+  owl:imports <http://loop3d.org/GSO/ontology/2020/1/metamorphicgrade/ontology> ;
+.
+gsgu:pedoderm
+  a owl:Class ;
+  dcterms:source "CGI geologicunittype SKOS vocabulary 2012-11-24"@en ;
+  rdfs:comment "Geologic unit defined based on soil development and character. Pedoderm is not a surface classification unit because soil classification requires knowledge of the soil profile, which always extends some distance beneath the surface."@en ;
+  rdfs:label "pedoderm"@en ;
+  rdfs:subClassOf gsog:Geologic_Unit ;
+.
+gsgu:pedostratigraphic_unit
+  a owl:Class ;
+  dcterms:source "North American Commission on Stratigraphic Nomenclature, 1983, Morrison, 1995, INQUA/ISSS newsletter, Nov. 1995http://fadr.msu.ru/inqua/nl-archive/nl-8-11/howcan.html, ISSN 0256-2340."@en ;
+  rdfs:comment "Geologic unit that represents a single pedologic horizon in a sequence of strata (consolidated or non-consolidated). The presence of an overlying geologic unit is required, but locally the soil horizon may be at the Earth surface (in which case is may be coincident with a Pedoderm). See discussion at https://www.seegrid.csiro.au/twiki/bin/view/CGIModel/PedostratigraphicUnit"@en ;
+  rdfs:label "pedostratigraphic unit"@en ;
+  rdfs:subClassOf gsog:Geologic_Unit ;
+.
+gsgu:polarity_chronostratigraphic_unit
+  a owl:Class ;
+  dcterms:source "North American Commission on Stratigraphic Nomenclature, 1983"@en ;
+  rdfs:comment "Geologic unit defined by primary magnetic-polarity record imposed whien the rock was deposited or crystallized during a specific interval of geolgoic time. Kind of chronostratigraphic unit and kind of geophysical unit."@en ;
+  rdfs:label "polarity chronostratigraphic unit"@en ;
+  rdfs:subClassOf gsog:Geologic_Unit ;
+.

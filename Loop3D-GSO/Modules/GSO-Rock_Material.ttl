@@ -1,25 +1,245 @@
 # baseURI: http://loop3d.org/GSO/ontology/2019/1/lithology/ontology
 # imports: http://loop3d.org/GSO/ontology/2019/1/geologicfeature/ontology
+# imports: http://loop3d.org/GSO/ontology/2019/1/lithology/particleaspectratio/ontology
+# imports: http://loop3d.org/GSO/ontology/2020/1/lithology/geneticcategory/ontology
+# imports: http://loop3d.org/GSO/ontology/2020/1/lithology/particleshape/ontology
+# imports: http://loop3d.org/GSO/ontology/2020/1/lithology/particletype/ontology
+# imports: http://loop3d.org/GSO/ontology/2020/1/metamorphicfacies/ontology
+# imports: http://loop3d.org/GSO/ontology/2020/1/metamorphicgrade/ontology
 # imports: http://purl.org/dc/terms/
-# prefix: lith
 
 @prefix : <http://loop3d.org/GSO/ontology/2019/1/lithology/> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix gsog: <http://loop3d.org/GSO/ontology/2019/1/geologicfeature/> .
+@prefix gsar: <http://loop3d.org/GSO/ontology/2020/1/lithology/particleaspectratio/> .
+@prefix gsgc: <http://loop3d.org/GSO/ontology/2020/1/lithology/geneticcategory/> .
 @prefix gslth: <http://loop3d.org/GSO/ontology/2019/1/lithology/> .
+@prefix gsmf: <http://loop3d.org/GSO/ontology/2020/1/metamorphicfacies/> .
+@prefix gsmg: <http://loop3d.org/GSO/ontology/2020/1/metamorphicgrade/> .
+@prefix gsoc: <http://loop3d.org/GSO/ontology/2019/1/common/> .
+@prefix gsog: <http://loop3d.org/GSO/ontology/2019/1/geologicfeature/> .
+@prefix gsop: <http://loop3d.org/GSO/ontology/2019/1/geologicproperty/> .
+@prefix gsps: <http://loop3d.org/GSO/ontology/2020/1/lithology/particleshape/> .
+@prefix gspt: <http://loop3d.org/GSO/ontology/2020/1/lithology/particletype/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<http://loop3d.org/GSO/ontology/2019/1/lithology/ontology> 
-  a owl:Ontology ;
-  rdfs:comment "modified from CGI SimpleLithology"@en ;
-  rdfs:label "GSO Simple Lithology"@en ;
-  owl:imports <http://loop3d.org/GSO/ontology/2019/1/geologicfeature/ontology> ;
-  owl:imports dcterms: ;
-  owl:versionIRI gslth: ;
+gsog:Granular_Material
+  a owl:Class ;
+  rdfs:comment "Granular material properties are bound in the Rock_Material module"@en ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasPhysicalProperty ;
+      owl:someValuesFrom gslth:Grain_Shape ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasPhysicalProperty ;
+      owl:someValuesFrom gslth:Grain_Size ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasPhysicalProperty ;
+      owl:someValuesFrom gslth:Particle_Aspect_Ratio_Category ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasPhysicalProperty ;
+      owl:someValuesFrom gslth:Particle_Sorting_Category ;
+    ] ;
+.
+gsog:Rock_Material
+  a owl:Class ;
+  rdfs:comment "Rock_material properties a bound in the Rock_Material module"@en ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasPhysicalProperty ;
+      owl:someValuesFrom gsop:Alteration_Degree ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasPhysicalProperty ;
+      owl:someValuesFrom gsop:Alteration_Distribution ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasPhysicalProperty ;
+      owl:someValuesFrom gsop:Alteration_Type ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasPhysicalProperty ;
+      owl:someValuesFrom gsop:Consolidation_Degree ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasPhysicalProperty ;
+      owl:someValuesFrom gsop:Grain_Shape ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasPhysicalProperty ;
+      owl:someValuesFrom gsop:Metamorphic_Facies ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasPhysicalProperty ;
+      owl:someValuesFrom gsop:Metamorphic_Grade ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasPhysicalProperty ;
+      owl:someValuesFrom gsop:Rock_Material_Genetic_Category ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasPhysicalProperty ;
+      owl:someValuesFrom gslth:Grain_Size ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasPhysicalProperty ;
+      owl:someValuesFrom gslth:Particle_Aspect_Ratio_Category ;
+    ] ;
+.
+gslth:Genetic_Category_Space
+  a owl:Class ;
+  rdfs:label "Any Genetic Category" ;
+  rdfs:subClassOf gsoc:Physical_Region ;
+.
+gslth:Grain_Shape
+  a owl:Class ;
+  rdfs:label "Grain Shape"@en ;
+  rdfs:subClassOf gsoc:Physical_Property ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom gslth:Particle_Shape_Space ;
+      owl:onProperty gsoc:hasValue ;
+    ] ;
+.
+gslth:Grain_Size
+  a owl:Class ;
+  rdfs:comment "generaly property for specification of grain size; sub-properties have value spaces for different size specification types."@en ;
+  rdfs:label "Grain Size property "@en ;
+  rdfs:subClassOf gsoc:Physical_Property ;
+.
+gslth:Grain_Size_Average
+  a owl:Class ;
+  rdfs:comment "mean diameter for grain size distribution "@en ;
+  rdfs:label "Grain Size Average "@en ;
+  rdfs:subClassOf gslth:Grain_Size ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom xsd:decimal ;
+      owl:onProperty gsoc:hasValue ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasUOM ;
+      owl:someValuesFrom gsop:UOM ;
+    ] ;
+.
+gslth:Grain_Size_Category
+  a owl:Class ;
+  rdfs:comment "grain size range expressed using a named size category vocabulary" ;
+  rdfs:isDefinedBy "GeoSciML v3" ;
+  rdfs:label "Grain size term" ;
+  rdfs:subClassOf gslth:Grain_Size ;
+.
+gslth:Grain_Size_Max
+  a owl:Class ;
+  rdfs:comment "upper bound of 95% interval for grain size distribution "@en ;
+  rdfs:label "Grain Size Maximum "@en ;
+  rdfs:subClassOf gslth:Grain_Size ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom xsd:decimal ;
+      owl:onProperty gsoc:hasValue ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasUOM ;
+      owl:someValuesFrom gsop:UOM ;
+    ] ;
+.
+gslth:Grain_Size_Min
+  a owl:Class ;
+  rdfs:comment "lower bound of 95% interval for grain size distribution "@en ;
+  rdfs:label "Grain Size Minimum "@en ;
+  rdfs:subClassOf gslth:Grain_Size ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom xsd:decimal ;
+      owl:onProperty gsoc:hasValue ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasUOM ;
+      owl:someValuesFrom gsop:UOM ;
+    ] ;
+.
+gslth:Particle_Aspect_Ratio_Category
+  a owl:Class ;
+  rdfs:comment "AspectRatio describes the geometry of particles based on the ratios of lengths of long, intermediate and short axes of grains. Equates to sphericity in sedimentary rocks (ie: the degree to which the shape of a particle approximates a sphere).  A quantitative specification based on the ratio of lengths of long, intermediate and short axes of grain shape (Sneed and Folk, 1958; Zingg, 1935). (eg: prolate, slightly flattened, very bladed, equant, acicular, tabular) "@en ;
+  rdfs:isDefinedBy "GeoSciML v4" ;
+  rdfs:label "Particle aspect ratio "@en ;
+  rdfs:subClassOf gsoc:Physical_Property ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom gslth:Particle_Aspect_Ratio_Space ;
+      owl:onProperty gsoc:hasValue ;
+    ] ;
+.
+gslth:Particle_Aspect_Ratio_Space
+  a owl:Class ;
+  rdfs:comment "categories partitioning the space are defined in a separate ontology, imported here as gsar: <http://loop3d.org/GSO/ontology/2020/1/lithology/particleaspectratio/>. Different vocabularies can be imported for different profiles." ;
+  rdfs:label "any particle aspect ratio" ;
+  rdfs:subClassOf gsoc:Physical_Region ;
+.
+gslth:Particle_Shape_Space
+  a owl:Class ;
+  rdfs:comment "categories partitioning the space are defined in a separate ontology, imported here as gsps: <http://loop3d.org/GSO/ontology/2020/1/lithology/particleshape/> Different vocabularies can be imported for different profiles." ;
+  rdfs:label "any particle shape category" ;
+  rdfs:subClassOf gsoc:Physical_Region ;
+.
+gslth:Particle_Sorting_Category
+  a owl:Class ;
+  rdfs:comment "The Sorting attribute holds text terms to specify size distribution of particles in a CompoundMaterial. Terminology for sorting in sedimentary rocks is based on the quantitative Graphic Standard Deviation (IGSD) scheme proposed by Folk (1968, 1974).  Example terms for this attribute may include sedimentary terms such as well sorted and poorly sorted, or igneous terms such as porphyritic, equigranuilar, seriate." ;
+  rdfs:isDefinedBy "GeoSciML v4" ;
+  rdfs:label "Particle sorting" ;
+  rdfs:subClassOf gsoc:Physical_Property ;
+.
+gslth:Rock_Material_Color
+  a owl:Class ;
+  rdfs:comment "Property for specification of color of rocks, minerals, other Earth Material "@en ;
+  rdfs:label "Earth Material Color"@en ;
+  rdfs:subClassOf gsoc:Physical_Property ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasValue ;
+      owl:someValuesFrom gsoc:Color ;
+    ] ;
+.
+gslth:Rock_Material_Composition_Category
+  a owl:Class ;
+  rdfs:comment "Term to specify the gross compositional character of a compound material. Composition as used here is loosely construed to include both chemical composition and petrograpic composition, thus multiple values may be applied to a single rock, e.g. metaluminous and alkalic, undersaturated and basic, etc. Terms would typically include broad chemical classifications such as silicate, carbonate, ferromagnesian, oxide.  However, this attribute may have different terminology for different kinds of rocks - for example sandstone petrographic classification terms (e.g. feldspathic) might be placed here."@en ;
+  rdfs:isDefinedBy "GeoSciML v4" ;
+  rdfs:label "Rock material composition category" ;
+  rdfs:subClassOf gsoc:Physical_Property ;
+.
+gslth:Rock_Material_Genetic_Category
+  a owl:Class ;
+  rdfs:comment "A term that represents a summary geologic history of the material. (ie, a genetic process classifier term) Examples include igneous, sedimentary, metamorphic, shock metamorphic, volcanic, pyroclastic."@en ;
+  rdfs:isDefinedBy "GeoSciML v4" ;
+  rdfs:label "Rock material genetic category" ;
+  rdfs:subClassOf gsoc:Physical_Property ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom gslth:Genetic_Category_Space ;
+      owl:onProperty gsoc:hasValue ;
+    ] ;
 .
 gslth:acidic_igneous_material
   a owl:Class ;
@@ -1356,6 +1576,19 @@ gslth:non_clastic_siliceous_sedimentary_rock
   rdfs:label "non clastic siliceous sedimentary rock"@en ;
   rdfs:subClassOf gslth:non_clastic_siliceous_sedimentary_material ;
   rdfs:subClassOf gslth:sedimentary_rock ;
+.
+gslth:ontology
+  a owl:Ontology ;
+  rdfs:comment "Rock type categories modified from CGI SimpleLithology; properties based on GeoSciML v3.2 conceptual model. Scope includes gso Rock_Material and gso Granular Material. GSO granular material is analogous to GeoSciMLv3.2 compound material particle geometry description.  "@en ;
+  rdfs:label "GSO Rock Material ontology."@en ;
+  owl:imports gsog:ontology ;
+  owl:imports <http://loop3d.org/GSO/ontology/2019/1/lithology/particleaspectratio/ontology> ;
+  owl:imports gsgc:ontology ;
+  owl:imports gsps:ontology ;
+  owl:imports gspt:ontology ;
+  owl:imports gsmf:ontology ;
+  owl:imports gsmg:ontology ;
+  owl:imports dcterms: ;
 .
 gslth:ooze
   a owl:Class ;

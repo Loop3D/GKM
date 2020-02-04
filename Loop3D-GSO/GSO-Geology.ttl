@@ -7,8 +7,8 @@
 @prefix gsoc: <http://loop3d.org/GSO/ontology/2019/1/common/> .
 @prefix gsog: <http://loop3d.org/GSO/ontology/2019/1/geologicfeature/> .
 @prefix gsop: <http://loop3d.org/GSO/ontology/2019/1/geologicproperty/> .
-@prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix gspr: <http://loop3d.org/GSO/ontology/2019/1/geologicprocess/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
@@ -166,7 +166,6 @@ gsog:Deformation
   a owl:Class ;
   rdfs:subClassOf gsog:Geologic_Process ;
 .
-
 gsog:Ductile_Shear_Zone
   a owl:Class ;
   rdfs:label "Ductile Shear Zone"@en ;
@@ -466,7 +465,7 @@ Probably should specify a Temporal Reference System used to assign coordinate va
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onClass gsoc:UOM ;
+      owl:onClass gsoc:UOM_Space ;
       owl:onProperty gsoc:hasUOM ;
       owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
     ] ;
@@ -543,8 +542,8 @@ gsog:Geologic_Unit
 - different parthood conditions:  
 -- a unit can be part of a stratigraphic lexicon, but its material cannot be part of the lexicon. 
 -- parts of the unit are not parts of the material, e.g. the western arm of formation X is not a part of its sandstone - the sandstone making up the western part of X is a part of the sandstone 
--- different identity conditions: a unit can have some material added or removed and retain identity, but the material changes identity with the addition or removal of some material"""@en,
-"Type of geologic unit is unknown, unspecified, irrelevant, or some type not included in the vocabulary. Type makes no implication for required properties or cardinalities. This is the root concept for the type hierarchy."@en;
+-- different identity conditions: a unit can have some material added or removed and retain identity, but the material changes identity with the addition or removal of some material"""@en ;
+  rdfs:comment "Type of geologic unit is unknown, unspecified, irrelevant, or some type not included in the vocabulary. Type makes no implication for required properties or cardinalities. This is the root concept for the type hierarchy."@en ;
   rdfs:label "Geologic Unit"@en ;
   rdfs:subClassOf gsoc:Physical_Object ;
   rdfs:subClassOf gsog:Rock_Body ;
@@ -602,9 +601,9 @@ gsog:Gradational_Contact_Zone
 .
 gsog:Granular_Material
   a owl:Class ;
-  rdfs:comment "Represents a rock body constituent composed of particles that share a set of characteristics, e.g. particle size (distribution), mineralogy, shape.  E.g. the sand that is a constituent in a sandstone, or the feldspar phenocrysts that are a constituent in a granite"@en ;
-  rdfs:comment "example top level subclasses shown (probably not complete); differentiated based on genesis for the most part."@en ;
-  rdfs:label "Granular Material"@en ;
+  rdfs:comment "Represents a rock body constituent composed of particles that share a set of characteristics, e.g. particle size (distribution), mineralogy, shape.  E.g. the sand that is a constituent in a sandstone, or the feldspar phenocrysts that are a constituent in a granite. Note-- this class also includes various types of cavities or voids that are useful to characterize as a constituent in a Rock_material."@en ;
+  rdfs:comment "example top level subclasses are included in the Base Geology ontology (these are not complete), differentiated based on genesis for the most part. Detailed subclasses are defined by CGI particle type vocabulary and are imported in the Rock_Material module."@en ;
+  rdfs:label "Granular,  Particulate or Void constituents"@en ;
   rdfs:subClassOf gsoc:Amount_Of_Matter ;
   rdfs:subClassOf [
       a owl:Restriction ;
@@ -733,7 +732,7 @@ gsog:Outcrop
   rdfs:label "Rock Material Outcrop"@en ;
   rdfs:subClassOf gsog:Rock_Body_Part ;
 .
-gsog:ParticleShape
+gsog:Particle_Shape_Space
   a owl:Class ;
   rdfs:label "Any Particle Shape"@en ;
   rdfs:subClassOf gsoc:Shape ;
@@ -985,10 +984,6 @@ gsog:Sub-Period
       owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
     ] ;
 .
-gsog:Subangular
-  a owl:Class ;
-  rdfs:subClassOf gsog:ParticleShape ;
-.
 gsog:Substage
   a owl:Class ;
   rdfs:subClassOf gsog:Chronostratigraphic_Unit ;
@@ -1047,7 +1042,6 @@ gsog:System
       owl:someValuesFrom gsog:Period ;
     ] ;
 .
-
 gsog:Transformation
   a owl:Class ;
   rdfs:comment "process that  changes the characteristics of matter within the model space" ;

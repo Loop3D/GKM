@@ -11,10 +11,37 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-
-gsop:Amount
+gsop:Alteration_Degree
   a owl:Class ;
+  rdfs:comment "Specification of the strength of observed alteration. Can be used on Geologic_Unit or Rock_Material"@en ;
+  rdfs:isDefinedBy "GeoSciML v4" ;
+  rdfs:label "Alteration degree"@en ;
   rdfs:subClassOf gsoc:Physical_Property ;
+.
+gsop:Alteration_Distribution
+  a owl:Class ;
+  rdfs:comment "AlterationDistribution describes the spatial distribution or geometry of alteration zones. eg: patchy, spotted, banded, viens, vein breccia, pervasive, disseminated, etc" ;
+  rdfs:isDefinedBy "GeoSciML v4" ;
+  rdfs:label "Alteration distribution" ;
+  rdfs:subClassOf gsoc:Physical_Property ;
+.
+gsop:Alteration_Type
+  a owl:Class ;
+  rdfs:comment "Specification of alteration types (eg; potassic, argillic, advanced argillic)"@en ;
+  rdfs:isDefinedBy "GeoSciML v4" ;
+  rdfs:label "Alteration type" ;
+  rdfs:subClassOf gsoc:Physical_Property ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasValue ;
+      owl:someValuesFrom gsop:Alteration_Type_Space ;
+    ] ;
+.
+gsop:Alteration_Type_Space
+  a owl:Class ;
+  rdfs:comment "Conceptual space containing all alteration types."@en ;
+  rdfs:label "Any Alteration Type"@en ;
+  rdfs:subClassOf gsoc:Physical_Region ;
 .
 gsop:Azimuth
   a owl:Class ;
@@ -29,23 +56,25 @@ gsop:Azimuth
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty gsoc:hasUOM ;
-      owl:someValuesFrom gsoc:UOM ;
+      owl:someValuesFrom gsop:UOM ;
     ] ;
 .
-
 gsop:Consolidation_Degree
   a owl:Class ;
   rdfs:comment "A property that specifies the degree to which an aggregation of EarthMaterial particles is a distinct solid material. Consolidation and induration are related concepts specified by this property. They define a continuum from unconsolidated material to very hard rock. Induration is the degree to which a consolidated material is made hard, operationally determined by how difficult it is to break a piece of the material. Consolidated materials may have varying degrees of induration (NADMSC, 2004)"@en ;
   rdfs:isDefinedBy "GeoSciML v4" ;
   rdfs:label "Consolidation degree"@en ;
   rdfs:subClassOf gsoc:Physical_Property ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasValue ;
+      owl:someValuesFrom gsop:Consolidation_Degree_Space ;
+    ] ;
 .
-gsop:Contact_Character
+gsop:Consolidation_Degree_Space
   a owl:Class ;
-  rdfs:comment "The character of the boundary, as opposed to its type. e.g. abrupt, gradational " ;
-  rdfs:isDefinedBy "GeoSciML v4" ;
-  rdfs:label "Contact character" ;
-  rdfs:subClassOf gsoc:Physical_Property ;
+  rdfs:label "Any Consolidation Degree"@en ;
+  rdfs:subClassOf gsoc:Physical_Region ;
 .
 gsop:Dip
   a owl:Class ;
@@ -60,82 +89,19 @@ gsop:Dip
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty gsoc:hasUOM ;
-      owl:someValuesFrom gsoc:UOM ;
+      owl:someValuesFrom gsop:UOM ;
     ] ;
 .
 gsop:Dip_Dip_Direction
   a owl:Class ;
   rdfs:comment "The orientation measurement consists of a dip and a dip direction. Dip is the angle that the structural surface (eg bedding, fault plane) makes with the horizontal measured perpendicular to the strike of the structure and in the vertical plane Dip direction is the azimuth perpindicular to the strike of the structure"@en ;
   rdfs:label "Dip and Dip Direction"@en ;
-  rdfs:subClassOf gsop:Plane_Orientation_Convention ;
+  rdfs:subClassOf gsop:Plane_Orientation_Convention_Space ;
 .
-gsop:Fabric_Continuity
+gsop:Displacement
   a owl:Class ;
-  rdfs:comment "Terms to distinguish continuous vs. disjunct cleavages" ;
-  rdfs:isDefinedBy "GeoSciML v4" ;
-  rdfs:label "Fabric continuity" ;
+  rdfs:label "Displacement"@en ;
   rdfs:subClassOf gsoc:Physical_Property ;
-.
-gsop:Fabric_Defining_Element
-  a owl:Class ;
-  rdfs:comment "Kinds of describable inhomogeneity in a rock body that may define a GeologicStructure.   Examples include Discontinuity, Shaped Surface, Oriented Particle, Material Boundary, and Layer.  " ;
-  rdfs:isDefinedBy "GeoSciML v4" ;
-  rdfs:label "Fabric defining element" ;
-  rdfs:subClassOf gsoc:Physical_Property ;
-.
-gsop:Fabric_Element_Spacing
-  a owl:Class ;
-  rdfs:comment "" ;
-  rdfs:isDefinedBy "GeoSciML v3" ;
-  rdfs:label "Fabric element spacing" ;
-  rdfs:subClassOf gsoc:Physical_Property ;
-.
-gsop:Fabric_Intensity
-  a owl:Class ;
-  rdfs:comment "How well the fabric is developed. Terms such as weak, moderate, strong." ;
-  rdfs:isDefinedBy "GeoSciML v4" ;
-  rdfs:label "Fabric intensity" ;
-  rdfs:subClassOf gsoc:Physical_Property ;
-.
-
-gsop:Grain_Shape
-  a owl:Class ;
-  rdfs:label "Grain Shape"@en ;
-  rdfs:subClassOf gsoc:Physical_Property ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty gsop:hasTermValue ;
-      owl:someValuesFrom gsop:ParticleShape ;
-    ] ;
-.
-gsop:Grain_Size
-  a owl:Class ;
-  rdfs:subClassOf gsoc:Physical_Property ;
-.
-gsop:Grain_Size_Average
-  a owl:Class ;
-  rdfs:comment "mean diameter for grain size distribution "@en ;
-  rdfs:label "Grain Size Average "@en ;
-  rdfs:subClassOf gsop:Grain_Size ;
-.
-gsop:Grain_Size_Category
-  a owl:Class ;
-  rdfs:comment "grain size range expressed using a named size category vocabulary" ;
-  rdfs:isDefinedBy "GeoSciML v3" ;
-  rdfs:label "Grain size term" ;
-  rdfs:subClassOf gsoc:Physical_Property ;
-.
-gsop:Grain_Size_Max
-  a owl:Class ;
-  rdfs:comment "upper bound of 95% interval for grain size distribution "@en ;
-  rdfs:label "Grain Size Maximum "@en ;
-  rdfs:subClassOf gsop:Grain_Size ;
-.
-gsop:Grain_Size_Min
-  a owl:Class ;
-  rdfs:comment "lower bound of 95% interval for grain size distribution "@en ;
-  rdfs:label "Grain Size Minimum "@en ;
-  rdfs:subClassOf gsop:Grain_Size ;
 .
 gsop:Line_Orientation
   a owl:Class ;
@@ -155,19 +121,39 @@ gsop:Line_Orientation
 .
 gsop:Metamorphic_Facies
   a owl:Class ;
-  rdfs:comment "Categories that characterize mineral assemblages indicative of certain metamorphic P-T conditions. Examples include Barrovian metasedimentary zones (eg: biotite facies, kyanite facies) or assemblages developed in rocks of more mafic composition (eg: greenschist facies, amphibolite facies)."@en,
-"applies to Earth_Material or Geologic_Unit"  ;
+  rdfs:comment "Categories that characterize mineral assemblages indicative of certain metamorphic P-T conditions. Examples include Barrovian metasedimentary zones (eg: biotite facies, kyanite facies) or assemblages developed in rocks of more mafic composition (eg: greenschist facies, amphibolite facies)."@en ;
+  rdfs:comment "applies to Earth_Material or Geologic_Unit" ;
   rdfs:isDefinedBy "GeoSciML v4" ;
   rdfs:label "Metamorphic facies" ;
   rdfs:subClassOf gsoc:Physical_Property ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasValue ;
+      owl:someValuesFrom gsop:Metamorphic_Facies_Space ;
+    ] ;
+.
+gsop:Metamorphic_Facies_Space
+  a owl:Class ;
+  rdfs:label "Any Metamorphic Facies" ;
+  rdfs:subClassOf gsoc:Physical_Region ;
 .
 gsop:Metamorphic_Grade
   a owl:Class ;
-  rdfs:comment "A term to indicate the intensity or rank of metamorphism applied to an EarthMaterial (eg: high metamorphic grade, low metamorphic grade). Indicates in a general way the P-T environment in which the metamorphism took place. Determination of metamorphic grade is based on mineral assemblages (ie, facies) present in a rock that are interpreted to have crystallized in equilibrium during a particular metamorphic event."@en,
-"applies to Earth_Material or Geologic_Unit" ;
+  rdfs:comment "A term to indicate the intensity or rank of metamorphism applied to an EarthMaterial (eg: high metamorphic grade, low metamorphic grade). Indicates in a general way the P-T environment in which the metamorphism took place. Determination of metamorphic grade is based on mineral assemblages (ie, facies) present in a rock that are interpreted to have crystallized in equilibrium during a particular metamorphic event."@en ;
+  rdfs:comment "applies to Earth_Material or Geologic_Unit" ;
   rdfs:isDefinedBy "GeoSciML v4" ;
   rdfs:label "Metamorphic grade" ;
   rdfs:subClassOf gsoc:Physical_Property ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasValue ;
+      owl:someValuesFrom gsop:Metamorphic_Grade_Space ;
+    ] ;
+.
+gsop:Metamorphic_Grade_Space
+  a owl:Class ;
+  rdfs:label "Any Metamorphic Grade" ;
+  rdfs:subClassOf gsoc:Physical_Region ;
 .
 gsop:Orientation
   a owl:Class ;
@@ -179,32 +165,18 @@ gsop:Overturned
   rdfs:label "Overturned facing"@en ;
   rdfs:subClassOf gsop:Surface_Facing_Space ;
 .
-gsop:Particle_Aspect_Ratio_Category
-  a owl:Class ;
-  rdfs:comment "AspectRatio describes the geometry of particles based on the ratios of lengths of long, intermediate and short axes of grains. Equates to sphericity in sedimentary rocks (ie: the degree to which the shape of a particle approximates a sphere).  A quantitative specification based on the ratio of lengths of long, intermediate and short axes of grain shape (Sneed and Folk, 1958; Zingg, 1935). (eg: prolate, slightly flattened, very bladed, equant, acicular, tabular) "@en ;
-  rdfs:isDefinedBy "GeoSciML v4" ;
-  rdfs:label "Particle aspect ratio "@en ;
-  rdfs:subClassOf gsoc:Physical_Property ;
-.
-gsop:Particle_Sorting_Category
-  a owl:Class ;
-  rdfs:comment "The Sorting attribute holds text terms to specify size distribution of particles in a CompoundMaterial. Terminology for sorting in sedimentary rocks is based on the quantitative Graphic Standard Deviation (IGSD) scheme proposed by Folk (1968, 1974).  Example terms for this attribute may include sedimentary terms such as well sorted and poorly sorted, or igneous terms such as porphyritic, equigranuilar, seriate." ;
-  rdfs:isDefinedBy "GeoSciML v4" ;
-  rdfs:label "Particle sorting" ;
-  rdfs:subClassOf gsoc:Physical_Property ;
-.
 gsop:Peak_Pressure
   a owl:Class ;
-  rdfs:comment "peak metamorphic pressure",
-"applies to Earth_Material or Geologic_Unit" ;
+  rdfs:comment "applies to Earth_Material or Geologic_Unit" ;
+  rdfs:comment "peak metamorphic pressure" ;
   rdfs:isDefinedBy "GeoSciML v3" ;
   rdfs:label "Peak pressure" ;
   rdfs:subClassOf gsoc:Physical_Property ;
 .
 gsop:Peak_Temperature
   a owl:Class ;
-  rdfs:comment "peak metamorphic temperature",
-"applies to Earth_Material or Geologic_Unit" ;
+  rdfs:comment "applies to Earth_Material or Geologic_Unit" ;
+  rdfs:comment "peak metamorphic temperature" ;
   rdfs:isDefinedBy "GeoSciML v3" ;
   rdfs:label "Peak temperature" ;
   rdfs:subClassOf gsoc:Physical_Property ;
@@ -237,9 +209,19 @@ gsop:Plane_Orientation
 .
 gsop:Plane_Orientation_Convention
   a owl:Class ;
-  rdfs:comment "links material spatial feature to Endurant or Perdurant or Physical Property that shares the same location" ;
-  rdfs:label "is colocated with" ;
-  rdfs:subClassOf gsoc:Physical_Region ;
+  rdfs:label "Plane orientation convention"@en ;
+  rdfs:subClassOf gsoc:Abstract_Property ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom gsop:Plane_Orientation_Convention_Space ;
+      owl:onProperty gsoc:hasValue ;
+    ] ;
+.
+gsop:Plane_Orientation_Convention_Space
+  a owl:Class ;
+  rdfs:comment "conceptual space for conventions defining planar orientation representations."@en ;
+  rdfs:label "any plane orientation convention"@en ;
+  rdfs:subClassOf gsoc:Abstract_Region ;
 .
 gsop:Plunge
   a owl:Class ;
@@ -254,26 +236,8 @@ gsop:Plunge
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty gsoc:hasUOM ;
-      owl:someValuesFrom gsoc:UOM ;
+      owl:someValuesFrom gsop:UOM ;
     ] ;
-.
-gsop:Rock_Material_Color
-  a owl:Class ;
-  rdfs:comment "Property for specification of color of rocks, minerals, other Earth Material "@en ;
-  rdfs:label "Earth Material Color"@en ;
-  rdfs:subClassOf gsoc:Physical_Property ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty gsop:hasTermValue ;
-      owl:someValuesFrom gsoc:Any_Color ;
-    ] ;
-.
-gsop:Rock_Material_Composition_Category
-  a owl:Class ;
-  rdfs:comment "Term to specify the gross compositional character of a compound material. Composition as used here is loosely construed to include both chemical composition and petrograpic composition, thus multiple values may be applied to a single rock, e.g. metaluminous and alkalic, undersaturated and basic, etc. Terms would typically include broad chemical classifications such as silicate, carbonate, ferromagnesian, oxide.  However, this attribute may have different terminology for different kinds of rocks - for example sandstone petrographic classification terms (e.g. feldspathic) might be placed here."@en ;
-  rdfs:isDefinedBy "GeoSciML v4" ;
-  rdfs:label "Rock material composition category" ;
-  rdfs:subClassOf gsoc:Physical_Property ;
 .
 gsop:Separation
   a owl:Class ;
@@ -291,7 +255,7 @@ gsop:Strike_Dip_RHR
   a owl:Class ;
   rdfs:comment "The strike and dip of planar data is listed according to the ‘right-hand rule’ or, as one looks along the strike direction, the surface dips to the right. Dip is the angle that the structural surface (eg bedding, fault plane) makes with the horizontal measured perpindicular to the strike of the structure and in the vertical plane"@en ;
   rdfs:label "Right hand rule strike and dip"@en ;
-  rdfs:subClassOf gsop:Plane_Orientation_Convention ;
+  rdfs:subClassOf gsop:Plane_Orientation_Convention_Space ;
 .
 gsop:Surface_Facing
   a owl:Class ;
@@ -321,7 +285,17 @@ gsop:Thickness
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty gsoc:hasUOM ;
-      owl:someValuesFrom gsoc:UOM ;
+      owl:someValuesFrom gsop:UOM ;
+    ] ;
+.
+gsop:UOM
+  a owl:Class ;
+  rdfs:label "Units of measurement"@en ;
+  rdfs:subClassOf gsoc:Abstract_Property ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom gsoc:UOM_Space ;
+      owl:onProperty gsoc:hasValue ;
     ] ;
 .
 gsop:Unknown_Facing
@@ -338,7 +312,7 @@ gsop:Upright
 .
 gsop:ontology
   a owl:Ontology ;
-    rdfs:label "Physical properties"@en ;
   rdfs:comment "Vocabulary of geologic physical properties used in multiple GSO modules."@en ;
+  rdfs:label "Physical properties"@en ;
   owl:imports gsoc:ontology ;
 .

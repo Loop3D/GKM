@@ -1,0 +1,185 @@
+# baseURI: http://loop3d.org/GSO/ontology/2020/1/geologicunit/rockbodypart/ontology
+# imports: http://loop3d.org/GSO/ontology/2019/1/geologicfeature/ontology
+# imports: http://purl.org/dc/terms/
+
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix gsoc: <http://loop3d.org/GSO/ontology/2019/1/common/> .
+@prefix gsog: <http://loop3d.org/GSO/ontology/2019/1/geologicfeature/> .
+@prefix gsop: <http://loop3d.org/GSO/ontology/2019/1/geologicproperty/> .
+@prefix gsrbp: <http://loop3d.org/GSO/ontology/2020/1/geologicunit/rockbodypart/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xlink: <http://www.w3.org/1999/xlink> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+gsog:Facies
+  a owl:Class ;
+  dcterms:source "CGI rockbodypart vocabulary 2016-11-21 "@en ;
+  rdfs:comment "Represents a particular body of rock that is a lateral variant of a lithostratigraphic unit, or a variant of a lithodemic unit. Contrast with lithosome in being a particular, connected body of rock, as opposed to a kind of rock body that is repeated in many places in a unit."@en ;
+  rdfs:label "facies"@en ;
+  rdfs:subClassOf gsog:Rock_Body_Part ;
+.
+gsog:Inclusion
+  a owl:Class ;
+  dcterms:source "CGI rockbodypart vocabulary 2016-11-21 "@en ;
+  rdfs:comment "Geologic unit constituent is present as masses with generally sharp boundaries enclosed within a matrix of some other material."@en ;
+  rdfs:label "inclusion"@en ;
+  rdfs:subClassOf gsog:Rock_Body_Part ;
+.
+gsog:Lithosome
+  a owl:Class ;
+  dcterms:source "CGI rockbodypart vocabulary 2016-11-21 "@en ;
+  rdfs:comment "A kind of rock body that has multiple occurrences in a single geologic unit. A mass of rock of uniform character, characterized by geometry, composition, and internal structure. Generally denotes rock mass that is the product of a particular rock forming process or related sequence of processes in the containing unit. Example--bouma sequence, point bar sequence. A particular lithosome may be characterized by the presence of blocks, but blocks are not treated as kinds of lithosome because the internal character of the blocks is determined by a separate genetic sequence from the described unit. This vocabulary generalizes the concept defined in Neuendorf et al 2005 to include bodies of igneous or metamorphic rock as well as sedimentary rock. NADM SLTTs (2004) used the term 'lithotope' with similar meaning for sedimentary rocks."@en ;
+  rdfs:label "lithosome"@en ;
+  rdfs:subClassOf gsog:Rock_Body_Part ;
+.
+gsog:Pendant
+  a owl:Class ;
+  dcterms:source "Base on Neuendorf et al 2005"@en ;
+  rdfs:comment "A block of wall rock material in an igneous intrusion. Pendants become xenoliths as the dimension becomes smaller than about 10 m in their longest dimension. Although term pendant has connotation of being suspended or supported from above, this is rarely demonstrable in geologic situations, and the concept here does not require connection to the wall of the containing intrusion."@en ;
+  rdfs:label "pendants"@en ;
+  rdfs:subClassOf gsog:Inclusion ;
+  skos:narrower gsrbp:rafts ;
+  skos:narrower gsrbp:roof_pendant ;
+  skos:narrower gsrbp:screen ;
+.
+gsog:Rock_Body_Part
+  a owl:Class ;
+  dcterms:source "CGI rockbodypart vocabulary 2016-11-21 "@en ;
+  rdfs:comment "The geologic unit part role is not known in any greater detail. Inclusion of Only_part as a separate concept implies that this concept is the equivalent of 'proper part' in mereology."@en ;
+  rdfs:label "part of"@en ;
+.
+gsog:Xenolith
+  a owl:Class ;
+  dcterms:source "Neuendorf et al. 2005, Cobbing, 2000, This vocabulary"@en ;
+  rdfs:comment "Inclusion of pre-intrusive country rock in intrusive igneous matrix, cm to about 10 meter diameter in longest dimension. Use term pendant for larger blocks."@en ;
+  rdfs:label "xenolith"@en ;
+  rdfs:subClassOf gsog:Inclusion ;
+.
+gsrbp:bed_lithosome
+  a owl:Class ;
+  dcterms:source "CGI rockbodypart vocabulary 2016-11-21 "@en ;
+  rdfs:comment "Lithosome in lithostratigraphic unit that occurs as individual beds interleaved with other constituents on the outcrop (m) scale or larger."@en ;
+  rdfs:label "bed lithosome"@en ;
+  rdfs:subClassOf gsog:Lithosome ;
+.
+gsrbp:blocks
+  a owl:Class ;
+  dcterms:source "CGI rockbodypart vocabulary 2016-11-21 "@en ;
+  rdfs:comment "Geologic unit constituent is present as masses with generally sharp boundaries and block-like geometry within a matrix of some other material emplaced by processes at the earth's surface--e.g. volcanic eruption or mass wasting. Implication is that blocks were derived from the same source geologic unit and emplaced in the described unit."@en ;
+  rdfs:label "blocks"@en ;
+  rdfs:subClassOf gsog:Inclusion ;
+.
+gsrbp:concretion
+  a owl:Class ;
+  dcterms:source "Neuendorf et al. 2005"@en ;
+  rdfs:comment "Hard, compact mass or aggregate of mineral matter, normally subsperical but commonly oblate, disc-shaped or irregular. Formed from precipitation from solution about a nucleus or centre. Use as a geologic unit part should be restricted to concretions that are too large to consider as constituents in the rock material that composes the unit."@en ;
+  rdfs:label "concretion"@en ;
+  rdfs:subClassOf gsog:Inclusion ;
+.
+gsrbp:cyclic_bedding_package
+  a owl:Class ;
+  dcterms:source "CGI rockbodypart vocabulary 2016-11-21 "@en ;
+  rdfs:comment "Lithosome characterized by an internal sequence of units, which is repeated in a stacked sequence, e.g. fining-upward sequence, thickening upward sequence, bouma sequence."@en ;
+  rdfs:label "cyclic bedding package"@en ;
+  rdfs:subClassOf gsog:Bedding_Package ;
+.
+gsrbp:enclave
+  a owl:Class ;
+  dcterms:source "Cobbing, 2000, Barbarin, 1991"@en ;
+  rdfs:comment "General term for a polymineralic aggregate enclosed in a granitoid."@en ;
+  rdfs:label "enclave"@en ;
+  rdfs:subClassOf gsog:Inclusion ;
+.
+gsrbp:geologic_unit_matrix
+  a owl:Class ;
+  dcterms:source "CGI rockbodypart vocabulary 2016-11-21 "@en ;
+  rdfs:comment "Lithosome in a geologic unit that is generally interstitial to other constituents, e.g. in a mass wasting deposit, melange, tuff breccia."@en ;
+  rdfs:label "geologic unit matrix"@en ;
+  rdfs:subClassOf gsog:Lithosome ;
+.
+gsrbp:irregular_lithosome
+  a owl:Class ;
+  dcterms:source "CGI rockbodypart vocabulary 2016-11-21 "@en ;
+  rdfs:comment "Lithosome in a mixed/heterogeneous lithodemic unit that occurs in irregular bodies within unit"@en ;
+  rdfs:label "irregular lithosome"@en ;
+  rdfs:subClassOf gsog:Lithosome ;
+.
+gsrbp:layer_lithosome
+  a owl:Class ;
+  dcterms:source "CGI rockbodypart vocabulary 2016-11-21 "@en ;
+  rdfs:comment "Lithosome in igneous or metamorphic geologic unit that occurs as layers alternating with other constituents."@en ;
+  rdfs:label "layer lithosome"@en ;
+  rdfs:subClassOf gsog:Lithosome ;
+.
+gsrbp:lenticular_lithosome
+  a owl:Class ;
+  dcterms:source "CGI rockbodypart vocabulary 2016-11-21 "@en ;
+  rdfs:comment "Lithosome occurs as discrete lense-shaped bodies, not connected with other bodies."@en ;
+  rdfs:label "lenticular lithosome"@en ;
+  rdfs:subClassOf gsog:Lithosome ;
+.
+gsrbp:marker_bed
+  a owl:Class ;
+  dcterms:source "CGI rockbodypart vocabulary 2016-11-21 "@en ;
+  rdfs:comment "Stratigraphic part that is a thin laterally continuous bed within another unit."@en ;
+  rdfs:label "marker bed"@en ;
+  rdfs:subClassOf gsrbp:stratigraphic_part ;
+.
+gsrbp:ontology
+  a owl:Ontology ;
+  dcterms:creator "CGI Geoscience Terminology Working Group, Stephen M Richard" ;
+  dcterms:date "2016-11-21" ;
+  dcterms:description "This file contains the CGI Geologic Unit Part role vocabulary, as defined by the IUGS Commission for Geoscience Information (CGI) Geoscience Terminology Working Group. This vocabulary includes terms to specify the role played by a constituent part of a geologic unit. These terms may be used to populate GeologicUnit.part.GeologicUnitPart.role, and GeologicUnit.composition.compositionPart.role. There are terms in this vocabulary that only apply to one or the other of these properties, but after an effort to create two separate vocabularies, it was decided to use a single vocabulary in order to avoid having the same concept in more than one closely related vocabulary. The duplication of applicable concepts in the two contexts (GeologicUnit.part.GeologicUnitPart.role and GeologicUnit.composition.compositionPart.role) arises because the model allows representation of complex geologic unit descriptions in more than one way. A complex geologic unit like a migmatite complex or a lithologically heterogeneous stratigraphic unit will have many different lithologic components. The simplest approach to representing the lithologic heterogeneity is to report a single GeologicUnit element with compositionParts for each lithologic component; the role on these compositionParts provides information about what kind of parts they are and perhaps something about their relationship, along with the kinds of rock they are composed of. A more complex alternative approach is to represent the various components each as GeologicUnit elements, each with compositionPart links to the rock type(s) composing that part. These component GeologicUnit elements are aggregated by GeologicUnit.part.GeologicUnitPart elements, with roles in the aggregation for each GeologicUnit part. The benefit of the more complex approach is that additional descriptive properties provided by the GeologicUnit content model can be assigned to each part, as well as GeologicRelations between the parts. The role of the compositionParts in these more 'disaggregated' GeologicUnit elements would be a simpler 'composition' kind of role, because the heterogeneous 'whole' unit would be described in GeologicUnitParts that are more lithologically homogeneous. Its a trade-off between simplicity and expressiveness."@en ;
+  dcterms:modified "2020-02-03" ;
+  dcterms:title "Rock Body Part types"@en ;
+  rdfs:comment "This file contains the 2016 SKOS-RDF version of the CGI Geologic Unit Part Role vocabulary. Compilation and review in MS Excel spreadsheet, converted to MS Excel for SKOS generation using SKOS_for_GA_from_XLS_2016.03.xslt. OWL adoption for Loop3D project by Stephen M Richard. "@en ;
+  owl:imports gsog:ontology ;
+  owl:imports dcterms: ;
+.
+gsrbp:rafts
+  a owl:Class ;
+  dcterms:source "CGI rockbodypart vocabulary 2016-11-21 "@en ;
+  rdfs:comment "Pendants of pre-intrusive country rock in intrusive igneous matrix that have large horizontal extent relative to their thickness"@en ;
+  rdfs:label "rafts"@en ;
+  rdfs:subClassOf gsog:Pendant ;
+.
+gsrbp:roof_pendant
+  a owl:Class ;
+  dcterms:source "Neuendorf et al 2005"@en ;
+  rdfs:comment "Pendant that is demonstrably derived from the upper boundary of an igneous body."@en ;
+  rdfs:label "roof pendant"@en ;
+  rdfs:subClassOf gsog:Pendant ;
+.
+gsrbp:screen
+  a owl:Class ;
+  dcterms:source "CGI rockbodypart vocabulary 2016-11-21 "@en ;
+  rdfs:comment "Pendant that is a vertical sheet like pendant in an intrusive igneous rock body."@en ;
+  rdfs:label "screen"@en ;
+  rdfs:subClassOf gsog:Pendant ;
+.
+gsrbp:stratigraphic_part
+  a owl:Class ;
+  dcterms:source "CGI rockbodypart vocabulary 2016-11-21 "@en ;
+  rdfs:comment "A geologic unit part that occupies a particular stratigraphic position within a geologic unit. Part is a particular body of rock."@en ;
+  rdfs:label "stratigraphic part"@en ;
+  rdfs:subClassOf gsog:Rock_Body_Part ;
+.
+gsrbp:tectonic_block
+  a owl:Class ;
+  dcterms:source "CGI rockbodypart vocabulary 2016-11-21 "@en ;
+  rdfs:comment "The geologic unit part occurs as discrete masses with faulted boundaries, emplaced into the host unit by tectonic processes inside the earth, e.g. blocks in tectonic melange"@en ;
+  rdfs:label "tectonic block"@en ;
+  rdfs:subClassOf gsog:Inclusion ;
+.
+gsrbp:vein_or_dike_lithosome
+  a owl:Class ;
+  dcterms:source "CGI rockbodypart vocabulary 2016-11-21 "@en ;
+  rdfs:comment "Lithosome occurs as intrusive, sheet-like bodies within the unit as an essential part of the unit."@en ;
+  rdfs:label "vein or dike lithosome"@en ;
+  rdfs:subClassOf gsog:Lithosome ;
+.
