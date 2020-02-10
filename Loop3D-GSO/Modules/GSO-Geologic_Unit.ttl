@@ -1,15 +1,15 @@
 # baseURI: http://loop3d.org/GSO/ontology/2020/1/geologicunit/ontology
-# imports: http://loop3d.org/GSO/ontology/2019/1/common/ontology
+# imports: http://loop3d.org/GSO/ontology/2020/1/common/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/geologicunit/rockbodypart/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/metamorphicfacies/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/metamorphicgrade/ontology
 
-@prefix dc: <http://purl.org/dc/elements/1.1/> .
+
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix gsgu: <http://loop3d.org/GSO/ontology/2020/1/geologicunit/> .
-@prefix gsoc: <http://loop3d.org/GSO/ontology/2019/1/common/> .
-@prefix gsog: <http://loop3d.org/GSO/ontology/2019/1/geologicfeature/> .
-@prefix gsop: <http://loop3d.org/GSO/ontology/2019/1/geologicproperty/> .
+@prefix gsoc: <http://loop3d.org/GSO/ontology/2020/1/common/> .
+@prefix gsog: <http://loop3d.org/GSO/ontology/2020/1/geologicfeature/> .
+@prefix gsop: <http://loop3d.org/GSO/ontology/2020/1/geologicproperty/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -17,13 +17,6 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-gsog:Chronostratigraphic_Unit
-  a owl:Class ;
-  dcterms:source "Salvador, A., 1994, International Stratigraphic Guide, Second Edition"@en ;
-  rdfs:comment "Geologic unit that includes all rocks formed during a specific interval of geologic time"@en ;
-  rdfs:label "chronostratigraphic unit"@en ;
-  rdfs:subClassOf gsog:Geologic_Unit ;
-.
 gsog:Geologic_Unit
   a owl:Class ;
   rdfs:comment "Geologic unit properties are bound in the Geologic_Unit module"@en ;
@@ -83,89 +76,75 @@ gsog:Geologic_Unit
       owl:someValuesFrom gsgu:Geologic_Unit_Outcrop_Character ;
     ] ;
 .
-gsog:Lithostratigraphic_Unit
-  a owl:Class ;
-  dcterms:source "Salvador, A., 1994, International Stratigraphic Guide, Second Edition"@en ;
-  rdfs:comment "Geologic unit defined on the basis of observable and distinctive lithologic properties or combination of lithologic properties and stratigraphic relationships. Denotes a particular body of rock."@en ;
-  rdfs:label "lithostratigraphic unit"@en ;
-  rdfs:subClassOf gsog:Geologic_Unit ;
-.
-gsop:Metamorphic_Facies
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty gsoc:hasValue ;
-      owl:someValuesFrom gsop:Metamorphic_Facies_Space ;
-    ] ;
-.
 gsgu:Bedding_Pattern
   a owl:Class ;
-  rdfs:comment "Term(s) specifying patterns of bedding thickness or relationships between bedding packages. (eg; thinning upward, thickening upward)" ;
-  rdfs:isDefinedBy "GeoSciML v4" ;
-  rdfs:label "Bedding pattern" ;
+  rdfs:comment "Term(s) specifying patterns of bedding thickness or relationships between bedding packages. (eg; thinning upward, thickening upward)"@en ;
+  rdfs:isDefinedBy "GeoSciML v4"@en ;
+  rdfs:label "Bedding pattern"@en ;
   rdfs:subClassOf gsoc:Physical_Property ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty gsoc:hasValue ;
+      owl:onProperty gsoc:hasTextValue ;
       owl:someValuesFrom xsd:string ;
     ] ;
 .
 gsgu:Bedding_Style
   a owl:Class ;
-  rdfs:comment "Term(s) specifying patterns of bedding thickness or relationships between bedding packages. (eg; thinning upward, thickening upward)" ;
-  rdfs:isDefinedBy "GeoSciML v4" ;
-  rdfs:label "Bedding style" ;
+  rdfs:comment "Term(s) specifying patterns of bedding thickness or relationships between bedding packages. (eg; thinning upward, thickening upward)"@en ;
+  rdfs:isDefinedBy "GeoSciML v4"@en ;
+  rdfs:label "Bedding style"@en ;
   rdfs:subClassOf gsoc:Physical_Property ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty gsoc:hasValue ;
+      owl:onProperty gsoc:hasTextValue ;
       owl:someValuesFrom xsd:string ;
     ] ;
 .
 gsgu:Bedding_Thickness_Category
   a owl:Class ;
-  rdfs:comment "Terms characterizing the thickness of bedding in the unit. " ;
-  rdfs:isDefinedBy "GeoSciML v4" ;
-  rdfs:label "Bedding thickness" ;
+  rdfs:comment "Terms characterizing the thickness of bedding in the unit. "@en ;
+  rdfs:isDefinedBy "GeoSciML v4"@en ;
+  rdfs:label "Bedding thickness"@en ;
   rdfs:subClassOf gsoc:Physical_Property ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty gsoc:hasValue ;
+      owl:onProperty gsoc:hasTextValue ;
       owl:someValuesFrom xsd:string ;
     ] ;
 .
 gsgu:Geologic_Unit_Body_Morphology
   a owl:Class ;
-  rdfs:comment "The geometry or form of a GeologicUnit.  Examples include: dike (dyke), cone, fan, sheet, etc. Morphology is independent of the substance (EarthMaterial) that composes the GeologicUnit or process that formed it." ;
-  rdfs:isDefinedBy "GeoSciML v4" ;
-  rdfs:label "Body morphology" ;
+  rdfs:comment "The geometry or form of a GeologicUnit.  Examples include: dike (dyke), cone, fan, sheet, etc. Morphology is independent of the substance (EarthMaterial) that composes the GeologicUnit or process that formed it."@en ;
+  rdfs:isDefinedBy "GeoSciML v4"@en ;
+  rdfs:label "Body morphology"@en ;
   rdfs:subClassOf gsoc:Physical_Property ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty gsoc:hasValue ;
+      owl:onProperty gsoc:hasTextValue ;
       owl:someValuesFrom xsd:string ;
     ] ;
 .
 gsgu:Geologic_Unit_Composition_Category
   a owl:Class ;
-  rdfs:comment "Composition-based classification that requires integrating the character of the unit over large area, not applicable at the rock-material/specimen level. Examples: alkalic, subaluminous, peraluminous, I-Type, carbonate, phosphate." ;
-  rdfs:isDefinedBy "GeoSciML v4" ;
-  rdfs:label "Composition category" ;
+  rdfs:comment "Composition-based classification that requires integrating the character of the unit over large area, not applicable at the rock-material/specimen level. Examples: alkalic, subaluminous, peraluminous, I-Type, carbonate, phosphate."@en ;
+  rdfs:isDefinedBy "GeoSciML v4"@en ;
+  rdfs:label "Composition category"@en ;
   rdfs:subClassOf gsoc:Physical_Property ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty gsoc:hasValue ;
+      owl:onProperty gsoc:hasTextValue ;
       owl:someValuesFrom xsd:string ;
     ] ;
 .
 gsgu:Geologic_Unit_Outcrop_Character
   a owl:Class ;
-  rdfs:comment "Describes the nature of outcrops formed by a geologic unit. Examples: bouldery, cliff-forming, ledge-forming, slope-forming, poorly exposed. Assign free text string value for now, controlled vocabulary is the goal." ;
-  rdfs:isDefinedBy "GeoSciML v4" ;
-  rdfs:label "Outcrop character" ;
+  rdfs:comment "Describes the nature of outcrops formed by a geologic unit. Examples: bouldery, cliff-forming, ledge-forming, slope-forming, poorly exposed. Assign free text string value for now, controlled vocabulary is the goal."@en ;
+  rdfs:isDefinedBy "GeoSciML v4"@en ;
+  rdfs:label "Outcrop character"@en ;
   rdfs:subClassOf gsoc:Physical_Property ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty gsoc:hasValue ;
+      owl:onProperty gsoc:hasTextValue ;
       owl:someValuesFrom xsd:string ;
     ] ;
 .
@@ -269,10 +248,10 @@ gsgu:mass_movement_unit
 .
 gsgu:ontology
   a owl:Ontology ;
-  dcterms:creator "CGI Geoscience Terminology Working Group, OWL conversion by Stephen Richard" ;
-  dcterms:date "2012-11-24" ;
+  dcterms:creator "CGI Geoscience Terminology Working Group, OWL conversion by Stephen Richard"@en ;
+  dcterms:date "2012-11-24"@en ;
   dcterms:description "This ontology specifies concepts for description of Geologic Unit, as defined by the IUGS Commission for Geoscience Information (CGI) Geoscience Terminology Working Group. These classes and properties extend the base GSO-Geology ontology for more detailed descriptions. Unit types are differentiated based on their defining lithological, stratigraphic, or other physical properties."@en ;
-  dcterms:modified "2020-01-30" ;
+  dcterms:modified "2020-01-30"@en ;
   rdfs:comment "This file based on the CGI Geologic Unit type vocabulary. Compilation and review in MS Excel spreadsheet, converted to MS Excel for SKOS generation using GSML_SKOS_fromXLS_2016.02.xslt."@en ;
   rdfs:label "Geologic Unit"@en ;
   owl:imports gsoc:ontology ;
@@ -299,5 +278,5 @@ gsgu:polarity_chronostratigraphic_unit
   dcterms:source "North American Commission on Stratigraphic Nomenclature, 1983"@en ;
   rdfs:comment "Geologic unit defined by primary magnetic-polarity record imposed whien the rock was deposited or crystallized during a specific interval of geolgoic time. Kind of chronostratigraphic unit and kind of geophysical unit."@en ;
   rdfs:label "polarity chronostratigraphic unit"@en ;
-  rdfs:subClassOf gsog:Geologic_Unit ;
+  rdfs:subClassOf gsgu:geophysical_unit ;
 .

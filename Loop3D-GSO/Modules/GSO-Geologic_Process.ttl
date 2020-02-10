@@ -1,14 +1,14 @@
-# baseURI: http://loop3d.org/GSO/ontology/2019/1/geologicprocess/ontology
-# imports: http://loop3d.org/GSO/ontology/2019/1/geologicfeature/ontology
+# baseURI: http://loop3d.org/GSO/ontology/2020/1/geologicprocess/ontology
+# imports: http://loop3d.org/GSO/ontology/2020/1/geologicfeature/ontology
 # imports: http://purl.org/dc/terms/
 
-@prefix : <http://loop3d.org/GSO/ontology/2019/1/geologicprocess/> .
+@prefix : <http://loop3d.org/GSO/ontology/2020/1/geologicprocess/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix gsoc: <http://loop3d.org/GSO/ontology/2019/1/common/> .
-@prefix gsog: <http://loop3d.org/GSO/ontology/2019/1/geologicfeature/> .
-@prefix gsop: <http://loop3d.org/GSO/ontology/2019/1/geologicproperty/> .
+@prefix gsoc: <http://loop3d.org/GSO/ontology/2020/1/common/> .
+@prefix gsog: <http://loop3d.org/GSO/ontology/2020/1/geologicfeature/> .
+@prefix gsop: <http://loop3d.org/GSO/ontology/2020/1/geologicproperty/> .
+@prefix gspr: <http://loop3d.org/GSO/ontology/2020/1/geologicprocess/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix gspr: <http://loop3d.org/GSO/ontology/2019/1/geologicprocess/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xlink: <http://www.w3.org/1999/xlink> .
@@ -37,6 +37,12 @@ gsog:Transformation
       owl:onProperty gsop:hasOutput ;
     ] ;
 .
+
+
+gspr:Metamorphic_Process
+  rdfs:subClassOf gsog:Geologic_Process ;
+.
+
 gspr:Accretion
   a owl:Class ;
   dcterms:source "Neuendorf, K.K.E, Mehl, J.P. & Jackson, J.A. (eds), 2005. Glossary of geology, 5th Edition. American Geological Institute, Alexandria, 779 p."@en ;
@@ -54,7 +60,7 @@ gspr:Alteration
 .
 gspr:Biological_Evolution
   a owl:Class ;
-  rdfs:label "Evolution" ;
+  rdfs:label "Evolution"@en  ;
   rdfs:subClassOf gspr:Biological_Process ;
 .
 gspr:Biological_Precipitation
@@ -66,7 +72,7 @@ gspr:Biological_Precipitation
 .
 gspr:Biological_Process
   a owl:Class ;
-  rdfs:label "definingElement" ;
+  rdfs:label "definingElement"@en  ;
   rdfs:subClassOf gsoc:Process ;
 .
 gspr:Biological_Weathering
@@ -174,12 +180,25 @@ gspr:Dissolution_Creep
   rdfs:label "dissolution creep"@en ;
   rdfs:subClassOf gsog:Transformation ;
 .
+gspr:Ductile_Flattening
+  a owl:Class ;
+  rdfs:comment "Also known as pure shear; a three-dimensional homogeneous flattening of a body (http://www.geology.sdsu.edu/visualstructure/vss/htm_hlp/pure_s.htm) accomodated by ductile deformation. It is an example of irrotational strain in which body is elongated in one direction while being shortened perpendicularly (https://en.wikipedia.org/wiki/Pure_shear)."@en ;
+  rdfs:label "Ductile Flattening"@en  ;
+  rdfs:subClassOf gspr:Ductile_Flow ;
+.
 gspr:Ductile_Flow
   a owl:Class ;
   dcterms:source "Neuendorf, K.K.E, Mehl, J.P. & Jackson, J.A. (eds), 2005. Glossary of geology, 5th Edition. American Geological Institute, Alexandria, 779 p."@en ;
-  rdfs:comment "deformation without apparent loss of continuity at the scale of observation."@en ;
+  rdfs:comment "Deformation without apparent loss of continuity at the scale of observation."@en ;
   rdfs:label "ductile flow"@en ;
   rdfs:subClassOf gsog:Deformation ;
+.
+gspr:Ductile_Simple_Shear
+  a owl:Class ;
+  rdfs:comment "Simple shear accomodated by ductile deformation. Simple sheare is a deformation in which parallel planes in a material remain parallel and maintain a constant distance, while translating relative to each other (https://en.wikipedia.org/wiki/Simple_shear)."@en ;
+  rdfs:label "Ductile Simple Shear"@en ;
+  rdfs:subClassOf gspr:Ductile_Flow ;
+  rdfs:subClassOf gspr:Shearing ;
 .
 gspr:Effusive_Eruption
   a owl:Class ;
@@ -576,10 +595,10 @@ gspr:Wind_Erosion
 .
 gspr:ontology
   a owl:Ontology ;
-  dcterms:creator "CGI Geoscience Terminology Working Group, OWL adaptation by Stephen Richard for Loop3D project" ;
-  dcterms:date "2016-06-15" ;
+  dcterms:creator "CGI Geoscience Terminology Working Group, OWL adaptation by Stephen Richard for Loop3D project"@en  ;
+  dcterms:date "2016-06-15"@en  ;
   dcterms:description "This scheme specifies concepts used to describe the geological processes that are associated with geological events, as defined by the IUGS Commission for Geoscience Information (CGI) Geoscience Terminology Working Group."@en ;
-  dcterms:modified "2019-12-04" ;
+  dcterms:modified "2019-12-04"@en  ;
   dcterms:title "Geologic processes"@en ;
   rdfs:comment "This file contains terms and definitions from the 2016 SKOS-RDF version of the CGI Event Process vocabulary."@en ;
   owl:imports gsog:ontology ;

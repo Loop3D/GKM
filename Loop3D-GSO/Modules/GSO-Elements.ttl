@@ -1,1258 +1,1208 @@
 # baseURI: http://loop3d.org/GSO/ontology/2020/1/element/ontology
 
 @prefix gsel: <http://loop3d.org/GSO/ontology/2020/1/element/> .
+@prefix gsoc: <http://loop3d.org/GSO/ontology/2020/1/common/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix gsoc: <http://loop3d.org/GSO/ontology/2019/1/common/> .
-
-<http://loop3d.org/GSO/ontology/2020/1/element/ontology>
-  a owl:Ontology ;
-  rdfs:comment "use wikidata URIs. Extracted via SPARQL query. Include atomic number, abbreviation, CHEBI URI and Encyclopedia Britannica link" ;
-  rdfs:label "GSO Elements" ;
-  rdfs:seeAlso "https://robertdavidstevens.wordpress.com/2010/12/21/an-ontology-for-inferring-the-periodic-table-of-the-elements/ for future elaboration ...."
-.
 
 gsel:actinium
   a owl:Class ;
   gsel:atomicNumber 89 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33337" ;
-  gsel:id "actinium" ;
-  gsel:symbol "Ac" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q1121" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33337"@en  ;
+  gsel:id "actinium"@en  ;
+  gsel:symbol "Ac"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q1121"@en  ;
   rdfs:label "actinium"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/actinium" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/actinium"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:aluminum
   a owl:Class ;
   gsel:atomicNumber 13 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_28984" ;
-  gsel:id "aluminum" ;
-  gsel:symbol "Al" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q663" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_28984"@en  ;
+  gsel:id "aluminum"@en  ;
+  gsel:symbol "Al"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q663"@en  ;
   rdfs:label "aluminum"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/aluminum" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/aluminum"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:americium
   a owl:Class ;
   gsel:atomicNumber 95 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33389" ;
-  gsel:id "americium" ;
-  gsel:symbol "Am" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q1872" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33389"@en  ;
+  gsel:id "americium"@en  ;
+  gsel:symbol "Am"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q1872"@en  ;
   rdfs:label "americium"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/americium" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/americium"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:antimony
   a owl:Class ;
   gsel:atomicNumber 51 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_30513" ;
-  gsel:id "antimony" ;
-  gsel:symbol "Sb" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q1099" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_30513"@en  ;
+  gsel:id "antimony"@en  ;
+  gsel:symbol "Sb"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q1099"@en  ;
   rdfs:label "antimony"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/antimony" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
-.
-gsel:anyelement
-  a owl:Class ;
-  a sh:NodeShape ;
-  rdfs:label "Element" ;
-  rdfs:subClassOf owl:Thing ;
-  sh:property [
-      a sh:PropertyShape ;
-      sh:path gsel:atomicNumber ;
-      sh:datatype xsd:integer ;
-      sh:maxCount 1 ;
-      sh:maxExclusive 110 ;
-      sh:minCount 1 ;
-      sh:minExclusive 0 ;
-    ] ;
-  sh:property [
-      a sh:PropertyShape ;
-      sh:path gsel:chebiid ;
-      sh:datatype xsd:string ;
-      sh:nodeKind sh:IRI ;
-    ] ;
-  sh:property [
-      a sh:PropertyShape ;
-      sh:path gsel:id ;
-      sh:datatype xsd:string ;
-    ] ;
-  sh:property [
-      a sh:PropertyShape ;
-      sh:path gsel:itemLabel ;
-      sh:datatype xsd:string ;
-    ] ;
-  sh:property [
-      a sh:PropertyShape ;
-      sh:path gsel:symbol ;
-      sh:datatype xsd:string ;
-    ] ;
-  sh:property [
-      a sh:PropertyShape ;
-      sh:path gsel:wikidataid ;
-      sh:datatype xsd:string ;
-      sh:nodeKind sh:IRI ;
-    ] ;
-  sh:property [
-      a sh:PropertyShape ;
-      sh:path rdfs:seeAlso ;
-      sh:datatype xsd:string ;
-      sh:name "seeAlso" ;
-    ] ;
+  rdfs:seeAlso "https://www.britannica.com/science/antimony"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:argon
   a owl:Class ;
   gsel:atomicNumber 18 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_49475" ;
-  gsel:id "argon" ;
-  gsel:symbol "Ar" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q696" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_49475"@en  ;
+  gsel:id "argon"@en  ;
+  gsel:symbol "Ar"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q696"@en  ;
   rdfs:label "argon"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/argon" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/argon"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:arsenic
   a owl:Class ;
   gsel:atomicNumber 33 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_27563" ;
-  gsel:id "arsenic" ;
-  gsel:symbol "As" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q871" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_27563"@en  ;
+  gsel:id "arsenic"@en  ;
+  gsel:symbol "As"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q871"@en  ;
   rdfs:label "arsenic"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/arsenic" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/arsenic"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:astatine
   a owl:Class ;
   gsel:atomicNumber 85 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_30415" ;
-  gsel:id "astatine" ;
-  gsel:symbol "At" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q999" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_30415"@en  ;
+  gsel:id "astatine"@en  ;
+  gsel:symbol "At"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q999"@en  ;
   rdfs:label "astatine"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/astatine" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/astatine"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:atomicNumber
   a owl:DatatypeProperty ;
-  rdfs:label "atomicNumber" ;
+  rdfs:label "atomicNumber"@en  ;
 .
 gsel:barium
   a owl:Class ;
   gsel:atomicNumber 56 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_32595" ;
-  gsel:id "barium" ;
-  gsel:symbol "Ba" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q1112" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_32595"@en  ;
+  gsel:id "barium"@en  ;
+  gsel:symbol "Ba"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q1112"@en  ;
   rdfs:label "barium"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/barium" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/barium"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:berkelium
   a owl:Class ;
   gsel:atomicNumber 97 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33391" ;
-  gsel:id "berkelium" ;
-  gsel:symbol "Bk" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q1882" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33391"@en  ;
+  gsel:id "berkelium"@en  ;
+  gsel:symbol "Bk"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q1882"@en  ;
   rdfs:label "berkelium"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/berkelium" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/berkelium"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:beryllium
   a owl:Class ;
   gsel:atomicNumber 4 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33783" ;
-  gsel:id "beryllium" ;
-  gsel:symbol "Be" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q569" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33783"@en  ;
+  gsel:id "beryllium"@en  ;
+  gsel:symbol "Be"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q569"@en  ;
   rdfs:label "beryllium"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/beryllium" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/beryllium"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:bismuth
   a owl:Class ;
   gsel:atomicNumber 83 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33301" ;
-  gsel:id "bismuth" ;
-  gsel:symbol "Bi" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q942" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33301"@en  ;
+  gsel:id "bismuth"@en  ;
+  gsel:symbol "Bi"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q942"@en  ;
   rdfs:label "bismuth"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/bismuth" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/bismuth"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:boron
   a owl:Class ;
   gsel:atomicNumber 5 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_27560" ;
-  gsel:id "boron" ;
-  gsel:symbol "B" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q618" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_27560"@en  ;
+  gsel:id "boron"@en  ;
+  gsel:symbol "B"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q618"@en  ;
   rdfs:label "boron"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/boron-chemical-element" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/boron-chemical-element"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:bromine
   a owl:Class ;
   gsel:atomicNumber 35 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33117" ;
-  gsel:id "bromine" ;
-  gsel:symbol "Br" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q879" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33117"@en  ;
+  gsel:id "bromine"@en  ;
+  gsel:symbol "Br"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q879"@en  ;
   rdfs:label "bromine"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/bromine" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/bromine"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:cadmium
   a owl:Class ;
   gsel:atomicNumber 48 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_22977" ;
-  gsel:id "cadmium" ;
-  gsel:symbol "Cd" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q1091" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_22977"@en  ;
+  gsel:id "cadmium"@en  ;
+  gsel:symbol "Cd"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q1091"@en  ;
   rdfs:label "cadmium"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/cadmium" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/cadmium"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:caesium
   a owl:Class ;
   gsel:atomicNumber 55 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_30514" ;
-  gsel:id "caesium" ;
-  gsel:symbol "Cs" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q1108" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_30514"@en  ;
+  gsel:id "caesium"@en  ;
+  gsel:symbol "Cs"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q1108"@en  ;
   rdfs:label "caesium"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/cesium" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/cesium"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:calcium
   a owl:Class ;
   gsel:atomicNumber 20 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_22984" ;
-  gsel:id "calcium" ;
-  gsel:symbol "Ca" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q706" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_22984"@en  ;
+  gsel:id "calcium"@en  ;
+  gsel:symbol "Ca"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q706"@en  ;
   rdfs:label "calcium"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/calcium" ;
-  rdfs:seeAlso "https://www.britannica.com/science/calcium-ion" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/calcium"@en  ;
+  rdfs:seeAlso "https://www.britannica.com/science/calcium-ion"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:californium
   a owl:Class ;
   gsel:atomicNumber 98 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33392" ;
-  gsel:id "californium" ;
-  gsel:symbol "Cf" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q1888" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33392"@en  ;
+  gsel:id "californium"@en  ;
+  gsel:symbol "Cf"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q1888"@en  ;
   rdfs:label "californium"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/californium" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/californium"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:carbon
   a owl:Class ;
   gsel:atomicNumber 6 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33415" ;
-  gsel:id "carbon" ;
-  gsel:symbol "C" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q623" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33415"@en  ;
+  gsel:id "carbon"@en  ;
+  gsel:symbol "C"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q623"@en  ;
   rdfs:label "carbon"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/carbon-chemical-element" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/carbon-chemical-element"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:cerium
   a owl:Class ;
   gsel:atomicNumber 58 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33369" ;
-  gsel:id "cerium" ;
-  gsel:symbol "Ce" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q1385" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33369"@en  ;
+  gsel:id "cerium"@en  ;
+  gsel:symbol "Ce"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q1385"@en  ;
   rdfs:label "cerium"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/cerium" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/cerium"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:chebiid
   a owl:DatatypeProperty ;
-  rdfs:label "chebiid" ;
+  rdfs:label "chebiid"@en  ;
 .
 gsel:chlorine
   a owl:Class ;
   gsel:atomicNumber 17 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_23116" ;
-  gsel:id "chlorine" ;
-  gsel:symbol "Cl" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q688" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_23116"@en  ;
+  gsel:id "chlorine"@en  ;
+  gsel:symbol "Cl"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q688"@en  ;
   rdfs:label "chlorine"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/chlorine" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/chlorine"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:chromium
   a owl:Class ;
   gsel:atomicNumber 24 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_28073" ;
-  gsel:id "chromium" ;
-  gsel:symbol "Cr" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q725" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_28073"@en  ;
+  gsel:id "chromium"@en  ;
+  gsel:symbol "Cr"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q725"@en  ;
   rdfs:label "chromium"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/chromium" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/chromium"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:cobalt
   a owl:Class ;
   gsel:atomicNumber 27 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_27638" ;
-  gsel:id "cobalt" ;
-  gsel:symbol "Co" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q740" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_27638"@en  ;
+  gsel:id "cobalt"@en  ;
+  gsel:symbol "Co"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q740"@en  ;
   rdfs:label "cobalt"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/cobalt-chemical-element" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/cobalt-chemical-element"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:copper
   a owl:Class ;
   gsel:atomicNumber 29 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_30052" ;
-  gsel:id "copper" ;
-  gsel:symbol "Cu" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q753" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_30052"@en  ;
+  gsel:id "copper"@en  ;
+  gsel:symbol "Cu"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q753"@en  ;
   rdfs:label "copper"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/copper" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/copper"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:curium
   a owl:Class ;
   gsel:atomicNumber 96 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33390" ;
-  gsel:id "curium" ;
-  gsel:symbol "Cm" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q1876" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33390"@en  ;
+  gsel:id "curium"@en  ;
+  gsel:symbol "Cm"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q1876"@en  ;
   rdfs:label "curium"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/curium-chemical-element" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/curium-chemical-element"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:dubnium
   a owl:Class ;
   gsel:atomicNumber 105 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33349" ;
-  gsel:id "dubnium" ;
-  gsel:symbol "Db" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q1232" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33349"@en  ;
+  gsel:id "dubnium"@en  ;
+  gsel:symbol "Db"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q1232"@en  ;
   rdfs:label "dubnium"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/dubnium" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/dubnium"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:dysprosium
   a owl:Class ;
   gsel:atomicNumber 66 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33377" ;
-  gsel:id "dysprosium" ;
-  gsel:symbol "Dy" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q1843" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33377"@en  ;
+  gsel:id "dysprosium"@en  ;
+  gsel:symbol "Dy"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q1843"@en  ;
   rdfs:label "dysprosium"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/dysprosium" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/dysprosium"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:einsteinium
   a owl:Class ;
   gsel:atomicNumber 99 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33393" ;
-  gsel:id "einsteinium" ;
-  gsel:symbol "Es" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q1892" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33393"@en  ;
+  gsel:id "einsteinium"@en  ;
+  gsel:symbol "Es"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q1892"@en  ;
   rdfs:label "einsteinium"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/einsteinium" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/einsteinium"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:erbium
   a owl:Class ;
   gsel:atomicNumber 68 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33379" ;
-  gsel:id "erbium" ;
-  gsel:symbol "Er" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q1849" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33379"@en  ;
+  gsel:id "erbium"@en  ;
+  gsel:symbol "Er"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q1849"@en  ;
   rdfs:label "erbium"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/erbium" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/erbium"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:europium
   a owl:Class ;
   gsel:atomicNumber 63 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_32999" ;
-  gsel:id "europium" ;
-  gsel:symbol "Eu" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q1396" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_32999"@en  ;
+  gsel:id "europium"@en  ;
+  gsel:symbol "Eu"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q1396"@en  ;
   rdfs:label "europium"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/europium" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/europium"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:fermium
   a owl:Class ;
   gsel:atomicNumber 100 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33394" ;
-  gsel:id "fermium" ;
-  gsel:symbol "Fm" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q1896" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33394"@en  ;
+  gsel:id "fermium"@en  ;
+  gsel:symbol "Fm"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q1896"@en  ;
   rdfs:label "fermium"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/fermium" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/fermium"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:fluorine
   a owl:Class ;
   gsel:atomicNumber 9 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_30239" ;
-  gsel:id "fluorine" ;
-  gsel:symbol "F" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q650" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_30239"@en  ;
+  gsel:id "fluorine"@en  ;
+  gsel:symbol "F"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q650"@en  ;
   rdfs:label "fluorine"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/fluorine" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/fluorine"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:francium
   a owl:Class ;
   gsel:atomicNumber 87 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33323" ;
-  gsel:id "francium" ;
-  gsel:symbol "Fr" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q671" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33323"@en  ;
+  gsel:id "francium"@en  ;
+  gsel:symbol "Fr"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q671"@en  ;
   rdfs:label "francium"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/francium" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/francium"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:gadolinium
   a owl:Class ;
   gsel:atomicNumber 64 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33375" ;
-  gsel:id "gadolinium" ;
-  gsel:symbol "Gd" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q1832" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33375"@en  ;
+  gsel:id "gadolinium"@en  ;
+  gsel:symbol "Gd"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q1832"@en  ;
   rdfs:label "gadolinium"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/gadolinium" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/gadolinium"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:gallium
   a owl:Class ;
   gsel:atomicNumber 31 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_49631" ;
-  gsel:id "gallium" ;
-  gsel:symbol "Ga" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q861" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_49631"@en  ;
+  gsel:id "gallium"@en  ;
+  gsel:symbol "Ga"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q861"@en  ;
   rdfs:label "gallium"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/germanium" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/germanium"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:germanium
   a owl:Class ;
   gsel:atomicNumber 32 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_30441" ;
-  gsel:id "germanium" ;
-  gsel:symbol "Ge" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q867" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_30441"@en  ;
+  gsel:id "germanium"@en  ;
+  gsel:symbol "Ge"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q867"@en  ;
   rdfs:label "germanium"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/gallium" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/gallium"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:gold
   a owl:Class ;
   gsel:atomicNumber 79 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_30050" ;
-  gsel:id "gold" ;
-  gsel:symbol "Au" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q897" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_30050"@en  ;
+  gsel:id "gold"@en  ;
+  gsel:symbol "Au"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q897"@en  ;
   rdfs:label "gold"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/gold-chemical-element" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/gold-chemical-element"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:hafnium
   a owl:Class ;
   gsel:atomicNumber 72 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33343" ;
-  gsel:id "hafnium" ;
-  gsel:symbol "Hf" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q1119" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33343"@en  ;
+  gsel:id "hafnium"@en  ;
+  gsel:symbol "Hf"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q1119"@en  ;
   rdfs:label "hafnium"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/hafnium" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/hafnium"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:helium
   a owl:Class ;
   gsel:atomicNumber 2 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_30217" ;
-  gsel:id "helium" ;
-  gsel:symbol "He" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q560" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_30217"@en  ;
+  gsel:id "helium"@en  ;
+  gsel:symbol "He"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q560"@en  ;
   rdfs:label "helium"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/helium-chemical-element" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/helium-chemical-element"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:holmium
   a owl:Class ;
   gsel:atomicNumber 67 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_49648" ;
-  gsel:id "holmium" ;
-  gsel:symbol "Ho" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q1846" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_49648"@en  ;
+  gsel:id "holmium"@en  ;
+  gsel:symbol "Ho"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q1846"@en  ;
   rdfs:label "holmium"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/holmium" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/holmium"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:hydrogen
   a owl:Class ;
   gsel:atomicNumber 1 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_49637" ;
-  gsel:id "hydrogen" ;
-  gsel:symbol "H" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q556" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_49637"@en  ;
+  gsel:id "hydrogen"@en  ;
+  gsel:symbol "H"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q556"@en  ;
   rdfs:label "hydrogen"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/hydrogen" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/hydrogen"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:id
   a owl:DatatypeProperty ;
-  rdfs:label "id" ;
+  rdfs:label "id"@en  ;
 .
 gsel:indium
   a owl:Class ;
   gsel:atomicNumber 49 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_30430" ;
-  gsel:id "indium" ;
-  gsel:symbol "In" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q1094" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_30430"@en  ;
+  gsel:id "indium"@en  ;
+  gsel:symbol "In"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q1094"@en  ;
   rdfs:label "indium"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/indium" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/indium"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:iodine
   a owl:Class ;
   gsel:atomicNumber 53 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_36897" ;
-  gsel:id "iodine" ;
-  gsel:symbol "I" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q1103" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_36897"@en  ;
+  gsel:id "iodine"@en  ;
+  gsel:symbol "I"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q1103"@en  ;
   rdfs:label "iodine"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/iodine" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/iodine"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:iridium
   a owl:Class ;
   gsel:atomicNumber 77 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_49666" ;
-  gsel:id "iridium" ;
-  gsel:symbol "Ir" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q877" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_49666"@en  ;
+  gsel:id "iridium"@en  ;
+  gsel:symbol "Ir"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q877"@en  ;
   rdfs:label "iridium"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/iridium" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/iridium"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:iron
   a owl:Class ;
   gsel:atomicNumber 26 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_18248" ;
-  gsel:id "iron" ;
-  gsel:symbol "Fe" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q677" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_18248"@en  ;
+  gsel:id "iron"@en  ;
+  gsel:symbol "Fe"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q677"@en  ;
   rdfs:label "iron"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/iron-chemical-element" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/iron-chemical-element"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:itemLabel
   a owl:DatatypeProperty ;
-  rdfs:label "itemLabel" ;
+  rdfs:label "itemLabel"@en  ;
 .
 gsel:krypton
   a owl:Class ;
   gsel:atomicNumber 36 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_49696" ;
-  gsel:id "krypton" ;
-  gsel:symbol "Kr" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q888" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_49696"@en  ;
+  gsel:id "krypton"@en  ;
+  gsel:symbol "Kr"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q888"@en  ;
   rdfs:label "krypton"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/krypton-chemical-element" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/krypton-chemical-element"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:lanthanum
   a owl:Class ;
   gsel:atomicNumber 57 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33336" ;
-  gsel:id "lanthanum" ;
-  gsel:symbol "La" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q1801" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33336"@en  ;
+  gsel:id "lanthanum"@en  ;
+  gsel:symbol "La"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q1801"@en  ;
   rdfs:label "lanthanum"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/lanthanum" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/lanthanum"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:lawrencium
   a owl:Class ;
   gsel:atomicNumber 103 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33397" ;
-  gsel:id "lawrencium" ;
-  gsel:symbol "Lr" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q1905" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33397"@en  ;
+  gsel:id "lawrencium"@en  ;
+  gsel:symbol "Lr"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q1905"@en  ;
   rdfs:label "lawrencium"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/lawrencium" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/lawrencium"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:lead
   a owl:Class ;
   gsel:atomicNumber 82 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_27889" ;
-  gsel:id "lead" ;
-  gsel:symbol "Pb" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q708" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_27889"@en  ;
+  gsel:id "lead"@en  ;
+  gsel:symbol "Pb"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q708"@en  ;
   rdfs:label "lead"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/lead-chemical-element" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/lead-chemical-element"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:lithium
   a owl:Class ;
   gsel:atomicNumber 3 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_30145" ;
-  gsel:id "lithium" ;
-  gsel:symbol "Li" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q568" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_30145"@en  ;
+  gsel:id "lithium"@en  ;
+  gsel:symbol "Li"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q568"@en  ;
   rdfs:label "lithium"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/lithium-chemical-element" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/lithium-chemical-element"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:lutetium
   a owl:Class ;
   gsel:atomicNumber 71 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33382" ;
-  gsel:id "lutetium" ;
-  gsel:symbol "Lu" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q1857" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33382"@en  ;
+  gsel:id "lutetium"@en  ;
+  gsel:symbol "Lu"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q1857"@en  ;
   rdfs:label "lutetium"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/lutetium" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/lutetium"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:magnesium
   a owl:Class ;
   gsel:atomicNumber 12 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_25107" ;
-  gsel:id "magnesium" ;
-  gsel:symbol "Mg" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q660" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_25107"@en  ;
+  gsel:id "magnesium"@en  ;
+  gsel:symbol "Mg"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q660"@en  ;
   rdfs:label "magnesium"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/magnesium" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/magnesium"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:manganese
   a owl:Class ;
   gsel:atomicNumber 25 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_18291" ;
-  gsel:id "manganese" ;
-  gsel:symbol "Mn" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q731" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_18291"@en  ;
+  gsel:id "manganese"@en  ;
+  gsel:symbol "Mn"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q731"@en  ;
   rdfs:label "manganese"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/manganese" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/manganese"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:mendelevium
   a owl:Class ;
   gsel:atomicNumber 101 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33395" ;
-  gsel:id "mendelevium" ;
-  gsel:symbol "Md" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q1898" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33395"@en  ;
+  gsel:id "mendelevium"@en  ;
+  gsel:symbol "Md"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q1898"@en  ;
   rdfs:label "mendelevium"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/mendelevium" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/mendelevium"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:mercury
   a owl:Class ;
   gsel:atomicNumber 80 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_16170" ;
-  gsel:id "mercury" ;
-  gsel:symbol "Hg" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q925" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_16170"@en  ;
+  gsel:id "mercury"@en  ;
+  gsel:symbol "Hg"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q925"@en  ;
   rdfs:label "mercury"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/mercury-chemical-element" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/mercury-chemical-element"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:molybdenum
   a owl:Class ;
   gsel:atomicNumber 42 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_28685" ;
-  gsel:id "molybdenum" ;
-  gsel:symbol "Mo" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q1053" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_28685"@en  ;
+  gsel:id "molybdenum"@en  ;
+  gsel:symbol "Mo"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q1053"@en  ;
   rdfs:label "molybdenum"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/molybdenum" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/molybdenum"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:neodymium
   a owl:Class ;
   gsel:atomicNumber 60 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33372" ;
-  gsel:id "neodymium" ;
-  gsel:symbol "Nd" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q1388" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33372"@en  ;
+  gsel:id "neodymium"@en  ;
+  gsel:symbol "Nd"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q1388"@en  ;
   rdfs:label "neodymium"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/neodymium" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/neodymium"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:neon
   a owl:Class ;
   gsel:atomicNumber 10 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33310" ;
-  gsel:id "neon" ;
-  gsel:symbol "Ne" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q654" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33310"@en  ;
+  gsel:id "neon"@en  ;
+  gsel:symbol "Ne"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q654"@en  ;
   rdfs:label "neon"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/neon-chemical-element" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/neon-chemical-element"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:neptunium
   a owl:Class ;
   gsel:atomicNumber 93 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33387" ;
-  gsel:id "neptunium" ;
-  gsel:symbol "Np" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q1105" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33387"@en  ;
+  gsel:id "neptunium"@en  ;
+  gsel:symbol "Np"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q1105"@en  ;
   rdfs:label "neptunium"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/neptunium" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/neptunium"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:nickel
   a owl:Class ;
   gsel:atomicNumber 28 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_28112" ;
-  gsel:id "nickel" ;
-  gsel:symbol "Ni" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q744" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_28112"@en  ;
+  gsel:id "nickel"@en  ;
+  gsel:symbol "Ni"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q744"@en  ;
   rdfs:label "nickel"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/nickel-chemical-element" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/nickel-chemical-element"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:niobium
   a owl:Class ;
   gsel:atomicNumber 41 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33344" ;
-  gsel:id "niobium" ;
-  gsel:symbol "Nb" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q1046" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33344"@en  ;
+  gsel:id "niobium"@en  ;
+  gsel:symbol "Nb"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q1046"@en  ;
   rdfs:label "niobium"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/niobium" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/niobium"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:nitrogen
   a owl:Class ;
   gsel:atomicNumber 7 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_25555" ;
-  gsel:id "nitrogen" ;
-  gsel:symbol "N" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q627" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_25555"@en  ;
+  gsel:id "nitrogen"@en  ;
+  gsel:symbol "N"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q627"@en  ;
   rdfs:label "nitrogen"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/nitrogen" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/nitrogen"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:nobelium
   a owl:Class ;
   gsel:atomicNumber 102 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33396" ;
-  gsel:id "nobelium" ;
-  gsel:symbol "No" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q1901" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33396"@en  ;
+  gsel:id "nobelium"@en  ;
+  gsel:symbol "No"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q1901"@en  ;
   rdfs:label "nobelium"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/nobelium" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/nobelium"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
-
+gsel:ontology
+  a owl:Ontology ;
+  rdfs:comment "use wikidata URIs. Extracted via SPARQL query. Include atomic number, abbreviation, CHEBI URI and Encyclopedia Britannica link"@en  ;
+  rdfs:label "GSO Elements"@en  ;
+  rdfs:seeAlso "https://robertdavidstevens.wordpress.com/2010/12/21/an-ontology-for-inferring-the-periodic-table-of-the-elements/ for future elaboration ...."@en  ;
+.
 gsel:osmium
   a owl:Class ;
   gsel:atomicNumber 76 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_30687" ;
-  gsel:id "osmium" ;
-  gsel:symbol "Os" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q751" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_30687"@en  ;
+  gsel:id "osmium"@en  ;
+  gsel:symbol "Os"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q751"@en  ;
   rdfs:label "osmium"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/osmium" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/osmium"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:oxygen
   a owl:Class ;
   gsel:atomicNumber 8 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_25805" ;
-  gsel:id "oxygen" ;
-  gsel:symbol "O" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q629" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_25805"@en  ;
+  gsel:id "oxygen"@en  ;
+  gsel:symbol "O"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q629"@en  ;
   rdfs:label "oxygen"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/oxygen" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/oxygen"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:palladium
   a owl:Class ;
   gsel:atomicNumber 46 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33363" ;
-  gsel:id "palladium" ;
-  gsel:symbol "Pd" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q1089" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33363"@en  ;
+  gsel:id "palladium"@en  ;
+  gsel:symbol "Pd"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q1089"@en  ;
   rdfs:label "palladium"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/palladium-chemical-element" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/palladium-chemical-element"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:phosphorus
   a owl:Class ;
   gsel:atomicNumber 15 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_28659" ;
-  gsel:id "phosphorus" ;
-  gsel:symbol "P" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q674" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_28659"@en  ;
+  gsel:id "phosphorus"@en  ;
+  gsel:symbol "P"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q674"@en  ;
   rdfs:label "phosphorus"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/phosphor" ;
-  rdfs:seeAlso "https://www.britannica.com/science/phosphorus-chemical-element" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/phosphor"@en  ;
+  rdfs:seeAlso "https://www.britannica.com/science/phosphorus-chemical-element"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:platinum
   a owl:Class ;
   gsel:atomicNumber 78 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33364" ;
-  gsel:id "platinum" ;
-  gsel:symbol "Pt" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q880" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33364"@en  ;
+  gsel:id "platinum"@en  ;
+  gsel:symbol "Pt"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q880"@en  ;
   rdfs:label "platinum"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/platinum" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/platinum"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:plutonium
   a owl:Class ;
   gsel:atomicNumber 94 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33388" ;
-  gsel:id "plutonium" ;
-  gsel:symbol "Pu" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q1102" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33388"@en  ;
+  gsel:id "plutonium"@en  ;
+  gsel:symbol "Pu"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q1102"@en  ;
   rdfs:label "plutonium"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/plutonium" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/plutonium"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:polonium
   a owl:Class ;
   gsel:atomicNumber 84 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33313" ;
-  gsel:id "polonium" ;
-  gsel:symbol "Po" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q979" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33313"@en  ;
+  gsel:id "polonium"@en  ;
+  gsel:symbol "Po"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q979"@en  ;
   rdfs:label "polonium"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/polonium" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/polonium"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:potassium
   a owl:Class ;
   gsel:atomicNumber 19 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_26216" ;
-  gsel:id "potassium" ;
-  gsel:symbol "K" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q703" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_26216"@en  ;
+  gsel:id "potassium"@en  ;
+  gsel:symbol "K"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q703"@en  ;
   rdfs:label "potassium"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/potassium" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/potassium"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:praseodymium
   a owl:Class ;
   gsel:atomicNumber 59 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_49828" ;
-  gsel:id "praseodymium" ;
-  gsel:symbol "Pr" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q1386" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_49828"@en  ;
+  gsel:id "praseodymium"@en  ;
+  gsel:symbol "Pr"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q1386"@en  ;
   rdfs:label "praseodymium"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/praseodymium" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/praseodymium"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:promethium
   a owl:Class ;
   gsel:atomicNumber 61 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33373" ;
-  gsel:id "promethium" ;
-  gsel:symbol "Pm" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q1809" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33373"@en  ;
+  gsel:id "promethium"@en  ;
+  gsel:symbol "Pm"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q1809"@en  ;
   rdfs:label "promethium"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/promethium" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/promethium"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:protactinium
   a owl:Class ;
   gsel:atomicNumber 91 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33386" ;
-  gsel:id "protactinium" ;
-  gsel:symbol "Pa" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q1109" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33386"@en  ;
+  gsel:id "protactinium"@en  ;
+  gsel:symbol "Pa"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q1109"@en  ;
   rdfs:label "protactinium"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/protactinium" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/protactinium"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:radium
   a owl:Class ;
   gsel:atomicNumber 88 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33325" ;
-  gsel:id "radium" ;
-  gsel:symbol "Ra" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q1128" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33325"@en  ;
+  gsel:id "radium"@en  ;
+  gsel:symbol "Ra"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q1128"@en  ;
   rdfs:label "radium"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/radium" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/radium"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:radon
   a owl:Class ;
   gsel:atomicNumber 86 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33314" ;
-  gsel:id "radon" ;
-  gsel:symbol "Rn" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q1133" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33314"@en  ;
+  gsel:id "radon"@en  ;
+  gsel:symbol "Rn"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q1133"@en  ;
   rdfs:label "radon"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/radon" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/radon"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:rhenium
   a owl:Class ;
   gsel:atomicNumber 75 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_49882" ;
-  gsel:id "rhenium" ;
-  gsel:symbol "Re" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q737" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_49882"@en  ;
+  gsel:id "rhenium"@en  ;
+  gsel:symbol "Re"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q737"@en  ;
   rdfs:label "rhenium"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/rhenium" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/rhenium"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:rhodium
   a owl:Class ;
   gsel:atomicNumber 45 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33359" ;
-  gsel:id "rhodium" ;
-  gsel:symbol "Rh" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q1087" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33359"@en  ;
+  gsel:id "rhodium"@en  ;
+  gsel:symbol "Rh"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q1087"@en  ;
   rdfs:label "rhodium"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/rhodium" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/rhodium"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:rubidium
   a owl:Class ;
   gsel:atomicNumber 37 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33322" ;
-  gsel:id "rubidium" ;
-  gsel:symbol "Rb" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q895" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33322"@en  ;
+  gsel:id "rubidium"@en  ;
+  gsel:symbol "Rb"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q895"@en  ;
   rdfs:label "rubidium"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/rubidium" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/rubidium"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:ruthenium
   a owl:Class ;
   gsel:atomicNumber 44 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_30682" ;
-  gsel:id "ruthenium" ;
-  gsel:symbol "Ru" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q1086" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_30682"@en  ;
+  gsel:id "ruthenium"@en  ;
+  gsel:symbol "Ru"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q1086"@en  ;
   rdfs:label "ruthenium"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/ruthenium" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/ruthenium"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:rutherfordium
   a owl:Class ;
   gsel:atomicNumber 104 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33346" ;
-  gsel:id "rutherfordium" ;
-  gsel:symbol "Rf" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q1226" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33346"@en  ;
+  gsel:id "rutherfordium"@en  ;
+  gsel:symbol "Rf"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q1226"@en  ;
   rdfs:label "rutherfordium"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/rutherfordium" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/rutherfordium"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:samarium
   a owl:Class ;
   gsel:atomicNumber 62 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33374" ;
-  gsel:id "samarium" ;
-  gsel:symbol "Sm" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q1819" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33374"@en  ;
+  gsel:id "samarium"@en  ;
+  gsel:symbol "Sm"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q1819"@en  ;
   rdfs:label "samarium"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/samarium" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/samarium"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:scandium
   a owl:Class ;
   gsel:atomicNumber 21 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33330" ;
-  gsel:id "scandium" ;
-  gsel:symbol "Sc" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q713" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33330"@en  ;
+  gsel:id "scandium"@en  ;
+  gsel:symbol "Sc"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q713"@en  ;
   rdfs:label "scandium"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/scandium" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/scandium"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:seaborgium
   a owl:Class ;
   gsel:atomicNumber 106 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33351" ;
-  gsel:id "seaborgium" ;
-  gsel:symbol "Sg" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q1234" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33351"@en  ;
+  gsel:id "seaborgium"@en  ;
+  gsel:symbol "Sg"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q1234"@en  ;
   rdfs:label "seaborgium"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/selenium" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/selenium"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:selenium
   a owl:Class ;
   gsel:atomicNumber 34 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_27568" ;
-  gsel:id "selenium" ;
-  gsel:symbol "Se" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q876" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_27568"@en  ;
+  gsel:id "selenium"@en  ;
+  gsel:symbol "Se"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q876"@en  ;
   rdfs:label "selenium"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/seaborgium" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/seaborgium"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:silicon
   a owl:Class ;
   gsel:atomicNumber 14 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_27573" ;
-  gsel:id "silicon" ;
-  gsel:symbol "Si" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q670" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_27573"@en  ;
+  gsel:id "silicon"@en  ;
+  gsel:symbol "Si"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q670"@en  ;
   rdfs:label "silicon"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/silicon" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/silicon"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:silver
   a owl:Class ;
   gsel:atomicNumber 47 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_9141" ;
-  gsel:id "silver" ;
-  gsel:symbol "Ag" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q1090" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_9141"@en  ;
+  gsel:id "silver"@en  ;
+  gsel:symbol "Ag"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q1090"@en  ;
   rdfs:label "silver"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/silver" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/silver"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:sodium
   a owl:Class ;
   gsel:atomicNumber 11 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_26708" ;
-  gsel:id "sodium" ;
-  gsel:symbol "Na" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q658" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_26708"@en  ;
+  gsel:id "sodium"@en  ;
+  gsel:symbol "Na"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q658"@en  ;
   rdfs:label "sodium"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/sodium" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/sodium"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:strontium
   a owl:Class ;
   gsel:atomicNumber 38 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33324" ;
-  gsel:id "strontium" ;
-  gsel:symbol "Sr" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q938" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33324"@en  ;
+  gsel:id "strontium"@en  ;
+  gsel:symbol "Sr"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q938"@en  ;
   rdfs:label "strontium"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/strontium" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/strontium"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:sulfur
   a owl:Class ;
   gsel:atomicNumber 16 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33403" ;
-  gsel:id "sulfur" ;
-  gsel:symbol "S" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q682" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33403"@en  ;
+  gsel:id "sulfur"@en  ;
+  gsel:symbol "S"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q682"@en  ;
   rdfs:label "sulfur"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/sulfur" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/sulfur"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:symbol
   a owl:DatatypeProperty ;
-  rdfs:label "symbol" ;
+  rdfs:label "symbol"@en  ;
 .
 gsel:tantalum
   a owl:Class ;
   gsel:atomicNumber 73 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33348" ;
-  gsel:id "tantalum" ;
-  gsel:symbol "Ta" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q1123" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33348"@en  ;
+  gsel:id "tantalum"@en  ;
+  gsel:symbol "Ta"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q1123"@en  ;
   rdfs:label "tantalum"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/tantalum" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/tantalum"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:technetium
   a owl:Class ;
   gsel:atomicNumber 43 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33353" ;
-  gsel:id "technetium" ;
-  gsel:symbol "Tc" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q1054" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33353"@en  ;
+  gsel:id "technetium"@en  ;
+  gsel:symbol "Tc"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q1054"@en  ;
   rdfs:label "technetium"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/technetium" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/technetium"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:tellurium
   a owl:Class ;
   gsel:atomicNumber 52 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_30452" ;
-  gsel:id "tellurium" ;
-  gsel:symbol "Te" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q1100" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_30452"@en  ;
+  gsel:id "tellurium"@en  ;
+  gsel:symbol "Te"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q1100"@en  ;
   rdfs:label "tellurium"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/tellurium" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/tellurium"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:terbium
   a owl:Class ;
   gsel:atomicNumber 65 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33376" ;
-  gsel:id "terbium" ;
-  gsel:symbol "Tb" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q1838" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33376"@en  ;
+  gsel:id "terbium"@en  ;
+  gsel:symbol "Tb"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q1838"@en  ;
   rdfs:label "terbium"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/terbium" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/terbium"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:thallium
   a owl:Class ;
   gsel:atomicNumber 81 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_30440" ;
-  gsel:id "thallium" ;
-  gsel:symbol "Tl" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q932" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_30440"@en  ;
+  gsel:id "thallium"@en  ;
+  gsel:symbol "Tl"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q932"@en  ;
   rdfs:label "thallium"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/thallium" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/thallium"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:thorium
   a owl:Class ;
   gsel:atomicNumber 90 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33385" ;
-  gsel:id "thorium" ;
-  gsel:symbol "Th" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q1115" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33385"@en  ;
+  gsel:id "thorium"@en  ;
+  gsel:symbol "Th"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q1115"@en  ;
   rdfs:label "thorium"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/thorium" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/thorium"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:thulium
   a owl:Class ;
   gsel:atomicNumber 69 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33380" ;
-  gsel:id "thulium" ;
-  gsel:symbol "Tm" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q1853" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33380"@en  ;
+  gsel:id "thulium"@en  ;
+  gsel:symbol "Tm"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q1853"@en  ;
   rdfs:label "thulium"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/thulium" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/thulium"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:tin
   a owl:Class ;
   gsel:atomicNumber 50 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_27007" ;
-  gsel:id "tin" ;
-  gsel:symbol "Sn" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q1096" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_27007"@en  ;
+  gsel:id "tin"@en  ;
+  gsel:symbol "Sn"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q1096"@en  ;
   rdfs:label "tin"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/tin" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/tin"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:titanium
   a owl:Class ;
   gsel:atomicNumber 22 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33341" ;
-  gsel:id "titanium" ;
-  gsel:symbol "Ti" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q716" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33341"@en  ;
+  gsel:id "titanium"@en  ;
+  gsel:symbol "Ti"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q716"@en  ;
   rdfs:label "titanium"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/titanium" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/titanium"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:tungsten
   a owl:Class ;
   gsel:atomicNumber 74 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_27998" ;
-  gsel:id "tungsten" ;
-  gsel:symbol "W" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q743" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_27998"@en  ;
+  gsel:id "tungsten"@en  ;
+  gsel:symbol "W"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q743"@en  ;
   rdfs:label "tungsten"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/tungsten-chemical-element" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/tungsten-chemical-element"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:uranium
   a owl:Class ;
   gsel:atomicNumber 92 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_49936" ;
-  gsel:id "uranium" ;
-  gsel:symbol "U" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q1098" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_49936"@en  ;
+  gsel:id "uranium"@en  ;
+  gsel:symbol "U"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q1098"@en  ;
   rdfs:label "uranium"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/uranium" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/uranium"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:vanadium
   a owl:Class ;
   gsel:atomicNumber 23 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_27698" ;
-  gsel:id "vanadium" ;
-  gsel:symbol "V" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q722" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_27698"@en  ;
+  gsel:id "vanadium"@en  ;
+  gsel:symbol "V"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q722"@en  ;
   rdfs:label "vanadium"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/vanadium" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/vanadium"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:wikidataid
   a owl:DatatypeProperty ;
-  rdfs:label "wikidataid" ;
+  rdfs:label "wikidataid"@en  ;
 .
 gsel:xenon
   a owl:Class ;
   gsel:atomicNumber 54 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_49957" ;
-  gsel:id "xenon" ;
-  gsel:symbol "Xe" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q1106" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_49957"@en  ;
+  gsel:id "xenon"@en  ;
+  gsel:symbol "Xe"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q1106"@en  ;
   rdfs:label "xenon"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/xenon" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/xenon"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:ytterbium
   a owl:Class ;
   gsel:atomicNumber 70 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33381" ;
-  gsel:id "ytterbium" ;
-  gsel:symbol "Yb" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q1855" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33381"@en  ;
+  gsel:id "ytterbium"@en  ;
+  gsel:symbol "Yb"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q1855"@en  ;
   rdfs:label "ytterbium"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/ytterbium" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/ytterbium"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:yttrium
   a owl:Class ;
   gsel:atomicNumber 39 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33331" ;
-  gsel:id "yttrium" ;
-  gsel:symbol "Y" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q941" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33331"@en  ;
+  gsel:id "yttrium"@en  ;
+  gsel:symbol "Y"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q941"@en  ;
   rdfs:label "yttrium"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/yttrium" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/yttrium"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:zinc
   a owl:Class ;
   gsel:atomicNumber 30 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_30185" ;
-  gsel:id "zinc" ;
-  gsel:symbol "Zn" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q758" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_30185"@en  ;
+  gsel:id "zinc"@en  ;
+  gsel:symbol "Zn"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q758"@en  ;
   rdfs:label "zinc"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/zinc" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/zinc"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .
 gsel:zirconium
   a owl:Class ;
   gsel:atomicNumber 40 ;
-  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33342" ;
-  gsel:id "zirconium" ;
-  gsel:symbol "Zr" ;
-  gsel:wikidataid "http://www.wikidata.org/entity/Q1038" ;
+  gsel:chebiid "http://purl.obolibrary.org/obo/CHEBI_33342"@en  ;
+  gsel:id "zirconium"@en  ;
+  gsel:symbol "Zr"@en  ;
+  gsel:wikidataid "http://www.wikidata.org/entity/Q1038"@en  ;
   rdfs:label "zirconium"@en ;
-  rdfs:seeAlso "https://www.britannica.com/science/zirconium" ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2019/1/common/Element> ;
+  rdfs:seeAlso "https://www.britannica.com/science/zirconium"@en  ;
+  rdfs:subClassOf gsoc:Element ;
 .

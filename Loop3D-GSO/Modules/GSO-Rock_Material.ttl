@@ -1,29 +1,32 @@
-# baseURI: http://loop3d.org/GSO/ontology/2019/1/lithology/ontology
-# imports: http://loop3d.org/GSO/ontology/2019/1/geologicfeature/ontology
-# imports: http://loop3d.org/GSO/ontology/2019/1/lithology/particleaspectratio/ontology
+# baseURI: http://loop3d.org/GSO/ontology/2020/1/lithology/ontology
+# imports: http://loop3d.org/GSO/ontology/2020/1/geologicfeature/ontology
+# imports: http://loop3d.org/GSO/ontology/2020/1/geologicproperty/ontology
+# imports: http://loop3d.org/GSO/ontology/2020/1/lithology/compositioncategory/ontology
+# imports: http://loop3d.org/GSO/ontology/2020/1/lithology/consolidationdegree/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/lithology/geneticcategory/ontology
+# imports: http://loop3d.org/GSO/ontology/2020/1/lithology/particleaspectratio/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/lithology/particleshape/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/lithology/particletype/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/metamorphicfacies/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/metamorphicgrade/ontology
-# imports: http://purl.org/dc/terms/
 
-@prefix : <http://loop3d.org/GSO/ontology/2019/1/lithology/> .
-@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix : <http://loop3d.org/GSO/ontology/2020/1/lithology/> .
+@prefix dcam: <http://purl.org/dc/dcam/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix gsar: <http://loop3d.org/GSO/ontology/2020/1/lithology/particleaspectratio/> .
 @prefix gsgc: <http://loop3d.org/GSO/ontology/2020/1/lithology/geneticcategory/> .
-@prefix gslth: <http://loop3d.org/GSO/ontology/2019/1/lithology/> .
+@prefix gslth: <http://loop3d.org/GSO/ontology/2020/1/lithology/> .
 @prefix gsmf: <http://loop3d.org/GSO/ontology/2020/1/metamorphicfacies/> .
 @prefix gsmg: <http://loop3d.org/GSO/ontology/2020/1/metamorphicgrade/> .
-@prefix gsoc: <http://loop3d.org/GSO/ontology/2019/1/common/> .
-@prefix gsog: <http://loop3d.org/GSO/ontology/2019/1/geologicfeature/> .
-@prefix gsop: <http://loop3d.org/GSO/ontology/2019/1/geologicproperty/> .
+@prefix gsoc: <http://loop3d.org/GSO/ontology/2020/1/common/> .
+@prefix gsog: <http://loop3d.org/GSO/ontology/2020/1/geologicfeature/> .
+@prefix gsop: <http://loop3d.org/GSO/ontology/2020/1/geologicproperty/> .
 @prefix gsps: <http://loop3d.org/GSO/ontology/2020/1/lithology/particleshape/> .
 @prefix gspt: <http://loop3d.org/GSO/ontology/2020/1/lithology/particletype/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 gsog:Granular_Material
@@ -71,16 +74,6 @@ gsog:Rock_Material
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty gsoc:hasPhysicalProperty ;
-      owl:someValuesFrom gsop:Consolidation_Degree ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty gsoc:hasPhysicalProperty ;
-      owl:someValuesFrom gsop:Grain_Shape ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty gsoc:hasPhysicalProperty ;
       owl:someValuesFrom gsop:Metamorphic_Facies ;
     ] ;
   rdfs:subClassOf [
@@ -91,7 +84,12 @@ gsog:Rock_Material
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty gsoc:hasPhysicalProperty ;
-      owl:someValuesFrom gsop:Rock_Material_Genetic_Category ;
+      owl:someValuesFrom <http://loop3d.org/GSO/ontology/2020/1/geologicproperty/http://loop3d.org/GSO/ontology/2020/1/lithology/Grain_Shape> ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasPhysicalProperty ;
+      owl:someValuesFrom gslth:Consolidation_Degree ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
@@ -103,10 +101,59 @@ gsog:Rock_Material
       owl:onProperty gsoc:hasPhysicalProperty ;
       owl:someValuesFrom gslth:Particle_Aspect_Ratio_Category ;
     ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasPhysicalProperty ;
+      owl:someValuesFrom gslth:Rock_Material_Genetic_Category ;
+    ] ;
+.
+gsop:Alteration_Degree
+  a owl:Class ;
+.
+gsop:Alteration_Distribution
+  a owl:Class ;
+.
+gsop:Alteration_Type
+  a owl:Class ;
+.
+gsop:Metamorphic_Facies
+  a owl:Class ;
+.
+gsop:Metamorphic_Grade
+  a owl:Class ;
+.
+gsop:UOM
+  a owl:Class ;
+.
+<http://loop3d.org/GSO/ontology/2020/1/geologicproperty/http://loop3d.org/GSO/ontology/2020/1/lithology/Grain_Shape>
+  a owl:Class ;
+.
+gslth:Composition_Category_Space
+  a owl:Class ;
+  rdfs:comment "categories for characterizing the broad compositional character of Rock Materials {@en}	" ;
+  rdfs:label "Any Composition Category"@en ;
+  rdfs:subClassOf gsoc:Physical_Region ;
+.
+gslth:Consolidation_Degree
+  a owl:Class ;
+  rdfs:comment "A property that specifies the degree to which an aggregation of EarthMaterial particles is a distinct solid material. Consolidation and induration are related concepts specified by this property. They define a continuum from unconsolidated material to very hard rock. Induration is the degree to which a consolidated material is made hard, operationally determined by how difficult it is to break a piece of the material. Consolidated materials may have varying degrees of induration (NADMSC, 2004)"@en ;
+  rdfs:isDefinedBy "GeoSciML v4"@en ;
+  rdfs:label "Consolidation degree"@en ;
+  rdfs:subClassOf gsoc:Physical_Property ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasValue ;
+      owl:someValuesFrom gslth:Consolidation_Degree_Space ;
+    ] ;
+.
+gslth:Consolidation_Degree_Space
+  a owl:Class ;
+  rdfs:label "Any Consolidation Degree"@en ;
+  rdfs:subClassOf gsoc:Physical_Region ;
 .
 gslth:Genetic_Category_Space
   a owl:Class ;
-  rdfs:label "Any Genetic Category" ;
+  rdfs:label "Any Genetic Category"@en ;
   rdfs:subClassOf gsoc:Physical_Region ;
 .
 gslth:Grain_Shape
@@ -133,7 +180,7 @@ gslth:Grain_Size_Average
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom xsd:decimal ;
-      owl:onProperty gsoc:hasValue ;
+      owl:onProperty gsoc:hasNumericValue ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
@@ -143,10 +190,15 @@ gslth:Grain_Size_Average
 .
 gslth:Grain_Size_Category
   a owl:Class ;
-  rdfs:comment "grain size range expressed using a named size category vocabulary" ;
-  rdfs:isDefinedBy "GeoSciML v3" ;
-  rdfs:label "Grain size term" ;
+  rdfs:comment "grain size range expressed using a named size category vocabulary"@en ;
+  rdfs:isDefinedBy "GeoSciML v3"@en ;
+  rdfs:label "Grain size term"@en ;
   rdfs:subClassOf gslth:Grain_Size ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom xsd:string ;
+      owl:onProperty gsoc:hasTextValue ;
+    ] ;
 .
 gslth:Grain_Size_Max
   a owl:Class ;
@@ -156,7 +208,7 @@ gslth:Grain_Size_Max
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom xsd:decimal ;
-      owl:onProperty gsoc:hasValue ;
+      owl:onProperty gsoc:hasNumericValue ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
@@ -172,7 +224,7 @@ gslth:Grain_Size_Min
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom xsd:decimal ;
-      owl:onProperty gsoc:hasValue ;
+      owl:onProperty gsoc:hasNumericValue ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
@@ -183,7 +235,7 @@ gslth:Grain_Size_Min
 gslth:Particle_Aspect_Ratio_Category
   a owl:Class ;
   rdfs:comment "AspectRatio describes the geometry of particles based on the ratios of lengths of long, intermediate and short axes of grains. Equates to sphericity in sedimentary rocks (ie: the degree to which the shape of a particle approximates a sphere).  A quantitative specification based on the ratio of lengths of long, intermediate and short axes of grain shape (Sneed and Folk, 1958; Zingg, 1935). (eg: prolate, slightly flattened, very bladed, equant, acicular, tabular) "@en ;
-  rdfs:isDefinedBy "GeoSciML v4" ;
+  rdfs:isDefinedBy "GeoSciML v4"@en ;
   rdfs:label "Particle aspect ratio "@en ;
   rdfs:subClassOf gsoc:Physical_Property ;
   rdfs:subClassOf [
@@ -194,22 +246,29 @@ gslth:Particle_Aspect_Ratio_Category
 .
 gslth:Particle_Aspect_Ratio_Space
   a owl:Class ;
-  rdfs:comment "categories partitioning the space are defined in a separate ontology, imported here as gsar: <http://loop3d.org/GSO/ontology/2020/1/lithology/particleaspectratio/>. Different vocabularies can be imported for different profiles." ;
-  rdfs:label "any particle aspect ratio" ;
+  rdfs:comment "categories partitioning the space are defined in a separate ontology, imported here as gsar: <http://loop3d.org/GSO/ontology/2020/1/lithology/particleaspectratio/>. Different vocabularies can be imported for different profiles."@en ;
+  rdfs:label "any particle aspect ratio"@en ;
   rdfs:subClassOf gsoc:Physical_Region ;
 .
 gslth:Particle_Shape_Space
   a owl:Class ;
-  rdfs:comment "categories partitioning the space are defined in a separate ontology, imported here as gsps: <http://loop3d.org/GSO/ontology/2020/1/lithology/particleshape/> Different vocabularies can be imported for different profiles." ;
-  rdfs:label "any particle shape category" ;
+  rdfs:comment "categories partitioning the space are defined in a separate ontology, imported here as gsps: <http://loop3d.org/GSO/ontology/2020/1/lithology/particleshape/> Different vocabularies can be imported for different profiles."@en ;
+  rdfs:label "Any Particle Shape"@en ;
+  rdfs:label "any particle shape category"@en ;
   rdfs:subClassOf gsoc:Physical_Region ;
+  rdfs:subClassOf gsoc:Shape ;
 .
 gslth:Particle_Sorting_Category
   a owl:Class ;
-  rdfs:comment "The Sorting attribute holds text terms to specify size distribution of particles in a CompoundMaterial. Terminology for sorting in sedimentary rocks is based on the quantitative Graphic Standard Deviation (IGSD) scheme proposed by Folk (1968, 1974).  Example terms for this attribute may include sedimentary terms such as well sorted and poorly sorted, or igneous terms such as porphyritic, equigranuilar, seriate." ;
-  rdfs:isDefinedBy "GeoSciML v4" ;
-  rdfs:label "Particle sorting" ;
+  rdfs:comment "The Sorting attribute holds text terms to specify size distribution of particles in a CompoundMaterial. Terminology for sorting in sedimentary rocks is based on the quantitative Graphic Standard Deviation (IGSD) scheme proposed by Folk (1968, 1974).  Example terms for this attribute may include sedimentary terms such as well sorted and poorly sorted, or igneous terms such as porphyritic, equigranuilar, seriate."@en ;
+  rdfs:isDefinedBy "GeoSciML v4"@en ;
+  rdfs:label "Particle sorting"@en ;
   rdfs:subClassOf gsoc:Physical_Property ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom xsd:string ;
+      owl:onProperty gsoc:hasTextValue ;
+    ] ;
 .
 gslth:Rock_Material_Color
   a owl:Class ;
@@ -225,15 +284,20 @@ gslth:Rock_Material_Color
 gslth:Rock_Material_Composition_Category
   a owl:Class ;
   rdfs:comment "Term to specify the gross compositional character of a compound material. Composition as used here is loosely construed to include both chemical composition and petrograpic composition, thus multiple values may be applied to a single rock, e.g. metaluminous and alkalic, undersaturated and basic, etc. Terms would typically include broad chemical classifications such as silicate, carbonate, ferromagnesian, oxide.  However, this attribute may have different terminology for different kinds of rocks - for example sandstone petrographic classification terms (e.g. feldspathic) might be placed here."@en ;
-  rdfs:isDefinedBy "GeoSciML v4" ;
-  rdfs:label "Rock material composition category" ;
+  rdfs:isDefinedBy "GeoSciML v4"@en ;
+  rdfs:label "Rock material composition category"@en ;
   rdfs:subClassOf gsoc:Physical_Property ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasValue ;
+      owl:someValuesFrom gslth:Composition_Category_Space ;
+    ] ;
 .
 gslth:Rock_Material_Genetic_Category
   a owl:Class ;
   rdfs:comment "A term that represents a summary geologic history of the material. (ie, a genetic process classifier term) Examples include igneous, sedimentary, metamorphic, shock metamorphic, volcanic, pyroclastic."@en ;
-  rdfs:isDefinedBy "GeoSciML v4" ;
-  rdfs:label "Rock material genetic category" ;
+  rdfs:isDefinedBy "GeoSciML v4"@en ;
+  rdfs:label "Rock material genetic category"@en ;
   rdfs:subClassOf gsoc:Physical_Property ;
   rdfs:subClassOf [
       a owl:Restriction ;
@@ -339,6 +403,7 @@ gslth:anorthositic_rock
 .
 gslth:anthracite_coal
   a owl:Class ;
+  a owl:NamedIndividual ;
   dcterms:alternative "High rank coal"@en ;
   dcterms:source "Economic commission for Europe, committee on Sustainable Energy- United Nations (ECE-UN), 1998, International Classification of in-Seam Coals: Energy 19, 41 pp; see also Neuendorf et al. 2005; http://en.wikipedia.org/wiki/Coal#Types_of_coal; Eberhard Lindner; Chemie für Ingenieure; Lindner Verlag Karlsruhe, S. 258"@en ;
   rdfs:comment "Coal that has vitrinite mean random reflectance greater than 2.0% (determined in conformance with ISO 7404-5). Less than 12-14 percent volatiles (dry, ash free), greater than 91 percent fixed carbon (dry, ash free basis). The highest rank coal; very hard, glossy, black, with semimetallic luster, semi conchoidal fracture."@en ;
@@ -465,6 +530,7 @@ gslth:biogenic_silica_sedimentary_rock
 .
 gslth:bituminous_coal
   a owl:Class ;
+  a owl:NamedIndividual ;
   dcterms:alternative "medium rank coal"@en ;
   dcterms:source "Economic commission for Europe, committee on Sustainable Energy- United Nations (ECE-UN), 1998, International Classification of in-Seam Coals: Energy 19, 41 pp; see also http://en.wikipedia.org/wiki/Coal#Types_of_coal; Eberhard Lindner; Chemie für Ingenieure; Lindner Verlag Karlsruhe, S. 258"@en ;
   rdfs:comment "Coal that has vitrinite mean random reflectance greater than 0.6% and less than 2.0% (determined in conformance with ISO 7404-5), or has a gross calorific value greater than 24 MJ/kg (determined in conformance with ISO 1928). Hard, black, organic rich sedimentary rock; contains less than 91 percent fixed carbon on a dry, mineral-matter-free basis, and greater than 13-14 percent volatiles (dry, ash free). Formed from the compaction or induration of variously altered plant remains similar to those of peaty deposits."@en ;
@@ -532,6 +598,7 @@ gslth:calcareous_carbonate_sedimentary_rock
 .
 gslth:carbonate_mud
   a owl:Class ;
+  a owl:NamedIndividual ;
   dcterms:alternative "marl"@en ;
   dcterms:source "follow pattern used for clastic sand and mud categories, based on SLTTs 2004"@en ;
   rdfs:comment "Carbonate sediment composed of less than 25 percent clasts that have a maximum diameter more than 2 mm, and the ratio of sand size to mud size clasts is less than one."@en ;
@@ -541,6 +608,7 @@ gslth:carbonate_mud
 .
 gslth:carbonate_mudstone
   a owl:Class ;
+  a owl:NamedIndividual ;
   dcterms:alternative "marlstone"@en ;
   dcterms:source "This vocabulary"@en ;
   rdfs:comment "Mudstone that consists of greater than 50 percent carbonate minerals of any origin in the mud size fraction."@en ;
@@ -559,6 +627,7 @@ gslth:carbonate_ooze
 .
 gslth:carbonate_rich_mud
   a owl:Class ;
+  a owl:NamedIndividual ;
   dcterms:alternative "carbonate rich loess"@en ;
   dcterms:alternative "marl"@en ;
   dcterms:source "This vocabulary"@en ;
@@ -568,6 +637,7 @@ gslth:carbonate_rich_mud
 .
 gslth:carbonate_rich_mudstone
   a owl:Class ;
+  a owl:NamedIndividual ;
   dcterms:alternative "marlstone"@en ;
   dcterms:source "This vocabulary"@en ;
   rdfs:comment "Carbonate-rich mudstone' definition limits carbonate to mud-size fraction to avoid overlap with 'impure carbonate sedimentary rock'. If carbonate minerals are in sand or gravel size fractions, use 'impure carbonate sedimentary rock'. The operational test typically used to identify this category is if the rock fizzes when hydrochloric acid is applied. The '10 percent carbonate' criteria is a fuzzy boundary."@en ;
@@ -646,6 +716,7 @@ gslth:chlorite_actinolite_epidote_metamorphic_rock
 .
 gslth:clastic_conglomerate
   a owl:Class ;
+  a owl:NamedIndividual ;
   dcterms:alternative "conglomeratic rock"@en ;
   dcterms:source "Neuendorf et al. 2005; SLTTs 2004"@en ;
   rdfs:comment "Clastic sedimentary rock composed of at least 30 percent rounded to subangular fragments larger than 2 mm in diameter; typically contains finer grained material in interstices between larger fragments. If more than 15 percent of the fine grained matrix is of indeterminant clastic or diagenetic origin and the fabric is matrix supported, may also be categorized as wackestone. If rock has unsorted or poorly sorted texture with a wide range of particle sizes, may also be categorized as diamictite."@en ;
@@ -656,6 +727,7 @@ gslth:clastic_conglomerate
 .
 gslth:clastic_mudstone
   a owl:Class ;
+  a owl:NamedIndividual ;
   dcterms:alternative "clastic mudstone"@en ;
   dcterms:alternative "mudrock"@en ;
   dcterms:source "Pettijohn et al. 1987 referenced in Hallsworth and Knox 1999."@en ;
@@ -667,6 +739,7 @@ gslth:clastic_mudstone
 .
 gslth:clastic_sandstone
   a owl:Class ;
+  a owl:NamedIndividual ;
   dcterms:alternative "clastic sandstone"@en ;
   dcterms:alternative "sandy rock"@en ;
   dcterms:source "SLTTs 2004; Neuendorf et al. 2005; particle size from Wentworth grade scale"@en ;
@@ -836,6 +909,7 @@ gslth:dolomitic_sediment
 .
 gslth:dolostone
   a owl:Class ;
+  a owl:NamedIndividual ;
   dcterms:alternative "dolostone"@en ;
   dcterms:alternative "pure dolomitic or magnesian carbonate sedimentary rock"@en ;
   dcterms:source "This vocabulary"@en ;
@@ -897,6 +971,7 @@ gslth:fault_related_material
 .
 gslth:fine_grained_igneous_rock
   a owl:Class ;
+  a owl:NamedIndividual ;
   dcterms:alternative "volcanic rock"@en ;
   dcterms:source "Gillespie and Styles 1999; LeMaitre et al. 2002"@en ;
   rdfs:comment "Igneous rock in which the framework of the rock consists of crystals that are too small to determine mineralogy with the unaided eye; framework may include up to 50 percent glass. A significant percentage of the rock by volume may be phenocrysts. Includes rocks that are generally called volcanic rocks."@en ;
@@ -1053,6 +1128,7 @@ gslth:foidite
 .
 gslth:foiditoid
   a owl:Class ;
+  a owl:NamedIndividual ;
   dcterms:alternative "foidite (sensu lato)"@en ;
   dcterms:alternative "foiditic rock"@en ;
   dcterms:source "LeMaitre et al. 2002"@en ;
@@ -1159,6 +1235,7 @@ gslth:glassy_igneous_rock
 .
 gslth:glaucophane_lawsonite_epidote_metamorphic_rock
   a owl:Class ;
+  a owl:NamedIndividual ;
   dcterms:alternative "blauschiefer"@de ;
   dcterms:source "This vocabulary"@en ;
   rdfs:comment "A metamorphic rock of roughly basaltic composition, defined by the presence of glaucophane with lawsonite or epidote. Other minerals that may be present include jadeite, albite, chlorite, garnet, and muscovite (phengitic white mica). Typically fine-grained, dark colored. Category for rocks commonly referred to as blueschist."@en ;
@@ -1176,6 +1253,7 @@ gslth:gneiss
 .
 gslth:grainstone
   a owl:Class ;
+  a owl:NamedIndividual ;
   dcterms:alternative "carbonate grainstone"@en ;
   dcterms:source "Dunham 1962"@en ;
   rdfs:comment "Carbonate sedimentary rock with recognizable depositional fabric that is grain-supported, and constituent particles are of intrabasinal origin; contains little or no mud matrix. Distinction from sandstone is based on interpretation of intrabasinal origin of clasts and grain-supported fabric, but grainstone definition does not include a grain size criteria."@en ;
@@ -1191,6 +1269,7 @@ gslth:granite
 .
 gslth:granitoid
   a owl:Class ;
+  a owl:NamedIndividual ;
   dcterms:alternative "granitic rock"@en ;
   dcterms:source "LeMaitre et al. 2002"@en ;
   rdfs:comment "Phaneritic crystalline igneous rock consisting of quartz, alkali feldspar and/or plagioclase. Includes rocks defined modally in QAPF fields 2, 3, 4 and 5 as alkali feldspar granite, granite, granodiorite or tonalite."@en ;
@@ -1295,6 +1374,7 @@ gslth:impact_generated_material
 .
 gslth:impure_calcareous_carbonate_sediment
   a owl:Class ;
+  a owl:NamedIndividual ;
   dcterms:alternative "calcareous marl"@en ;
   dcterms:source "This vocabulary"@en ;
   rdfs:comment "Carbonate sediment in which between 50 and 90 percent of the constituents are composed of one (or more) of the carbonate minerals in particles of intrabasinal origin, and a calcite (plus aragonite) to dolomite ratio greater than 1 to 1."@en ;
@@ -1304,6 +1384,7 @@ gslth:impure_calcareous_carbonate_sediment
 .
 gslth:impure_carbonate_sediment
   a owl:Class ;
+  a owl:NamedIndividual ;
   dcterms:alternative "marl"@en ;
   dcterms:source "This vocabulary"@en ;
   rdfs:comment "Carbonate sediment in which between 50 and 90 percent of the constituents are composed of one (or more) of the carbonate minerals in particles of intrabasinal origin."@en ;
@@ -1312,6 +1393,7 @@ gslth:impure_carbonate_sediment
 .
 gslth:impure_carbonate_sedimentary_rock
   a owl:Class ;
+  a owl:NamedIndividual ;
   dcterms:alternative "marlstone"@en ;
   dcterms:source "This vocabulary"@en ;
   rdfs:comment "Sedimentary rock in which between 50 and 90 percent of the primary and/or recrystallized constituents are composed of carbonate minerals."@en ;
@@ -1320,6 +1402,7 @@ gslth:impure_carbonate_sedimentary_rock
 .
 gslth:impure_dolomitic_sediment
   a owl:Class ;
+  a owl:NamedIndividual ;
   dcterms:alternative "dolomitic marl"@en ;
   dcterms:source "This vocabulary"@en ;
   rdfs:comment "Carbonate sediment in which between 50 and 90 percent of the constituents are composed of one (or more) of the carbonate minerals in particles of intrabasinal origin, and the ratio of magnesium carbonate to calcite (plus aragonite) greater than 1 to 1."@en ;
@@ -1329,6 +1412,7 @@ gslth:impure_dolomitic_sediment
 .
 gslth:impure_dolostone
   a owl:Class ;
+  a owl:NamedIndividual ;
   dcterms:alternative "dolomitic marlstone"@en ;
   dcterms:alternative "impure dolomitic or magnesian carbonate sedimentary rock"@en ;
   dcterms:alternative "impure dolostone"@en ;
@@ -1340,6 +1424,7 @@ gslth:impure_dolostone
 .
 gslth:impure_limestone
   a owl:Class ;
+  a owl:NamedIndividual ;
   dcterms:alternative "calcareous marlstone"@en ;
   dcterms:source "This vocabulary"@en ;
   rdfs:comment "Impure carbonate sedimentary rock with a calcite (plus aragonite) to dolomite ratio greater than 1 to 1."@en ;
@@ -1416,6 +1501,7 @@ gslth:latitic_rock
 .
 gslth:lignite
   a owl:Class ;
+  a owl:NamedIndividual ;
   dcterms:alternative "low rank coal"@en ;
   dcterms:source "Economic commission for Europe, committee on Sustainable Energy- United Nations (ECE-UN), 1998, International Classification of in-Seam Coals: Energy 19, 41 pp."@en ;
   rdfs:comment "Coal that has a gross calorific value less than 24 MJ/kg (determined in conformance with ISO 1928), and vitrinite mean random reflectance less than 0.6% (determined in conformance with ISO 7404-5). Gross calorific value is recalculated to a moist, ash free basis using bed moisture (determined according to ISO 1015 or ISO 5068). Includes all low-rank coals, including sub-bitiminous coal. A consolidated, dull, soft brown to black coal having many readily discernible plant fragments set in a finer grained organic matrix. Tends to crack and fall apart on drying. Operationally sub-bituminous and bitiminous coal are qualitatively distinguished based on brown streak for sub-bitiminous coal and black streak for bituminous coal."@en ;
@@ -1582,16 +1668,20 @@ gslth:ontology
   rdfs:comment "Rock type categories modified from CGI SimpleLithology; properties based on GeoSciML v3.2 conceptual model. Scope includes gso Rock_Material and gso Granular Material. GSO granular material is analogous to GeoSciMLv3.2 compound material particle geometry description.  "@en ;
   rdfs:label "GSO Rock Material ontology."@en ;
   owl:imports gsog:ontology ;
-  owl:imports <http://loop3d.org/GSO/ontology/2019/1/lithology/particleaspectratio/ontology> ;
+  owl:imports gsop:ontology ;
+  owl:imports <http://loop3d.org/GSO/ontology/2020/1/lithology/compositioncategory/ontology> ;
+  owl:imports <http://loop3d.org/GSO/ontology/2020/1/lithology/consolidationdegree/ontology> ;
   owl:imports gsgc:ontology ;
+  owl:imports gsar:ontology ;
   owl:imports gsps:ontology ;
   owl:imports gspt:ontology ;
   owl:imports gsmf:ontology ;
   owl:imports gsmg:ontology ;
-  owl:imports dcterms: ;
+  owl:improts dcterms: ;
 .
 gslth:ooze
   a owl:Class ;
+  a owl:NamedIndividual ;
   dcterms:alternative "biogenic mud"@en ;
   dcterms:source "based on Bates and Jackson 1987 and Hallsworth and Knox 1999"@en ;
   rdfs:comment "Biogenic sediment consisting of less than 1 percent gravel-size (greater than or equal to 2 mm) particles, with a sand to mud ratio less than 1 to 9, and less than 50 percent carbonate minerals."@en ;
@@ -1602,6 +1692,7 @@ gslth:ooze
 .
 gslth:organic_bearing_mudstone
   a owl:Class ;
+  a owl:NamedIndividual ;
   dcterms:alternative "oil shale"@en ;
   dcterms:source "Neuendorf et al. 2005; http://en.wikipedia.org/wiki/Oil_shale"@en ;
   rdfs:comment "Mudstone that contains a significant amount of organic carbon, typically kerogen. commonly finely laminated, brown or black in color."@en ;
@@ -1686,6 +1777,7 @@ gslth:peridotite
 .
 gslth:phaneritic_igneous_rock
   a owl:Class ;
+  a owl:NamedIndividual ;
   dcterms:alternative "coarse grained crystalline igneous rock"@en ;
   dcterms:alternative "plutonic rock"@en ;
   dcterms:source "Neuendorf et al. 2005"@en ;
@@ -1723,6 +1815,7 @@ gslth:phonolitic_tephrite
 .
 gslth:phonolitoid
   a owl:Class ;
+  a owl:NamedIndividual ;
   dcterms:alternative "phonolitic rock"@en ;
   dcterms:source "LeMaitre et al. 2002"@en ;
   rdfs:comment "Fine grained igneous rock than contains less than 90 percent mafic minerals, between 10 and 60 percent feldspathoid mineral in the QAPF fraction and has a plagioclase to total feldspar ratio less than 0.5. Includes rocks defined modally in QAPF fields 11 and 12, and TAS field Ph."@en ;
@@ -1775,6 +1868,7 @@ gslth:porphyry
 .
 gslth:pure_calcareous_carbonate_sediment
   a owl:Class ;
+  a owl:NamedIndividual ;
   dcterms:alternative "lime sediment"@en ;
   dcterms:source "This vocabulary"@en ;
   rdfs:comment "Carbonate sediment in which greater than 90 percent of the constituents are composed of one (or more) of the carbonate minerals in particles of intrabasinal origin, and a calcite (plus aragonite) to dolomite ratio greater than 1 to 1."@en ;
@@ -1944,6 +2038,7 @@ gslth:rhyolite
 .
 gslth:rhyolitoid
   a owl:Class ;
+  a owl:NamedIndividual ;
   dcterms:alternative "rhyolitic rock"@en ;
   dcterms:source "LeMaitre et al. 2002"@en ;
   rdfs:comment "Note that technical definition, based on modal mineralogy plotted in a QAPF triangle may be applied qualitatively, based on phenocryst mineralogy when ground mass mineralogy can not be determined optically, or based on CIPW norm. Although TAS categories are defined based on chemical analyses, the correspondence with the QAPF defined categories is generally close enough that QAPF categories are commonly used interchangeably with TAS categories. It is important to note the basis for assignment of fine-grained igneous rocks to a specifice lithology category."@en ;
@@ -2065,6 +2160,7 @@ gslth:siliceous_ooze
 .
 gslth:silt
   a owl:Class ;
+  a owl:NamedIndividual ;
   dcterms:alternative "loess"@en ;
   dcterms:source "based on SLTTs 2004; Neuendorf et al. 2005; particle size from Wentworth grade scale"@en ;
   rdfs:comment "Mud that consists of greater than 50 percent silt-size grains."@en ;
@@ -2073,6 +2169,7 @@ gslth:silt
 .
 gslth:siltstone
   a owl:Class ;
+  a owl:NamedIndividual ;
   dcterms:alternative "Silt bearing mudstone"@en ;
   dcterms:source "This vocabulary"@en ;
   rdfs:comment "Mudstone that contains detectable silt. (see comments)"@en ;
@@ -2082,6 +2179,7 @@ gslth:siltstone
 .
 gslth:skarn
   a owl:Class ;
+  a owl:NamedIndividual ;
   dcterms:alternative "exoskarn"@en ;
   dcterms:alternative "tactite"@en ;
   dcterms:source "Fettes and Desmons, 2007, p195"@en ;
@@ -2162,6 +2260,7 @@ gslth:tephritic_phonolite
 .
 gslth:tephritoid
   a owl:Class ;
+  a owl:NamedIndividual ;
   dcterms:alternative "tephritic rock"@en ;
   dcterms:source "LeMaitre et al. 2002"@en ;
   rdfs:comment "Fine grained igneous rock than contains less than 90 percent mafic minerals, between 10 and 60 percent feldspathoid mineral in the QAPF fraction and has a plagioclase to total feldspar ratio greater than 0.5. Includes rocks classified in QAPF field 13 and 14 or chemically in TAS field U1 as basanite or tephrite."@en ;
@@ -2258,4 +2357,765 @@ gslth:wacke
   rdfs:label "piedra"@es ;
   rdfs:label "wacke"@en ;
   rdfs:subClassOf gslth:clastic_sandstone ;
+.
+dcterms:
+  dcterms:modified "2012-06-14"^^xsd:date ;
+  dcterms:publisher <http://purl.org/dc/aboutdcmi#DCMI> ;
+  dcterms:title "DCMI Metadata Terms - other"@en ;
+.
+dcterms:Agent
+  a dcterms:AgentClass ;
+  a owl:Class ;
+  dcterms:issued "2008-01-14"^^xsd:date ;
+  rdfs:comment "A resource that acts or has the power to act."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "Agent"@en ;
+.
+dcterms:AgentClass
+  a owl:Class ;
+  dcterms:issued "2008-01-14"^^xsd:date ;
+  rdfs:comment "A group of agents."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "Agent Class"@en ;
+  rdfs:subClassOf rdfs:Class ;
+.
+dcterms:BibliographicResource
+  a owl:Class ;
+  dcterms:issued "2008-01-14"^^xsd:date ;
+  rdfs:comment "A book, article, or other documentary resource."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "Bibliographic Resource"@en ;
+.
+dcterms:Box
+  a rdfs:Datatype ;
+  dcterms:issued "2000-07-11"^^xsd:date ;
+  rdfs:comment "The set of regions in space defined by their geographic coordinates according to the DCMI Box Encoding Scheme."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "DCMI Box"@en ;
+  rdfs:seeAlso <https://www.dublincore.org/specifications/dublin-core/dcmi-box/> ;
+.
+dcterms:DCMIType
+  a dcam:VocabularyEncodingScheme ;
+  dcterms:issued "2000-07-11"^^xsd:date ;
+  rdfs:comment "The set of classes specified by the DCMI Type Vocabulary, used to categorize the nature or genre of the resource."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "DCMI Type Vocabulary"@en ;
+  rdfs:seeAlso <http://purl.org/dc/dcmitype/> ;
+.
+dcterms:DDC
+  a dcam:VocabularyEncodingScheme ;
+  dcterms:issued "2000-07-11"^^xsd:date ;
+  rdfs:comment "The set of conceptual resources specified by the Dewey Decimal Classification."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "DDC"@en ;
+  rdfs:seeAlso <http://www.oclc.org/dewey/> ;
+.
+dcterms:FileFormat
+  a owl:Class ;
+  dcterms:issued "2008-01-14"^^xsd:date ;
+  rdfs:comment "A digital resource format."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "File Format"@en ;
+  rdfs:subClassOf dcterms:MediaType ;
+.
+dcterms:Frequency
+  a owl:Class ;
+  dcterms:issued "2008-01-14"^^xsd:date ;
+  rdfs:comment "A rate at which something recurs."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "Frequency"@en ;
+.
+dcterms:IMT
+  a dcam:VocabularyEncodingScheme ;
+  dcterms:issued "2000-07-11"^^xsd:date ;
+  rdfs:comment "The set of media types specified by the Internet Assigned Numbers Authority."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "IMT"@en ;
+  rdfs:seeAlso <http://www.iana.org/assignments/media-types/> ;
+.
+dcterms:ISO3166
+  a rdfs:Datatype ;
+  dcterms:issued "2000-07-11"^^xsd:date ;
+  rdfs:comment "The set of codes listed in ISO 3166-1 for the representation of names of countries."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "ISO 3166"@en ;
+  rdfs:seeAlso <http://www.iso.org/iso/en/prods-services/iso3166ma/02iso-3166-code-lists/list-en1.html> ;
+.
+dcterms:ISO639-2
+  a rdfs:Datatype ;
+  dcterms:issued "2000-07-11"^^xsd:date ;
+  rdfs:comment "The three-letter alphabetic codes listed in ISO639-2 for the representation of names of languages."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "ISO 639-2"@en ;
+  rdfs:seeAlso <http://lcweb.loc.gov/standards/iso639-2/langhome.html> ;
+.
+dcterms:ISO639-3
+  a rdfs:Datatype ;
+  dcterms:issued "2008-01-14"^^xsd:date ;
+  rdfs:comment "The set of three-letter codes listed in ISO 639-3 for the representation of names of languages."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "ISO 639-3"@en ;
+  rdfs:seeAlso <http://www.sil.org/iso639-3/> ;
+.
+dcterms:Jurisdiction
+  a owl:Class ;
+  dcterms:issued "2008-01-14"^^xsd:date ;
+  rdfs:comment "The extent or range of judicial, law enforcement, or other authority."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "Jurisdiction"@en ;
+  rdfs:subClassOf dcterms:LocationPeriodOrJurisdiction ;
+.
+dcterms:LCC
+  a dcam:VocabularyEncodingScheme ;
+  dcterms:issued "2000-07-11"^^xsd:date ;
+  rdfs:comment "The set of conceptual resources specified by the Library of Congress Classification."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "LCC"@en ;
+  rdfs:seeAlso <http://lcweb.loc.gov/catdir/cpso/lcco/lcco.html> ;
+.
+dcterms:LCSH
+  a dcam:VocabularyEncodingScheme ;
+  dcterms:issued "2000-07-11"^^xsd:date ;
+  rdfs:comment "The set of labeled concepts specified by the Library of Congress Subject Headings."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "LCSH"@en ;
+.
+dcterms:LicenseDocument
+  a owl:Class ;
+  dcterms:issued "2008-01-14"^^xsd:date ;
+  rdfs:comment "A legal document giving official permission to do something with a resource."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "License Document"@en ;
+  rdfs:subClassOf dcterms:RightsStatement ;
+.
+dcterms:LinguisticSystem
+  a owl:Class ;
+  dcterms:description "Written, spoken, sign, and computer languages are linguistic systems."@en ;
+  dcterms:issued "2008-01-14"^^xsd:date ;
+  rdfs:comment "A system of signs, symbols, sounds, gestures, or rules used in communication."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "Linguistic System"@en ;
+.
+dcterms:Location
+  a owl:Class ;
+  dcterms:issued "2008-01-14"^^xsd:date ;
+  rdfs:comment "A spatial region or named place."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "Location"@en ;
+  rdfs:subClassOf dcterms:LocationPeriodOrJurisdiction ;
+.
+dcterms:LocationPeriodOrJurisdiction
+  a owl:Class ;
+  dcterms:issued "2008-01-14"^^xsd:date ;
+  rdfs:comment "A location, period of time, or jurisdiction."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "Location, Period, or Jurisdiction"@en ;
+.
+dcterms:MESH
+  a dcam:VocabularyEncodingScheme ;
+  dcterms:issued "2000-07-11"^^xsd:date ;
+  rdfs:comment "The set of labeled concepts specified by the Medical Subject Headings."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "MeSH"@en ;
+  rdfs:seeAlso <http://www.nlm.nih.gov/mesh/meshhome.html> ;
+.
+dcterms:MediaType
+  a owl:Class ;
+  dcterms:issued "2008-01-14"^^xsd:date ;
+  rdfs:comment "A file format or physical medium."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "Media Type"@en ;
+  rdfs:subClassOf dcterms:MediaTypeOrExtent ;
+.
+dcterms:MediaTypeOrExtent
+  a owl:Class ;
+  dcterms:issued "2008-01-14"^^xsd:date ;
+  rdfs:comment "A media type or extent."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "Media Type or Extent"@en ;
+.
+dcterms:MethodOfAccrual
+  a owl:Class ;
+  dcterms:issued "2008-01-14"^^xsd:date ;
+  rdfs:comment "A method by which resources are added to a collection."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "Method of Accrual"@en ;
+.
+dcterms:MethodOfInstruction
+  a owl:Class ;
+  dcterms:issued "2008-01-14"^^xsd:date ;
+  rdfs:comment "A process that is used to engender knowledge, attitudes, and skills."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "Method of Instruction"@en ;
+.
+dcterms:NLM
+  a dcam:VocabularyEncodingScheme ;
+  dcterms:issued "2005-06-13"^^xsd:date ;
+  rdfs:comment "The set of conceptual resources specified by the National Library of Medicine Classification."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "NLM"@en ;
+  rdfs:seeAlso <http://wwwcf.nlm.nih.gov/class/> ;
+.
+dcterms:Period
+  a rdfs:Datatype ;
+  dcterms:issued "2000-07-11"^^xsd:date ;
+  rdfs:comment "The set of time intervals defined by their limits according to the DCMI Period Encoding Scheme."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "DCMI Period"@en ;
+  rdfs:seeAlso <https://www.dublincore.org/specifications/dublin-core/dcmi-period/> ;
+.
+dcterms:PeriodOfTime
+  a owl:Class ;
+  dcterms:issued "2008-01-14"^^xsd:date ;
+  rdfs:comment "An interval of time that is named or defined by its start and end dates."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "Period of Time"@en ;
+  rdfs:subClassOf dcterms:LocationPeriodOrJurisdiction ;
+.
+dcterms:PhysicalMedium
+  a owl:Class ;
+  dcterms:description "Examples include paper, canvas, or DVD."@en ;
+  dcterms:issued "2008-01-14"^^xsd:date ;
+  rdfs:comment "A physical material or carrier."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "Physical Medium"@en ;
+  rdfs:subClassOf dcterms:MediaType ;
+.
+dcterms:PhysicalResource
+  a owl:Class ;
+  dcterms:issued "2008-01-14"^^xsd:date ;
+  rdfs:comment "A material thing."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "Physical Resource"@en ;
+.
+dcterms:Point
+  a rdfs:Datatype ;
+  dcterms:issued "2000-07-11"^^xsd:date ;
+  rdfs:comment "The set of points in space defined by their geographic coordinates according to the DCMI Point Encoding Scheme."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "DCMI Point"@en ;
+  rdfs:seeAlso <https://www.dublincore.org/specifications/dublin-core/dcmi-point/> ;
+.
+dcterms:Policy
+  a owl:Class ;
+  dcterms:issued "2008-01-14"^^xsd:date ;
+  rdfs:comment "A plan or course of action by an authority, intended to influence and determine decisions, actions, and other matters."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "Policy"@en ;
+.
+dcterms:ProvenanceStatement
+  a owl:Class ;
+  dcterms:issued "2008-01-14"^^xsd:date ;
+  rdfs:comment "Any changes in ownership and custody of a resource since its creation that are significant for its authenticity, integrity, and interpretation."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "Provenance Statement"@en ;
+.
+dcterms:RFC1766
+  a rdfs:Datatype ;
+  dcterms:issued "2000-07-11"^^xsd:date ;
+  rdfs:comment "The set of tags, constructed according to RFC 1766, for the identification of languages."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "RFC 1766"@en ;
+  rdfs:seeAlso <http://www.ietf.org/rfc/rfc1766.txt> ;
+.
+dcterms:RFC3066
+  a rdfs:Datatype ;
+  dcterms:description "RFC 3066 has been obsoleted by RFC 4646."@en ;
+  dcterms:issued "2002-07-13"^^xsd:date ;
+  rdfs:comment "The set of tags constructed according to RFC 3066 for the identification of languages."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "RFC 3066"@en ;
+  rdfs:seeAlso <http://www.ietf.org/rfc/rfc3066.txt> ;
+.
+dcterms:RFC4646
+  a rdfs:Datatype ;
+  dcterms:description "RFC 4646 obsoletes RFC 3066."@en ;
+  dcterms:issued "2008-01-14"^^xsd:date ;
+  rdfs:comment "The set of tags constructed according to RFC 4646 for the identification of languages."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "RFC 4646"@en ;
+  rdfs:seeAlso <http://www.ietf.org/rfc/rfc4646.txt> ;
+.
+dcterms:RFC5646
+  a rdfs:Datatype ;
+  dcterms:description "RFC 5646 obsoletes RFC 4646."@en ;
+  dcterms:issued "2010-10-11"^^xsd:date ;
+  rdfs:comment "The set of tags constructed according to RFC 5646 for the identification of languages."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "RFC 5646"@en ;
+  rdfs:seeAlso <http://www.ietf.org/rfc/rfc5646.txt> ;
+.
+dcterms:RightsStatement
+  a owl:Class ;
+  dcterms:issued "2008-01-14"^^xsd:date ;
+  rdfs:comment "A statement about the intellectual property rights (IPR) held in or over a resource, a legal document giving official permission to do something with a resource, or a statement about access rights."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "Rights Statement"@en ;
+.
+dcterms:SizeOrDuration
+  a owl:Class ;
+  dcterms:description "Examples include a number of pages, a specification of length, width, and breadth, or a period in hours, minutes, and seconds."@en ;
+  dcterms:issued "2008-01-14"^^xsd:date ;
+  rdfs:comment "A dimension or extent, or a time taken to play or execute."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "Size or Duration"@en ;
+  rdfs:subClassOf dcterms:MediaTypeOrExtent ;
+.
+dcterms:Standard
+  a owl:Class ;
+  dcterms:issued "2008-01-14"^^xsd:date ;
+  rdfs:comment "A reference point against which other things can be evaluated or compared."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "Standard"@en ;
+.
+dcterms:TGN
+  a dcam:VocabularyEncodingScheme ;
+  dcterms:issued "2000-07-11"^^xsd:date ;
+  rdfs:comment "The set of places specified by the Getty Thesaurus of Geographic Names."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "TGN"@en ;
+  rdfs:seeAlso <http://www.getty.edu/research/tools/vocabulary/tgn/index.html> ;
+.
+dcterms:UDC
+  a dcam:VocabularyEncodingScheme ;
+  dcterms:issued "2000-07-11"^^xsd:date ;
+  rdfs:comment "The set of conceptual resources specified by the Universal Decimal Classification."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "UDC"@en ;
+  rdfs:seeAlso <http://www.udcc.org/> ;
+.
+dcterms:URI
+  a rdfs:Datatype ;
+  dcterms:issued "2000-07-11"^^xsd:date ;
+  rdfs:comment "The set of identifiers constructed according to the generic syntax for Uniform Resource Identifiers as specified by the Internet Engineering Task Force."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "URI"@en ;
+  rdfs:seeAlso <http://www.ietf.org/rfc/rfc3986.txt> ;
+.
+dcterms:W3CDTF
+  a rdfs:Datatype ;
+  dcterms:issued "2000-07-11"^^xsd:date ;
+  rdfs:comment "The set of dates and times constructed according to the W3C Date and Time Formats Specification."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "W3C-DTF"@en ;
+  rdfs:seeAlso <http://www.w3.org/TR/NOTE-datetime> ;
+.
+dcterms:abstract
+  dcterms:issued "2000-07-11"^^xsd:date ;
+  rdfs:comment "A summary of the resource."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "Abstract"@en ;
+.
+dcterms:accessRights
+  dcam:rangeIncludes dcterms:RightsStatement ;
+  dcterms:description "Access Rights may include information regarding access or restrictions based on privacy, security, or other policies."@en ;
+  dcterms:issued "2003-02-15"^^xsd:date ;
+  rdfs:comment "Information about who access the resource or an indication of its security status."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "Access Rights"@en ;
+.
+dcterms:accrualMethod
+  dcam:rangeIncludes dcterms:MethodOfAccrual ;
+  dcterms:description "Recommended practice is to use a value from the Collection Description Accrual Method Vocabulary [[DCMI-ACCRUALMETHOD](https://dublincore.org/groups/collections/accrual-method/)]."@en ;
+  dcterms:issued "2005-06-13"^^xsd:date ;
+  rdfs:comment "The method by which items are added to a collection."@en ;
+  rdfs:domain <http://purl.org/dc/dcmitype/Collection> ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "Accrual Method"@en ;
+.
+dcterms:accrualPeriodicity
+  dcam:rangeIncludes dcterms:Frequency ;
+  dcterms:description "Recommended practice is to use a value from the Collection Description Frequency Vocabulary [[DCMI-COLLFREQ](https://dublincore.org/groups/collections/frequency/)]."@en ;
+  dcterms:issued "2005-06-13"^^xsd:date ;
+  rdfs:comment "The frequency with which items are added to a collection."@en ;
+  rdfs:domain <http://purl.org/dc/dcmitype/Collection> ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "Accrual Periodicity"@en ;
+.
+dcterms:accrualPolicy
+  dcam:rangeIncludes dcterms:Policy ;
+  dcterms:description "Recommended practice is to use a value from the Collection Description Accrual Policy Vocabulary [[DCMI-ACCRUALPOLICY](https://dublincore.org/groups/collections/accrual-policy/)]."@en ;
+  dcterms:issued "2005-06-13"^^xsd:date ;
+  rdfs:comment "The policy governing the addition of items to a collection."@en ;
+  rdfs:domain <http://purl.org/dc/dcmitype/Collection> ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "Accrual Policy"@en ;
+.
+dcterms:alternative
+  dcterms:description "The distinction between titles and alternative titles is application-specific."@en ;
+  dcterms:issued "2000-07-11"^^xsd:date ;
+  rdfs:comment "An alternative name for the resource."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "Alternative Title"@en ;
+  rdfs:range rdfs:Literal ;
+.
+dcterms:audience
+  dcam:rangeIncludes dcterms:AgentClass ;
+  dcterms:description "Recommended practice is to use this property with non-literal values from a vocabulary of audience types."@en ;
+  dcterms:issued "2001-05-21"^^xsd:date ;
+  rdfs:comment "A class of agents for whom the resource is intended or useful."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "Audience"@en ;
+.
+dcterms:available
+  dcterms:description "Recommended practice is to describe the date, date/time, or period of time as recommended for the property Date, of which this is a subproperty."@en ;
+  dcterms:issued "2000-07-11"^^xsd:date ;
+  rdfs:comment "Date that the resource became or will become available."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "Date Available"@en ;
+  rdfs:range rdfs:Literal ;
+.
+dcterms:bibliographicCitation
+  dcterms:description "Recommended practice is to include sufficient bibliographic detail to identify the resource as unambiguously as possible."@en ;
+  dcterms:issued "2003-02-15"^^xsd:date ;
+  rdfs:comment "A bibliographic reference for the resource."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "Bibliographic Citation"@en ;
+  rdfs:range rdfs:Literal ;
+.
+dcterms:conformsTo
+  dcam:rangeIncludes dcterms:Standard ;
+  dcterms:issued "2001-05-21"^^xsd:date ;
+  rdfs:comment "An established standard to which the described resource conforms."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "Conforms To"@en ;
+.
+dcterms:contributor
+  dcam:rangeIncludes dcterms:Agent ;
+  dcterms:description "The guidelines for using names of persons or organizations as creators apply to contributors."@en ;
+  dcterms:issued "2008-01-14"^^xsd:date ;
+  rdfs:comment "An entity responsible for making contributions to the resource."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "Contributor"@en ;
+.
+dcterms:coverage
+  dcam:rangeIncludes dcterms:Jurisdiction ;
+  dcam:rangeIncludes dcterms:Location ;
+  dcam:rangeIncludes dcterms:Period ;
+  dcterms:description "Spatial topic and spatial applicability may be a named place or a location specified by its geographic coordinates. Temporal topic may be a named period, date, or date range. A jurisdiction may be a named administrative entity or a geographic place to which the resource applies. Recommended practice is to use a controlled vocabulary such as the Getty Thesaurus of Geographic Names [[TGN](https://www.getty.edu/research/tools/vocabulary/tgn/index.html)]. Where appropriate, named places or time periods may be used in preference to numeric identifiers such as sets of coordinates or date ranges.  Because coverage is so broadly defined, it is preferable to use the more specific subproperties Temporal Coverage and Spatial Coverage."@en ;
+  dcterms:issued "2008-01-14"^^xsd:date ;
+  rdfs:comment "The spatial or temporal topic of the resource, spatial applicability of the resource, or jurisdiction under which the resource is relevant."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "Coverage"@en ;
+.
+dcterms:created
+  dcterms:description "Recommended practice is to describe the date, date/time, or period of time as recommended for the property Date, of which this is a subproperty."@en ;
+  dcterms:issued "2000-07-11"^^xsd:date ;
+  rdfs:comment "Date of creation of the resource."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "Date Created"@en ;
+  rdfs:range rdfs:Literal ;
+.
+dcterms:creator
+  dcam:rangeIncludes dcterms:Agent ;
+  dcterms:description "Recommended practice is to identify the creator with a URI.  If this is not possible or feasible, a literal value that identifies the creator may be provided."@en ;
+  dcterms:issued "2008-01-14"^^xsd:date ;
+  rdfs:comment "An entity responsible for making the resource."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "Creator"@en ;
+.
+dcterms:date
+  dcterms:description "Date may be used to express temporal information at any level of granularity.  Recommended practice is to express the date, date/time, or period of time according to ISO 8601-1 [[ISO 8601-1](https://www.iso.org/iso-8601-date-and-time-format.html)] or a published profile of the ISO standard, such as the W3C Note on Date and Time Formats [[W3CDTF](https://www.w3.org/TR/NOTE-datetime)] or the Extended Date/Time Format Specification [[EDTF](http://www.loc.gov/standards/datetime/)].  If the full date is unknown, month and year (YYYY-MM) or just year (YYYY) may be used. Date ranges may be specified using ISO 8601 period of time specification in which start and end dates are separated by a '/' (slash) character.  Either the start or end date may be missing."@en ;
+  dcterms:issued "2008-01-14"^^xsd:date ;
+  rdfs:comment "A point or period of time associated with an event in the lifecycle of the resource."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "Date"@en ;
+  rdfs:range rdfs:Literal ;
+.
+dcterms:dateAccepted
+  dcterms:description "Recommended practice is to describe the date, date/time, or period of time as recommended for the property Date, of which this is a subproperty.  Examples of resources to which a date of acceptance may be relevant are a thesis (accepted by a university department) or an article (accepted by a journal)."@en ;
+  dcterms:issued "2002-07-13"^^xsd:date ;
+  rdfs:comment "Date of acceptance of the resource."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "Date Accepted"@en ;
+  rdfs:range rdfs:Literal ;
+.
+dcterms:dateCopyrighted
+  dcterms:description "Typically a year.  Recommended practice is to describe the date, date/time, or period of time as recommended for the property Date, of which this is a subproperty."@en ;
+  dcterms:issued "2002-07-13"^^xsd:date ;
+  rdfs:comment "Date of copyright of the resource."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "Date Copyrighted"@en ;
+  rdfs:range rdfs:Literal ;
+.
+dcterms:dateSubmitted
+  dcterms:description "Recommended practice is to describe the date, date/time, or period of time as recommended for the property Date, of which this is a subproperty.  Examples of resources to which a 'Date Submitted' may be relevant include a thesis (submitted to a university department) or an article (submitted to a journal)."@en ;
+  dcterms:issued "2002-07-13"^^xsd:date ;
+  rdfs:comment "Date of submission of the resource."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "Date Submitted"@en ;
+  rdfs:range rdfs:Literal ;
+.
+dcterms:description
+  dcterms:description "Description may include but is not limited to: an abstract, a table of contents, a graphical representation, or a free-text account of the resource."@en ;
+  dcterms:issued "2008-01-14"^^xsd:date ;
+  rdfs:comment "An account of the resource."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "Description"@en ;
+.
+dcterms:educationLevel
+  dcam:rangeIncludes dcterms:AgentClass ;
+  dcterms:issued "2002-07-13"^^xsd:date ;
+  rdfs:comment "A class of agents, defined in terms of progression through an educational or training context, for which the described resource is intended."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "Audience Education Level"@en ;
+.
+dcterms:extent
+  dcam:rangeIncludes dcterms:SizeOrDuration ;
+  dcterms:description "Recommended practice is to specify the file size in megabytes and duration in ISO 8601 format."@en ;
+  dcterms:issued "2000-07-11"^^xsd:date ;
+  rdfs:comment "The size or duration of the resource."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "Extent"@en ;
+.
+dcterms:format
+  dcam:rangeIncludes dcterms:Extent ;
+  dcam:rangeIncludes dcterms:MediaType ;
+  dcterms:description "Recommended practice is to use a controlled vocabulary where available. For example, for file formats one could use the list of Internet Media Types [[MIME](https://www.iana.org/assignments/media-types/media-types.xhtml)].  Examples of dimensions include size and duration."@en ;
+  dcterms:issued "2008-01-14"^^xsd:date ;
+  rdfs:comment "The file format, physical medium, or dimensions of the resource."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "Format"@en ;
+.
+dcterms:hasFormat
+  dcterms:description "This property is intended to be used with non-literal values. This property is an inverse property of Is Format Of."@en ;
+  dcterms:issued "2000-07-11"^^xsd:date ;
+  rdfs:comment "A related resource that is substantially the same as the pre-existing described resource, but in another format."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "Has Format"@en ;
+.
+dcterms:hasPart
+  dcterms:description "This property is intended to be used with non-literal values. This property is an inverse property of Is Part Of."@en ;
+  dcterms:issued "2000-07-11"^^xsd:date ;
+  rdfs:comment "A related resource that is included either physically or logically in the described resource."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "Has Part"@en ;
+.
+dcterms:hasVersion
+  dcterms:description "Changes in version imply substantive changes in content rather than differences in format. This property is intended to be used with non-literal values. This property is an inverse property of Is Version Of."@en ;
+  dcterms:issued "2000-07-11"^^xsd:date ;
+  rdfs:comment "A related resource that is a version, edition, or adaptation of the described resource."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "Has Version"@en ;
+.
+dcterms:identifier
+  dcterms:description "Recommended practice is to identify the resource by means of a string conforming to an identification system. Examples include International Standard Book Number (ISBN), Digital Object Identifier (DOI), and Uniform Resource Name (URN).  Persistent identifiers should be provided as HTTP URIs."@en ;
+  dcterms:issued "2008-01-14"^^xsd:date ;
+  rdfs:comment "An unambiguous reference to the resource within a given context."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "Identifier"@en ;
+  rdfs:range rdfs:Literal ;
+.
+dcterms:instructionalMethod
+  dcam:rangeIncludes dcterms:MethodOfInstruction ;
+  dcterms:description "Instructional Method typically includes ways of presenting instructional materials or conducting instructional activities, patterns of learner-to-learner and learner-to-instructor interactions, and mechanisms by which group and individual levels of learning are measured.  Instructional methods include all aspects of the instruction and learning processes from planning and implementation through evaluation and feedback."@en ;
+  dcterms:issued "2005-06-13"^^xsd:date ;
+  rdfs:comment "A process, used to engender knowledge, attitudes and skills, that the described resource is designed to support."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "Instructional Method"@en ;
+.
+dcterms:isFormatOf
+  dcterms:description "This property is intended to be used with non-literal values. This property is an inverse property of Has Format."@en ;
+  dcterms:issued "2000-07-11"^^xsd:date ;
+  rdfs:comment "A pre-existing related resource that is substantially the same as the described resource, but in another format."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "Is Format Of"@en ;
+.
+dcterms:isPartOf
+  dcterms:description "This property is intended to be used with non-literal values. This property is an inverse property of Has Part."@en ;
+  dcterms:issued "2000-07-11"^^xsd:date ;
+  rdfs:comment "A related resource in which the described resource is physically or logically included."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "Is Part Of"@en ;
+.
+dcterms:isReferencedBy
+  dcterms:description "This property is intended to be used with non-literal values. This property is an inverse property of References."@en ;
+  dcterms:issued "2000-07-11"^^xsd:date ;
+  rdfs:comment "A related resource that references, cites, or otherwise points to the described resource."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "Is Referenced By"@en ;
+.
+dcterms:isReplacedBy
+  dcterms:description "This property is intended to be used with non-literal values. This property is an inverse property of Replaces."@en ;
+  dcterms:issued "2000-07-11"^^xsd:date ;
+  rdfs:comment "A related resource that supplants, displaces, or supersedes the described resource."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "Is Replaced By"@en ;
+.
+dcterms:isRequiredBy
+  dcterms:description "This property is intended to be used with non-literal values. This property is an inverse property of Requires."@en ;
+  dcterms:issued "2000-07-11"^^xsd:date ;
+  rdfs:comment "A related resource that requires the described resource to support its function, delivery, or coherence."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "Is Required By"@en ;
+.
+dcterms:isVersionOf
+  dcterms:description "Changes in version imply substantive changes in content rather than differences in format. This property is intended to be used with non-literal values. This property is an inverse property of Has Version."@en ;
+  dcterms:issued "2000-07-11"^^xsd:date ;
+  rdfs:comment "A related resource of which the described resource is a version, edition, or adaptation."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "Is Version Of"@en ;
+.
+dcterms:issued
+  dcterms:description "Recommended practice is to describe the date, date/time, or period of time as recommended for the property Date, of which this is a subproperty."@en ;
+  dcterms:issued "2000-07-11"^^xsd:date ;
+  rdfs:comment "Date of formal issuance of the resource."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "Date Issued"@en ;
+  rdfs:range rdfs:Literal ;
+.
+dcterms:language
+  dcam:rangeIncludes dcterms:LinguisticSystem ;
+  dcterms:description "Recommended practice is to use either a non-literal value representing a language from a controlled vocabulary such as ISO 639-2 or ISO 639-3, or a literal value consisting of an IETF Best Current Practice 47 [[IETF-BCP47](https://tools.ietf.org/html/bcp47)] language tag."@en ;
+  dcterms:issued "2008-01-14"^^xsd:date ;
+  rdfs:comment "A language of the resource."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "Language"@en ;
+.
+dcterms:license
+  dcam:rangeIncludes dcterms:LicenseDocument ;
+  dcterms:description "Recommended practice is to identify the license document with a URI. If this is not possible or feasible, a literal value that identifies the license may be provided."@en ;
+  dcterms:issued "2004-06-14"^^xsd:date ;
+  rdfs:comment "A legal document giving official permission to do something with the resource."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "License"@en ;
+.
+dcterms:mediator
+  dcam:rangeIncludes dcterms:AgentClass ;
+  dcterms:description "In an educational context, a mediator might be a parent, teacher, teaching assistant, or care-giver."@en ;
+  dcterms:issued "2001-05-21"^^xsd:date ;
+  rdfs:comment "An entity that mediates access to the resource."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "Mediator"@en ;
+.
+dcterms:medium
+  dcam:domainIncludes dcterms:PhysicalResource ;
+  dcam:rangeIncludes dcterms:PhysicalMedium ;
+  dcterms:issued "2000-07-11"^^xsd:date ;
+  rdfs:comment "The material or physical carrier of the resource."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "Medium"@en ;
+.
+dcterms:modified
+  dcterms:description "Recommended practice is to describe the date, date/time, or period of time as recommended for the property Date, of which this is a subproperty."@en ;
+  dcterms:issued "2000-07-11"^^xsd:date ;
+  rdfs:comment "Date on which the resource was changed."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "Date Modified"@en ;
+  rdfs:range rdfs:Literal ;
+.
+dcterms:provenance
+  dcam:rangeIncludes dcterms:ProvenanceStatement ;
+  dcterms:description "The statement may include a description of any changes successive custodians made to the resource."@en ;
+  dcterms:issued "2004-09-20"^^xsd:date ;
+  rdfs:comment "A statement of any changes in ownership and custody of the resource since its creation that are significant for its authenticity, integrity, and interpretation."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "Provenance"@en ;
+.
+dcterms:publisher
+  dcam:rangeIncludes dcterms:Agent ;
+  dcterms:issued "2008-01-14"^^xsd:date ;
+  rdfs:comment "An entity responsible for making the resource available."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "Publisher"@en ;
+.
+dcterms:references
+  dcterms:description "This property is intended to be used with non-literal values. This property is an inverse property of Is Referenced By."@en ;
+  dcterms:issued "2000-07-11"^^xsd:date ;
+  rdfs:comment "A related resource that is referenced, cited, or otherwise pointed to by the described resource."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "References"@en ;
+.
+dcterms:relation
+  dcterms:description "Recommended practice is to identify the related resource by means of a URI.  If this is not possible or feasible, a string conforming to a formal identification system may be provided."@en ;
+  dcterms:issued "2008-01-14"^^xsd:date ;
+  rdfs:comment "A related resource."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "Relation"@en ;
+.
+dcterms:replaces
+  dcterms:description "This property is intended to be used with non-literal values. This property is an inverse property of Is Replaced By."@en ;
+  dcterms:issued "2000-07-11"^^xsd:date ;
+  rdfs:comment "A related resource that is supplanted, displaced, or superseded by the described resource."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "Replaces"@en ;
+.
+dcterms:requires
+  dcterms:description "This property is intended to be used with non-literal values. This property is an inverse property of Is Required By."@en ;
+  dcterms:issued "2000-07-11"^^xsd:date ;
+  rdfs:comment "A related resource that is required by the described resource to support its function, delivery, or coherence."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "Requires"@en ;
+.
+dcterms:rights
+  dcam:rangeIncludes dcterms:RightsStatement ;
+  dcterms:description "Typically, rights information includes a statement about various property rights associated with the resource, including intellectual property rights.  Recommended practice is to refer to a rights statement with a URI.  If this is not possible or feasible, a literal value (name, label, or short text) may be provided."@en ;
+  dcterms:issued "2008-01-14"^^xsd:date ;
+  rdfs:comment "Information about rights held in and over the resource."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "Rights"@en ;
+.
+dcterms:rightsHolder
+  dcam:rangeIncludes dcterms:Agent ;
+  dcterms:description "Recommended practice is to refer to the rights holder with a URI. If this is not possible or feasible, a literal value that identifies the rights holder may be provided."@en ;
+  dcterms:issued "2004-06-14"^^xsd:date ;
+  rdfs:comment "A person or organization owning or managing rights over the resource."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "Rights Holder"@en ;
+.
+dcterms:source
+  dcterms:description "This property is intended to be used with non-literal values. The described resource may be derived from the related resource in whole or in part. Best practice is to identify the related resource by means of a URI or a string conforming to a formal identification system."@en ;
+  dcterms:issued "2008-01-14"^^xsd:date ;
+  rdfs:comment "A related resource from which the described resource is derived."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "Source"@en ;
+.
+dcterms:spatial
+  dcam:rangeIncludes dcterms:Location ;
+  dcterms:issued "2000-07-11"^^xsd:date ;
+  rdfs:comment "Spatial characteristics of the resource."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "Spatial Coverage"@en ;
+.
+dcterms:subject
+  dcterms:description "Recommended practice is to refer to the subject with a URI. If this is not possible or feasible, a literal value that identifies the subject may be provided. Both should preferably refer to a subject in a controlled vocabulary."@en ;
+  dcterms:issued "2008-01-14"^^xsd:date ;
+  rdfs:comment "A topic of the resource."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "Subject"@en ;
+.
+dcterms:tableOfContents
+  dcterms:issued "2000-07-11"^^xsd:date ;
+  rdfs:comment "A list of subunits of the resource."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "Table Of Contents"@en ;
+.
+dcterms:temporal
+  dcam:rangeIncludes dcterms:PeriodOfTime ;
+  dcterms:issued "2000-07-11"^^xsd:date ;
+  rdfs:comment "Temporal characteristics of the resource."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "Temporal Coverage"@en ;
+.
+dcterms:title
+  dcterms:issued "2008-01-14"^^xsd:date ;
+  rdfs:comment "A name given to the resource."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "Title"@en ;
+  rdfs:range rdfs:Literal ;
+.
+dcterms:type
+  dcterms:description "Recommended practice is to use a controlled vocabulary such as the DCMI Type Vocabulary [[DCMI-TYPE](http://dublincore.org/documents/dcmi-type-vocabulary/)]. To describe the file format, physical medium, or dimensions of the resource, use the property Format."@en ;
+  dcterms:issued "2008-01-14"^^xsd:date ;
+  rdfs:comment "The nature or genre of the resource."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "Type"@en ;
+.
+dcterms:valid
+  dcterms:description "Recommended practice is to describe the date, date/time, or period of time as recommended for the property Date, of which this is a subproperty."@en ;
+  dcterms:issued "2000-07-11"^^xsd:date ;
+  rdfs:comment "Date (often a range) of validity of a resource."@en ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "Date Valid"@en ;
+  rdfs:range rdfs:Literal ;
 .
