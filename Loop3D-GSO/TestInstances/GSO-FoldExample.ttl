@@ -1,60 +1,79 @@
-# baseURI: http://loop3d.org/GSO/ontology/2019/1/foldexample
-# imports: http://loop3d.org/GSO/ontology/2019/1/loop3dmaster
+# baseURI: http://loop3d.org/GSO/ontology/2020/1/foldexample
+# imports: http://loop3d.org/GSO/ontology/2020/1/loop3dmaster
 # prefix: exfold
 
-@prefix : <http://loop3d.org/GSO/ontology/2019/1/foldexample#> .
-@prefix gsen: <http://loop3d.org/GSO/ontology/2019/1/eventenvironment/> .
-@prefix exfold: <http://loop3d.org/GSO/ontology/2019/1/foldexample#> .
-@prefix fau2: <http://loop3d.org/GSO/ontology/2019/1/faultstest2/> .
-@prefix gsoc: <http://loop3d.org/GSO/ontology/2019/1/common/> .
-@prefix gssf: <http://loop3d.org/GSO/ontology/2019/1/geologicstructurefold/> .
-@prefix gsog: <http://loop3d.org/GSO/ontology/2019/1/geologicfeature/> .
-@prefix gsop: <http://loop3d.org/GSO/ontology/2019/1/geologicproperty/> .
-@prefix gstime: <http://loop3d.org/GSO/ontology/2019/1/ischart/> .
+@prefix : <http://loop3d.org/GSO/ontology/2020/1/foldexample#> .
+@prefix exfold: <http://loop3d.org/GSO/ontology/2020/1/foldexample#> .
+@prefix fau2: <http://loop3d.org/GSO/ontology/2020/1/faultstest2/> .
+@prefix gsen: <http://loop3d.org/GSO/ontology/2020/1/eventenvironment/> .
+@prefix gsoc: <http://loop3d.org/GSO/ontology/2020/1/common/> .
+@prefix gsog: <http://loop3d.org/GSO/ontology/2020/1/geologicfeature/> .
+@prefix gsop: <http://loop3d.org/GSO/ontology/2020/1/geologicproperty/> .
+@prefix gspr: <http://loop3d.org/GSO/ontology/2020/1/geologicprocess/> .
+@prefix gssf: <http://loop3d.org/GSO/ontology/2020/1/geologicstructure/fold/> .
+@prefix gstime: <http://loop3d.org/GSO/ontology/2020/1/ischart/> .
+@prefix gsuom: <http://qudt.org/vocab/unit#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix gspr: <http://loop3d.org/GSO/ontology/2019/1/geologicprocess/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix gsuom: <http://qudt.org/vocab/unit#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 gsoc:hostedBy
   owl:inverseOf gsoc:hosts ;
 .
-<http://loop3d.org/GSO/ontology/2019/1/foldexample>
+<http://loop3d.org/GSO/ontology/2020/1/foldexample>
   a owl:Ontology ;
-  owl:imports <http://loop3d.org/GSO/ontology/2019/1/loop3dmaster> ;
-  owl:versionIRI <http://loop3d.org/GSO/ontology/2019/1/foldexample> ;
+  owl:imports <http://loop3d.org/GSO/ontology/2020/1/loop3dmaster> ;
+  owl:versionIRI <http://loop3d.org/GSO/ontology/2020/1/foldexample> ;
 .
 exfold:Fold_1
   a gsog:Fold ;
-  a owl:NamedIndividual ;
+  gsoc:hasPart exfold:HingeSurface_1 ;
   gsoc:hasPart [
       a gssf:Fold_Hinge ;
       gsoc:hasProperty [
-          a gsop:Orientation ;
+          a gsop:Line_Orientation ;
+          gsoc:hasPhysicalProperty [
+              a gsop:Azimuth ;
+              gsoc:hasNumericValue "330"@en ;
+            ] ;
           gsoc:hasPhysicalProperty [
               a gsop:Plunge ;
-              gsoc:hasNumericValue "33" ;
-            ] ;
-          gsoc:hasPhysicalProperty [
-              a gsop:Trend ;
-              gsoc:hasNumericValue "330" ;
+              gsoc:hasNumericValue "33"@en ;
             ] ;
         ] ;
-      rdfs:label "Fold hinge: 33 to 330" ;
+      gsoc:hosts exfold:HingeSurface_1 ;
+      rdfs:label "Fold hinge: 33 to 330"@en ;
     ] ;
   gsoc:hasPhysicalProperty [
       a gssf:Fold_Amplitude ;
-      gsoc:hasNumericValue "10" ;
-      gsoc:hasUOM <http://loop3d.org/GSO/ontology/2019/1/uom/meter> ;
+      gsoc:hasNumericValue "10"@en ;
+      gsoc:hasUOM <http://loop3d.org/GSO/ontology/2020/1/uom/meter> ;
     ] ;
   gsoc:hasPhysicalProperty [
       a gssf:Fold_Profile_Type ;
+	  gsoc:hasTextValue "antiform"@en ;
     ] ;
-  rdfs:comment "test fold properties" ;
-  rdfs:label "is test fold" ;
+  rdfs:comment "test fold properties"@en ;
+  rdfs:label "is test fold"@en ;
+.
+exfold:HingeSurface_1
+  a gssf:Fold_Hinge_Surface ;
+  gsoc:hasProperty [
+      a gsop:Plane_Orientation ;
+      gsoc:hasPhysicalProperty [
+          a gsop:Azimuth ;
+          gsoc:hasNumericValue "310"@en ;
+        ] ;
+      gsoc:hasPhysicalProperty [
+          a gsop:Dip ;
+          gsoc:hasNumericValue "78"@en ;
+        ] ;
+      gsop:Plane_Orientation_Convention [
+          a gsop:Strike_Dip_RHR ;
+        ] ;
+    ] ;
 .
 gspr:Biological_Evolution
   rdfs:subClassOf gsoc:Process ;
@@ -76,4 +95,11 @@ gspr:deep_water_oxygen_depletion
 .
 gspr:sea_level_fluctuation
   rdfs:subClassOf gsoc:Process ;
+.
+gssf:Fold_Profile_Type
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasTextValue ;
+      owl:someValuesFrom xsd:string ;
+    ] ;
 .

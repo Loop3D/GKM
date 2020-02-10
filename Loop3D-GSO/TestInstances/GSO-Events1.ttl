@@ -1,31 +1,32 @@
-# baseURI: http://loop3d.org/GSO/ontology/2019/1/ex-event1
-# imports: http://loop3d.org/GSO/ontology/2019/1/common
-# imports: http://loop3d.org/GSO/ontology/2019/1/eventenvironment
-# imports: http://loop3d.org/GSO/ontology/2019/1/geologicfeature
-# imports: http://loop3d.org/GSO/ontology/2019/1/ischart
+# baseURI: http://loop3d.org/GSO/ontology/2020/1/ex-event1
+# imports: http://loop3d.org/GSO/ontology/2020/1/common
+# imports: http://loop3d.org/GSO/ontology/2020/1/eventenvironment
+# imports: http://loop3d.org/GSO/ontology/2020/1/geologicfeature
+# imports: http://loop3d.org/GSO/ontology/2020/1/ischart
 
-@prefix evn1: <http://loop3d.org/GSO/ontology/2019/1/ex-event1/> .
-@prefix dc: <http://purl.org/dc/elements/1.1/> .
-@prefix gsen: <http://loop3d.org/GSO/ontology/2019/1/eventenvironment> .
-@prefix gsoc: <http://loop3d.org/GSO/ontology/2019/1/common/> .
-@prefix gsog: <http://loop3d.org/GSO/ontology/2019/1/geologicfeature/> .
-@prefix gsop: <http://loop3d.org/GSO/ontology/2019/1/geologicproperty/> .
-@prefix gstime: <http://loop3d.org/GSO/ontology/2019/1/ischart/> .
-@prefix gslth: <http://loop3d.org/GSO/ontology/2019/1/lithology/> .
+@prefix evn1: <http://loop3d.org/GSO/ontology/2020/1/ex-event1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix gsen: <http://loop3d.org/GSO/ontology/2020/1/eventenvironment> .
+@prefix gsoc: <http://loop3d.org/GSO/ontology/2020/1/common/> .
+@prefix gsog: <http://loop3d.org/GSO/ontology/2020/1/geologicfeature/> .
+@prefix gsop: <http://loop3d.org/GSO/ontology/2020/1/geologicproperty/> .
+@prefix gspr: <http://loop3d.org/GSO/ontology/2020/1/geologicprocess/> .
+@prefix gstime: <http://loop3d.org/GSO/ontology/2020/1/ischart/> .
+@prefix gslth: <http://loop3d.org/GSO/ontology/2020/1/lithology/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix gspr: <http://loop3d.org/GSO/ontology/2019/1/geologicprocess/> .
+@prefix gspr: <http://loop3d.org/GSO/ontology/2020/1/geologicprocess/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix turtle: <http://www.semanticweb.org/owl/owlapi/turtle#> .
-@prefix gsuom: <http://loop3d.org/GSO/ontology/2019/1/uom/> .
+@prefix gsuom: <http://loop3d.org/GSO/ontology/2020/1/uom/> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 
-<http://loop3d.org/GSO/ontology/2019/1/ex-event1>
+<http://loop3d.org/GSO/ontology/2020/1/ex-event1>
   a owl:Ontology ;
-  owl:imports <http://loop3d.org/GSO/ontology/2019/1/loop3dmaster> ;
-  owl:versionIRI <http://loop3d.org/GSO/ontology/2019/1/ex-event1> ;
+  owl:imports <http://loop3d.org/GSO/ontology/2020/1/loop3dmaster> ;
+  owl:versionIRI <http://loop3d.org/GSO/ontology/2020/1/ex-event1> ;
 .
 evn1:Cretaceous90Ma
   a gsog:Geologic_Age_Instant ;
@@ -35,7 +36,7 @@ evn1:Cretaceous90Ma
       gsog:hasDate "90"^^xsd:decimal ;
       gsog:hasUncertainty "8"^^xsd:decimal ;
     ] ;
-  rdfs:label "90 Ma" ;
+  rdfs:label "90 Ma"@en  ;
 .
 evn1:Cretaceous_dike_intrusion
   a gsog:Geologic_Event ;
@@ -54,7 +55,7 @@ evn1:Date110Ma
   gsoc:hasUOM [a gsuom:ma ] ;
   gsog:hasDate "110"^^xsd:decimal ;
   gsog:hasUncertainty "9"^^xsd:decimal ;
-  rdfs:label "110 Ma" ;
+  rdfs:label "110 Ma"@en  ;
 .
 evn1:HsGenesis
   a gsog:Geologic_Event ;
@@ -62,7 +63,7 @@ evn1:HsGenesis
       a gsog:Chronostratigraphic_Age_Interval ;
       gsog:hasOlderAge gstime:Holocene ;
       gsog:hasYoungerAge gstime:Holocene ;
-      rdfs:label "Holocene age" ;
+      rdfs:label "Holocene age"@en  ;
     ] ;
   gsoc:isManifestationOf [
       a gspr:deposition ;
@@ -81,7 +82,7 @@ evn1:JsGenesis
       a gsog:Chronostratigraphic_Age_Interval ;
       gsog:hasOlderAge gstime:Jurassic ;
       gsog:hasYoungerAge gstime:Jurassic ;
-      rdfs:label "Jurassic Age" ;
+      rdfs:label "Jurassic Age"@en  ;
     ] ;
   gsoc:isManifestationOf [
       a gspr:deposition ;
@@ -144,6 +145,7 @@ evn1:Pre_Cretaceous_Burial
 .
 evn1:Pre_Jurassic_Erosion
   a gsog:Geologic_Event ;
+  gsoc:isManifestationOf [ a gspr:Erosion ];
   rdfs:comment "Erosional unroofing of tilted Xm, Cb, Os and Ss "@en ;
   rdfs:label "Pre Jurassic Erosion "@en ;
 .
