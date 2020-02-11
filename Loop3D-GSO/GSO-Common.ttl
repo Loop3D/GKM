@@ -1,1273 +1,1110 @@
+# baseURI: http://loop3d.org/GSO/ontology/2020/1/common/ontology
+
 @prefix : <http://loop3d.org/GSO/ontology/2020/1/common/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 
-:ontology a owl:Ontology ;
-	rdfs:comment "Unary predicates are represented by classes, binary predicates by object properties"@en , "ontology of shared objectProperties and high level classes used to define geologic features"@en ;
-	rdfs:label "Shared elements for geoscience ontology"@en .
-# 
-# 
-# #################################################################
-# #
-# #    Object Properties
-# #
-# #################################################################
-# 
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/age_disjoint
-
-:age_disjoint a owl:ObjectProperty ;
-	rdfs:subPropertyOf :isTemporallyRelatedTo ;
-	rdfs:comment "the union of Allen Before and After; Age intervals of subject and object do not touch or intersect."@en ;
-	rdfs:label "age disjoint"@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/age_during
-
-:age_during a owl:ObjectProperty ;
-	rdfs:subPropertyOf :age_interval_in , :age_not_older_than ;
-	owl:inverseOf :age_interval_contains ;
-	rdfs:comment "interval A is entirely contained in interval B; B starts before A and B ends after A. Allen relation."@en ;
-	rdfs:label "age during"@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/age_equivalent_To
-
-:age_equivalent_To a owl:ObjectProperty ;
-	rdfs:subPropertyOf :isTemporallyRelatedTo ;
-	rdfs:comment "A is equivalent to B if they represent expressions of the same event. Same as Allen A Equals B."@en , "One of six binary relations between geologic events defined by Burns (1975)"@en ;
-	rdfs:label "age equivalent"@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/age_finished_by
-
-:age_finished_by a owl:ObjectProperty ;
-	rdfs:subPropertyOf :isTemporallyRelatedTo ;
-	owl:inverseOf :age_finishes ;
-	rdfs:comment "source interval begins before target; source and target end simultaneously; inverse of finishes"@en ;
-	rdfs:label "age interval finished by"@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/age_finishes
-
-:age_finishes a owl:ObjectProperty ;
-	rdfs:subPropertyOf :age_interval_in , :age_not_older_than ;
-	rdfs:comment "Target interval starts before source interval, and source and target interval end at the same instant. Allen Relation"@en ;
-	rdfs:label "age finishes"@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/age_incomparable_to
-
-:age_incomparable_to a owl:ObjectProperty ;
-	rdfs:subPropertyOf :isTemporallyRelatedTo ;
-	rdfs:comment "A is incomparable to be if there is not enough information to determine an age relationship"@en , "One of six binary relations between geolgoic events defined by Burns (1975)"@en ;
-	rdfs:label "age incomparable"@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/age_interval_contains
-
-:age_interval_contains a owl:ObjectProperty ;
-	rdfs:subPropertyOf :isTemporallyRelatedTo ;
-	rdfs:comment "target interval is completely within the source interval; source begins before target and ends after target. inverse of During"@en ;
-	rdfs:label "age interval contains"@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/age_interval_in
-
-:age_interval_in a owl:ObjectProperty ;
-	rdfs:subPropertyOf :isTemporallyRelatedTo ;
-	rdfs:comment "Source interval is contained in target interval; union of during, starts, and finishes. Target interval may start befor or end after source interval"@en ;
-	rdfs:label "age interval in"@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/age_meets
-
-:age_meets a owl:ObjectProperty ;
-	rdfs:subPropertyOf :isTemporallyRelatedTo ;
-	owl:inverseOf :age_met_by ;
-	rdfs:comment "A covers B -- A is immediately younger than B (there are no events between A and B) Same as Allen A meets B."@en , "One of six binary relations between geologic events defined by Burns (1975)"@en ;
-	rdfs:label "age meets"@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/age_met_by
-
-:age_met_by a owl:ObjectProperty ;
-	rdfs:subPropertyOf :isTemporallyRelatedTo ;
-	rdfs:comment "Source interval starts at the end of the target interval; there is no intervening time; inverse of meets"@en ;
-	rdfs:label "age met by"@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/age_not_older_than
-
-:age_not_older_than a owl:ObjectProperty ;
-	rdfs:subPropertyOf :isTemporallyRelatedTo ;
-	rdfs:comment "Event B is not older than event A; B is either younger than A, B is equivalent to A, or B is incomparable to A. (Burns, 1975; Mathematical Geology, Vol. 7, No. 4)"@en ;
-	rdfs:label "not older than"@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/age_older_than
-
-:age_older_than a owl:ObjectProperty ;
-	rdfs:subPropertyOf :age_disjoint ;
-	owl:inverseOf :age_younger_than ;
-	rdfs:comment "Age associated with subject is entirely prior to age associated with object"@en , "Event A is older than event B if A has occurred prior to B. (Burns, 1975; Mathematical Geology, Vol. 7, No. 4) Equivalent to Allen A Before B."@en ;
-	rdfs:label "older than"@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/age_overlaps
-
-:age_overlaps a owl:ObjectProperty ;
-	rdfs:subPropertyOf :isTemporallyRelatedTo ;
-	rdfs:comment "target interval starts before source interval ends, and target inteval ends after source interval. Allen Relation"@en ;
-	rdfs:label "age overlaps"@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/age_started_by
-
-:age_started_by a owl:ObjectProperty ;
-	rdfs:subPropertyOf :isTemporallyRelatedTo ;
-	owl:inverseOf :age_starts ;
-	rdfs:comment "source and target start simultaneously; source interval ends after target; ; inverse of starts"@en ;
-	rdfs:label "age interval started by"@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/age_starts
-
-:age_starts a owl:ObjectProperty ;
-	rdfs:subPropertyOf :age_interval_in ;
-	rdfs:comment "source and target intervals start as same instance, target interval ends after source interval; Allen Relation"@en ;
-	rdfs:label "age starts"@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/age_younger_than
-
-:age_younger_than a owl:ObjectProperty ;
-	rdfs:subPropertyOf :age_disjoint ;
-	rdfs:comment "Age associated with subject is entirely after the age associated with object"@en , "Event A is younger than event B if A has occurred after  B.  Same as Allen A After B.  (Burns, 1975; Mathematical Geology, Vol. 7, No. 4)"@en ;
-	rdfs:label "younger than"@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/containedBy
-
-:containedBy a owl:ObjectProperty ;
-	rdfs:subPropertyOf :isPhysicallyRelatedTo ;
-	owl:inverseOf :contains ;
-	rdfs:domain :Physical_Endurant ;
-	rdfs:range :Physical_Endurant ;
-	rdfs:comment "Relationship in which subject Physical_Endurant is completly within the object Physical_Endurant"@en ;
-	rdfs:label "contained by"@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/contains
-
-:contains a owl:ObjectProperty ;
-	rdfs:subPropertyOf :isPhysicallyRelatedTo ;
-	rdfs:domain :Physical_Endurant ;
-	rdfs:range :Physical_Endurant ;
-	rdfs:comment "Relationship in which object Physical_Endurant is completely within the subject Physical_Endurant"@en ;
-	rdfs:label "contains"@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/determinedBy
-
-:determinedBy a owl:ObjectProperty ;
-	rdfs:subPropertyOf :isFundamentallyRelatedTo ;
-	rdfs:range :Determining_Event ;
-	rdfs:comment "Link from a particular to an event that defines that particular. Recommented practice is for target to be a class inherioting from Dolce Utralight (dul:) Event (gsop:Event), e.g. sosa:Observation, or prov:Activity"@en ;
-	rdfs:label "determined by "@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/hasAbstractProperty
-
-:hasAbstractProperty a owl:ObjectProperty ;
-	rdfs:subPropertyOf :hasProperty .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/hasConstituent
-
-:hasConstituent a owl:ObjectProperty ;
-	rdfs:subPropertyOf :isFundamentallyRelatedTo ;
-	owl:inverseOf :isConstituentOf ;
-	a owl:TransitiveProperty ;
-	rdfs:comment "leave domain and range unconstrained; would need to add more of the high level ontologic entities (Physical Endurant, Perdurant) to specify here."@en ;
-	rdfs:label "hasConstituent"@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/hasHistory
-
-:hasHistory a owl:ObjectProperty ;
-	rdfs:subPropertyOf :isTemporallyRelatedTo ;
-	rdfs:comment "relates an Endurant to a sequence of 1 to many events."@en ;
-	rdfs:label "has History"@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/hasInput
-
-:hasInput a owl:ObjectProperty ;
-	rdfs:subPropertyOf :hasParticipant ;
-	owl:inverseOf :isInputFor ;
-	rdfs:comment "A participant in a process that must be present before the process can operate "@en ;
-	rdfs:label "Input "@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/hasOutput
-
-:hasOutput a owl:ObjectProperty ;
-	rdfs:subPropertyOf :hasParticipant ;
-	owl:inverseOf :isOutputOf ;
-	rdfs:comment "A participant in a process that is produced by the action of the process and is present when the process is complete "@en ;
-	rdfs:label "Output "@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/hasPart
-
-:hasPart a owl:ObjectProperty ;
-	rdfs:subPropertyOf :isFundamentallyRelatedTo ;
-	owl:inverseOf :isPartOf ;
-	a owl:TransitiveProperty .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/hasParticipant
-
-:hasParticipant a owl:ObjectProperty ;
-	rdfs:subPropertyOf :isFundamentallyRelatedTo ;
-	owl:inverseOf :isParticipantIn .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/hasPhysicalProperty
-
-:hasPhysicalProperty a owl:ObjectProperty ;
-	rdfs:subPropertyOf :hasProperty ;
-	owl:inverseOf :isPhysicalPropertyOf ;
-	rdfs:comment ""@en ;
-	rdfs:label "has Physical Property"@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/hasProperty
-
-:hasProperty a owl:ObjectProperty ;
-	owl:inverseOf :isPropertyOf ;
-	rdfs:comment ""@en ;
-	rdfs:label "has Property "@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/hasReference
-
-:hasReference a owl:ObjectProperty ;
-	rdfs:subPropertyOf :isFundamentallyRelatedTo ;
-	owl:inverseOf :isReferenceFor .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/hasSetting
-
-:hasSetting a owl:ObjectProperty ;
-	rdfs:subPropertyOf :isFundamentallyRelatedTo ;
-	rdfs:range :Physical_Setting ;
-	rdfs:comment ""@en ;
-	rdfs:label "has Setting"@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/hasSpatialProperty
-
-:hasSpatialProperty a owl:ObjectProperty ;
-	rdfs:subPropertyOf :hasPhysicalProperty ;
-	owl:inverseOf :isSpatialPropertyOf ;
-	a owl:InverseFunctionalProperty ;
-	rdfs:range :Spatial_Location ;
-	rdfs:comment ""@en , "Geographic disposition of an endurant."@en ;
-	rdfs:label "has Spatial Property"@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/hasTemporalProperty
-
-:hasTemporalProperty a owl:ObjectProperty ;
-	rdfs:subPropertyOf :hasProperty ;
-	owl:inverseOf :isTemporalPropertyOf ;
-	rdfs:comment ""@en ;
-	rdfs:label "has Temporal Property"@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/hasUOM
-
-:hasUOM a owl:ObjectProperty ;
-	rdfs:subPropertyOf :hasAbstractProperty ;
-	rdfs:comment "top level property for assigning property values; subtype for associating values with measurement units "@en ;
-	rdfs:label "has unit of measure "@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/hasValue
-
-:hasValue a owl:ObjectProperty ;
-	rdfs:subPropertyOf :hasAbstractProperty ;
-	rdfs:domain :Property ;
-	rdfs:comment "top level property for assigning property values; subtype for particular kinds of values (integer, category, number boolean...) "@en ;
-	rdfs:label "hasValue "@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/hostedBy
-
-:hostedBy a owl:ObjectProperty ;
-	rdfs:subPropertyOf :isFundamentallyRelatedTo .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/hosts
-
-:hosts a owl:ObjectProperty ;
-	rdfs:subPropertyOf :isFundamentallyRelatedTo ;
-	rdfs:comment ""@en ;
-	rdfs:label "hosts"@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/isColocatedWith
-
-:isColocatedWith a owl:ObjectProperty ;
-	rdfs:subPropertyOf :isSpatiallyRelatedTo ;
-	rdfs:domain :Physical_Feature ;
-	rdfs:range _:genid1 .
-
-_:genid1 a owl:Class ;
-	owl:unionOf _:genid4 .
-
-_:genid4 a rdf:List ;
-	rdf:first :Endurant ;
-	rdf:rest _:genid3 .
-
-_:genid3 a rdf:List ;
-	rdf:first :Perdurant ;
-	rdf:rest _:genid2 .
-
-_:genid2 a rdf:List ;
-	rdf:first :Physical_Property ;
-	rdf:rest rdf:nil .
-
-:isColocatedWith rdfs:comment "links material spatial feature to Endurant or Perdurant or Physical Property that shares the same location"@en ;
-	rdfs:label "is colocated with"@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/isConstituentOf
-
-:isConstituentOf a owl:ObjectProperty ;
-	rdfs:subPropertyOf :isFundamentallyRelatedTo ;
-	a owl:TransitiveProperty ;
-	rdfs:range :Amount_Of_Matter .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/isFundamentallyRelatedTo
-
-:isFundamentallyRelatedTo a owl:ObjectProperty ;
-	rdfs:subPropertyOf :isRelatedto ;
-	rdfs:domain _:genid5 .
-
-_:genid5 a owl:Class ;
-	owl:unionOf _:genid9 .
-
-_:genid9 a rdf:List ;
-	rdf:first :Abstract ;
-	rdf:rest _:genid8 .
-
-_:genid8 a rdf:List ;
-	rdf:first :Endurant ;
-	rdf:rest _:genid7 .
-
-_:genid7 a rdf:List ;
-	rdf:first :Perdurant ;
-	rdf:rest _:genid6 .
-
-_:genid6 a rdf:List ;
-	rdf:first :Physical_Setting ;
-	rdf:rest rdf:nil .
-
-:isFundamentallyRelatedTo rdfs:range _:genid10 .
-
-_:genid10 a owl:Class ;
-	owl:unionOf _:genid14 .
-
-_:genid14 a rdf:List ;
-	rdf:first :Abstract ;
-	rdf:rest _:genid13 .
-
-_:genid13 a rdf:List ;
-	rdf:first :Endurant ;
-	rdf:rest _:genid12 .
-
-_:genid12 a rdf:List ;
-	rdf:first :Perdurant ;
-	rdf:rest _:genid11 .
-
-_:genid11 a rdf:List ;
-	rdf:first :Physical_Setting ;
-	rdf:rest rdf:nil .
-
-:isFundamentallyRelatedTo rdfs:comment "relationships between Endurant, Perdurants, or Physical_Settings"@en ;
-	rdfs:label "fundamentally related"@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/isInputFor
-
-:isInputFor a owl:ObjectProperty ;
-	rdfs:subPropertyOf :isParticipantIn ;
-	rdfs:comment "relation from Endurant to Perdurant event or process for which the endurant is a precursor"@en ;
-	rdfs:label "is input for"@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/isManifestationOf
-
-:isManifestationOf a owl:ObjectProperty ;
-	rdfs:subPropertyOf :isFundamentallyRelatedTo ;
-	rdfs:comment ""@en ;
-	rdfs:label "is Manifestation Of"@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/isOutputOf
-
-:isOutputOf a owl:ObjectProperty ;
-	rdfs:subPropertyOf :isParticipantIn ;
-	rdfs:comment "relation from Endurant to Perdurant event or process for which the endurant is a result"@en ;
-	rdfs:label "is output of"@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/isPartOf
-
-:isPartOf a owl:ObjectProperty ;
-	rdfs:subPropertyOf :isFundamentallyRelatedTo ;
-	a owl:TransitiveProperty .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/isParticipantIn
-
-:isParticipantIn a owl:ObjectProperty ;
-	rdfs:subPropertyOf :isFundamentallyRelatedTo ;
-	rdfs:domain :Endurant ;
-	rdfs:range :Perdurant .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/isPhysicalPropertyOf
-
-:isPhysicalPropertyOf a owl:ObjectProperty ;
-	rdfs:subPropertyOf :isPropertyOf ;
-	rdfs:domain :Physical_Property ;
-	rdfs:comment "link from physical property to a class that exhibits the property"@en ;
-	rdfs:label "is physical property of "@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/isPhysicallyRelatedTo
-
-:isPhysicallyRelatedTo a owl:ObjectProperty ;
-	rdfs:subPropertyOf :isRelatedto ;
-	rdfs:comment ""@en ;
-	rdfs:label "is Physically Related To"@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/isPropertyOf
-
-:isPropertyOf a owl:ObjectProperty ;
-	rdfs:domain :Property ;
-	rdfs:range :Particular ;
-	rdfs:comment "OWL ObjectProperty that binds a Property to some other Particular in which that property inheres."@en ;
-	rdfs:label "is Property Of"@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/isRealizedBy
-
-:isRealizedBy a owl:ObjectProperty ;
-	rdfs:subPropertyOf :isFundamentallyRelatedTo ;
-	owl:inverseOf :realizes .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/isReferenceFor
-
-:isReferenceFor a owl:ObjectProperty ;
-	rdfs:subPropertyOf :isFundamentallyRelatedTo .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/isRelatedto
-
-:isRelatedto a owl:ObjectProperty ;
-	rdfs:comment "high level category for associations/relationships between particulars other than property bindings"@en ;
-	rdfs:label "related to"@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/isSettingFor
-
-:isSettingFor a owl:ObjectProperty ;
-	rdfs:subPropertyOf :isFundamentallyRelatedTo ;
-	rdfs:comment ""@en ;
-	rdfs:label "is Setting For"@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/isSpatialPropertyOf
-
-:isSpatialPropertyOf a owl:ObjectProperty ;
-	rdfs:subPropertyOf :isPhysicalPropertyOf ;
-	rdfs:domain :Spatial_Location ;
-	rdfs:comment "link from spatial property to a class that exhibits the property"@en ;
-	rdfs:label "is spatial property of "@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/isSpatiallyRelatedTo
-
-:isSpatiallyRelatedTo a owl:ObjectProperty ;
-	rdfs:subPropertyOf :isRelatedto ;
-	rdfs:domain _:genid15 .
-
-_:genid15 a owl:Class ;
-	owl:unionOf _:genid17 .
-
-_:genid17 a rdf:List ;
-	rdf:first :Physical_Endurant ;
-	rdf:rest _:genid16 .
-
-_:genid16 a rdf:List ;
-	rdf:first :Spatial_Region ;
-	rdf:rest rdf:nil .
-
-:isSpatiallyRelatedTo rdfs:range _:genid18 .
-
-_:genid18 a owl:Class ;
-	owl:unionOf _:genid20 .
-
-_:genid20 a rdf:List ;
-	rdf:first :Physical_Endurant ;
-	rdf:rest _:genid19 .
-
-_:genid19 a rdf:List ;
-	rdf:first :Spatial_Region ;
-	rdf:rest rdf:nil .
-
-:isSpatiallyRelatedTo rdfs:label "Spatially related to "@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/isTemporalPropertyOf
-
-:isTemporalPropertyOf a owl:ObjectProperty ;
-	rdfs:subPropertyOf :isPropertyOf ;
-	rdfs:domain :Temporal_Property ;
-	rdfs:comment "link from a temporal property to a class that exhibits the property"@en ;
-	rdfs:label "is temporal property of"@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/isTemporallyRelatedTo
-
-:isTemporallyRelatedTo a owl:ObjectProperty ;
-	rdfs:subPropertyOf :isRelatedto ;
-	rdfs:domain _:genid21 .
-
-_:genid21 a owl:Class ;
-	owl:unionOf _:genid24 .
-
-_:genid24 a rdf:List ;
-	rdf:first :Endurant ;
-	rdf:rest _:genid23 .
-
-_:genid23 a rdf:List ;
-	rdf:first :Perdurant ;
-	rdf:rest _:genid22 .
-
-_:genid22 a rdf:List ;
-	rdf:first :Temporal_Region ;
-	rdf:rest rdf:nil .
-
-:isTemporallyRelatedTo rdfs:range _:genid25 .
-
-_:genid25 a owl:Class ;
-	owl:unionOf _:genid28 .
-
-_:genid28 a rdf:List ;
-	rdf:first :Endurant ;
-	rdf:rest _:genid27 .
-
-_:genid27 a rdf:List ;
-	rdf:first :Perdurant ;
-	rdf:rest _:genid26 .
-
-_:genid26 a rdf:List ;
-	rdf:first :Temporal_Region ;
-	rdf:rest rdf:nil .
-
-:isTemporallyRelatedTo rdfs:comment "Temporal relationships are relationships either directly between Temporal_Regions, or between the Endurants or Perdurants based on the temporal region with which they are associated (either explicitly or implicitly)"@en ;
-	rdfs:label "is Temporally Related To"@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/manifests
-
-:manifests a owl:ObjectProperty ;
-	rdfs:subPropertyOf :isFundamentallyRelatedTo ;
-	rdfs:comment ""@en ;
-	rdfs:label "Manifests"@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/proportionFor
-
-:proportionFor a owl:ObjectProperty ;
-	rdfs:subPropertyOf :hasPhysicalProperty ;
-	rdfs:comment ""@en ;
-	rdfs:label "proportion for"@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/proportionOf
-
-:proportionOf a owl:ObjectProperty ;
-	rdfs:subPropertyOf :hasPhysicalProperty ;
-	rdfs:comment ""@en ;
-	rdfs:label "proportion of"@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/realizes
-
-:realizes a owl:ObjectProperty ;
-	rdfs:subPropertyOf :isFundamentallyRelatedTo ;
-	rdfs:comment ""@en ;
-	rdfs:label "realizes"@en .
-# 
-# 
-# 
-# #################################################################
-# #
-# #    Data properties
-# #
-# #################################################################
-# 
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/hasNumericValue
-
-:hasNumericValue a owl:DatatypeProperty ;
-	rdfs:comment ""@en ;
-	rdfs:label "hasNumericValue"@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/hasTextValue
-
-:hasTextValue a owl:DatatypeProperty ;
-	rdfs:range xsd:string ;
-	rdfs:comment "data type property for free text values" ;
-	rdfs:label "text value" .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/hasUncertainty
-
-:hasUncertainty a owl:DatatypeProperty ;
-	rdfs:subPropertyOf :hasNumericValue ;
-	rdfs:comment "numeric assertion of the one-side confidence interval for a measured value. The statistic used to assert this uncertainty interval should be explained in the metadata for instances using this property."@en .
-# 
-# 
-# 
-# #################################################################
-# #
-# #    Classes
-# #
-# #################################################################
-# 
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/Abstract
-
-:Abstract a owl:Class ;
-	rdfs:subClassOf :Particular ;
-	owl:disjointWith :Endurant , :Perdurant ;
-	rdfs:comment "The main characteristic of abstract entities is that they do not have spatial nor temporal qualities, and they are not qualities themselves. The only class of abstract entities we consider in the present version of the upper ontology is that of quality regions (or simply regions). Quality spaces are special kinds of quality regions, being mereological sums of all the regions related to a certain quality type. The other examples of abstract entities (sets and facts) are only indicative."@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/Abstract_Property
-
-:Abstract_Property a owl:Class ;
-	rdfs:subClassOf :Property , _:genid29 .
-
-_:genid29 a owl:Restriction ;
-	owl:onProperty :hasProperty ;
-	owl:allValuesFrom :Abstract_Property .
-
-:Abstract_Property rdfs:comment "abstract class for any kind of property"@en ;
-	rdfs:label "Abstract Property "@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/Abstract_Region
-
-:Abstract_Region a owl:Class ;
-	rdfs:subClassOf :Abstract ;
-	rdfs:comment "conceptual spaces for quantifying properties that are related to measurement or observation conventions, not directly to physical entitites"@en ;
-	rdfs:label "Abstract Region"@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/Amount_Of_Matter
-
-:Amount_Of_Matter a owl:Class ;
-	rdfs:subClassOf :Physical_Endurant ;
-	owl:disjointWith :Physical_Object ;
-	rdfs:comment "The amount of matter type can be subdivided into [a volume] of (1) material (rock material), or (2) state of a material (solid, fluid), to enable designation of lumps of rock or lumps of fluid."@en , "The common trait of amounts of matter is that they are endurants with no unity (according to Gangemi et a. 2001 none of them is an essential whole). Amounts of matter - 'stuffs' referred to by mass nouns like 'gold', 'iron', 'wood', 'sand', 'meat', etc. - are mereologically invariant, in the sense that they change their identity when they change some parts."@en ;
-	rdfs:label "Amount of Matter"@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/Calculation
-
-:Calculation a owl:Class ;
-	rdfs:subClassOf :Determining_Event ;
-	rdfs:comment "A determination of the value of some property using analytical methods and other data input "@en ;
-	rdfs:label "Calculation "@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/Color
-
-:Color a owl:Class ;
-	rdfs:subClassOf :Physical_Region ;
-	rdfs:comment "upper level class that represents any conceptual space for quantifying color, e.g. RGB, Munsell, CMYK, US NBS Color (NBS Special Pub 440)"@en ;
-	rdfs:label "Any Color"@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/Complex_Feature
-
-:Complex_Feature a owl:Class ;
-	rdfs:subClassOf :Part_Feature ;
-	rdfs:comment ""@en ;
-	rdfs:label "Complex Feature "@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/Determining_Event
-
-:Determining_Event a owl:Class ;
-	rdfs:subClassOf :Event ;
-	rdfs:comment "An observation, calculation, or inference envent used to determine the value of one or more properties. The suggested hook here is to use PROV and or SOSA vocabulary to populate Determining_Event subclasses."@en ;
-	rdfs:label "Determining Event "@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/Dynamic_Feature
-
-:Dynamic_Feature a owl:Class ;
-	rdfs:subClassOf :Physical_Feature ;
-	rdfs:comment ""@en ;
-	rdfs:label "Dynamic Feature"@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/Element
-
-:Element a owl:Class ;
-	rdfs:subClassOf :Amount_Of_Matter .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/Endurant
-
-:Endurant a owl:Class ;
-	rdfs:subClassOf :Particular ;
-	owl:disjointWith :Perdurant ;
-	rdfs:comment "The main characteristic of endurants is that all of them are independent essential wholes. This does not mean that the corresponding property (being an endurant) carries proper unity, since there is no common unity criterion for endurants. Endurants can 'genuinely' change in time, in the sense that the very same endurant as a whole can have incompatible properties at different times. To see this, suppose that an endurant - say 'this paper' - has a property at a time t 'it's white', and a different, incompatible property at time t' 'it's yellow': in both cases we refer to the whole object, without picking up any particular part of it."@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/Event
-
-:Event a owl:Class ;
-	rdfs:subClassOf :Perdurant , _:genid30 .
-
-_:genid30 a owl:Restriction ;
-	owl:onProperty :isManifestationOf ;
-	owl:someValuesFrom :Process .
-
-:Event rdfs:comment "A event is an occurence that involves a change in state of some system.  \"Something that occurs in a certain place during a particular interval of time\" (https://www.dictionary.com/browse/event);  \"an occurrence; something that happens\" (https://wikidiff.com/event/process)."@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/First_Standard_Deviation_Calculation
-
-:First_Standard_Deviation_Calculation a owl:Class ;
-	rdfs:subClassOf :Statistical_Calculation ;
-	rdfs:comment "report a standard deviation value for a value range "@en ;
-	rdfs:label "First Standard Deviation Calculation"@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/Fluid
-
-:Fluid a owl:Class ;
-	rdfs:subClassOf :State_Of_Matter .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/Gap
-
-:Gap a owl:Class ;
-	rdfs:subClassOf :Physical_Void ;
-	rdfs:comment """A physical void with a scattered (disconnected) host, consisting of the spaces between the scattered parts of the host.   G(x) <--> exists y [hosts-v(y,x) ^ not ICon (y)].  ICon (x): x is interior connected (continuous, not scattered)  {@en}
+:Abstract
+  a owl:Class ;
+  rdfs:comment "The main characteristic of abstract entities is that they do not have spatial nor temporal qualities, and they are not qualities themselves. The only class of abstract entities we consider in the present version of the upper ontology is that of quality regions (or simply regions). Quality spaces are special kinds of quality regions, being mereological sums of all the regions related to a certain quality type. The other examples of abstract entities (sets and facts) are only indicative."@en ;
+  rdfs:subClassOf :Particular ;
+  owl:disjointWith :Endurant ;
+  owl:disjointWith :Perdurant ;
+.
+:Abstract_Property
+  a owl:Class ;
+  rdfs:comment "abstract class for any kind of property"@en ;
+  rdfs:label "Abstract Property "@en ;
+  rdfs:subClassOf :Property ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom :Abstract_Property ;
+      owl:onProperty :hasProperty ;
+    ] ;
+.
+:Abstract_Region
+  a owl:Class ;
+  rdfs:comment "conceptual spaces for quantifying properties that are related to measurement or observation conventions, not directly to physical entitites"@en ;
+  rdfs:label "Abstract Region"@en ;
+  rdfs:subClassOf :Abstract ;
+.
+:Amount_Of_Matter
+  a owl:Class ;
+  rdfs:comment "The amount of matter type can be subdivided into [a volume] of (1) material (rock material), or (2) state of a material (solid, fluid), to enable designation of lumps of rock or lumps of fluid."@en ;
+  rdfs:comment "The common trait of amounts of matter is that they are endurants with no unity (according to Gangemi et a. 2001 none of them is an essential whole). Amounts of matter - 'stuffs' referred to by mass nouns like 'gold', 'iron', 'wood', 'sand', 'meat', etc. - are mereologically invariant, in the sense that they change their identity when they change some parts."@en ;
+  rdfs:label "Amount of Matter"@en ;
+  rdfs:subClassOf :Physical_Endurant ;
+  owl:disjointWith :Physical_Object ;
+.
+:Calculation
+  a owl:Class ;
+  rdfs:comment "A determination of the value of some property using analytical methods and other data input "@en ;
+  rdfs:label "Calculation "@en ;
+  rdfs:subClassOf :Determining_Event ;
+.
+:Color
+  a owl:Class ;
+  rdfs:comment "upper level class that represents any conceptual space for quantifying color, e.g. RGB, Munsell, CMYK, US NBS Color (NBS Special Pub 440)"@en ;
+  rdfs:label "Any Color"@en ;
+  rdfs:subClassOf :Physical_Region ;
+.
+:Complex_Feature
+  a owl:Class ;
+  rdfs:comment ""@en ;
+  rdfs:label "Complex Feature "@en ;
+  rdfs:subClassOf :Part_Feature ;
+.
+:Determining_Event
+  a owl:Class ;
+  rdfs:comment "An observation, calculation, or inference envent used to determine the value of one or more properties. The suggested hook here is to use PROV and or SOSA vocabulary to populate Determining_Event subclasses."@en ;
+  rdfs:label "Determining Event "@en ;
+  rdfs:subClassOf :Event ;
+.
+:Dynamic_Feature
+  a owl:Class ;
+  rdfs:comment "A feature for which the host participates in some perdurant (wave); some aspect of the host changes over time"@en ;
+  rdfs:label "Dynamic Feature"@en ;
+  rdfs:subClassOf :Physical_Feature ;
+.
+:Element
+  a owl:Class ;
+  rdfs:subClassOf :Amount_Of_Matter ;
+.
+:Endurant
+  a owl:Class ;
+  rdfs:comment "The main characteristic of endurants is that all of them are independent essential wholes. This does not mean that the corresponding property (being an endurant) carries proper unity, since there is no common unity criterion for endurants. Endurants can 'genuinely' change in time, in the sense that the very same endurant as a whole can have incompatible properties at different times. To see this, suppose that an endurant - say 'this paper' - has a property at a time t 'it's white', and a different, incompatible property at time t' 'it's yellow': in both cases we refer to the whole object, without picking up any particular part of it."@en ;
+  rdfs:subClassOf :Particular ;
+  owl:disjointWith :Perdurant ;
+.
+:Event
+  a owl:Class ;
+  rdfs:comment "A event is an occurence that involves a change in state of some system.  \"Something that occurs in a certain place during a particular interval of time\" (https://www.dictionary.com/browse/event);  \"an occurrence; something that happens\" (https://wikidiff.com/event/process)."@en ;
+  rdfs:subClassOf :Perdurant ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty :isManifestationOf ;
+      owl:someValuesFrom :Process ;
+    ] ;
+.
+:First_Standard_Deviation_Calculation
+  a owl:Class ;
+  rdfs:comment "report a standard deviation value for a value range "@en ;
+  rdfs:label "First Standard Deviation Calculation"@en ;
+  rdfs:subClassOf :Statistical_Calculation ;
+.
+:Fluid
+  a owl:Class ;
+  rdfs:subClassOf :State_Of_Matter ;
+.
+:Gap
+  a owl:Class ;
+  rdfs:comment """A physical void with a scattered (disconnected) host, consisting of the spaces between the scattered parts of the host.   G(x) <--> exists y [hosts-v(y,x) ^ not ICon (y)].  ICon (x): x is interior connected (continuous, not scattered)  {@en}
 """@en ;
-	rdfs:label "Gap"@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/Gas
-
-:Gas a owl:Class ;
-	rdfs:subClassOf :Fluid .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/Glass
-
-:Glass a owl:Class ;
-	rdfs:subClassOf :Amount_Of_Matter , _:genid31 .
-
-_:genid31 a owl:Restriction ;
-	owl:onProperty :hasConstituent ;
-	owl:allValuesFrom :Element .
-
-:Glass rdfs:comment "amorphous product of rapid cooling of melted material. Includes natural glasses in Earth and extraterrestrial material, as well as anthromophomorphic manufactured material"@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/Hole
-
-:Hole a owl:Class ;
-	rdfs:subClassOf :Physical_Void ;
-	rdfs:comment "A physical void with a self-connected (non-scattered) host, consisting of some depression or cavity within the host.    H(x) <--> exists y [hosts-v(y,x) ^ ICon (y)].   ICon (x): x is interior connected (continuous, not scattered)"@en ;
-	rdfs:label "Hole"@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/Immaterial_Feature
-
-:Immaterial_Feature a owl:Class ;
-	rdfs:subClassOf :Spatial_Feature ;
-	rdfs:comment "A dependent place feature that is immaterial.  E.g. voids, shadows and relational features such as traffic intersections (meeting of roads).   MPF(x) <--> DPF(x) ^ not mat(x)"@en ;
-	rdfs:label "Immaterial_Feature "@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/Inference
-
-:Inference a owl:Class ;
-	rdfs:subClassOf :Determining_Event ;
-	rdfs:comment "An indirect determination of the value of some property based on logical reasoning from other data "@en ;
-	rdfs:label "Inference "@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/Inherent_Feature
-
-:Inherent_Feature a owl:Class ;
-	rdfs:subClassOf :Physical_Feature ;
-	rdfs:comment ""@en ;
-	rdfs:label "Inherent Feature "@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/Integral_Feature
-
-:Integral_Feature a owl:Class ;
-	rdfs:subClassOf :Physical_Feature ;
-	rdfs:comment "Integral features are dissective - every part of a foliation is also a foliation (at a scale of observation). "@en ;
-	rdfs:label "Integral Feature "@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/Liquid
-
-:Liquid a owl:Class ;
-	rdfs:subClassOf :Fluid .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/Low_Dimension_Feature
-
-:Low_Dimension_Feature a owl:Class ;
-	rdfs:subClassOf :Immaterial_Feature ;
-	rdfs:comment ""@en ;
-	rdfs:label "Low Dimension Feature "@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/Material_Spatial_Feature
-
-:Material_Spatial_Feature a owl:Class ;
-	rdfs:subClassOf :Spatial_Feature ;
-	rdfs:comment "Material Spatial Feature (MSF): A dependent place feature that is material. - my house's backyard, frontyard.   LOGIC:  MSF(x) <--> SF(x) ^ mat(x)"@en ;
-	rdfs:label "Material Spatial Feature "@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/Material_State
-
-:Material_State a owl:Class ;
-	rdfs:subClassOf :Physical_Property , _:genid32 .
-
-_:genid32 a owl:Restriction ;
-	owl:onProperty :hasValue ;
-	owl:someValuesFrom :State_Of_Matter .
-
-:Material_State rdfs:comment ""@en ;
-	rdfs:label "Material State"@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/Maximum_Value_Calculation
-
-:Maximum_Value_Calculation a owl:Class ;
-	rdfs:subClassOf :Statistical_Calculation ;
-	rdfs:comment "report a maximum value for a value range "@en ;
-	rdfs:label "Maximum Value Calculation"@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/Mean_Value_Calculation
-
-:Mean_Value_Calculation a owl:Class ;
-	rdfs:subClassOf :Statistical_Calculation ;
-	rdfs:comment "report a mean value for a value range "@en ;
-	rdfs:label "Mean Value Calculation"@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/Minimum_Value_Calculation
-
-:Minimum_Value_Calculation a owl:Class ;
-	rdfs:subClassOf :Statistical_Calculation ;
-	rdfs:comment "report a minimum value for a value range "@en ;
-	rdfs:label "Minimum Value Calculation"@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/Morphologic_Feature
-
-:Morphologic_Feature a owl:Class ;
-	rdfs:subClassOf :Inherent_Feature ;
-	rdfs:comment "Morphologic Feature (MF): A feature that is not a part of its host, but characterized by the form or structure of the host: Morphological features can have morphological properties e.g. orientation, thickness, fold profile, etc.  - smile or frown / lips.    - mountain / planet surface (protrusion in the planet surface).  - graben and horst / planet surface (protrusion or depression in the planet surface caused by faulting).  - geological fold: rock body with a certain shape.   MF(x) --> MDF (x) ^ exist y [hosts (y,x) ^ not partOf (x,y)]"@en ;
-	rdfs:label "Morphologic Feature"@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/Observation
-
-:Observation a owl:Class ;
-	rdfs:subClassOf :Determining_Event ;
-	rdfs:comment "A direct determination of the value of some property "@en ;
-	rdfs:label "Observation "@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/Part_Feature
-
-:Part_Feature a owl:Class ;
-	rdfs:subClassOf :Physical_Feature ;
-	rdfs:comment ""@en ;
-	rdfs:label "Part Feature "@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/Particular
-
-:Particular a owl:Class ;
-	rdfs:subClassOf _:genid33 .
-
-_:genid33 a owl:Restriction ;
-	owl:onProperty :determinedBy ;
-	owl:allValuesFrom :Determining_Event .
-
-:Particular rdfs:comment "AKA 'entity'. Any individual in the DOLCE domain of discourse. The extensional coverage of DOLCE is as large as possible, since it ranges on 'possibilia', i.e all possible individuals that can be postulated by means of DOLCE axioms. Possibilia include physical objects, substances, processes, qualities, conceptual regions, non-physical objects, collections and even arbitrary sums of objects.The class 'particular' features a covering partition that includes: endurant, perdurant, quality, and abstract. There are also some subclasses defined as unions of subclasses of 'particular' for special purposes: spatio-temporal-particular (any particular except abstracts)- physical-realization (any realization of an information object, defined in the ExtendedDnS ontology)."@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/Perdurant
-
-:Perdurant a owl:Class ;
-	rdfs:subClassOf :Particular , _:genid34 .
-
-_:genid34 a owl:Restriction ;
-	owl:onProperty :hasParticipant ;
-	owl:someValuesFrom :Physical_Endurant .
-
-:Perdurant rdfs:subClassOf _:genid35 .
-
-_:genid35 a owl:Restriction ;
-	owl:onProperty :hasSetting ;
-	owl:someValuesFrom :Physical_Setting .
-
-:Perdurant rdfs:subClassOf _:genid36 .
-
-_:genid36 a owl:Restriction ;
-	owl:onProperty :hasTemporalProperty ;
-	owl:someValuesFrom :Temporal_Property .
-
-:Perdurant rdfs:subClassOf _:genid37 .
-
-_:genid37 a owl:Restriction ;
-	owl:onProperty :hasPart ;
-	owl:allValuesFrom :Perdurant .
-
-:Perdurant rdfs:subClassOf _:genid38 .
-
-_:genid38 a owl:Restriction ;
-	owl:onProperty :hasSpatialProperty ;
-	owl:allValuesFrom :Spatial_Location .
-
-:Perdurant rdfs:subClassOf _:genid39 .
-
-_:genid39 a owl:Restriction ;
-	owl:onProperty :isPartOf ;
-	owl:allValuesFrom :Perdurant .
-
-:Perdurant rdfs:subClassOf _:genid40 .
-
-_:genid40 a owl:Restriction ;
-	owl:onProperty :isTemporallyRelatedTo ;
-	owl:allValuesFrom :Perdurant .
-
-:Perdurant rdfs:comment "Perdurants (AKA occurrences) comprise what are variously called events, processes, phenomena, activities and states. They can have temporal parts or spatial parts. For instance, the first movement of (an execution of) a symphony is a temporal part of the symphony. On the other hand, the play performed by the left side of the orchestra is a spatial part. In both cases, these parts are occurrences themselves. We assume that objects cannot be parts of occurrences, but rather they participate in them. Perdurants extend in time by accumulating different temporal parts, so that, at any time they are present, they are only partially present, in the sense that some of their proper temporal parts (e.g., their previous or future phases) may be not present. E.g., the piece of paper you are reading now is wholly present, while some temporal parts of your reading are not present yet, or any more. Philosophers say that endurants are entities that are in time, while lacking temporal parts (so to speak, all their parts flow with them in time). Perdurants, on the contrary, are entities that happen in time, and can have temporal parts (all their parts are fixed in time)."@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/Physical_Boundary
-
-:Physical_Boundary a owl:Class ;
-	rdfs:subClassOf :Part_Feature ;
-	rdfs:comment """Physical Boundary (PB):
+  rdfs:label "Gap"@en ;
+  rdfs:subClassOf :Physical_Void ;
+.
+:Gas
+  a owl:Class ;
+  rdfs:subClassOf :Fluid ;
+.
+:Glass
+  a owl:Class ;
+  rdfs:comment "amorphous product of rapid cooling of melted material. Includes natural glasses in Earth and extraterrestrial material, as well as anthromophomorphic manufactured material"@en ;
+  rdfs:subClassOf :Amount_Of_Matter ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom :Element ;
+      owl:onProperty :hasConstituent ;
+    ] ;
+.
+:Hole
+  a owl:Class ;
+  rdfs:comment "A physical void with a self-connected (non-scattered) host, consisting of some depression or cavity within the host.    H(x) <--> exists y [hosts-v(y,x) ^ ICon (y)].   ICon (x): x is interior connected (continuous, not scattered)"@en ;
+  rdfs:label "Hole"@en ;
+  rdfs:subClassOf :Physical_Void ;
+.
+:Immaterial_Feature
+  a owl:Class ;
+  rdfs:comment "A dependent place feature that is immaterial.  E.g. voids, shadows and relational features such as traffic intersections (meeting of roads).   MPF(x) <--> DPF(x) ^ not mat(x)"@en ;
+  rdfs:label "Immaterial_Feature "@en ;
+  rdfs:subClassOf :Spatial_Feature ;
+.
+:Inference
+  a owl:Class ;
+  rdfs:comment "An indirect determination of the value of some property based on logical reasoning from other data "@en ;
+  rdfs:label "Inference "@en ;
+  rdfs:subClassOf :Determining_Event ;
+.
+:Inherent_Feature
+  a owl:Class ;
+  rdfs:comment "based on quality inhering in (essential relation) host. The quality is the focal; Quality inheres in both the feature and the host. Morphologic feature -- focal  is a specific shape (river bend, fold)"@en ;
+  rdfs:label "Inherent Feature "@en ;
+  rdfs:subClassOf :Physical_Feature ;
+.
+:Integral_Feature
+  a owl:Class ;
+  rdfs:comment "feature for which integral whole is composed of proper parts that are aspects of the host. arrangement of parts defines feature. (knot, smile, fist, wood grain, ?foliation?) essential relation is the composition of the relation between hosts and focals, plus the relation arranging the focals into an integral whole. Integral features are dissective - every part of a foliation is also a foliation (at a scale of observation)."@en ;
+  rdfs:label "Integral Feature "@en ;
+  rdfs:subClassOf :Physical_Feature ;
+.
+:Liquid
+  a owl:Class ;
+  rdfs:subClassOf :Fluid ;
+.
+:Low_Dimension_Feature
+  a owl:Class ;
+  rdfs:comment "A feature that is immaterial but spatially located, typically a lower dimension subdivision of the host  (north pole, equator, earth surface, center of town); host is physical endurant, focal is spatial location relative to host."@en ;
+  rdfs:label "Low Dimension Feature "@en ;
+  rdfs:subClassOf :Immaterial_Feature ;
+.
+:Material_Spatial_Feature
+  a owl:Class ;
+  rdfs:comment "Material Spatial Feature (MSF): A dependent place feature that is material. - my house's backyard, frontyard.  focal is the spatial relations.  LOGIC:  MSF(x) <--> SF(x) ^ mat(x)"@en ;
+  rdfs:label "Material Spatial Feature "@en ;
+  rdfs:subClassOf :Spatial_Feature ;
+.
+:Material_State
+  a owl:Class ;
+  rdfs:comment ""@en ;
+  rdfs:label "Material State"@en ;
+  rdfs:subClassOf :Physical_Property ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty :hasValue ;
+      owl:someValuesFrom :State_Of_Matter ;
+    ] ;
+.
+:Maximum_Value_Calculation
+  a owl:Class ;
+  rdfs:comment "report a maximum value for a value range "@en ;
+  rdfs:label "Maximum Value Calculation"@en ;
+  rdfs:subClassOf :Statistical_Calculation ;
+.
+:Mean_Value_Calculation
+  a owl:Class ;
+  rdfs:comment "report a mean value for a value range "@en ;
+  rdfs:label "Mean Value Calculation"@en ;
+  rdfs:subClassOf :Statistical_Calculation ;
+.
+:Minimum_Value_Calculation
+  a owl:Class ;
+  rdfs:comment "report a minimum value for a value range "@en ;
+  rdfs:label "Minimum Value Calculation"@en ;
+  rdfs:subClassOf :Statistical_Calculation ;
+.
+:Morphologic_Feature
+  a owl:Class ;
+  rdfs:comment "Morphologic Feature (MF): A feature that is not a part of its host, but characterized by the form or structure of the host: Morphological features can have morphological properties e.g. orientation, thickness, fold profile, etc.  - smile or frown / lips.    - mountain / planet surface (protrusion in the planet surface).  - graben and horst / planet surface (protrusion or depression in the planet surface caused by faulting).  - geological fold: rock body with a certain shape.   MF(x) --> MDF (x) ^ exist y [hosts (y,x) ^ not partOf (x,y)]"@en ;
+  rdfs:label "Morphologic Feature"@en ;
+  rdfs:subClassOf :Inherent_Feature ;
+.
+:Observation
+  a owl:Class ;
+  rdfs:comment "A direct determination of the value of some property "@en ;
+  rdfs:label "Observation "@en ;
+  rdfs:subClassOf :Determining_Event ;
+.
+:Part_Feature
+  a owl:Class ;
+  rdfs:comment "proper part of host is focus (forehead, mountain top, boundary[as a material entity]) part of relation is essential to feature but not to host."@en ;
+  rdfs:label "Part Feature "@en ;
+  rdfs:subClassOf :Physical_Feature ;
+.
+:Particular
+  a owl:Class ;
+  rdfs:comment "AKA 'entity'. Any individual in the DOLCE domain of discourse. The extensional coverage of DOLCE is as large as possible, since it ranges on 'possibilia', i.e all possible individuals that can be postulated by means of DOLCE axioms. Possibilia include physical objects, substances, processes, qualities, conceptual regions, non-physical objects, collections and even arbitrary sums of objects.The class 'particular' features a covering partition that includes: endurant, perdurant, quality, and abstract. There are also some subclasses defined as unions of subclasses of 'particular' for special purposes: spatio-temporal-particular (any particular except abstracts)- physical-realization (any realization of an information object, defined in the ExtendedDnS ontology)."@en ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom :Determining_Event ;
+      owl:onProperty :determinedBy ;
+    ] ;
+.
+:Perdurant
+  a owl:Class ;
+  rdfs:comment "Perdurants (AKA occurrences) comprise what are variously called events, processes, phenomena, activities and states. They can have temporal parts or spatial parts. For instance, the first movement of (an execution of) a symphony is a temporal part of the symphony. On the other hand, the play performed by the left side of the orchestra is a spatial part. In both cases, these parts are occurrences themselves. We assume that objects cannot be parts of occurrences, but rather they participate in them. Perdurants extend in time by accumulating different temporal parts, so that, at any time they are present, they are only partially present, in the sense that some of their proper temporal parts (e.g., their previous or future phases) may be not present. E.g., the piece of paper you are reading now is wholly present, while some temporal parts of your reading are not present yet, or any more. Philosophers say that endurants are entities that are in time, while lacking temporal parts (so to speak, all their parts flow with them in time). Perdurants, on the contrary, are entities that happen in time, and can have temporal parts (all their parts are fixed in time)."@en ;
+  rdfs:subClassOf :Particular ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom :Perdurant ;
+      owl:onProperty :hasPart ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom :Perdurant ;
+      owl:onProperty :isPartOf ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom :Perdurant ;
+      owl:onProperty :isTemporallyRelatedTo ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom :Spatial_Location ;
+      owl:onProperty :hasSpatialProperty ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty :hasParticipant ;
+      owl:someValuesFrom :Physical_Endurant ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty :hasSetting ;
+      owl:someValuesFrom :Physical_Setting ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty :hasTemporalProperty ;
+      owl:someValuesFrom :Temporal_Property ;
+    ] ;
+.
+:Physical_Boundary
+  a owl:Class ;
+  rdfs:comment """Physical Boundary (PB):
 A part of a physical object or amount of matter that touches the exterior in 3D space, either a point (e.g. table corner), a line (table edge), or a surface (e.g. table top)... possibly a volume.
 
 PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, complement(y))]"""@en ;
-	rdfs:label "Physical Boundary"@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/Physical_Endurant
-
-:Physical_Endurant a owl:Class ;
-	rdfs:subClassOf :Endurant , _:genid41 .
-
-_:genid41 a owl:Restriction ;
-	owl:onProperty :hasHistory ;
-	owl:someValuesFrom :Perdurant .
-
-:Physical_Endurant rdfs:subClassOf _:genid42 .
-
-_:genid42 a owl:Restriction ;
-	owl:onProperty :hasPhysicalProperty ;
-	owl:someValuesFrom :Physical_Property .
-
-:Physical_Endurant rdfs:subClassOf _:genid43 .
-
-_:genid43 a owl:Restriction ;
-	owl:onProperty :hasSetting ;
-	owl:someValuesFrom :Physical_Setting .
-
-:Physical_Endurant rdfs:subClassOf _:genid44 .
-
-_:genid44 a owl:Restriction ;
-	owl:onProperty :hasSpatialProperty ;
-	owl:someValuesFrom :Spatial_Location .
-
-:Physical_Endurant rdfs:subClassOf _:genid45 .
-
-_:genid45 a owl:Restriction ;
-	owl:onProperty :hasTemporalProperty ;
-	owl:someValuesFrom :Temporal_Property .
-
-:Physical_Endurant rdfs:subClassOf _:genid46 .
-
-_:genid46 a owl:Restriction ;
-	owl:onProperty :hasPart ;
-	owl:allValuesFrom :Physical_Endurant .
-
-:Physical_Endurant rdfs:subClassOf _:genid47 .
-
-_:genid47 a owl:Restriction ;
-	owl:onProperty :isPartOf ;
-	owl:allValuesFrom :Physical_Endurant .
-
-:Physical_Endurant rdfs:subClassOf _:genid48 .
-
-_:genid48 a owl:Restriction ;
-	owl:onProperty :isPhysicallyRelatedTo ;
-	owl:allValuesFrom :Physical_Endurant .
-
-:Physical_Endurant rdfs:comment "An endurant having a direct physical (at least spatial) quality."@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/Physical_Feature
-
-:Physical_Feature a owl:Class ;
-	rdfs:subClassOf :Physical_Endurant ;
-	rdfs:comment "Physical Feature"@en ;
-	rdfs:label "Physical Feature"@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/Physical_Object
-
-:Physical_Object a owl:Class ;
-	rdfs:subClassOf :Physical_Endurant ;
-	rdfs:comment "The main characteristic of physical objects is that they are endurants with unity. However, they have no common unity criterion, since different subtypes of objects may have different unity criteria. Differently from aggregates, (most) physical objects change some of their parts while keeping their identity, they can have therefore temporary parts. Often physical objects (indeed, all endurants) are ontologically independent from occurrences (discussed below). However, if we admit that every object has a life, it is hard to exclude a mutual specific constant dependence between the two. Nevertheless, we may still use the notion of dependence to (weakly) characterize objects as being not specifically constantly dependent on other objects."@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/Physical_Property
-
-:Physical_Property a owl:Class ;
-	rdfs:subClassOf :Property , _:genid49 .
-
-_:genid49 a owl:Restriction ;
-	owl:onProperty :isPropertyOf ;
-	owl:someValuesFrom _:genid50 .
-
-_:genid50 a owl:Class ;
-	owl:unionOf _:genid53 .
-
-_:genid53 a rdf:List ;
-	rdf:first :Endurant ;
-	rdf:rest _:genid52 .
-
-_:genid52 a rdf:List ;
-	rdf:first :Perdurant ;
-	rdf:rest _:genid51 .
-
-_:genid51 a rdf:List ;
-	rdf:first :Physical_Property ;
-	rdf:rest rdf:nil .
-
-:Physical_Property rdfs:subClassOf _:genid54 .
-
-_:genid54 a owl:Restriction ;
-	owl:onProperty :hasProperty ;
-	owl:allValuesFrom :Property .
-
-:Physical_Property rdfs:comment "Physical Property"@en ;
-	rdfs:label "Physical Property"@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/Physical_Region
-
-:Physical_Region a owl:Class ;
-	rdfs:subClassOf :Abstract ;
-	rdfs:comment "A region at which only physical qualities can be directly located. It assumes some metrics for physical properties. Quantified by a controlled vocabulary that provides labels for the regions of interest in the concept space for the quality (property)."@en ;
-	rdfs:label "Physical Region"@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/Physical_Setting
-
-:Physical_Setting a owl:Class ;
-	rdfs:subClassOf :Particular , _:genid55 .
-
-_:genid55 a owl:Restriction ;
-	owl:onProperty :hasSpatialProperty ;
-	owl:someValuesFrom :Spatial_Extent .
-
-:Physical_Setting rdfs:subClassOf _:genid56 .
-
-_:genid56 a owl:Restriction ;
-	owl:onProperty :isSettingFor ;
-	owl:someValuesFrom _:genid57 .
-
-_:genid57 a owl:Class ;
-	owl:unionOf _:genid59 .
-
-_:genid59 a rdf:List ;
-	rdf:first :Perdurant ;
-	rdf:rest _:genid58 .
-
-_:genid58 a rdf:List ;
-	rdf:first :Physical_Endurant ;
-	rdf:rest rdf:nil .
-
-:Physical_Setting rdfs:subClassOf _:genid60 .
-
-_:genid60 a owl:Restriction ;
-	owl:onProperty :hasPart ;
-	owl:allValuesFrom _:genid61 .
-
-_:genid61 a owl:Class ;
-	owl:unionOf _:genid65 .
-
-_:genid65 a rdf:List ;
-	rdf:first :Perdurant ;
-	rdf:rest _:genid64 .
-
-_:genid64 a rdf:List ;
-	rdf:first :Physical_Endurant ;
-	rdf:rest _:genid63 .
-
-_:genid63 a rdf:List ;
-	rdf:first :Physical_Property ;
-	rdf:rest _:genid62 .
-
-_:genid62 a rdf:List ;
-	rdf:first :Physical_Setting ;
-	rdf:rest rdf:nil .
-
-:Physical_Setting rdfs:subClassOf _:genid66 .
-
-_:genid66 a owl:Restriction ;
-	owl:onProperty :hasProperty ;
-	owl:allValuesFrom :Property .
-
-:Physical_Setting rdfs:subClassOf _:genid67 .
-
-_:genid67 a owl:Restriction ;
-	owl:onProperty :isPartOf ;
-	owl:allValuesFrom :Physical_Setting .
-
-:Physical_Setting rdfs:comment "A physical setting might be defined by parts that are endurants or perdurants, and also by particular qualities/properties. Thus it is a direct subtype of Particular."@en ;
-	rdfs:label "Physical Setting"@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/Physical_Void
-
-:Physical_Void a owl:Class ;
-	rdfs:subClassOf :Place_Feature ;
-	rdfs:comment "An empty physical space in 3D. Distinct from abstract mathematical spaces, which include spaces made from various reference frames, including coordinate systems imposed on the earth (these are abstract imposed on real space). V(x) <--> IPF(x) ^ exists y [hosts-v (y,x)]"@en ;
-	rdfs:label "Physical Void "@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/Place_Feature
-
-:Place_Feature a owl:Class ;
-	rdfs:subClassOf :Immaterial_Feature ;
-	rdfs:comment ""@en ;
-	rdfs:label "Place Feature "@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/Plasma
-
-:Plasma a owl:Class ;
-	rdfs:subClassOf :Fluid .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/Process
-
-:Process a owl:Class ;
-	rdfs:subClassOf :Perdurant , _:genid68 .
-
-_:genid68 a owl:Restriction ;
-	owl:onProperty :manifests ;
-	owl:allValuesFrom :Event .
-
-:Process rdfs:comment "In Basic Formal Ontology: An occurrent entity that exists in time by occurring or happening, has temporal (proper) parts, and always depends on some material (continuant) entity (Arp et al., 2015, p. 121; Notes in parenthesis () from Mustafa Jarrar https://www.slideshare.net/jarrar02/classifying-processes-and-basic-formal-ontology) Processes are not necessarily homeomeric or cumulative.  \" process is a series of events to produce a result\" (https://wikidiff.com/event/process)  \"A process may also be defined as the workflows and sequence of events inherent in processes such as manufacturing, engineering and business processes.\" (https://en.wikipedia.org/wiki/Process_ontology)"@en ;
-	rdfs:label "Process"@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/Property
-
-:Property a owl:Class ;
-	rdfs:subClassOf :Particular , _:genid69 .
-
-_:genid69 a owl:Restriction ;
-	owl:onProperty :hasPart ;
-	owl:qualifiedCardinality "0"^^xsd:nonNegativeInteger ;
-	owl:onClass :Particular .
-
-:Property rdfs:subClassOf _:genid70 .
-
-_:genid70 a owl:Restriction ;
-	owl:onProperty :isPartOf ;
-	owl:qualifiedCardinality "0"^^xsd:nonNegativeInteger ;
-	owl:onClass :Particular .
-
-:Property rdfs:comment "A concept that specifies some aspect that inheres in instances of some Particular.  Note that the value of the determiningEvent  property on Property is used to specify metadata about how a property value is assigned"@en ;
-	rdfs:label "Property"@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/Proportion
-
-:Proportion a owl:Class ;
-	rdfs:subClassOf :Physical_Property , _:genid71 .
-
-_:genid71 a owl:Restriction ;
-	owl:onProperty :proportionFor ;
-	owl:someValuesFrom :Endurant .
-
-:Proportion rdfs:subClassOf _:genid72 .
-
-_:genid72 a owl:Restriction ;
-	owl:onProperty :proportionOf ;
-	owl:someValuesFrom :Endurant .
-
-:Proportion rdfs:comment "A numeric property value used to express the fraction of a whole that is composed of some part. Values will range from 0 to 1 (0 to 100%)."@en ;
-	rdfs:label "Proportion"@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/Shape
-
-:Shape a owl:Class ;
-	rdfs:subClassOf :Physical_Region ;
-	rdfs:comment ""@en ;
-	rdfs:label "Any Shape"@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/Solid
-
-:Solid a owl:Class ;
-	rdfs:subClassOf :State_Of_Matter .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/Spatial_Extent
-
-:Spatial_Extent a owl:Class ;
-	rdfs:subClassOf :Spatial_Location ;
-	rdfs:comment "Class of objects that represent locations within the Earth."@en , "renamed from SpatialEntity in previous version"@en ;
-	rdfs:label "Spatial Extent"@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/Spatial_Feature
-
-:Spatial_Feature a owl:Class ;
-	rdfs:subClassOf :Physical_Feature ;
-	rdfs:comment ""@en ;
-	rdfs:label "Spatial Feature "@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/Spatial_Location
-
-:Spatial_Location a owl:Class ;
-	rdfs:subClassOf :Physical_Property , _:genid73 .
-
-_:genid73 a owl:Restriction ;
-	owl:onProperty :hasValue ;
-	owl:someValuesFrom :Spatial_Region .
-
-:Spatial_Location rdfs:comment "A physical property that is quantified by a category from a classification scheme."@en ;
-	rdfs:label "Spatial Location"@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/Spatial_Region
-
-:Spatial_Region a owl:Class ;
-	rdfs:subClassOf :Physical_Region ;
-	rdfs:comment ""@en ;
-	rdfs:label "Spatial Region"@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/State_Of_Matter
-
-:State_Of_Matter a owl:Class ;
-	rdfs:subClassOf :Physical_Region ;
-	rdfs:label "Any State of Matter"@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/Statistical_Calculation
-
-:Statistical_Calculation a owl:Class ;
-	rdfs:subClassOf :Calculation , _:genid74 .
-
-_:genid74 a owl:Restriction ;
-	owl:onProperty :hasUOM ;
-	owl:someValuesFrom :UOM_Space .
-
-:Statistical_Calculation rdfs:comment "Determination of statistics associated with a measured value, e.g. minimum, maximum, mean, mode, standard deviation."@en ;
-	rdfs:label "Statistical Calculation"@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/Temporal_Property
-
-:Temporal_Property a owl:Class ;
-	rdfs:subClassOf :Property , _:genid75 .
-
-_:genid75 a owl:Restriction ;
-	owl:onProperty :isPropertyOf ;
-	owl:someValuesFrom _:genid76 .
-
-_:genid76 a owl:Class ;
-	owl:unionOf _:genid79 .
-
-_:genid79 a rdf:List ;
-	rdf:first :Endurant ;
-	rdf:rest _:genid78 .
-
-_:genid78 a rdf:List ;
-	rdf:first :Perdurant ;
-	rdf:rest _:genid77 .
-
-_:genid77 a rdf:List ;
-	rdf:first :Temporal_Property ;
-	rdf:rest rdf:nil .
-
-:Temporal_Property rdfs:subClassOf _:genid80 .
-
-_:genid80 a owl:Restriction ;
-	owl:onProperty :hasProperty ;
-	owl:allValuesFrom :Temporal_Property .
-
-:Temporal_Property rdfs:comment "Temporal Property"@en ;
-	rdfs:label "Temporal Property"@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/Temporal_Region
-
-:Temporal_Region a owl:Class ;
-	rdfs:subClassOf :Abstract ;
-	rdfs:comment ""@en ;
-	rdfs:label "Temporal Region"@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/Time_Instant
-
-:Time_Instant a owl:Class ;
-	rdfs:subClassOf :Temporal_Region ;
-	rdfs:comment "represents a point location in time."@en ;
-	rdfs:label "Time Instant"@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/Time_Interval
-
-:Time_Interval a owl:Class ;
-	rdfs:subClassOf :Temporal_Region ;
-	rdfs:comment ""@en ;
-	rdfs:label "Time Interval"@en .
-# 
-# http://loop3d.org/GSO/ontology/2020/1/common/UOM_Space
-
-:UOM_Space a owl:Class ;
-	rdfs:subClassOf :Abstract_Region ;
-	rdfs:comment "conceptual space for units of measure."@en ;
-	rdfs:label "Unit of Measurement"@en .
-# 
-# Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
+  rdfs:label "Physical Boundary"@en ;
+  rdfs:subClassOf :Part_Feature ;
+.
+:Physical_Endurant
+  a owl:Class ;
+  rdfs:comment "An endurant having a direct physical (at least spatial) quality."@en ;
+  rdfs:subClassOf :Endurant ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom :Physical_Endurant ;
+      owl:onProperty :hasPart ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom :Physical_Endurant ;
+      owl:onProperty :isPartOf ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom :Physical_Endurant ;
+      owl:onProperty :isPhysicallyRelatedTo ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty :hasHistory ;
+      owl:someValuesFrom :Perdurant ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty :hasPhysicalProperty ;
+      owl:someValuesFrom :Physical_Property ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty :hasSetting ;
+      owl:someValuesFrom :Physical_Setting ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty :hasSpatialProperty ;
+      owl:someValuesFrom :Spatial_Location ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty :hasTemporalProperty ;
+      owl:someValuesFrom :Temporal_Property ;
+    ] ;
+.
+:Physical_Feature
+  a owl:Class ;
+  rdfs:comment "A feature is a Physical Endurant that is ontologically dependent on at least one host Physical Endurant and a focal entity that are related by some essential relation. The identity of a feature is distinct from the identity of its host. Dependency on the host through is a hosting relation that holds between the Feature and at least one other distinct particular individual Physical Endurant, the host. A feature is specifically dependent on its host. A feature can be either specifically or generically dependent on a  focal entity (e.g. knot in string). The focal is some spatially located individual Physical Endurant that participates in the essential relation on which the feature ontologically depends. The focal entities are in sum spatially co-located with the feature at any time the feature exists."@en ;
+  rdfs:label "Physical Feature"@en ;
+  rdfs:subClassOf :Physical_Endurant ;
+.
+:Physical_Object
+  a owl:Class ;
+  rdfs:comment "The main characteristic of physical objects is that they are endurants with unity. However, they have no common unity criterion, since different subtypes of objects may have different unity criteria. Differently from aggregates, (most) physical objects change some of their parts while keeping their identity, they can have therefore temporary parts. Often physical objects (indeed, all endurants) are ontologically independent from occurrences (discussed below). However, if we admit that every object has a life, it is hard to exclude a mutual specific constant dependence between the two. Nevertheless, we may still use the notion of dependence to (weakly) characterize objects as being not specifically constantly dependent on other objects."@en ;
+  rdfs:subClassOf :Physical_Endurant ;
+.
+:Physical_Property
+  a owl:Class ;
+  rdfs:comment "Physical Property"@en ;
+  rdfs:label "Physical Property"@en ;
+  rdfs:subClassOf :Property ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom :Property ;
+      owl:onProperty :hasProperty ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty :isPropertyOf ;
+      owl:someValuesFrom [
+          a owl:Class ;
+          owl:unionOf [
+              a rdf:List ;
+              rdf:first :Endurant ;
+              rdf:rest [
+                  a rdf:List ;
+                  rdf:first :Perdurant ;
+                  rdf:rest [
+                      a rdf:List ;
+                      rdf:first :Physical_Property ;
+                      rdf:rest () ;
+                    ] ;
+                ] ;
+            ] ;
+        ] ;
+    ] ;
+.
+:Physical_Region
+  a owl:Class ;
+  rdfs:comment "A region at which only physical qualities can be directly located. It assumes some metrics for physical properties. Quantified by a controlled vocabulary that provides labels for the regions of interest in the concept space for the quality (property)."@en ;
+  rdfs:label "Physical Region"@en ;
+  rdfs:subClassOf :Abstract ;
+.
+:Physical_Setting
+  a owl:Class ;
+  rdfs:comment "A physical setting might be defined by parts that are endurants or perdurants, and also by particular qualities/properties. Thus it is a direct subtype of Particular."@en ;
+  rdfs:label "Physical Setting"@en ;
+  rdfs:subClassOf :Particular ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom :Physical_Setting ;
+      owl:onProperty :isPartOf ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom :Property ;
+      owl:onProperty :hasProperty ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom [
+          a owl:Class ;
+          owl:unionOf [
+              a rdf:List ;
+              rdf:first :Perdurant ;
+              rdf:rest [
+                  a rdf:List ;
+                  rdf:first :Physical_Endurant ;
+                  rdf:rest [
+                      a rdf:List ;
+                      rdf:first :Physical_Property ;
+                      rdf:rest [
+                          a rdf:List ;
+                          rdf:first :Physical_Setting ;
+                          rdf:rest () ;
+                        ] ;
+                    ] ;
+                ] ;
+            ] ;
+        ] ;
+      owl:onProperty :hasPart ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty :hasSpatialProperty ;
+      owl:someValuesFrom :Spatial_Extent ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty :isSettingFor ;
+      owl:someValuesFrom [
+          a owl:Class ;
+          owl:unionOf [
+              a rdf:List ;
+              rdf:first :Perdurant ;
+              rdf:rest [
+                  a rdf:List ;
+                  rdf:first :Physical_Endurant ;
+                  rdf:rest () ;
+                ] ;
+            ] ;
+        ] ;
+    ] ;
+.
+:Physical_Void
+  a owl:Class ;
+  rdfs:comment "A chunk of physical space adjacent to some material feature and surrounded by it. (holes,valleys, canyon, cave, gap, space between fingers). host must be self connected.  An empty physical space in 3D. Distinct from abstract mathematical spaces, which include spaces made from various reference frames, including coordinate systems imposed on the earth (these are abstract imposed on real space). V(x) <--> IPF(x) ^ exists y [hosts-v (y,x)]"@en ;
+  rdfs:label "Physical Void "@en ;
+  rdfs:subClassOf :Place_Feature ;
+.
+:Place_Feature
+  a owl:Class ;
+  rdfs:comment "chunk of physical space (the focal); only hosted by and relative to a material entity, thus not fixed in space (host can move) (downtown, outside my house, personal space)"@en ;
+  rdfs:label "Place Feature "@en ;
+  rdfs:subClassOf :Immaterial_Feature ;
+.
+:Plasma
+  a owl:Class ;
+  rdfs:subClassOf :Fluid ;
+.
+:Process
+  a owl:Class ;
+  rdfs:comment "In Basic Formal Ontology: An occurrent entity that exists in time by occurring or happening, has temporal (proper) parts, and always depends on some material (continuant) entity (Arp et al., 2015, p. 121; Notes in parenthesis () from Mustafa Jarrar https://www.slideshare.net/jarrar02/classifying-processes-and-basic-formal-ontology) Processes are not necessarily homeomeric or cumulative.  \" process is a series of events to produce a result\" (https://wikidiff.com/event/process)  \"A process may also be defined as the workflows and sequence of events inherent in processes such as manufacturing, engineering and business processes.\" (https://en.wikipedia.org/wiki/Process_ontology)"@en ;
+  rdfs:label "Process"@en ;
+  rdfs:subClassOf :Perdurant ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom :Event ;
+      owl:onProperty :manifests ;
+    ] ;
+.
+:Property
+  a owl:Class ;
+  rdfs:comment "A concept that specifies some aspect that inheres in instances of some Particular.  Note that the value of the determiningEvent  property on Property is used to specify metadata about how a property value is assigned"@en ;
+  rdfs:label "Property"@en ;
+  rdfs:subClassOf :Particular ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onClass :Particular ;
+      owl:onProperty :hasPart ;
+      owl:qualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onClass :Particular ;
+      owl:onProperty :isPartOf ;
+      owl:qualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+    ] ;
+.
+:Proportion
+  a owl:Class ;
+  rdfs:comment "A numeric property value used to express the fraction of a whole that is composed of some part. Values will range from 0 to 1 (0 to 100%)."@en ;
+  rdfs:label "Proportion"@en ;
+  rdfs:subClassOf :Physical_Property ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty :proportionFor ;
+      owl:someValuesFrom :Endurant ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty :proportionOf ;
+      owl:someValuesFrom :Endurant ;
+    ] ;
+.
+:Shape
+  a owl:Class ;
+  rdfs:comment ""@en ;
+  rdfs:label "Any Shape"@en ;
+  rdfs:subClassOf :Physical_Region ;
+.
+:Solid
+  a owl:Class ;
+  rdfs:subClassOf :State_Of_Matter ;
+.
+:Spatial_Extent
+  a owl:Class ;
+  rdfs:comment "Class of objects that represent locations within the Earth."@en ;
+  rdfs:comment "renamed from SpatialEntity in previous version"@en ;
+  rdfs:label "Spatial Extent"@en ;
+  rdfs:subClassOf :Spatial_Location ;
+.
+:Spatial_Feature
+  a owl:Class ;
+  rdfs:comment "A feature for which the host is involved in some essential spatial relation,e g. adjacency, containment, intersection, contact."@en ;
+  rdfs:label "Spatial Feature "@en ;
+  rdfs:subClassOf :Physical_Feature ;
+.
+:Spatial_Location
+  a owl:Class ;
+  rdfs:comment "A physical property that is quantified by a category from a classification scheme."@en ;
+  rdfs:label "Spatial Location"@en ;
+  rdfs:subClassOf :Physical_Property ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty :hasValue ;
+      owl:someValuesFrom :Spatial_Region ;
+    ] ;
+.
+:Spatial_Region
+  a owl:Class ;
+  rdfs:comment ""@en ;
+  rdfs:label "Spatial Region"@en ;
+  rdfs:subClassOf :Physical_Region ;
+.
+:State_Of_Matter
+  a owl:Class ;
+  rdfs:label "Any State of Matter"@en ;
+  rdfs:subClassOf :Physical_Region ;
+.
+:Statistical_Calculation
+  a owl:Class ;
+  rdfs:comment "Determination of statistics associated with a measured value, e.g. minimum, maximum, mean, mode, standard deviation."@en ;
+  rdfs:label "Statistical Calculation"@en ;
+  rdfs:subClassOf :Calculation ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty :hasUOM ;
+      owl:someValuesFrom :UOM_Space ;
+    ] ;
+.
+:Temporal_Property
+  a owl:Class ;
+  rdfs:comment "Temporal Property"@en ;
+  rdfs:label "Temporal Property"@en ;
+  rdfs:subClassOf :Property ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom :Temporal_Property ;
+      owl:onProperty :hasProperty ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty :isPropertyOf ;
+      owl:someValuesFrom [
+          a owl:Class ;
+          owl:unionOf [
+              a rdf:List ;
+              rdf:first :Endurant ;
+              rdf:rest [
+                  a rdf:List ;
+                  rdf:first :Perdurant ;
+                  rdf:rest [
+                      a rdf:List ;
+                      rdf:first :Temporal_Property ;
+                      rdf:rest () ;
+                    ] ;
+                ] ;
+            ] ;
+        ] ;
+    ] ;
+.
+:Temporal_Region
+  a owl:Class ;
+  rdfs:comment ""@en ;
+  rdfs:label "Temporal Region"@en ;
+  rdfs:subClassOf :Abstract ;
+.
+:Time_Instant
+  a owl:Class ;
+  rdfs:comment "represents a point location in time."@en ;
+  rdfs:label "Time Instant"@en ;
+  rdfs:subClassOf :Temporal_Region ;
+.
+:Time_Interval
+  a owl:Class ;
+  rdfs:comment ""@en ;
+  rdfs:label "Time Interval"@en ;
+  rdfs:subClassOf :Temporal_Region ;
+.
+:UOM_Space
+  a owl:Class ;
+  rdfs:comment "conceptual space for units of measure."@en ;
+  rdfs:label "Unit of Measurement"@en ;
+  rdfs:subClassOf :Abstract_Region ;
+.
+:age_disjoint
+  a owl:ObjectProperty ;
+  rdfs:comment "the union of Allen Before and After; Age intervals of subject and object do not touch or intersect."@en ;
+  rdfs:label "age disjoint"@en ;
+  rdfs:subPropertyOf :isTemporallyRelatedTo ;
+.
+:age_during
+  a owl:ObjectProperty ;
+  rdfs:comment "interval A is entirely contained in interval B; B starts before A and B ends after A. Allen relation."@en ;
+  rdfs:label "age during"@en ;
+  rdfs:subPropertyOf :age_interval_in ;
+  rdfs:subPropertyOf :age_not_older_than ;
+  owl:inverseOf :age_interval_contains ;
+.
+:age_equivalent_To
+  a owl:ObjectProperty ;
+  rdfs:comment "A is equivalent to B if they represent expressions of the same event. Same as Allen A Equals B."@en ;
+  rdfs:comment "One of six binary relations between geologic events defined by Burns (1975)"@en ;
+  rdfs:label "age equivalent"@en ;
+  rdfs:subPropertyOf :isTemporallyRelatedTo ;
+.
+:age_finished_by
+  a owl:ObjectProperty ;
+  rdfs:comment "source interval begins before target; source and target end simultaneously; inverse of finishes"@en ;
+  rdfs:label "age interval finished by"@en ;
+  rdfs:subPropertyOf :isTemporallyRelatedTo ;
+  owl:inverseOf :age_finishes ;
+.
+:age_finishes
+  a owl:ObjectProperty ;
+  rdfs:comment "Target interval starts before source interval, and source and target interval end at the same instant. Allen Relation"@en ;
+  rdfs:label "age finishes"@en ;
+  rdfs:subPropertyOf :age_interval_in ;
+  rdfs:subPropertyOf :age_not_older_than ;
+.
+:age_incomparable_to
+  a owl:ObjectProperty ;
+  rdfs:comment "A is incomparable to be if there is not enough information to determine an age relationship"@en ;
+  rdfs:comment "One of six binary relations between geolgoic events defined by Burns (1975)"@en ;
+  rdfs:label "age incomparable"@en ;
+  rdfs:subPropertyOf :isTemporallyRelatedTo ;
+.
+:age_interval_contains
+  a owl:ObjectProperty ;
+  rdfs:comment "target interval is completely within the source interval; source begins before target and ends after target. inverse of During"@en ;
+  rdfs:label "age interval contains"@en ;
+  rdfs:subPropertyOf :isTemporallyRelatedTo ;
+.
+:age_interval_in
+  a owl:ObjectProperty ;
+  rdfs:comment "Source interval is contained in target interval; union of during, starts, and finishes. Target interval may start befor or end after source interval"@en ;
+  rdfs:label "age interval in"@en ;
+  rdfs:subPropertyOf :isTemporallyRelatedTo ;
+.
+:age_meets
+  a owl:ObjectProperty ;
+  rdfs:comment "A covers B -- A is immediately younger than B (there are no events between A and B) Same as Allen A meets B."@en ;
+  rdfs:comment "One of six binary relations between geologic events defined by Burns (1975)"@en ;
+  rdfs:label "age meets"@en ;
+  rdfs:subPropertyOf :isTemporallyRelatedTo ;
+  owl:inverseOf :age_met_by ;
+.
+:age_met_by
+  a owl:ObjectProperty ;
+  rdfs:comment "Source interval starts at the end of the target interval; there is no intervening time; inverse of meets"@en ;
+  rdfs:label "age met by"@en ;
+  rdfs:subPropertyOf :isTemporallyRelatedTo ;
+.
+:age_not_older_than
+  a owl:ObjectProperty ;
+  rdfs:comment "Event B is not older than event A; B is either younger than A, B is equivalent to A, or B is incomparable to A. (Burns, 1975; Mathematical Geology, Vol. 7, No. 4)"@en ;
+  rdfs:label "not older than"@en ;
+  rdfs:subPropertyOf :isTemporallyRelatedTo ;
+.
+:age_older_than
+  a owl:ObjectProperty ;
+  rdfs:comment "Age associated with subject is entirely prior to age associated with object"@en ;
+  rdfs:comment "Event A is older than event B if A has occurred prior to B. (Burns, 1975; Mathematical Geology, Vol. 7, No. 4) Equivalent to Allen A Before B."@en ;
+  rdfs:label "older than"@en ;
+  rdfs:subPropertyOf :age_disjoint ;
+  owl:inverseOf :age_younger_than ;
+.
+:age_overlaps
+  a owl:ObjectProperty ;
+  rdfs:comment "target interval starts before source interval ends, and target inteval ends after source interval. Allen Relation"@en ;
+  rdfs:label "age overlaps"@en ;
+  rdfs:subPropertyOf :isTemporallyRelatedTo ;
+.
+:age_started_by
+  a owl:ObjectProperty ;
+  rdfs:comment "source and target start simultaneously; source interval ends after target; ; inverse of starts"@en ;
+  rdfs:label "age interval started by"@en ;
+  rdfs:subPropertyOf :isTemporallyRelatedTo ;
+  owl:inverseOf :age_starts ;
+.
+:age_starts
+  a owl:ObjectProperty ;
+  rdfs:comment "source and target intervals start as same instance, target interval ends after source interval; Allen Relation"@en ;
+  rdfs:label "age starts"@en ;
+  rdfs:subPropertyOf :age_interval_in ;
+.
+:age_younger_than
+  a owl:ObjectProperty ;
+  rdfs:comment "Age associated with subject is entirely after the age associated with object"@en ;
+  rdfs:comment "Event A is younger than event B if A has occurred after  B.  Same as Allen A After B.  (Burns, 1975; Mathematical Geology, Vol. 7, No. 4)"@en ;
+  rdfs:label "younger than"@en ;
+  rdfs:subPropertyOf :age_disjoint ;
+.
+:containedBy
+  a owl:ObjectProperty ;
+  rdfs:comment "Relationship in which subject Physical_Endurant is completly within the object Physical_Endurant"@en ;
+  rdfs:domain :Physical_Endurant ;
+  rdfs:label "contained by"@en ;
+  rdfs:range :Physical_Endurant ;
+  rdfs:subPropertyOf :isPhysicallyRelatedTo ;
+  owl:inverseOf :contains ;
+.
+:contains
+  a owl:ObjectProperty ;
+  rdfs:comment "Relationship in which object Physical_Endurant is completely within the subject Physical_Endurant"@en ;
+  rdfs:domain :Physical_Endurant ;
+  rdfs:label "contains"@en ;
+  rdfs:range :Physical_Endurant ;
+  rdfs:subPropertyOf :isPhysicallyRelatedTo ;
+.
+:determinedBy
+  a owl:ObjectProperty ;
+  rdfs:comment "Link from a particular to an event that defines that particular. Recommented practice is for target to be a class inherioting from Dolce Utralight (dul:) Event (gsop:Event), e.g. sosa:Observation, or prov:Activity"@en ;
+  rdfs:label "determined by "@en ;
+  rdfs:range :Determining_Event ;
+  rdfs:subPropertyOf :isFundamentallyRelatedTo ;
+.
+:hasAbstractProperty
+  a owl:ObjectProperty ;
+  rdfs:subPropertyOf :hasProperty ;
+.
+:hasConstituent
+  a owl:ObjectProperty ;
+  a owl:TransitiveProperty ;
+  rdfs:comment "leave domain and range unconstrained; would need to add more of the high level ontologic entities (Physical Endurant, Perdurant) to specify here."@en ;
+  rdfs:label "hasConstituent"@en ;
+  rdfs:subPropertyOf :isFundamentallyRelatedTo ;
+  owl:inverseOf :isConstituentOf ;
+.
+:hasHistory
+  a owl:ObjectProperty ;
+  rdfs:comment "relates an Endurant to a sequence of 1 to many events."@en ;
+  rdfs:label "has History"@en ;
+  rdfs:subPropertyOf :isTemporallyRelatedTo ;
+.
+:hasInput
+  a owl:ObjectProperty ;
+  rdfs:comment "A participant in a process that must be present before the process can operate "@en ;
+  rdfs:label "Input "@en ;
+  rdfs:subPropertyOf :hasParticipant ;
+  owl:inverseOf :isInputFor ;
+.
+:hasNumericValue
+  a owl:DatatypeProperty ;
+  rdfs:comment ""@en ;
+  rdfs:label "hasNumericValue"@en ;
+.
+:hasOutput
+  a owl:ObjectProperty ;
+  rdfs:comment "A participant in a process that is produced by the action of the process and is present when the process is complete "@en ;
+  rdfs:label "Output "@en ;
+  rdfs:subPropertyOf :hasParticipant ;
+  owl:inverseOf :isOutputOf ;
+.
+:hasPart
+  a owl:ObjectProperty ;
+  a owl:TransitiveProperty ;
+  rdfs:subPropertyOf :isFundamentallyRelatedTo ;
+  owl:inverseOf :isPartOf ;
+.
+:hasParticipant
+  a owl:ObjectProperty ;
+  rdfs:subPropertyOf :isFundamentallyRelatedTo ;
+  owl:inverseOf :isParticipantIn ;
+.
+:hasPhysicalProperty
+  a owl:ObjectProperty ;
+  rdfs:comment ""@en ;
+  rdfs:label "has Physical Property"@en ;
+  rdfs:subPropertyOf :hasProperty ;
+  owl:inverseOf :isPhysicalPropertyOf ;
+.
+:hasProperty
+  a owl:ObjectProperty ;
+  rdfs:comment ""@en ;
+  rdfs:label "has Property "@en ;
+  owl:inverseOf :isPropertyOf ;
+.
+:hasReference
+  a owl:ObjectProperty ;
+  rdfs:subPropertyOf :isFundamentallyRelatedTo ;
+  owl:inverseOf :isReferenceFor ;
+.
+:hasSetting
+  a owl:ObjectProperty ;
+  rdfs:comment ""@en ;
+  rdfs:label "has Setting"@en ;
+  rdfs:range :Physical_Setting ;
+  rdfs:subPropertyOf :isFundamentallyRelatedTo ;
+.
+:hasSpatialProperty
+  a owl:InverseFunctionalProperty ;
+  a owl:ObjectProperty ;
+  rdfs:comment ""@en ;
+  rdfs:comment "Geographic disposition of an endurant."@en ;
+  rdfs:label "has Spatial Property"@en ;
+  rdfs:range :Spatial_Location ;
+  rdfs:subPropertyOf :hasPhysicalProperty ;
+  owl:inverseOf :isSpatialPropertyOf ;
+.
+:hasTemporalProperty
+  a owl:ObjectProperty ;
+  rdfs:comment ""@en ;
+  rdfs:label "has Temporal Property"@en ;
+  rdfs:subPropertyOf :hasProperty ;
+  owl:inverseOf :isTemporalPropertyOf ;
+.
+:hasTextValue
+  a owl:DatatypeProperty ;
+  rdfs:comment "data type property for free text values" ;
+  rdfs:label "text value" ;
+  rdfs:range xsd:string ;
+.
+:hasUOM
+  a owl:ObjectProperty ;
+  rdfs:comment "top level property for assigning property values; subtype for associating values with measurement units "@en ;
+  rdfs:label "has unit of measure "@en ;
+  rdfs:subPropertyOf :hasAbstractProperty ;
+.
+:hasUncertainty
+  a owl:DatatypeProperty ;
+  rdfs:comment "numeric assertion of the one-side confidence interval for a measured value. The statistic used to assert this uncertainty interval should be explained in the metadata for instances using this property."@en ;
+  rdfs:subPropertyOf :hasNumericValue ;
+.
+:hasValue
+  a owl:ObjectProperty ;
+  rdfs:comment "top level property for assigning property values; subtype for particular kinds of values (integer, category, number boolean...) "@en ;
+  rdfs:domain :Property ;
+  rdfs:label "hasValue "@en ;
+  rdfs:subPropertyOf :hasAbstractProperty ;
+.
+:hostedBy
+  a owl:ObjectProperty ;
+  rdfs:subPropertyOf :isFundamentallyRelatedTo ;
+.
+:hosts
+  a owl:ObjectProperty ;
+  rdfs:comment ""@en ;
+  rdfs:label "hosts"@en ;
+  rdfs:subPropertyOf :isFundamentallyRelatedTo ;
+.
+:isColocatedWith
+  a owl:ObjectProperty ;
+  rdfs:comment "links material spatial feature to Endurant or Perdurant or Physical Property that shares the same location"@en ;
+  rdfs:domain :Physical_Feature ;
+  rdfs:label "is colocated with"@en ;
+  rdfs:range [
+      a owl:Class ;
+      owl:unionOf [
+          a rdf:List ;
+          rdf:first :Endurant ;
+          rdf:rest [
+              a rdf:List ;
+              rdf:first :Perdurant ;
+              rdf:rest [
+                  a rdf:List ;
+                  rdf:first :Physical_Property ;
+                  rdf:rest () ;
+                ] ;
+            ] ;
+        ] ;
+    ] ;
+  rdfs:subPropertyOf :isSpatiallyRelatedTo ;
+.
+:isConstituentOf
+  a owl:ObjectProperty ;
+  a owl:TransitiveProperty ;
+  rdfs:range :Amount_Of_Matter ;
+  rdfs:subPropertyOf :isFundamentallyRelatedTo ;
+.
+:isFundamentallyRelatedTo
+  a owl:ObjectProperty ;
+  rdfs:comment "relationships between Endurant, Perdurants, or Physical_Settings"@en ;
+  rdfs:domain [
+      a owl:Class ;
+      owl:unionOf [
+          a rdf:List ;
+          rdf:first :Abstract ;
+          rdf:rest [
+              a rdf:List ;
+              rdf:first :Endurant ;
+              rdf:rest [
+                  a rdf:List ;
+                  rdf:first :Perdurant ;
+                  rdf:rest [
+                      a rdf:List ;
+                      rdf:first :Physical_Setting ;
+                      rdf:rest () ;
+                    ] ;
+                ] ;
+            ] ;
+        ] ;
+    ] ;
+  rdfs:label "fundamentally related"@en ;
+  rdfs:range [
+      a owl:Class ;
+      owl:unionOf [
+          a rdf:List ;
+          rdf:first :Abstract ;
+          rdf:rest [
+              a rdf:List ;
+              rdf:first :Endurant ;
+              rdf:rest [
+                  a rdf:List ;
+                  rdf:first :Perdurant ;
+                  rdf:rest [
+                      a rdf:List ;
+                      rdf:first :Physical_Setting ;
+                      rdf:rest () ;
+                    ] ;
+                ] ;
+            ] ;
+        ] ;
+    ] ;
+  rdfs:subPropertyOf :isRelatedto ;
+.
+:isInputFor
+  a owl:ObjectProperty ;
+  rdfs:comment "relation from Endurant to Perdurant event or process for which the endurant is a precursor"@en ;
+  rdfs:label "is input for"@en ;
+  rdfs:subPropertyOf :isParticipantIn ;
+.
+:isManifestationOf
+  a owl:ObjectProperty ;
+  rdfs:comment ""@en ;
+  rdfs:label "is Manifestation Of"@en ;
+  rdfs:subPropertyOf :isFundamentallyRelatedTo ;
+.
+:isOutputOf
+  a owl:ObjectProperty ;
+  rdfs:comment "relation from Endurant to Perdurant event or process for which the endurant is a result"@en ;
+  rdfs:label "is output of"@en ;
+  rdfs:subPropertyOf :isParticipantIn ;
+.
+:isPartOf
+  a owl:ObjectProperty ;
+  a owl:TransitiveProperty ;
+  rdfs:subPropertyOf :isFundamentallyRelatedTo ;
+.
+:isParticipantIn
+  a owl:ObjectProperty ;
+  rdfs:domain :Endurant ;
+  rdfs:range :Perdurant ;
+  rdfs:subPropertyOf :isFundamentallyRelatedTo ;
+.
+:isPhysicalPropertyOf
+  a owl:ObjectProperty ;
+  rdfs:comment "link from physical property to a class that exhibits the property"@en ;
+  rdfs:domain :Physical_Property ;
+  rdfs:label "is physical property of "@en ;
+  rdfs:subPropertyOf :isPropertyOf ;
+.
+:isPhysicallyRelatedTo
+  a owl:ObjectProperty ;
+  rdfs:comment ""@en ;
+  rdfs:label "is Physically Related To"@en ;
+  rdfs:subPropertyOf :isRelatedto ;
+.
+:isPropertyOf
+  a owl:ObjectProperty ;
+  rdfs:comment "OWL ObjectProperty that binds a Property to some other Particular in which that property inheres."@en ;
+  rdfs:domain :Property ;
+  rdfs:label "is Property Of"@en ;
+  rdfs:range :Particular ;
+.
+:isRealizedBy
+  a owl:ObjectProperty ;
+  rdfs:subPropertyOf :isFundamentallyRelatedTo ;
+  owl:inverseOf :realizes ;
+.
+:isReferenceFor
+  a owl:ObjectProperty ;
+  rdfs:subPropertyOf :isFundamentallyRelatedTo ;
+.
+:isRelatedto
+  a owl:ObjectProperty ;
+  rdfs:comment "high level category for associations/relationships between particulars other than property bindings"@en ;
+  rdfs:label "related to"@en ;
+.
+:isSettingFor
+  a owl:ObjectProperty ;
+  rdfs:comment ""@en ;
+  rdfs:label "is Setting For"@en ;
+  rdfs:subPropertyOf :isFundamentallyRelatedTo ;
+.
+:isSpatialPropertyOf
+  a owl:ObjectProperty ;
+  rdfs:comment "link from spatial property to a class that exhibits the property"@en ;
+  rdfs:domain :Spatial_Location ;
+  rdfs:label "is spatial property of "@en ;
+  rdfs:subPropertyOf :isPhysicalPropertyOf ;
+.
+:isSpatiallyRelatedTo
+  a owl:ObjectProperty ;
+  rdfs:domain [
+      a owl:Class ;
+      owl:unionOf [
+          a rdf:List ;
+          rdf:first :Physical_Endurant ;
+          rdf:rest [
+              a rdf:List ;
+              rdf:first :Spatial_Region ;
+              rdf:rest () ;
+            ] ;
+        ] ;
+    ] ;
+  rdfs:label "Spatially related to "@en ;
+  rdfs:range [
+      a owl:Class ;
+      owl:unionOf [
+          a rdf:List ;
+          rdf:first :Physical_Endurant ;
+          rdf:rest [
+              a rdf:List ;
+              rdf:first :Spatial_Region ;
+              rdf:rest () ;
+            ] ;
+        ] ;
+    ] ;
+  rdfs:subPropertyOf :isRelatedto ;
+.
+:isTemporalPropertyOf
+  a owl:ObjectProperty ;
+  rdfs:comment "link from a temporal property to a class that exhibits the property"@en ;
+  rdfs:domain :Temporal_Property ;
+  rdfs:label "is temporal property of"@en ;
+  rdfs:subPropertyOf :isPropertyOf ;
+.
+:isTemporallyRelatedTo
+  a owl:ObjectProperty ;
+  rdfs:comment "Temporal relationships are relationships either directly between Temporal_Regions, or between the Endurants or Perdurants based on the temporal region with which they are associated (either explicitly or implicitly)"@en ;
+  rdfs:domain [
+      a owl:Class ;
+      owl:unionOf [
+          a rdf:List ;
+          rdf:first :Endurant ;
+          rdf:rest [
+              a rdf:List ;
+              rdf:first :Perdurant ;
+              rdf:rest [
+                  a rdf:List ;
+                  rdf:first :Temporal_Region ;
+                  rdf:rest () ;
+                ] ;
+            ] ;
+        ] ;
+    ] ;
+  rdfs:label "is Temporally Related To"@en ;
+  rdfs:range [
+      a owl:Class ;
+      owl:unionOf [
+          a rdf:List ;
+          rdf:first :Endurant ;
+          rdf:rest [
+              a rdf:List ;
+              rdf:first :Perdurant ;
+              rdf:rest [
+                  a rdf:List ;
+                  rdf:first :Temporal_Region ;
+                  rdf:rest () ;
+                ] ;
+            ] ;
+        ] ;
+    ] ;
+  rdfs:subPropertyOf :isRelatedto ;
+.
+:manifests
+  a owl:ObjectProperty ;
+  rdfs:comment ""@en ;
+  rdfs:label "Manifests"@en ;
+  rdfs:subPropertyOf :isFundamentallyRelatedTo ;
+.
+:ontology
+  a owl:Ontology ;
+  rdfs:comment "Unary predicates are represented by classes, binary predicates by object properties"@en ;
+  rdfs:comment "ontology of shared objectProperties and high level classes used to define geologic features"@en ;
+  rdfs:label "Shared elements for geoscience ontology"@en ;
+.
+:proportionFor
+  a owl:ObjectProperty ;
+  rdfs:comment ""@en ;
+  rdfs:label "proportion for"@en ;
+  rdfs:subPropertyOf :hasPhysicalProperty ;
+.
+:proportionOf
+  a owl:ObjectProperty ;
+  rdfs:comment ""@en ;
+  rdfs:label "proportion of"@en ;
+  rdfs:subPropertyOf :hasPhysicalProperty ;
+.
+:realizes
+  a owl:ObjectProperty ;
+  rdfs:comment ""@en ;
+  rdfs:label "realizes"@en ;
+  rdfs:subPropertyOf :isFundamentallyRelatedTo ;
+.
