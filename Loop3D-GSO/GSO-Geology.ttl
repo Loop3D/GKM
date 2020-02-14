@@ -1,6 +1,7 @@
 # baseURI: http://loop3d.org/GSO/ontology/2020/1/geologicfeature/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/common/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/geologicproperty/ontology
+# imports: http://purl.org/dc/terms/
 
 @prefix : <http://loop3d.org/GSO/ontology/2020/1/geologicfeature/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
@@ -14,99 +15,26 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-
-
-gsog:crosscuts
-  a owl:ObjectProperty ;
-  rdfs:comment "relationship in with the subject Rock_Body or Physical_Feature exhibits field relations demonstrating that it is younger that the object Rock_Body or Physical_Feature"@en ;
-  rdfs:domain [
-      a owl:Class ;
-      owl:unionOf (
-          gsog:Rock_Body
-          gsoc:Physical_Feature
-        ) ;
+gsoc:Glass
+  a owl:Class ;
+  rdfs:comment "Amorphous product of rapid cooling of melted earth material. Generally product of igneous activity, frictional melting or bolide impact."@en ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom [
+          a owl:Class ;
+          owl:unionOf [
+              a rdf:List ;
+              rdf:first gsog:Granular_Material ;
+              rdf:rest [
+                  a rdf:List ;
+                  rdf:first gsog:Rock_Material ;
+                  rdf:rest () ;
+                ] ;
+            ] ;
+        ] ;
+      owl:onProperty gsoc:isConstituentOf ;
     ] ;
-  rdfs:label "cross-cuts or truncates"@en ;
-  rdfs:range [
-      a owl:Class ;
-      owl:unionOf (
-          gsog:Rock_Body
-          gsoc:Physical_Feature
-        ) ;
-    ] ;
-  rdfs:subPropertyOf gsog:isGeologicallyRelatedTo ;
 .
-gsog:hasProtolith
-  a owl:ObjectProperty ;
-  rdfs:comment "link from a subject rock_material to an object rock_material from which it was derived as the product of metamorphism, metasomatism, or alteration."@en ;
-  rdfs:domain gsog:Rock_Material ;
-  rdfs:label "has protolith"@en ;
-  rdfs:range gsog:Rock_Material ;
-  rdfs:subPropertyOf gsog:isGeologicallyRelatedTo ;
-.
-gsog:isProtolithOf
-  a owl:ObjectProperty ;
-  rdfs:comment "link from a subject rock_material to an object rock_material that is the product of metamorphism, metasomatism, or alteration of the subject rock."@en ;
-  rdfs:domain gsog:Rock_Material ;
-  rdfs:label "protolith of"@en ;
-  rdfs:range gsog:Rock_Material ;
-  rdfs:subPropertyOf gsog:isGeologicallyRelatedTo ;
-.
-gsog:iscrosscutby
-  a owl:ObjectProperty ;
-  rdfs:comment "relationship in with the object Rock_Body or Physical_Feature exhibits field relations demonstrating that it is younger that the subject Rock_Body or Physical_Feature"@en ;
-  rdfs:label "is cross-cut or truncated by"@en ;
-  rdfs:subPropertyOf gsog:isGeologicallyRelatedTo ;
-  owl:inverseOf gsog:crosscuts ;
-.
-gsog:litparlitintrudes
-  a owl:ObjectProperty ;
-  rdfs:comment "Intruded rock is penetrated by numerous sheets of intruded igneous rock, usually granitic."@en ;
-  rdfs:label "lit-par-lit intrudes"@en ;
-  rdfs:subPropertyOf gsog:intrudes ;
-.
-gsog:overprintedby
-  a owl:ObjectProperty ;
-  rdfs:comment "relationship in which a subject  Rock_Body or Physical_Feature is interpreted to have a subject fabric (foliation or lineation) imposed on it"@en ;
-  rdfs:domain [
-      a owl:Class ;
-      owl:unionOf (
-          gsog:Rock_Body
-          gsoc:Physical_Feature
-        ) ;
-    ] ;
-  rdfs:label "overprinted by"@en ;
-  rdfs:range [
-      a owl:Class ;
-      owl:unionOf (
-          gsog:Foliation
-          gsog:Lineation
-        ) ;
-    ] ;
-  rdfs:subPropertyOf gsog:isGeologicallyRelatedTo ;
-  owl:inverseOf gsog:overprints ;
-.
-gsog:overprints
-  a owl:ObjectProperty ;
-  rdfs:comment "relationship in which a subject fabric (foliation or lineation) is interpreted to have formed after the object Rock_Body or Physical_Feature"@en ;
-  rdfs:domain [
-      a owl:Class ;
-      owl:unionOf (
-          gsog:Foliation
-          gsog:Lineation
-        ) ;
-    ] ;
-  rdfs:label "overprints"@en ;
-  rdfs:range [
-      a owl:Class ;
-      owl:unionOf (
-          gsog:Rock_Body
-          gsoc:Physical_Feature
-        ) ;
-    ] ;
-  rdfs:subPropertyOf gsog:isGeologicallyRelatedTo ;
-.
-
 gsog:Additive_Process
   a owl:Class ;
   rdfs:comment "process that introduces new matter into the model space"@en ;
@@ -163,9 +91,9 @@ gsog:Chronostratigraphic_Age_Interval
 .
 gsog:Chronostratigraphic_Unit
   a owl:Class ;
+  dcterms:source "Salvador, A., 1994, International Stratigraphic Guide, Second Edition"@en ;
   rdfs:comment "A body of rocks that includes all rocks, layered or unlayered, formed during a specific interval of geologic time, and only those rocks formed during that time span. Chronostratigraphic units are bounded by synchronous horizons. The rank and relative magnitude of the units in the chronostratigraphic hierarchy are a function of the length of the time interval that their rocks subtend, rather than of their physical thickness. (http://www.stratigraphy.org/upload/bak/chron.htm)"@en ;
   rdfs:label "Chronostratigraphic unit"@en ;
-  dcterms:source "Salvador, A., 1994, International Stratigraphic Guide, Second Edition"@en ;
   rdfs:subClassOf gsog:Geologic_Unit ;
   rdfs:subClassOf [
       a owl:Restriction ;
@@ -201,7 +129,7 @@ gsog:Clast
 .
 gsog:Clastic_Granular_Material
   a owl:Class ;
-  rdfs:comment """Use for clastic sedimentary components --conglomerate clast types, sand components, clay matrix. Also for deformation-producted clasts in tectonic breccia."""@en ;
+  rdfs:comment "Use for clastic sedimentary components --conglomerate clast types, sand components, clay matrix. Also for deformation-producted clasts in tectonic breccia."@en ;
   rdfs:subClassOf gsog:Granular_Material ;
 .
 gsog:Complex
@@ -219,11 +147,6 @@ Contact(x) <--> exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RB
   rdfs:subClassOf gsog:Geologic_Structure ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:cardinality "0"^^xsd:nonNegativeInteger ;
-      owl:onProperty gsog:hasDisplacement ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
       owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
       owl:onClass gsog:Geochronologic_Boundary ;
       owl:onProperty gsoc:realizes ;
@@ -239,6 +162,12 @@ Contact(x) <--> exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RB
       owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
       owl:onClass gsog:Rock_Body ;
       owl:onProperty gsoc:hostedBy ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onClass gsop:Displacement ;
+      owl:onProperty gsoc:hasPhysicalProperty ;
+      owl:qualifiedCardinality "0"^^xsd:nonNegativeInteger ;
     ] ;
 .
 gsog:Crystallized_Granular_Material
@@ -262,13 +191,13 @@ gsog:Ductile_Shear_Zone
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty gsog:hasBoundaryThickness ;
-      owl:someValuesFrom gsop:Thickness ;
+      owl:onProperty gsog:hasPhysicalProperty ;
+      owl:someValuesFrom gsop:Displacement ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty gsog:hasDisplacement ;
-      owl:someValuesFrom gsop:Displacement ;
+      owl:onProperty gsog:hasThickness ;
+      owl:someValuesFrom gsop:Thickness ;
     ] ;
 .
 gsog:Eon
@@ -366,9 +295,9 @@ gsog:Fault
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
+      owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
       owl:onClass gsop:Displacement ;
-      owl:onProperty gsog:hasDisplacement ;
-      owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty gsoc:hasPhysicalProperty ;
     ] ;
 .
 gsog:Fault_Zone
@@ -414,8 +343,8 @@ gsog:Fracture
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-      owl:onClass gsoc:Physical_Property ;
-      owl:onProperty gsog:hasDisplacement ;
+      owl:onClass gsop:Displacement ;
+      owl:onProperty gsoc:hasPhysicalProperty ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
@@ -436,12 +365,12 @@ gsog:GSSP
   rdfs:subClassOf gsog:Stratigraphic_Point ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty gsoc:containedBy ;
+      owl:onProperty gsoc:hasReference ;
       owl:someValuesFrom gsog:Stratotype ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty gsoc:hasReference ;
+      owl:onProperty gsoc:physicallyContainedBy ;
       owl:someValuesFrom gsog:Stratotype ;
     ] ;
 .
@@ -647,26 +576,6 @@ gsog:Geologic_Unit
       owl:onProperty gsoc:hasReference ;
     ] ;
 .
-gsoc:Glass
-  a owl:Class ;
-  rdfs:comment "Amorphous product of rapid coolimh of melted earth material. Generally product of igneous activity, frictional melting or bolide impact."@en ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom [
-          a owl:Class ;
-          owl:unionOf [
-              a rdf:List ;
-              rdf:first gsog:Granular_Material ;
-              rdf:rest [
-                  a rdf:List ;
-                  rdf:first gsog:Rock_Material ;
-                  rdf:rest () ;
-                ] ;
-            ] ;
-        ] ;
-      owl:onProperty gsoc:isConstituentOf ;
-    ] ;
-.
 gsog:Gradational_Contact_Zone
   a owl:Class ;
   rdfs:label "Gradational Contact Zone"@en ;
@@ -678,15 +587,15 @@ gsog:Gradational_Contact_Zone
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty gsog:hasBoundaryThickness ;
+      owl:onProperty gsog:hasThickness ;
       owl:someValuesFrom gsop:Thickness ;
     ] ;
 .
 gsog:Granular_Material
   a owl:Class ;
-  rdfs:comment "Represents a rock body constituent composed of particles that share a set of characteristics, e.g. particle size (distribution), mineralogy, shape.  E.g. the sand that is a constituent in a sandstone, or the feldspar phenocrysts that are a constituent in a granite. Note-- this class also includes various types of cavities or voids that are useful to characterize as a constituent in a Rock_material."@en ;
+  rdfs:comment "Represents a rock body constituent composed of particles that share a set of characteristics, e.g. particle size (distribution), mineralogy, shape.  E.g. the sand that is a constituent in a sandstone, or the feldspar phenocrysts that are a constituent in a granite."@en ;
   rdfs:comment "example top level subclasses are included in the Base Geology ontology (these are not complete), differentiated based on genesis for the most part. Detailed subclasses are defined by CGI particle type vocabulary and are imported in the Rock_Material module."@en ;
-  rdfs:label "Granular,  Particulate or Void constituents"@en ;
+  rdfs:label "Granular or Particulate constituents"@en ;
   rdfs:subClassOf gsoc:Amount_Of_Matter ;
   rdfs:subClassOf [
       a owl:Restriction ;
@@ -731,7 +640,7 @@ gsog:Joint
       a owl:Restriction ;
       owl:maxQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
       owl:onClass gsop:Displacement ;
-      owl:onProperty gsog:hasDisplacement ;
+      owl:onProperty gsog:hasPhysicalProperty ;
     ] ;
 .
 gsog:Lineation
@@ -750,9 +659,9 @@ gsog:Lithosome
 .
 gsog:Lithostratigraphic_Unit
   a owl:Class ;
-  rdfs:label "Lithostratigraphic Unit"@en ;
   dcterms:source "Salvador, A., 1994, International Stratigraphic Guide, Second Edition"@en ;
   rdfs:comment "Geologic unit defined on the basis of observable and distinctive lithologic properties or combination of lithologic properties and stratigraphic relationships. Denotes a particular body of rock."@en ;
+  rdfs:label "Lithostratigraphic Unit"@en ;
   rdfs:label "lithostratigraphic unit"@en ;
   rdfs:subClassOf gsog:Geologic_Unit ;
   rdfs:subClassOf [
@@ -782,8 +691,6 @@ gsog:Lithostratigraphic_Unit
       owl:someValuesFrom gsog:Rock_Material ;
     ] ;
 .
-
-
 gsog:Member
   a owl:Class ;
   rdfs:subClassOf gsog:Lithostratigraphic_Unit ;
@@ -820,7 +727,17 @@ gsog:Outcrop
   rdfs:label "Rock Material Outcrop"@en ;
   rdfs:subClassOf gsog:Rock_Body_Part ;
 .
-
+gsog:Overgrowth
+  a owl:Class ;
+  rdfs:comment "A rock body part that encloses some other constituent in the rock body" ;
+  rdfs:label "Overgrowth" ;
+  rdfs:subClassOf gsog:Rock_Body_Part ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:covers ;
+      owl:someValuesFrom gsog:Granular_Material ;
+    ] ;
+.
 gsog:Pendant
   a owl:Class ;
   rdfs:comment "a mass of country rock that is entirely surrounded by an igneous intrusion such as a batholith or other pluton. "@en ;
@@ -842,10 +759,6 @@ gsog:Period
       owl:onProperty gsoc:isPartOf ;
       owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
     ] ;
-.
-gsog:Porespace
-  a owl:Class ;
-  rdfs:subClassOf gsog:Rock_Body_Void ;
 .
 gsog:Pyroclastic_Granular_Material
   a owl:Class ;
@@ -896,7 +809,7 @@ gsog:Rock_Body_Boundary
   a owl:Class ;
   rdfs:comment """a physical boundary hosted by a rock body.
 RBD (x) <--> SF (x) ^ exists y [RB (y) ^ hosts (y,x)] 
-The exterior-facing material of a rock body."""@en ;
+The exterior-facing material of a rock body.  A rock body boundary can have a thickness physical property"""@en ;
   rdfs:label "Rock Body Boundary"@en ;
   rdfs:subClassOf gsoc:Physical_Boundary ;
   rdfs:subClassOf gsog:Rock_Body_Part ;
@@ -1151,40 +1064,35 @@ gsog:cometary_impact
   rdfs:label "cometary impact"@en ;
   rdfs:subClassOf gsog:bolide_impact ;
 .
+gsog:crosscuts
+  a owl:ObjectProperty ;
+  rdfs:comment "relationship in with the subject Rock_Body or Physical_Feature exhibits field relations demonstrating that it is younger that the object Rock_Body or Physical_Feature and there is a spatial intersection"@en ;
+  rdfs:domain [
+      a owl:Class ;
+      owl:unionOf (
+          gsog:Rock_Body
+          gsoc:Physical_Feature
+        ) ;
+    ] ;
+  rdfs:label "cross-cuts or truncates"@en ;
+  rdfs:range [
+      a owl:Class ;
+      owl:unionOf (
+          gsog:Rock_Body
+          gsoc:Physical_Feature
+        ) ;
+    ] ;
+  rdfs:subPropertyOf gsog:isGeologicallyRelatedTo ;
+.
 gsog:hasAgeDate
   rdfs:comment "property to assigne a Geologic_Time_Date to a Perdurant."@en ;
-  rdfs:range gsoc:Time_Instant ;
   rdfs:label "has age date"@en ;
-.
-gsog:hasBoundaryThickness
-  a owl:ObjectProperty ;
-  rdfs:comment "thickness (length) of boundary zone at a gradational contact "@en ;
-  rdfs:domain gsog:Gradational_Contact_Zone ;
-  rdfs:label "has boundary thickness "@en ;
-  rdfs:range gsop:Thickness ;
-  rdfs:subPropertyOf gsog:isGeologicallyRelatedTo ;
+  rdfs:range gsoc:Time_Instant ;
 .
 gsog:hasDate
   a owl:DatatypeProperty ;
   rdfs:comment "numeric value for a time coordinate. Associated hasUOM property asserts the units of measure; the temporal reference system used to assert dates should be explained in metadata for the data instances."@en ;
   rdfs:subPropertyOf gsoc:hasNumericValue ;
-.
-gsog:hasDisplacement
-  a owl:ObjectProperty ;
-  rdfs:domain [
-      a owl:Class ;
-      owl:unionOf [
-          a rdf:List ;
-          rdf:first gsog:Ductile_Shear_Zone ;
-          rdf:rest [
-              a rdf:List ;
-              rdf:first gsog:Fault ;
-              rdf:rest () ;
-            ] ;
-        ] ;
-    ] ;
-  rdfs:range gsop:Displacement ;
-  rdfs:subPropertyOf gsoc:hasPhysicalProperty ;
 .
 gsog:hasMaterialConstituent
   a owl:ObjectProperty ;
@@ -1193,7 +1101,7 @@ gsog:hasMaterialConstituent
 .
 gsog:hasOlderAge
   a owl:ObjectProperty ;
-    rdfs:range gsoc:Time_Interval ;
+  rdfs:range gsoc:Time_Interval ;
   rdfs:subPropertyOf gsoc:hasTemporalProperty ;
 .
 gsog:hasOlderBound
@@ -1206,18 +1114,18 @@ gsog:hasOlderHost
   a owl:ObjectProperty ;
   rdfs:subPropertyOf gsoc:hostedBy ;
 .
-gsog:hasOrientation
+gsog:hasThickness
   a owl:ObjectProperty ;
-  rdfs:comment "property linking a geologic class with an Orientation property"@en ;
-  rdfs:domain gsog:Geologic_Structure ;
-  rdfs:label "definingElement"@en ;
+  rdfs:comment "thickness (length) of a tabular or sheet like body or feature."@en ;
+  rdfs:label "has thickness"@en ;
+  rdfs:range gsop:Thickness ;
   rdfs:subPropertyOf gsoc:hasPhysicalProperty ;
 .
 gsog:hasYoungerAge
   a owl:ObjectProperty ;
-    rdfs:comment "assign a younger age boundary for a time interval as a time interval, e.g. Jurassic thru Cretaceous, younger age is Cretaceous."@en ;
+  rdfs:comment "assign a younger age boundary for a time interval as a time interval, e.g. Jurassic thru Cretaceous, younger age is Cretaceous."@en ;
   rdfs:label "younger bounding time interval"@en ;
-    rdfs:range gsoc:Time_Interval ;
+  rdfs:range gsoc:Time_Interval ;
   rdfs:subPropertyOf gsoc:hasTemporalProperty ;
 .
 gsog:hasYoungerBound
@@ -1229,7 +1137,7 @@ gsog:hasYoungerBound
 .
 gsog:hasYoungerHost
   a owl:ObjectProperty ;
-    rdfs:comment "for a feature that is hosted by multiple entities, e.g. a contact, specify the younger hosting entity."@en ;
+  rdfs:comment "for a feature that is hosted by multiple entities, e.g. a contact, specify the younger hosting entity."@en ;
   rdfs:label "younger host"@en ;
   rdfs:subPropertyOf gsoc:hostedBy ;
 .
@@ -1242,7 +1150,7 @@ gsog:intrudes
 gsog:isGeologicallyRelatedTo
   a owl:ObjectProperty ;
   rdfs:label "geologically related to"@en ;
-  rdfs:subPropertyOf gsoc:isPhysicallyRelatedTo ;
+  rdfs:subPropertyOf gsoc:isRelatedto ;
 .
 gsog:isPartOfTimeScale
   a owl:ObjectProperty ;
@@ -1251,7 +1159,35 @@ gsog:isPartOfTimeScale
   rdfs:range gsog:Geologic_Time_Scale ;
   rdfs:subPropertyOf gsoc:isPartOf ;
 .
-
+gsog:isTransformedFrom
+  a owl:ObjectProperty ;
+  rdfs:comment "link from a subject rock_material to an object rock_material from which it was derived as the product of metamorphism, metasomatism, or alteration. Identifies protolith of composite genesis material."@en ;
+  rdfs:domain gsog:Rock_Material ;
+  rdfs:label "has protolith"@en ;
+  rdfs:range gsog:Rock_Material ;
+  rdfs:subPropertyOf gsog:isGeologicallyRelatedTo ;
+.
+gsog:isTransformedInto
+  a owl:ObjectProperty ;
+  rdfs:comment "link from a subject rock_material to an object rock_material that is the product of metamorphism, metasomatism, or alteration of the subject rock."@en ;
+  rdfs:domain gsog:Rock_Material ;
+  rdfs:label "protolith of"@en ;
+  rdfs:range gsog:Rock_Material ;
+  rdfs:subPropertyOf gsog:isGeologicallyRelatedTo ;
+.
+gsog:iscrosscutby
+  a owl:ObjectProperty ;
+  rdfs:comment "relationship in with the object Rock_Body or Physical_Feature exhibits field relations demonstrating that it is younger that the subject Rock_Body or Physical_Feature"@en ;
+  rdfs:label "is cross-cut or truncated by"@en ;
+  rdfs:subPropertyOf gsog:isGeologicallyRelatedTo ;
+  owl:inverseOf gsog:crosscuts ;
+.
+gsog:litparlitintrudes
+  a owl:ObjectProperty ;
+  rdfs:comment "Intruded rock is penetrated by numerous sheets of intruded igneous rock, usually granitic. {@en}  lit par lit -- type of contact?" ;
+  rdfs:label "lit-par-lit intrudes"@en ;
+  rdfs:subPropertyOf gsog:intrudes ;
+.
 gsog:magnetic_field_reversal
   a owl:Class ;
   dcterms:source "this vocabulary"@en ;
@@ -1271,34 +1207,65 @@ gsog:ontology
   rdfs:comment "Base geologic feature classes, constraints, and relationships"@en ;
   owl:imports gsoc:ontology ;
   owl:imports gsop:ontology ;
-  owl:imports dcterms:
+  owl:imports dcterms: ;
 .
 gsog:overlies
   a owl:ObjectProperty ;
-  rdfs:comment "Relationship between rock bodies in which subject body is above and in contact with the object body in geographic refernce system (the object might or might not be younger than the subject). Generally applied to stratified rock bodies"@en ;
+  rdfs:comment "Relationship between rock bodies in which subject body is above and in contact with the object body in geographic reference system (the object might or might not be younger than the subject). Generally applied to stratified rock bodies {@en}  subclass from meets" ;
   rdfs:domain gsog:Rock_Body ;
   rdfs:label "overlies "@en ;
   rdfs:range gsog:Rock_Body ;
+  rdfs:subPropertyOf gsoc:isSpatiallyRelatedTo ;
+.
+gsog:overprintedby
+  a owl:ObjectProperty ;
+  rdfs:comment "relationship in which a subject  Rock_Body or Physical_Feature is interpreted to have a subject fabric (foliation or lineation) imposed on it"@en ;
+  rdfs:domain [
+      a owl:Class ;
+      owl:unionOf (
+          gsog:Rock_Body
+          gsoc:Physical_Feature
+        ) ;
+    ] ;
+  rdfs:label "overprinted by"@en ;
+  rdfs:range [
+      a owl:Class ;
+      owl:unionOf (
+          gsog:Foliation
+          gsog:Lineation
+        ) ;
+    ] ;
+  rdfs:subPropertyOf gsog:isGeologicallyRelatedTo ;
+  owl:inverseOf gsog:overprints ;
+.
+gsog:overprints
+  a owl:ObjectProperty ;
+  rdfs:comment "relationship in which a subject fabric (foliation or lineation) is interpreted to have formed after the object Rock_Body or Physical_Feature"@en ;
+  rdfs:domain [
+      a owl:Class ;
+      owl:unionOf (
+          gsog:Foliation
+          gsog:Lineation
+        ) ;
+    ] ;
+  rdfs:label "overprints"@en ;
+  rdfs:range [
+      a owl:Class ;
+      owl:unionOf (
+          gsog:Rock_Body
+          gsoc:Physical_Feature
+        ) ;
+    ] ;
   rdfs:subPropertyOf gsog:isGeologicallyRelatedTo ;
 .
-
 gsog:underlies
   a owl:ObjectProperty ;
   rdfs:comment "Relationship between rock bodies in which subject body is below and in contact with the object body in geographic refernce system (the object might or might not be younger than the subject). Generally applied to stratified rock bodies"@en ;
   rdfs:domain gsog:Rock_Body ;
   rdfs:label "underlies "@en ;
   rdfs:range gsog:Rock_Body ;
-  rdfs:subPropertyOf gsog:isGeologicallyRelatedTo ;
+  rdfs:subPropertyOf gsoc:isSpatiallyRelatedTo ;
 .
-gsog:within
-  a owl:ObjectProperty ;
-  rdfs:comment "relationship between Rock_Body in which subject rock body is within (completely contained by) the object rock body."@en ;
-  rdfs:domain gsog:Rock_Body ;
-  rdfs:label "within "@en ;
-  rdfs:range gsog:Rock_Body ;
-  rdfs:subPropertyOf gsog:isGeologicallyRelatedTo ;
-.
-
 dcterms:source
   a owl:AnnotationProperty ;
 .

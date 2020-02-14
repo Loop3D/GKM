@@ -66,6 +66,27 @@ gsrbp:Block
   rdfs:label "blocks"@en ;
   rdfs:subClassOf gsog:Inclusion ;
 .
+gsrbp:Concretion
+  a owl:Class ;
+  dcterms:source "Neuendorf et al. 2005"@en ;
+  rdfs:comment "Hard, compact mass or aggregate of mineral matter, normally subsperical but commonly oblate, disc-shaped or irregular. Formed from precipitation from solution about a nucleus or centre. Use as a geologic unit part should be restricted to concretions that are too large to consider as constituents in the rock material that composes the unit."@en ;
+  rdfs:label "concretion"@en ;
+  rdfs:subClassOf gsog:Inclusion ;
+.
+gsrbp:Enclave
+  a owl:Class ;
+  dcterms:source "Cobbing, 2000, Barbarin, 1991"@en ;
+  rdfs:comment "General term for a polymineralic aggregate enclosed in a granitoid."@en ;
+  rdfs:label "enclave"@en ;
+  rdfs:subClassOf gsog:Inclusion ;
+.
+gsrbp:Tectonic_block
+  a owl:Class ;
+  dcterms:source "CGI rockbodypart vocabulary 2016-11-21 "@en ;
+  rdfs:comment "The geologic unit part occurs as discrete masses with faulted boundaries, emplaced into the host unit by tectonic processes inside the earth, e.g. blocks in tectonic melange"@en ;
+  rdfs:label "tectonic block"@en ;
+  rdfs:subClassOf gsog:Inclusion ;
+.
 gsrbp:bed_lithosome
   a owl:Class ;
   dcterms:source "CGI rockbodypart vocabulary 2016-11-21 "@en ;
@@ -73,26 +94,12 @@ gsrbp:bed_lithosome
   rdfs:label "bed lithosome"@en ;
   rdfs:subClassOf gsog:Lithosome ;
 .
-gsrbp:concretion
-  a owl:Class ;
-  dcterms:source "Neuendorf et al. 2005"@en ;
-  rdfs:comment "Hard, compact mass or aggregate of mineral matter, normally subsperical but commonly oblate, disc-shaped or irregular. Formed from precipitation from solution about a nucleus or centre. Use as a geologic unit part should be restricted to concretions that are too large to consider as constituents in the rock material that composes the unit."@en ;
-  rdfs:label "concretion"@en ;
-  rdfs:subClassOf gsog:Inclusion ;
-.
 gsrbp:cyclic_bedding_package
   a owl:Class ;
   dcterms:source "CGI rockbodypart vocabulary 2016-11-21 "@en ;
   rdfs:comment "Lithosome characterized by an internal sequence of units, which is repeated in a stacked sequence, e.g. fining-upward sequence, thickening upward sequence, bouma sequence."@en ;
   rdfs:label "cyclic bedding package"@en ;
   rdfs:subClassOf gsog:Bedding_Package ;
-.
-gsrbp:enclave
-  a owl:Class ;
-  dcterms:source "Cobbing, 2000, Barbarin, 1991"@en ;
-  rdfs:comment "General term for a polymineralic aggregate enclosed in a granitoid."@en ;
-  rdfs:label "enclave"@en ;
-  rdfs:subClassOf gsog:Inclusion ;
 .
 gsrbp:geologic_unit_matrix
   a owl:Class ;
@@ -131,10 +138,10 @@ gsrbp:marker_bed
 .
 gsrbp:ontology
   a owl:Ontology ;
-  dcterms:creator "CGI Geoscience Terminology Working Group, Stephen M Richard"@en  ;
-  dcterms:date "2016-11-21"@en  ;
+  dcterms:creator "CGI Geoscience Terminology Working Group, Stephen M Richard"@en ;
+  dcterms:date "2016-11-21"@en ;
   dcterms:description "This file contains the CGI Geologic Unit Part role vocabulary, as defined by the IUGS Commission for Geoscience Information (CGI) Geoscience Terminology Working Group. This vocabulary includes terms to specify the role played by a constituent part of a geologic unit. These terms may be used to populate GeologicUnit.part.GeologicUnitPart.role, and GeologicUnit.composition.compositionPart.role. There are terms in this vocabulary that only apply to one or the other of these properties, but after an effort to create two separate vocabularies, it was decided to use a single vocabulary in order to avoid having the same concept in more than one closely related vocabulary. The duplication of applicable concepts in the two contexts (GeologicUnit.part.GeologicUnitPart.role and GeologicUnit.composition.compositionPart.role) arises because the model allows representation of complex geologic unit descriptions in more than one way. A complex geologic unit like a migmatite complex or a lithologically heterogeneous stratigraphic unit will have many different lithologic components. The simplest approach to representing the lithologic heterogeneity is to report a single GeologicUnit element with compositionParts for each lithologic component; the role on these compositionParts provides information about what kind of parts they are and perhaps something about their relationship, along with the kinds of rock they are composed of. A more complex alternative approach is to represent the various components each as GeologicUnit elements, each with compositionPart links to the rock type(s) composing that part. These component GeologicUnit elements are aggregated by GeologicUnit.part.GeologicUnitPart elements, with roles in the aggregation for each GeologicUnit part. The benefit of the more complex approach is that additional descriptive properties provided by the GeologicUnit content model can be assigned to each part, as well as GeologicRelations between the parts. The role of the compositionParts in these more 'disaggregated' GeologicUnit elements would be a simpler 'composition' kind of role, because the heterogeneous 'whole' unit would be described in GeologicUnitParts that are more lithologically homogeneous. Its a trade-off between simplicity and expressiveness."@en ;
-  dcterms:modified "2020-02-03"@en  ;
+  dcterms:modified "2020-02-03"@en ;
   dcterms:title "Rock Body Part types"@en ;
   rdfs:comment "This file contains the 2016 SKOS-RDF version of the CGI Geologic Unit Part Role vocabulary. Compilation and review in MS Excel spreadsheet, converted to MS Excel for SKOS generation using SKOS_for_GA_from_XLS_2016.03.xslt. OWL adoption for Loop3D project by Stephen M Richard. "@en ;
   owl:imports gsog:ontology ;
@@ -167,13 +174,6 @@ gsrbp:stratigraphic_part
   rdfs:comment "A geologic unit part that occupies a particular stratigraphic position within a geologic unit. Part is a particular body of rock."@en ;
   rdfs:label "stratigraphic part"@en ;
   rdfs:subClassOf gsog:Rock_Body_Part ;
-.
-gsrbp:tectonic_block
-  a owl:Class ;
-  dcterms:source "CGI rockbodypart vocabulary 2016-11-21 "@en ;
-  rdfs:comment "The geologic unit part occurs as discrete masses with faulted boundaries, emplaced into the host unit by tectonic processes inside the earth, e.g. blocks in tectonic melange"@en ;
-  rdfs:label "tectonic block"@en ;
-  rdfs:subClassOf gsog:Inclusion ;
 .
 gsrbp:vein_or_dike_lithosome
   a owl:Class ;

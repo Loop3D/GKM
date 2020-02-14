@@ -42,6 +42,28 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
+gsoc:hasProperty
+  rdfs:subPropertyOf gsoc:isRelatedto ;
+.
+gsoc:isPropertyOf
+  rdfs:subPropertyOf gsoc:isRelatedto ;
+.
+gsoc:overlaps
+  rdfs:subPropertyOf gsoc:isSpatiallyRelatedTo ;
+.
+gsoc:partialEnvelope
+  a owl:ObjectProperty ;
+  rdfs:comment "Proposed for 'wraps around'" ;
+  rdfs:label "partial envelope" ;
+  rdfs:subPropertyOf gsoc:isSpatiallyRelatedTo ;
+.
+gsog:Rock_Body_Void
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hostedBy ;
+      owl:someValuesFrom gsog:Rock_Body ;
+    ] ;
+.
 gsgu:polarity_chronostratigraphic_unit
   rdfs:subClassOf gsog:Chronostratigraphic_Unit ;
 .
@@ -51,8 +73,29 @@ gsgu:polarity_chronostratigraphic_unit
 <http://loop3d.org/GSO/ontology/2020/1/lithology/compositioncategory/fluoride_chemistry>
   rdfs:subClassOf gslth:Composition_Category_Space ;
 .
-<http://loop3d.org/GSO/ontology/2020/1/lithology/particletype/cavity>
+<http://loop3d.org/GSO/ontology/2020/1/lithology/particletype/amygdule>
+  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2020/1/lithology/particletype/vesicle> ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:contains ;
+      owl:someValuesFrom gsog:Mineral ;
+    ] ;
+.
+<http://loop3d.org/GSO/ontology/2020/1/lithology/particletype/fenestra>
+  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2020/1/lithology/particletype/vug> ;
+.
+<http://loop3d.org/GSO/ontology/2020/1/lithology/particletype/lithophysae>
   rdfs:subClassOf gsog:Rock_Body_Void ;
+.
+<http://loop3d.org/GSO/ontology/2020/1/lithology/particletype/pore_space>
+  rdfs:subClassOf gsoc:Gap ;
+  rdfs:subClassOf gsog:Rock_Body_Void ;
+.
+<http://loop3d.org/GSO/ontology/2020/1/lithology/particletype/vesicle>
+  rdfs:subClassOf gsog:Rock_Body_Void ;
+.
+<http://loop3d.org/GSO/ontology/2020/1/lithology/particletype/vug>
+  rdfs:subClassOf gsoc:Hole ;
 .
 <http://loop3d.org/GSO/ontology/2020/1/loop3dmaster>
   a owl:Ontology ;

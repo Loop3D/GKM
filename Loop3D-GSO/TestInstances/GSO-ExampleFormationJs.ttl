@@ -1,7 +1,6 @@
 # baseURI: http://loop3d.org/GSO/ontology/2020/1/ex-formationJs/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/ex-complexcontact/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/loop3dmaster
-# prefix: ejs
 
 @prefix con: <http://loop3d.org/GSO/ontology/2020/1/ex-complexcontact#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
@@ -24,39 +23,32 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<http://loop3d.org/GSO/ontology/2020/1/ex-formationJs/ontology>
-  a owl:Ontology ;
-  rdfs:comment "Stephen M. Richard 2019-05-02"@en ;
-  rdfs:comment "details of description of Js unit in GeologyScenarioForTesting.pptx"@en ;
-  owl:imports <http://loop3d.org/GSO/ontology/2020/1/ex-complexcontact/ontology> ;
-  owl:imports <http://loop3d.org/GSO/ontology/2020/1/loop3dmaster> ;
-.
 ejs:JsFormation
   a gsog:Formation ;
-  gsoc:hasPart <http://loop3d.org/GSO/ontology/2020/1/ex-complexcontact#KdInJsDikeContact-3_1_4> ;
-  gsoc:hasPart <http://loop3d.org/GSO/ontology/2020/1/ex-complexcontact#KdInJsDikeContact-3_2_4> ;
-  gsoc:hasPart <http://loop3d.org/GSO/ontology/2020/1/ex-complexcontact#KgInJsIntrusiveContact-4_2> ;
+  gsoc:hasPart con:KdInJsDikeContact-3_1_4 ;
+  gsoc:hasPart con:KdInJsDikeContact-3_2_4 ;
+  gsoc:hasPart con:KgInJsIntrusiveContact-4_2 ;
   gsoc:hasPart ejs:JsFormation-lower ;
   gsoc:hasPart ejs:JsFormation-upper ;
   gsoc:hasPart ejs:baseJs-6 ;
   gsoc:hasPart ejs:topJs-2 ;
   gsoc:hasPhysicalProperty [
       a gsop:Metamorphic_Facies ;
-	  rdfs:label "not metamorphosed"@en ;
       gsoc:hasValue [
           a gsmf:no_metamorphic_minerals ;
         ] ;
+      rdfs:label "not metamorphosed"@en ;
     ] ;
   gsoc:hasPhysicalProperty [
       a gsgu:Bedding_Thickness_Category ;
-	  rdfs:label "thin to medium bedded"@en ;
       gsoc:hasTextValue "Thin to medium Bedded"@en ;
+      rdfs:label "thin to medium bedded"@en ;
     ] ;
   gsoc:hasTemporalProperty [
       a gsog:Chronostratigraphic_Age_Interval ;
-	  rdfs:label "Lower Jurassic Age"@en ;
       gsog:hasOlderAge gstime:LowerJurassic ;
       gsog:hasYoungerAge gstime:LowerJurassic ;
+      rdfs:label "Lower Jurassic Age"@en ;
     ] ;
   rdfs:comment "Several surfaces are not elucidated as parts in this example, but are referenced in the Contact instances below. These surfaces would participate in intrusion and also ?contact metamorphism? processes"@en ;
   rdfs:comment "clasts of Cb Quartzite are abundant in the lower part of the unit. The lower part is a fining-upward sequence from conglomeratic sandstone to fine-grained sandstone. There is a marker bed that is a tuff in the upper part of the lower clastic interval. Upper part is massive limestone with abundant ammonites"@en ;
@@ -64,7 +56,7 @@ ejs:JsFormation
 .
 ejs:JsFormation-lower
   a gsog:Rock_Body_Part ;
-  gsoc:hasPart <http://loop3d.org/GSO/ontology/2020/1/ex-formationJs#JsFormationMarker-6_4> ;
+  gsoc:hasPart ejs:JsFormationMarker-6_4 ;
   gsoc:hasPart ejs:baseJs-6 ;
   gsoc:hasPart ejs:lith_1 ;
   gsoc:hasPart ejs:lith_2 ;
@@ -72,7 +64,7 @@ ejs:JsFormation-lower
   gsog:underlies ejs:JsFormation-upper ;
   rdfs:comment "underlies, overlies, within are subproperty of relatedTo"@en ;
 .
-<http://loop3d.org/GSO/ontology/2020/1/ex-formationJs#JsFormationMarker-6_4>
+ejs:JsFormationMarker-6_4
   a gsog:Bed ;
   gsoc:hasConstituent <http://uri.org/Ballyloghlin_tuff> ;
   gsoc:hasPart [
@@ -89,25 +81,25 @@ ejs:JsFormation-lower
 .
 ejs:baseJs-6
   a gsog:Rock_Body_Bottom ;
-  gsoc:hasPart <http://loop3d.org/GSO/ontology/2020/1/ex-formationJs#baseJs-6_1> ;
-  gsoc:hasPart <http://loop3d.org/GSO/ontology/2020/1/ex-formationJs#baseJs-6_2> ;
-  gsoc:hasPart <http://loop3d.org/GSO/ontology/2020/1/ex-formationJs#baseJs-6_3> ;
+  gsoc:hasPart ejs:baseJs-6_1 ;
+  gsoc:hasPart ejs:baseJs-6_2 ;
+  gsoc:hasPart ejs:baseJs-6_3 ;
 .
-<http://loop3d.org/GSO/ontology/2020/1/ex-formationJs#baseJs-6_1>
+ejs:baseJs-6_1
   a gsog:Rock_Body_Bottom ;
   gsoc:isParticipantIn [
       a gspr:Deposition ;
     ] ;
   rdfs:comment "Js on Ss surface"@en ;
 .
-<http://loop3d.org/GSO/ontology/2020/1/ex-formationJs#baseJs-6_2>
+ejs:baseJs-6_2
   a gsog:Rock_Body_Bottom ;
   gsoc:isParticipantIn [
       a gspr:Deposition ;
     ] ;
   rdfs:comment "Js on Os surface"@en ;
 .
-<http://loop3d.org/GSO/ontology/2020/1/ex-formationJs#baseJs-6_3>
+ejs:baseJs-6_3
   a gsog:Rock_Body_Bottom ;
   gsoc:isParticipantIn [
       a gspr:Deposition ;
@@ -116,28 +108,28 @@ ejs:baseJs-6
 .
 ejs:contactJs-lith_1-lith_2
   a gsog:Gradational_Contact_Zone ;
-  gsog:hasBoundaryThickness [
+  gsog:hasHost ejs:lith_1 ;
+  gsog:hasHost ejs:lith_2 ;
+  gsog:hasThickness [
       a gsop:Thickness ;
       gsoc:hasUOM [
           a gsuom:meter ;
         ] ;
       gsoc:hasValue 10 ;
     ] ;
-  gsog:hasHost ejs:lith_1 ;
-  gsog:hasHost ejs:lith_2 ;
   rdfs:label "internal gradational contact "@en ;
 .
 ejs:contactJs-lith_2-lith_3
   a gsog:Gradational_Contact_Zone ;
-  gsog:hasBoundaryThickness [
+  gsog:hasHost ejs:lith_2 ;
+  gsog:hasHost ejs:lith_3 ;
+  gsog:hasThickness [
       a gsop:Thickness ;
       gsoc:hasUOM [
           a gsuom:meter ;
         ] ;
       gsoc:hasValue 4 ;
     ] ;
-  gsog:hasHost ejs:lith_2 ;
-  gsog:hasHost ejs:lith_3 ;
   rdfs:label "internal gradational contact "@en ;
 .
 ejs:lith_1
@@ -181,4 +173,11 @@ ejs:lith_3
   gsoc:isParticipantIn [
       a gspr:Erosion ;
     ] ;
+.
+<http://loop3d.org/GSO/ontology/2020/1/ex-formationJs/ontology>
+  a owl:Ontology ;
+  rdfs:comment "Stephen M. Richard 2019-05-02"@en ;
+  rdfs:comment "details of description of Js unit in GeologyScenarioForTesting.pptx"@en ;
+  owl:imports ex-complexcontact:ontology ;
+  owl:imports <http://loop3d.org/GSO/ontology/2020/1/loop3dmaster> ;
 .

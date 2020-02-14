@@ -1,11 +1,17 @@
 # baseURI: http://loop3d.org/GSO/ontology/2020/1/common/ontology
+# imports: http://purl.org/dc/elements/1.1/
+# imports: http://purl.org/dc/terms/
 
 @prefix : <http://loop3d.org/GSO/ontology/2020/1/common/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+
 
 :Abstract
   a owl:Class ;
@@ -81,7 +87,7 @@
 .
 :Event
   a owl:Class ;
-  rdfs:comment "A event is an occurence that involves a change in state of some system.  \"Something that occurs in a certain place during a particular interval of time\" (https://www.dictionary.com/browse/event);  \"an occurrence; something that happens\" (https://wikidiff.com/event/process)."@en ;
+  rdfs:comment "A event is an occurence that involves a change in state of some system.  \"Something that occurs in a certain place during a particular interval of time\" (https://www.dictionary.com/browse/event);  \"an occurrence; something that happens\" (https://wikidiff.com/event/process).  Event is dependent on at least one process"@en ;
   rdfs:subClassOf :Perdurant ;
   rdfs:subClassOf [
       a owl:Restriction ;
@@ -101,7 +107,7 @@
 .
 :Gap
   a owl:Class ;
-  rdfs:comment """A physical void with a scattered (disconnected) host, consisting of the spaces between the scattered parts of the host.   G(x) <--> exists y [hosts-v(y,x) ^ not ICon (y)].  ICon (x): x is interior connected (continuous, not scattered)  {@en}
+  rdfs:comment """A physical void with a scattered (disconnected) host, consisting of the spaces between the scattered parts of the host. e.g. porosity in a rock.  G(x) <--> exists y [hosts-v(y,x) ^ not ICon (y)].  ICon (x): x is interior connected (continuous, not scattered)  {@en}
 """@en ;
   rdfs:label "Gap"@en ;
   rdfs:subClassOf :Physical_Void ;
@@ -122,7 +128,7 @@
 .
 :Hole
   a owl:Class ;
-  rdfs:comment "A physical void with a self-connected (non-scattered) host, consisting of some depression or cavity within the host.    H(x) <--> exists y [hosts-v(y,x) ^ ICon (y)].   ICon (x): x is interior connected (continuous, not scattered)"@en ;
+  rdfs:comment "A physical void with a self-connected (non-scattered) host, consisting of some depression or cavity within the host.  E.g. vug, vesicle, miariolitic cavity.  H(x) <--> exists y [hosts-v(y,x) ^ ICon (y)].   ICon (x): x is interior connected (continuous, not scattered)"@en ;
   rdfs:label "Hole"@en ;
   rdfs:subClassOf :Physical_Void ;
 .
@@ -475,16 +481,6 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   rdfs:comment "A numeric property value used to express the fraction of a whole that is composed of some part. Values will range from 0 to 1 (0 to 100%)."@en ;
   rdfs:label "Proportion"@en ;
   rdfs:subClassOf :Physical_Property ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty :proportionFor ;
-      owl:someValuesFrom :Endurant ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty :proportionOf ;
-      owl:someValuesFrom :Endurant ;
-    ] ;
 .
 :Shape
   a owl:Class ;
@@ -707,20 +703,41 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
 .
 :containedBy
   a owl:ObjectProperty ;
-  rdfs:comment "Relationship in which subject Physical_Endurant is completly within the object Physical_Endurant"@en ;
-  rdfs:domain :Physical_Endurant ;
+  dc:source "https://en.wikipedia.org/wiki/DE-9IM, from Clementini and others(1993, 1994) based on the seminal works of Egenhofer and others (1990, 1991)" ;
+  rdfs:comment "The interior and boundary of the subject spatial region intesect only the interior of the object spatial region. Subject region is in the interior of the object region."@en ;
   rdfs:label "contained by"@en ;
-  rdfs:range :Physical_Endurant ;
-  rdfs:subPropertyOf :isPhysicallyRelatedTo ;
-  owl:inverseOf :contains ;
+  rdfs:subPropertyOf :isSpatiallyRelatedTo ;
+  skos:altLabel "within"@en ;
 .
 :contains
+  a rdf:Property ;
+  dc:source "https://en.wikipedia.org/wiki/DE-9IM, from Clementini and others(1993, 1994) based on the seminal works of Egenhofer and others (1990, 1991)" ;
+  rdfs:comment "Only the interior of the subject region intersects the interior or the boundary of the object region;  the boundaries do not intersect."@en ;
+  rdfs:comment "object region lies in subject region, and the interiors intersect. Another definition: \"subject region contains object region  iff no points of object region lie in the exterior of subject region, and at least one point of the interior of object region lies in the interior of subject region\"."@en ;
+  rdfs:label "Spatially contains"@en ;
+  rdfs:subPropertyOf :isSpatiallyRelatedTo ;
+.
+:coveredBy
   a owl:ObjectProperty ;
-  rdfs:comment "Relationship in which object Physical_Endurant is completely within the subject Physical_Endurant"@en ;
-  rdfs:domain :Physical_Endurant ;
-  rdfs:label "contains"@en ;
-  rdfs:range :Physical_Endurant ;
-  rdfs:subPropertyOf :isPhysicallyRelatedTo ;
+  dc:source "https://en.wikipedia.org/wiki/DE-9IM, from Clementini and others(1993, 1994) based on the seminal works of Egenhofer and others (1990, 1991)" ;
+  rdfs:comment "the boundary of the subject intesects the interior or the boundary of the object region, and the interior of the subject intersects only the interior of the object region.  Every point of the subject region is a point in the interior or the boundary of the object region."@en ;
+  rdfs:label "Spatially covered by"@en ;
+  rdfs:subPropertyOf :isSpatiallyRelatedTo ;
+.
+:covers
+  a owl:ObjectProperty ;
+  dc:source "https://en.wikipedia.org/wiki/DE-9IM, from Clementini and others(1993, 1994) based on the seminal works of Egenhofer and others (1990, 1991)" ;
+  rdfs:comment "At least one point of object region lies in subject region,  and no point of object region lies in the exterior of subject region, or every point of object region is a point of (the interior or boundary of) subject region."@en ;
+  rdfs:comment "The interior of the subject region intersects the interior or the boundary of the object region, and the boundary of the subject region intersects the boundary of the object region."@en ;
+  rdfs:label "Spatially covers"@en ;
+  rdfs:subPropertyOf :isSpatiallyRelatedTo ;
+.
+:crosses
+  a owl:ObjectProperty ;
+  dc:source "https://en.wikipedia.org/wiki/DE-9IM, from Clementini and others(1993, 1994) based on the seminal works of Egenhofer and others (1990, 1991)" ;
+  rdfs:comment "The subject and object spatial regions have some but not all interior points in common, and the dimension of the intersection is less than that of at least one of them."@en ;
+  rdfs:label "Spatially crosses"@en ;
+  rdfs:subPropertyOf :isSpatiallyRelatedTo ;
 .
 :determinedBy
   a owl:ObjectProperty ;
@@ -809,7 +826,7 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   rdfs:comment "Geographic disposition of an endurant."@en ;
   rdfs:label "has Spatial Property"@en ;
   rdfs:range :Spatial_Location ;
-  rdfs:subPropertyOf :hasPhysicalProperty ;
+  rdfs:subPropertyOf :hasProperty ;
   owl:inverseOf :isSpatialPropertyOf ;
 .
 :hasTemporalProperty
@@ -874,7 +891,7 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
             ] ;
         ] ;
     ] ;
-  rdfs:subPropertyOf :isSpatiallyRelatedTo ;
+  rdfs:subPropertyOf :spatiallyEqual ;
 .
 :isConstituentOf
   a owl:ObjectProperty ;
@@ -1089,22 +1106,67 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   rdfs:comment "Unary predicates are represented by classes, binary predicates by object properties"@en ;
   rdfs:comment "ontology of shared objectProperties and high level classes used to define geologic features"@en ;
   rdfs:label "Shared elements for geoscience ontology"@en ;
+  owl:imports dc: ;
+  owl:imports <http://purl.org/dc/terms/> ;
 .
-:proportionFor
+:overlaps
   a owl:ObjectProperty ;
-  rdfs:comment ""@en ;
-  rdfs:label "proportion for"@en ;
-  rdfs:subPropertyOf :hasPhysicalProperty ;
+  rdfs:comment "The subject and object spatial regions have some but not all points in common, they have the same dimension, and the intersection of the interiors of the two geometries has the same dimension as the geometries themselves"@en ;
+  rdfs:label "Spatially overlaps" ;
 .
-:proportionOf
+:physicallyContainedBy
   a owl:ObjectProperty ;
-  rdfs:comment ""@en ;
-  rdfs:label "proportion of"@en ;
-  rdfs:subPropertyOf :hasPhysicalProperty ;
+  rdfs:comment "Relationship in which subject Physical_Endurant is completly within the object Physical_Endurant"@en ;
+  rdfs:domain :Physical_Endurant ;
+  rdfs:label "physically contained by"@en ;
+  rdfs:range :Physical_Endurant ;
+  rdfs:subPropertyOf :containedBy ;
+  owl:inverseOf :physicallyContains ;
+  skos:altLabel "inside of"@en ;
+.
+:physicallyContains
+  a owl:ObjectProperty ;
+  rdfs:comment "Relationship in which object Physical_Endurant is completely within the subject Physical_Endurant, but the boundaries do not intersect."@en ;
+  rdfs:domain :Physical_Endurant ;
+  rdfs:label "contains"@en ;
+  rdfs:range :Physical_Endurant ;
+  rdfs:subPropertyOf :contains ;
 .
 :realizes
   a owl:ObjectProperty ;
   rdfs:comment ""@en ;
   rdfs:label "realizes"@en ;
   rdfs:subPropertyOf :isFundamentallyRelatedTo ;
+.
+:spatiallyDisjoint
+  a owl:ObjectProperty ;
+  dc:source "https://en.wikipedia.org/wiki/DE-9IM, from Clementini and others(1993, 1994) based on the seminal works of Egenhofer and others (1990, 1991)" ;
+  rdfs:comment "subject and object region have no point in common. They form a set of disconnected geometries."@en ;
+  rdfs:comment "there is no intersection between interior or boundary of subject with the object of the relation."@en ;
+  rdfs:label "Spatially Disjoint"@en ;
+  rdfs:subPropertyOf :isSpatiallyRelatedTo ;
+.
+:spatiallyEqual
+  a owl:ObjectProperty ;
+  dc:source "https://en.wikipedia.org/wiki/DE-9IM, from Clementini and others(1993, 1994) based on the seminal works of Egenhofer and others (1990, 1991)" ;
+  rdfs:comment "a and b are topologically equal. Two geometries are topologically equal if their interiors intersect and no part of the interior or boundary of one geometry intersects the exterior of the other"@en ;
+  rdfs:comment "the boundary of the subject intersects only the boundary of the object spatial region, and the interior of the subject intersects only the interior of the obect spatial region."@en ;
+  rdfs:label "Spatially Equal"@en ;
+  rdfs:subPropertyOf :isSpatiallyRelatedTo ;
+.
+:spatiallyIntersects
+  a owl:ObjectProperty ;
+  dc:source "https://en.wikipedia.org/wiki/DE-9IM, from Clementini and others(1993, 1994) based on the seminal works of Egenhofer and others (1990, 1991)" ;
+  rdfs:comment "The subject and object spatial regions have at least one point in common."@en ;
+  rdfs:label "Spatially intersects"@en ;
+  rdfs:subPropertyOf :isSpatiallyRelatedTo ;
+.
+:spatiallyTouch
+  a owl:ObjectProperty ;
+  dc:source "https://en.wikipedia.org/wiki/DE-9IM, from Clementini and others(1993, 1994) based on the seminal works of Egenhofer and others (1990, 1991)" ;
+  rdfs:comment "subject and object regions have at least one point in common, but their interiors do not intersect."@en ;
+  rdfs:comment "the boundary  and only the boundary of the subect intersects the boundary of the object spatial region"@en ;
+  rdfs:label "Spatially Touch"@en ;
+  rdfs:subPropertyOf :isSpatiallyRelatedTo ;
+  skos:altLabel "spatially meet"@en ;
 .
