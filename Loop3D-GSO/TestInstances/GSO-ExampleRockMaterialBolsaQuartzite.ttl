@@ -41,9 +41,9 @@ bol:Bolsa_Quartzite_Material
   gsoc:hasConstituent bol:Clay_matrix ;
   gsoc:hasConstituent bol:Feldspar_grains ;
   gsoc:hasConstituent bol:Quartz_grains ;
-  gsoc:hasPhysicalProperty bol:constituent_part2 ;
-  gsoc:hasPhysicalProperty bol:constituent_part3 ;
-  gsoc:hasPhysicalProperty [
+  gsoc:hasProperty bol:constituent_part2 ;
+  gsoc:hasProperty bol:constituent_part3 ;
+  gsoc:hasProperty [
       a gsoc:Proportion ;
       gsoc:hasUOM [ a gsuom:percent] ;
       gsoc:hasNumericValue 40 ;
@@ -51,22 +51,22 @@ bol:Bolsa_Quartzite_Material
       rdfs:label "proportion of feldspar grains"@en ;
     ] ;
   
-  gsoc:hasPhysicalProperty [
+  gsoc:hasProperty [
       a gsop:Rock_Material_Color ;
       gsoc:hasValue <http://colors.org/maroonbrown> ;
 	  rdfs:label "Maroon-brown outcrop color" ;
     ] ;
-  gsoc:hasPhysicalProperty [
+  gsoc:hasProperty [
       a gslth:Consolidation_Degree ;
       gsoc:hasValue [ a cnsd:well_consolidated ] ;
 	  rdfs:label "well consolidated" ;
     ] ;
-  gsoc:hasPhysicalProperty [
+  gsoc:hasProperty [
       a gslth:Rock_Material_Genetic_Category ;
       gsoc:hasValue [ a gsgc:clastic_sedimentary_genesis ] ;
 	  rdfs:label "clastic sedimentary genesis" ;
     ] ;
-   gsoc:hasPhysicalProperty [
+   gsoc:hasProperty [
       a gslth:Rock_Material_Composition_Category ;
       gsoc:hasValue [a gscc:arkosic_detrital_mode, gscc:quartzo_feldspathic] ;
 	  rdfs:label "arkose" ;
@@ -80,7 +80,7 @@ bol:Clay_matrix
   gsoc:hasConstituent [
       a gsmin:claymineral ;
     ] ;
-  gsoc:hasPhysicalProperty [
+  gsoc:hasProperty [
       a gsop:Grain_Size_Max ;
       gsoc:hasUOM [ a gsuom:millimeter ];
       gsoc:hasNumericValue .005 ;
@@ -91,23 +91,24 @@ bol:Clay_matrix
 bol:Feldspar_grains
   a gsog:Clastic_Granular_Material, gspt:mineral_clast ;
   gsoc:hasConstituent bol:Feldspar_mineral ;
-  gsoc:hasPhysicalProperty [
-      a gsop:Grain_Shape ;
-      gsoc:hasValue <http://geosciml.org/particleShape/subangular> ;
+  gsoc:hasProperty [
+      a gslth:Grain_Shape ;
+      gsoc:hasValue [ a gsps:sub_angular] ;
+      rdfs:label "subangular grains"@en ;
     ] ;
-  gsoc:hasPhysicalProperty [
+  gsoc:hasProperty [
       a gsop:Grain_Size_Max ;
       gsoc:hasUOM [a gsuom:millimeter ];
       gsoc:hasNumericValue 5 ;
       rdfs:label "5 mm maximum"@en ;
     ] ;
-  gsoc:hasPhysicalProperty [
+  gsoc:hasProperty [
       a gsop:Grain_Size_Min ;
       gsoc:hasUOM [a gsuom:millimeter ];
       gsoc:hasNumericValue .02 ;
       rdfs:label "0.02 mm minimum"@en ;
     ] ;
-   gsoc:hasPhysicalProperty [
+   gsoc:hasProperty [
       a gslth:Grain_Shape ;
       gsoc:hasValue [ a gsps:sub_rounded] ;
       rdfs:label "subrounded grains"@en ;
@@ -136,30 +137,32 @@ bol:Quartz_grains
   a gsog:Clastic_Granular_Material, gspt:mineral_clast ;
   gsoc:hasConstituent bol:Quartz_mineral ;
 
-  gsoc:hasPhysicalProperty [
+  gsoc:hasProperty [
       a gsop:Grain_Size_Average ;
       gsoc:hasProperty [
-          a gsoc:First_Standard_Deviation_Calculation ;
+		  a gsoc:Simple_Uncertainty ;          
           gsoc:hasUOM [ a gsuom:millimeter ];
           gsoc:hasNumericValue .06 ;
+		  gsoc:determinedBy [
+		   a gsoc:First_Standard_Deviation_Calculation ]
         ] ;
       gsoc:hasUOM [a gsuom:millimeter ] ;
       gsoc:hasNumericValue 3 ;
     ] ;
-  gsoc:hasPhysicalProperty [
+  gsoc:hasProperty [
       a gsop:Grain_Size_Max ;
       gsoc:hasUOM gsuom:millimeter ;
       gsoc:hasNumericValue 8 ;
     ] ;
-  gsoc:hasPhysicalProperty [
+  gsoc:hasProperty [
       a gsop:Grain_Size_Min ;
       gsoc:hasUOM [a gsuom:millimeter ];
       gsoc:hasNumericValue .05 ;
     ] ;
-   gsoc:hasPhysicalProperty [
+   gsoc:hasProperty [
       a gslth:Grain_Shape ;
       gsoc:hasValue [ a gsps:sub_rounded, gsps:rounded ] ;
-      rdfs:label "subrounded grains"@en ;
+      rdfs:label "subrounded to rounded grains"@en ;
     ] ;
 .
 bol:Quartz_mineral

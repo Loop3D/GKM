@@ -16,15 +16,16 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix spin: <http://spinrdf.org/spin#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 con:CbFormation
   a gsog:Formation ;
-  gsoc:hasTemporalProperty [
+  gsoc:hasDirectTemporalLocation [
       a gsog:Chronostratigraphic_Age_Interval ;
-      gsog:hasOlderAge gstime:Cambrian ;
-      gsog:hasYoungerAge gstime:Cambrian ;
+      gsog:hasOlderInterval gstime:Cambrian ;
+      gsog:hasYoungerInterval gstime:Cambrian ;
       rdfs:label "Cambrian Age"@en ;
     ] ;
   rdfs:label "Bolsa Quartzite (Cambrian)"@en ;
@@ -37,7 +38,7 @@ con:KdDike
   a gsog:Formation ;
   gsoc:hasConstituent [
       a gslth:diorite ;
-      gsoc:hasPhysicalProperty [
+      gsoc:hasProperty [
           gsoc:hasUOM [
               a gsuom:millimeter ;
             ] ;
@@ -81,7 +82,7 @@ con:KgGranite
   a gsog:Formation ;
   gsoc:hasConstituent [
       a gslth:granitoid ;
-      gsoc:hasPhysicalProperty [
+      gsoc:hasProperty [
           gsoc:hasUOM [
               a gsuom:millimeter ;
             ] ;
@@ -170,15 +171,15 @@ con:OsBoundary-6_2
 .
 con:OsFormation
   a gsog:Formation ;
-  gsoc:hasPhysicalProperty [
+  gsoc:hasDirectTemporalLocation [
       a gsog:Chronostratigraphic_Age_Interval ;
-      gsog:hasOlderAge gstime:Ordovician ;
-      gsog:hasYoungerAge gstime:Ordovician ;
+      gsog:hasOlderInterval gstime:Ordovician ;
+      gsog:hasYoungerInterval gstime:Ordovician ;
     ] ;
-  gsoc:hasTemporalProperty [
+  gsoc:hasProperty [
       a gsog:Chronostratigraphic_Age_Interval ;
-      gsog:hasOlderAge gstime:Ordovician ;
-      gsog:hasYoungerAge gstime:Ordovician ;
+      gsog:hasOlderInterval gstime:Ordovician ;
+      gsog:hasYoungerInterval gstime:Ordovician ;
     ] ;
   rdfs:label "Sedimentary Rocks (Ordovician)"@en ;
 .
@@ -187,10 +188,10 @@ con:SsBoundary-6_1
 .
 con:SsFormation
   a gsog:Formation ;
-  gsoc:hasTemporalProperty [
+  gsoc:hasDirectTemporalLocation [
       a gsog:Chronostratigraphic_Age_Interval ;
-      gsog:hasOlderAge gstime:Silurian ;
-      gsog:hasYoungerAge gstime:Silurian ;
+      gsog:hasOlderInterval gstime:Silurian ;
+      gsog:hasYoungerInterval gstime:Silurian ;
     ] ;
   rdfs:label "Sedimentary Rocks (Silurian)"@en ;
 .
@@ -206,7 +207,7 @@ con:XmRockBody
   a gsog:Complex ;
   gsoc:hasConstituent [
       a gslth:gneiss ;
-      gsoc:hasPhysicalProperty [
+      gsoc:hasProperty [
           a gsop:Metamorphic_Grade ;
         ] ;
     ] ;
@@ -399,6 +400,7 @@ con:upSideKd-3_2_4
 .
 <http://loop3d.org/GSO/ontology/2020/1/ex-complexcontact/ontology>
   a owl:Ontology ;
+  spin:imports <http://topbraid.org/spin/spinowl> ;
   rdfs:comment "Focus is Js, a Jurassic age sedimentary unit that has a lower clastic part with an internal tuff marker bed, and an upper limestone part. The unit unconformably overlies tilted Paleozoic strata that overly Early Proterozoic metamorphic rocks; it is intruded by a Cretaceous granite, and the granite and Js are intruded by a Cretaceous diorite dike. After the igneous activity a period of exumation and erosion removed the cover on the Jurassic sediment and Cretaceous igneous rocks, and Late Miocene sediment covered this unconformity."@en ;
   rdfs:comment "Xm, Cb, Os, and Ss and their boundary surfaces not elucidated here"@en ;
   rdfs:comment "this example references the GeologyScenarioForTesting diagram"@en ;
@@ -407,17 +409,17 @@ con:upSideKd-3_2_4
 .
 ejs:JsFormation
   a gsog:Formation ;
+  gsoc:hasDirectTemporalLocation [
+      a gsog:Chronostratigraphic_Age_Interval ;
+      gsog:hasOlderInterval gstime:Jurassic ;
+      gsog:hasYoungerInterval gstime:Jurassic ;
+      rdfs:label "Jurassic Age"@en ;
+    ] ;
   gsoc:hasPart con:KdInJsDikeContact-3_1_4 ;
   gsoc:hasPart con:KdInJsDikeContact-3_2_4 ;
   gsoc:hasPart con:KgInJsIntrusiveContact-4_2 ;
   gsoc:hasPart con:baseJs-6 ;
   gsoc:hasPart con:topJs-2 ;
-  gsoc:hasTemporalProperty [
-      a gsog:Chronostratigraphic_Age_Interval ;
-      gsog:hasOlderAge gstime:Jurassic ;
-      gsog:hasYoungerAge gstime:Jurassic ;
-      rdfs:label "Jurassic Age"@en ;
-    ] ;
   rdfs:comment "details of unit description are in a separate Example: GSO-ExampleFormationJs.txt"@en ;
   rdfs:label "Js Formation"@en ;
 .

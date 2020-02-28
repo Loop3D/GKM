@@ -1,0 +1,288 @@
+# baseURI: http://loop3d.org/GSO/ontology/2020/1/geologicproperty/ontology
+# imports: http://loop3d.org/GSO/ontology/2020/1/common/ontology
+
+@prefix : <http://loop3d.org/GSO/ontology/2020/1/geologicproperty/> .
+@prefix geologicfeature: <http://loop3d.org/GSO/ontology/2020/1/geologicfeature/> .
+@prefix gsoc: <http://loop3d.org/GSO/ontology/2020/1/common/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+
+:Alteration_Degree
+  a owl:Class ;
+  rdfs:comment "Specification of the strength of observed alteration. Can be used on Geologic_Unit or Rock_Material"@en ;
+  rdfs:isDefinedBy "GeoSciML v4"@en ;
+  rdfs:label "Alteration degree"@en ;
+  rdfs:subClassOf gsoc:Property ;
+.
+:Alteration_Distribution
+  a owl:Class ;
+  rdfs:comment "AlterationDistribution describes the spatial distribution or geometry of alteration zones. eg: patchy, spotted, banded, viens, vein breccia, pervasive, disseminated, etc"@en ;
+  rdfs:isDefinedBy "GeoSciML v4"@en ;
+  rdfs:label "Alteration distribution"@en ;
+  rdfs:subClassOf gsoc:Property ;
+.
+:Alteration_Type
+  a owl:Class ;
+  rdfs:comment "Specification of alteration types (eg; potassic, argillic, advanced argillic)"@en ;
+  rdfs:isDefinedBy "GeoSciML v4"@en ;
+  rdfs:label "Alteration type"@en ;
+  rdfs:subClassOf gsoc:Property ;
+
+.
+:Any_Alteration_Type
+  a owl:Class ;
+  rdfs:comment "Conceptual space for alteration types defined by CGI AlterationType vocabulary."@en ;
+  rdfs:label "Any Alteration Type"@en ;
+  rdfs:subClassOf :Alteration_Type ;
+.
+:Any_Metamorphic_Facies
+  a owl:Class ;
+  rdfs:label "Any Metamorphic Facies"@en ;
+  rdfs:subClassOf :Metamorphic_Facies ;
+.
+:Any_Metamorphic_Grade
+  a owl:Class ;
+  rdfs:label "Any Metamorphic Grade"@en ;
+  rdfs:subClassOf :Metamorphic_Grade ;
+.
+:Any_Plane_Orientation_Convention
+  a owl:Class ;
+  rdfs:comment "conceptual space for conventions defining planar orientation representations."@en ;
+  rdfs:label "any plane orientation convention"@en ;
+  rdfs:subClassOf :Plane_Orientation_Convention ;
+.
+:Any_Surface_Facing
+  a owl:Class ;
+  rdfs:comment "conceptual space for values specifying the facing direction of surfaces, e.g. upright, overturned."@en ;
+  rdfs:label "Any Facing Value"@en ;
+  rdfs:subClassOf :Surface_Facing ;
+.
+:Azimuth
+  a owl:Class ;
+  rdfs:comment "Bearing of a horizontal line relative to north. Use for specifying the orientation of planar features."@en ;
+  rdfs:label "Azimuth"@en ;
+  rdfs:subClassOf :Orientation ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom xsd:decimal ;
+      owl:onProperty gsoc:hasNumericValue ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasProperty ;
+      owl:someValuesFrom gsoc:Unit_of_Measure ;
+    ] ;
+.
+:Dip
+  a owl:Class ;
+  rdfs:comment "the maximum angle between a horizontal surface and a planar feature"@en ;
+  rdfs:label "Dip"@en ;
+  rdfs:subClassOf :Orientation ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom xsd:decimal ;
+      owl:onProperty gsoc:hasNumericValue ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasProperty ;
+      owl:someValuesFrom gsoc:Unit_of_Measure ;
+    ] ;
+.
+:Dip_Dip_Direction
+  a owl:Class ;
+  rdfs:comment "The orientation measurement consists of a dip and a dip direction. Dip is the angle that the structural surface (eg bedding, fault plane) makes with the horizontal measured perpendicular to the strike of the structure and in the vertical plane Dip direction is the azimuth perpindicular to the strike of the structure"@en ;
+  rdfs:label "Dip and Dip Direction"@en ;
+  rdfs:subClassOf :Any_Plane_Orientation_Convention ;
+.
+:Displacement
+  a owl:Class ;
+  rdfs:label "Displacement"@en ;
+  rdfs:subClassOf gsoc:Property ;
+.
+:Line_Orientation
+  a owl:Class ;
+  rdfs:comment "specification of the orientation of a line in space, using a trend (bearing of horizontal projection of line relative to geographic north) and plunge (inclination of line measured positive downward in degrees from local horizontal).  TBD:  add 'isdirected property to indicate if the line is directed (e.g. sense of shear), values should be Boolean,"@en ;
+  rdfs:label "Line orientation"@en ;
+  rdfs:subClassOf :Orientation ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasProperty ;
+      owl:someValuesFrom :Azimuth ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasProperty ;
+      owl:someValuesFrom :Plunge ;
+    ] ;
+.
+:Metamorphic_Facies
+  a owl:Class ;
+  rdfs:comment "Categories that characterize mineral assemblages indicative of certain metamorphic P-T conditions. Examples include Barrovian metasedimentary zones (eg: biotite facies, kyanite facies) or assemblages developed in rocks of more mafic composition (eg: greenschist facies, amphibolite facies)."@en ;
+  rdfs:comment "applies to Earth_Material or Geologic_Unit"@en ;
+  rdfs:isDefinedBy "GeoSciML v4"@en ;
+  rdfs:label "Metamorphic facies"@en ;
+  rdfs:subClassOf gsoc:Property ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasValue ;
+      owl:someValuesFrom :Any_Metamorphic_Facies ;
+    ] ;
+.
+:Metamorphic_Grade
+  a owl:Class ;
+  rdfs:comment "A term to indicate the intensity or rank of metamorphism applied to an EarthMaterial (eg: high metamorphic grade, low metamorphic grade). Indicates in a general way the P-T environment in which the metamorphism took place. Determination of metamorphic grade is based on mineral assemblages (ie, facies) present in a rock that are interpreted to have crystallized in equilibrium during a particular metamorphic event."@en ;
+  rdfs:comment "applies to Earth_Material or Geologic_Unit"@en ;
+  rdfs:isDefinedBy "GeoSciML v4"@en ;
+  rdfs:label "Metamorphic grade"@en ;
+  rdfs:subClassOf gsoc:Property ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasValue ;
+      owl:someValuesFrom :Any_Metamorphic_Grade ;
+    ] ;
+.
+:Orientation
+  a owl:Class ;
+  rdfs:subClassOf gsoc:Property ;
+.
+:Overturned
+  a owl:Class ;
+  rdfs:comment "top of surface is facing downward, toward Earth interior."@en ;
+  rdfs:label "Overturned facing"@en ;
+  rdfs:subClassOf :Any_Surface_Facing ;
+.
+:Peak_Pressure
+  a owl:Class ;
+  rdfs:comment "applies to Earth_Material or Geologic_Unit"@en ;
+  rdfs:comment "peak metamorphic pressure"@en ;
+  rdfs:isDefinedBy "GeoSciML v3"@en ;
+  rdfs:label "Peak pressure"@en ;
+  rdfs:subClassOf gsoc:Property ;
+.
+:Peak_Temperature
+  a owl:Class ;
+  rdfs:comment "applies to Earth_Material or Geologic_Unit"@en ;
+  rdfs:comment "peak metamorphic temperature"@en ;
+  rdfs:isDefinedBy "GeoSciML v3"@en ;
+  rdfs:label "Peak temperature"@en ;
+  rdfs:subClassOf gsoc:Property ;
+.
+:Plane_Orientation
+  a owl:Class ;
+  rdfs:comment "specification of the orientation of a plane in space, using a dip (inclination of line of maximum imnclination contained in the plane, measured positive downward in degrees from local horizontal) and either a strike or dip direction"@en ;
+  rdfs:label "Plane orientation (dip and dip direction)"@en ;
+  rdfs:subClassOf :Orientation ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasProperty ;
+      owl:someValuesFrom :Azimuth ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasProperty ;
+      owl:someValuesFrom :Dip ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasProperty ;
+      owl:someValuesFrom :Any_Surface_Facing ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasProperty ;
+      owl:someValuesFrom :Plane_Orientation_Convention ;
+    ] ;
+.
+:Plane_Orientation_Convention
+  a owl:Class ;
+  rdfs:label "Plane orientation convention"@en ;
+  rdfs:subClassOf gsoc:Property ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom :Any_Plane_Orientation_Convention ;
+      owl:onProperty gsoc:hasValue ;
+    ] ;
+.
+:Plunge
+  a owl:Class ;
+  rdfs:comment "Numeric value should be between +90 and -90.   Negative values only valid if the linear feature is directed."@en ;
+  rdfs:label "Plunge"@en ;
+  rdfs:subClassOf :Orientation ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom xsd:decimal ;
+      owl:onProperty gsoc:hasNumericValue ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasProperty ;
+      owl:someValuesFrom gsoc:Unit_of_Measure ;
+    ] ;
+.
+:Separation
+  a owl:Class ;
+  rdfs:comment "a vector (magnitude and orientation) specifying the distance between the intersection of a surface on opposite sides of a displacment surface. In 3-D is the projection of a vector normal to the displaced surface into the displacment surface, but might also be specified as offset of the intersection of displacement surface and marker surface in some other profile view (e.g. horizontal/map view, or a cross section)"@en ;
+  rdfs:label "Separation"@en ;
+  rdfs:subClassOf :Displacement ;
+.
+:Slip
+  a owl:Class ;
+  rdfs:comment "a vector (magnitude and orientation) that links a peircing point on opposite sides of a displacement surface."@en ;
+  rdfs:label "Slip"@en ;
+  rdfs:subClassOf :Displacement ;
+.
+:Strike_Dip_RHR
+  a owl:Class ;
+  rdfs:comment "The strike and dip of planar data is listed according to the ‘right-hand rule’ or, as one looks along the strike direction, the surface dips to the right. Dip is the angle that the structural surface (eg bedding, fault plane) makes with the horizontal measured perpindicular to the strike of the structure and in the vertical plane"@en ;
+  rdfs:label "Right hand rule strike and dip"@en ;
+  rdfs:subClassOf :Any_Plane_Orientation_Convention ;
+.
+:Surface_Facing
+  a owl:Class ;
+  rdfs:comment "property to specify if a surface is directed, i.e. has a top and bottom. Values: {upright, overturned, unknown}"@en ;
+  rdfs:label "facing direction"@en ;
+  rdfs:subClassOf gsoc:Property ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom :Any_Surface_Facing ;
+      owl:onProperty gsoc:hasValue ;
+    ] ;
+.
+:Thickness
+  a owl:Class ;
+  rdfs:subClassOf gsoc:Property ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom xsd:decimal ;
+      owl:onProperty gsoc:hasValue ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasProperty ;
+      owl:someValuesFrom gsoc:Unit_of_Measure ;
+    ] ;
+.
+
+:Unknown_Facing
+  a owl:Class ;
+  rdfs:comment "Facing direction is unknown {@en}	"@en ;
+  rdfs:label "Unknown Facing Direction"@en ;
+  rdfs:subClassOf :Any_Surface_Facing ;
+.
+:Upright
+  a owl:Class ;
+  rdfs:comment "top of surface is away from center of earth."@en ;
+  rdfs:label "Upright Facing"@en ;
+  rdfs:subClassOf :Any_Surface_Facing ;
+.
+:ontology
+  a owl:Ontology ;
+  rdfs:comment "Vocabulary of geologic physical properties used in multiple GSO modules."@en ;
+  rdfs:label "Physical properties"@en ;
+  owl:imports gsoc:ontology ;
+.

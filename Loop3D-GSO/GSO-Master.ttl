@@ -8,6 +8,7 @@
 # imports: http://loop3d.org/GSO/ontology/2020/1/geologicproperty/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/geologicstructure/contact/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/geologicstructure/fault/ontology
+# imports: http://loop3d.org/GSO/ontology/2020/1/geologicstructure/fold/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/geologicstructure/foliation/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/geologicstructure/lineation/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/geologicunit/ontology
@@ -16,9 +17,11 @@
 # imports: http://loop3d.org/GSO/ontology/2020/1/lithology/particleaspectratio/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/mineral/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/uom/ontology
+# imports: http://topbraid.org/spin/spinowl
 
 @prefix : <http://loop3d.org/GSO/ontology/2020/1/loop3dmaster/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix fold: <http://loop3d.org/GSO/ontology/2020/1/geologicstructure/fold/> .
 @prefix gsel: <http://loop3d.org/GSO/ontology/2020/1/element/> .
 @prefix gsen: <http://loop3d.org/GSO/ontology/2020/1/eventenvironment> .
 @prefix gsfa: <http://loop3d.org/GSO/ontology/2020/1/geologicstructure/fault/> .
@@ -42,61 +45,6 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-gsoc:hasProperty
-  rdfs:subPropertyOf gsoc:isRelatedto ;
-.
-gsoc:isPropertyOf
-  rdfs:subPropertyOf gsoc:isRelatedto ;
-.
-gsoc:overlaps
-  rdfs:subPropertyOf gsoc:isSpatiallyRelatedTo ;
-.
-gsoc:partialEnvelope
-  a owl:ObjectProperty ;
-  rdfs:comment "Proposed for 'wraps around'" ;
-  rdfs:label "partial envelope" ;
-  rdfs:subPropertyOf gsoc:isSpatiallyRelatedTo ;
-.
-gsog:Rock_Body_Void
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty gsoc:hostedBy ;
-      owl:someValuesFrom gsog:Rock_Body ;
-    ] ;
-.
-gsgu:polarity_chronostratigraphic_unit
-  rdfs:subClassOf gsog:Chronostratigraphic_Unit ;
-.
-<http://loop3d.org/GSO/ontology/2020/1/lithology/compositioncategory/chloride_chemistry>
-  rdfs:subClassOf gslth:Composition_Category_Space ;
-.
-<http://loop3d.org/GSO/ontology/2020/1/lithology/compositioncategory/fluoride_chemistry>
-  rdfs:subClassOf gslth:Composition_Category_Space ;
-.
-<http://loop3d.org/GSO/ontology/2020/1/lithology/particletype/amygdule>
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2020/1/lithology/particletype/vesicle> ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty gsoc:contains ;
-      owl:someValuesFrom gsog:Mineral ;
-    ] ;
-.
-<http://loop3d.org/GSO/ontology/2020/1/lithology/particletype/fenestra>
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2020/1/lithology/particletype/vug> ;
-.
-<http://loop3d.org/GSO/ontology/2020/1/lithology/particletype/lithophysae>
-  rdfs:subClassOf gsog:Rock_Body_Void ;
-.
-<http://loop3d.org/GSO/ontology/2020/1/lithology/particletype/pore_space>
-  rdfs:subClassOf gsoc:Gap ;
-  rdfs:subClassOf gsog:Rock_Body_Void ;
-.
-<http://loop3d.org/GSO/ontology/2020/1/lithology/particletype/vesicle>
-  rdfs:subClassOf gsog:Rock_Body_Void ;
-.
-<http://loop3d.org/GSO/ontology/2020/1/lithology/particletype/vug>
-  rdfs:subClassOf gsoc:Hole ;
-.
 <http://loop3d.org/GSO/ontology/2020/1/loop3dmaster>
   a owl:Ontology ;
   rdfs:comment "This is a shell to import all the various peices needed for geologic instances "@en ;
@@ -109,6 +57,7 @@ gsgu:polarity_chronostratigraphic_unit
   owl:imports gsop:ontology ;
   owl:imports gssf:ontology ;
   owl:imports gsfa:ontology ;
+  owl:imports fold:ontology ;
   owl:imports gsfo:ontology ;
   owl:imports gsol:ontology ;
   owl:imports gsgu:ontology ;
@@ -117,4 +66,5 @@ gsgu:polarity_chronostratigraphic_unit
   owl:imports <http://loop3d.org/GSO/ontology/2020/1/lithology/particleaspectratio/ontology> ;
   owl:imports gsmin:ontology ;
   owl:imports gsuom:ontology ;
+  owl:imports <http://topbraid.org/spin/spinowl> ;
 .

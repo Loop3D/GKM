@@ -41,33 +41,45 @@ gsog:Fault_Zone
 .
 gsop:Displacement
   a owl:Class ;
-  rdfs:subClassOf gsoc:Physical_Property ;
+  rdfs:subClassOf gsoc:Property ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty gsoc:hasPhysicalProperty ;
+      owl:onProperty gsoc:hasProperty ;
       owl:someValuesFrom gsfa:Fault_Movement_Magnitude ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty gsoc:hasPhysicalProperty ;
+      owl:onProperty gsoc:hasProperty ;
       owl:someValuesFrom gsfa:Fault_Movement_Sense ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty gsoc:hasPhysicalProperty ;
+      owl:onProperty gsoc:hasProperty ;
       owl:someValuesFrom gsfa:Fault_Movement_Type ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty gsoc:hasPhysicalProperty ;
+      owl:onProperty gsoc:hasProperty ;
       owl:someValuesFrom gsfa:Fault_Movement_Vector ;
     ] ;
+.
+gsfa:Any_Fault_Movement_Sense
+  a owl:Class ;
+  rdfs:comment "Concept space for Fault Movement Sense Property"@en ;
+  rdfs:label "Any Fault Movement Sense"@en ;
+  rdfs:subClassOf gsfa:Fault_Movement_Sense ;
+.
+gsfa:Any_Fault_Movement_Type
+  a owl:Class ;
+  rdfs:comment "concept space for type of movement (eg dip-slip, strike-slip) for a Displacement property"@en ;
+  rdfs:label "Any fault movement type"@en ;
+  rdfs:subClassOf gsfa:Fault_Movement_Type ;
 .
 gsfa:Fault_Movement_Magnitude
   a owl:Class ;
   rdfs:comment "magnitude of slip or separation"@en ;
   rdfs:label "Displacement magnitude"@en ;
-  rdfs:subClassOf gsoc:Physical_Property ;
+  rdfs:subClassOf gsoc:Property ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom xsd:decimal ;
@@ -76,56 +88,34 @@ gsfa:Fault_Movement_Magnitude
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty gsoc:hasUOM ;
-      owl:someValuesFrom gsop:UOM ;
+      owl:someValuesFrom gsoc:Unit_of_Measure ;
     ] ;
 .
 gsfa:Fault_Movement_Sense
   a owl:Class ;
   rdfs:comment "eg, dextral, sinistral"@en ;
   rdfs:label "Movement sense"@en ;
-  rdfs:subClassOf gsoc:Physical_Property ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom gsfa:Fault_Movement_Sense_Space ;
-      owl:onProperty gsoc:hasValue ;
-    ] ;
-.
-gsfa:Fault_Movement_Sense_Space
-  a owl:Class ;
-  rdfs:comment "Concept space for Fault Movement Sense Property"@en ;
-  rdfs:label "Any Fault Movement Sense"@en ;
-  rdfs:subClassOf gsoc:Physical_Region ;
+  rdfs:subClassOf gsoc:Property ;
 .
 gsfa:Fault_Movement_Type
   a owl:Class ;
   rdfs:comment "Defines the type of movement  (eg dip-slip, strike-slip)"@en ;
   rdfs:label "Movement Type"@en ;
-  rdfs:subClassOf gsoc:Physical_Property ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom gsfa:Fault_Movement_Type_Space ;
-      owl:onProperty gsoc:hasValue ;
-    ] ;
-.
-gsfa:Fault_Movement_Type_Space
-  a owl:Class ;
-  rdfs:comment "concept space for type of movement (eg dip-slip, strike-slip) for a Displacement property"@en ;
-  rdfs:label "Any fault movement type"@en ;
-  rdfs:subClassOf gsoc:Physical_Region ;
+  rdfs:subClassOf gsoc:Property ;
 .
 gsfa:Fault_Movement_Vector
   a owl:Class ;
   rdfs:comment "Slip vector linking piercing point on opposite sides of fault, or separation vector linking offset surface along fault trace."@en ;
   rdfs:label "Movement Vector"@en ;
-  rdfs:subClassOf gsoc:Physical_Property ;
+  rdfs:subClassOf gsoc:Property ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty gsoc:hasPhysicalProperty ;
+      owl:onProperty gsoc:hasProperty ;
       owl:someValuesFrom gsop:Azimuth ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty gsoc:hasPhysicalProperty ;
+      owl:onProperty gsoc:hasProperty ;
       owl:someValuesFrom gsop:Plunge ;
     ] ;
 .
@@ -230,7 +220,7 @@ gsfms:dextral
   rdfs:comment "Right-lateral separation sense, in plan view, the side opposite the observer appears displaced to the right.,"@en ;
   rdfs:label "dextral"@en ;
   rdfs:label "dextre"@fr ;
-  rdfs:subClassOf gsfa:Fault_Movement_Sense_Space ;
+  rdfs:subClassOf gsfa:Any_Fault_Movement_Sense ;
 .
 gsfms:generic_decollement
   a owl:Class ;
@@ -238,21 +228,21 @@ gsfms:generic_decollement
   rdfs:comment "A large-displacement (kilometers or tens of kilometers) shallowly dipping to subhorizontal fault or shear zone."@en ;
   rdfs:label "decollement"@fr ;
   rdfs:label "generic decollement"@en ;
-  rdfs:subClassOf gsfa:Fault_Movement_Sense_Space ;
+  rdfs:subClassOf gsfa:Any_Fault_Movement_Sense ;
 .
 gsfms:no_movement_sense
   a owl:Class ;
   dcterms:source "Froitzheim, N., Pleuger, J. & Nagel, T.J., 2006. Extraction faults. Journal of Structural Geology v28, pp. 1388-1395."@en ;
   rdfs:comment "The fault-parallel displacement is effectively zero, as in an extraction fault."@en ;
   rdfs:label "no movement sense"@en ;
-  rdfs:subClassOf gsfa:Fault_Movement_Sense_Space ;
+  rdfs:subClassOf gsfa:Any_Fault_Movement_Sense ;
 .
 gsfms:normal
   a owl:Class ;
   dcterms:source "GGIC vocabularies working group (Australia)"@en ;
   rdfs:comment "The hanging wall appears to have moved down relative to the footwall, dip of fault usually 45-90 degrees."@en ;
   rdfs:label "normal"@en ;
-  rdfs:subClassOf gsfa:Fault_Movement_Sense_Space ;
+  rdfs:subClassOf gsfa:Any_Fault_Movement_Sense ;
 .
 gsfms:normal_dextral
   a owl:Class ;
@@ -276,7 +266,7 @@ gsfms:reverse
   rdfs:comment "The hanging wall appears to have moved down relative to the footwall, dip of fault usually greater than 45 degrees."@en ;
   rdfs:label "inverse"@fr ;
   rdfs:label "reverse"@en ;
-  rdfs:subClassOf gsfa:Fault_Movement_Sense_Space ;
+  rdfs:subClassOf gsfa:Any_Fault_Movement_Sense ;
 .
 gsfms:reverse_dextral
   a owl:Class ;
@@ -299,7 +289,7 @@ gsfms:sinistral
   dcterms:source "GGIC vocabularies working group (Australia)"@en ;
   rdfs:comment "Left-lateral separation sense, in plan view, the side opposite the observer appears displaced to the left."@en ;
   rdfs:label "sinistral"@en ;
-  rdfs:subClassOf gsfa:Fault_Movement_Sense_Space ;
+  rdfs:subClassOf gsfa:Any_Fault_Movement_Sense ;
 .
 gsfms:thrust
   a owl:Class ;
@@ -321,7 +311,7 @@ gsfmt:dip_separation_sense
   dcterms:source "GGIC vocabularies working group (Australia)"@en ;
   rdfs:comment "A fault along which there is some separation parallel to the dip of the fault."@en ;
   rdfs:label "dip separation sense"@en ;
-  rdfs:subClassOf gsfa:Fault_Movement_Type_Space ;
+  rdfs:subClassOf gsfa:Any_Fault_Movement_Type ;
 .
 gsfmt:dip_slip
   a owl:Class ;
@@ -335,14 +325,14 @@ gsfmt:extraction
   dcterms:source "Froitzheim, N., Pleuger, J. & Nagel, T.J., 2006. Extraction faults. Journal of Structural Geology v28, pp. 1388-1395."@en ;
   rdfs:comment "A fault whose two sides have approached each other substantially in the direction perpendicular to the fault."@en ;
   rdfs:label "extraction"@en ;
-  rdfs:subClassOf gsfa:Fault_Movement_Type_Space ;
+  rdfs:subClassOf gsfa:Any_Fault_Movement_Type ;
 .
 gsfmt:horizontal
   a owl:Class ;
   dcterms:source "GGIC vocabularies working group (Australia)"@en ;
   rdfs:comment "The fault is horizontal."@en ;
   rdfs:label "horizontal"@en ;
-  rdfs:subClassOf gsfa:Fault_Movement_Type_Space ;
+  rdfs:subClassOf gsfa:Any_Fault_Movement_Type ;
 .
 gsfmt:mixed_extraction
   a owl:Class ;
@@ -356,7 +346,7 @@ gsfmt:oblique_slip
   dcterms:source "GGIC vocabularies working group (Australia), SMR"@en ;
   rdfs:comment "The net slip of the fault lies between the strike and dip directions of the fault, the slip vector rakes between 10 and 80 degrees in the plane of the fault."@en ;
   rdfs:label "oblique slip"@en ;
-  rdfs:subClassOf gsfa:Fault_Movement_Type_Space ;
+  rdfs:subClassOf gsfa:Any_Fault_Movement_Type ;
 .
 gsfmt:pure_extraction
   a owl:Class ;
@@ -370,14 +360,14 @@ gsfmt:scissor
   dcterms:source "Neuendorf et al 2005"@en ;
   rdfs:comment "A fault on which there is increasing offset or separation along the strike from an initial point of no offset, with reverse offset in the opposite direction."@en ;
   rdfs:label "scissor"@en ;
-  rdfs:subClassOf gsfa:Fault_Movement_Type_Space ;
+  rdfs:subClassOf gsfa:Any_Fault_Movement_Type ;
 .
 gsfmt:strike_separation_sense
   a owl:Class ;
   dcterms:source "GGIC vocabularies working group (Australia)"@en ;
   rdfs:comment "A fault along which there is some separation parallel to the strike of the fault."@en ;
   rdfs:label "strike separation sense"@en ;
-  rdfs:subClassOf gsfa:Fault_Movement_Type_Space ;
+  rdfs:subClassOf gsfa:Any_Fault_Movement_Type ;
 .
 gsfmt:strike_slip
   a owl:Class ;
