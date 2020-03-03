@@ -4,7 +4,7 @@
 # imports: http://purl.org/dc/terms/
 
 @prefix : <http://loop3d.org/GSO/ontology/2020/1/geologicfeature/> .
-@prefix dcterms: <http://purl.org/dc/terms/> .
+
 @prefix gsoc: <http://loop3d.org/GSO/ontology/2020/1/common/> .
 @prefix gsog: <http://loop3d.org/GSO/ontology/2020/1/geologicfeature/> .
 @prefix gsop: <http://loop3d.org/GSO/ontology/2020/1/geologicproperty/> .
@@ -14,22 +14,10 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
 
-
-gsog:GSSA
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onClass gsoc:Simple_Uncertainty ;
-      owl:onProperty gsoc:hasProperty ;
-      owl:qualifiedCardinality "0"^^xsd:nonNegativeInteger ;
-    ] ;
-.
-gsog:Geologic_Time_Date
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty gsoc:hasProperty ;
-      owl:someValuesFrom gsoc:Simple_Uncertainty ;
-    ] ;
+gsog:Geologic_Date_Interval
+  rdfs:comment "same as Geochronologic_Age_Interval"@en ;
 .
 
 gsoc:Element
@@ -129,20 +117,6 @@ gsog:Boundary_Stratotype
   rdfs:comment "A stratigraphic section that contains a designated point in a stratigraphic sequence of essentially continuous deposition, preferably marine, chosen for its correlation potential. http://www.stratigraphy.org/upload/bak/chron.htm"@en ;
   rdfs:label "Boundary Stratotype"@en ;
   rdfs:subClassOf gsog:Stratotype ;
-.
-gsog:Chronostratigraphic_Age_Interval
-  a owl:Class ;
-  rdfs:subClassOf gsog:Geologic_Age ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom gsog:Geologic_Date_Interval ;
-      owl:onProperty gsog:hasOlderInterval ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom gsog:Geologic_Date_Interval ;
-      owl:onProperty gsog:hasYoungerInterval ;
-    ] ;
 .
 gsog:Chronostratigraphic_Unit
   a owl:Class ;
@@ -442,6 +416,12 @@ gsog:GSSA
   rdfs:comment "A Geochronologic Age defined by the International Stratigraphic Commission, based on fiat selection of defined older and younger bounding time coordinates"@en ;
   rdfs:label "GSSA"@en ;
   rdfs:subClassOf gsog:Geologic_Time_Date ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onClass gsoc:Simple_Uncertainty ;
+      owl:onProperty gsoc:hasProperty ;
+      owl:qualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+    ] ;
 .
 gsog:GSSP
   a owl:Class ;
@@ -459,20 +439,6 @@ gsog:GSSP
       owl:someValuesFrom gsog:Stratotype ;
     ] ;
 .
-gsog:Geochronologic_Age_Interval
-  a owl:Class ;
-  rdfs:subClassOf gsog:Geologic_Age ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom gsog:Geologic_Time_Date ;
-      owl:onProperty gsog:hasOlderDate ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom gsog:Geologic_Time_Date ;
-      owl:onProperty gsog:hasYoungerDate ;
-    ] ;
-.
 gsog:Geochronologic_Boundary
   a owl:Class ;
   rdfs:label "Geochronologic Boundary"@en ;
@@ -482,16 +448,6 @@ gsog:Geochronologic_Boundary
       owl:allValuesFrom gsog:Stratigraphic_Point ;
       owl:onProperty gsoc:hasReference ;
     ] ;
-.
-gsog:Geologic_Age
-  a owl:Class ;
-  rdfs:subClassOf gsoc:Property ;
-.
-gsog:Geologic_Age_Instant
-  a owl:Class ;
-  rdfs:comment "A Geologic age that is specified by either a numeric temporal coordinate or correlation with a stratigraphic point via GeochronologicBoundary/isRealizedBy/StratigraphicPoint"@en ;
-  rdfs:label "Geologic Age Instant"@en ;
-  rdfs:subClassOf gsog:Geologic_Age ;
 .
 gsog:Geologic_Date_Interval
   a owl:Class ;
@@ -619,7 +575,7 @@ Probably should specify a Temporal Reference System used to assign coordinate va
 .
 gsog:Geologic_Time_Interval
   a owl:Class ;
-  rdfs:comment "" ;
+  rdfs:comment "Same as Chronostratigraphic_Age_Interval"@en ;
   rdfs:label "Geologic Time Interval"@en ;
   rdfs:subClassOf gsoc:Time_Interval ;
   rdfs:subClassOf [
@@ -1453,7 +1409,7 @@ gsog:ontology
   rdfs:comment "Base geologic feature classes, constraints, and relationships"@en ;
   owl:imports gsoc:ontology ;
   owl:imports gsop:ontology ;
-  owl:imports dcterms: ;
+
 .
 gsog:orb
   a owl:Class ;
