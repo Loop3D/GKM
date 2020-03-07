@@ -1,13 +1,9 @@
 # baseURI: http://loop3d.org/GSO/ontology/2020/1/common/ontology
-# imports: http://purl.org/dc/elements/1.1/
-# imports: http://purl.org/dc/terms/
 
 @prefix : <http://loop3d.org/GSO/ontology/2020/1/common/> .
-@prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
@@ -19,13 +15,7 @@
   rdfs:subClassOf :Physical_Endurant ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty :hasProperty ;
-      owl:someValuesFrom :State_Of_Matter ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty :isConstituentOf ;
-      owl:someValuesFrom [
+      owl:allValuesFrom [
           a owl:Class ;
           owl:unionOf [
               a rdf:List ;
@@ -37,6 +27,12 @@
                 ] ;
             ] ;
         ] ;
+      owl:onProperty :isConstituentOf ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty :hasProperty ;
+      owl:someValuesFrom :State_Of_Matter ;
     ] ;
 .
 :Any_Unit_of_Measure
@@ -85,18 +81,18 @@
   rdfs:subClassOf :Particular ;
   rdfs:subClassOf [
       a owl:Restriction ;
+      owl:allValuesFrom :Endurant ;
+      owl:onProperty :hasPart ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom :Endurant ;
+      owl:onProperty :hasReference ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
       owl:onProperty :hasIndirectTemporalLocation ;
       owl:someValuesFrom :Time_Region ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty :hasPart ;
-      owl:someValuesFrom :Endurant ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty :hasReference ;
-      owl:someValuesFrom :Endurant ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
@@ -119,7 +115,13 @@
 :Event
   a owl:Class ;
   rdfs:comment "A event is an occurence that involves a change in state of some system.  \"Something that occurs in a certain place during a particular interval of time\" (https://www.dictionary.com/browse/event);  \"an occurrence; something that happens\" (https://wikidiff.com/event/process).  Event is dependent on at least one process"@en ;
+  rdfs:label "Event"@en ;
   rdfs:subClassOf :Perdurant ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom :Event ;
+      owl:onProperty :hasPart ;
+    ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty :hasConstituent ;
@@ -137,11 +139,6 @@
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty :hasPart ;
-      owl:someValuesFrom :Event ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
       owl:onProperty :hasParticipant ;
       owl:someValuesFrom :Endurant ;
     ] ;
@@ -155,7 +152,7 @@
 :Feature
   a owl:Class ;
   rdfs:comment "A feature is an  Endurant that is ontologically dependent on at least one host  Endurant and a focal entity that are related by some essential relation. The identity of a feature is distinct from the identity of its host. Dependency on the host through is a hosting relation that holds between the Feature and at least one other distinct particular individual Endurant, the host. A feature is specifically dependent on its host. A feature can be either specifically or generically dependent on a  focal entity (e.g. knot in string). The focal is some spatially located individual Endurant that participates in the essential relation on which the feature ontologically depends. The focal entities are in sum spatially co-located with the feature at any time the feature exists."@en ;
-  rdfs:label "Physical Feature"@en ;
+  rdfs:label "Feature"@en ;
   rdfs:subClassOf :Endurant ;
   rdfs:subClassOf [
       a owl:Restriction ;
@@ -201,8 +198,8 @@
   rdfs:subClassOf :Amount_Of_Matter ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:allValuesFrom :Element ;
       owl:onProperty :hasConstituent ;
+      owl:someValuesFrom :Element ;
     ] ;
 .
 :Hole
@@ -292,18 +289,18 @@
   rdfs:comment "AKA 'entity'. Any individual in the DOLCE domain of discourse. The extensional coverage of DOLCE is as large as possible, since it ranges on 'possibilia', i.e all possible individuals that can be postulated by means of DOLCE axioms. Possibilia include physical objects, substances, processes, qualities, conceptual regions, non-physical objects, collections and even arbitrary sums of objects.The class 'particular' features a covering partition that includes: endurant, perdurant, quality, and abstract. There are also some subclasses defined as unions of subclasses of 'particular' for special purposes: spatio-temporal-particular (any particular except abstracts)- physical-realization (any realization of an information object, defined in the ExtendedDnS ontology)."@en ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:allValuesFrom :Determining_Event ;
-      owl:onProperty :determinedBy ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
+      owl:allValuesFrom :Property ;
       owl:onProperty :hasProperty ;
-      owl:someValuesFrom :Property ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
+      owl:allValuesFrom :Situation ;
       owl:onProperty :hasSetting ;
-      owl:someValuesFrom :Situation ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty :determinedBy ;
+      owl:someValuesFrom :Determining_Event ;
     ] ;
 .
 :Perdurant
@@ -317,13 +314,8 @@
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:allValuesFrom :Perdurant ;
-      owl:onProperty :isPartOf ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty :hasSetting ;
-      owl:someValuesFrom :Situation ;
+      owl:onProperty :hasReference ;
+      owl:someValuesFrom :Particular ;
     ] ;
 .
 :Physical_Boundary
@@ -346,23 +338,13 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
+      owl:allValuesFrom :Physical_Endurant ;
+      owl:onProperty :hasReference ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
       owl:onProperty :hasDirectSpatialLocation ;
       owl:someValuesFrom :Spatial_Region ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty :hasProperty ;
-      owl:someValuesFrom :Property ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty :hasReference ;
-      owl:someValuesFrom :Physical_Endurant ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty :hasSetting ;
-      owl:someValuesFrom :Situation ;
     ] ;
 .
 :Physical_Object
@@ -371,13 +353,13 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   rdfs:subClassOf :Physical_Endurant ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty :hasConstituent ;
-      owl:someValuesFrom :Amount_Of_Matter ;
+      owl:allValuesFrom :Physical_Object ;
+      owl:onProperty :hasPart ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty :hasPart ;
-      owl:someValuesFrom :Physical_Object ;
+      owl:onProperty :hasConstituent ;
+      owl:someValuesFrom :Amount_Of_Matter ;
     ] ;
 .
 :Physical_Property
@@ -414,7 +396,7 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
 :Physical_Void
   a owl:Class ;
   rdfs:comment "A chunk of physical space adjacent to some material feature and surrounded by it. (holes,valleys, canyon, cave, gap, space between fingers). host must be self connected.  An empty physical space in 3D. Distinct from abstract mathematical spaces, which include spaces made from various reference frames, including coordinate systems imposed on the earth (these are abstract imposed on real space). V(x) <--> IPF(x) ^ exists y [hosts-v (y,x)]"@en ;
-  rdfs:label "Physical Void "@en ;
+  rdfs:label "Physical Void"@en ;
   rdfs:subClassOf :Place_Feature ;
 .
 :Place_Feature
@@ -434,6 +416,16 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   rdfs:subClassOf :Perdurant ;
   rdfs:subClassOf [
       a owl:Restriction ;
+      owl:allValuesFrom :Event ;
+      owl:onProperty :isConstituentOf ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom :Process ;
+      owl:onProperty :hasPart ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
       owl:onProperty :hasDirectTemporalLocation ;
       owl:someValuesFrom :Time_Region ;
     ] ;
@@ -441,11 +433,6 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
       a owl:Restriction ;
       owl:onProperty :hasIndirectSpatialLocation ;
       owl:someValuesFrom :Spatial_Region ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty :hasPart ;
-      owl:someValuesFrom :Process ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
@@ -457,38 +444,44 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
       owl:onProperty :hasReference ;
       owl:someValuesFrom :Process ;
     ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty :isConstituentOf ;
-      owl:someValuesFrom :Event ;
-    ] ;
 .
 :Property
   a owl:Class ;
   rdfs:comment "A concept that specifies some aspect that inheres in instances of some Particular.  Note that the value of the determiningEvent  property on Property is used to specify metadata about how a property value is assigned"@en ;
+  rdfs:comment """Need SHACL rule that a Property.hasPart is not allowed. count Property.hasPart = 0
+Need SHACL rule that count Property.isPartOf = 0"""@en ;
+  rdfs:comment "Need SHACL rule that only one of 'hasDataValue' or 'hasValue' should be instantiated."@en ;
   rdfs:label "Property"@en ;
   rdfs:subClassOf :Endurant ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onClass :Particular ;
-      owl:onProperty :hasPart ;
-      owl:qualifiedCardinality "0"^^xsd:nonNegativeInteger ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onClass :Particular ;
-      owl:onProperty :isPartOf ;
-      owl:qualifiedCardinality "0"^^xsd:nonNegativeInteger ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty :hasDataValue ;
-      owl:someValuesFrom xsd:anySimpleType ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
+      owl:allValuesFrom :Property ;
       owl:onProperty :hasProperty ;
-      owl:someValuesFrom :Property ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom :Property ;
+      owl:onProperty :hasValue ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom xsd:anySimpleType ;
+      owl:onProperty :hasDataValue ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom owl:Nothing ;
+      owl:onProperty :hasPart ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom owl:Nothing ;
+      owl:onProperty :isPartOf ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty :hasIndirectSpatialLocation ;
+      owl:someValuesFrom :Spatial_Region ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
@@ -527,8 +520,18 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   rdfs:subClassOf :Endurant ;
   rdfs:subClassOf [
       a owl:Restriction ;
+      owl:allValuesFrom :Particular ;
       owl:onProperty :isSettingFor ;
-      owl:someValuesFrom :Particular ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty :hasIndirectSpatialLocation ;
+      owl:someValuesFrom :Spatial_Region ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty :hasPart ;
+      owl:someValuesFrom :Endurant ;
     ] ;
 .
 :Solid
@@ -554,9 +557,35 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
 .
 :Spatial_Region
   a owl:Class ;
-  rdfs:comment ""@en ;
+  rdfs:comment "Need SHACL rule for isSpatialLocationFor NOT 'Spatial Region'"@en ;
   rdfs:label "Spatial Region"@en ;
   rdfs:subClassOf :Endurant ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom :Spatial_Region ;
+      owl:onProperty :hasReference ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom [
+          a owl:Class ;
+          owl:unionOf [
+              a rdf:List ;
+              rdf:first :Physical_Void ;
+              rdf:rest [
+                  a rdf:List ;
+                  rdf:first :Spatial_Region ;
+                  rdf:rest () ;
+                ] ;
+            ] ;
+        ] ;
+      owl:onProperty :hasPart ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty :hasProperty ;
+      owl:someValuesFrom :Spatial_Location ;
+    ] ;
 .
 :State_Of_Matter
   a owl:Class ;
@@ -595,6 +624,14 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
       a owl:Restriction ;
       owl:allValuesFrom :Time_Region ;
       owl:onProperty :hasPart ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom [
+          a owl:Class ;
+          owl:complementOf :Time_Region ;
+        ] ;
+      owl:onProperty :isTemporalLocationFor ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
@@ -657,7 +694,7 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
 .
 :age_interval_in
   a owl:ObjectProperty ;
-  rdfs:comment "Source interval is contained in target interval; union of during, starts, and finishes. Target interval may start befor or end after source interval"@en ;
+  rdfs:comment "Source interval is contained in target interval; union of during, starts, and finishes. Target interval may start before or end after source interval"@en ;
   rdfs:label "age interval in"@en ;
   rdfs:subPropertyOf :isTemporallyRelatedTo ;
 .
@@ -716,47 +753,48 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   rdfs:subPropertyOf :age_disjoint ;
 .
 :containedBy
+  a owl:NamedIndividual ;
   a owl:ObjectProperty ;
-  dcterms:source "https://en.wikipedia.org/wiki/DE-9IM, from Clementini and others(1993, 1994) based on the seminal works of Egenhofer and others (1990, 1991)"@en ;
   rdfs:comment "The interior and boundary of the subject spatial region intesect only the interior of the object spatial region. Subject region is in the interior of the object region."@en ;
+  rdfs:comment "dct:source--  https://en.wikipedia.org/wiki/DE-9IM, from Clementini and others(1993, 1994) based on the seminal works of Egenhofer and others (1990, 1991)"@en ;
+  rdfs:comment "skos:altLabel--  within"@en ;
   rdfs:label "contained by"@en ;
   rdfs:subPropertyOf :isSpatiallyRelatedTo ;
-  dcterms:alternative "within"@en ;
 .
 :contains
   a owl:ObjectProperty ;
-  dcterms:source "https://en.wikipedia.org/wiki/DE-9IM, from Clementini and others(1993, 1994) based on the seminal works of Egenhofer and others (1990, 1991)" ;
   rdfs:comment "Only the interior of the subject region intersects the interior or the boundary of the object region;  the boundaries do not intersect."@en ;
+  rdfs:comment "dct:source--  https://en.wikipedia.org/wiki/DE-9IM, from Clementini and others(1993, 1994) based on the seminal works of Egenhofer and others (1990, 1991)" ;
   rdfs:comment "object region lies in subject region, and the interiors intersect. Another definition: \"subject region contains object region  iff no points of object region lie in the exterior of subject region, and at least one point of the interior of object region lies in the interior of subject region\"."@en ;
   rdfs:label "Spatially contains"@en ;
   rdfs:subPropertyOf :isSpatiallyRelatedTo ;
 .
 :coveredBy
   a owl:ObjectProperty ;
-  dcterms:source "https://en.wikipedia.org/wiki/DE-9IM, from Clementini and others(1993, 1994) based on the seminal works of Egenhofer and others (1990, 1991)" ;
+  rdfs:comment "dct:source--  https://en.wikipedia.org/wiki/DE-9IM, from Clementini and others(1993, 1994) based on the seminal works of Egenhofer and others (1990, 1991)" ;
   rdfs:comment "the boundary of the subject intesects the interior or the boundary of the object region, and the interior of the subject intersects only the interior of the object region.  Every point of the subject region is a point in the interior or the boundary of the object region."@en ;
   rdfs:label "Spatially covered by"@en ;
   rdfs:subPropertyOf :isSpatiallyRelatedTo ;
 .
 :covers
   a owl:ObjectProperty ;
-  dcterms:source "https://en.wikipedia.org/wiki/DE-9IM, from Clementini and others(1993, 1994) based on the seminal works of Egenhofer and others (1990, 1991)" ;
   rdfs:comment "At least one point of object region lies in subject region,  and no point of object region lies in the exterior of subject region, or every point of object region is a point of (the interior or boundary of) subject region."@en ;
   rdfs:comment "The interior of the subject region intersects the interior or the boundary of the object region, and the boundary of the subject region intersects the boundary of the object region."@en ;
+  rdfs:comment "dct:source--  https://en.wikipedia.org/wiki/DE-9IM, from Clementini and others(1993, 1994) based on the seminal works of Egenhofer and others (1990, 1991)" ;
   rdfs:label "Spatially covers"@en ;
   rdfs:subPropertyOf :isSpatiallyRelatedTo ;
 .
 :crosses
   a owl:ObjectProperty ;
-  dcterms:source "https://en.wikipedia.org/wiki/DE-9IM, from Clementini and others(1993, 1994) based on the seminal works of Egenhofer and others (1990, 1991)" ;
   rdfs:comment "The subject and object spatial regions have some but not all interior points in common, and the dimension of the intersection is less than that of at least one of them."@en ;
+  rdfs:comment "dct:source--  https://en.wikipedia.org/wiki/DE-9IM, from Clementini and others(1993, 1994) based on the seminal works of Egenhofer and others (1990, 1991)" ;
   rdfs:label "Spatially crosses"@en ;
   rdfs:subPropertyOf :isSpatiallyRelatedTo ;
 .
 :determinedBy
   a owl:ObjectProperty ;
   rdfs:comment "Link from a particular to an event that defines that particular. Recommented practice is for target to be a class inherioting from Dolce Utralight (dul:) Event (gsop:Event), e.g. sosa:Observation, or prov:Activity"@en ;
-  rdfs:label "determined by "@en ;
+  rdfs:label "determined by"@en ;
   rdfs:range :Determining_Event ;
   rdfs:subPropertyOf :isFundamentallyRelatedTo ;
 .
@@ -771,7 +809,7 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
 :hasDataValue
   a owl:DatatypeProperty ;
   rdfs:comment "" ;
-  rdfs:label "Any data value" ;
+  rdfs:label "has data value"@en ;
   rdfs:range xsd:anySimpleType ;
 .
 :hasDirectSpatialLocation
@@ -788,6 +826,7 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   rdfs:label "has direct temporal location"@en ;
   rdfs:range :Time_Region ;
   rdfs:subPropertyOf :isTemporallyRelatedTo ;
+  owl:inverseOf :isTemporalLocationFor ;
 .
 :hasHistory
   a owl:ObjectProperty ;
@@ -820,7 +859,6 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   rdfs:comment ""@en ;
   rdfs:label "hasNumericValue"@en ;
   rdfs:range xsd:decimal ;
-  rdfs:subPropertyOf :hasDataValue ;
 .
 :hasOutput
   a owl:ObjectProperty ;
@@ -858,17 +896,11 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   rdfs:range :Geologic_Setting ;
   rdfs:subPropertyOf :isFundamentallyRelatedTo ;
 .
-:hasSource
-  a rdf:Property ;
-  rdfs:comment "maps to dcterms: source; define here to avoid dcterms imports."@en ;
-  rdfs:label "has Source"@en ;
-.
 :hasTextValue
   a owl:DatatypeProperty ;
   rdfs:comment "data type property for free text values" ;
   rdfs:label "text value" ;
   rdfs:range xsd:string ;
-  rdfs:subPropertyOf :hasDataValue ;
 .
 :hasUOM
   a owl:ObjectProperty ;
@@ -892,6 +924,7 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
 :hostedBy
   a owl:ObjectProperty ;
   rdfs:subPropertyOf :isFundamentallyRelatedTo ;
+  owl:inverseOf :hosts ;
 .
 :hosts
   a owl:ObjectProperty ;
@@ -925,7 +958,6 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
 :isConstituentOf
   a owl:ObjectProperty ;
   a owl:TransitiveProperty ;
-  rdfs:range :Amount_Of_Matter ;
   rdfs:subPropertyOf :isFundamentallyRelatedTo ;
 .
 :isFundamentallyRelatedTo
@@ -964,12 +996,6 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   rdfs:label "is input for"@en ;
   rdfs:subPropertyOf :isParticipantIn ;
 .
-:isManifestationOf
-  a owl:ObjectProperty ;
-  rdfs:comment ""@en ;
-  rdfs:label "is Manifestation Of"@en ;
-  rdfs:subPropertyOf :isFundamentallyRelatedTo ;
-.
 :isOutputOf
   a owl:ObjectProperty ;
   rdfs:comment "relation from Endurant to Perdurant event or process for which the endurant is a result"@en ;
@@ -985,32 +1011,24 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   rdfs:domain :Endurant ;
   rdfs:range [
       a owl:Class ;
-      owl:unionOf (
-          :Process
-          :Event
-        ) ;
+      owl:unionOf [
+          a rdf:List ;
+          rdf:first :Event ;
+          rdf:rest [
+              a rdf:List ;
+              rdf:first :Process ;
+              rdf:rest () ;
+            ] ;
+        ] ;
     ] ;
   rdfs:subPropertyOf :isFundamentallyRelatedTo ;
-.
-:isPhysicallyRelatedTo
-  a owl:ObjectProperty ;
-  rdfs:comment ""@en ;
-  rdfs:label "is Physically Related To"@en ;
-  rdfs:subPropertyOf :isRelatedto ;
 .
 :isPropertyOf
   a owl:ObjectProperty ;
   rdfs:comment "OWL ObjectProperty that binds a Property to some other Particular in which that property inheres."@en ;
   rdfs:comment "link from physical property to a class that exhibits the property"@en ;
-  rdfs:domain :Property ;
   rdfs:label "is Property Of"@en ;
-  rdfs:range :Particular ;
   rdfs:subPropertyOf :isRelatedto ;
-.
-:isRealizedBy
-  a owl:ObjectProperty ;
-  rdfs:subPropertyOf :isFundamentallyRelatedTo ;
-  owl:inverseOf :realizes ;
 .
 :isReferenceFor
   a owl:ObjectProperty ;
@@ -1033,13 +1051,6 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   rdfs:label "is Setting For"@en ;
   rdfs:subPropertyOf :isFundamentallyRelatedTo ;
 .
-:isSpatialLocationFor
-  a owl:ObjectProperty ;
-  rdfs:comment "link from spatial region to an entity that it locates"@en ;
-  rdfs:domain :Spatial_Region ;
-  rdfs:label "is spatial location for"@en ;
-  rdfs:subPropertyOf :isPropertyOf ;
-.
 :isSpatiallyRelatedTo
   a owl:ObjectProperty ;
   rdfs:label "Spatially related to "@en ;
@@ -1047,14 +1058,8 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
 .
 :isTemporalLocationFor
   a owl:ObjectProperty ;
-  rdfs:comment "link from a temporal property to a class that exhibits the property"@en ;
-  rdfs:domain :Time_Region ;
-  rdfs:label "is temporal property of"@en ;
-  rdfs:range [
-      a owl:Class ;
-      owl:complementOf :Time_Region ;
-    ] ;
-  rdfs:subPropertyOf :isPropertyOf ;
+  rdfs:label "isTemporalLocationFor"@en ;
+  rdfs:subPropertyOf :isTemporallyRelatedTo ;
 .
 :isTemporallyRelatedTo
   a owl:ObjectProperty ;
@@ -1062,19 +1067,11 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   rdfs:label "is Temporally Related To"@en ;
   rdfs:subPropertyOf :isRelatedto ;
 .
-:manifests
-  a owl:ObjectProperty ;
-  rdfs:comment ""@en ;
-  rdfs:label "Manifests"@en ;
-  rdfs:subPropertyOf :isFundamentallyRelatedTo ;
-.
 :ontology
   a owl:Ontology ;
   rdfs:comment "Unary predicates are represented by classes, binary predicates by object properties"@en ;
   rdfs:comment "ontology of shared objectProperties and high level classes used to define geologic features"@en ;
   rdfs:label "Shared elements for geoscience ontology"@en ;
-  owl:imports dcterms: ;
-  owl:imports <http://purl.org/dc/terms/> ;
 .
 :overlaps
   a owl:ObjectProperty ;
@@ -1088,19 +1085,13 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   rdfs:label "partial envelope" ;
   rdfs:subPropertyOf :isSpatiallyRelatedTo ;
 .
-:realizes
-  a owl:ObjectProperty ;
-  rdfs:comment ""@en ;
-  rdfs:label "realizes"@en ;
-  rdfs:subPropertyOf :isFundamentallyRelatedTo ;
-.
 :satisfies
   rdfs:comment "" ;
   rdfs:label "satisfies" ;
 .
 :spatiallyDisjoint
   a owl:ObjectProperty ;
-  dcterms:source "https://en.wikipedia.org/wiki/DE-9IM, from Clementini and others(1993, 1994) based on the seminal works of Egenhofer and others (1990, 1991)" ;
+  rdfs:comment "dct:source--  https://en.wikipedia.org/wiki/DE-9IM, from Clementini and others(1993, 1994) based on the seminal works of Egenhofer and others (1990, 1991)" ;
   rdfs:comment "subject and object region have no point in common. They form a set of disconnected geometries."@en ;
   rdfs:comment "there is no intersection between interior or boundary of subject with the object of the relation."@en ;
   rdfs:label "Spatially Disjoint"@en ;
@@ -1108,32 +1099,32 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
 .
 :spatiallyEqual
   a owl:ObjectProperty ;
-  dcterms:source "https://en.wikipedia.org/wiki/DE-9IM, from Clementini and others(1993, 1994) based on the seminal works of Egenhofer and others (1990, 1991)" ;
   rdfs:comment "a and b are topologically equal. Two geometries are topologically equal if their interiors intersect and no part of the interior or boundary of one geometry intersects the exterior of the other"@en ;
+  rdfs:comment "dct:source--  https://en.wikipedia.org/wiki/DE-9IM, from Clementini and others(1993, 1994) based on the seminal works of Egenhofer and others (1990, 1991)" ;
   rdfs:comment "the boundary of the subject intersects only the boundary of the object spatial region, and the interior of the subject intersects only the interior of the obect spatial region."@en ;
   rdfs:label "Spatially Equal"@en ;
   rdfs:subPropertyOf :isSpatiallyRelatedTo ;
 .
 :spatiallyIntersects
   a owl:ObjectProperty ;
-  dcterms:source "https://en.wikipedia.org/wiki/DE-9IM, from Clementini and others(1993, 1994) based on the seminal works of Egenhofer and others (1990, 1991)" ;
   rdfs:comment "The subject and object spatial regions have at least one point in common."@en ;
+  rdfs:comment "dct:source--  https://en.wikipedia.org/wiki/DE-9IM, from Clementini and others(1993, 1994) based on the seminal works of Egenhofer and others (1990, 1991)" ;
   rdfs:label "Spatially intersects"@en ;
   rdfs:subPropertyOf :isSpatiallyRelatedTo ;
 .
 :spatiallyTouch
+  a owl:NamedIndividual ;
   a owl:ObjectProperty ;
-  dcterms:source "https://en.wikipedia.org/wiki/DE-9IM, from Clementini and others(1993, 1994) based on the seminal works of Egenhofer and others (1990, 1991)" ;
+  rdfs:comment "dct:source--  https://en.wikipedia.org/wiki/DE-9IM, from Clementini and others(1993, 1994) based on the seminal works of Egenhofer and others (1990, 1991)" ;
+  rdfs:comment "skos:altLabel--  spatially meet"@en ;
   rdfs:comment "subject and object regions have at least one point in common, but their interiors do not intersect."@en ;
   rdfs:comment "the boundary  and only the boundary of the subect intersects the boundary of the object spatial region"@en ;
   rdfs:label "Spatially Touch"@en ;
   rdfs:subPropertyOf :isSpatiallyRelatedTo ;
-  dcterms:alternative "spatially meet"@en ;
 .
-dcterms:source
-  a owl:AnnotationProperty ;
+xsd:anySimpleType
+  a rdfs:Datatype ;
 .
-
-dcterms:alternative
-  a owl:AnnotationProperty ;
+xsd:date
+  a rdfs:Datatype ;
 .

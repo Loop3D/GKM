@@ -5,7 +5,7 @@
 # imports: http://loop3d.org/GSO/ontology/2020/1/ischart
 
 @prefix evn1: <http://loop3d.org/GSO/ontology/2020/1/ex-event1/> .
-@prefix dcterms: <http://purl.org/dc/terms/> .
+
 @prefix gsen: <http://loop3d.org/GSO/ontology/2020/1/eventenvironment> .
 @prefix gsoc: <http://loop3d.org/GSO/ontology/2020/1/common/> .
 @prefix gsog: <http://loop3d.org/GSO/ontology/2020/1/geologicfeature/> .
@@ -29,19 +29,16 @@
   owl:versionIRI <http://loop3d.org/GSO/ontology/2020/1/ex-event1> ;
 .
 evn1:Cretaceous90Ma
-  [
       a gsog:Geologic_Time_Date ;
 	    rdfs:label "90 Ma"@en  ;
       gsoc:hasUOM [ a gsuom:ma ] ;
       gsog:hasDate "90"^^xsd:decimal ;
        gsoc:hasProperty [a gsoc:Simple_Uncertainty ; gsoc:hasNumericValue "8"^^xsd:decimal ] ;
-    ] ;
-
-.
+ .
 evn1:Cretaceous_dike_intrusion
   a gsog:Geologic_Event ;
   gsoc:hasDirectTemporalLocation evn1:Cretaceous90Ma ;
-  gsoc:isManifestationOf [
+  gsoc:hasConstituent [
       a gspr:intrusion ;
     ] ;
   gsog:hasSetting [
@@ -65,7 +62,7 @@ evn1:HsGenesis
       gsog:hasYoungerInterval gstime:Holocene ;
       rdfs:label "Holocene age"@en  ;
     ] ;
-  gsoc:isManifestationOf [
+  gsoc:hasConstituent [
       a gspr:deposition ;
       rdfs:label "process of sedimentary deposition"@en ;
     ] ;
@@ -84,7 +81,7 @@ evn1:JsGenesis
       gsog:hasYoungerInterval gstime:Jurassic ;
       rdfs:label "Jurassic Age"@en  ;
     ] ;
-  gsoc:isManifestationOf [
+  gsoc:hasConstituent [
       a gspr:deposition ;
     ] ;
   gsog:hasSetting [
@@ -106,7 +103,7 @@ evn1:Kg_Intrusion
       gsog:hasAgeDate evn1:Date110Ma ;
       rdfs:label "Cretaceous 110 Ma Age Date"@en ;
     ] ;
-  gsoc:isManifestationOf [
+  gsoc:hasConstituent [
       a gspr:intrusion ;
     ] ;
   gsog:hasSetting [
@@ -129,7 +126,7 @@ evn1:MsGenesis
       gsog:hasYoungerInterval gstime:Miocene ;
       rdfs:label "Miocene Age"@en ;
     ] ;
-  gsoc:isManifestationOf [
+  gsoc:hasConstituent [
       a gspr:deposition ;
     ] ;
   gsog:hasSetting [
@@ -145,7 +142,7 @@ evn1:Pre_Cretaceous_Burial
 .
 evn1:Pre_Jurassic_Erosion
   a gsog:Geologic_Event ;
-  gsoc:isManifestationOf [ a gspr:Erosion ];
+  gsoc:hasConstituent [ a gspr:Erosion ];
   rdfs:comment "Erosional unroofing of tilted Xm, Cb, Os and Ss "@en ;
   rdfs:label "Pre Jurassic Erosion "@en ;
 .

@@ -1,7 +1,7 @@
 # baseURI: http://loop3d.org/GSO/ontology/2020/1/geologicstructure/fault/ontology
-# imports: http://purl.org/dc/terms/
 
-@prefix dcterms: <http://purl.org/dc/terms/> .
+
+
 @prefix gsfa: <http://loop3d.org/GSO/ontology/2020/1/geologicstructure/fault/> .
 @prefix gsfms: <http://loop3d.org/GSO/ontology/2020/1/geologicstructure/fault/movementsense/> .
 @prefix gsfmt: <http://loop3d.org/GSO/ontology/2020/1/geologicstructure/fault/movementtype/> .
@@ -12,7 +12,7 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix xlink: <http://www.w3.org/1999/xlink> .
+
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
@@ -26,7 +26,7 @@ gsog:Fault_Zone
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty gsoc:isColocatedWith ;
-      owl:someValuesFrom gsgu:Deformation_Unit ;
+      owl:someValuesFrom gsgu:deformation_unit ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
@@ -35,7 +35,7 @@ gsog:Fault_Zone
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty gsog:hasThickness ;
+      owl:onProperty gsog:hasProperty ;
       owl:someValuesFrom gsop:Thickness ;
     ] ;
 .
@@ -121,35 +121,35 @@ gsfa:Fault_Movement_Vector
 .
 gsfa:detachment_fault
   a owl:Class ;
-  dcterms:source "CGI faulttype SKOS vocabulary 2016-10-19"@en ;
+  rdfs:comment "dct:source--  CGI faulttype SKOS vocabulary 2016-10-19"@en ;
   rdfs:comment "A regional-scale, large displacement, low-angle normal fault."@en ;
   rdfs:label "detachment fault"@en ;
   rdfs:subClassOf gsfa:low_angle_normal_fault ;
 .
 gsfa:dextral_strike_slip_fault
   a owl:Class ;
-  dcterms:source "CGI faulttype SKOS vocabulary 2016-10-19"@en ;
+  rdfs:comment "dct:source--  CGI faulttype SKOS vocabulary 2016-10-19"@en ;
   rdfs:comment "Fault with right-lateral strike-parallel displacement component of slip vector more than 10 times the dip-parallel component of the slip vector at at least one location along the fault, and right-lateral displacement over more than half the mapped trace of the fault."@en ;
   rdfs:label "dextral strike slip fault"@en ;
   rdfs:subClassOf gsfa:strike_slip_fault ;
 .
 gsfa:extraction_fault
   a owl:Class ;
-  dcterms:source "Froitzheim, N., Pleuger, J. & Nagel, T.J., 2006. Extraction faults. Journal of Structural Geology v28, pp. 1388-1395."@en ;
+  rdfs:comment "dct:source--  Froitzheim, N., Pleuger, J. & Nagel, T.J., 2006. Extraction faults. Journal of Structural Geology v28, pp. 1388-1395."@en ;
   rdfs:comment "A fault whose two sides have approached each other substantially in the direction perpendicular to the fault."@en ;
   rdfs:label "extraction fault"@en ;
   rdfs:subClassOf gsog:Fault ;
 .
 gsfa:high_angle_fault
   a owl:Class ;
-  dcterms:source "CGI faulttype SKOS vocabulary 2016-10-19"@en ;
+  rdfs:comment "dct:source--  CGI faulttype SKOS vocabulary 2016-10-19"@en ;
   rdfs:comment "Fault that dips at least 45 degrees over more than half of its recognized extent, for which slip or separation is not explicitly specified."@en ;
   rdfs:label "high angle fault"@en ;
   rdfs:subClassOf gsog:Fault ;
 .
 gsfa:high_angle_normal_fault
   a owl:Class ;
-  dcterms:source "CGI faulttype SKOS vocabulary 2016-10-19"@en ;
+  rdfs:comment "dct:source--  CGI faulttype SKOS vocabulary 2016-10-19"@en ;
   rdfs:comment "Fault that dips at least 45 degrees over more than half of the recognized extent of the fault with the hanging wall displaced from a structurally higher position relative to footwall rocks."@en ;
   rdfs:label "high angle normal fault"@en ;
   rdfs:subClassOf gsfa:high_angle_fault ;
@@ -157,7 +157,7 @@ gsfa:high_angle_normal_fault
 .
 gsfa:high_angle_reverse
   a owl:Class ;
-  dcterms:source "CGI faulttype SKOS vocabulary 2016-10-19"@en ;
+  rdfs:comment "dct:source--  CGI faulttype SKOS vocabulary 2016-10-19"@en ;
   rdfs:comment "Reverse fault that dips at least 45 degrees over more than half of its recognized extent, for which slip or separation is not explicitly specified."@en ;
   rdfs:label "high angle reverse"@en ;
   rdfs:subClassOf gsfa:high_angle_fault ;
@@ -165,35 +165,35 @@ gsfa:high_angle_reverse
 .
 gsfa:horizontal_fault
   a owl:Class ;
-  dcterms:source "GGIC vocabularies working group (Australia)"@en ;
+  rdfs:comment "dct:source--  GGIC vocabularies working group (Australia)"@en ;
   rdfs:comment "Fault that dips less than 10 degrees over more than half the recognized extent of the fault."@en ;
   rdfs:label "horizontal fault"@en ;
   rdfs:subClassOf gsfa:low_angle_fault ;
 .
 gsfa:left_normal_fault
   a owl:Class ;
-  dcterms:source "CGI faulttype SKOS vocabulary 2016-10-19"@en ;
+  rdfs:comment "dct:source--  CGI faulttype SKOS vocabulary 2016-10-19"@en ;
   rdfs:comment "High angle fault with slip vector that has ratio of strike-parallel to dip-parallel displacement between 10 to 1 and 1 to 10 at at least one location along the mapped trace, with left-lateral strike-parallel component and normal dip-parallel component over at least half the mapped trace of the fault."@en ;
   rdfs:label "left normal fault"@en ;
   rdfs:subClassOf gsfa:oblique_slip_fault ;
 .
 gsfa:left_reverse_fault
   a owl:Class ;
-  dcterms:source "CGI faulttype SKOS vocabulary 2016-10-19"@en ;
+  rdfs:comment "dct:source--  CGI faulttype SKOS vocabulary 2016-10-19"@en ;
   rdfs:comment "High angle fault with slip vector that has ratio of strike-parallel to dip-parallel displacement between 10 to 1 and 1 to 10 at at least one location along the mapped trace, with left-lateral strike-parallel component and reverse dip-parallel component over at least half the mapped trace of the fault."@en ;
   rdfs:label "left reverse fault"@en ;
   rdfs:subClassOf gsfa:oblique_slip_fault ;
 .
 gsfa:low_angle_fault
   a owl:Class ;
-  dcterms:source "CGI faulttype SKOS vocabulary 2016-10-19"@en ;
+  rdfs:comment "dct:source--  CGI faulttype SKOS vocabulary 2016-10-19"@en ;
   rdfs:comment "Fault that dips less than 45 degrees over more than half of the recognized extent of the fault."@en ;
   rdfs:label "low angle fault"@en ;
   rdfs:subClassOf gsog:Fault ;
 .
 gsfa:low_angle_normal_fault
   a owl:Class ;
-  dcterms:source "CGI faulttype SKOS vocabulary 2016-10-19"@en ;
+  rdfs:comment "dct:source--  CGI faulttype SKOS vocabulary 2016-10-19"@en ;
   rdfs:comment "Fault that dips less than 45 degrees over more than half of the recognized extent of the fault with the hanging wall displaced from a structurally higher position relative to footwall rocks."@en ;
   rdfs:label "low angle normal fault"@en ;
   rdfs:subClassOf gsfa:low_angle_fault ;
@@ -201,14 +201,14 @@ gsfa:low_angle_normal_fault
 .
 gsfa:mixed_extraction_fault
   a owl:Class ;
-  dcterms:source "Froitzheim, N., Pleuger, J. & Nagel, T.J., 2006. Extraction faults. Journal of Structural Geology v28, pp. 1388-1395."@en ;
+  rdfs:comment "dct:source--  Froitzheim, N., Pleuger, J. & Nagel, T.J., 2006. Extraction faults. Journal of Structural Geology v28, pp. 1388-1395."@en ;
   rdfs:comment "An extraction fault with some displacement within the fault plane."@en ;
   rdfs:label "mixed extraction fault"@en ;
   rdfs:subClassOf gsfa:extraction_fault ;
 .
 gsfms:detachment
   a owl:Class ;
-  dcterms:source "GGIC vocabularies working group (Australia)"@en ;
+  rdfs:comment "dct:source--  GGIC vocabularies working group (Australia)"@en ;
   rdfs:comment "A regional-scale low-angle normal fault."@en ;
   rdfs:label "detachment"@en ;
   rdfs:label "détachement"@fr ;
@@ -216,7 +216,7 @@ gsfms:detachment
 .
 gsfms:dextral
   a owl:Class ;
-  dcterms:source "GGIC vocabularies working group (Australia)"@en ;
+  rdfs:comment "dct:source--  GGIC vocabularies working group (Australia)"@en ;
   rdfs:comment "Right-lateral separation sense, in plan view, the side opposite the observer appears displaced to the right.,"@en ;
   rdfs:label "dextral"@en ;
   rdfs:label "dextre"@fr ;
@@ -224,7 +224,7 @@ gsfms:dextral
 .
 gsfms:generic_decollement
   a owl:Class ;
-  dcterms:source "Neuendorf et al. 2005"@en ;
+  rdfs:comment "dct:source--  Neuendorf et al. 2005"@en ;
   rdfs:comment "A large-displacement (kilometers or tens of kilometers) shallowly dipping to subhorizontal fault or shear zone."@en ;
   rdfs:label "decollement"@fr ;
   rdfs:label "generic decollement"@en ;
@@ -232,21 +232,21 @@ gsfms:generic_decollement
 .
 gsfms:no_movement_sense
   a owl:Class ;
-  dcterms:source "Froitzheim, N., Pleuger, J. & Nagel, T.J., 2006. Extraction faults. Journal of Structural Geology v28, pp. 1388-1395."@en ;
+  rdfs:comment "dct:source--  Froitzheim, N., Pleuger, J. & Nagel, T.J., 2006. Extraction faults. Journal of Structural Geology v28, pp. 1388-1395."@en ;
   rdfs:comment "The fault-parallel displacement is effectively zero, as in an extraction fault."@en ;
   rdfs:label "no movement sense"@en ;
   rdfs:subClassOf gsfa:Any_Fault_Movement_Sense ;
 .
 gsfms:normal
   a owl:Class ;
-  dcterms:source "GGIC vocabularies working group (Australia)"@en ;
+  rdfs:comment "dct:source--  GGIC vocabularies working group (Australia)"@en ;
   rdfs:comment "The hanging wall appears to have moved down relative to the footwall, dip of fault usually 45-90 degrees."@en ;
   rdfs:label "normal"@en ;
   rdfs:subClassOf gsfa:Any_Fault_Movement_Sense ;
 .
 gsfms:normal_dextral
   a owl:Class ;
-  dcterms:source "GGIC vocabularies working group (Australia)"@en ;
+  rdfs:comment "dct:source--  GGIC vocabularies working group (Australia)"@en ;
   rdfs:comment "The movement sense includes both normal and dextral components."@en ;
   rdfs:label "normal dextral"@en ;
   rdfs:subClassOf gsfms:dextral ;
@@ -254,7 +254,7 @@ gsfms:normal_dextral
 .
 gsfms:normal_sinistral
   a owl:Class ;
-  dcterms:source "GGIC vocabularies working group (Australia)"@en ;
+  rdfs:comment "dct:source--  GGIC vocabularies working group (Australia)"@en ;
   rdfs:comment "The movement sense includes both normal and sinistral components."@en ;
   rdfs:label "normal sinistral"@en ;
   rdfs:subClassOf gsfms:normal ;
@@ -262,7 +262,7 @@ gsfms:normal_sinistral
 .
 gsfms:reverse
   a owl:Class ;
-  dcterms:source "GGIC vocabularies working group (Australia)"@en ;
+  rdfs:comment "dct:source--  GGIC vocabularies working group (Australia)"@en ;
   rdfs:comment "The hanging wall appears to have moved down relative to the footwall, dip of fault usually greater than 45 degrees."@en ;
   rdfs:label "inverse"@fr ;
   rdfs:label "reverse"@en ;
@@ -270,7 +270,7 @@ gsfms:reverse
 .
 gsfms:reverse_dextral
   a owl:Class ;
-  dcterms:source "GGIC vocabularies working group (Australia)"@en ;
+  rdfs:comment "dct:source--  GGIC vocabularies working group (Australia)"@en ;
   rdfs:comment "The movement sense includes both reverse and dextral components."@en ;
   rdfs:label "reverse dextral"@en ;
   rdfs:subClassOf gsfms:dextral ;
@@ -278,7 +278,7 @@ gsfms:reverse_dextral
 .
 gsfms:reverse_sinistral
   a owl:Class ;
-  dcterms:source "GGIC vocabularies working group (Australia)"@en ;
+  rdfs:comment "dct:source--  GGIC vocabularies working group (Australia)"@en ;
   rdfs:comment "The movement sense includes both reverse and sinistral components."@en ;
   rdfs:label "reverse sinistral"@en ;
   rdfs:subClassOf gsfms:reverse ;
@@ -286,14 +286,14 @@ gsfms:reverse_sinistral
 .
 gsfms:sinistral
   a owl:Class ;
-  dcterms:source "GGIC vocabularies working group (Australia)"@en ;
+  rdfs:comment "dct:source--  GGIC vocabularies working group (Australia)"@en ;
   rdfs:comment "Left-lateral separation sense, in plan view, the side opposite the observer appears displaced to the left."@en ;
   rdfs:label "sinistral"@en ;
   rdfs:subClassOf gsfa:Any_Fault_Movement_Sense ;
 .
 gsfms:thrust
   a owl:Class ;
-  dcterms:source "GGIC vocabularies working group (Australia)"@en ;
+  rdfs:comment "dct:source--  GGIC vocabularies working group (Australia)"@en ;
   rdfs:comment "Reverse fault with dip typically less than 45 degrees, horizontal compression, rather than vertical displacement is characteristic."@en ;
   rdfs:label "décrochement"@fr ;
   rdfs:label "thrust"@en ;
@@ -301,192 +301,192 @@ gsfms:thrust
 .
 gsfms:thrust_decollement
   a owl:Class ;
-  dcterms:source "GeoScience Victoria and others"@en ;
+  rdfs:comment "dct:source--  GeoScience Victoria and others"@en ;
   rdfs:comment "A regional-scale low-angle thrust fault."@en ;
   rdfs:label "thrust decollement"@en ;
   rdfs:subClassOf gsfms:thrust ;
 .
 gsfmt:dip_separation_sense
   a owl:Class ;
-  dcterms:source "GGIC vocabularies working group (Australia)"@en ;
+  rdfs:comment "dct:source--  GGIC vocabularies working group (Australia)"@en ;
   rdfs:comment "A fault along which there is some separation parallel to the dip of the fault."@en ;
   rdfs:label "dip separation sense"@en ;
   rdfs:subClassOf gsfa:Any_Fault_Movement_Type ;
 .
 gsfmt:dip_slip
   a owl:Class ;
-  dcterms:source "GGIC vocabularies working group (Australia)"@en ;
+  rdfs:comment "dct:source--  GGIC vocabularies working group (Australia)"@en ;
   rdfs:comment "The net slip of the fault lies in the dip direction of the fault."@en ;
   rdfs:label "dip slip"@en ;
   rdfs:subClassOf gsfmt:dip_separation_sense ;
 .
 gsfmt:extraction
   a owl:Class ;
-  dcterms:source "Froitzheim, N., Pleuger, J. & Nagel, T.J., 2006. Extraction faults. Journal of Structural Geology v28, pp. 1388-1395."@en ;
+  rdfs:comment "dct:source--  Froitzheim, N., Pleuger, J. & Nagel, T.J., 2006. Extraction faults. Journal of Structural Geology v28, pp. 1388-1395."@en ;
   rdfs:comment "A fault whose two sides have approached each other substantially in the direction perpendicular to the fault."@en ;
   rdfs:label "extraction"@en ;
   rdfs:subClassOf gsfa:Any_Fault_Movement_Type ;
 .
 gsfmt:horizontal
   a owl:Class ;
-  dcterms:source "GGIC vocabularies working group (Australia)"@en ;
+  rdfs:comment "dct:source--  GGIC vocabularies working group (Australia)"@en ;
   rdfs:comment "The fault is horizontal."@en ;
   rdfs:label "horizontal"@en ;
   rdfs:subClassOf gsfa:Any_Fault_Movement_Type ;
 .
 gsfmt:mixed_extraction
   a owl:Class ;
-  dcterms:source "Froitzheim, N., Pleuger, J. & Nagel, T.J., 2006. Extraction faults. Journal of Structural Geology v28, pp. 1388-1395."@en ;
+  rdfs:comment "dct:source--  Froitzheim, N., Pleuger, J. & Nagel, T.J., 2006. Extraction faults. Journal of Structural Geology v28, pp. 1388-1395."@en ;
   rdfs:comment "An extraction fault with some displacement within the fault plane."@en ;
   rdfs:label "mixed extraction"@en ;
   rdfs:subClassOf gsfmt:extraction ;
 .
 gsfmt:oblique_slip
   a owl:Class ;
-  dcterms:source "GGIC vocabularies working group (Australia), SMR"@en ;
+  rdfs:comment "dct:source--  GGIC vocabularies working group (Australia), SMR"@en ;
   rdfs:comment "The net slip of the fault lies between the strike and dip directions of the fault, the slip vector rakes between 10 and 80 degrees in the plane of the fault."@en ;
   rdfs:label "oblique slip"@en ;
   rdfs:subClassOf gsfa:Any_Fault_Movement_Type ;
 .
 gsfmt:pure_extraction
   a owl:Class ;
-  dcterms:source "Froitzheim, N., Pleuger, J. & Nagel, T.J., 2006. Extraction faults. Journal of Structural Geology v28, pp. 1388-1395."@en ;
+  rdfs:comment "dct:source--  Froitzheim, N., Pleuger, J. & Nagel, T.J., 2006. Extraction faults. Journal of Structural Geology v28, pp. 1388-1395."@en ;
   rdfs:comment "An extraction fault with no discernible displacement within the fault plane."@en ;
   rdfs:label "pure extraction"@en ;
   rdfs:subClassOf gsfmt:extraction ;
 .
 gsfmt:scissor
   a owl:Class ;
-  dcterms:source "Neuendorf et al 2005"@en ;
+  rdfs:comment "dct:source--  Neuendorf et al 2005"@en ;
   rdfs:comment "A fault on which there is increasing offset or separation along the strike from an initial point of no offset, with reverse offset in the opposite direction."@en ;
   rdfs:label "scissor"@en ;
   rdfs:subClassOf gsfa:Any_Fault_Movement_Type ;
 .
 gsfmt:strike_separation_sense
   a owl:Class ;
-  dcterms:source "GGIC vocabularies working group (Australia)"@en ;
+  rdfs:comment "dct:source--  GGIC vocabularies working group (Australia)"@en ;
   rdfs:comment "A fault along which there is some separation parallel to the strike of the fault."@en ;
   rdfs:label "strike separation sense"@en ;
   rdfs:subClassOf gsfa:Any_Fault_Movement_Type ;
 .
 gsfmt:strike_slip
   a owl:Class ;
-  dcterms:source "GGIC vocabularies working group (Australia), this vocabulary"@en ;
+  rdfs:comment "dct:source--  GGIC vocabularies working group (Australia), this vocabulary"@en ;
   rdfs:comment "The net slip of the fault (slip vector) is parallel to the strike of the fault."@en ;
   rdfs:label "strike slip"@en ;
   rdfs:subClassOf gsfmt:strike_separation_sense ;
 .
 gsfmt:transcurrent
   a owl:Class ;
-  dcterms:source "GGIC vocabularies working group (Australia)"@en ;
+  rdfs:comment "dct:source--  GGIC vocabularies working group (Australia)"@en ;
   rdfs:comment "A large scale strike-slip fault in which the fault surface is steeply inclined."@en ;
   rdfs:label "transcurrent"@en ;
   rdfs:subClassOf gsfmt:strike_slip ;
 .
 gsfmt:transform
   a owl:Class ;
-  dcterms:source "GGIC vocabularies working group (Australia)"@en ;
+  rdfs:comment "dct:source--  GGIC vocabularies working group (Australia)"@en ;
   rdfs:comment "A variety of strike-slip fault along which the displacement suddenly stops or changes form, typically associated with mid-ocean ridges."@en ;
   rdfs:label "transform"@en ;
   rdfs:subClassOf gsfmt:strike_slip ;
 .
 gsfmt:transpressional
   a owl:Class ;
-  dcterms:source "GGIC vocabularies working group (Australia)"@en ;
+  rdfs:comment "dct:source--  GGIC vocabularies working group (Australia)"@en ;
   rdfs:comment "A fault along which strike-slip deformation is accompanied by a component of shortening transverse to the fault."@en ;
   rdfs:label "transpressional"@en ;
   rdfs:subClassOf gsfmt:oblique_slip ;
 .
 gsfmt:transtensional
   a owl:Class ;
-  dcterms:source "GGIC vocabularies working group (Australia)"@en ;
+  rdfs:comment "dct:source--  GGIC vocabularies working group (Australia)"@en ;
   rdfs:comment "A fault along which strike-slip deformation is accompanied by a component of extension transverse to the fault."@en ;
   rdfs:label "transtensional"@en ;
   rdfs:subClassOf gsfmt:oblique_slip ;
 .
 gsfmt:wrench
   a owl:Class ;
-  dcterms:source "GGIC vocabularies working group (Australia)"@en ;
+  rdfs:comment "dct:source--  GGIC vocabularies working group (Australia)"@en ;
   rdfs:comment "A strike slip fault in which the faut plane is more or less vertical."@en ;
   rdfs:label "wrench"@en ;
   rdfs:subClassOf gsfmt:strike_slip ;
 .
 gsfa:normal_fault
   a owl:Class ;
-  dcterms:source "CGI faulttype SKOS vocabulary 2016-10-19"@en ;
+  rdfs:comment "dct:source--  CGI faulttype SKOS vocabulary 2016-10-19"@en ;
   rdfs:comment "Fault with dip-parallel displacement component of slip vector more than 10 times the strike-parallel component of the slip vector over more than half recognized extent of the fault, and for which the fault dips consistently in the same direction, and for which the hanging wall has been displaced down relative to the footwall."@en ;
   rdfs:label "normal fault"@en ;
   rdfs:subClassOf gsog:Fault ;
 .
 gsfa:oblique_slip_fault
   a owl:Class ;
-  dcterms:source "CGI faulttype SKOS vocabulary 2016-10-19"@en ;
+  rdfs:comment "dct:source--  CGI faulttype SKOS vocabulary 2016-10-19"@en ;
   rdfs:comment "Fault with slip vector that has ratio of strike-parallel to dip-parallel displacement between 10 to 1 and 1 to 10 at at least one location along the mapped trace of the fault."@en ;
   rdfs:label "oblique slip fault"@en ;
   rdfs:subClassOf gsog:Fault ;
 .
 gsfa:ontology
   a owl:Ontology ;
-  dcterms:creator "CGI Geoscience Terminology Working Group; OWL conversion by Stephen Richard for Loop3D project"@en ;
-  dcterms:date "2016-10-19"@en ;
-  dcterms:description "This ontology includes extensions for describing faults in more detail. (ie, a summary of movement type and orientation) as defined by the IUGS Commission for Geoscience Information (CGI) Geoscience Terminology Working Group. Although the terms in this vocabulary are in common usage with definitions in standard texts or glossaries like Neuendorf et al. (2005), the definitions here attempt to establish unambiguous criteria to distinguish the categories, and are thus listed with this vocabulary as the source."@en ;
-  dcterms:modified "2020-01-29"@en ;
+  rdfs:comment "dct:creator--  CGI Geoscience Terminology Working Group; OWL conversion by Stephen Richard for Loop3D project"@en ;
+  rdfs:comment "dct:date--  2016-10-19"@en ;
+  rdfs:comment "This ontology includes extensions for describing faults in more detail. (ie, a summary of movement type and orientation) as defined by the IUGS Commission for Geoscience Information (CGI) Geoscience Terminology Working Group. Although the terms in this vocabulary are in common usage with definitions in standard texts or glossaries like Neuendorf et al. (2005), the definitions here attempt to establish unambiguous criteria to distinguish the categories, and are thus listed with this vocabulary as the source."@en ;
+  rdfs:comment "dct:modified-- 2020-01-29"@en ;
   rdfs:comment "This file contains the 2016 SKOS-RDF version of the CGI Fault Type, Fault Movement Sense and Fault Movement Type vocabulary. Compilation and review in MS Excel spreadsheet, converted to MS Excel for SKOS generation using SKOS_for_GA_from_XLS_2016.03.xslt"@en ;
   rdfs:label "Fault Type"@en ;
-  owl:imports dcterms: ;
+  
 .
 gsfa:pure_extraction_fault
   a owl:Class ;
-  dcterms:source "Froitzheim, N., Pleuger, J. & Nagel, T.J., 2006. Extraction faults. Journal of Structural Geology v28, pp. 1388-1395."@en ;
+  rdfs:comment "dct:source--  Froitzheim, N., Pleuger, J. & Nagel, T.J., 2006. Extraction faults. Journal of Structural Geology v28, pp. 1388-1395."@en ;
   rdfs:comment "An extraction fault with no discernible displacement within the fault plane."@en ;
   rdfs:label "pure extraction fault"@en ;
   rdfs:subClassOf gsfa:extraction_fault ;
 .
 gsfa:reverse_fault
   a owl:Class ;
-  dcterms:source "CGI faulttype SKOS vocabulary 2016-10-19"@en ;
+  rdfs:comment "dct:source--  CGI faulttype SKOS vocabulary 2016-10-19"@en ;
   rdfs:comment "Fault with dip-parallel displacement component of slip vector more than 10 times the strike-parallel component of the slip vector at at least one location along the mapped trace of the fault, and the fault dips consistently in the same direction with the hanging wall displaced up relative to the footwall over at least half the mapped trace of the fault."@en ;
   rdfs:label "reverse fault"@en ;
   rdfs:subClassOf gsog:Fault ;
 .
 gsfa:right_normal_fault
   a owl:Class ;
-  dcterms:source "CGI faulttype SKOS vocabulary 2016-10-19"@en ;
+  rdfs:comment "dct:source--  CGI faulttype SKOS vocabulary 2016-10-19"@en ;
   rdfs:comment "High angle fault with slip vector that has ratio of strike-parallel to dip-parallel displacement between 10 to 1 and 1 to 10 at at least one location along the mapped trace, with right-lateral strike-parallel component and normal dip-parallel component of slip over at least half the mapped trace of the fault"@en ;
   rdfs:label "right normal fault"@en ;
   rdfs:subClassOf gsfa:oblique_slip_fault ;
 .
 gsfa:right_reverse_fault
   a owl:Class ;
-  dcterms:source "CGI faulttype SKOS vocabulary 2016-10-19"@en ;
+  rdfs:comment "dct:source--  CGI faulttype SKOS vocabulary 2016-10-19"@en ;
   rdfs:comment "High angle fault with slip vector that has ratio of strike-parallel to dip-parallel displacement between 10 to 1 and 1 to 10 at at least one location along the mapped trace, with a right-lateral strike-parallel component and reverse dip-parallel component of slip over at least half the mapped trace of the fault."@en ;
   rdfs:label "right reverse fault"@en ;
   rdfs:subClassOf gsfa:oblique_slip_fault ;
 .
 gsfa:scissor_fault
   a owl:Class ;
-  dcterms:source "Neuendorf et al 2005"@en ;
+  rdfs:comment "dct:source--  Neuendorf et al 2005"@en ;
   rdfs:comment "A fault on which there is increasing offset or separation along the strike from an initial point of no offset, with the opposite sense of offset in the opposite direction."@en ;
   rdfs:label "scissor fault"@en ;
   rdfs:subClassOf gsog:Fault ;
 .
 gsfa:sinistral_strike_slip_fault
   a owl:Class ;
-  dcterms:source "CGI faulttype SKOS vocabulary 2016-10-19"@en ;
+  rdfs:comment "dct:source--  CGI faulttype SKOS vocabulary 2016-10-19"@en ;
   rdfs:comment "Fault with left-lateral strike-parallel displacement component of slip vector more than 10 times the dip-parallel component of the slip vector at at least one location along the fault, and left-lateral displacement over more than half the mapped trace of the fault."@en ;
   rdfs:label "sinistral strike slip fault"@en ;
   rdfs:subClassOf gsfa:strike_slip_fault ;
 .
 gsfa:strike_slip_fault
   a owl:Class ;
-  dcterms:source "CGI faulttype SKOS vocabulary 2016-10-19"@en ;
+  rdfs:comment "dct:source--  CGI faulttype SKOS vocabulary 2016-10-19"@en ;
   rdfs:comment "Fault with strike-parallel displacement component of slip vector more than 10 times the dip-parallel component of the slip vector at at least one location along the mapped trace of the fault."@en ;
   rdfs:label "strike slip fault"@en ;
   rdfs:subClassOf gsog:Fault ;
 .
 gsfa:thrust_fault
   a owl:Class ;
-  dcterms:source "CGI faulttype SKOS vocabulary 2016-10-19"@en ;
+  rdfs:comment "dct:source--  CGI faulttype SKOS vocabulary 2016-10-19"@en ;
   rdfs:comment "Fault that dips less than 45 degrees over more than half of the recognized extent of the fault, with a hanging wall displaced from a structurally deeper position relative to footwall rocks."@en ;
   rdfs:label "thrust fault"@en ;
   rdfs:subClassOf gsfa:low_angle_fault ;
@@ -494,7 +494,7 @@ gsfa:thrust_fault
 .
 gsfa:wrench_fault
   a owl:Class ;
-  dcterms:source "GGIC vocabularies working group (Australia)"@en ;
+  rdfs:comment "dct:source--  GGIC vocabularies working group (Australia)"@en ;
   rdfs:comment "A strike slip fault in which the fault plane dips at least 45 degrees over more than half of the recognized extent of the fault."@en ;
   rdfs:label "wrench fault"@en ;
   rdfs:subClassOf gsfa:high_angle_fault ;

@@ -4,13 +4,14 @@
 
 @prefix : <http://loop3d.org/GSO/ontology/2020/1/ex-complexcontact#> .
 @prefix con: <http://loop3d.org/GSO/ontology/2020/1/ex-complexcontact#> .
-@prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ejs: <http://loop3d.org/GSO/ontology/2020/1/ex-formationJs#> .
 @prefix gslth: <http://loop3d.org/GSO/ontology/2020/1/lithology/> .
 @prefix gsoc: <http://loop3d.org/GSO/ontology/2020/1/common/> .
 @prefix gsog: <http://loop3d.org/GSO/ontology/2020/1/geologicfeature/> .
 @prefix gsop: <http://loop3d.org/GSO/ontology/2020/1/geologicproperty/> .
 @prefix gspr: <http://loop3d.org/GSO/ontology/2020/1/geologicprocess/> .
+@prefix gsgu: <http://loop3d.org/GSO/ontology/2020/1/geologicunit/> .
+@prefix gsmg: <http://loop3d.org/GSO/ontology/2020/1/metamorphicgrade/> .
 @prefix gstime: <http://loop3d.org/GSO/ontology/2020/1/ischart/> .
 @prefix gsuom: <http://loop3d.org/GSO/ontology/2020/1/uom/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
@@ -42,10 +43,14 @@ con:KdDike
           gsoc:hasUOM [
               a gsuom:millimeter ;
             ] ;
-          gsoc:hasValue .05 ;
-          rdfs:type gsog:GrainSizeAverage ;
+          gsoc:hasNumericValue ".05"^^xsd:decimal ;
+          a gslth:Grain_Size_Average ;
         ] ;
     ] ;
+  gsoc:hasProperty [
+	a gsgu:Geologic_Unit_Body_Morphology ;
+	gsoc:hasTextValue "Dike";
+  ];
   gsoc:hasPart con:KdUnderMs ;
   gsoc:hasPart con:downSideKd-3_1 ;
   gsoc:hasPart con:upSideKd-3_2 ;
@@ -86,7 +91,7 @@ con:KgGranite
           gsoc:hasUOM [
               a gsuom:millimeter ;
             ] ;
-          gsoc:hasValue 5 ;
+          gsoc:hasNumericValue "5"^^xsd:decimal ;
           rdfs:type gsog:GrainSizeAverage ;
         ] ;
     ] ;
@@ -209,6 +214,9 @@ con:XmRockBody
       a gslth:gneiss ;
       gsoc:hasProperty [
           a gsop:Metamorphic_Grade ;
+		  gsoc:hasValue [
+		    a gsmg:medium_metamorphic_grade
+			]
         ] ;
     ] ;
 .
@@ -400,7 +408,6 @@ con:upSideKd-3_2_4
 .
 <http://loop3d.org/GSO/ontology/2020/1/ex-complexcontact/ontology>
   a owl:Ontology ;
-  spin:imports <http://topbraid.org/spin/spinowl> ;
   rdfs:comment "Focus is Js, a Jurassic age sedimentary unit that has a lower clastic part with an internal tuff marker bed, and an upper limestone part. The unit unconformably overlies tilted Paleozoic strata that overly Early Proterozoic metamorphic rocks; it is intruded by a Cretaceous granite, and the granite and Js are intruded by a Cretaceous diorite dike. After the igneous activity a period of exumation and erosion removed the cover on the Jurassic sediment and Cretaceous igneous rocks, and Late Miocene sediment covered this unconformity."@en ;
   rdfs:comment "Xm, Cb, Os, and Ss and their boundary surfaces not elucidated here"@en ;
   rdfs:comment "this example references the GeologyScenarioForTesting diagram"@en ;

@@ -1,11 +1,8 @@
 # baseURI: http://loop3d.org/GSO/ontology/2020/1/ex-formationJs/ontology
-# imports: http://loop3d.org/GSO/ontology/2020/1/ex-complexcontact/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/loop3dmaster
 
 @prefix con: <http://loop3d.org/GSO/ontology/2020/1/ex-complexcontact#> .
-@prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ejs: <http://loop3d.org/GSO/ontology/2020/1/ex-formationJs#> .
-@prefix ex-complexcontact: <http://loop3d.org/GSO/ontology/2020/1/ex-complexcontact/> .
 @prefix gsen: <http://loop3d.org/GSO/ontology/2020/1/eventenvironment> .
 @prefix gsgu: <http://loop3d.org/GSO/ontology/2020/1/geologicunit/> .
 @prefix gslth: <http://loop3d.org/GSO/ontology/2020/1/lithology/> .
@@ -14,6 +11,7 @@
 @prefix gsog: <http://loop3d.org/GSO/ontology/2020/1/geologicfeature/> .
 @prefix gsop: <http://loop3d.org/GSO/ontology/2020/1/geologicproperty/> .
 @prefix gspr: <http://loop3d.org/GSO/ontology/2020/1/geologicprocess/> .
+@prefix gsrbp: <http://loop3d.org/GSO/ontology/2020/1/geologicunit/rockbodypart/> .
 @prefix gstime: <http://loop3d.org/GSO/ontology/2020/1/ischart/> .
 @prefix gsuom: <http://loop3d.org/GSO/ontology/2020/1/uom/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
@@ -65,7 +63,7 @@ ejs:JsFormation-lower
   rdfs:comment "underlies, overlies, within are subproperty of relatedTo"@en ;
 .
 ejs:JsFormationMarker-6_4
-  a gsog:Bed ;
+  a gsrbp:marker_bed ;
   gsoc:hasConstituent <http://uri.org/Ballyloghlin_tuff> ;
   gsoc:hasPart [
       a gsog:Rock_Body_Bottom ;
@@ -110,12 +108,12 @@ ejs:contactJs-lith_1-lith_2
   a gsog:Gradational_Contact_Zone ;
   gsog:hasHost ejs:lith_1 ;
   gsog:hasHost ejs:lith_2 ;
-  gsog:hasThickness [
+  gsog:hasProperty [
       a gsop:Thickness ;
+      gsoc:hasNumericValue "10"^^xsd:decimal ;
       gsoc:hasUOM [
           a gsuom:meter ;
         ] ;
-      gsoc:hasValue 10 ;
     ] ;
   rdfs:label "internal gradational contact "@en ;
 .
@@ -123,17 +121,17 @@ ejs:contactJs-lith_2-lith_3
   a gsog:Gradational_Contact_Zone ;
   gsog:hasHost ejs:lith_2 ;
   gsog:hasHost ejs:lith_3 ;
-  gsog:hasThickness [
+  gsog:hasProperty [
       a gsop:Thickness ;
+      gsoc:hasNumericValue "4"^^xsd:decimal ;
       gsoc:hasUOM [
           a gsuom:meter ;
         ] ;
-      gsoc:hasValue 4 ;
     ] ;
   rdfs:label "internal gradational contact "@en ;
 .
 ejs:lith_1
-  a gsog:Rock_Body_Part ;
+  a gsrbp:stratigraphic_part ;
   gsoc:hasConstituent gslth:arenite ;
   gsoc:hasConstituent gslth:clastic_conglomerate ;
   gsoc:hasPart ejs:baseJs-6 ;
@@ -141,7 +139,7 @@ ejs:lith_1
   rdfs:comment "need to capture gradational fining upward relationship"@en ;
 .
 ejs:lith_2
-  a gsog:Rock_Body_Part ;
+  a gsrbp:stratigraphic_part ;
   gsoc:hasConstituent [
       a gslth:clastic_sandstone ;
     ] ;
@@ -155,7 +153,7 @@ ejs:lith_2
   gsog:underlies ejs:lith_3 ;
 .
 ejs:lith_3
-  a gsog:Rock_Body_Part ;
+  a gsrbp:stratigraphic_part ;
   gsoc:hasConstituent [
       a gslth:clastic_sandstone ;
       rdfs:label "fine-Grained sandstone"@en ;
@@ -178,6 +176,5 @@ ejs:lith_3
   a owl:Ontology ;
   rdfs:comment "Stephen M. Richard 2019-05-02"@en ;
   rdfs:comment "details of description of Js unit in GeologyScenarioForTesting.pptx"@en ;
-  owl:imports ex-complexcontact:ontology ;
   owl:imports <http://loop3d.org/GSO/ontology/2020/1/loop3dmaster> ;
 .

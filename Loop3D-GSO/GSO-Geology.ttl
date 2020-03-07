@@ -1,12 +1,9 @@
 # baseURI: http://loop3d.org/GSO/ontology/2020/1/geologicfeature/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/common/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/geologicproperty/ontology
-# imports: http://purl.org/dc/terms/
 
 @prefix : <http://loop3d.org/GSO/ontology/2020/1/geologicfeature/> .
-
 @prefix gsoc: <http://loop3d.org/GSO/ontology/2020/1/common/> .
-@prefix gsog: <http://loop3d.org/GSO/ontology/2020/1/geologicfeature/> .
 @prefix gsop: <http://loop3d.org/GSO/ontology/2020/1/geologicproperty/> .
 @prefix gspr: <http://loop3d.org/GSO/ontology/2020/1/geologicprocess/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
@@ -14,24 +11,27 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix dcterms: <http://purl.org/dc/terms/> .
-
-gsog:Geologic_Date_Interval
-  rdfs:comment "same as Geochronologic_Age_Interval"@en ;
-.
 
 gsoc:Element
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty gsoc:isConstituentOf ;
-      owl:someValuesFrom [
+      owl:allValuesFrom [
           a owl:Class ;
-          owl:unionOf (
-              gsog:Rock_Material
-              gsog:Granular_Material
-              gsog:Mineral
-            ) ;
+          owl:unionOf [
+              a rdf:List ;
+              rdf:first :Granular_Material ;
+              rdf:rest [
+                  a rdf:List ;
+                  rdf:first :Mineral ;
+                  rdf:rest [
+                      a rdf:List ;
+                      rdf:first :Rock_Material ;
+                      rdf:rest () ;
+                    ] ;
+                ] ;
+            ] ;
         ] ;
+      owl:onProperty gsoc:isConstituentOf ;
     ] ;
 .
 gsoc:Glass
@@ -43,10 +43,10 @@ gsoc:Glass
           a owl:Class ;
           owl:unionOf [
               a rdf:List ;
-              rdf:first gsog:Granular_Material ;
+              rdf:first :Granular_Material ;
               rdf:rest [
                   a rdf:List ;
-                  rdf:first gsog:Rock_Material ;
+                  rdf:first :Rock_Material ;
                   rdf:rest () ;
                 ] ;
             ] ;
@@ -57,76 +57,81 @@ gsoc:Glass
 gsoc:age_meets
   rdfs:comment "Source interval ends at the beginning of the target interval; there is no intervening time; inverse of age_met_by"@en ;
 .
-gsog:Additive_Process
+:Additive_Process
   a owl:Class ;
   rdfs:comment "process that introduces new matter into the model space"@en ;
   rdfs:label "Additive Process"@en ;
-  rdfs:subClassOf gsog:Geologic_Process ;
+  rdfs:subClassOf :Geologic_Process ;
 .
-gsog:Age_Rank
+:Age_Rank
   a owl:Class ;
   rdfs:comment "most granular geochronologic time interval; one or more Ages are grouped into an Epoch"@en ;
   rdfs:label "Age (time scale rank)"@en ;
-  rdfs:subClassOf gsog:Geologic_Date_Interval ;
+  rdfs:subClassOf :Geologic_Date_Interval ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onClass gsog:Epoch ;
+      owl:onClass :Epoch ;
       owl:onProperty gsoc:isPartOf ;
       owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onClass gsog:Geologic_Date_Interval ;
+      owl:onClass :Geologic_Date_Interval ;
       owl:onProperty gsoc:hasPart ;
       owl:qualifiedCardinality "0"^^xsd:nonNegativeInteger ;
     ] ;
 .
-gsog:Bed
+:Bed
   a owl:Class ;
-  rdfs:subClassOf gsog:Lithostratigraphic_Unit ;
+  rdfs:subClassOf :Lithostratigraphic_Unit ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:allValuesFrom gsog:Rock_Body_Part ;
+      owl:allValuesFrom :Rock_Body_Part ;
       owl:onProperty gsoc:hasPart ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom [
           a owl:Class ;
-          owl:unionOf (
-              gsog:Member
-              gsog:Formation
-            ) ;
+          owl:unionOf [
+              a rdf:List ;
+              rdf:first :Formation ;
+              rdf:rest [
+                  a rdf:List ;
+                  rdf:first :Member ;
+                  rdf:rest () ;
+                ] ;
+            ] ;
         ] ;
       owl:onProperty gsoc:isPartOf ;
     ] ;
 .
-gsog:Bedding_Package
+:Bedding_Package
   a owl:Class ;
   rdfs:comment "A sub-map scale sequence of strata, e.g. bouma sequence, fining-upward sequence, interbedded sandstone and mudstone... "@en ;
   rdfs:label "Bedding Package "@en ;
   rdfs:subClassOf gsoc:Integral_Feature ;
 .
-gsog:Biogenic_Granular_Material
+:Biogenic_Granular_Material
   a owl:Class ;
   rdfs:comment "use to describe body fossil components in a fossiliferous rock, e.g. crinoid columnals, radiolaria in chert, ammonites, shell hash...."@en ;
-  rdfs:subClassOf gsog:Granular_Particle_Material ;
+  rdfs:subClassOf :Granular_Particle_Material ;
 .
-gsog:Boundary_Stratotype
+:Boundary_Stratotype
   a owl:Class ;
   rdfs:comment "A stratigraphic section that contains a designated point in a stratigraphic sequence of essentially continuous deposition, preferably marine, chosen for its correlation potential. http://www.stratigraphy.org/upload/bak/chron.htm"@en ;
   rdfs:label "Boundary Stratotype"@en ;
-  rdfs:subClassOf gsog:Stratotype ;
+  rdfs:subClassOf :Stratotype ;
 .
-gsog:Chronostratigraphic_Unit
+:Chronostratigraphic_Unit
   a owl:Class ;
-  dcterms:source "Salvador, A., 1994, International Stratigraphic Guide, Second Edition"@en ;
   rdfs:comment "A body of rocks that includes all rocks, layered or unlayered, formed during a specific interval of geologic time, and only those rocks formed during that time span. Chronostratigraphic units are bounded by synchronous horizons. The rank and relative magnitude of the units in the chronostratigraphic hierarchy are a function of the length of the time interval that their rocks subtend, rather than of their physical thickness. (http://www.stratigraphy.org/upload/bak/chron.htm)"@en ;
+  rdfs:comment "dct:source--  Salvador, A., 1994, International Stratigraphic Guide, Second Edition"@en ;
   rdfs:label "Chronostratigraphic unit"@en ;
-  rdfs:subClassOf gsog:Geologic_Unit ;
+  rdfs:subClassOf :Geologic_Unit ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:allValuesFrom gsog:Chronostratigraphic_Unit ;
+      owl:allValuesFrom :Chronostratigraphic_Unit ;
       owl:onProperty gsoc:isPartOf ;
     ] ;
   rdfs:subClassOf [
@@ -135,10 +140,10 @@ gsog:Chronostratigraphic_Unit
           a owl:Class ;
           owl:unionOf [
               a rdf:List ;
-              rdf:first gsog:Chronostratigraphic_Unit ;
+              rdf:first :Chronostratigraphic_Unit ;
               rdf:rest [
                   a rdf:List ;
-                  rdf:first gsog:Rock_Body_Part ;
+                  rdf:first :Rock_Body_Part ;
                   rdf:rest () ;
                 ] ;
             ] ;
@@ -148,59 +153,67 @@ gsog:Chronostratigraphic_Unit
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty gsoc:isReferenceFor ;
-      owl:someValuesFrom gsog:Geologic_Date_Interval ;
+      owl:someValuesFrom :Geologic_Date_Interval ;
     ] ;
 .
-gsog:Clast
+:Clast
   a owl:Class ;
   rdfs:label "Clast"@en ;
-  rdfs:subClassOf gsog:Rock_Body_Part ;
+  rdfs:subClassOf :Rock_Body_Part ;
 .
-gsog:Clastic_Granular_Material
+:Clastic_Granular_Material
   a owl:Class ;
   rdfs:comment "Use for clastic sedimentary components --conglomerate clast types, sand components, clay matrix. Also for deformation-producted clasts in tectonic breccia."@en ;
-  rdfs:subClassOf gsog:Granular_Particle_Material ;
+  rdfs:subClassOf :Granular_Particle_Material ;
 .
-gsog:Complex
+:Complex
   a owl:Class ;
   rdfs:label "Complex"@en ;
-  rdfs:subClassOf gsog:Lithostratigraphic_Unit ;
+  rdfs:subClassOf :Lithostratigraphic_Unit ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom :Rock_Body_Part ;
+      owl:onProperty gsoc:hasPart ;
+    ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom [
           a owl:Class ;
-          owl:unionOf (
-              gsog:Formation
-              gsog:Supergroup
-              gsog:Group
-            ) ;
+          owl:unionOf [
+              a rdf:List ;
+              rdf:first :Formation ;
+              rdf:rest [
+                  a rdf:List ;
+                  rdf:first :Group ;
+                  rdf:rest [
+                      a rdf:List ;
+                      rdf:first :Supergroup ;
+                      rdf:rest () ;
+                    ] ;
+                ] ;
+            ] ;
         ] ;
       owl:onProperty gsoc:isPartOf ;
     ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty gsoc:hasPart ;
-      owl:someValuesFrom gsog:Rock_Body_Part ;
-    ] ;
 .
-gsog:Contact
+:Contact
   a owl:Class ;
   rdfs:comment "A surface that separates geologic units. Very general concept representing any kind of surface separating two geologic units, including primary boundaries such as depositional contacts, all kinds of unconformities, intrusive contacts, and gradational contacts, as well as faults that separate geologic units. (CGI ContactType vocabulary, adapted from Jackson, 1997, page 137, NADM C1 2004)"@en ;
   rdfs:comment """Contact (CT): Feature hosted by 2 or more rock bodies that touch; not a part of any of the touching rock bodies. A contact is realizedBy 2 Rock Body Surfaces; each is a part of a different Rock Body host that is in contact. 
 Contact(x) <--> exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RBS (z)]"""@en ;
   rdfs:label "Contact"@en ;
   rdfs:subClassOf gsoc:Low_Dimension_Feature ;
-  rdfs:subClassOf gsog:Geologic_Structure ;
+  rdfs:subClassOf :Geologic_Structure ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-      owl:onClass gsog:Geochronologic_Boundary ;
+      owl:onClass :Geochronologic_Boundary ;
       owl:onProperty gsoc:isReferenceFor ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
-      owl:onClass gsog:Rock_Body ;
+      owl:onClass :Rock_Body ;
       owl:onProperty gsoc:hostedBy ;
     ] ;
   rdfs:subClassOf [
@@ -210,21 +223,21 @@ Contact(x) <--> exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RB
       owl:qualifiedCardinality "0"^^xsd:nonNegativeInteger ;
     ] ;
 .
-gsog:Crystallized_Particle_Material
+:Crystallized_Particle_Material
   a owl:Class ;
   rdfs:comment "Constituent particles/grains that are the product of crystallization during formation of a rock material (see NADMC1 2004). Serves to distinguish crystalline from granular rocks (Struik, 2002). Includes constituents crystallized in evaporite environments, during diagenesis or hydrothermal alteration, or in other low-temperature environments."@en ;
   rdfs:comment "use to describe crystalline grain types in igneous, metamorphic and metasomatic rocks, e.g. the plagioclase phenocrysts, groundmass quartz, biotite phenocrysts, Andalusite porphyroblasts..."@en ;
-  rdfs:subClassOf gsog:Granular_Material ;
+  rdfs:subClassOf :Granular_Material ;
 .
-gsog:Deformation
+:Deformation
   a owl:Class ;
-  rdfs:subClassOf gsog:Geologic_Process ;
+  rdfs:subClassOf :Geologic_Process ;
 .
-gsog:Ductile_Shear_Zone
+:Ductile_Shear_Zone
   a owl:Class ;
   rdfs:label "Ductile Shear Zone"@en ;
   rdfs:subClassOf gsoc:Material_Spatial_Feature ;
-  rdfs:subClassOf gsog:Geologic_Structure ;
+  rdfs:subClassOf :Geologic_Structure ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty gsoc:isParticipantIn ;
@@ -232,22 +245,22 @@ gsog:Ductile_Shear_Zone
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty gsog:hasProperty ;
+      owl:onProperty :hasProperty ;
       owl:someValuesFrom gsop:Displacement ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty gsog:hasThickness ;
+      owl:onProperty :hasProperty ;
       owl:someValuesFrom gsop:Thickness ;
     ] ;
 .
-gsog:Eon
+:Eon
   a owl:Class ;
   rdfs:comment "How will this be defined?  Must contain at least one Era and have duration longer than some Era?"@en ;
-  rdfs:subClassOf gsog:Geologic_Date_Interval ;
+  rdfs:subClassOf :Geologic_Date_Interval ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:allValuesFrom gsog:Eon ;
+      owl:allValuesFrom :Eon ;
       owl:onProperty gsoc:isPartOf ;
     ] ;
   rdfs:subClassOf [
@@ -256,10 +269,10 @@ gsog:Eon
           a owl:Class ;
           owl:unionOf [
               a rdf:List ;
-              rdf:first gsog:Eon ;
+              rdf:first :Eon ;
               rdf:rest [
                   a rdf:List ;
-                  rdf:first gsog:Era ;
+                  rdf:first :Era ;
                   rdf:rest () ;
                 ] ;
             ] ;
@@ -267,68 +280,79 @@ gsog:Eon
       owl:onProperty gsoc:hasPart ;
     ] ;
 .
-gsog:Eonothem
+:Eonothem
   a owl:Class ;
-  rdfs:subClassOf gsog:Chronostratigraphic_Unit ;
+  rdfs:subClassOf :Chronostratigraphic_Unit ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty gsoc:isReferenceFor ;
-      owl:someValuesFrom gsog:Eon ;
+      owl:someValuesFrom :Eon ;
     ] ;
 .
-gsog:Epoch
+:Epoch
   a owl:Class ;
   rdfs:comment "An Epoch may be subdivided into Ages. Epochs are grouped into Periods. Example epochs: Eocene, Pleistocene"@en ;
   rdfs:label "Epoch"@en ;
-  rdfs:subClassOf gsog:Geologic_Date_Interval ;
+  rdfs:subClassOf :Geologic_Date_Interval ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:allValuesFrom gsog:Age_Rank ;
+      owl:allValuesFrom :Age_Rank ;
       owl:onProperty gsoc:hasPart ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onClass gsog:Period ;
+      owl:onClass [
+          a owl:Class ;
+          owl:unionOf [
+              a rdf:List ;
+              rdf:first :Period ;
+              rdf:rest [
+                  a rdf:List ;
+                  rdf:first :Sub-Period ;
+                  rdf:rest () ;
+                ] ;
+            ] ;
+        ] ;
       owl:onProperty gsoc:isPartOf ;
       owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
     ] ;
 .
-gsog:Era
+:Era
   a owl:Class ;
   rdfs:comment "Named rank for geochronologic time interval. An Era may be subdivided into Periods. Eras are grouped into Eons"@en ;
-  rdfs:subClassOf gsog:Geologic_Date_Interval ;
+  rdfs:subClassOf :Geologic_Date_Interval ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:allValuesFrom gsog:Period ;
+      owl:allValuesFrom :Period ;
       owl:onProperty gsoc:hasPart ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty gsoc:isPartOf ;
-      owl:someValuesFrom gsog:Eon ;
+      owl:someValuesFrom :Eon ;
     ] ;
 .
-gsog:Erathem
+:Erathem
   a owl:Class ;
-  rdfs:subClassOf gsog:Chronostratigraphic_Unit ;
+  rdfs:subClassOf :Chronostratigraphic_Unit ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty gsoc:isReferenceFor ;
-      owl:someValuesFrom gsog:Era ;
+      owl:someValuesFrom :Era ;
     ] ;
 .
-gsog:Facies
+:Facies
   a owl:Class ;
   rdfs:label "Facies"@en ;
-  rdfs:subClassOf gsog:Rock_Body_Part ;
+  rdfs:subClassOf :Rock_Body_Part ;
 .
-gsog:Fault
+:Fault
   a owl:Class ;
-  dcterms:source "this vocabulary"@en ;
   rdfs:comment "A discrete surface, or zone of discrete surfaces, with some thickness, separating two rock masses across which one mass has slid past the other and characterized by brittle deformation."@en ;
+  rdfs:comment "dct:source--  this vocabulary"@en ;
   rdfs:label "Fault"@en ;
   rdfs:subClassOf gsoc:Low_Dimension_Feature ;
-  rdfs:subClassOf gsog:Geologic_Structure ;
+  rdfs:subClassOf :Geologic_Structure ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
@@ -338,135 +362,138 @@ gsog:Fault
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty gsoc:isParticipantIn ;
-      owl:someValuesFrom gsog:Deformation ;
+      owl:someValuesFrom :Deformation ;
     ] ;
 .
-gsog:Fault_Zone
+:Fault_Zone
   a owl:Class ;
   rdfs:comment "A material spatial feature that contains one or more fault surfaces as well as deformed rocks related to the faults located between and adjacent to the fault traces"@en ;
   rdfs:label "Fault Zone "@en ;
   rdfs:subClassOf gsoc:Material_Spatial_Feature ;
 .
-gsog:Fold
+:Fold
   a owl:Class ;
   rdfs:label "Fold"@en ;
   rdfs:subClassOf gsoc:Morphologic_Feature ;
-  rdfs:subClassOf gsog:Geologic_Structure ;
+  rdfs:subClassOf :Geologic_Structure ;
 .
-gsog:Foliation
+:Foliation
   a owl:Class ;
-  dcterms:source "Jackson 1997"@en ;
   rdfs:comment "Fabric defined by the planar arrangement of textural or structural features (fabric elements)."@en ;
+  rdfs:comment "dct:source--  Jackson 1997"@en ;
   rdfs:label "Foliation"@en ;
   rdfs:subClassOf gsoc:Integral_Feature ;
-  rdfs:subClassOf gsog:Geologic_Structure ;
+  rdfs:subClassOf :Geologic_Structure ;
 .
-gsog:Formation
+:Formation
   a owl:Class ;
-  rdfs:subClassOf gsog:Lithostratigraphic_Unit ;
+  rdfs:subClassOf :Lithostratigraphic_Unit ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom [
           a owl:Class ;
-          owl:unionOf (
-              gsog:Rock_Body_Part
-              gsog:Member
-              gsog:Bed
-            ) ;
+          owl:unionOf [
+              a rdf:List ;
+              rdf:first :Bed ;
+              rdf:rest [
+                  a rdf:List ;
+                  rdf:first :Member ;
+                  rdf:rest [
+                      a rdf:List ;
+                      rdf:first :Rock_Body_Part ;
+                      rdf:rest () ;
+                    ] ;
+                ] ;
+            ] ;
         ] ;
       owl:onProperty gsoc:hasPart ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty gsoc:isPartOf ;
-      owl:someValuesFrom [
+      owl:allValuesFrom [
           a owl:Class ;
-          owl:unionOf (
-              gsog:Group
-              gsog:Supergroup
-            ) ;
+          owl:unionOf [
+              a rdf:List ;
+              rdf:first :Group ;
+              rdf:rest [
+                  a rdf:List ;
+                  rdf:first :Supergroup ;
+                  rdf:rest () ;
+                ] ;
+            ] ;
         ] ;
+      owl:onProperty gsoc:isPartOf ;
     ] ;
 .
-gsog:Fossil
+:Fossil
   a owl:Class ;
   rdfs:label "Fossil"@en ;
-  rdfs:subClassOf gsog:Rock_Body_Part ;
+  rdfs:subClassOf :Rock_Body_Part ;
 .
-gsog:Fracture
+:Fracture
   a owl:Class ;
   rdfs:comment "axioms for hasDisplacment and gsoc:participantIn are place holders for more specific properties in gsop and gspr. Trying to avoid imports here."@en ;
   rdfs:label "Fracture"@en ;
   rdfs:subClassOf gsoc:Low_Dimension_Feature ;
-  rdfs:subClassOf gsog:Geologic_Structure ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-      owl:onClass gsop:Displacement ;
-      owl:onProperty gsoc:hasProperty ;
-    ] ;
+  rdfs:subClassOf :Geologic_Structure ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty gsoc:isParticipantIn ;
-      owl:someValuesFrom gsog:Deformation ;
+      owl:someValuesFrom :Deformation ;
     ] ;
 .
-gsog:GSSA
+:GSSA
   a owl:Class ;
   rdfs:comment "A Geochronologic Age defined by the International Stratigraphic Commission, based on fiat selection of defined older and younger bounding time coordinates"@en ;
+  rdfs:comment "add SHACL rule that GSSA may not have property Simple_Uncertainty" ;
   rdfs:label "GSSA"@en ;
-  rdfs:subClassOf gsog:Geologic_Time_Date ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onClass gsoc:Simple_Uncertainty ;
-      owl:onProperty gsoc:hasProperty ;
-      owl:qualifiedCardinality "0"^^xsd:nonNegativeInteger ;
-    ] ;
+  rdfs:subClassOf :Geologic_Time_Date ;
 .
-gsog:GSSP
+:GSSP
   a owl:Class ;
   rdfs:comment "A stratigraphic point that is hosted by a top and bottom segment of adjacent chronostratigraphic units. The top and bottom are part of an outcrop and part of a stratotype (type section) for the unit. "@en ;
   rdfs:label "GSSP "@en ;
-  rdfs:subClassOf gsog:Stratigraphic_Point ;
+  rdfs:subClassOf :Stratigraphic_Point ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty gsoc:containedBy ;
-      owl:someValuesFrom gsog:Stratotype ;
+      owl:someValuesFrom :Stratotype ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty gsoc:hasReference ;
-      owl:someValuesFrom gsog:Stratotype ;
+      owl:someValuesFrom :Stratotype ;
     ] ;
 .
-gsog:Geochronologic_Boundary
+:Geochronologic_Boundary
   a owl:Class ;
   rdfs:label "Geochronologic Boundary"@en ;
-  rdfs:subClassOf gsog:Geologic_Time_Date ;
+  rdfs:subClassOf :Geologic_Time_Date ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:allValuesFrom gsog:Stratigraphic_Point ;
+      owl:allValuesFrom :Stratigraphic_Point ;
       owl:onProperty gsoc:hasReference ;
     ] ;
 .
-gsog:Geologic_Date_Interval
+:Geologic_Date_Interval
   a owl:Class ;
-  rdfs:label "Geologic Time Interval"@en ;
+  rdfs:comment "same as Geochronologic_Age_Interval"@en ;
+  rdfs:label "Geologic Date Interval"@en ;
   rdfs:subClassOf gsoc:Time_Interval ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:allValuesFrom gsog:Geologic_Date_Interval ;
+      owl:allValuesFrom :Geologic_Date_Interval ;
       owl:onProperty gsoc:hasPart ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:allValuesFrom gsog:Geologic_Date_Interval ;
-      owl:onProperty gsog:nextTimeInterval ;
+      owl:allValuesFrom :Geologic_Date_Interval ;
+      owl:onProperty :nextTimeInterval ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:allValuesFrom gsog:Geologic_Date_Interval ;
-      owl:onProperty gsog:previousTimeInterval ;
+      owl:allValuesFrom :Geologic_Date_Interval ;
+      owl:onProperty :previousTimeInterval ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
@@ -477,21 +504,22 @@ gsog:Geologic_Date_Interval
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-      owl:onClass gsog:Chronostratigraphic_Unit ;
+      owl:onClass :Chronostratigraphic_Unit ;
       owl:onProperty gsoc:hasReference ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty gsog:hasOlderDate ;
+      owl:onProperty :hasOlderDate ;
       owl:someValuesFrom gsoc:Time_Instant ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty gsog:hasYoungerDate ;
+      owl:onProperty :hasYoungerDate ;
       owl:someValuesFrom gsoc:Time_Instant ;
     ] ;
+  owl:disjointWith :Geologic_Time_Date ;
 .
-gsog:Geologic_Event
+:Geologic_Event
   a owl:Class ;
   rdfs:comment """If an event is caused by a process, then any restrictions on participants of the process also apply to participants of the event 
   causedBy (x,y) ^ GeologicEvent (x) ^ GeologicProcess (y) --> forall z  [participates(z,x) --> participates (z,y)]"""@en ;
@@ -499,7 +527,7 @@ gsog:Geologic_Event
   rdfs:subClassOf gsoc:Event ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:allValuesFrom gsog:Geologic_Process ;
+      owl:allValuesFrom :Geologic_Process ;
       owl:onProperty gsoc:hasConstituent ;
     ] ;
   rdfs:subClassOf [
@@ -508,13 +536,14 @@ gsog:Geologic_Event
       owl:someValuesFrom gsoc:Time_Region ;
     ] ;
 .
-gsog:Geologic_Process
+:Geologic_Process
   a owl:Class ;
+  rdfs:comment "A process that has inputs and or outputs that are part of the Earth System"@en ;
   rdfs:label "Geologic Process"@en ;
   rdfs:subClassOf gsoc:Process ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:allValuesFrom gsog:Geologic_Event ;
+      owl:allValuesFrom :Geologic_Event ;
       owl:onProperty gsoc:isConstituentOf ;
     ] ;
   rdfs:subClassOf [
@@ -523,27 +552,27 @@ gsog:Geologic_Process
       owl:someValuesFrom gsoc:Time_Region ;
     ] ;
 .
-gsog:Geologic_Structure
+:Geologic_Structure
   a owl:Class ;
   rdfs:label "Geologic Structure"@en ;
   rdfs:subClassOf gsoc:Feature ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:allValuesFrom gsog:Geologic_Structure ;
+      owl:allValuesFrom :Geologic_Structure ;
       owl:onProperty gsoc:hasPart ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:allValuesFrom gsog:Geologic_Structure ;
+      owl:allValuesFrom :Geologic_Structure ;
       owl:onProperty gsoc:isPartOf ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:allValuesFrom gsog:Rock_Body ;
+      owl:allValuesFrom :Rock_Body ;
       owl:onProperty gsoc:hostedBy ;
     ] ;
 .
-gsog:Geologic_Time_Date
+:Geologic_Time_Date
   a owl:Class ;
   rdfs:comment """A temporal coordinate value, located either by a point position (with uncertainty) on a time line, specified by a numeric coordinate (generally MYPB, but definitions of 'present' vary). Can be a GeochronologicBoundary if it is associated with a location in a particular stratigraphic section, or a GSSA if the numeric time coordinate is arbitrarily assigned.
 Probably should specify a Temporal Reference System used to assign coordinate values."""@en ;
@@ -551,15 +580,8 @@ Probably should specify a Temporal Reference System used to assign coordinate va
   rdfs:subClassOf gsoc:Time_Instant ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onClass gsoc:Any_Unit_of_Measure ;
-      owl:onProperty gsoc:hasUOM ;
-      owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onDataRange xsd:decimal ;
-      owl:onProperty gsog:hasDate ;
-      owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty gsoc:determinedBy ;
+      owl:someValuesFrom gsoc:Determining_Event ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
@@ -568,44 +590,48 @@ Probably should specify a Temporal Reference System used to assign coordinate va
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty gsoc:hasProperty ;
-      owl:someValuesFrom gsoc:Statistical_Calculation ;
+      owl:onProperty gsoc:hasUOM ;
+      owl:someValuesFrom gsoc:Any_Unit_of_Measure ;
     ] ;
-  owl:disjointWith gsog:Geologic_Date_Interval ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty :hasDate ;
+      owl:someValuesFrom xsd:decimal ;
+    ] ;
 .
-gsog:Geologic_Time_Interval
+:Geologic_Time_Interval
   a owl:Class ;
   rdfs:comment "Same as Chronostratigraphic_Age_Interval"@en ;
   rdfs:label "Geologic Time Interval"@en ;
   rdfs:subClassOf gsoc:Time_Interval ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:allValuesFrom gsog:Geologic_Date_Interval ;
-      owl:onProperty gsog:hasOlderInterval ;
+      owl:onProperty :hasOlderInterval ;
+      owl:someValuesFrom :Geologic_Time_Interval ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:allValuesFrom gsog:Geologic_Date_Interval ;
-      owl:onProperty gsog:hasYoungerInterval ;
+      owl:onProperty :hasYoungerInterval ;
+      owl:someValuesFrom :Geologic_Time_Interval ;
     ] ;
 .
-gsog:Geologic_Time_Scale
+:Geologic_Time_Scale
   a owl:Class ;
   rdfs:comment "A collection of Geochronologic Age entities that obey a special topology (Cox and Richard, 2010)."@en ;
   rdfs:label "Geologic Time Scale"@en ;
   rdfs:subClassOf gsoc:Time_Interval ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:allValuesFrom gsog:Geologic_Date_Interval ;
+      owl:allValuesFrom :Geologic_Date_Interval ;
       owl:onProperty gsoc:hasPart ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty gsoc:hasPart ;
-      owl:someValuesFrom gsog:Geologic_Date_Interval ;
+      owl:someValuesFrom :Geologic_Date_Interval ;
     ] ;
 .
-gsog:Geologic_Unit
+:Geologic_Unit
   a owl:Class ;
   rdfs:comment """A geologic unit and (the amount of) its rock material are co-located, but different entities. They can share properties, e.g. porosity, thickness, density, but also have differences:
 - different persistence conditions: the material can exist without the unit; e.g. a unit can be cease to exist due to natural (seismic) or artificial (explosion) means, but the material can persist
@@ -616,39 +642,39 @@ gsog:Geologic_Unit
   rdfs:comment "Type of geologic unit is unknown, unspecified, irrelevant, or some type not included in the vocabulary. Type makes no implication for required properties or cardinalities. This is the root concept for the type hierarchy."@en ;
   rdfs:label "Geologic Unit"@en ;
   rdfs:subClassOf gsoc:Physical_Object ;
-  rdfs:subClassOf gsog:Rock_Body ;
+  rdfs:subClassOf :Rock_Body ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:allValuesFrom gsog:Geologic_Unit ;
+      owl:allValuesFrom :Geologic_Unit ;
       owl:onProperty gsoc:isPartOf ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:allValuesFrom gsog:Rock_Material ;
-      owl:onProperty gsoc:hasConstituent ;
+      owl:allValuesFrom :Stratotype ;
+      owl:onProperty gsoc:hasReference ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:allValuesFrom gsog:Stratotype ;
-      owl:onProperty gsoc:hasReference ;
+      owl:onProperty gsoc:hasConstituent ;
+      owl:someValuesFrom :Rock_Material ;
     ] ;
 .
-gsog:Gradational_Contact_Zone
+:Gradational_Contact_Zone
   a owl:Class ;
   rdfs:label "Gradational Contact Zone"@en ;
   rdfs:subClassOf gsoc:Material_Spatial_Feature ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty gsoc:isColocatedWith ;
-      owl:someValuesFrom gsog:Contact ;
+      owl:someValuesFrom :Contact ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty gsog:hasThickness ;
+      owl:onProperty :hasProperty ;
       owl:someValuesFrom gsop:Thickness ;
     ] ;
 .
-gsog:Granular_Material
+:Granular_Material
   a owl:Class ;
   rdfs:comment "Particle is defined as a \\General term, used without restriction as to shape composition or internal structure, for a separable or distinct unit in a [compound material].\\ (Neuendorf et al, 2005).  Note that the term particle has no size denotation as used here."@en ;
   rdfs:comment "Represents a rock body constituent composed of particles that share a set of characteristics, e.g. particle size (distribution), mineralogy, shape.  E.g. the sand that is a constituent in a sandstone, or the feldspar phenocrysts that are a constituent in a granite."@en ;
@@ -657,96 +683,95 @@ gsog:Granular_Material
   rdfs:subClassOf gsoc:Amount_Of_Matter ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:allValuesFrom gsog:Rock_Material ;
+      owl:allValuesFrom :Rock_Material ;
       owl:onProperty gsoc:isConstituentOf ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:allValuesFrom [
+      owl:onProperty gsoc:hasConstituent ;
+      owl:someValuesFrom [
           a owl:Class ;
           owl:unionOf [
               a rdf:List ;
               rdf:first gsoc:Element ;
               rdf:rest [
                   a rdf:List ;
-                  rdf:first gsog:Glass ;
+                  rdf:first gsoc:Glass ;
                   rdf:rest [
                       a rdf:List ;
-                      rdf:first gsog:Mineral ;
+                      rdf:first :Mineral ;
                       rdf:rest () ;
                     ] ;
                 ] ;
             ] ;
         ] ;
-      owl:onProperty gsoc:hasConstituent ;
     ] ;
 .
-gsog:Granular_Particle_Material
+:Granular_Particle_Material
   a owl:Class ;
-  dcterms:source "NADM SLTTs 2004"@en ;
   rdfs:comment "Material consisting of a collection of pre-existing objects (particles, grains) before incorporation into a particulate aggregate. \\...a component of solid material that has the form of grains, clasts, fragments, or whole objects of any size, shape, composition, texture, and structure.\\ (NADMSC SLTTs, 2004)"@en ;
+  rdfs:comment "dct:source--  NADM SLTTs 2004"@en ;
   rdfs:label "granular particle"@en ;
-  rdfs:subClassOf gsog:Granular_Material ;
+  rdfs:subClassOf :Granular_Material ;
 .
-gsog:Group
+:Group
   a owl:Class ;
-  rdfs:subClassOf gsog:Lithostratigraphic_Unit ;
+  rdfs:subClassOf :Lithostratigraphic_Unit ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:allValuesFrom gsog:Supergroup ;
+      owl:allValuesFrom :Supergroup ;
       owl:onProperty gsoc:isPartOf ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:allValuesFrom [
-          a owl:Class ;
-          owl:unionOf (
-              gsog:Formation
-              gsog:Complex
-            ) ;
-        ] ;
       owl:onProperty gsoc:hasPart ;
+      owl:someValuesFrom [
+          a owl:Class ;
+          owl:unionOf [
+              a rdf:List ;
+              rdf:first :Complex ;
+              rdf:rest [
+                  a rdf:List ;
+                  rdf:first :Formation ;
+                  rdf:rest () ;
+                ] ;
+            ] ;
+        ] ;
     ] ;
 .
-gsog:Inclusion
+:Inclusion
   a owl:Class ;
   rdfs:label "Inclusion"@en ;
-  rdfs:subClassOf gsog:Rock_Body_Part ;
+  rdfs:subClassOf :Rock_Body_Part ;
 .
-gsog:Joint
+:Joint
   a owl:Class ;
   rdfs:label "Joint"@en ;
-  rdfs:subClassOf gsog:Fracture ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:maxQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
-      owl:onClass gsop:Displacement ;
-      owl:onProperty gsog:hasProperty ;
-    ] ;
+  rdfs:subClassOf :Fracture ;
 .
-gsog:Lineation
+:Lineation
   a owl:Class ;
-  dcterms:source "Neuendorf et al 2005, CGI lineationtype SKOS vocabulary 2016-11-21"@en ;
   rdfs:comment "Nongenetic term for a penetrative linear structure."@en ;
+  rdfs:comment "dct:source--  Neuendorf et al 2005, CGI lineationtype SKOS vocabulary 2016-11-21"@en ;
   rdfs:label "Lineation"@en ;
   rdfs:subClassOf gsoc:Integral_Feature ;
-  rdfs:subClassOf gsog:Geologic_Structure ;
+  rdfs:subClassOf :Geologic_Structure ;
 .
-gsog:Lithosome
+:Lithosome
   a owl:Class ;
   rdfs:comment "A kind of rock body that has multiple occurrences in a single geologic unit. A mass of rock of uniform character, characterized by geometry, composition, and internal structure. (http://inspire.ec.europa.eu/codelist/CompositionPartRoleValue/lithosome)"@en ;
   rdfs:label "Lithosome "@en ;
-  rdfs:subClassOf gsog:Rock_Body_Part ;
+  rdfs:subClassOf :Rock_Body_Part ;
 .
-gsog:Lithostratigraphic_Unit
+:Lithostratigraphic_Unit
   a owl:Class ;
-  dcterms:source "Salvador, A., 1994, International Stratigraphic Guide, Second Edition"@en ;
   rdfs:comment "Geologic unit defined on the basis of observable and distinctive lithologic properties or combination of lithologic properties and stratigraphic relationships. Denotes a particular body of rock."@en ;
+  rdfs:comment "dct:source--  Salvador, A., 1994, International Stratigraphic Guide, Second Edition"@en ;
   rdfs:label "Lithostratigraphic Unit"@en ;
-  rdfs:subClassOf gsog:Geologic_Unit ;
+  rdfs:subClassOf :Geologic_Unit ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:allValuesFrom gsog:Lithostratigraphic_Unit ;
+      owl:allValuesFrom :Lithostratigraphic_Unit ;
       owl:onProperty gsoc:isPartOf ;
     ] ;
   rdfs:subClassOf [
@@ -755,10 +780,10 @@ gsog:Lithostratigraphic_Unit
           a owl:Class ;
           owl:unionOf [
               a rdf:List ;
-              rdf:first gsog:Lithostratigraphic_Unit ;
+              rdf:first :Lithostratigraphic_Unit ;
               rdf:rest [
                   a rdf:List ;
-                  rdf:first gsog:Rock_Body_Part ;
+                  rdf:first :Rock_Body_Part ;
                   rdf:rest () ;
                 ] ;
             ] ;
@@ -766,198 +791,215 @@ gsog:Lithostratigraphic_Unit
       owl:onProperty gsoc:hasPart ;
     ] ;
 .
-gsog:Member
+:Member
   a owl:Class ;
-  rdfs:subClassOf gsog:Lithostratigraphic_Unit ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom gsog:Formation ;
-      owl:onProperty gsoc:isPartOf ;
-    ] ;
+  rdfs:subClassOf :Lithostratigraphic_Unit ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom [
           a owl:Class ;
-          owl:unionOf (
-              gsog:Rock_Body_Part
-              gsog:Bed
-            ) ;
+          owl:unionOf [
+              a rdf:List ;
+              rdf:first :Bed ;
+              rdf:rest [
+                  a rdf:List ;
+                  rdf:first :Rock_Body_Part ;
+                  rdf:rest () ;
+                ] ;
+            ] ;
         ] ;
       owl:onProperty gsoc:hasPart ;
     ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:isPartOf ;
+      owl:someValuesFrom :Formation ;
+    ] ;
 .
-gsog:Mineral
+:Mineral
   a owl:Class ;
   rdfs:comment "\"A mineral is an element or chemical compound that is normally crystalline and that has been formed as a result of geological processes.\" Nickel, Ernest H. (1995), The definition of a mineral,  The Canadian Mineralogist. 33 (3): 689–90."@en ;
   rdfs:label "Mineral"@en ;
   rdfs:subClassOf gsoc:Amount_Of_Matter ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:allValuesFrom gsoc:Element ;
-      owl:onProperty gsoc:hasConstituent ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
       owl:allValuesFrom [
           a owl:Class ;
           owl:unionOf [
               a rdf:List ;
-              rdf:first gsog:Granular_Material ;
+              rdf:first :Granular_Material ;
               rdf:rest [
                   a rdf:List ;
-                  rdf:first gsog:Rock_Material ;
+                  rdf:first :Rock_Material ;
                   rdf:rest () ;
                 ] ;
             ] ;
         ] ;
       owl:onProperty gsoc:isConstituentOf ;
     ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasConstituent ;
+      owl:someValuesFrom gsoc:Element ;
+    ] ;
 .
-gsog:Outcrop
+:Outcrop
   a owl:Class ;
   rdfs:label "Rock Material Outcrop"@en ;
-  rdfs:subClassOf gsog:Rock_Body_Part ;
+  rdfs:subClassOf :Rock_Body_Part ;
 .
-gsog:Overgrowth
+:Overgrowth
   a owl:Class ;
   rdfs:comment "A rock body part that encloses some other constituent in the rock body" ;
   rdfs:label "Overgrowth" ;
-  rdfs:subClassOf gsog:Rock_Body_Part ;
+  rdfs:subClassOf :Rock_Body_Part ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty gsoc:covers ;
-      owl:someValuesFrom gsog:Granular_Material ;
+      owl:someValuesFrom :Granular_Material ;
     ] ;
 .
-gsog:Pendant
+:Pendant
   a owl:Class ;
   rdfs:comment "a mass of country rock that is entirely surrounded by an igneous intrusion such as a batholith or other pluton. "@en ;
   rdfs:label "Pendant "@en ;
-  rdfs:subClassOf gsog:Rock_Body_Part ;
+  rdfs:subClassOf :Rock_Body_Part ;
 .
-gsog:Period
+:Period
   a owl:Class ;
   rdfs:comment "Named rank for geochronologic time interval. Periods may be subdivided into Epochs. Periods are grouped into an Era."@en ;
-  rdfs:subClassOf gsog:Geologic_Date_Interval ;
+  rdfs:subClassOf :Geologic_Date_Interval ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:allValuesFrom gsog:Epoch ;
+      owl:allValuesFrom [
+          a owl:Class ;
+          owl:unionOf [
+              a rdf:List ;
+              rdf:first :Epoch ;
+              rdf:rest [
+                  a rdf:List ;
+                  rdf:first :Sub-Period ;
+                  rdf:rest () ;
+                ] ;
+            ] ;
+        ] ;
       owl:onProperty gsoc:hasPart ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onClass gsog:Era ;
+      owl:onClass :Era ;
       owl:onProperty gsoc:isPartOf ;
       owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
     ] ;
 .
-gsog:Pyroclastic_Granular_Material
+:Pyroclastic_Granular_Material
   a owl:Class ;
   rdfs:comment "Particles ejected during a volcanic eruption. (Jackson, 1997, p. 521). Clast whose origin is a direct result of volcanic process (excludes fragments in lava autobreccia) and has not been reworked by sedimentary processes (Gillespie and Styles 1999). Pyroclasts."@en ;
   rdfs:comment "Use for description of pyroclastic rocks"@en ;
-  rdfs:subClassOf gsog:Clastic_Granular_Material ;
+  rdfs:subClassOf :Clastic_Granular_Material ;
 .
-gsog:Rock_Body
+:Rock_Body
   a owl:Class ;
   rdfs:comment "An endurant in which some Rock Material inheres, either as an 'amount of matter' (disembodied matter), or as a geologic unit."@en ;
   rdfs:label "Rock Body"@en ;
   rdfs:subClassOf gsoc:Physical_Endurant ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:allValuesFrom gsoc:Amount_Of_Matter ;
-      owl:onProperty gsoc:hasConstituent ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
       owl:allValuesFrom [
           a owl:Class ;
           owl:unionOf [
               a rdf:List ;
-              rdf:first gsog:Geologic_Unit ;
+              rdf:first :Geologic_Unit ;
               rdf:rest [
                   a rdf:List ;
-                  rdf:first gsog:Rock_Body_Part ;
+                  rdf:first :Rock_Body_Part ;
                   rdf:rest () ;
                 ] ;
             ] ;
         ] ;
       owl:onProperty gsoc:hasPart ;
     ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasConstituent ;
+      owl:someValuesFrom gsoc:Amount_Of_Matter ;
+    ] ;
 .
-gsog:Rock_Body_Bottom
+:Rock_Body_Bottom
   a owl:Class ;
   rdfs:comment """Rock Body Bottom (RBB):
 The bottom surface of a rock body.
 RBT (x) <--> RBD (x) ^ exists z forall y [isPartOf (y,z) ^ hasHost (z,x) -> above (y,x) v isPartOf (y,x)]"""@en ;
   rdfs:label "Rock Body Bottom"@en ;
-  rdfs:subClassOf gsog:Rock_Body_Boundary ;
+  rdfs:subClassOf :Rock_Body_Boundary ;
 .
-gsog:Rock_Body_Boundary
+:Rock_Body_Boundary
   a owl:Class ;
   rdfs:comment """a physical boundary hosted by a rock body.
 RBD (x) <--> SF (x) ^ exists y [RB (y) ^ hosts (y,x)] 
 The exterior-facing material of a rock body.  A rock body boundary can have a thickness physical property"""@en ;
   rdfs:label "Rock Body Boundary"@en ;
   rdfs:subClassOf gsoc:Physical_Boundary ;
-  rdfs:subClassOf gsog:Rock_Body_Part ;
+  rdfs:subClassOf :Rock_Body_Part ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:allValuesFrom gsog:Rock_Body_Boundary ;
+      owl:allValuesFrom :Rock_Body_Boundary ;
       owl:onProperty gsoc:hasPart ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty gsoc:hostedBy ;
-      owl:someValuesFrom gsog:Rock_Body ;
+      owl:someValuesFrom :Rock_Body ;
     ] ;
 .
-gsog:Rock_Body_Part
+:Rock_Body_Part
   a owl:Class ;
   rdfs:label "Rock Body Part"@en ;
-  rdfs:subClassOf gsog:Rock_Body ;
+  rdfs:subClassOf :Rock_Body ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:allValuesFrom gsog:Rock_Body_Part ;
+      owl:allValuesFrom :Rock_Body_Part ;
       owl:onProperty gsoc:hasPart ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:allValuesFrom gsog:Rock_Material ;
+      owl:allValuesFrom :Rock_Material ;
       owl:onProperty gsoc:hasConstituent ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty gsoc:isPartOf ;
-      owl:someValuesFrom gsog:Rock_Body ;
+      owl:someValuesFrom :Rock_Body ;
     ] ;
 .
-gsog:Rock_Body_Top
+:Rock_Body_Top
   a owl:Class ;
   rdfs:comment """Rock Body Top (RBT):
 The top surface of a rock body.
 RBT (x) <--> RBD (x) ^ exists z forall y [(isPartOf (y,z) ^ hasHost (z,x)) -> (below (y,x) v isPartOf (y,x))]"""@en ;
   rdfs:label "Rock Body Top"@en ;
-  rdfs:subClassOf gsog:Rock_Body_Boundary ;
+  rdfs:subClassOf :Rock_Body_Boundary ;
 .
-gsog:Rock_Body_Void
+:Rock_Body_Void
   a owl:Class ;
   rdfs:label "Rock Body Void"@en ;
   rdfs:subClassOf gsoc:Physical_Void ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty gsoc:hostedBy ;
-      owl:someValuesFrom gsog:Rock_Body ;
+      owl:someValuesFrom :Rock_Body ;
     ] ;
 .
-gsog:Rock_Material
+:Rock_Material
   a owl:Class ;
   rdfs:comment "hook into CGI simple lithology ontology. SMR has one, and Clinton Smyth has an extension of that with more rock types."@en ;
+  rdfs:comment "need SHACL rule for isPartOf exactly 0 'Rock Body'"@en ;
   rdfs:label "Rock Material"@en ;
   rdfs:subClassOf gsoc:Amount_Of_Matter ;
-  rdfs:subClassOf gsog:Rock_Body ;
+  rdfs:subClassOf :Rock_Body ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:allValuesFrom gsog:Rock_Body_Part ;
+      owl:allValuesFrom :Rock_Body_Part ;
       owl:onProperty gsoc:hasPart ;
     ] ;
   rdfs:subClassOf [
@@ -966,34 +1008,10 @@ gsog:Rock_Material
           a owl:Class ;
           owl:unionOf [
               a rdf:List ;
-              rdf:first gsoc:Element ;
+              rdf:first :Geologic_Unit ;
               rdf:rest [
                   a rdf:List ;
-                  rdf:first gsog:Glass ;
-                  rdf:rest [
-                      a rdf:List ;
-                      rdf:first gsog:Granular_Material ;
-                      rdf:rest [
-                          a rdf:List ;
-                          rdf:first gsog:Mineral ;
-                          rdf:rest () ;
-                        ] ;
-                    ] ;
-                ] ;
-            ] ;
-        ] ;
-      owl:onProperty gsoc:hasConstituent ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom [
-          a owl:Class ;
-          owl:unionOf [
-              a rdf:List ;
-              rdf:first gsog:Geologic_Unit ;
-              rdf:rest [
-                  a rdf:List ;
-                  rdf:first gsog:Rock_Body_Part ;
+                  rdf:first :Rock_Body_Part ;
                   rdf:rest () ;
                 ] ;
             ] ;
@@ -1002,538 +1020,601 @@ gsog:Rock_Material
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onClass gsog:Rock_Body ;
-      owl:onProperty gsoc:isPartOf ;
-      owl:qualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+      owl:onProperty gsoc:hasConstituent ;
+      owl:someValuesFrom [
+          a owl:Class ;
+          owl:unionOf [
+              a rdf:List ;
+              rdf:first gsoc:Element ;
+              rdf:rest [
+                  a rdf:List ;
+                  rdf:first gsoc:Glass ;
+                  rdf:rest [
+                      a rdf:List ;
+                      rdf:first :Granular_Material ;
+                      rdf:rest [
+                          a rdf:List ;
+                          rdf:first :Mineral ;
+                          rdf:rest () ;
+                        ] ;
+                    ] ;
+                ] ;
+            ] ;
+        ] ;
     ] ;
 .
-gsog:Series
+:Series
   a owl:Class ;
-  rdfs:subClassOf gsog:Chronostratigraphic_Unit ;
+  rdfs:subClassOf :Chronostratigraphic_Unit ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty gsoc:isReferenceFor ;
-      owl:someValuesFrom gsog:Epoch ;
+      owl:someValuesFrom :Epoch ;
     ] ;
 .
-gsog:Specimen
+:Specimen
   a owl:Class ;
   rdfs:label "Rock Material Specimen"@en ;
-  rdfs:subClassOf gsog:Rock_Body_Part ;
+  rdfs:subClassOf :Rock_Body_Part ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty gsoc:isSampleOf ;
-      owl:someValuesFrom gsog:Rock_Body ;
+      owl:someValuesFrom :Rock_Body ;
     ] ;
 .
-gsog:Stage
+:Stage
   a owl:Class ;
   rdfs:comment "The stage includes all rocks formed during an age. A stage is normally the lowest ranking unit in the chronostratigraphic hierarchy that can be recognized on a global scale. The stage has been called the basic working unit of chronostratigraphy because it is suited in scope and rank to the practical needs and purposes of intraregional chronostratigraphic classification. It is a subdivision of a series."@en ;
-  rdfs:subClassOf gsog:Chronostratigraphic_Unit ;
+  rdfs:subClassOf :Chronostratigraphic_Unit ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty gsoc:isPartOf ;
-      owl:someValuesFrom gsog:Series ;
+      owl:someValuesFrom :Series ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty gsoc:isReferenceFor ;
-      owl:someValuesFrom gsog:Age_Rank ;
+      owl:someValuesFrom :Age_Rank ;
     ] ;
 .
-gsog:Stratigraphic_Point
+:Stratigraphic_Point
   a owl:Class ;
   rdfs:comment "A spatially restricted part of a Contact feature, typically located by a point location. Could be thought of as an instance of a Contact, or a sample of a Contact."@en ;
   rdfs:label "Stratigraphic Point"@en ;
-  rdfs:subClassOf gsog:Contact ;
+  rdfs:subClassOf :Contact ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty gsoc:hasReference ;
-      owl:someValuesFrom gsog:Stratotype ;
+      owl:someValuesFrom :Stratotype ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty gsog:hasSpatialProperty ;
+      owl:onProperty :hasSpatialProperty ;
       owl:someValuesFrom gsoc:Spatial_Location ;
     ] ;
 .
-gsog:Stratigraphic_Section
+:Stratigraphic_Section
   a owl:Class ;
   rdfs:label "Stratigraphic Section"@en ;
-  rdfs:subClassOf gsog:Rock_Body_Part ;
+  rdfs:subClassOf :Rock_Body_Part ;
 .
-gsog:Stratotype
+:Stratotype
   a owl:Class ;
+  rdfs:comment "Add SHACL rule that a Stratotype may not have a 'hasReference' relation"@en ;
   rdfs:label "Stratotype"@en ;
-  rdfs:subClassOf gsog:Stratigraphic_Section ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:cardinality "0"^^xsd:nonNegativeInteger ;
-      owl:onProperty gsoc:hasReference ;
-    ] ;
+  rdfs:subClassOf :Stratigraphic_Section ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty gsoc:isReferenceFor ;
       owl:someValuesFrom gsoc:Physical_Endurant ;
     ] ;
 .
-gsog:Sub-Period
+:Sub-Period
   a owl:Class ;
   rdfs:comment "Named rank for geochronologic time interval. Sub-Periods may be subdivided into Epochs. Sub-Periods are grouped into a period."@en ;
-  rdfs:subClassOf gsog:Geologic_Date_Interval ;
+  rdfs:subClassOf :Geologic_Date_Interval ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:allValuesFrom gsog:Epoch ;
+      owl:allValuesFrom :Epoch ;
       owl:onProperty gsoc:hasPart ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onClass gsog:Period ;
+      owl:onClass :Period ;
       owl:onProperty gsoc:isPartOf ;
       owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
     ] ;
 .
-gsog:Substage
+:Substage
   a owl:Class ;
-  rdfs:subClassOf gsog:Chronostratigraphic_Unit ;
+  rdfs:subClassOf :Chronostratigraphic_Unit ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty gsoc:isReferenceFor ;
-      owl:someValuesFrom gsog:Age_Rank ;
+      owl:someValuesFrom :Age_Rank ;
     ] ;
 .
-gsog:Subtractive_Process
+:Subtractive_Process
   a owl:Class ;
+  rdfs:comment "A process that removes matter from the scope of an Earth Model."@en ;
   rdfs:label "Subtractive Process"@en ;
-  rdfs:subClassOf gsog:Geologic_Process ;
+  rdfs:subClassOf :Geologic_Process ;
 .
-gsog:Supereon
+:Supereon
   a owl:Class ;
   rdfs:comment "hight ranking geochronlogic time interval, parts are eons"@en ;
   rdfs:label "Supereon"@en ;
-  rdfs:subClassOf gsog:Geologic_Date_Interval ;
+  rdfs:subClassOf :Geologic_Date_Interval ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:allValuesFrom gsog:Eon ;
+      owl:allValuesFrom :Eon ;
       owl:onProperty gsoc:hasPart ;
     ] ;
 .
-gsog:Supergroup
+:Supergroup
   a owl:Class ;
-  rdfs:subClassOf gsog:Lithostratigraphic_Unit ;
+  rdfs:subClassOf :Lithostratigraphic_Unit ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:allValuesFrom [
+      owl:onProperty gsoc:hasPart ;
+      owl:someValuesFrom [
           a owl:Class ;
           owl:unionOf [
               a rdf:List ;
-              rdf:first gsog:Complex ;
+              rdf:first :Complex ;
               rdf:rest [
                   a rdf:List ;
-                  rdf:first gsog:Formation ;
+                  rdf:first :Formation ;
                   rdf:rest [
                       a rdf:List ;
-                      rdf:first gsog:Group ;
+                      rdf:first :Group ;
                       rdf:rest () ;
                     ] ;
                 ] ;
             ] ;
         ] ;
-      owl:onProperty gsoc:hasPart ;
     ] ;
 .
-gsog:System
+:System
   a owl:Class ;
-  rdfs:subClassOf gsog:Chronostratigraphic_Unit ;
+  rdfs:subClassOf :Chronostratigraphic_Unit ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty gsoc:isReferenceFor ;
-      owl:someValuesFrom gsog:Period ;
+      owl:someValuesFrom :Period ;
     ] ;
 .
-gsog:Transformation
+:Transformation
   a owl:Class ;
   rdfs:comment "process that  changes the characteristics of matter within the model space"@en ;
   rdfs:label "Transformation Process"@en ;
-  rdfs:subClassOf gsog:Geologic_Process ;
+  rdfs:subClassOf :Geologic_Process ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom gsoc:Amount_Of_Matter ;
+      owl:onProperty gsop:hasInput ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom gsoc:Amount_Of_Matter ;
+      owl:onProperty gsop:hasOutput ;
+    ] ;
 .
-gsog:Xenolith
+:Xenolith
   a owl:Class ;
   rdfs:label "Xenolith"@en ;
-  rdfs:subClassOf gsog:Rock_Body_Part ;
+  rdfs:subClassOf :Rock_Body_Part ;
 .
-gsog:aggregate_non-clastic_particle
+:aggregate_non-clastic_particle
   a owl:Class ;
-  dcterms:source "this vocabulary"@en ;
   rdfs:comment "Generic term for a non-clastic particle that is itself composed of an aggregation of particles."@en ;
+  rdfs:comment "dct:source--  this vocabulary"@en ;
   rdfs:label "aggregate non clastic particle"@en ;
-  rdfs:subClassOf gsog:Rock_Body_Part ;
+  rdfs:subClassOf :Rock_Body_Part ;
 .
-gsog:amygdule
+:amygdule
   a owl:Class ;
-  dcterms:source "based on Neuendorf et al 2005"@en ;
   rdfs:comment "Cavity filled with secondary minerals, denotes that cavities are filled vesicles, thus restricted to volcanic rock. Have to model as a cavity/with material.  Rock hosts cavity"@en ;
+  rdfs:comment "dct:source--  based on Neuendorf et al 2005"@en ;
   rdfs:label "amygdule"@en ;
-  rdfs:subClassOf gsog:vesicle ;
+  rdfs:subClassOf :vesicle ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty gsoc:contains ;
-      owl:someValuesFrom gsog:Mineral ;
+      owl:someValuesFrom :Mineral ;
     ] ;
 .
-gsog:axiolite
+:axiolite
   a owl:Class ;
-  dcterms:source "Williams, Turner, Gilbert 1954"@en ;
   rdfs:comment "Elongate to irregular lense with radial aggregates of acicular and fibrous mineral coalescing along a central axis."@en ;
+  rdfs:comment "dct:source--  Williams, Turner, Gilbert 1954"@en ;
   rdfs:label "axiolite"@en ;
-  rdfs:subClassOf gsog:aggregate_non-clastic_particle ;
+  rdfs:subClassOf :aggregate_non-clastic_particle ;
 .
-gsog:bolide_impact
+:bolide_impact
   a owl:Class ;
-  dcterms:source "this vocabulary"@en ;
   rdfs:comment "The impact of an extraterrestrial body on the surface of the earth"@en ;
+  rdfs:comment "dct:source--  this vocabulary"@en ;
   rdfs:label "bolide impact"@en ;
-  rdfs:subClassOf gsog:Geologic_Event ;
+  rdfs:subClassOf :Geologic_Event ;
 .
-gsog:cometary_impact
+:cometary_impact
   a owl:Class ;
-  dcterms:source "this vocabulary"@en ;
   rdfs:comment "The impact of a comet on the surface of the earth"@en ;
+  rdfs:comment "dct:source--  this vocabulary"@en ;
   rdfs:label "cometary impact"@en ;
-  rdfs:subClassOf gsog:bolide_impact ;
+  rdfs:subClassOf :bolide_impact ;
 .
-gsog:concretionary_particle
+:concretionary_particle
   a owl:Class ;
-  dcterms:source "Neuendorf et al, 2005"@en ;
   rdfs:comment "A hard, compact mass or aggregate of mineral matter, normally subsperical but commonly oblate, disc-shaped or irregular. Formed by precipitation of mineral from solution in the pores of a granular rock, localized around a nucleus or center, to define a discrete, sharply separated object. Size ranges from cm to meters. Particle geometry description for concretion describes the concretion size and shape, not the size and shape of particles forming the concretion."@en ;
+  rdfs:comment "dct:source--  Neuendorf et al, 2005"@en ;
   rdfs:label "concretionary particle"@en ;
-  rdfs:subClassOf gsog:aggregate_non-clastic_particle ;
+  rdfs:subClassOf :aggregate_non-clastic_particle ;
 .
-gsog:crosscuts
+:crosscuts
   a owl:ObjectProperty ;
   rdfs:comment "relationship in with the subject Rock_Body or Physical_Feature exhibits field relations demonstrating that it is younger that the object Rock_Body or Physical_Feature and there is a spatial intersection"@en ;
   rdfs:domain [
       a owl:Class ;
-      owl:unionOf (
-          gsog:Rock_Body
-          gsoc:Feature
-        ) ;
+      owl:unionOf [
+          a rdf:List ;
+          rdf:first gsoc:Feature ;
+          rdf:rest [
+              a rdf:List ;
+              rdf:first :Rock_Body ;
+              rdf:rest () ;
+            ] ;
+        ] ;
     ] ;
   rdfs:label "cross-cuts or truncates"@en ;
   rdfs:range [
       a owl:Class ;
-      owl:unionOf (
-          gsog:Rock_Body
-          gsoc:Feature
-        ) ;
+      owl:unionOf [
+          a rdf:List ;
+          rdf:first gsoc:Feature ;
+          rdf:rest [
+              a rdf:List ;
+              rdf:first :Rock_Body ;
+              rdf:rest () ;
+            ] ;
+        ] ;
     ] ;
-  rdfs:subPropertyOf gsog:isGeologicallyRelatedTo ;
+  rdfs:subPropertyOf :isGeologicallyRelatedTo ;
+  owl:inverseOf :iscrosscutby ;
 .
-gsog:fenestra
+:fenestra
   a owl:Class ;
-  dcterms:source "based on Neuendorf et al 2005"@en ;
   rdfs:comment "Primary or penecontemporaneous gap or cavity in the framework of a sedimentary rock, larger than grain-supported intersticies. May be open space or have partial to complete fill with secondary cement or introduced sediment."@en ;
+  rdfs:comment "dct:source--  based on Neuendorf et al 2005"@en ;
   rdfs:label "fenestra"@en ;
-  rdfs:subClassOf gsog:vug ;
+  rdfs:subClassOf :vug ;
 .
-gsog:hasAgeDate
+:hasAgeDate
+  a owl:ObjectProperty ;
   rdfs:comment "property to assigne a Geologic_Time_Date to a Perdurant."@en ;
   rdfs:label "has age date"@en ;
   rdfs:range gsoc:Time_Instant ;
 .
-gsog:hasDate
+:hasDate
   a owl:DatatypeProperty ;
   rdfs:comment "numeric value for a time coordinate. Associated hasUOM property asserts the units of measure; the temporal reference system used to assert dates should be explained in metadata for the data instances."@en ;
   rdfs:subPropertyOf gsoc:hasNumericValue ;
 .
-gsog:hasMaterialConstituent
+:hasMaterialConstituent
   a owl:ObjectProperty ;
-  rdfs:range gsog:Rock_Material ;
+  rdfs:range :Rock_Material ;
   rdfs:subPropertyOf gsoc:hasConstituent ;
 .
-gsog:hasOlderDate
+:hasOlderDate
   a owl:ObjectProperty ;
-  rdfs:label "has Older Bounding Age"@en ;
+  rdfs:comment "assign an older age boundary as a time instant for a time interval"@en ;
+  rdfs:label "older bounding time position"@en ;
   rdfs:range gsoc:Time_Instant ;
-  rdfs:subPropertyOf gsoc:hasProperty ;
+  rdfs:subPropertyOf gsoc:age_starts ;
 .
-gsog:hasOlderHost
+:hasOlderHost
   a owl:ObjectProperty ;
   rdfs:subPropertyOf gsoc:hostedBy ;
 .
-gsog:hasOlderInterval
+:hasOlderInterval
   a owl:ObjectProperty ;
-  rdfs:range gsog:Geologic_Date_Interval ;
-  rdfs:subPropertyOf gsoc:hasProperty ;
+  rdfs:comment "assign an older age boundary for a time interval as a time interval, e.g. Jurassic thru Cretaceous, older age is Jurassic."@en ;
+  rdfs:label "older bounding time interval"@en ;
+  rdfs:range :Geologic_Date_Interval ;
+  rdfs:subPropertyOf gsoc:age_starts ;
 .
-gsog:hasThickness
+:hasProperty
   a owl:ObjectProperty ;
-  rdfs:comment "thickness (length) of a tabular or sheet like body or feature."@en ;
-  rdfs:label "has thickness"@en ;
-  rdfs:range gsop:Thickness ;
-  rdfs:subPropertyOf gsoc:hasProperty ;
 .
-gsog:hasYoungerDate
+:hasSpatialProperty
+  a owl:ObjectProperty ;
+.
+:hasYoungerDate
   a owl:ObjectProperty ;
   rdfs:comment "assign a younger age boundary as a time instant for a time interval"@en ;
   rdfs:label "younger bounding time position"@en ;
   rdfs:range gsoc:Time_Instant ;
-  rdfs:subPropertyOf gsoc:hasProperty ;
+  rdfs:subPropertyOf gsoc:age_finishes ;
 .
-gsog:hasYoungerHost
+:hasYoungerHost
   a owl:ObjectProperty ;
   rdfs:comment "for a feature that is hosted by multiple entities, e.g. a contact, specify the younger hosting entity."@en ;
   rdfs:label "younger host"@en ;
   rdfs:subPropertyOf gsoc:hostedBy ;
 .
-gsog:hasYoungerInterval
+:hasYoungerInterval
   a owl:ObjectProperty ;
   rdfs:comment "assign a younger age boundary for a time interval as a time interval, e.g. Jurassic thru Cretaceous, younger age is Cretaceous."@en ;
   rdfs:label "younger bounding time interval"@en ;
-  rdfs:range gsog:Geologic_Date_Interval ;
-  rdfs:subPropertyOf gsoc:hasProperty ;
+  rdfs:range :Geologic_Date_Interval ;
+  rdfs:subPropertyOf gsoc:age_finishes ;
 .
-gsog:hydrothermal_vein
+:hydrothermal_vein
   a owl:Class ;
-  dcterms:source "Neuendorf et al 2005, this vocabulary"@en ;
   rdfs:comment "A tabular or sheet-like part of a compound material formed by hydrothermal (or other metasomatic) mineral filling a fracture, may be associated with replacement of the host rock adjacent to the body"@en ;
+  rdfs:comment "dct:source--  Neuendorf et al 2005, this vocabulary"@en ;
   rdfs:label "hydrothermal vein"@en ;
-  rdfs:subClassOf gsog:intrusive_sheet ;
+  rdfs:subClassOf :intrusive_sheet ;
 .
-gsog:igneous_vein
+:igneous_vein
   a owl:Class ;
-  dcterms:source "this vocabulary"@en ;
   rdfs:comment "A tabular or sheet like part of a compound material formed by the intrusion of magma"@en ;
+  rdfs:comment "dct:source--  this vocabulary"@en ;
   rdfs:label "igneous vein"@en ;
-  rdfs:subClassOf gsog:intrusive_sheet ;
+  rdfs:subClassOf :intrusive_sheet ;
 .
-gsog:intrudes
+:intrudes
   a owl:ObjectProperty ;
   rdfs:comment "subject rock body intrudes object rock body. Implies that subject rock body is igneous rock, and that object rock body is older than subject rock body"@en ;
   rdfs:label "intrudes"@en ;
-  rdfs:subPropertyOf gsog:isGeologicallyRelatedTo ;
+  rdfs:subPropertyOf :isGeologicallyRelatedTo ;
 .
-gsog:intrusive_sheet
+:intrusive_sheet
   a owl:Class ;
-  dcterms:source "this vocabulary"@en ;
   rdfs:comment "A tabular or sheet-like part of a compound material, genetic origin not specified"@en ;
+  rdfs:comment "dct:source--  this vocabulary"@en ;
   rdfs:label "intrusive sheet"@en ;
-  rdfs:subClassOf gsog:Rock_Body_Part ;
+  rdfs:subClassOf :Rock_Body_Part ;
 .
-gsog:isGeologicallyRelatedTo
+:isGeologicallyRelatedTo
   a owl:ObjectProperty ;
   rdfs:label "geologically related to"@en ;
   rdfs:subPropertyOf gsoc:isRelatedto ;
 .
-gsog:isPartOfTimeScale
+:isPartOfTimeScale
   a owl:ObjectProperty ;
   rdfs:comment "object property linking a time interval to a time scale"@en ;
   rdfs:label "in Time Scale "@en ;
-  rdfs:range gsog:Geologic_Time_Scale ;
+  rdfs:range :Geologic_Time_Scale ;
   rdfs:subPropertyOf gsoc:isPartOf ;
 .
-gsog:isTransformedFrom
+:isTransformedFrom
   a owl:ObjectProperty ;
   rdfs:comment "link from a subject rock_material to an object rock_material from which it was derived as the product of metamorphism, metasomatism, or alteration. Identifies protolith of composite genesis material."@en ;
-  rdfs:domain gsog:Rock_Material ;
+  rdfs:domain :Rock_Material ;
   rdfs:label "has protolith"@en ;
-  rdfs:range gsog:Rock_Material ;
-  rdfs:subPropertyOf gsog:isGeologicallyRelatedTo ;
+  rdfs:range :Rock_Material ;
+  rdfs:subPropertyOf :isGeologicallyRelatedTo ;
 .
-gsog:isTransformedInto
+:isTransformedInto
   a owl:ObjectProperty ;
   rdfs:comment "link from a subject rock_material to an object rock_material that is the product of metamorphism, metasomatism, or alteration of the subject rock."@en ;
-  rdfs:domain gsog:Rock_Material ;
+  rdfs:domain :Rock_Material ;
   rdfs:label "protolith of"@en ;
-  rdfs:range gsog:Rock_Material ;
-  rdfs:subPropertyOf gsog:isGeologicallyRelatedTo ;
+  rdfs:range :Rock_Material ;
+  rdfs:subPropertyOf :isGeologicallyRelatedTo ;
 .
-gsog:iscrosscutby
+:iscrosscutby
   a owl:ObjectProperty ;
   rdfs:comment "relationship in with the object Rock_Body or Physical_Feature exhibits field relations demonstrating that it is younger that the subject Rock_Body or Physical_Feature"@en ;
   rdfs:label "is cross-cut or truncated by"@en ;
-  rdfs:subPropertyOf gsog:isGeologicallyRelatedTo ;
-  owl:inverseOf gsog:crosscuts ;
+  rdfs:subPropertyOf :isGeologicallyRelatedTo ;
 .
-gsog:lithophysae
+:lithophysae
   a owl:Class ;
-  dcterms:source "Neuendorf et al 2005"@en ;
   rdfs:comment "Bubble-like cavity with concentric shells of finely crystalline minerals, open space remains in core of structure. Radiating fibrous structure may be present in secondary mineral fill. Typically in silicic volcanic rock."@en ;
+  rdfs:comment "dct:source--  Neuendorf et al 2005"@en ;
   rdfs:label "lithophysae"@en ;
-  rdfs:subClassOf gsog:Rock_Body_Void ;
+  rdfs:subClassOf :Rock_Body_Void ;
 .
-gsog:litparlitintrudes
+:litparlitintrudes
   a owl:ObjectProperty ;
   rdfs:comment "Intruded rock is penetrated by numerous sheets of intruded igneous rock, usually granitic. {@en}  lit par lit -- type of contact?" ;
   rdfs:label "lit-par-lit intrudes"@en ;
-  rdfs:subPropertyOf gsog:intrudes ;
+  rdfs:subPropertyOf :intrudes ;
 .
-gsog:magnetic_field_reversal
+:magnetic_field_reversal
   a owl:Class ;
-  dcterms:source "this vocabulary"@en ;
   rdfs:comment "A geomagnetic event in which the Earth's magnetic field reverses direction."@en ;
+  rdfs:comment "dct:source--  this vocabulary"@en ;
   rdfs:label "magnetic field reversal"@en ;
-  rdfs:subClassOf gsog:Geologic_Event ;
+  rdfs:subClassOf :Geologic_Event ;
 .
-gsog:meteorite_impact
+:meteorite_impact
   a owl:Class ;
-  dcterms:source "this vocabulary"@en ;
   rdfs:comment "The impact of a meteorite on the surface of the earth"@en ;
+  rdfs:comment "dct:source--  this vocabulary"@en ;
   rdfs:label "meteorite impact"@en ;
-  rdfs:subClassOf gsog:bolide_impact ;
+  rdfs:subClassOf :bolide_impact ;
 .
-gsog:miarolitic_cavity
+:miarolitic_cavity
   a owl:Class ;
-  dcterms:source "Neuendorf et al 2005"@en ;
   rdfs:comment "An irregular cavity in a phaneritic igneous rock into which small crystals of the rock-forming minerals protrude."@en ;
+  rdfs:comment "dct:source--  Neuendorf et al 2005"@en ;
   rdfs:label "miarolitic cavity"@en ;
-  rdfs:subClassOf gsog:vug ;
+  rdfs:subClassOf :vug ;
 .
-gsog:nextTimeInterval
+:nextTimeInterval
   a owl:ObjectProperty ;
   rdfs:comment "Source interval ends at the beginning of the target interval; there is no intervening time; inverse of age_met_by"@en ;
-  rdfs:domain gsog:Geologic_Date_Interval ;
+  rdfs:domain :Geologic_Date_Interval ;
   rdfs:label "next time interval"@en ;
-  rdfs:range gsog:Geologic_Date_Interval ;
+  rdfs:range :Geologic_Date_Interval ;
   rdfs:subPropertyOf gsoc:age_meets ;
 .
-gsog:nodule
+:nodule
   a owl:Class ;
-  dcterms:source "Neuendorf et al., 2005"@en ;
   rdfs:comment "An irregularly rounded mass of a mineral or mineral aggregate normally having a warty or knobby surface and no internal sructure, usually with a contrasting composition from the enclosing sediment or rock matrix in which it is embedded, and that can be separated as a discrete mass from the host material. Igneous nodules should be classified as 'Igneous inclusions'."@en ;
+  rdfs:comment "dct:source--  Neuendorf et al., 2005"@en ;
   rdfs:label "nodule"@en ;
-  rdfs:subClassOf gsog:Rock_Body_Part ;
+  rdfs:subClassOf :Rock_Body_Part ;
 .
-gsog:ontology
+:ontology
   a owl:Ontology ;
   rdfs:comment "Base geologic feature classes, constraints, and relationships"@en ;
   owl:imports gsoc:ontology ;
   owl:imports gsop:ontology ;
-
 .
-gsog:orb
+:orb
   a owl:Class ;
-  dcterms:source "this vocabulary"@en ;
   rdfs:comment "Igneous constituent typically mafic, equant rounded spheroid with concentric mineralogic banding"@en ;
+  rdfs:comment "dct:source--  this vocabulary"@en ;
   rdfs:label "orb"@en ;
-  rdfs:subClassOf gsog:Rock_Body_Part ;
+  rdfs:subClassOf :Rock_Body_Part ;
 .
-gsog:overlies
+:overlies
   a owl:ObjectProperty ;
   rdfs:comment "Relationship between rock bodies in which subject body is above and in contact with the object body in geographic reference system (the object might or might not be younger than the subject). Generally applied to stratified rock bodies {@en}  subclass from meets" ;
-  rdfs:domain gsog:Rock_Body ;
+  rdfs:domain :Rock_Body ;
   rdfs:label "overlies "@en ;
-  rdfs:range gsog:Rock_Body ;
+  rdfs:range :Rock_Body ;
   rdfs:subPropertyOf gsoc:isSpatiallyRelatedTo ;
 .
-gsog:overprintedby
+:overprintedby
   a owl:ObjectProperty ;
   rdfs:comment "relationship in which a subject  Rock_Body or Physical_Feature is interpreted to have a subject fabric (foliation or lineation) imposed on it"@en ;
   rdfs:domain [
       a owl:Class ;
-      owl:unionOf (
-          gsog:Rock_Body
-          gsoc:Feature
-        ) ;
+      owl:unionOf [
+          a rdf:List ;
+          rdf:first gsoc:Feature ;
+          rdf:rest [
+              a rdf:List ;
+              rdf:first :Rock_Body ;
+              rdf:rest () ;
+            ] ;
+        ] ;
     ] ;
   rdfs:label "overprinted by"@en ;
   rdfs:range [
       a owl:Class ;
-      owl:unionOf (
-          gsog:Foliation
-          gsog:Lineation
-        ) ;
+      owl:unionOf [
+          a rdf:List ;
+          rdf:first :Foliation ;
+          rdf:rest [
+              a rdf:List ;
+              rdf:first :Lineation ;
+              rdf:rest () ;
+            ] ;
+        ] ;
     ] ;
-  rdfs:subPropertyOf gsog:isGeologicallyRelatedTo ;
-  owl:inverseOf gsog:overprints ;
+  rdfs:subPropertyOf :isGeologicallyRelatedTo ;
+  owl:inverseOf :overprints ;
 .
-gsog:overprints
+:overprints
   a owl:ObjectProperty ;
   rdfs:comment "relationship in which a subject fabric (foliation or lineation) is interpreted to have formed after the object Rock_Body or Physical_Feature"@en ;
   rdfs:domain [
       a owl:Class ;
-      owl:unionOf (
-          gsog:Foliation
-          gsog:Lineation
-        ) ;
+      owl:unionOf [
+          a rdf:List ;
+          rdf:first :Foliation ;
+          rdf:rest [
+              a rdf:List ;
+              rdf:first :Lineation ;
+              rdf:rest () ;
+            ] ;
+        ] ;
     ] ;
   rdfs:label "overprints"@en ;
   rdfs:range [
       a owl:Class ;
-      owl:unionOf (
-          gsog:Rock_Body
-          gsoc:Feature
-        ) ;
+      owl:unionOf [
+          a rdf:List ;
+          rdf:first gsoc:Feature ;
+          rdf:rest [
+              a rdf:List ;
+              rdf:first :Rock_Body ;
+              rdf:rest () ;
+            ] ;
+        ] ;
     ] ;
-  rdfs:subPropertyOf gsog:isGeologicallyRelatedTo ;
+  rdfs:subPropertyOf :isGeologicallyRelatedTo ;
 .
-gsog:pore_space
+:pore_space
   a owl:Class ;
-  dcterms:source "Neuendorf et al 2005, this vocabulary"@en ;
   rdfs:comment "Open space between particles in a granular aggregate."@en ;
+  rdfs:comment "dct:source--  Neuendorf et al 2005, this vocabulary"@en ;
   rdfs:label "pore space"@en ;
-  rdfs:subClassOf gsog:Rock_Body_Void ;
+  rdfs:subClassOf :Rock_Body_Void ;
 .
-gsog:previousTimeInterval
+:previousTimeInterval
   a owl:ObjectProperty ;
   rdfs:comment "Source interval starts at the end of the target interval; there is no intervening time; inverse of meets"@en ;
-  rdfs:domain gsog:Geologic_Date_Interval ;
+  rdfs:domain :Geologic_Date_Interval ;
   rdfs:label "previous time interval"@en ;
-  rdfs:range gsog:Geologic_Date_Interval ;
+  rdfs:range :Geologic_Date_Interval ;
   rdfs:subPropertyOf gsoc:age_met_by ;
 .
-gsog:schlieren
+:schlieren
   a owl:Class ;
-  dcterms:source "GGIPAC"@en ;
   rdfs:comment "a tabular body, generally a few cm to a few metres long, within a plutonic rockhaving different mineral proportions and colour to the surrounding rock"@en ;
+  rdfs:comment "dct:source--  GGIPAC"@en ;
   rdfs:label "schlieren"@en ;
-  rdfs:subClassOf gsog:Rock_Body_Part ;
+  rdfs:subClassOf :Rock_Body_Part ;
 .
-gsog:spherule
+:spherule
   a owl:Class ;
-  dcterms:source "Williams, Turner, Gilbert 1954"@en ;
   rdfs:comment "A rounded or spherical mass of acicular or fibrous mineral, generally in glassy siliceous lava."@en ;
+  rdfs:comment "dct:source--  Williams, Turner, Gilbert 1954"@en ;
   rdfs:label "spherule"@en ;
-  rdfs:subClassOf gsog:aggregate_non-clastic_particle ;
+  rdfs:subClassOf :aggregate_non-clastic_particle ;
 .
-gsog:syngenetic_nodule
+:syngenetic_nodule
   a owl:Class ;
-  dcterms:source "NADM SLTTs 2004, Jackson 1997"@en ;
   rdfs:comment "Particle formed by chemical precipitation at sediment-water interface, lacking layered structure that characterizes coated grains. Includes glauconite grains, manganese nodules, phosphate grains. Manganese nodule--\\An irregular, black to brown, friable"@en ;
+  rdfs:comment "dct:source--  NADM SLTTs 2004, Jackson 1997"@en ;
   rdfs:label "syngenetic nodule"@en ;
-  rdfs:subClassOf gsog:nodule ;
+  rdfs:subClassOf :nodule ;
 .
-gsog:underlies
+:underlies
   a owl:ObjectProperty ;
   rdfs:comment "Relationship between rock bodies in which subject body is below and in contact with the object body in geographic refernce system (the object might or might not be younger than the subject). Generally applied to stratified rock bodies"@en ;
-  rdfs:domain gsog:Rock_Body ;
+  rdfs:domain :Rock_Body ;
   rdfs:label "underlies "@en ;
-  rdfs:range gsog:Rock_Body ;
+  rdfs:range :Rock_Body ;
   rdfs:subPropertyOf gsoc:isSpatiallyRelatedTo ;
 .
-gsog:variole
+:variole
   a owl:Class ;
-  dcterms:source "Williams, Turner, Gilbert 1954"@en ;
   rdfs:comment "Spherulitic cluster of crystals in mafic rock, usually consists of divergent plagioclase fibers, with or without interstitial glass, or intergrown with granules of pyroxene, olivine or iron ore. (equivalent to Spherule, but in mafic rock)"@en ;
+  rdfs:comment "dct:source--  Williams, Turner, Gilbert 1954"@en ;
   rdfs:label "variole"@en ;
-  rdfs:subClassOf gsog:spherule ;
+  rdfs:subClassOf :spherule ;
 .
-gsog:vesicle
+:vesicle
   a owl:Class ;
-  dcterms:source "Neuendorf et al 2005"@en ;
   rdfs:comment "Cavity in volcanic rock formed by trapped gas. Use amygdule if filled with secondary mineral."@en ;
+  rdfs:comment "dct:source--  Neuendorf et al 2005"@en ;
   rdfs:label "vesicle"@en ;
-  rdfs:subClassOf gsog:Rock_Body_Void ;
+  rdfs:subClassOf :Rock_Body_Void ;
 .
-gsog:vug
+:vug
   a owl:Class ;
-  dcterms:source "Neuendorf et al 2005"@en ;
   rdfs:comment "Irregular cavity in rock, generic term with no connotation of origin of cavity. May be lined with crystals of different mineral compostion to the host rock"@en ;
+  rdfs:comment "dct:source--  Neuendorf et al 2005"@en ;
   rdfs:label "vug"@en ;
-  rdfs:subClassOf gsog:Rock_Body_Void ;
+  rdfs:subClassOf :Rock_Body_Void ;
 .
-dcterms:source
-  a owl:AnnotationProperty ;
+gspr:Ductile_Flow
+  a owl:Class ;
+.
+gsop:hasInput
+  a owl:ObjectProperty ;
+.
+gsop:hasOutput
+  a owl:ObjectProperty ;
 .
 owl:maxQualifiedCardinality
   a owl:AnnotationProperty ;
@@ -1541,3 +1622,6 @@ owl:maxQualifiedCardinality
 owl:qualifiedCardinality
   a owl:AnnotationProperty ;
 .
+[
+  owl:maxQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+].
