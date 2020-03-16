@@ -218,7 +218,7 @@ Contact(x) <--> exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RB
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onClass gsop:Displacement ;
+      owl:onClass :Displacement ;
       owl:onProperty gsoc:hasProperty ;
       owl:qualifiedCardinality "0"^^xsd:nonNegativeInteger ;
     ] ;
@@ -233,6 +233,14 @@ Contact(x) <--> exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RB
   a owl:Class ;
   rdfs:subClassOf :Geologic_Process ;
 .
+
+:Displacement
+  a owl:Class ;
+  rdfs:label "Displacement"@en ;
+  rdfs:subClassOf gsoc:Property ;
+.
+
+
 :Ductile_Shear_Zone
   a owl:Class ;
   rdfs:label "Ductile Shear Zone"@en ;
@@ -246,7 +254,7 @@ Contact(x) <--> exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RB
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty :hasProperty ;
-      owl:someValuesFrom gsop:Displacement ;
+      owl:someValuesFrom :Displacement ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
@@ -356,7 +364,7 @@ Contact(x) <--> exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RB
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-      owl:onClass gsop:Displacement ;
+      owl:onClass :Displacement ;
       owl:onProperty gsoc:hasProperty ;
     ] ;
   rdfs:subClassOf [
@@ -640,6 +648,7 @@ Probably should specify a Temporal Reference System used to assign coordinate va
 -- parts of the unit are not parts of the material, e.g. the western arm of formation X is not a part of its sandstone - the sandstone making up the western part of X is a part of the sandstone 
 -- different identity conditions: a unit can have some material added or removed and retain identity, but the material changes identity with the addition or removal of some material"""@en ;
   rdfs:comment "Type of geologic unit is unknown, unspecified, irrelevant, or some type not included in the vocabulary. Type makes no implication for required properties or cardinalities. This is the root concept for the type hierarchy."@en ;
+  rdfs:comment "a body of material in the Earth whose complete and precise extent is inferred to exist (NADM GeologicUnit, Stratigraphic unit in sense of NACSN or International Stratigraphic Code), or a classifier used to characterize parts of the Earth (e.g. lithologic map unit like 'granitic rock' or 'alluvial deposit', surficial units like 'till' or 'old alluvium'). (GeoSciML v3.2)"@en ;
   rdfs:label "Geologic Unit"@en ;
   rdfs:subClassOf gsoc:Physical_Object ;
   rdfs:subClassOf :Rock_Body ;

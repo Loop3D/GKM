@@ -2,7 +2,7 @@
 # imports: http://loop3d.org/GSO/ontology/2020/1/common/ontology
 
 @prefix : <http://loop3d.org/GSO/ontology/2020/1/geologicproperty/> .
-@prefix geologicfeature: <http://loop3d.org/GSO/ontology/2020/1/geologicfeature/> .
+@prefix gsog: <http://loop3d.org/GSO/ontology/2020/1/geologicfeature/> .
 @prefix gsoc: <http://loop3d.org/GSO/ontology/2020/1/common/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -99,11 +99,7 @@
   rdfs:label "Dip and Dip Direction"@en ;
   rdfs:subClassOf :Any_Plane_Orientation_Convention ;
 .
-:Displacement
-  a owl:Class ;
-  rdfs:label "Displacement"@en ;
-  rdfs:subClassOf gsoc:Property ;
-.
+
 :Line_Orientation
   a owl:Class ;
   rdfs:comment "specification of the orientation of a line in space, using a trend (bearing of horizontal projection of line relative to geographic north) and plunge (inclination of line measured positive downward in degrees from local horizontal).  TBD:  add 'isdirected property to indicate if the line is directed (e.g. sense of shear), values should be Boolean,"@en ;
@@ -228,13 +224,13 @@
   a owl:Class ;
   rdfs:comment "a vector (magnitude and orientation) specifying the distance between the intersection of a surface on opposite sides of a displacment surface. In 3-D is the projection of a vector normal to the displaced surface into the displacment surface, but might also be specified as offset of the intersection of displacement surface and marker surface in some other profile view (e.g. horizontal/map view, or a cross section)"@en ;
   rdfs:label "Separation"@en ;
-  rdfs:subClassOf :Displacement ;
+  rdfs:subClassOf gsog:Displacement ;
 .
 :Slip
   a owl:Class ;
   rdfs:comment "a vector (magnitude and orientation) that links a peircing point on opposite sides of a displacement surface."@en ;
   rdfs:label "Slip"@en ;
-  rdfs:subClassOf :Displacement ;
+  rdfs:subClassOf gsog:Displacement ;
 .
 :Strike_Dip_RHR
   a owl:Class ;
