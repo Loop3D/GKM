@@ -1,7 +1,7 @@
-# baseURI: http://loop3d.org/GSO/ontology/2020/1/history1
+# baseURI: http://loop3d.org/GSO/ontology/2020/1/faultstest2/
 # imports: http://loop3d.org/GSO/ontology/2020/1/loop3dmaster
 
-@prefix : <http://loop3d.org/GSO/ontology/2020/1/history1#> .
+@prefix : <http://loop3d.org/GSO/ontology/2020/1/faultstest2/> .
 @prefix fau2: <http://loop3d.org/GSO/ontology/2020/1/faultstest2/> .
 @prefix gsen: <http://loop3d.org/GSO/ontology/2020/1/eventenvironment/> .
 @prefix gsoc: <http://loop3d.org/GSO/ontology/2020/1/common/> .
@@ -14,6 +14,11 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
+fau2:
+  a owl:Ontology ;
+  owl:imports <http://loop3d.org/GSO/ontology/2020/1/loop3dmaster> ;
+  owl:versionIRI fau2: ;
+.
 fau2:Basement_Cover_Shear_Event
   a gsog:Geologic_Event ;
   gsoc:hasConstituent [
@@ -107,6 +112,7 @@ fau2:LaramideFaultingInterval
 .
 fau2:Laramide_Ductile_deformation
   a gsog:Geologic_Event ;
+  gsoc:age_younger_than fau2:Mesozoic_Sediment_Deposition ;
   gsoc:hasConstituent [
       a gspr:Ductile_Flow ;
       rdfs:label "Mid-crustal remobilization"@en ;
@@ -117,6 +123,23 @@ fau2:Laramide_Ductile_deformation
       a gsen:middle_continental_crustal_setting ;
     ] ;
   rdfs:label "Late Laramide ductile flow in basement"@en ;
+.
+fau2:Laramide_Thrust_Faulting
+  a gsog:Geologic_Event ;
+  gsoc:age_started_by fau2:Laramide_Ductile_deformation ;
+  gsoc:hasDirectTemporalLocation [
+      a gsog:Geologic_Time_Interval ;
+      gsog:hasOlderInterval gstime:Campanian ;
+      gsog:hasYoungerInterval gstime:Danian ;
+    ] ;
+  gsoc:hasSetting [
+      a gsen:foreland_setting ;
+    ] ;
+  gsoc:hasSetting [
+      a gsen:upper_continental_crust_setting ;
+    ] ;
+  rdfs:comment "Development of thrust faults in upper crust"@en ;
+  rdfs:label "Laramide Thrust Faulting"@en ;
 .
 fau2:MesozoicDepositionInterval
   a gsog:Geologic_Time_Interval ;
@@ -145,6 +168,7 @@ fau2:Mesozoic_Basin_Formation
 .
 fau2:Mesozoic_Sediment_Deposition
   a gsog:Geologic_Event ;
+  gsoc:age_started_by fau2:Mesozoic_Basin_Formation ;
   gsoc:hasConstituent [
       a gspr:Deposition ;
       rdfs:label "Intra and back arc sediment accumulation"@en ;
@@ -157,6 +181,13 @@ fau2:Mesozoic_Sediment_Deposition
     ] ;
   rdfs:label "Mesozoic basin sediment deposition"@en ;
 .
+fau2:Middle_Tertiary_Extension
+  a gsog:Geologic_Event ;
+  gsoc:age_younger_than fau2:Laramide_Thrust_Faulting ;
+  gsoc:hasPart fau2:Basin_Fill_Tilting_Event ;
+  rdfs:comment "Crustal extension between late Oligocene and Late Miocene" ;
+  rdfs:label "Middle Tertiary Extension "@en ;
+.
 fau2:PaleozoicDepositionInterval
   a gsog:Geologic_Time_Interval ;
   gsog:hasOlderInterval gstime:Cambrian ;
@@ -165,6 +196,7 @@ fau2:PaleozoicDepositionInterval
 .
 fau2:Paleozoic_Sediment_Deposition
   a gsog:Geologic_Event ;
+  gsoc:age_older_than fau2:Mesozoic_Basin_Formation ;
   gsoc:hasConstituent [
       a gspr:Deposition ;
       rdfs:label "Passive margin sediment accumulation"@en ;
@@ -175,6 +207,7 @@ fau2:Paleozoic_Sediment_Deposition
 .
 fau2:Proterozoic_igneous_intrusion
   a gsog:Geologic_Event ;
+  gsoc:age_older_than fau2:Paleozoic_Sediment_Deposition ;
   gsoc:hasConstituent [
       a gspr:Intrusion ;
     ] ;
@@ -232,9 +265,4 @@ fau2:Wilderness_Granite_Intrusion_Event
       a gsen:middle_continental_crustal_setting ;
     ] ;
   rdfs:label "Two-mica granite intrusion"@en ;
-.
-<http://loop3d.org/GSO/ontology/2020/1/history1>
-  a owl:Ontology ;
-  owl:imports <http://loop3d.org/GSO/ontology/2020/1/loop3dmaster> ;
-  owl:versionIRI <http://loop3d.org/GSO/ontology/2020/1/history1> ;
 .
