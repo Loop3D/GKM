@@ -73,6 +73,8 @@
 .
 :Element
   a owl:Class ;
+  rdfs:comment "a species of atom having the same number of protons in its atomic nuclei (that is, the same atomic number, or Z). https://en.wikipedia.org/wiki/Chemical_element"@en ;
+  rdfs:label "Element"@en ;
   rdfs:subClassOf :Amount_Of_Matter ;
 .
 :Endurant
@@ -195,6 +197,7 @@
 :Glass
   a owl:Class ;
   rdfs:comment "amorphous product of rapid cooling of melted material. Includes natural glasses in Earth and extraterrestrial material, as well as anthromophomorphic manufactured material"@en ;
+  rdfs:label "Glass"@en ;
   rdfs:subClassOf :Amount_Of_Matter ;
   rdfs:subClassOf [
       a owl:Restriction ;
@@ -286,7 +289,8 @@
 .
 :Particular
   a owl:Class ;
-  rdfs:comment "AKA 'entity'. Any individual in the DOLCE domain of discourse. The extensional coverage of DOLCE is as large as possible, since it ranges on 'possibilia', i.e all possible individuals that can be postulated by means of DOLCE axioms. Possibilia include physical objects, substances, processes, qualities, conceptual regions, non-physical objects, collections and even arbitrary sums of objects.The class 'particular' features a covering partition that includes: endurant, perdurant, quality, and abstract. There are also some subclasses defined as unions of subclasses of 'particular' for special purposes: spatio-temporal-particular (any particular except abstracts)- physical-realization (any realization of an information object, defined in the ExtendedDnS ontology)."@en ;
+  rdfs:comment "AKA 'Entity', 'Thing'. Any individual in the DOLCE domain of discourse. The extensional coverage of DOLCE is as large as possible, since it ranges on 'possibilia', i.e all possible individuals that can be postulated by means of DOLCE axioms. Possibilia include physical objects, substances, processes, qualities, conceptual regions, non-physical objects, collections and even arbitrary sums of objects.The class 'particular' features a covering partition that includes: endurant, perdurant, quality, and abstract. There are also some subclasses defined as unions of subclasses of 'particular' for special purposes: spatio-temporal-particular (any particular except abstracts)- physical-realization (any realization of an information object, defined in the ExtendedDnS ontology)."@en ;
+  rdfs:label "Particular"@en ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom :Property ;
@@ -350,10 +354,17 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
 :Physical_Object
   a owl:Class ;
   rdfs:comment "The main characteristic of physical objects is that they are endurants with unity. However, they have no common unity criterion, since different subtypes of objects may have different unity criteria. Differently from aggregates, (most) physical objects change some of their parts while keeping their identity, they can have therefore temporary parts. Often physical objects (indeed, all endurants) are ontologically independent from occurrences (discussed below). However, if we admit that every object has a life, it is hard to exclude a mutual specific constant dependence between the two. Nevertheless, we may still use the notion of dependence to (weakly) characterize objects as being not specifically constantly dependent on other objects."@en ;
+  rdfs:label "Physical Object"@en ;
   rdfs:subClassOf :Physical_Endurant ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:allValuesFrom :Physical_Object ;
+      owl:allValuesFrom [
+          a owl:Class ;
+          owl:unionOf (
+              :Physical_Object
+              :Feature
+            ) ;
+        ] ;
       owl:onProperty :hasPart ;
     ] ;
   rdfs:subClassOf [
@@ -447,7 +458,7 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
 .
 :Property
   a owl:Class ;
-  rdfs:comment "A concept that specifies some aspect that inheres in instances of some Particular.  Note that the value of the determiningEvent  property on Property is used to specify metadata about how a property value is assigned"@en ;
+  rdfs:comment "A concept that specifies some aspect that inheres in instances of some Particular.  Note that the value of the determiningEvent  property on Property is used to specify metadata about how a property value is assigned. Synonym: Quality"@en ;
   rdfs:comment """Need SHACL rule that a Property.hasPart is not allowed. count Property.hasPart = 0
 Need SHACL rule that count Property.isPartOf = 0"""@en ;
   rdfs:comment "Need SHACL rule that only one of 'hasDataValue' or 'hasValue' should be instantiated."@en ;
@@ -498,7 +509,7 @@ Need SHACL rule that count Property.isPartOf = 0"""@en ;
 :Scientific_Situation
   a owl:Class ;
   rdfs:comment "" ;
-  rdfs:label "Scientific Situation" ;
+  rdfs:label "Scientific Situation"@en ;
   rdfs:subClassOf :Situation ;
 .
 :Shape
@@ -516,7 +527,7 @@ Need SHACL rule that count Property.isPartOf = 0"""@en ;
 :Situation
   a owl:Class ;
   rdfs:comment "" ;
-  rdfs:label "Situation" ;
+  rdfs:label "Situation"@en ;
   rdfs:subClassOf :Endurant ;
   rdfs:subClassOf [
       a owl:Restriction ;
@@ -546,7 +557,7 @@ Need SHACL rule that count Property.isPartOf = 0"""@en ;
 .
 :Spatial_Location
   a owl:Class ;
-  rdfs:comment "A physical property that is quantified by a category from a classification scheme."@en ;
+  rdfs:comment "A physical property that spacifies the position of an entity relative to some spatial reference system."@en ;
   rdfs:label "Spatial Location"@en ;
   rdfs:subClassOf :Property ;
   rdfs:subClassOf [
