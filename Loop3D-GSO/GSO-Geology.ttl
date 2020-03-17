@@ -106,11 +106,17 @@ gsoc:age_meets
       owl:onProperty gsoc:isPartOf ;
     ] ;
 .
+:Bedding
+  a owl:Class ;
+  rdfs:comment "Bedding as a fabric representing the average orientation of paleodepositional surface should be encoded through the foliationType; might apply to bedding that is layering or a foliation without layering (e.g. clast alignment in amalgamated beds)."@en ;
+  rdfs:label "Bedding  "@en ;
+  rdfs:subClassOf :Foliation ;
+.
 :Bedding_Package
   a owl:Class ;
   rdfs:comment "A sub-map scale sequence of strata, e.g. bouma sequence, fining-upward sequence, interbedded sandstone and mudstone... "@en ;
   rdfs:label "Bedding Package "@en ;
-  rdfs:subClassOf gsoc:Integral_Feature ;
+  rdfs:subClassOf :Rock_Body_Part ;
 .
 :Biogenic_Granular_Material
   a owl:Class ;
@@ -231,16 +237,15 @@ Contact(x) <--> exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RB
 .
 :Deformation
   a owl:Class ;
+  rdfs:comment "Parent class for processes that change the shape or location of geologic entities. Includes strain and translation."@en ;
+  rdfs:label "Deformation process"@en ;
   rdfs:subClassOf :Geologic_Process ;
 .
-
 :Displacement
   a owl:Class ;
   rdfs:label "Displacement"@en ;
   rdfs:subClassOf gsoc:Property ;
 .
-
-
 :Ductile_Shear_Zone
   a owl:Class ;
   rdfs:label "Ductile Shear Zone"@en ;
@@ -453,8 +458,8 @@ Contact(x) <--> exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RB
 :GSSA
   a owl:Class ;
   rdfs:comment "A Geochronologic Age defined by the International Stratigraphic Commission, based on fiat selection of defined older and younger bounding time coordinates"@en ;
-  rdfs:comment "add SHACL rule that GSSA may not have property Simple_Uncertainty" ;
-  rdfs:label "GSSA"@en ;
+  rdfs:comment "add SHACL rule that GSSA may not have property Simple_Uncertainty"@en ;
+  rdfs:label "Global Standard Stratigraphic Age (GSSA)"@en ;
   rdfs:subClassOf :Geologic_Time_Date ;
 .
 :GSSP
@@ -479,8 +484,8 @@ Contact(x) <--> exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RB
   rdfs:subClassOf :Geologic_Time_Date ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:allValuesFrom :Stratigraphic_Point ;
       owl:onProperty gsoc:hasReference ;
+      owl:someValuesFrom :Stratigraphic_Point ;
     ] ;
 .
 :Geologic_Date_Interval
@@ -488,6 +493,16 @@ Contact(x) <--> exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RB
   rdfs:comment "same as Geochronologic_Age_Interval"@en ;
   rdfs:label "Geologic Date Interval"@en ;
   rdfs:subClassOf gsoc:Time_Interval ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom gsoc:Time_Instant ;
+      owl:onProperty :hasOlderDate ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom gsoc:Time_Instant ;
+      owl:onProperty :hasYoungerDate ;
+    ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom :Geologic_Date_Interval ;
@@ -515,16 +530,6 @@ Contact(x) <--> exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RB
       owl:onClass :Chronostratigraphic_Unit ;
       owl:onProperty gsoc:hasReference ;
     ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty :hasOlderDate ;
-      owl:someValuesFrom gsoc:Time_Instant ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty :hasYoungerDate ;
-      owl:someValuesFrom gsoc:Time_Instant ;
-    ] ;
   owl:disjointWith :Geologic_Time_Date ;
 .
 :Geologic_Event
@@ -535,13 +540,8 @@ Contact(x) <--> exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RB
   rdfs:subClassOf gsoc:Event ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:allValuesFrom :Geologic_Process ;
       owl:onProperty gsoc:hasConstituent ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty gsoc:hasDirectTemporalLocation ;
-      owl:someValuesFrom gsoc:Time_Region ;
+      owl:someValuesFrom :Geologic_Process ;
     ] ;
 .
 :Geologic_Process
@@ -551,13 +551,8 @@ Contact(x) <--> exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RB
   rdfs:subClassOf gsoc:Process ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:allValuesFrom :Geologic_Event ;
       owl:onProperty gsoc:isConstituentOf ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty gsoc:hasDirectTemporalLocation ;
-      owl:someValuesFrom gsoc:Time_Region ;
+      owl:someValuesFrom :Geologic_Event ;
     ] ;
 .
 :Geologic_Structure
@@ -584,18 +579,9 @@ Contact(x) <--> exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RB
   a owl:Class ;
   rdfs:comment """A temporal coordinate value, located either by a point position (with uncertainty) on a time line, specified by a numeric coordinate (generally MYPB, but definitions of 'present' vary). Can be a GeochronologicBoundary if it is associated with a location in a particular stratigraphic section, or a GSSA if the numeric time coordinate is arbitrarily assigned.
 Probably should specify a Temporal Reference System used to assign coordinate values."""@en ;
+  rdfs:comment "Need SHACL rule that gsoc:Simple_Uncertainty and Statistical_Calculation are recommended"@en ;
   rdfs:label "Geologic Time Date"@en ;
   rdfs:subClassOf gsoc:Time_Instant ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty gsoc:determinedBy ;
-      owl:someValuesFrom gsoc:Determining_Event ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty gsoc:hasProperty ;
-      owl:someValuesFrom gsoc:Simple_Uncertainty ;
-    ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty gsoc:hasUOM ;
@@ -647,8 +633,7 @@ Probably should specify a Temporal Reference System used to assign coordinate va
 -- a unit can be part of a stratigraphic lexicon, but its material cannot be part of the lexicon. 
 -- parts of the unit are not parts of the material, e.g. the western arm of formation X is not a part of its sandstone - the sandstone making up the western part of X is a part of the sandstone 
 -- different identity conditions: a unit can have some material added or removed and retain identity, but the material changes identity with the addition or removal of some material"""@en ;
-  rdfs:comment "Type of geologic unit is unknown, unspecified, irrelevant, or some type not included in the vocabulary. Type makes no implication for required properties or cardinalities. This is the root concept for the type hierarchy."@en ;
-  rdfs:comment "a body of material in the Earth whose complete and precise extent is inferred to exist (NADM GeologicUnit, Stratigraphic unit in sense of NACSN or International Stratigraphic Code), or a classifier used to characterize parts of the Earth (e.g. lithologic map unit like 'granitic rock' or 'alluvial deposit', surficial units like 'till' or 'old alluvium'). (GeoSciML v3.2)"@en ;
+  rdfs:comment "This is the root concept for the geologic unit type hierarchy.. A body of material in the Earth whose complete and precise extent is inferred to exist (NADM GeologicUnit, Stratigraphic unit in sense of NACSN or International Stratigraphic Code), or a classifier used to characterize parts of the Earth (e.g. lithologic map unit like 'granitic rock' or 'alluvial deposit', surficial units like 'till' or 'old alluvium'). (GeoSciML v3.2)"@en ;
   rdfs:label "Geologic Unit"@en ;
   rdfs:subClassOf gsoc:Physical_Object ;
   rdfs:subClassOf :Rock_Body ;
@@ -972,8 +957,8 @@ The exterior-facing material of a rock body.  A rock body boundary can have a th
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:allValuesFrom :Rock_Material ;
       owl:onProperty gsoc:hasConstituent ;
+      owl:someValuesFrom :Rock_Material ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
@@ -1001,7 +986,7 @@ RBT (x) <--> RBD (x) ^ exists z forall y [(isPartOf (y,z) ^ hasHost (z,x)) -> (b
 .
 :Rock_Material
   a owl:Class ;
-  rdfs:comment "hook into CGI simple lithology ontology. SMR has one, and Clinton Smyth has an extension of that with more rock types."@en ;
+  rdfs:comment "Hook into CGI simple lithology ontology. SMR has one, and Clinton Smyth has an extension of that with more rock types."@en ;
   rdfs:comment "need SHACL rule for isPartOf exactly 0 'Rock Body'"@en ;
   rdfs:label "Rock Material"@en ;
   rdfs:subClassOf gsoc:Amount_Of_Matter ;
@@ -1195,7 +1180,7 @@ RBT (x) <--> RBD (x) ^ exists z forall y [(isPartOf (y,z) ^ hasHost (z,x)) -> (b
 .
 :Transformation
   a owl:Class ;
-  rdfs:comment "process that  changes the characteristics of matter within the model space"@en ;
+  rdfs:comment "Process that  changes the characteristics of materials within the model space. Includes metamorphism, metasomatism, alteration, weathering"@en ;
   rdfs:label "Transformation Process"@en ;
   rdfs:subClassOf :Geologic_Process ;
   rdfs:subClassOf [
@@ -1209,6 +1194,12 @@ RBT (x) <--> RBD (x) ^ exists z forall y [(isPartOf (y,z) ^ hasHost (z,x)) -> (b
       owl:onProperty gsop:hasOutput ;
     ] ;
 .
+:Volcanic_Glass
+  a owl:Class ;
+  rdfs:comment "Glass formed by rapid cooling of lava "@en ;
+  rdfs:label "Volcanic Glass  "@en ;
+  rdfs:subClassOf gsoc:Glass ;
+.
 :Xenolith
   a owl:Class ;
   rdfs:label "Xenolith"@en ;
@@ -1217,7 +1208,7 @@ RBT (x) <--> RBD (x) ^ exists z forall y [(isPartOf (y,z) ^ hasHost (z,x)) -> (b
 :aggregate_non-clastic_particle
   a owl:Class ;
   rdfs:comment "Generic term for a non-clastic particle that is itself composed of an aggregation of particles."@en ;
-  rdfs:comment "dct:source--  this vocabulary"@en ;
+  rdfs:comment "dct:source--  CGI GTWG ParticleType vocabulary"@en ;
   rdfs:label "aggregate non clastic particle"@en ;
   rdfs:subClassOf :Rock_Body_Part ;
 .
@@ -1243,14 +1234,14 @@ RBT (x) <--> RBD (x) ^ exists z forall y [(isPartOf (y,z) ^ hasHost (z,x)) -> (b
 :bolide_impact
   a owl:Class ;
   rdfs:comment "The impact of an extraterrestrial body on the surface of the earth"@en ;
-  rdfs:comment "dct:source--  this vocabulary"@en ;
+  rdfs:comment "dct:source--  CGI GTWG process vocabulary"@en ;
   rdfs:label "bolide impact"@en ;
   rdfs:subClassOf :Geologic_Event ;
 .
 :cometary_impact
   a owl:Class ;
   rdfs:comment "The impact of a comet on the surface of the earth"@en ;
-  rdfs:comment "dct:source--  this vocabulary"@en ;
+  rdfs:comment "dct:source--  CGI GTWG process vocabulary"@en ;
   rdfs:label "cometary impact"@en ;
   rdfs:subClassOf :bolide_impact ;
 .
@@ -1362,14 +1353,14 @@ RBT (x) <--> RBD (x) ^ exists z forall y [(isPartOf (y,z) ^ hasHost (z,x)) -> (b
 :hydrothermal_vein
   a owl:Class ;
   rdfs:comment "A tabular or sheet-like part of a compound material formed by hydrothermal (or other metasomatic) mineral filling a fracture, may be associated with replacement of the host rock adjacent to the body"@en ;
-  rdfs:comment "dct:source--  Neuendorf et al 2005, this vocabulary"@en ;
+  rdfs:comment "dct:source--  Neuendorf et al 2005, CGI GTWG vocabulary"@en ;
   rdfs:label "hydrothermal vein"@en ;
   rdfs:subClassOf :intrusive_sheet ;
 .
 :igneous_vein
   a owl:Class ;
   rdfs:comment "A tabular or sheet like part of a compound material formed by the intrusion of magma"@en ;
-  rdfs:comment "dct:source--  this vocabulary"@en ;
+  rdfs:comment "dct:source--  CGI GTWG vocabulary"@en ;
   rdfs:label "igneous vein"@en ;
   rdfs:subClassOf :intrusive_sheet ;
 .
@@ -1382,7 +1373,7 @@ RBT (x) <--> RBD (x) ^ exists z forall y [(isPartOf (y,z) ^ hasHost (z,x)) -> (b
 :intrusive_sheet
   a owl:Class ;
   rdfs:comment "A tabular or sheet-like part of a compound material, genetic origin not specified"@en ;
-  rdfs:comment "dct:source--  this vocabulary"@en ;
+  rdfs:comment "dct:source--  CGI GTWG vocabualry"@en ;
   rdfs:label "intrusive sheet"@en ;
   rdfs:subClassOf :Rock_Body_Part ;
 .
@@ -1436,14 +1427,14 @@ RBT (x) <--> RBD (x) ^ exists z forall y [(isPartOf (y,z) ^ hasHost (z,x)) -> (b
 :magnetic_field_reversal
   a owl:Class ;
   rdfs:comment "A geomagnetic event in which the Earth's magnetic field reverses direction."@en ;
-  rdfs:comment "dct:source--  this vocabulary"@en ;
+  rdfs:comment "dct:source--  CGI GTWG process vocabulary"@en ;
   rdfs:label "magnetic field reversal"@en ;
   rdfs:subClassOf :Geologic_Event ;
 .
 :meteorite_impact
   a owl:Class ;
   rdfs:comment "The impact of a meteorite on the surface of the earth"@en ;
-  rdfs:comment "dct:source--  this vocabulary"@en ;
+  rdfs:comment "dct:source--  CGI GTWG process vocabulary"@en ;
   rdfs:label "meteorite impact"@en ;
   rdfs:subClassOf :bolide_impact ;
 .
@@ -1478,7 +1469,7 @@ RBT (x) <--> RBD (x) ^ exists z forall y [(isPartOf (y,z) ^ hasHost (z,x)) -> (b
 :orb
   a owl:Class ;
   rdfs:comment "Igneous constituent typically mafic, equant rounded spheroid with concentric mineralogic banding"@en ;
-  rdfs:comment "dct:source--  this vocabulary"@en ;
+  rdfs:comment "dct:source--  CGI GTWG vocabulary"@en ;
   rdfs:label "orb"@en ;
   rdfs:subClassOf :Rock_Body_Part ;
 .
@@ -1554,7 +1545,7 @@ RBT (x) <--> RBD (x) ^ exists z forall y [(isPartOf (y,z) ^ hasHost (z,x)) -> (b
 :pore_space
   a owl:Class ;
   rdfs:comment "Open space between particles in a granular aggregate."@en ;
-  rdfs:comment "dct:source--  Neuendorf et al 2005, this vocabulary"@en ;
+  rdfs:comment "dct:source--  Neuendorf et al 2005, CGI GTWG vocabulary"@en ;
   rdfs:label "pore space"@en ;
   rdfs:subClassOf :Rock_Body_Void ;
 .
