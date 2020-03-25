@@ -1,11 +1,8 @@
 # baseURI: http://loop3d.org/GSO/ontology/2020/1/ex-formationJs/ontology
-# imports: http://loop3d.org/GSO/ontology/2020/1/ex-complexcontact/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/loop3dmaster
 
 @prefix con: <http://loop3d.org/GSO/ontology/2020/1/ex-complexcontact#> .
-@prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ejs: <http://loop3d.org/GSO/ontology/2020/1/ex-formationJs#> .
-@prefix ex-complexcontact: <http://loop3d.org/GSO/ontology/2020/1/ex-complexcontact/> .
 @prefix gsen: <http://loop3d.org/GSO/ontology/2020/1/eventenvironment> .
 @prefix gsgu: <http://loop3d.org/GSO/ontology/2020/1/geologicunit/> .
 @prefix gslth: <http://loop3d.org/GSO/ontology/2020/1/lithology/> .
@@ -14,6 +11,7 @@
 @prefix gsog: <http://loop3d.org/GSO/ontology/2020/1/geologicfeature/> .
 @prefix gsop: <http://loop3d.org/GSO/ontology/2020/1/geologicproperty/> .
 @prefix gspr: <http://loop3d.org/GSO/ontology/2020/1/geologicprocess/> .
+@prefix gsrbp: <http://loop3d.org/GSO/ontology/2020/1/geologicunit/rockbodypart/> .
 @prefix gstime: <http://loop3d.org/GSO/ontology/2020/1/ischart/> .
 @prefix gsuom: <http://loop3d.org/GSO/ontology/2020/1/uom/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
@@ -25,6 +23,12 @@
 
 ejs:JsFormation
   a gsog:Formation ;
+  gsoc:hasDirectTemporalLocation [
+      a gsog:Geologic_Time_Interval ;
+      gsog:hasOlderInterval gstime:LowerJurassic ;
+      gsog:hasYoungerInterval gstime:LowerJurassic ;
+      rdfs:label "Lower Jurassic Age"@en ;
+    ] ;
   gsoc:hasPart con:KdInJsDikeContact-3_1_4 ;
   gsoc:hasPart con:KdInJsDikeContact-3_2_4 ;
   gsoc:hasPart con:KgInJsIntrusiveContact-4_2 ;
@@ -32,23 +36,17 @@ ejs:JsFormation
   gsoc:hasPart ejs:JsFormation-upper ;
   gsoc:hasPart ejs:baseJs-6 ;
   gsoc:hasPart ejs:topJs-2 ;
-  gsoc:hasPhysicalProperty [
+  gsoc:hasProperty [
       a gsop:Metamorphic_Facies ;
       gsoc:hasValue [
           a gsmf:no_metamorphic_minerals ;
         ] ;
       rdfs:label "not metamorphosed"@en ;
     ] ;
-  gsoc:hasPhysicalProperty [
+  gsoc:hasProperty [
       a gsgu:Bedding_Thickness_Category ;
       gsoc:hasTextValue "Thin to medium Bedded"@en ;
       rdfs:label "thin to medium bedded"@en ;
-    ] ;
-  gsoc:hasTemporalProperty [
-      a gsog:Chronostratigraphic_Age_Interval ;
-      gsog:hasOlderAge gstime:LowerJurassic ;
-      gsog:hasYoungerAge gstime:LowerJurassic ;
-      rdfs:label "Lower Jurassic Age"@en ;
     ] ;
   rdfs:comment "Several surfaces are not elucidated as parts in this example, but are referenced in the Contact instances below. These surfaces would participate in intrusion and also ?contact metamorphism? processes"@en ;
   rdfs:comment "clasts of Cb Quartzite are abundant in the lower part of the unit. The lower part is a fining-upward sequence from conglomeratic sandstone to fine-grained sandstone. There is a marker bed that is a tuff in the upper part of the lower clastic interval. Upper part is massive limestone with abundant ammonites"@en ;
@@ -58,14 +56,14 @@ ejs:JsFormation-lower
   a gsog:Rock_Body_Part ;
   gsoc:hasPart ejs:JsFormationMarker-6_4 ;
   gsoc:hasPart ejs:baseJs-6 ;
-  gsoc:hasPart ejs:lith_1 ;
-  gsoc:hasPart ejs:lith_2 ;
-  gsoc:hasPart ejs:lith_3 ;
+  gsoc:hasPart ejs:stratPart_1 ;
+  gsoc:hasPart ejs:stratPart_2 ;
+  gsoc:hasPart ejs:stratPart_3 ;
   gsog:underlies ejs:JsFormation-upper ;
   rdfs:comment "underlies, overlies, within are subproperty of relatedTo"@en ;
 .
 ejs:JsFormationMarker-6_4
-  a gsog:Bed ;
+  a gsrbp:marker_bed ;
   gsoc:hasConstituent <http://uri.org/Ballyloghlin_tuff> ;
   gsoc:hasPart [
       a gsog:Rock_Body_Bottom ;
@@ -76,7 +74,7 @@ ejs:JsFormationMarker-6_4
   gsoc:hasPart [
       a gsog:Rock_Body_Top ;
     ] ;
-  gsog:within ejs:lith_3 ;
+  gsog:within ejs:stratPart_3 ;
   rdfs:comment "Bed is viewed as a degenerate volume, considered a surface that has a hasConstiuent property, and hasPart that represents contacts of the bed"@en ;
 .
 ejs:baseJs-6
@@ -106,42 +104,42 @@ ejs:baseJs-6_3
     ] ;
   rdfs:comment "Js on Xm surface"@en ;
 .
-ejs:contactJs-lith_1-lith_2
+ejs:contactJs-stratPart_1-stratPart_2
   a gsog:Gradational_Contact_Zone ;
-  gsog:hasHost ejs:lith_1 ;
-  gsog:hasHost ejs:lith_2 ;
-  gsog:hasThickness [
+  gsog:hasHost ejs:stratPart_1 ;
+  gsog:hasHost ejs:stratPart_2 ;
+  gsog:hasProperty [
       a gsop:Thickness ;
+      gsoc:hasNumericValue "10"^^xsd:decimal ;
       gsoc:hasUOM [
           a gsuom:meter ;
         ] ;
-      gsoc:hasValue 10 ;
     ] ;
   rdfs:label "internal gradational contact "@en ;
 .
-ejs:contactJs-lith_2-lith_3
+ejs:contactJs-stratPart_2-stratPart_3
   a gsog:Gradational_Contact_Zone ;
-  gsog:hasHost ejs:lith_2 ;
-  gsog:hasHost ejs:lith_3 ;
-  gsog:hasThickness [
+  gsog:hasHost ejs:stratPart_2 ;
+  gsog:hasHost ejs:stratPart_3 ;
+  gsog:hasProperty [
       a gsop:Thickness ;
+      gsoc:hasNumericValue "4"^^xsd:decimal ;
       gsoc:hasUOM [
           a gsuom:meter ;
         ] ;
-      gsoc:hasValue 4 ;
     ] ;
   rdfs:label "internal gradational contact "@en ;
 .
-ejs:lith_1
-  a gsog:Rock_Body_Part ;
+ejs:stratPart_1
+  a gsrbp:stratigraphic_part ;
   gsoc:hasConstituent gslth:arenite ;
   gsoc:hasConstituent gslth:clastic_conglomerate ;
   gsoc:hasPart ejs:baseJs-6 ;
-  gsog:underlies ejs:lith_2 ;
+  gsog:underlies ejs:stratPart_2 ;
   rdfs:comment "need to capture gradational fining upward relationship"@en ;
 .
-ejs:lith_2
-  a gsog:Rock_Body_Part ;
+ejs:stratPart_2
+  a gsrbp:stratigraphic_part ;
   gsoc:hasConstituent [
       a gslth:clastic_sandstone ;
     ] ;
@@ -151,11 +149,11 @@ ejs:lith_2
           a gspr:Deposition ;
         ] ;
     ] ;
-  gsog:overlies ejs:lith_1 ;
-  gsog:underlies ejs:lith_3 ;
+  gsog:overlies ejs:stratPart_1 ;
+  gsog:underlies ejs:stratPart_3 ;
 .
-ejs:lith_3
-  a gsog:Rock_Body_Part ;
+ejs:stratPart_3
+  a gsrbp:stratigraphic_part ;
   gsoc:hasConstituent [
       a gslth:clastic_sandstone ;
       rdfs:label "fine-Grained sandstone"@en ;
@@ -166,7 +164,7 @@ ejs:lith_3
           a gspr:Deposition ;
         ] ;
     ] ;
-  gsog:overlies ejs:lith_2 ;
+  gsog:overlies ejs:stratPart_2 ;
 .
 <http://loop3d.org/GSO/ontology/2020/1/ex-formationJs#topJs-2.1>
   a gsog:Rock_Body_Top ;
@@ -178,6 +176,5 @@ ejs:lith_3
   a owl:Ontology ;
   rdfs:comment "Stephen M. Richard 2019-05-02"@en ;
   rdfs:comment "details of description of Js unit in GeologyScenarioForTesting.pptx"@en ;
-  owl:imports ex-complexcontact:ontology ;
   owl:imports <http://loop3d.org/GSO/ontology/2020/1/loop3dmaster> ;
 .

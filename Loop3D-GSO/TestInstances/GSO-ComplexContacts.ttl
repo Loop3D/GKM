@@ -4,27 +4,29 @@
 
 @prefix : <http://loop3d.org/GSO/ontology/2020/1/ex-complexcontact#> .
 @prefix con: <http://loop3d.org/GSO/ontology/2020/1/ex-complexcontact#> .
-@prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ejs: <http://loop3d.org/GSO/ontology/2020/1/ex-formationJs#> .
 @prefix gslth: <http://loop3d.org/GSO/ontology/2020/1/lithology/> .
 @prefix gsoc: <http://loop3d.org/GSO/ontology/2020/1/common/> .
 @prefix gsog: <http://loop3d.org/GSO/ontology/2020/1/geologicfeature/> .
 @prefix gsop: <http://loop3d.org/GSO/ontology/2020/1/geologicproperty/> .
 @prefix gspr: <http://loop3d.org/GSO/ontology/2020/1/geologicprocess/> .
+@prefix gsgu: <http://loop3d.org/GSO/ontology/2020/1/geologicunit/> .
+@prefix gsmg: <http://loop3d.org/GSO/ontology/2020/1/metamorphicgrade/> .
 @prefix gstime: <http://loop3d.org/GSO/ontology/2020/1/ischart/> .
 @prefix gsuom: <http://loop3d.org/GSO/ontology/2020/1/uom/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix spin: <http://spinrdf.org/spin#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 con:CbFormation
   a gsog:Formation ;
-  gsoc:hasTemporalProperty [
-      a gsog:Chronostratigraphic_Age_Interval ;
-      gsog:hasOlderAge gstime:Cambrian ;
-      gsog:hasYoungerAge gstime:Cambrian ;
+  gsoc:hasDirectTemporalLocation [
+      a gsog:Geologic_Time_Interval ;
+      gsog:hasOlderInterval gstime:Cambrian ;
+      gsog:hasYoungerInterval gstime:Cambrian ;
       rdfs:label "Cambrian Age"@en ;
     ] ;
   rdfs:label "Bolsa Quartzite (Cambrian)"@en ;
@@ -37,14 +39,18 @@ con:KdDike
   a gsog:Formation ;
   gsoc:hasConstituent [
       a gslth:diorite ;
-      gsoc:hasPhysicalProperty [
+      gsoc:hasProperty [
           gsoc:hasUOM [
               a gsuom:millimeter ;
             ] ;
-          gsoc:hasValue .05 ;
-          rdfs:type gsog:GrainSizeAverage ;
+          gsoc:hasNumericValue ".05"^^xsd:decimal ;
+          a gslth:Grain_Size_Average ;
         ] ;
     ] ;
+  gsoc:hasProperty [
+	a gsgu:Geologic_Unit_Body_Morphology ;
+	gsoc:hasTextValue "Dike";
+  ];
   gsoc:hasPart con:KdUnderMs ;
   gsoc:hasPart con:downSideKd-3_1 ;
   gsoc:hasPart con:upSideKd-3_2 ;
@@ -81,11 +87,11 @@ con:KgGranite
   a gsog:Formation ;
   gsoc:hasConstituent [
       a gslth:granitoid ;
-      gsoc:hasPhysicalProperty [
+      gsoc:hasProperty [
           gsoc:hasUOM [
               a gsuom:millimeter ;
             ] ;
-          gsoc:hasValue 5 ;
+          gsoc:hasNumericValue "5"^^xsd:decimal ;
           rdfs:type gsog:GrainSizeAverage ;
         ] ;
     ] ;
@@ -170,15 +176,15 @@ con:OsBoundary-6_2
 .
 con:OsFormation
   a gsog:Formation ;
-  gsoc:hasPhysicalProperty [
-      a gsog:Chronostratigraphic_Age_Interval ;
-      gsog:hasOlderAge gstime:Ordovician ;
-      gsog:hasYoungerAge gstime:Ordovician ;
+  gsoc:hasDirectTemporalLocation [
+      a gsog:Geologic_Time_Interval ;
+      gsog:hasOlderInterval gstime:Ordovician ;
+      gsog:hasYoungerInterval gstime:Ordovician ;
     ] ;
-  gsoc:hasTemporalProperty [
-      a gsog:Chronostratigraphic_Age_Interval ;
-      gsog:hasOlderAge gstime:Ordovician ;
-      gsog:hasYoungerAge gstime:Ordovician ;
+  gsoc:hasProperty [
+      a gsog:Geologic_Time_Interval ;
+      gsog:hasOlderInterval gstime:Ordovician ;
+      gsog:hasYoungerInterval gstime:Ordovician ;
     ] ;
   rdfs:label "Sedimentary Rocks (Ordovician)"@en ;
 .
@@ -187,10 +193,10 @@ con:SsBoundary-6_1
 .
 con:SsFormation
   a gsog:Formation ;
-  gsoc:hasTemporalProperty [
-      a gsog:Chronostratigraphic_Age_Interval ;
-      gsog:hasOlderAge gstime:Silurian ;
-      gsog:hasYoungerAge gstime:Silurian ;
+  gsoc:hasDirectTemporalLocation [
+      a gsog:Geologic_Time_Interval ;
+      gsog:hasOlderInterval gstime:Silurian ;
+      gsog:hasYoungerInterval gstime:Silurian ;
     ] ;
   rdfs:label "Sedimentary Rocks (Silurian)"@en ;
 .
@@ -206,8 +212,11 @@ con:XmRockBody
   a gsog:Complex ;
   gsoc:hasConstituent [
       a gslth:gneiss ;
-      gsoc:hasPhysicalProperty [
+      gsoc:hasProperty [
           a gsop:Metamorphic_Grade ;
+		  gsoc:hasValue [
+		    a gsmg:medium_metamorphic_grade
+			]
         ] ;
     ] ;
 .
@@ -407,17 +416,17 @@ con:upSideKd-3_2_4
 .
 ejs:JsFormation
   a gsog:Formation ;
+  gsoc:hasDirectTemporalLocation [
+      a gsog:Geologic_Time_Interval ;
+      gsog:hasOlderInterval gstime:Jurassic ;
+      gsog:hasYoungerInterval gstime:Jurassic ;
+      rdfs:label "Jurassic Age"@en ;
+    ] ;
   gsoc:hasPart con:KdInJsDikeContact-3_1_4 ;
   gsoc:hasPart con:KdInJsDikeContact-3_2_4 ;
   gsoc:hasPart con:KgInJsIntrusiveContact-4_2 ;
   gsoc:hasPart con:baseJs-6 ;
   gsoc:hasPart con:topJs-2 ;
-  gsoc:hasTemporalProperty [
-      a gsog:Chronostratigraphic_Age_Interval ;
-      gsog:hasOlderAge gstime:Jurassic ;
-      gsog:hasYoungerAge gstime:Jurassic ;
-      rdfs:label "Jurassic Age"@en ;
-    ] ;
   rdfs:comment "details of unit description are in a separate Example: GSO-ExampleFormationJs.txt"@en ;
   rdfs:label "Js Formation"@en ;
 .
