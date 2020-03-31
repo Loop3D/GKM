@@ -223,6 +223,33 @@
   rdfs:label "Inference "@en ;
   rdfs:subClassOf :Determining_Event ;
 .
+:Inherant
+  a owl:Class ;
+  rdfs:comment """Need SHACL rule that a Inherant.hasPart is not allowed. count Inherent.hasPart = 0
+Need SHACL rule that count Inherant.isPartOf = 0"""@en ;
+  rdfs:label "Inherant"@en ;
+  rdfs:subClassOf :Endurant ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom owl:Nothing ;
+      owl:onProperty :hasPart ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom owl:Nothing ;
+      owl:onProperty :isPartOf ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty :hasIndirectSpatialLocation ;
+      owl:someValuesFrom :Spatial_Region ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty :inheresIn ;
+      owl:someValuesFrom :Particular ;
+    ] ;
+.
 :Inherent_Feature
   a owl:Class ;
   rdfs:comment "based on quality inhering in (essential relation) host. The quality is the focal; Quality inheres in both the feature and the host. Morphologic feature -- focal  is a specific shape (river bend, fold)"@en ;
@@ -459,11 +486,9 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
 :Property
   a owl:Class ;
   rdfs:comment "A concept that specifies some aspect that inheres in instances of some Particular.  Note that the value of the determiningEvent  property on Property is used to specify metadata about how a property value is assigned. Synonym: Quality"@en ;
-  rdfs:comment """Need SHACL rule that a Property.hasPart is not allowed. count Property.hasPart = 0
-Need SHACL rule that count Property.isPartOf = 0"""@en ;
   rdfs:comment "Need SHACL rule that only one of 'hasDataValue' or 'hasValue' should be instantiated."@en ;
   rdfs:label "Property"@en ;
-  rdfs:subClassOf :Endurant ;
+  rdfs:subClassOf :Inherant ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom :Property ;
@@ -481,21 +506,6 @@ Need SHACL rule that count Property.isPartOf = 0"""@en ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:allValuesFrom owl:Nothing ;
-      owl:onProperty :hasPart ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom owl:Nothing ;
-      owl:onProperty :isPartOf ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty :hasIndirectSpatialLocation ;
-      owl:someValuesFrom :Spatial_Region ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
       owl:onProperty :isPropertyOf ;
       owl:someValuesFrom :Particular ;
     ] ;
@@ -505,6 +515,22 @@ Need SHACL rule that count Property.isPartOf = 0"""@en ;
   rdfs:comment "A numeric property value used to express the fraction of a whole that is composed of some part. Values will range from 0 to 1 (0 to 100%)."@en ;
   rdfs:label "Proportion"@en ;
   rdfs:subClassOf :Property ;
+.
+:Role
+  a owl:Class ;
+  rdfs:comment "subclasses of role restrict the kinds of particular that can be RolePlayer and Role Object. Note that hasRolePlayer is subproperty of inheresIn."@en ;
+  rdfs:label "Role  "@en ;
+  rdfs:subClassOf :Inherant ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty :hasRoleObject ;
+      owl:someValuesFrom :Particular ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty :hasRolePlayer ;
+      owl:someValuesFrom :Particular ;
+    ] ;
 .
 :Scientific_Situation
   a owl:Class ;
@@ -858,6 +884,12 @@ Need SHACL rule that count Property.isPartOf = 0"""@en ;
   rdfs:range :Time_Region ;
   rdfs:subPropertyOf :isTemporallyRelatedTo ;
 .
+:hasInherant
+  a owl:ObjectProperty ;
+  rdfs:comment "" ;
+  rdfs:label "has inherent  "@en ;
+  rdfs:subPropertyOf :isRelatedto ;
+.
 :hasInput
   a owl:ObjectProperty ;
   rdfs:comment "A participant in a process that must be present before the process can operate "@en ;
@@ -892,13 +924,30 @@ Need SHACL rule that count Property.isPartOf = 0"""@en ;
   a owl:ObjectProperty ;
   rdfs:comment ""@en ;
   rdfs:label "has Property "@en ;
-  rdfs:subPropertyOf :isRelatedto ;
+  rdfs:subPropertyOf :hasInherant ;
   owl:inverseOf :isPropertyOf ;
 .
 :hasReference
   a owl:ObjectProperty ;
   rdfs:subPropertyOf :isFundamentallyRelatedTo ;
   owl:inverseOf :isReferenceFor ;
+.
+:hasRole
+  a owl:ObjectProperty ;
+  rdfs:comment "" ;
+  rdfs:label "has role  "@en ;
+  rdfs:subPropertyOf :hasInherant ;
+.
+:hasRoleObject
+  a owl:ObjectProperty ;
+  rdfs:comment "property that links a Role to the Particular that the RolePlayer is linked to in a relationship"@en ;
+  rdfs:label "has role object  "@en ;
+.
+:hasRolePlayer
+  a owl:ObjectProperty ;
+  rdfs:comment "" ;
+  rdfs:label "has role player  "@en ;
+  rdfs:subPropertyOf :inheresIn ;
 .
 :hasSetting
   a owl:ObjectProperty ;
@@ -942,6 +991,12 @@ Need SHACL rule that count Property.isPartOf = 0"""@en ;
   rdfs:comment ""@en ;
   rdfs:label "hosts"@en ;
   rdfs:subPropertyOf :isFundamentallyRelatedTo ;
+.
+:inheresIn
+  a owl:ObjectProperty ;
+  rdfs:comment "" ;
+  rdfs:label "inheres in  "@en ;
+  rdfs:subPropertyOf :isRelatedto ;
 .
 :isColocatedWith
   a owl:ObjectProperty ;
@@ -1039,7 +1094,7 @@ Need SHACL rule that count Property.isPartOf = 0"""@en ;
   rdfs:comment "OWL ObjectProperty that binds a Property to some other Particular in which that property inheres."@en ;
   rdfs:comment "link from physical property to a class that exhibits the property"@en ;
   rdfs:label "is Property Of"@en ;
-  rdfs:subPropertyOf :isRelatedto ;
+  rdfs:subPropertyOf :inheresIn ;
 .
 :isReferenceFor
   a owl:ObjectProperty ;
@@ -1054,7 +1109,7 @@ Need SHACL rule that count Property.isPartOf = 0"""@en ;
   a owl:ObjectProperty ;
   rdfs:comment "" ;
   rdfs:label "is sample of" ;
-  rdfs:subPropertyOf :isFundamentallyRelatedTo ;
+  rdfs:subPropertyOf :hasRolePlayer ;
 .
 :isSettingFor
   a owl:ObjectProperty ;
