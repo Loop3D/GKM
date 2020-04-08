@@ -16,21 +16,21 @@
   rdfs:comment "Specification of the strength of observed alteration. Can be used on Geologic_Unit or Rock_Material"@en ;
   rdfs:isDefinedBy "GeoSciML v4"@en ;
   rdfs:label "Alteration degree"@en ;
-  rdfs:subClassOf gsoc:Property ;
+  rdfs:subClassOf gsoc:Quality ;
 .
 :Alteration_Distribution
   a owl:Class ;
   rdfs:comment "AlterationDistribution describes the spatial distribution or geometry of alteration zones. eg: patchy, spotted, banded, viens, vein breccia, pervasive, disseminated, etc"@en ;
   rdfs:isDefinedBy "GeoSciML v4"@en ;
   rdfs:label "Alteration distribution"@en ;
-  rdfs:subClassOf gsoc:Property ;
+  rdfs:subClassOf gsoc:Quality ;
 .
 :Alteration_Type
   a owl:Class ;
   rdfs:comment "Specification of alteration types (eg; potassic, argillic, advanced argillic)"@en ;
   rdfs:isDefinedBy "GeoSciML v4"@en ;
   rdfs:label "Alteration type"@en ;
-  rdfs:subClassOf gsoc:Property ;
+  rdfs:subClassOf gsoc:Quality ;
 
 .
 :Any_Alteration_Type
@@ -69,11 +69,11 @@
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom xsd:decimal ;
-      owl:onProperty gsoc:hasNumericValue ;
+      owl:onProperty gsoc:hasDataValue ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty gsoc:hasProperty ;
+      owl:onProperty gsoc:hasQuality ;
       owl:someValuesFrom gsoc:Unit_of_Measure ;
     ] ;
 .
@@ -85,11 +85,11 @@
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom xsd:decimal ;
-      owl:onProperty gsoc:hasNumericValue ;
+      owl:onProperty gsoc:hasDataValue ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty gsoc:hasProperty ;
+      owl:onProperty gsoc:hasQuality ;
       owl:someValuesFrom gsoc:Unit_of_Measure ;
     ] ;
 .
@@ -107,12 +107,12 @@
   rdfs:subClassOf :Orientation ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty gsoc:hasProperty ;
+      owl:onProperty gsoc:hasQuality ;
       owl:someValuesFrom :Azimuth ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty gsoc:hasProperty ;
+      owl:onProperty gsoc:hasQuality ;
       owl:someValuesFrom :Plunge ;
     ] ;
 .
@@ -122,7 +122,7 @@
   rdfs:comment "applies to Earth_Material or Geologic_Unit"@en ;
   rdfs:isDefinedBy "GeoSciML v4"@en ;
   rdfs:label "Metamorphic facies"@en ;
-  rdfs:subClassOf gsoc:Property ;
+  rdfs:subClassOf gsoc:Quality ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty gsoc:hasValue ;
@@ -135,7 +135,7 @@
   rdfs:comment "applies to Earth_Material or Geologic_Unit"@en ;
   rdfs:isDefinedBy "GeoSciML v4"@en ;
   rdfs:label "Metamorphic grade"@en ;
-  rdfs:subClassOf gsoc:Property ;
+  rdfs:subClassOf gsoc:Quality ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty gsoc:hasValue ;
@@ -144,7 +144,7 @@
 .
 :Orientation
   a owl:Class ;
-  rdfs:subClassOf gsoc:Property ;
+  rdfs:subClassOf gsoc:Quality ;
 .
 :Overturned
   a owl:Class ;
@@ -158,7 +158,7 @@
   rdfs:comment "peak metamorphic pressure"@en ;
   rdfs:isDefinedBy "GeoSciML v3"@en ;
   rdfs:label "Peak pressure"@en ;
-  rdfs:subClassOf gsoc:Property ;
+  rdfs:subClassOf gsoc:Quality ;
 .
 :Peak_Temperature
   a owl:Class ;
@@ -166,7 +166,7 @@
   rdfs:comment "peak metamorphic temperature"@en ;
   rdfs:isDefinedBy "GeoSciML v3"@en ;
   rdfs:label "Peak temperature"@en ;
-  rdfs:subClassOf gsoc:Property ;
+  rdfs:subClassOf gsoc:Quality ;
 .
 :Plane_Orientation
   a owl:Class ;
@@ -175,29 +175,29 @@
   rdfs:subClassOf :Orientation ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty gsoc:hasProperty ;
+      owl:onProperty gsoc:hasQuality ;
       owl:someValuesFrom :Azimuth ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty gsoc:hasProperty ;
+      owl:onProperty gsoc:hasQuality ;
       owl:someValuesFrom :Dip ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty gsoc:hasProperty ;
+      owl:onProperty gsoc:hasQuality ;
       owl:someValuesFrom :Any_Surface_Facing ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty gsoc:hasProperty ;
+      owl:onProperty gsoc:hasQuality ;
       owl:someValuesFrom :Plane_Orientation_Convention ;
     ] ;
 .
 :Plane_Orientation_Convention
   a owl:Class ;
   rdfs:label "Plane orientation convention"@en ;
-  rdfs:subClassOf gsoc:Property ;
+  rdfs:subClassOf gsoc:Quality ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom :Any_Plane_Orientation_Convention ;
@@ -216,7 +216,7 @@
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty gsoc:hasProperty ;
+      owl:onProperty gsoc:hasQuality ;
       owl:someValuesFrom gsoc:Unit_of_Measure ;
     ] ;
 .
@@ -242,7 +242,7 @@
   a owl:Class ;
   rdfs:comment "property to specify if a surface is directed, i.e. has a top and bottom. Values: {upright, overturned, unknown}"@en ;
   rdfs:label "facing direction"@en ;
-  rdfs:subClassOf gsoc:Property ;
+  rdfs:subClassOf gsoc:Quality ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom :Any_Surface_Facing ;
@@ -251,15 +251,15 @@
 .
 :Thickness
   a owl:Class ;
-  rdfs:subClassOf gsoc:Property ;
+  rdfs:subClassOf gsoc:Quality ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom xsd:decimal ;
-      owl:onProperty gsoc:hasValue ;
+      owl:onProperty gsoc:hasDataValue ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty gsoc:hasProperty ;
+      owl:onProperty gsoc:hasQuality ;
       owl:someValuesFrom gsoc:Unit_of_Measure ;
     ] ;
 .

@@ -276,7 +276,7 @@ Contact(x) <--> exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RB
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onClass :Displacement ;
-      owl:onProperty gsoc:hasProperty ;
+      owl:onProperty gsoc:hasQuality ;
       owl:qualifiedCardinality "0"^^xsd:nonNegativeInteger ;
     ] ;
 .
@@ -316,7 +316,7 @@ Contact(x) <--> exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RB
 :Displacement
   a owl:Class ;
   rdfs:label "Displacement"@en ;
-  rdfs:subClassOf gsoc:Property ;
+  rdfs:subClassOf gsoc:Quality ;
 .
 :Ductile_Shear_Zone
   a owl:Class ;
@@ -330,12 +330,12 @@ Contact(x) <--> exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RB
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty :hasProperty ;
+      owl:onProperty gsoc:hasQuality ;
       owl:someValuesFrom :Displacement ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty :hasProperty ;
+      owl:onProperty gsoc:hasQuality ;
       owl:someValuesFrom gsop:Thickness ;
     ] ;
 .
@@ -442,7 +442,7 @@ Contact(x) <--> exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RB
       a owl:Restriction ;
       owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
       owl:onClass :Displacement ;
-      owl:onProperty gsoc:hasProperty ;
+      owl:onProperty gsoc:hasQuality ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
@@ -725,7 +725,7 @@ Probably should specify a Temporal Reference System used to assign coordinate va
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty :hasProperty ;
+      owl:onProperty gsoc:hasQuality ;
       owl:someValuesFrom gsop:Thickness ;
     ] ;
 .
@@ -1455,9 +1455,7 @@ RBT (x) <--> RBD (x) ^ exists z forall y [(isPartOf (y,z) ^ hasHost (z,x)) -> (b
   rdfs:range :Geologic_Date_Interval ;
   rdfs:subPropertyOf gsoc:age_starts ;
 .
-:hasProperty
-  a owl:ObjectProperty ;
-.
+
 :hasSpatialProperty
   a owl:ObjectProperty ;
 .

@@ -31,7 +31,7 @@
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty :hasProperty ;
+      owl:onProperty :hasQuality ;
       owl:someValuesFrom :State_Of_Matter ;
     ] ;
 .
@@ -51,7 +51,7 @@
   a owl:Class ;
   rdfs:comment "upper level class that represents any conceptual space for quantifying colour, e.g. RGB, Munsell, CMYK, US NBS Color (NBS Special Pub 440)"@en ;
   rdfs:label "Any Colour"@en ;
-  rdfs:subClassOf :Property ;
+  rdfs:subClassOf :Quality ;
 .
 :Complex_Feature
   a owl:Class ;
@@ -400,19 +400,19 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
       owl:someValuesFrom :Amount_Of_Matter ;
     ] ;
 .
-:Physical_Property
+:Physical_Quality
   a owl:Class ;
-  rdfs:comment "Physical Property"@en ;
+  rdfs:comment "Physical Property or Quality"@en ;
   rdfs:label "Physical Property"@en ;
-  rdfs:subClassOf :Property ;
+  rdfs:subClassOf :Quality ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:allValuesFrom :Property ;
-      owl:onProperty :hasProperty ;
+      owl:allValuesFrom :Quality ;
+      owl:onProperty :hasQuality ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty :isPropertyOf ;
+      owl:onProperty :isQualityOf ;
       owl:someValuesFrom [
           a owl:Class ;
           owl:unionOf [
@@ -423,7 +423,7 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
                   rdf:first :Perdurant ;
                   rdf:rest [
                       a rdf:List ;
-                      rdf:first :Property ;
+                      rdf:first :Quality ;
                       rdf:rest () ;
                     ] ;
                 ] ;
@@ -483,20 +483,20 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
       owl:someValuesFrom :Process ;
     ] ;
 .
-:Property
+:Quality
   a owl:Class ;
-  rdfs:comment "A concept that specifies some aspect that inheres in instances of some Particular.  Note that the value of the determiningEvent  property on Property is used to specify metadata about how a property value is assigned. Synonym: Quality"@en ;
+  rdfs:comment "A concept that specifies some aspect that inheres in instances of some Particular.  Note that the value of the determiningEvent property on Quality is used to specify metadata about how a property value is assigned. Synonym: Property"@en ;
   rdfs:comment "Need SHACL rule that only one of 'hasDataValue' or 'hasValue' should be instantiated."@en ;
-  rdfs:label "Property"@en ;
+  rdfs:label "Quality"@en ;
   rdfs:subClassOf :Inherant ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:allValuesFrom :Property ;
-      owl:onProperty :hasProperty ;
+      owl:allValuesFrom :Quality ;
+      owl:onProperty :hasQuality ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:allValuesFrom :Property ;
+      owl:allValuesFrom :Quality ;
       owl:onProperty :hasValue ;
     ] ;
   rdfs:subClassOf [
@@ -506,7 +506,7 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty :isPropertyOf ;
+      owl:onProperty :isQualityOf ;
       owl:someValuesFrom :Particular ;
     ] ;
 .
@@ -514,7 +514,7 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   a owl:Class ;
   rdfs:comment "A numeric property value used to express the fraction of a whole that is composed of some part. Values will range from 0 to 1 (0 to 100%)."@en ;
   rdfs:label "Proportion"@en ;
-  rdfs:subClassOf :Property ;
+  rdfs:subClassOf :Quality ;
 .
 :Role
   a owl:Class ;
@@ -542,13 +542,13 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   a owl:Class ;
   rdfs:comment "Property to specify the shape of an object. Lots of possible property spaces under this, e.g. (in geology) roundness, sphericity, aspect ratio"@en ;
   rdfs:label "Shape Property"@en ;
-  rdfs:subClassOf :Property ;
+  rdfs:subClassOf :Quality ;
 .
 :Simple_Uncertainty
   a owl:Class ;
   rdfs:comment "" ;
   rdfs:label "Simple Uncertainty"@en ;
-  rdfs:subClassOf :Property ;
+  rdfs:subClassOf :Quality ;
 .
 :Situation
   a owl:Class ;
@@ -585,7 +585,7 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   a owl:Class ;
   rdfs:comment "A physical property that spacifies the position of an entity relative to some spatial reference system."@en ;
   rdfs:label "Spatial Location"@en ;
-  rdfs:subClassOf :Property ;
+  rdfs:subClassOf :Quality ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty :hasValue ;
@@ -620,14 +620,14 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty :hasProperty ;
+      owl:onProperty :hasQuality ;
       owl:someValuesFrom :Spatial_Location ;
     ] ;
 .
 :State_Of_Matter
   a owl:Class ;
   rdfs:label "Any State of Matter"@en ;
-  rdfs:subClassOf :Property ;
+  rdfs:subClassOf :Quality ;
 .
 :Statistical_Calculation
   a owl:Class ;
@@ -636,7 +636,7 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   rdfs:subClassOf :Calculation ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty :hasProperty ;
+      owl:onProperty :hasQuality ;
       owl:someValuesFrom :Unit_of_Measure ;
     ] ;
 .
@@ -679,7 +679,7 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
 :Unit_of_Measure
   a owl:Class ;
   rdfs:label "Units of measurement"@en ;
-  rdfs:subClassOf :Property ;
+  rdfs:subClassOf :Quality ;
 .
 :age_disjoint
   a owl:ObjectProperty ;
@@ -920,12 +920,12 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   rdfs:subPropertyOf :isFundamentallyRelatedTo ;
   owl:inverseOf :isParticipantIn ;
 .
-:hasProperty
+:hasQuality
   a owl:ObjectProperty ;
   rdfs:comment ""@en ;
-  rdfs:label "has Property "@en ;
+  rdfs:label "has Quality "@en ;
   rdfs:subPropertyOf :hasInherant ;
-  owl:inverseOf :isPropertyOf ;
+  owl:inverseOf :isQualityOf ;
 .
 :hasReference
   a owl:ObjectProperty ;
@@ -967,7 +967,7 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   rdfs:comment "top level property for assigning property values; subtype for associating values with measurement units "@en ;
   rdfs:label "has unit of measure "@en ;
   rdfs:range :Unit_of_Measure ;
-  rdfs:subPropertyOf :hasProperty ;
+  rdfs:subPropertyOf :hasQuality ;
 .
 :hasUncertainty
   a owl:DatatypeProperty ;
@@ -977,9 +977,9 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
 :hasValue
   a owl:ObjectProperty ;
   rdfs:comment "top level property for assigning property values; subtype for particular kinds of values (integer, category, number boolean...) "@en ;
-  rdfs:domain :Property ;
+  rdfs:domain :Quality ;
   rdfs:label "hasValue "@en ;
-  rdfs:subPropertyOf :hasProperty ;
+  rdfs:subPropertyOf :hasQuality ;
 .
 :hostedBy
   a owl:ObjectProperty ;
@@ -1089,7 +1089,7 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
     ] ;
   rdfs:subPropertyOf :isFundamentallyRelatedTo ;
 .
-:isPropertyOf
+:isQualityOf
   a owl:ObjectProperty ;
   rdfs:comment "OWL ObjectProperty that binds a Property to some other Particular in which that property inheres."@en ;
   rdfs:comment "link from physical property to a class that exhibits the property"@en ;

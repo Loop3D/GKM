@@ -37,22 +37,22 @@ gsog:Granular_Material
   rdfs:comment "Granular material properties are bound in the Rock_Material module"@en ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty gsoc:hasProperty ;
+      owl:onProperty gsoc:hasQuality ;
       owl:someValuesFrom gslth:Grain_Shape ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty gsoc:hasProperty ;
+      owl:onProperty gsoc:hasQuality ;
       owl:someValuesFrom gslth:Grain_Size ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty gsoc:hasProperty ;
+      owl:onProperty gsoc:hasQuality ;
       owl:someValuesFrom gslth:Particle_Aspect_Ratio_Category ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty gsoc:hasProperty ;
+      owl:onProperty gsoc:hasQuality ;
       owl:someValuesFrom gslth:Particle_Sorting_Category ;
     ] ;
 .
@@ -61,52 +61,52 @@ gsog:Rock_Material
   rdfs:comment "Rock_material properties a bound in the Rock_Material module"@en ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty gsoc:hasProperty ;
+      owl:onProperty gsoc:hasQuality ;
       owl:someValuesFrom gsop:Alteration_Degree ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty gsoc:hasProperty ;
+      owl:onProperty gsoc:hasQuality ;
       owl:someValuesFrom gsop:Alteration_Distribution ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty gsoc:hasProperty ;
+      owl:onProperty gsoc:hasQuality ;
       owl:someValuesFrom gsop:Alteration_Type ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty gsoc:hasProperty ;
+      owl:onProperty gsoc:hasQuality ;
       owl:someValuesFrom gsop:Metamorphic_Facies ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty gsoc:hasProperty ;
+      owl:onProperty gsoc:hasQuality ;
       owl:someValuesFrom gsop:Metamorphic_Grade ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty gsoc:hasProperty ;
+      owl:onProperty gsoc:hasQuality ;
       owl:someValuesFrom gslth:Consolidation_Degree ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty gsoc:hasProperty ;
+      owl:onProperty gsoc:hasQuality ;
       owl:someValuesFrom gslth:Grain_Shape ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty gsoc:hasProperty ;
+      owl:onProperty gsoc:hasQuality ;
       owl:someValuesFrom gslth:Grain_Size ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty gsoc:hasProperty ;
+      owl:onProperty gsoc:hasQuality ;
       owl:someValuesFrom gslth:Particle_Aspect_Ratio_Category ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty gsoc:hasProperty ;
+      owl:onProperty gsoc:hasQuality ;
       owl:someValuesFrom gslth:Rock_Material_Genetic_Category ;
     ] ;
 .
@@ -148,12 +148,12 @@ gslth:Consolidation_Degree
   rdfs:comment "A property that specifies the degree to which an aggregation of EarthMaterial particles is a distinct solid material. Consolidation and induration are related concepts specified by this property. They define a continuum from unconsolidated material to very hard rock. Induration is the degree to which a consolidated material is made hard, operationally determined by how difficult it is to break a piece of the material. Consolidated materials may have varying degrees of induration (NADMSC, 2004)"@en ;
   rdfs:isDefinedBy "GeoSciML v4"@en ;
   rdfs:label "Consolidation degree"@en ;
-  rdfs:subClassOf gsoc:Property ;
+  rdfs:subClassOf gsoc:Quality ;
 .
 gslth:Grain_Shape
   a owl:Class ;
   rdfs:label "Grain Shape"@en ;
-  rdfs:subClassOf gsoc:Property ;
+  rdfs:subClassOf gsoc:Quality ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom gslth:Any_Particle_Shape ;
@@ -164,7 +164,7 @@ gslth:Grain_Size
   a owl:Class ;
   rdfs:comment "generaly property for specification of grain size; sub-properties have value spaces for different size specification types."@en ;
   rdfs:label "Grain Size property "@en ;
-  rdfs:subClassOf gsoc:Property ;
+  rdfs:subClassOf gsoc:Quality ;
 .
 gslth:Grain_Size_Average
   a owl:Class ;
@@ -174,7 +174,7 @@ gslth:Grain_Size_Average
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom xsd:decimal ;
-      owl:onProperty gsoc:hasNumericValue ;
+      owl:onProperty gsoc:hasDataValue ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
@@ -191,7 +191,7 @@ gslth:Grain_Size_Category
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom xsd:string ;
-      owl:onProperty gsoc:hasTextValue ;
+      owl:onProperty gsoc:hasDataValue ;
     ] ;
 .
 gslth:Grain_Size_Max
@@ -202,7 +202,7 @@ gslth:Grain_Size_Max
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom xsd:decimal ;
-      owl:onProperty gsoc:hasNumericValue ;
+      owl:onProperty gsoc:hasDataValue ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
@@ -218,7 +218,7 @@ gslth:Grain_Size_Min
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom xsd:decimal ;
-      owl:onProperty gsoc:hasNumericValue ;
+      owl:onProperty gsoc:hasDataValue ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
@@ -231,25 +231,25 @@ gslth:Particle_Aspect_Ratio_Category
   rdfs:comment "AspectRatio describes the geometry of particles based on the ratios of lengths of long, intermediate and short axes of grains. Equates to sphericity in sedimentary rocks (ie: the degree to which the shape of a particle approximates a sphere).  A quantitative specification based on the ratio of lengths of long, intermediate and short axes of grain shape (Sneed and Folk, 1958; Zingg, 1935). (eg: prolate, slightly flattened, very bladed, equant, acicular, tabular) "@en ;
   rdfs:isDefinedBy "GeoSciML v4"@en ;
   rdfs:label "Particle aspect ratio "@en ;
-  rdfs:subClassOf gsoc:Property ;
+  rdfs:subClassOf gsoc:Quality ;
 .
 gslth:Particle_Sorting_Category
   a owl:Class ;
   rdfs:comment "The Sorting attribute holds text terms to specify size distribution of particles in a CompoundMaterial. Terminology for sorting in sedimentary rocks is based on the quantitative Graphic Standard Deviation (IGSD) scheme proposed by Folk (1968, 1974).  Example terms for this attribute may include sedimentary terms such as well sorted and poorly sorted, or igneous terms such as porphyritic, equigranuilar, seriate."@en ;
   rdfs:isDefinedBy "GeoSciML v4"@en ;
   rdfs:label "Particle sorting"@en ;
-  rdfs:subClassOf gsoc:Property ;
+  rdfs:subClassOf gsoc:Quality ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom xsd:string ;
-      owl:onProperty gsoc:hasTextValue ;
+      owl:onProperty gsoc:hasDataValue ;
     ] ;
 .
 gslth:Rock_Material_Color
   a owl:Class ;
   rdfs:comment "Property for specification of color of rocks, minerals, other Earth Material "@en ;
   rdfs:label "Earth Material Color"@en ;
-  rdfs:subClassOf gsoc:Property ;
+  rdfs:subClassOf gsoc:Quality ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty gsoc:hasValue ;
@@ -261,14 +261,14 @@ gslth:Rock_Material_Composition_Category
   rdfs:comment "Term to specify the gross compositional character of a compound material. Composition as used here is loosely construed to include both chemical composition and petrograpic composition, thus multiple values may be applied to a single rock, e.g. metaluminous and alkalic, undersaturated and basic, etc. Terms would typically include broad chemical classifications such as silicate, carbonate, ferromagnesian, oxide.  However, this attribute may have different terminology for different kinds of rocks - for example sandstone petrographic classification terms (e.g. feldspathic) might be placed here."@en ;
   rdfs:isDefinedBy "GeoSciML v4"@en ;
   rdfs:label "Rock material composition category"@en ;
-  rdfs:subClassOf gsoc:Property ;
+  rdfs:subClassOf gsoc:Quality ;
 .
 gslth:Rock_Material_Genetic_Category
   a owl:Class ;
   rdfs:comment "A term that represents a summary geologic history of the material. (ie, a genetic process classifier term) Examples include igneous, sedimentary, metamorphic, shock metamorphic, volcanic, pyroclastic."@en ;
   rdfs:isDefinedBy "GeoSciML v4"@en ;
   rdfs:label "Rock material genetic category"@en ;
-  rdfs:subClassOf gsoc:Property ;
+  rdfs:subClassOf gsoc:Quality ;
 .
 gslth:acidic_igneous_material
   a owl:Class ;
