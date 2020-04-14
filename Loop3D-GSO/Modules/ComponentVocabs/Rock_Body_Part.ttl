@@ -12,46 +12,9 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-gsog:Facies
-  a owl:Class ;
-  rdfs:comment "Represents a particular body of rock that is a lateral variant of a lithostratigraphic unit, or a variant of a lithodemic unit. Contrast with lithosome in being a particular, connected body of rock, as opposed to a kind of rock body that is repeated in many places in a unit."@en ;
-  rdfs:comment "dct:source--  CGI rockbodypart vocabulary 2016-11-21 "@en ;
-  rdfs:label "facies"@en ;
-  rdfs:subClassOf gsog:Rock_Body_Part ;
-.
-gsog:Inclusion
-  a owl:Class ;
-  rdfs:comment "A body of material present as masses with generally sharp boundaries enclosed within a matrix of some other material."@en ;
-  rdfs:comment "dct:source--  CGI rockbodypart vocabulary 2016-11-21 "@en ;
-  rdfs:label "inclusion"@en ;
-  rdfs:subClassOf gsog:Rock_Body_Part ;
-.
-gsog:Lithosome
-  a owl:Class ;
-  rdfs:comment "A kind of rock body that has multiple occurrences in a single geologic unit. A mass of rock of uniform character, characterized by geometry, composition, and internal structure. Generally denotes rock mass that is the product of a particular rock forming process or related sequence of processes in the containing unit. Example--bouma sequence, point bar sequence. A particular lithosome may be characterized by the presence of blocks, but blocks are not treated as kinds of lithosome because the internal character of the blocks is determined by a separate genetic sequence from the described unit. This vocabulary generalizes the concept defined in Neuendorf et al 2005 to include bodies of igneous or metamorphic rock as well as sedimentary rock. NADM SLTTs (2004) used the term 'lithotope' with similar meaning for sedimentary rocks."@en ;
-  rdfs:comment "dct:source--  CGI rockbodypart vocabulary 2016-11-21 "@en ;
-  rdfs:label "lithosome"@en ;
-  rdfs:subClassOf gsog:Rock_Body_Part ;
-.
-gsog:Pendant
-  a owl:Class ;
-  rdfs:comment "A block of wall rock material in an igneous intrusion. Pendants become xenoliths as the dimension becomes smaller than about 10 m in their longest dimension. Although term pendant has connotation of being suspended or supported from above, this is rarely demonstrable in geologic situations, and the concept here does not require connection to the wall of the containing intrusion."@en ;
-  rdfs:comment "dct:source--  Base on Neuendorf et al 2005"@en ;
-.
-gsog:Rock_Body_Part
-  a owl:Class ;
-  rdfs:comment "The geologic unit part role is not known in any greater detail. Inclusion of Only_part as a separate concept implies that this concept is the equivalent of 'proper part' in mereology."@en ;
-  rdfs:comment "dct:source--  CGI rockbodypart vocabulary 2016-11-21 "@en ;
-.
-gsog:Xenolith
-  a owl:Class ;
-  rdfs:comment "Inclusion of pre-intrusive country rock in intrusive igneous matrix, cm to about 10 meter diameter in longest dimension. Use term pendant for larger blocks."@en ;
-  rdfs:comment "dct:source--  Neuendorf et al. 2005, Cobbing, 2000, This vocabulary"@en ;
-  rdfs:subClassOf gsog:Inclusion ;
-.
 gsrbp:Block
   a owl:Class ;
-  rdfs:comment "Geologic unit constituent is present as masses with generally sharp boundaries and block-like geometry within a matrix of some other material emplaced by processes at the earth's surface--e.g. volcanic eruption or mass wasting."@en ;
+  rdfs:comment "Geologic unit part is one or more masses with generally sharp boundaries and block-like geometry within a matrix of some other material emplaced by processes at the earth's surface--e.g. volcanic eruption or mass wasting. Use for objects that are larger that what would be considered a clast, e.g. greater than about 10 m shortest dimension, typically large enough and sparse enough to be considered individual objects."@en ;
   rdfs:comment "dct:source--  CGI rockbodypart vocabulary 2016-11-21 "@en ;
   rdfs:label "blocks"@en ;
   rdfs:subClassOf gsog:Inclusion ;
@@ -61,11 +24,12 @@ gsrbp:Concretion
   rdfs:comment "A hard, compact mass or aggregate of mineral matter, normally subspherical but commonly oblate, disc-shaped or irregular. Formed from precipitation from solution about a nucleus or centre."@en ;
   rdfs:comment "dct:source--  Neuendorf et al. 2005"@en ;
   rdfs:label "Concretion"@en ;
-  rdfs:subClassOf gsog:Inclusion ;
+  rdfs:subClassOf gsog:Nodule ;
+  rdfs:subClassOf gsog:Rock_Object ;
 .
 gsrbp:Enclave
   a owl:Class ;
-  rdfs:comment "General term for a polymineralic aggregate enclosed in a granitoid."@en ;
+  rdfs:comment "General term for a polymineralic aggregate enclosed in a granitoid. Use when origin of inclusion as xenolith or a separate igneous phase is unclear."@en ;
   rdfs:comment "dct:source--  Cobbing, 2000, Barbarin, 1991"@en ;
   rdfs:label "enclave"@en ;
   rdfs:subClassOf gsog:Inclusion ;
@@ -96,6 +60,8 @@ gsrbp:Tectonic_block
   rdfs:comment "Discrete masses with faulted boundaries, emplaced into the host unit by tectonic processes inside the earth, e.g. blocks in tectonic melange"@en ;
   rdfs:comment "dct:source--  CGI rockbodypart vocabulary 2016-11-21 "@en ;
   rdfs:label "tectonic block"@en ;
+  rdfs:subClassOf gsog:Rock_Body_Part ;
+  rdfs:subClassOf gsrbp:Block ;
 .
 gsrbp:bed_lithosome
   a owl:Class ;
@@ -113,10 +79,10 @@ gsrbp:cyclic_bedding_package
 .
 gsrbp:geologic_unit_matrix
   a owl:Class ;
-  rdfs:comment "Lithosome in a geologic unit that is generally interstitial to other constituents, e.g. in a mass wasting deposit, melange, tuff breccia."@en ;
-  rdfs:comment "dct:source--  CGI rockbodypart vocabulary 2016-11-21 "@en ;
+  rdfs:comment "Part of a geologic unit that is generally interstitial to other constituents, e.g. in a mass wasting deposit, melange, tuff breccia."@en ;
+  rdfs:comment "dct:source--  modified from CGI rockbodypart vocabulary 2016-11-21"@en ;
   rdfs:label "geologic unit matrix"@en ;
-  rdfs:subClassOf gsog:Lithosome ;
+  rdfs:subClassOf gsog:Matrix ;
 .
 gsrbp:irregular_lithosome
   a owl:Class ;
@@ -144,7 +110,7 @@ gsrbp:marker_bed
   rdfs:comment "Stratigraphic part that is a thin laterally continuous bed within another unit."@en ;
   rdfs:comment "dct:source--  CGI rockbodypart vocabulary 2016-11-21 "@en ;
   rdfs:label "marker bed"@en ;
-  rdfs:subClassOf gsrbp:stratigraphic_part ;
+  rdfs:subClassOf gsog:Bed ;
 .
 gsrbp:ontology
   a owl:Ontology ;
@@ -158,10 +124,10 @@ gsrbp:ontology
 .
 gsrbp:stratigraphic_part
   a owl:Class ;
-  rdfs:comment "A geologic unit part that occupies a particular stratigraphic position within a geologic unit. Part is a particular body of rock."@en ;
-  rdfs:comment "dct:source--  CGI rockbodypart vocabulary 2016-11-21 "@en ;
+  rdfs:comment "A geologic unit part that occupies a particular stratigraphic position within a geologic unit. Part is a particular body of rock, but is not designated with one of the formal lithostratigraphic or lithdemic rank terms."@en ;
+  rdfs:comment "dct:source--  based on CGI rockbodypart vocabulary 2016-11-21; hierarchy position modified in GSO."@en ;
   rdfs:label "stratigraphic part"@en ;
-  rdfs:subClassOf gsog:Rock_Body_Part ;
+  rdfs:subClassOf gsog:Lithostratigraphic_Unit ;
 .
 gsrbp:vein_or_dike_lithosome
   a owl:Class ;

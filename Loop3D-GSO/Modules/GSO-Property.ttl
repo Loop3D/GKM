@@ -2,14 +2,13 @@
 # imports: http://loop3d.org/GSO/ontology/2020/1/common/ontology
 
 @prefix : <http://loop3d.org/GSO/ontology/2020/1/geologicproperty/> .
-@prefix gsog: <http://loop3d.org/GSO/ontology/2020/1/geologicfeature/> .
 @prefix gsoc: <http://loop3d.org/GSO/ontology/2020/1/common/> .
+@prefix gsog: <http://loop3d.org/GSO/ontology/2020/1/geologicfeature/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-
 
 :Alteration_Degree
   a owl:Class ;
@@ -31,7 +30,11 @@
   rdfs:isDefinedBy "GeoSciML v4"@en ;
   rdfs:label "Alteration type"@en ;
   rdfs:subClassOf gsoc:Quality ;
-
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasValue ;
+      owl:someValuesFrom :Any_Alteration_Type ;
+    ] ;
 .
 :Any_Alteration_Type
   a owl:Class ;
@@ -99,7 +102,6 @@
   rdfs:label "Dip and Dip Direction"@en ;
   rdfs:subClassOf :Any_Plane_Orientation_Convention ;
 .
-
 :Line_Orientation
   a owl:Class ;
   rdfs:comment "specification of the orientation of a line in space, using a trend (bearing of horizontal projection of line relative to geographic north) and plunge (inclination of line measured positive downward in degrees from local horizontal).  TBD:  add 'isdirected property to indicate if the line is directed (e.g. sense of shear), values should be Boolean,"@en ;
@@ -119,7 +121,7 @@
 :Metamorphic_Facies
   a owl:Class ;
   rdfs:comment "Categories that characterize mineral assemblages indicative of certain metamorphic P-T conditions. Examples include Barrovian metasedimentary zones (eg: biotite facies, kyanite facies) or assemblages developed in rocks of more mafic composition (eg: greenschist facies, amphibolite facies)."@en ;
-  rdfs:comment "applies to Earth_Material or Geologic_Unit"@en ;
+  rdfs:comment "applies to Rock_Material or Geologic_Unit"@en ;
   rdfs:isDefinedBy "GeoSciML v4"@en ;
   rdfs:label "Metamorphic facies"@en ;
   rdfs:subClassOf gsoc:Quality ;
@@ -176,17 +178,17 @@
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty gsoc:hasQuality ;
+      owl:someValuesFrom :Any_Surface_Facing ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasQuality ;
       owl:someValuesFrom :Azimuth ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty gsoc:hasQuality ;
       owl:someValuesFrom :Dip ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty gsoc:hasQuality ;
-      owl:someValuesFrom :Any_Surface_Facing ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
@@ -212,11 +214,11 @@
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom xsd:decimal ;
-      owl:onProperty gsoc:hasNumericValue ;
+      owl:onProperty gsoc:hasDataValue ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty gsoc:hasQuality ;
+      owl:onProperty gsoc:hasUOM ;
       owl:someValuesFrom gsoc:Unit_of_Measure ;
     ] ;
 .
@@ -263,7 +265,6 @@
       owl:someValuesFrom gsoc:Unit_of_Measure ;
     ] ;
 .
-
 :Unknown_Facing
   a owl:Class ;
   rdfs:comment "Facing direction is unknown {@en}	"@en ;
