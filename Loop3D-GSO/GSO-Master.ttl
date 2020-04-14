@@ -15,6 +15,7 @@
 # imports: http://loop3d.org/GSO/ontology/2020/1/ischart/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/lithology/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/lithology/particleaspectratio/ontology
+# imports: http://loop3d.org/GSO/ontology/2020/1/lithology/particleshape/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/uom/ontology
 # imports: http://loop3d.org/GSO/ontology2020/1/mineral/ontology
 
@@ -32,6 +33,7 @@
 @prefix gsol: <http://loop3d.org/GSO/ontology/2020/1/geologicstructure/lineation/> .
 @prefix gsop: <http://loop3d.org/GSO/ontology/2020/1/geologicproperty/> .
 @prefix gspr: <http://loop3d.org/GSO/ontology/2020/1/geologicprocess/> .
+@prefix gsps: <http://loop3d.org/GSO/ontology/2020/1/lithology/particleshape/> .
 @prefix gssf: <http://loop3d.org/GSO/ontology/2020/1/geologicstructure/contact/> .
 @prefix gstime: <http://loop3d.org/GSO/ontology/2020/1/ischart/> .
 @prefix gsuom: <http://loop3d.org/GSO/ontology/2020/1/uom/> .
@@ -42,9 +44,47 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<http://loop3d.org/GSO/ontology/2020/1/geologicunit/rockbodypart/Tectonic_block>
-  rdfs:subClassOf gsog:Rock_Object_Role ;
+
+gsop:Alteration_Degree
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom [
+          a owl:Class ;
+          owl:unionOf (
+              gsog:Geologic_Unit
+              gsog:Rock_Material
+            ) ;
+        ] ;
+      owl:onProperty gsoc:isQualityOf ;
+    ] ;
 .
+gsop:Alteration_Distribution
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom [
+          a owl:Class ;
+          owl:unionOf (
+              gsog:Geologic_Unit
+              gsog:Rock_Material
+            ) ;
+        ] ;
+      owl:onProperty gsoc:isQualityOf ;
+    ] ;
+.
+gsop:Alteration_Type
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom [
+          a owl:Class ;
+          owl:unionOf (
+              gsog:Geologic_Unit
+              gsog:Rock_Material
+            ) ;
+        ] ;
+      owl:onProperty gsoc:isQualityOf ;
+    ] ;
+.
+
 <http://loop3d.org/GSO/ontology/2020/1/loop3dmaster>
   a owl:Ontology ;
   rdfs:comment "This is a shell to import all the various peices needed for geologic instances."@en ;
@@ -64,6 +104,7 @@
   owl:imports gstime:ontology ;
   owl:imports gslth:ontology ;
   owl:imports <http://loop3d.org/GSO/ontology/2020/1/lithology/particleaspectratio/ontology> ;
+  owl:imports gsps:ontology ;
   owl:imports gsuom:ontology ;
   owl:imports <http://loop3d.org/GSO/ontology2020/1/mineral/ontology> ;
 .
