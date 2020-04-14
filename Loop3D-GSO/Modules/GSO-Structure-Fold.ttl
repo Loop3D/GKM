@@ -1,325 +1,364 @@
-# baseURI: http://loop3d.org/GSO/ontology/2020/1/geologicstructure/fold/ontology
-# imports: http://loop3d.org/GSO/ontology/2020/1/common/ontology
-# imports: http://loop3d.org/GSO/ontology/2020/1/geologicfeature/ontology
-# imports: http://loop3d.org/GSO/ontology/2020/1/geologicproperty/ontology
-
 @prefix : <http://loop3d.org/GSO/ontology/2020/1/geologicstructure/fold/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix gsoc: <http://loop3d.org/GSO/ontology/2020/1/common/> .
 @prefix gsog: <http://loop3d.org/GSO/ontology/2020/1/geologicfeature/> .
 @prefix gsop: <http://loop3d.org/GSO/ontology/2020/1/geologicproperty/> .
-@prefix gssf: <http://loop3d.org/GSO/ontology/2020/1/geologicstructure/fold/> .
-@prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix xml: <http://www.w3.org/XML/1998/namespace> .
-@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-gsog:Fold
-  rdfs:comment "One or more systematically curved layers, surfaces, or lines in a rock body. Fold denotes a structure formed by the deformation of a GeologicStructure to form a structure that may be described by the translation of an abstract line (the fold axis) parallel to itself along some curvilinear path (the fold profile). Folds have a hinge zone (zone of maximum curvature along the surface) and limbs (parts of the deformed surface not in the hinge zone).  Folds are described by an axial surface, hinge line , profile geometry, the solid angle between the limbs, and the relationships between adjacent folded surfaces if the folded structure is a Layering fabric (similar, parallel). (GeoSciML v3.2)"@en ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty gsoc:hostedBy ;
-      owl:someValuesFrom gsog:Geologic_Structure ;
-    ] ;
-.
-gsop:Metamorphic_Grade
-  rdfs:subClassOf gsoc:Property ;
-.
-gssf:Fold_Amplitude
-  a owl:Class ;
-  rdfs:comment "the length of half the distance from the crest of a fold to the adjacent troughs. "@en ;
-  rdfs:label "Fold Amplitude"@en ;
-  rdfs:subClassOf gsoc:Quality ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom gsog:Fold ;
-      owl:onProperty gsoc:isQualityOf ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty gsoc:hasDataValue ;
-      owl:someValuesFrom xsd:decimal ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty gsoc:hasUOM ;
-      owl:someValuesFrom gsoc:Unit_of_Measure ;
-    ] ;
-.
-gssf:Fold_Axial_Surface_Orientation
-  a owl:Class ;
-  rdfs:comment "Abstract surface that bisects the limbs of a fold or is the normal to a surface defined by the poles to the folded surface (typically visualized on a stereonet).  The axial surface of a particular fold may be located based on observations of the folded geologic structure, but in general it has no direct physical manifestation. Contrast with hinge surface, which is defined as the surface containing a set of hinge lines in the stack of folded surfaces defining a fold structure.  As a geologic surface, the axial surface has geometric properties, including orientation, which may be specified by observations at one or more locations, or generalized using terminology (upright, inclined, reclined, recumbent, overturned). Dip and Dip Direction are one approach to specifying the value. (revised from GeoSciML 3.2)"@en ;
-  rdfs:isDefinedBy "Revised from GeoSciML v3.2"@en ;
-  rdfs:label "Fold axial surface orientation term"@en ;
-  rdfs:subClassOf gsoc:Quality ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom gsog:Fold ;
-      owl:onProperty gsoc:isQualityOf ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty gsoc:hasValue ;
-      owl:someValuesFrom xsd:string ;
-    ] ;
-.
-gssf:Fold_Genetic_Model
-  a owl:Class ;
-  rdfs:comment "Specification of genetic model for fold, e.g. flexural slip, parallel (GeoSciML 3.2) TBD: need vocabulary"@en ;
-  rdfs:isDefinedBy "GeoSciML v3.2"@en ;
-  rdfs:label "Fold genetic model"@en ;
-  rdfs:subClassOf gsoc:Quality ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom gsog:Fold ;
-      owl:onProperty gsoc:isQualityOf ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty gsoc:hasDataValue ;
-      owl:someValuesFrom xsd:string ;
-    ] ;
-.
-gssf:Fold_Hinge
-  a owl:Class ;
-  rdfs:comment "the line linking points of maximum curvature on a folded surface (http://www.geosci.usyd.edu.au/users/prey/Teaching/Geos-2123/Folds/Sld22.html)"@en ;
-  rdfs:label "Fold Hinge"@en ;
-  rdfs:subClassOf gsog:Geologic_Structure ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom gsog:Fold ;
-      owl:onProperty gsoc:isPartOf ;
-    ] ;
-.
-gssf:Fold_Hinge_Orientation
-  a owl:Class ;
-  rdfs:comment "Trend and plunge measure of a single hinge orientation"@en ;
-  rdfs:isDefinedBy "GeoSciML v3.2"@en ;
-  rdfs:label "Fold hinge orientation"@en ;
-  rdfs:subClassOf gsoc:Quality ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom gssf:Fold_Hinge ;
-      owl:onProperty gsoc:isQualityOf ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty gsoc:hasValue ;
-      owl:someValuesFrom gsop:Line_Orientation ;
-    ] ;
-.
-gssf:Fold_Hinge_Plunge
-  a owl:Class ;
-  rdfs:comment "Term to categorize plunge of fold hinge(s) in fold structure. Hinge plunge term examples: sub-vertical, steeply plunging, ... sub-horizontal, reclined and vertical for special cases in which hinge plunge is close to axial surface dip.  (from GeoSciML v3.2).  Individual fold hinge measurements should be represented as instances of Fold_Hinge (GeoSciML v3.2)"@en ;
-  rdfs:isDefinedBy "GeoSciML v3.2"@en ;
-  rdfs:label "Fold hinge plunge term"@en ;
-  rdfs:subClassOf gsoc:Quality ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom gsog:Fold ;
-      owl:onProperty gsoc:isQualityOf ;
-    ] ;
-.
-gssf:Fold_Hinge_Surface
-  a owl:Class ;
-  rdfs:comment "Surface that contains the hinge lines in a stack of folded layers"@en ;
-  rdfs:label "Fold - Hinge surface"@en ;
-  rdfs:subClassOf gsog:Geologic_Structure ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom gsog:Fold ;
-      owl:onProperty gsoc:isPartOf ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty gsoc:hostedBy ;
-      owl:someValuesFrom gssf:Fold_Hinge ;
-    ] ;
-.
-gssf:Fold_Hinge_Surface_Orientation
-  a owl:Class ;
-  rdfs:comment "Strike and dip of hinge surface to fold"@en ;
-  rdfs:isDefinedBy "GeoSciML v3.2"@en ;
-  rdfs:label "Fold hinge surface orientation"@en ;
-  rdfs:subClassOf gsoc:Quality ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom gssf:Fold_Hinge_Surface ;
-      owl:onProperty gsoc:isQualityOf ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty gsoc:hasValue ;
-      owl:someValuesFrom gsop:Plane_Orientation ;
-    ] ;
-.
-gssf:Fold_InterLimb_Angle
-  a owl:Class ;
-  rdfs:comment "Straight vs curved limbs, eg kink, chevron, sinusoidal, box"@en ;
-  rdfs:isDefinedBy "GeoSciML v4"@en ;
-  rdfs:label "Fold limb shape"@en ;
-  rdfs:subClassOf gsoc:Quality ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom gsog:Fold ;
-      owl:onProperty gsoc:isQualityOf ;
-    ] ;
-.
-gssf:Fold_Limb
-  a owl:Class ;
-  rdfs:comment "The generally planar region of a fold which lies between two adjacent hinge lines and is confined between the zones of maximum curvature. ("@en ;
-  rdfs:label "Fold Limb"@en ;
-  rdfs:subClassOf gsog:Geologic_Structure ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom gsog:Fold ;
-      owl:onProperty gsoc:isPartOf ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty gsoc:hostedBy ;
-      owl:someValuesFrom gsog:Geologic_Structure ;
-    ] ;
-.
-gssf:Fold_Limb_Shape
-  a owl:Class ;
-  rdfs:comment "Straight vs curved limbs, eg kink, chevron, sinusoidal, box"@en ;
-  rdfs:isDefinedBy "GeoSciML v4"@en ;
-  rdfs:label "Fold limb shape"@en ;
-  rdfs:subClassOf gsoc:Quality ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom gsog:Fold ;
-      owl:onProperty gsoc:isQualityOf ;
-    ] ;
-.
-gssf:Fold_Profile_Type
-  a owl:Class ;
-  rdfs:comment "categories  to specify fold profile type property. Terminology specifying concave/convex geometry of fold relative to earth surface, and relationship to younging direction in folded strata if known. (eg; antiform, synform, neutral, anticline, syncline, monocline, ptygmatic)"@en ;
-  rdfs:label "Fold - profile type category"@en ;
-  rdfs:subClassOf gsoc:Quality ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom gsog:Fold ;
-      owl:onProperty gsoc:isQualityOf ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty gsoc:hasDataValue ;
-      owl:someValuesFrom xsd:string ;
-    ] ;
-.
-gssf:Fold_Span
-  a owl:Class ;
-  rdfs:comment "linear distance between inflection points in a single fold (GeoSciML v3.2)"@en ;
-  rdfs:isDefinedBy "GeoSciML v3.2"@en ;
-  rdfs:label "Fold span"@en ;
-  rdfs:subClassOf gsoc:Quality ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom gsog:Fold ;
-      owl:onProperty gsoc:isQualityOf ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty gsoc:hasDataValue ;
-      owl:someValuesFrom xsd:decimal ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty gsoc:hasUOM ;
-      owl:someValuesFrom gsoc:Unit_of_Measure ;
-    ] ;
-.
-gssf:Fold_Symmetry
-  a owl:Class ;
-  rdfs:comment "Concordance or discordance of bisecting surface and axial surface, or ratio of length of limbs. Folded surface may have asymmetry defined by limb length ratio if inflection points are defined. Defintion based on bisecting surface/axial surface angle depends on having multiple surfaces defined such that the axial surface may be identified. (symmetric, assymetric)"@en ;
-  rdfs:isDefinedBy "GeoSciML v4"@en ;
-  rdfs:label "Fold symmetry"@en ;
-  rdfs:subClassOf gsoc:Quality ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom gsog:Fold ;
-      owl:onProperty gsoc:isQualityOf ;
-    ] ;
-.
-gssf:Fold_System
-  a owl:Class ;
-  rdfs:comment "A collection of congruent folds  (axis and axial surface are parallel) produced by the same tectonic event. Sometimes referred to as a \"Fold Train\". (GeoSciML 4.0.1)"@en ;
-  rdfs:label "Fold System"@en ;
-  rdfs:subClassOf gsog:Geologic_Structure ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom gsog:Fold ;
-      owl:onProperty gsoc:hasPart ;
-    ] ;
-.
-gssf:Fold_Wavelength
-  a owl:Class ;
-  rdfs:comment "The distance between adjacent crest or trough of  a single fold, or the average distance between adjacent crests or troughs in a fold system. "@en ;
-  rdfs:label "Fold wavelength"@en ;
-  rdfs:subClassOf gsoc:Quality ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom [
-          a owl:Class ;
-          owl:unionOf (
-              gsog:Fold
-              gssf:Fold_System
-            ) ;
-        ] ;
-      owl:onProperty gsoc:isQualityOf ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty gsoc:hasDataValue ;
-      owl:someValuesFrom xsd:decimal ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty gsoc:hasUOM ;
-      owl:someValuesFrom gsoc:Unit_of_Measure ;
-    ] ;
-.
-gssf:Hinge_Line_Curvature
-  a owl:Class ;
-  rdfs:comment "Variation in orientation of fold hinge along trend of fold, distinguish sheath from cylindrical folds. Specify with terminology eg sheath, dome, basin, cylindrical."@en ;
-  rdfs:isDefinedBy "GeoSciML v4"@en ;
-  rdfs:label "Fold hinge line curvature"@en ;
-  rdfs:subClassOf gsoc:Quality ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom gsog:Fold ;
-      owl:onProperty gsoc:isQualityOf ;
-    ] ;
-.
-gssf:Hinge_Shape
-  a owl:Class ;
-  rdfs:comment "Rounded vs. angular hinge zones; has to do with the proportion of the wavelength that is considered part of hinge"@en ;
-  rdfs:isDefinedBy "GeoSciML v4"@en ;
-  rdfs:label "Fold hinge shape"@en ;
-  rdfs:subClassOf gsoc:Quality ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom gsog:Fold ;
-      owl:onProperty gsoc:isQualityOf ;
-    ] ;
-.
-gssf:Is_Periodic
-  a owl:Class ;
-  rdfs:comment "boolean value, true if wavelength of folds in a fold system is approximately the same"@en ;
-  rdfs:label "Folds are periodic"@en ;
-  rdfs:subClassOf gsoc:Quality ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom gssf:Fold_System ;
-      owl:onProperty gsoc:isQualityOf ;
-    ] ;
-.
-gssf:ontology
-  a owl:Ontology ;
-  rdfs:comment "extension module for properties related to folds"@en ;
-  owl:imports gsoc:ontology ;
-  owl:imports gsog:ontology ;
-  owl:imports gsop:ontology ;
-.
+:ontology a owl:Ontology ;
+	owl:imports gsoc:ontology , gsog:ontology , gsop:ontology ;
+	rdfs:comment "extension module for properties related to folds"@en .
+# 
+# 
+# #################################################################
+# #
+# #    Classes
+# #
+# #################################################################
+# 
+# 
+# http://loop3d.org/GSO/ontology/2020/1/geologicfeature/Fold
+
+gsog:Fold rdfs:subClassOf _:genid1 .
+
+_:genid1 a owl:Restriction ;
+	owl:onProperty gsoc:hostedBy ;
+	owl:someValuesFrom gsog:Geologic_Structure .
+
+gsog:Fold rdfs:comment "One or more systematically curved layers, surfaces, or lines in a rock body. Fold denotes a structure formed by the deformation of a GeologicStructure to form a structure that may be described by the translation of an abstract line (the fold axis) parallel to itself along some curvilinear path (the fold profile). Folds have a hinge zone (zone of maximum curvature along the surface) and limbs (parts of the deformed surface not in the hinge zone).  Folds are described by an axial surface, hinge line , profile geometry, the solid angle between the limbs, and the relationships between adjacent folded surfaces if the folded structure is a Layering fabric (similar, parallel). (GeoSciML v3.2)"@en .
+# 
+# http://loop3d.org/GSO/ontology/2020/1/geologicstructure/fold/Fold_Amplitude
+
+:Fold_Amplitude a owl:Class ;
+	rdfs:subClassOf gsoc:Quality , _:genid2 .
+
+_:genid2 a owl:Restriction ;
+	owl:onProperty gsoc:hasUOM ;
+	owl:someValuesFrom gsoc:Unit_of_Measure .
+
+:Fold_Amplitude rdfs:subClassOf _:genid3 .
+
+_:genid3 a owl:Restriction ;
+	owl:onProperty gsoc:isQualityOf ;
+	owl:allValuesFrom gsog:Fold .
+
+:Fold_Amplitude rdfs:subClassOf _:genid4 .
+
+_:genid4 a owl:Restriction ;
+	owl:onProperty gsoc:hasDataValue ;
+	owl:someValuesFrom xsd:decimal .
+
+:Fold_Amplitude rdfs:comment "the length of half the distance from the crest of a fold to the adjacent troughs. "@en ;
+	rdfs:label "Fold Amplitude"@en .
+# 
+# http://loop3d.org/GSO/ontology/2020/1/geologicstructure/fold/Fold_Axial_Surface_Orientation
+
+:Fold_Axial_Surface_Orientation a owl:Class ;
+	rdfs:subClassOf gsoc:Quality , _:genid5 .
+
+_:genid5 a owl:Restriction ;
+	owl:onProperty gsoc:isQualityOf ;
+	owl:allValuesFrom gsog:Fold .
+
+:Fold_Axial_Surface_Orientation rdfs:subClassOf _:genid6 .
+
+_:genid6 a owl:Restriction ;
+	owl:onProperty gsoc:hasValue .
+
+gsoc:hasValue a owl:DatatypeProperty .
+
+_:genid6 owl:someValuesFrom xsd:string .
+
+:Fold_Axial_Surface_Orientation rdfs:comment "Abstract surface that bisects the limbs of a fold or is the normal to a surface defined by the poles to the folded surface (typically visualized on a stereonet).  The axial surface of a particular fold may be located based on observations of the folded geologic structure, but in general it has no direct physical manifestation. Contrast with hinge surface, which is defined as the surface containing a set of hinge lines in the stack of folded surfaces defining a fold structure.  As a geologic surface, the axial surface has geometric properties, including orientation, which may be specified by observations at one or more locations, or generalized using terminology (upright, inclined, reclined, recumbent, overturned). Dip and Dip Direction are one approach to specifying the value. (revised from GeoSciML 3.2)"@en ;
+	rdfs:isDefinedBy "Revised from GeoSciML v3.2"@en ;
+	rdfs:label "Fold axial surface orientation term"@en .
+# 
+# http://loop3d.org/GSO/ontology/2020/1/geologicstructure/fold/Fold_Genetic_Model
+
+:Fold_Genetic_Model a owl:Class ;
+	rdfs:subClassOf gsoc:Quality , _:genid7 .
+
+_:genid7 a owl:Restriction ;
+	owl:onProperty gsoc:isQualityOf ;
+	owl:allValuesFrom gsog:Fold .
+
+:Fold_Genetic_Model rdfs:subClassOf _:genid8 .
+
+_:genid8 a owl:Restriction ;
+	owl:onProperty gsoc:hasDataValue ;
+	owl:someValuesFrom xsd:string .
+
+:Fold_Genetic_Model rdfs:comment "Specification of genetic model for fold, e.g. flexural slip, parallel (GeoSciML 3.2) TBD: need vocabulary"@en ;
+	rdfs:isDefinedBy "GeoSciML v3.2"@en ;
+	rdfs:label "Fold genetic model"@en .
+# 
+# http://loop3d.org/GSO/ontology/2020/1/geologicstructure/fold/Fold_Hinge
+
+:Fold_Hinge a owl:Class ;
+	rdfs:subClassOf gsog:Geologic_Structure , _:genid9 .
+
+_:genid9 a owl:Restriction ;
+	owl:onProperty gsoc:isPartOf ;
+	owl:allValuesFrom gsog:Fold .
+
+:Fold_Hinge rdfs:comment "the line linking points of maximum curvature on a folded surface (http://www.geosci.usyd.edu.au/users/prey/Teaching/Geos-2123/Folds/Sld22.html)"@en ;
+	rdfs:label "Fold Hinge"@en .
+# 
+# http://loop3d.org/GSO/ontology/2020/1/geologicstructure/fold/Fold_Hinge_Orientation
+
+:Fold_Hinge_Orientation a owl:Class ;
+	rdfs:subClassOf gsoc:Quality , _:genid10 .
+
+_:genid10 a owl:Restriction ;
+	owl:onProperty gsoc:hasValue ;
+	owl:someValuesFrom gsop:Line_Orientation .
+
+:Fold_Hinge_Orientation rdfs:subClassOf _:genid11 .
+
+_:genid11 a owl:Restriction ;
+	owl:onProperty gsoc:isQualityOf ;
+	owl:allValuesFrom :Fold_Hinge .
+
+:Fold_Hinge_Orientation rdfs:comment "Trend and plunge measure of a single hinge orientation"@en ;
+	rdfs:isDefinedBy "GeoSciML v3.2"@en ;
+	rdfs:label "Fold hinge orientation"@en .
+# 
+# http://loop3d.org/GSO/ontology/2020/1/geologicstructure/fold/Fold_Hinge_Plunge
+
+:Fold_Hinge_Plunge a owl:Class ;
+	rdfs:subClassOf gsoc:Quality , _:genid12 .
+
+_:genid12 a owl:Restriction ;
+	owl:onProperty gsoc:isQualityOf ;
+	owl:allValuesFrom gsog:Fold .
+
+:Fold_Hinge_Plunge rdfs:comment "Term to categorize plunge of fold hinge(s) in fold structure. Hinge plunge term examples: sub-vertical, steeply plunging, ... sub-horizontal, reclined and vertical for special cases in which hinge plunge is close to axial surface dip.  (from GeoSciML v3.2).  Individual fold hinge measurements should be represented as instances of Fold_Hinge (GeoSciML v3.2)"@en ;
+	rdfs:isDefinedBy "GeoSciML v3.2"@en ;
+	rdfs:label "Fold hinge plunge term"@en .
+# 
+# http://loop3d.org/GSO/ontology/2020/1/geologicstructure/fold/Fold_Hinge_Surface
+
+:Fold_Hinge_Surface a owl:Class ;
+	rdfs:subClassOf gsog:Geologic_Structure , _:genid13 .
+
+_:genid13 a owl:Restriction ;
+	owl:onProperty gsoc:hostedBy ;
+	owl:someValuesFrom :Fold_Hinge .
+
+:Fold_Hinge_Surface rdfs:subClassOf _:genid14 .
+
+_:genid14 a owl:Restriction ;
+	owl:onProperty gsoc:isPartOf ;
+	owl:allValuesFrom gsog:Fold .
+
+:Fold_Hinge_Surface rdfs:comment "Surface that contains the hinge lines in a stack of folded layers"@en ;
+	rdfs:label "Fold - Hinge surface"@en .
+# 
+# http://loop3d.org/GSO/ontology/2020/1/geologicstructure/fold/Fold_Hinge_Surface_Orientation
+
+:Fold_Hinge_Surface_Orientation a owl:Class ;
+	rdfs:subClassOf gsoc:Quality , _:genid15 .
+
+_:genid15 a owl:Restriction ;
+	owl:onProperty gsoc:hasValue ;
+	owl:someValuesFrom gsop:Plane_Orientation .
+
+:Fold_Hinge_Surface_Orientation rdfs:subClassOf _:genid16 .
+
+_:genid16 a owl:Restriction ;
+	owl:onProperty gsoc:isQualityOf ;
+	owl:allValuesFrom :Fold_Hinge_Surface .
+
+:Fold_Hinge_Surface_Orientation rdfs:comment "Strike and dip of hinge surface to fold"@en ;
+	rdfs:isDefinedBy "GeoSciML v3.2"@en ;
+	rdfs:label "Fold hinge surface orientation"@en .
+# 
+# http://loop3d.org/GSO/ontology/2020/1/geologicstructure/fold/Fold_InterLimb_Angle
+
+:Fold_InterLimb_Angle a owl:Class ;
+	rdfs:subClassOf gsoc:Quality , _:genid17 .
+
+_:genid17 a owl:Restriction ;
+	owl:onProperty gsoc:isQualityOf ;
+	owl:allValuesFrom gsog:Fold .
+
+:Fold_InterLimb_Angle rdfs:comment "Straight vs curved limbs, eg kink, chevron, sinusoidal, box"@en ;
+	rdfs:isDefinedBy "GeoSciML v4"@en ;
+	rdfs:label "Fold limb shape"@en .
+# 
+# http://loop3d.org/GSO/ontology/2020/1/geologicstructure/fold/Fold_Limb
+
+:Fold_Limb a owl:Class ;
+	rdfs:subClassOf gsog:Geologic_Structure , _:genid18 .
+
+_:genid18 a owl:Restriction ;
+	owl:onProperty gsoc:hostedBy ;
+	owl:someValuesFrom gsog:Geologic_Structure .
+
+:Fold_Limb rdfs:subClassOf _:genid19 .
+
+_:genid19 a owl:Restriction ;
+	owl:onProperty gsoc:isPartOf ;
+	owl:allValuesFrom gsog:Fold .
+
+:Fold_Limb rdfs:comment "The generally planar region of a fold which lies between two adjacent hinge lines and is confined between the zones of maximum curvature. ("@en ;
+	rdfs:label "Fold Limb"@en .
+# 
+# http://loop3d.org/GSO/ontology/2020/1/geologicstructure/fold/Fold_Limb_Shape
+
+:Fold_Limb_Shape a owl:Class ;
+	rdfs:subClassOf gsoc:Quality , _:genid20 .
+
+_:genid20 a owl:Restriction ;
+	owl:onProperty gsoc:isQualityOf ;
+	owl:allValuesFrom gsog:Fold .
+
+:Fold_Limb_Shape rdfs:comment "Straight vs curved limbs, eg kink, chevron, sinusoidal, box"@en ;
+	rdfs:isDefinedBy "GeoSciML v4"@en ;
+	rdfs:label "Fold limb shape"@en .
+# 
+# http://loop3d.org/GSO/ontology/2020/1/geologicstructure/fold/Fold_Profile_Type
+
+:Fold_Profile_Type a owl:Class ;
+	rdfs:subClassOf gsoc:Quality , _:genid21 .
+
+_:genid21 a owl:Restriction ;
+	owl:onProperty gsoc:isQualityOf ;
+	owl:allValuesFrom gsog:Fold .
+
+:Fold_Profile_Type rdfs:subClassOf _:genid22 .
+
+_:genid22 a owl:Restriction ;
+	owl:onProperty gsoc:hasDataValue ;
+	owl:someValuesFrom xsd:string .
+
+:Fold_Profile_Type rdfs:comment "categories  to specify fold profile type property. Terminology specifying concave/convex geometry of fold relative to earth surface, and relationship to younging direction in folded strata if known. (eg; antiform, synform, neutral, anticline, syncline, monocline, ptygmatic)"@en ;
+	rdfs:label "Fold - profile type category"@en .
+# 
+# http://loop3d.org/GSO/ontology/2020/1/geologicstructure/fold/Fold_Span
+
+:Fold_Span a owl:Class ;
+	rdfs:subClassOf gsoc:Quality , _:genid23 .
+
+_:genid23 a owl:Restriction ;
+	owl:onProperty gsoc:hasUOM ;
+	owl:someValuesFrom gsoc:Unit_of_Measure .
+
+:Fold_Span rdfs:subClassOf _:genid24 .
+
+_:genid24 a owl:Restriction ;
+	owl:onProperty gsoc:isQualityOf ;
+	owl:allValuesFrom gsog:Fold .
+
+:Fold_Span rdfs:subClassOf _:genid25 .
+
+_:genid25 a owl:Restriction ;
+	owl:onProperty gsoc:hasDataValue ;
+	owl:someValuesFrom xsd:decimal .
+
+:Fold_Span rdfs:comment "linear distance between inflection points in a single fold (GeoSciML v3.2)"@en ;
+	rdfs:isDefinedBy "GeoSciML v3.2"@en ;
+	rdfs:label "Fold span"@en .
+# 
+# http://loop3d.org/GSO/ontology/2020/1/geologicstructure/fold/Fold_Symmetry
+
+:Fold_Symmetry a owl:Class ;
+	rdfs:subClassOf gsoc:Quality , _:genid26 .
+
+_:genid26 a owl:Restriction ;
+	owl:onProperty gsoc:isQualityOf ;
+	owl:allValuesFrom gsog:Fold .
+
+:Fold_Symmetry rdfs:comment "Concordance or discordance of bisecting surface and axial surface, or ratio of length of limbs. Folded surface may have asymmetry defined by limb length ratio if inflection points are defined. Defintion based on bisecting surface/axial surface angle depends on having multiple surfaces defined such that the axial surface may be identified. (symmetric, assymetric)"@en ;
+	rdfs:isDefinedBy "GeoSciML v4"@en ;
+	rdfs:label "Fold symmetry"@en .
+# 
+# http://loop3d.org/GSO/ontology/2020/1/geologicstructure/fold/Fold_System
+
+:Fold_System a owl:Class ;
+	rdfs:subClassOf gsog:Geologic_Structure , _:genid27 .
+
+_:genid27 a owl:Restriction ;
+	owl:onProperty gsoc:hasPart ;
+	owl:allValuesFrom gsog:Fold .
+
+:Fold_System rdfs:comment "A collection of congruent folds  (axis and axial surface are parallel) produced by the same tectonic event. Sometimes referred to as a \"Fold Train\". (GeoSciML 4.0.1)"@en ;
+	rdfs:label "Fold System"@en .
+# 
+# http://loop3d.org/GSO/ontology/2020/1/geologicstructure/fold/Fold_Wavelength
+
+:Fold_Wavelength a owl:Class ;
+	rdfs:subClassOf gsoc:Quality , _:genid28 .
+
+_:genid28 a owl:Restriction ;
+	owl:onProperty gsoc:hasUOM ;
+	owl:someValuesFrom gsoc:Unit_of_Measure .
+
+:Fold_Wavelength rdfs:subClassOf _:genid29 .
+
+_:genid29 a owl:Restriction ;
+	owl:onProperty gsoc:isQualityOf ;
+	owl:allValuesFrom _:genid30 .
+
+_:genid30 a owl:Class ;
+	owl:unionOf _:genid32 .
+
+_:genid32 a rdf:List ;
+	rdf:first gsog:Fold ;
+	rdf:rest _:genid31 .
+
+_:genid31 a rdf:List ;
+	rdf:first :Fold_System ;
+	rdf:rest rdf:nil .
+
+:Fold_Wavelength rdfs:subClassOf _:genid33 .
+
+_:genid33 a owl:Restriction ;
+	owl:onProperty gsoc:hasDataValue ;
+	owl:someValuesFrom xsd:decimal .
+
+:Fold_Wavelength rdfs:comment "The distance between adjacent crest or trough of  a single fold, or the average distance between adjacent crests or troughs in a fold system. "@en ;
+	rdfs:label "Fold wavelength"@en .
+# 
+# http://loop3d.org/GSO/ontology/2020/1/geologicstructure/fold/Hinge_Line_Curvature
+
+:Hinge_Line_Curvature a owl:Class ;
+	rdfs:subClassOf gsoc:Quality , _:genid34 .
+
+_:genid34 a owl:Restriction ;
+	owl:onProperty gsoc:isQualityOf ;
+	owl:allValuesFrom gsog:Fold .
+
+:Hinge_Line_Curvature rdfs:comment "Variation in orientation of fold hinge along trend of fold, distinguish sheath from cylindrical folds. Specify with terminology eg sheath, dome, basin, cylindrical."@en ;
+	rdfs:isDefinedBy "GeoSciML v4"@en ;
+	rdfs:label "Fold hinge line curvature"@en .
+# 
+# http://loop3d.org/GSO/ontology/2020/1/geologicstructure/fold/Hinge_Shape
+
+:Hinge_Shape a owl:Class ;
+	rdfs:subClassOf gsoc:Quality , _:genid35 .
+
+_:genid35 a owl:Restriction ;
+	owl:onProperty gsoc:isQualityOf ;
+	owl:allValuesFrom gsog:Fold .
+
+:Hinge_Shape rdfs:comment "Rounded vs. angular hinge zones; has to do with the proportion of the wavelength that is considered part of hinge"@en ;
+	rdfs:isDefinedBy "GeoSciML v4"@en ;
+	rdfs:label "Fold hinge shape"@en .
+# 
+# http://loop3d.org/GSO/ontology/2020/1/geologicstructure/fold/Is_Periodic
+
+:Is_Periodic a owl:Class ;
+	rdfs:subClassOf gsoc:Quality , _:genid36 .
+
+_:genid36 a owl:Restriction ;
+	owl:onProperty gsoc:isQualityOf ;
+	owl:allValuesFrom :Fold_System .
+
+:Is_Periodic rdfs:comment "boolean value, true if wavelength of folds in a fold system is approximately the same"@en ;
+	rdfs:label "Folds are periodic"@en .
+# 
+# Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
