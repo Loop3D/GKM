@@ -15,17 +15,17 @@
   rdfs:subClassOf :Physical_Endurant ;
   rdfs:subClassOf [
       a owl:Restriction ;
+      owl:allValuesFrom :Amount_Of_Matter ;
+      owl:onProperty :hasConstituent ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
       owl:allValuesFrom [
           a owl:Class ;
-          owl:unionOf [
-              a rdf:List ;
-              rdf:first :Amount_Of_Matter ;
-              rdf:rest [
-                  a rdf:List ;
-                  rdf:first :Physical_Object ;
-                  rdf:rest () ;
-                ] ;
-            ] ;
+          owl:unionOf (
+              :Amount_Of_Matter
+              :Physical_Object
+            ) ;
         ] ;
       owl:onProperty :isConstituentOf ;
     ] ;
@@ -52,6 +52,11 @@
   rdfs:comment "upper level class that represents any conceptual space for quantifying colour, e.g. RGB, Munsell, CMYK, US NBS Color (NBS Special Pub 440)"@en ;
   rdfs:label "Any Colour"@en ;
   rdfs:subClassOf :Quality ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom :Physical_Endurant ;
+      owl:onProperty :isQualityOf ;
+    ] ;
 .
 :Complex_Feature
   a owl:Class ;
@@ -64,6 +69,17 @@
   rdfs:comment "An observation, calculation, or inference envent used to determine the value of one or more properties. The suggested hook here is to use PROV and or SOSA vocabulary to populate Determining_Event subclasses."@en ;
   rdfs:label "Determining Event "@en ;
   rdfs:subClassOf :Event ;
+.
+:Distribution
+  a owl:Class ;
+  rdfs:comment "spcification of how much of the quality carrier displays the quality. Use to indicate variability of development of the quality "@en ;
+  rdfs:label "quality distribution"@en ;
+  rdfs:subClassOf :Quality ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom :Quality ;
+      owl:onProperty :isQualityOf ;
+    ] ;
 .
 :Dynamic_Feature
   a owl:Class ;
@@ -262,6 +278,17 @@ Need SHACL rule that count Inherant.isPartOf = 0"""@en ;
   rdfs:label "Integral Feature "@en ;
   rdfs:subClassOf :Feature ;
 .
+:Intensity
+  a owl:Class ;
+  rdfs:comment "degree to which a quality is exhibited in some particular, e.g. degree of alteration, fabric development."@en ;
+  rdfs:label "intensity  "@en ;
+  rdfs:subClassOf :Quality ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom :Quality ;
+      owl:onProperty :isQualityOf ;
+    ] ;
+.
 :Liquid
   a owl:Class ;
   rdfs:subClassOf :Fluid ;
@@ -295,6 +322,12 @@ Need SHACL rule that count Inherant.isPartOf = 0"""@en ;
   rdfs:comment "report a minimum value for a value range "@en ;
   rdfs:label "Minimum Value Calculation"@en ;
   rdfs:subClassOf :Statistical_Calculation ;
+.
+:Moderate_Development
+  a owl:Class ;
+  rdfs:comment "Quality is present and can be discerned by any observer"@en ;
+  rdfs:label "moderate development" ;
+  rdfs:subClassOf :Intensity ;
 .
 :Morphologic_Feature
   a owl:Class ;
@@ -385,6 +418,16 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   rdfs:subClassOf :Physical_Endurant ;
   rdfs:subClassOf [
       a owl:Restriction ;
+      owl:allValuesFrom :Physical_Object ;
+      owl:onProperty :isPartOf ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom owl:Nothing ;
+      owl:onProperty :isConstituentOf ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
       owl:allValuesFrom [
           a owl:Class ;
           owl:unionOf (
@@ -398,37 +441,6 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
       a owl:Restriction ;
       owl:onProperty :hasConstituent ;
       owl:someValuesFrom :Amount_Of_Matter ;
-    ] ;
-.
-:Physical_Quality
-  a owl:Class ;
-  rdfs:comment "Physical Property or Quality"@en ;
-  rdfs:label "Physical Property"@en ;
-  rdfs:subClassOf :Quality ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom :Quality ;
-      owl:onProperty :hasQuality ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty :isQualityOf ;
-      owl:someValuesFrom [
-          a owl:Class ;
-          owl:unionOf [
-              a rdf:List ;
-              rdf:first :Endurant ;
-              rdf:rest [
-                  a rdf:List ;
-                  rdf:first :Perdurant ;
-                  rdf:rest [
-                      a rdf:List ;
-                      rdf:first :Quality ;
-                      rdf:rest () ;
-                    ] ;
-                ] ;
-            ] ;
-        ] ;
     ] ;
 .
 :Physical_Void
@@ -483,6 +495,22 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
       owl:someValuesFrom :Process ;
     ] ;
 .
+:Proportion
+  a owl:Class ;
+  rdfs:comment "A numeric property value used to express the fraction of a whole that is composed of some part. Values will range from 0 to 1 (0 to 100%)."@en ;
+  rdfs:label "Proportion"@en ;
+  rdfs:subClassOf :Quality ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty :hasDataValue ;
+      owl:someValuesFrom xsd:decimal ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty :hasUOM ;
+      owl:someValuesFrom :Unit_of_Measure ;
+    ] ;
+.
 :Quality
   a owl:Class ;
   rdfs:comment "A concept that specifies some aspect that inheres in instances of some Particular.  Note that the value of the determiningEvent property on Quality is used to specify metadata about how a property value is assigned. Synonym: Property"@en ;
@@ -509,12 +537,6 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
       owl:onProperty :isQualityOf ;
       owl:someValuesFrom :Particular ;
     ] ;
-.
-:Proportion
-  a owl:Class ;
-  rdfs:comment "A numeric property value used to express the fraction of a whole that is composed of some part. Values will range from 0 to 1 (0 to 100%)."@en ;
-  rdfs:label "Proportion"@en ;
-  rdfs:subClassOf :Quality ;
 .
 :Role
   a owl:Class ;
@@ -549,6 +571,16 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   rdfs:comment "" ;
   rdfs:label "Simple Uncertainty"@en ;
   rdfs:subClassOf :Quality ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty :hasDataValue ;
+      owl:someValuesFrom xsd:decimal ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty :hasUOM ;
+      owl:someValuesFrom :Unit_of_Measure ;
+    ] ;
 .
 :Situation
   a owl:Class ;
@@ -575,6 +607,12 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   a owl:Class ;
   rdfs:subClassOf :State_Of_Matter ;
 .
+:Sparse_Distribution
+  a owl:Class ;
+  rdfs:comment "Quality is occasionally present in instances of the host particular "@en ;
+  rdfs:label "sparse distribution" ;
+  rdfs:subClassOf :Distribution ;
+.
 :Spatial_Feature
   a owl:Class ;
   rdfs:comment "A feature for which the host is involved in some essential spatial relation,e g. adjacency, containment, intersection, contact."@en ;
@@ -588,7 +626,7 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   rdfs:subClassOf :Quality ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty :hasValue ;
+      owl:onProperty :isQualityOf ;
       owl:someValuesFrom :Spatial_Region ;
     ] ;
 .
@@ -628,6 +666,16 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   a owl:Class ;
   rdfs:label "Any State of Matter"@en ;
   rdfs:subClassOf :Quality ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom :State_Of_Matter ;
+      owl:onProperty :hasValue ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty :hasValue ;
+      owl:someValuesFrom :State_Of_Matter ;
+    ] ;
 .
 :Statistical_Calculation
   a owl:Class ;
@@ -639,6 +687,12 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
       owl:onProperty :hasQuality ;
       owl:someValuesFrom :Unit_of_Measure ;
     ] ;
+.
+:Strong_Development
+  a owl:Class ;
+  rdfs:comment "Quality is present and is dominate feature of the quality host." ;
+  rdfs:label "strong development" ;
+  rdfs:subClassOf :Intensity ;
 .
 :Time_Instant
   a owl:Class ;
@@ -676,10 +730,38 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
       owl:someValuesFrom :Particular ;
     ] ;
 .
+:Ubiquitous_Distribution
+  a owl:Class ;
+  rdfs:comment "Quality is everywhere present in the host particular"@en ;
+  rdfs:label "ubiquitous distribution"@en ;
+  rdfs:subClassOf :Distribution ;
+.
 :Unit_of_Measure
   a owl:Class ;
   rdfs:label "Units of measurement"@en ;
   rdfs:subClassOf :Quality ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom :Unit_of_Measure ;
+      owl:onProperty :hasValue ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty :hasValue ;
+      owl:someValuesFrom :Unit_of_Measure ;
+    ] ;
+.
+:Variable_Distribution
+  a owl:Class ;
+  rdfs:comment "Quality is not present in all instances of the host particular "@en ;
+  rdfs:label "variable distribution" ;
+  rdfs:subClassOf :Distribution ;
+.
+:Weak_development
+  a owl:Class ;
+  rdfs:comment "Quality is present but difficult to discern "@en ;
+  rdfs:label "weak development"@en ;
+  rdfs:subClassOf :Intensity ;
 .
 :age_disjoint
   a owl:ObjectProperty ;
@@ -739,6 +821,7 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   a owl:ObjectProperty ;
   rdfs:comment "A covers B -- A is immediately younger than B (there are no events between A and B) Same as Allen A meets B."@en ;
   rdfs:comment "One of six binary relations between geologic events defined by Burns (1975)"@en ;
+  rdfs:comment "Source interval ends at the beginning of the target interval; there is no intervening time; inverse of age_met_by"@en ;
   rdfs:label "age meets"@en ;
   rdfs:subPropertyOf :isTemporallyRelatedTo ;
   owl:inverseOf :age_met_by ;
@@ -897,12 +980,6 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   rdfs:subPropertyOf :hasParticipant ;
   owl:inverseOf :isInputFor ;
 .
-:hasNumericValue
-  a owl:DatatypeProperty ;
-  rdfs:comment ""@en ;
-  rdfs:label "hasNumericValue"@en ;
-  rdfs:range xsd:decimal ;
-.
 :hasOutput
   a owl:ObjectProperty ;
   rdfs:comment "A participant in a process that is produced by the action of the process and is present when the process is complete "@en ;
@@ -955,12 +1032,6 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   rdfs:label "has Setting"@en ;
   rdfs:range :Geologic_Setting ;
   rdfs:subPropertyOf :isFundamentallyRelatedTo ;
-.
-:hasTextValue
-  a owl:DatatypeProperty ;
-  rdfs:comment "data type property for free text values" ;
-  rdfs:label "text value" ;
-  rdfs:range xsd:string ;
 .
 :hasUOM
   a owl:ObjectProperty ;
