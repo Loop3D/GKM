@@ -18,51 +18,6 @@ gsog:Fold
   rdfs:comment "One or more systematically curved layers, surfaces, or lines in a rock body. Fold denotes a structure formed by the deformation of a GeologicStructure to form a structure that may be described by the translation of an abstract line (the fold axis) parallel to itself along some curvilinear path (the fold profile). Folds have a hinge zone (zone of maximum curvature along the surface) and limbs (parts of the deformed surface not in the hinge zone).  Folds are described by an axial surface, hinge line , profile geometry, the solid angle between the limbs, and the relationships between adjacent folded surfaces if the folded structure is a Layering fabric (similar, parallel). (GeoSciML v3.2)"@en ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty gsoc:hasQuality ;
-      owl:someValuesFrom gssf:Fold_Amplitude ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty gsoc:hasQuality ;
-      owl:someValuesFrom gssf:Fold_Axial_Surface_Orientation ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty gsoc:hasQuality ;
-      owl:someValuesFrom gssf:Fold_Genetic_Model ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty gsoc:hasQuality ;
-      owl:someValuesFrom gssf:Fold_Hinge_Plunge ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty gsoc:hasQuality ;
-      owl:someValuesFrom gssf:Fold_InterLimb_Angle ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty gsoc:hasQuality ;
-      owl:someValuesFrom gssf:Fold_Limb_Shape ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty gsoc:hasQuality ;
-      owl:someValuesFrom gssf:Fold_Profile_Type ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty gsoc:hasQuality ;
-      owl:someValuesFrom gssf:Fold_Span ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty gsoc:hasQuality ;
-      owl:someValuesFrom gssf:Fold_Symmetry ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
       owl:onProperty gsoc:hostedBy ;
       owl:someValuesFrom gsog:Geologic_Structure ;
     ] ;
@@ -74,7 +29,7 @@ gssf:Fold_Amplitude
   a owl:Class ;
   rdfs:comment "the length of half the distance from the crest of a fold to the adjacent troughs. "@en ;
   rdfs:label "Fold Amplitude"@en ;
-  rdfs:subClassOf gsoc:Property ;
+  rdfs:subClassOf gsoc:Quality ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom gsog:Fold ;
@@ -82,8 +37,13 @@ gssf:Fold_Amplitude
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty gsoc:hasNumericValue ;
+      owl:onProperty gsoc:hasDataValue ;
       owl:someValuesFrom xsd:decimal ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasUOM ;
+      owl:someValuesFrom gsoc:Unit_of_Measure ;
     ] ;
 .
 gssf:Fold_Axial_Surface_Orientation
@@ -116,7 +76,7 @@ gssf:Fold_Genetic_Model
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty gsoc:hasTextValue ;
+      owl:onProperty gsoc:hasDataValue ;
       owl:someValuesFrom xsd:string ;
     ] ;
 .
@@ -129,11 +89,6 @@ gssf:Fold_Hinge
       a owl:Restriction ;
       owl:allValuesFrom gsog:Fold ;
       owl:onProperty gsoc:isPartOf ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty gsoc:hasQuality ;
-      owl:someValuesFrom gssf:Fold_Hinge_Orientation ;
     ] ;
 .
 gssf:Fold_Hinge_Orientation
@@ -187,6 +142,11 @@ gssf:Fold_Hinge_Surface_Orientation
   rdfs:isDefinedBy "GeoSciML v3.2"@en ;
   rdfs:label "Fold hinge surface orientation"@en ;
   rdfs:subClassOf gsoc:Quality ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom gssf:Fold_Hinge_Surface ;
+      owl:onProperty gsoc:isQualityOf ;
+    ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty gsoc:hasValue ;
@@ -243,6 +203,11 @@ gssf:Fold_Profile_Type
       owl:allValuesFrom gsog:Fold ;
       owl:onProperty gsoc:isQualityOf ;
     ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasDataValue ;
+      owl:someValuesFrom xsd:string ;
+    ] ;
 .
 gssf:Fold_Span
   a owl:Class ;
@@ -254,6 +219,16 @@ gssf:Fold_Span
       a owl:Restriction ;
       owl:allValuesFrom gsog:Fold ;
       owl:onProperty gsoc:isQualityOf ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasDataValue ;
+      owl:someValuesFrom xsd:decimal ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasUOM ;
+      owl:someValuesFrom gsoc:Unit_of_Measure ;
     ] ;
 .
 gssf:Fold_Symmetry
@@ -284,6 +259,27 @@ gssf:Fold_Wavelength
   rdfs:comment "The distance between adjacent crest or trough of  a single fold, or the average distance between adjacent crests or troughs in a fold system. "@en ;
   rdfs:label "Fold wavelength"@en ;
   rdfs:subClassOf gsoc:Quality ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom [
+          a owl:Class ;
+          owl:unionOf (
+              gsog:Fold
+              gssf:Fold_System
+            ) ;
+        ] ;
+      owl:onProperty gsoc:isQualityOf ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasDataValue ;
+      owl:someValuesFrom xsd:decimal ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasUOM ;
+      owl:someValuesFrom gsoc:Unit_of_Measure ;
+    ] ;
 .
 gssf:Hinge_Line_Curvature
   a owl:Class ;
@@ -314,6 +310,11 @@ gssf:Is_Periodic
   rdfs:comment "boolean value, true if wavelength of folds in a fold system is approximately the same"@en ;
   rdfs:label "Folds are periodic"@en ;
   rdfs:subClassOf gsoc:Quality ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom gssf:Fold_System ;
+      owl:onProperty gsoc:isQualityOf ;
+    ] ;
 .
 gssf:ontology
   a owl:Ontology ;
@@ -321,13 +322,4 @@ gssf:ontology
   owl:imports gsoc:ontology ;
   owl:imports gsog:ontology ;
   owl:imports gsop:ontology ;
-.
-
-
-gssf:Fold_Profile_Type
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty gsoc:hasTextValue ;
-      owl:someValuesFrom xsd:string ;
-    ] ;
 .
