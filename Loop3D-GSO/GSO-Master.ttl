@@ -5,7 +5,7 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix fold: <http://loop3d.org/GSO/ontology/2020/1/geologicstructure/fold/> .
 @prefix gsel: <http://loop3d.org/GSO/ontology/2020/1/element/> .
-@prefix gsen: <http://loop3d.org/GSO/ontology/2020/1/eventenvironment> .
+@prefix gsen: <http://loop3d.org/GSO/ontology/2020/1/eventenvironment/> .
 @prefix gsfa: <http://loop3d.org/GSO/ontology/2020/1/geologicstructure/fault/> .
 @prefix gsfo: <http://loop3d.org/GSO/ontology/2020/1/geologicstructure/foliation/> .
 @prefix gsgu: <http://loop3d.org/GSO/ontology/2020/1/geologicunit/> .
@@ -22,69 +22,92 @@
 @prefix gsuom: <http://loop3d.org/GSO/ontology/2020/1/uom/> .
 @prefix gstime: <http://loop3d.org/GSO/ontology/2020/1/ischart/> .
 @prefix turtle: <http://www.semanticweb.org/owl/owlapi/turtle#> .
-@base <http://loop3d.org/GSO/ontology/2020/1/loop3dmaster> .
 
-<http://loop3d.org/GSO/ontology/2020/1/loop3dmaster> rdf:type owl:Ontology ;
-                                                      owl:imports <http://loop3d.org/GSO/ontology/2020/1/alterationtype/ontology> ,
-                                                                  gsoc:ontology ,
-                                                                  gsel:ontology ,
-                                                                  <http://loop3d.org/GSO/ontology/2020/1/eventenvironment/ontology> ,
-                                                                  gsog:ontology ,
-                                                                  gspr:ontology ,
-                                                                  gsop:ontology ,
-                                                                  gssf:ontology ,
-                                                                  gsfa:ontology ,
-                                                                  fold:ontology ,
-                                                                  gsfo:ontology ,
-                                                                  gsol:ontology ,
-                                                                  gsgu:ontology ,
-                                                                  gstime:ontology ,
-                                                                  gslth:ontology ,
-                                                                  <http://loop3d.org/GSO/ontology/2020/1/lithology/particleaspectratio/ontology> ,
-                                                                  gsps:ontology ,
-                                                                  gsuom:ontology ,
-                                                                  <http://loop3d.org/GSO/ontology2020/1/mineral/ontology> ;
-                                                      rdfs:comment "This is a shell to import all the various peices needed for geologic instances."@en .
+<http://loop3d.org/GSO/ontology/2020/1/loop3dmaster> a owl:Ontology ;
+	owl:imports <http://loop3d.org/GSO/ontology/2020/1/alterationtype/ontology> , 
+	gsoc:ontology , 
+	gsel:ontology , 
+	gsen:ontology , 
+	gsog:ontology , 
+	gsmin:ontology , 
+	gspr:ontology , 
+	gsop:ontology , 
+	gssf:ontology , 
+	gsfa:ontology , 
+	fold:ontology , 
+	gsfo:ontology , 
+	gsol:ontology , 
+	gsgu:ontology , 
+	gstime:ontology , 
+	gslth:ontology , 
+	<http://loop3d.org/GSO/ontology/2020/1/lithology/particleaspectratio/ontology> , 
+	gsps:ontology , 
+	gsuom:ontology ;
+	rdfs:comment "This is a shell to import all the various peices needed for geologic instances."@en .
+# 
+# 
+# #################################################################
+# #
+# #    Classes
+# #
+# #################################################################
+# 
+# 
+# http://loop3d.org/GSO/ontology/2020/1/geologicproperty/Alteration_Degree
 
-#################################################################
-#    Classes
-#################################################################
+gsop:Alteration_Degree rdfs:subClassOf _:genid1 .
 
-###  http://loop3d.org/GSO/ontology/2020/1/common/Physical_Property
-gsoc:Physical_Property rdfs:subClassOf gsoc:Quality .
+_:genid1 a owl:Restriction ;
+	owl:onProperty gsoc:isQualityOf ;
+	owl:allValuesFrom _:genid2 .
 
+_:genid2 a owl:Class ;
+	owl:unionOf _:genid4 .
 
-###  http://loop3d.org/GSO/ontology/2020/1/geologicproperty/Alteration_Degree
-gsop:Alteration_Degree rdfs:subClassOf [ rdf:type owl:Restriction ;
-                                         owl:onProperty gsoc:isQualityOf ;
-                                         owl:allValuesFrom [ rdf:type owl:Class ;
-                                                             owl:unionOf ( gsog:Geologic_Unit
-                                                                           gsog:Rock_Material
-                                                                         )
-                                                           ]
-                                       ] .
+_:genid4 a rdf:List ;
+	rdf:first gsog:Geologic_Unit ;
+	rdf:rest _:genid3 .
 
+_:genid3 a rdf:List ;
+	rdf:first gsog:Rock_Material ;
+	rdf:rest rdf:nil .
+# 
+# http://loop3d.org/GSO/ontology/2020/1/geologicproperty/Alteration_Distribution
 
-###  http://loop3d.org/GSO/ontology/2020/1/geologicproperty/Alteration_Distribution
-gsop:Alteration_Distribution rdfs:subClassOf [ rdf:type owl:Restriction ;
-                                               owl:onProperty gsoc:isQualityOf ;
-                                               owl:allValuesFrom [ rdf:type owl:Class ;
-                                                                   owl:unionOf ( gsog:Geologic_Unit
-                                                                                 gsog:Rock_Material
-                                                                               )
-                                                                 ]
-                                             ] .
+gsop:Alteration_Distribution rdfs:subClassOf _:genid5 .
 
+_:genid5 a owl:Restriction ;
+	owl:onProperty gsoc:isQualityOf ;
+	owl:allValuesFrom _:genid6 .
 
-###  http://loop3d.org/GSO/ontology/2020/1/geologicproperty/Alteration_Type
-gsop:Alteration_Type rdfs:subClassOf [ rdf:type owl:Restriction ;
-                                       owl:onProperty gsoc:isQualityOf ;
-                                       owl:allValuesFrom [ rdf:type owl:Class ;
-                                                           owl:unionOf ( gsog:Geologic_Unit
-                                                                         gsog:Rock_Material
-                                                                       )
-                                                         ]
-                                     ] .
+_:genid6 a owl:Class ;
+	owl:unionOf _:genid8 .
 
+_:genid8 a rdf:List ;
+	rdf:first gsog:Geologic_Unit ;
+	rdf:rest _:genid7 .
 
-###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
+_:genid7 a rdf:List ;
+	rdf:first gsog:Rock_Material ;
+	rdf:rest rdf:nil .
+# 
+# http://loop3d.org/GSO/ontology/2020/1/geologicproperty/Alteration_Type
+
+gsop:Alteration_Type rdfs:subClassOf _:genid9 .
+
+_:genid9 a owl:Restriction ;
+	owl:onProperty gsoc:isQualityOf ;
+	owl:allValuesFrom _:genid10 .
+
+_:genid10 a owl:Class ;
+	owl:unionOf _:genid12 .
+
+_:genid12 a rdf:List ;
+	rdf:first gsog:Geologic_Unit ;
+	rdf:rest _:genid11 .
+
+_:genid11 a rdf:List ;
+	rdf:first gsog:Rock_Material ;
+	rdf:rest rdf:nil .
+# 
+# Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi

@@ -252,16 +252,6 @@ Contact(x) <--> exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RB
   rdfs:subClassOf :Rock_Object ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:allValuesFrom :Crystal ;
-      owl:onProperty gsoc:hasPart ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom :Crystal ;
-      owl:onProperty gsoc:isPartOf ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
       owl:allValuesFrom :Mineral ;
       owl:onProperty gsoc:hasConstituent ;
     ] ;
@@ -282,6 +272,7 @@ Contact(x) <--> exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RB
 :Crystallized_Particle_Material
   a owl:Class ;
   rdfs:comment "Constituent particles/grains that are the product of crystallization during formation of a rock material (see NADMC1 2004). Serves to distinguish crystalline from granular rocks (Struik, 2002). Includes constituents crystallized in evaporite environments, during diagenesis or hydrothermal alteration, or in other low-temperature environments."@en ;
+  rdfs:comment "particle material is distinguished from a particle in an 'amount of matter role' in that if a 'material' is removed from its rock context, it is still identifiable as that material, whereas identifying a particle in a role requires knowing the rock context for the particle-- if it is removed from the rock it just becomes some particle."@en ;
   rdfs:comment "use to describe crystalline grain types in igneous, metamorphic and metasomatic rocks, e.g. the plagioclase phenocrysts, groundmass quartz, biotite phenocrysts, Andalusite porphyroblasts..."@en ;
   rdfs:subClassOf :Granular_Material ;
 .
@@ -836,7 +827,7 @@ Probably should specify a Temporal Reference System used to assign coordinate va
 :Lithosome
   a owl:Class ;
   rdfs:comment "A kind of rock body that has multiple occurrences in a single geologic unit. A mass of rock of uniform character, characterized by geometry, composition, and internal structure. (http://inspire.ec.europa.eu/codelist/CompositionPartRoleValue/lithosome)"@en ;
-  rdfs:comment "A kind of rock body that has multiple occurrences in a single geologic unit. A mass of rock of uniform character, characterized by geometry, composition, and internal structure. Generally denotes rock mass that is the product of a particular rock forming process or related sequence of processes in the containing unit. Example--bouma sequence, point bar sequence. A particular lithosome may be characterized by the presence of blocks, but blocks are not treated as kinds of lithosome because the internal character of the blocks is determined by a separate genetic sequence from the described unit."@en ;
+  rdfs:comment "Generally denotes rock mass that is the product of a particular rock forming process or related sequence of processes in the containing unit. Example--bouma sequence, point bar sequence. A particular lithosome may be characterized by the presence of blocks, but blocks are not treated as kinds of lithosome because the internal character of the blocks is determined by a separate genetic sequence from the described unit."@en ;
   rdfs:comment "In the AGI glossary (Neuendorf et al 2005) and usage found on the World Wide Web, lithosome typically denotes relatively uniform and distinctive bodies of sediment that intertongue with one another. (e.g. https://geoinfo.nmt.edu/resources/water/amp/brochures/Koning_lithS_lithA_PP_presentation.pdf; http://www.kgs.ku.edu/Publications/Bulletins/169/Dott/).   This vocabulary generalizes the concept defined in Neuendorf et al 2005 to include bodies of igneous or metamorphic rock as well as sedimentary rock. NADM SLTTs (2004) used the term 'lithotope' with similar meaning for sedimentary rocks."@en ;
   rdfs:comment "Lithosome is considered a kind of Integral feature, where the host is a geologic unit, and the focal is the defining lithologic characteristics of the lithosome."@en ;
   rdfs:comment "dct:source--  CGI rockbodypart vocabulary 2016-11-21 "@en ;
@@ -1110,6 +1101,11 @@ RBT (x) <--> RBD (x) ^ exists z forall y [(isPartOf (y,z) ^ hasHost (z,x)) -> (b
   rdfs:subClassOf :Rock_Body ;
   rdfs:subClassOf [
       a owl:Restriction ;
+      owl:allValuesFrom gsoc:Amount_Of_Matter ;
+      owl:onProperty gsoc:hasConstituent ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
       owl:allValuesFrom :Rock_Object ;
       owl:onProperty gsoc:hasPart ;
     ] ;
@@ -1117,14 +1113,6 @@ RBT (x) <--> RBD (x) ^ exists z forall y [(isPartOf (y,z) ^ hasHost (z,x)) -> (b
       a owl:Restriction ;
       owl:allValuesFrom :Rock_Object ;
       owl:onProperty gsoc:isPartOf ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom [
-          a owl:Class ;
-          owl:complementOf gsoc:Particular ;
-        ] ;
-      owl:onProperty gsoc:isConstituentOf ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
