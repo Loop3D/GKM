@@ -1,0 +1,109 @@
+# baseURI: http://loop3d.org/GSO/ontology/2020/1/lithology/particleroundness/ontology/
+
+@prefix : <http://loop3d.org/GSO/ontology/2020/1/lithology/particleroundness/> .
+@prefix gslth: <http://loop3d.org/GSO/ontology/2020/1/lithology/> .
+@prefix gsmf: <http://loop3d.org/GSO/ontology/2020/1/metamorphicfacies/> .
+@prefix gsmg: <http://loop3d.org/GSO/ontology/2020/1/metamorphicgrade/> .
+@prefix gsoc: <http://loop3d.org/GSO/ontology/2020/1/common/> .
+@prefix gsog: <http://loop3d.org/GSO/ontology/2020/1/geologicfeature/> .
+@prefix gsop: <http://loop3d.org/GSO/ontology/2020/1/geologicquality/> .
+@prefix gsps: <http://loop3d.org/GSO/ontology/2020/1/lithology/particleroundness/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+gsps:ontology
+  a owl:Ontology ;
+  rdfs:comment "This file contains the 2016 SKOS-RDF version of the CGI Particle Shape vocabulary. Compilation and review in MS Excel spreadsheet, converted to MS Excel for SKOS generation using SKOS_for_GA_from_XLS_2016.03.xslt. Converted to OWL for Loop3D project by Stephen M. Richard. "@en ;
+  rdfs:comment "This file contains the CGI Particle Shape vocabulary, as defined by the IUGS Commission for Geoscience Information (CGI) Geoscience Terminology Working Group. The Shape attribute describes, a) the development of crystal faces bounding particles in crystalline compond materials, and b) surface rounding of grains in sedimentary rocks. Roundness is a measure of the sharpness of the edges between surfaces bounding a particle (see Jackson, 1997; Wadell, 1932) and is an indication of the degree of abrasion of a clastic particle. Expressed by Wadell (1932) as the ratio of the average radius of curvature of the several edges or corners of the particle to the radius of curvature of the maximum inscribed sphere (or to one-half the nominal diameter of the particle). The value is more conveniently computed from a plane figure (a projection or cross section); thus, roundness may be defined as the ratio of the average radius of curvature of the corners of the particle image to the radius of the maximum inscribed circle. A perfectly rounded particle (such as a sphere) has a roundness value of 1.0; less-rounded particles have values less than 1.0. The corresponding concept in aggregates with crystalline as opposed to clastic grains is here referred to as crystallinity, and is the degree to which a mineral grain is bounded by crystal faces. Terms should be appropriate for the kind of compound material (eg: for crystalline rocks- euhedral, ideoblastic, subhedral, anhedral, xenoblastic; for sedimentary rocks - angular, rounded)."@en ;
+  rdfs:comment "dct:creator--  CGI Geoscience Terminology Working Group, Stephen M. Ricahrd"@en ;
+  rdfs:comment "dct:date--  2016-11-25"@en ;
+  rdfs:comment "dct:modified-- 2020-02-03" ;
+  rdfs:label "Particle Roundness"@en ;
+.
+gsps:angular
+  a owl:Class ;
+  rdfs:comment "A clastic sedimentary particle showing very little or no evidence of abrasion, with all of its edges and corners sharp, such as blocks with numerous (15-30) secondary corners and a roundness value between 0.17 and 0.25 (midpoint at 0.21)."@en ;
+  rdfs:comment "dct:source--  Powers, M. C., 1953 A new roundness scale for sedimentary particles. Journal of Sedimentary Petrology, v. 23, p. 117-119"@en ;
+  rdfs:label "angular"@en ;
+  rdfs:subClassOf gslth:Grain_Roundness ;
+.
+gsps:anhedral
+  a owl:Class ;
+  rdfs:comment "Crystalline particles in a rock lack well-developed crystal faces, usually referring to igneous or metamorphic grains"@en ;
+  rdfs:comment "dct:source--  MacKenzie, W.S., Donaldson, C.H. & Guilford, C., 1982. Atlas of igneous rocks and their textures. John Wiley & Sons, New York"@en ;
+  rdfs:label "anhedral"@en ;
+  rdfs:subClassOf gslth:Grain_Roundness ;
+.
+gsps:diffuse
+  a owl:Class ;
+  rdfs:comment "Particles in aggregate have diffuse, ill-defined boundaries"@en ;
+  rdfs:comment "dct:source--  SLTTs 2004"@en ;
+  rdfs:label "diffuse"@en ;
+  rdfs:subClassOf gslth:Grain_Roundness ;
+.
+gsps:euhedral
+  a owl:Class ;
+  rdfs:comment "Crystalline particles in a rock are mostly bounded by perfect crystal faces, usually referring to igneous or metamorphoc grains"@en ;
+  rdfs:comment "dct:source--  MacKenzie, W.S., Donaldson, C.H. & Guilford, C., 1982. Atlas of igneous rocks and their textures. John Wiley & Sons, New York"@en ;
+  rdfs:label "euhedral"@en ;
+  rdfs:subClassOf gslth:Grain_Roundness ;
+.
+gsps:resorbed
+  a owl:Class ;
+  rdfs:comment "Particles have smooth, embayed boundaries caused by resorption by the host magma"@en ;
+  rdfs:comment "dct:source--  Neuendorf, K.K.E, Mehl, J.P. & Jackson, J.A. (eds), 2005. Glossary of geology, 5th Edition. American Geological Institute, Alexandria, 779 p."@en ;
+  rdfs:label "resorbed"@en ;
+  rdfs:subClassOf gslth:Grain_Roundness ;
+.
+gsps:rounded
+  a owl:Class ;
+  rdfs:comment "A clastic sedimentary particle whose original edges and corners have been smoothed off to rather broad curves and whose original faces are almost completely removed by abrasion (although some comparatively flat surfaces may be present), such as a pebble with a roundness value between 0.49 and 0.70 (midpoint at 0.59) and few (0-5) and greatly subdued secondary corners. The original shape is still readily apparent."@en ;
+  rdfs:comment "dct:source--  Powers, M. C., 1953 A new roundness scale for sedimentary particles. Journal of Sedimentary Petrology, v. 23, p. 117-119"@en ;
+  rdfs:label "rounded"@en ;
+  rdfs:subClassOf gslth:Grain_Roundness ;
+.
+gsps:shape_not_specified
+  a owl:Class ;
+  rdfs:comment "Shape property may have any value. Use in normative definitions where shape may take any value."@en ;
+  rdfs:comment "dct:source--  this vocabulary"@en ;
+  rdfs:label "any shape"@en ;
+  rdfs:subClassOf gslth:Grain_Roundness ;
+.
+gsps:sub_angular
+  a owl:Class ;
+  rdfs:comment "A clastic sedimentary particle showing definite effects of slight abrasion, retaining its original general form, and having faces that are virtually untouched and edges and corners that are rounded off to some extent, such as a glacial boulder with numerous (10-20) secondary corners and a roundness value between 0.25 and 0.35 (midpoint at 0.300)."@en ;
+  rdfs:comment "dct:source--  Powers, M. C., 1953 A new roundness scale for sedimentary particles. Journal of Sedimentary Petrology, v. 23, p. 117-119"@en ;
+  rdfs:label "sub-angular"@en ;
+  rdfs:subClassOf gslth:Grain_Roundness ;
+.
+gsps:sub_rounded
+  a owl:Class ;
+  rdfs:comment "A clastic sedimentary particle showing considerable but incomplete abrasion and an original general form that is still discernible, and having many of its edges and corners noticeably rounded off to smooth curves, such as a cobble with a reduced number (5-10) of secondary corners, a considerably reduced area of the original faces, and a roundness value between 0.35 and 0.49 (midpoint at 0.41)."@en ;
+  rdfs:comment "dct:source--  Powers, M. C., 1953 A new roundness scale for sedimentary particles. Journal of Sedimentary Petrology, v. 23, p. 117-119"@en ;
+  rdfs:label "sub-rounded"@en ;
+  rdfs:subClassOf gslth:Grain_Roundness ;
+.
+gsps:subhedral
+  a owl:Class ;
+  rdfs:comment "Crystalline particles in a rock are partly bounded by crystal faces, usually referring to igneous or metamorphic grains"@en ;
+  rdfs:comment "dct:source--  MacKenzie, W.S., Donaldson, C.H. & Guilford, C., 1982. Atlas of igneous rocks and their textures. John Wiley & Sons, New York"@en ;
+  rdfs:label "subhedral"@en ;
+  rdfs:subClassOf gslth:Grain_Roundness ;
+.
+gsps:very_angular
+  a owl:Class ;
+  rdfs:comment "A clastic sedimentary particle with a roundness value between 0.12 and 0.17 (midpoint at 0.14)."@en ;
+  rdfs:comment "dct:source--  Powers, M. C., 1953 A new roundness scale for sedimentary particles. Journal of Sedimentary Petrology, v. 23, p. 117-119"@en ;
+  rdfs:label "very angular"@en ;
+  rdfs:subClassOf gslth:Grain_Roundness ;
+.
+gsps:well_rounded
+  a owl:Class ;
+  rdfs:comment "A clastic sedimentary particle whose original faces, edges, and corners have been destroyed by abrasion and whose entire surface consists of broad curves without any flat areas, specif. said of a particle with no secondary corners and a roundness value between 0.70 and 1.00 (midpoint at 0.84). The original shape may be suggested by the present form of the particle."@en ;
+  rdfs:comment "dct:source--  Powers, M. C., 1953 A new roundness scale for sedimentary particles. Journal of Sedimentary Petrology, v. 23, p. 117-119"@en ;
+  rdfs:label "well rounded"@en ;
+  rdfs:subClassOf gslth:Grain_Roundness ;
+.
