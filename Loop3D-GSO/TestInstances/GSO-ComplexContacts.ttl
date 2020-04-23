@@ -1,17 +1,18 @@
 # baseURI: http://loop3d.org/GSO/ontology/2020/1/ex-complexcontact/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/ex-formationJs/ontology
+# imports: http://loop3d.org/GSO/ontology/2020/1/geologicquality/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/loop3dmaster
 
 @prefix : <http://loop3d.org/GSO/ontology/2020/1/ex-complexcontact#> .
 @prefix con: <http://loop3d.org/GSO/ontology/2020/1/ex-complexcontact#> .
 @prefix ejs: <http://loop3d.org/GSO/ontology/2020/1/ex-formationJs#> .
+@prefix gsgu: <http://loop3d.org/GSO/ontology/2020/1/geologicunit/> .
 @prefix gslth: <http://loop3d.org/GSO/ontology/2020/1/lithology/> .
+@prefix gsmg: <http://loop3d.org/GSO/ontology/2020/1/metamorphicgrade/> .
 @prefix gsoc: <http://loop3d.org/GSO/ontology/2020/1/common/> .
 @prefix gsog: <http://loop3d.org/GSO/ontology/2020/1/geologicfeature/> .
 @prefix gsop: <http://loop3d.org/GSO/ontology/2020/1/geologicproperty/> .
 @prefix gspr: <http://loop3d.org/GSO/ontology/2020/1/geologicprocess/> .
-@prefix gsgu: <http://loop3d.org/GSO/ontology/2020/1/geologicunit/> .
-@prefix gsmg: <http://loop3d.org/GSO/ontology/2020/1/metamorphicgrade/> .
 @prefix gstime: <http://loop3d.org/GSO/ontology/2020/1/ischart/> .
 @prefix gsuom: <http://loop3d.org/GSO/ontology/2020/1/uom/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
@@ -35,25 +36,106 @@ con:JsDeposition
   a gspr:Deposition ;
   rdfs:label "Deposition of Unit Js"@en ;
 .
+con:KdBoundaryDownSide-3_1
+  a gsog:Rock_Body_Boundary ;
+  gsoc:hasPart con:KdBoundaryDownSide-3_1_1 ;
+  gsoc:hasPart con:KdBoundaryDownSide-3_1_2 ;
+  gsoc:hasPart con:KdBoundaryDownSide-3_1_3 ;
+  gsoc:hasPart con:KdBoundaryDownSide-3_1_4 ;
+  gsoc:hostedBy con:KdDike ;
+  gsoc:isParticipantIn [
+      a gspr:Intrusion ;
+    ] ;
+  rdfs:comment "lower side of dike"@en ;
+.
+con:KdBoundaryDownSide-3_1_1
+  a gsog:Rock_Body_Boundary ;
+  gsoc:hostedBy con:KdDike ;
+  rdfs:comment "could have more properties describing contact effectw sith Xm here"@en ;
+.
+con:KdBoundaryDownSide-3_1_2
+  a gsog:Rock_Body_Boundary ;
+  gsoc:hostedBy con:KdDike ;
+.
+con:KdBoundaryDownSide-3_1_3
+  a gsog:Rock_Body_Boundary ;
+  gsoc:hostedBy con:KdDike ;
+.
+con:KdBoundaryDownSide-3_1_4
+  a gsog:Rock_Body_Boundary ;
+  gsoc:hostedBy con:KdDike ;
+  rdfs:comment "dike intrudes Js"@en ;
+  rdfs:comment "surface separating dike from rocks beneath it"@en ;
+  rdfs:label "dike intrudes Js, lower"@en ;
+.
+con:KdBoundaryInJs-3_1_4
+  a gsog:Rock_Body_Boundary ;
+  gsoc:hostedBy con:KdDike ;
+.
+con:KdBoundaryInJs-3_2_4
+  a gsog:Rock_Body_Boundary ;
+  gsoc:hostedBy con:KdDike ;
+.
+con:KdBoundaryUnderMs
+  a gsog:Rock_Body_Boundary ;
+  gsoc:hostedBy con:KdDike ;
+  gsoc:isParticipantIn [
+      a gspr:Erosion ;
+      rdfs:comment "pre-Miocene erosion event"@en ;
+    ] ;
+  rdfs:comment "Eroded surface under Ms"@en ;
+.
+con:KdBoundaryUpSide-3_2
+  a gsog:Rock_Body_Boundary ;
+  gsoc:hasPart con:KdBoundaryUpSide-3_2_1 ;
+  gsoc:hasPart con:KdBoundaryUpSide-3_2_2 ;
+  gsoc:hasPart con:KdBoundaryUpSide-3_2_3 ;
+  gsoc:hasPart con:KdBoundaryUpSide-3_2_4 ;
+  gsoc:hostedBy con:KdDike ;
+  gsoc:isParticipantIn [
+      a gspr:Intrusion ;
+    ] ;
+  rdfs:comment "upper side of dike"@en ;
+.
+con:KdBoundaryUpSide-3_2_1
+  a gsog:Rock_Body_Boundary ;
+  gsoc:hostedBy con:KdDike ;
+  rdfs:comment "dike intrudes Xm"@en ;
+.
+con:KdBoundaryUpSide-3_2_2
+  a gsog:Rock_Body_Boundary ;
+  gsoc:hostedBy con:KdDike ;
+  rdfs:comment "dike intrudes Cb"@en ;
+.
+con:KdBoundaryUpSide-3_2_3
+  a gsog:Rock_Body_Boundary ;
+  gsoc:hostedBy con:KdDike ;
+  rdfs:comment "dike intrudes Kg"@en ;
+.
+con:KdBoundaryUpSide-3_2_4
+  a gsog:Rock_Body_Boundary ;
+  gsoc:hostedBy con:KdDike ;
+  rdfs:comment "dike intrudes Js"@en ;
+.
 con:KdDike
   a gsog:Formation ;
   gsoc:hasConstituent [
       a gslth:diorite ;
       gsoc:hasQuality [
+          a gslth:Grain_Size_Average ;
+          gsoc:hasDataValue .05 ;
           gsoc:hasUOM [
               a gsuom:millimeter ;
             ] ;
-          gsoc:hasDataValue ".05"^^xsd:decimal ;
-          a gslth:Grain_Size_Average ;
         ] ;
     ] ;
-  gsoc:hasQuality [
-	a gsgu:Geologic_Unit_Body_Morphology ;
-	gsoc:hasDataValue "Dike";
-  ];
-  gsoc:hasPart con:KdBoundaryUnderMs ;
   gsoc:hasPart con:KdBoundaryDownSide-3_1 ;
+  gsoc:hasPart con:KdBoundaryUnderMs ;
   gsoc:hasPart con:KdBoundaryUpSide-3_2 ;
+  gsoc:hasQuality [
+      a gsgu:Geologic_Unit_Body_Morphology ;
+      gsoc:hasDataValue "Dike" ;
+    ] ;
   gsog:intrudes con:CbFormation ;
   gsog:intrudes con:JsFormation ;
   gsog:intrudes con:KgGranite ;
@@ -62,40 +144,27 @@ con:KdDike
   rdfs:comment "intrudes is subproperty of relatedTo"@en ;
   rdfs:label "Mafic Dike (Cretaceous)"@en ;
 .
-con:KdBoundaryInJs-3_1_4
-  a gsog:Rock_Body_Boundary ;
-  gsoc:hostedBy con:KdDike
-.
-con:KdBoundaryInJs-3_2_4
-  a gsog:Rock_Body_Boundary ;
-    gsoc:hostedBy con:KdDike
-.
-con:KdBoundaryUnderMs
-  a gsog:Rock_Body_Boundary ;
-  gsoc:isParticipantIn [
-      a gspr:Erosion ;
-      rdfs:comment "pre-Miocene erosion event"@en ;
-    ] ;
-  rdfs:comment "Eroded surface under Ms"@en ;
-    gsoc:hostedBy con:KdDike
-.
 con:KgBoundaryErosionSurface-2_3
   a gsog:Rock_Body_Boundary ;
+  gsoc:hostedBy con:KgGranite ;
   gsoc:isParticipantIn [
       a gspr:Erosion ;
     ] ;
   rdfs:comment "Kg erosion surface overlain by Ms"@en ;
-    gsoc:hostedBy con:KgGranite
+.
+con:KgBoundaryIntrudesJs-4_2
+  a gsog:Rock_Body_Boundary ;
+  gsoc:hostedBy con:KgGranite ;
 .
 con:KgGranite
   a gsog:Formation ;
   gsoc:hasConstituent [
       a gslth:granitoid ;
       gsoc:hasQuality [
+          gsoc:hasDataValue "5"^^xsd:decimal ;
           gsoc:hasUOM [
               a gsuom:millimeter ;
             ] ;
-          gsoc:hasDataValue "5"^^xsd:decimal ;
           rdfs:type gsog:GrainSizeAverage ;
         ] ;
     ] ;
@@ -113,13 +182,9 @@ con:KgGranite
   rdfs:comment "intrusion has lots of intrusive contacts, each contact is with a different unit, also an erosion surface at the top, overlain by Ms."@en ;
   rdfs:label "Granite (Cretaceous)"@en ;
 .
-con:KgBoundaryIntrudesJs-4_2
-  a gsog:Rock_Body_Boundary ;
-      gsoc:hostedBy con:KgGranite
-.
 con:KgIntrusiveBoundary-3_1_3
   a gsog:Rock_Body_Boundary ;
-      gsoc:hostedBy con:KgGranite ;
+  gsoc:hostedBy con:KgGranite ;
   gsoc:isParticipantIn [
       a gspr:Intrusion ;
     ] ;
@@ -127,7 +192,7 @@ con:KgIntrusiveBoundary-3_1_3
 .
 con:KgIntrusiveBoundary-3_2_3
   a gsog:Rock_Body_Boundary ;
-      gsoc:hostedBy con:KgGranite ;
+  gsoc:hostedBy con:KgGranite ;
   gsoc:isParticipantIn [
       a gspr:Intrusion ;
     ] ;
@@ -138,10 +203,10 @@ con:KgIntrusiveBoundary-4_1
   gsoc:hasPart con:KgIntrusiveBoundary-4_1_1 ;
   gsoc:hasPart con:KgIntrusiveBoundary-4_1_2 ;
   gsoc:hasPart con:KgIntrusiveBoundary-4_1_3 ;
+  gsoc:hostedBy con:KgGranite ;
   gsoc:isParticipantIn [
       a gspr:Intrusion ;
     ] ;
-  gsoc:hostedBy con:KgGranite ;
   rdfs:comment "Kg intruding the tilted Xm-Cb-Os-Ss sequence"@en ;
 .
 con:KgIntrusiveBoundary-4_1_1
@@ -166,6 +231,44 @@ con:KgIntrusiveBoundary-4_2
       a gspr:Intrusion ;
     ] ;
   rdfs:comment "Kg intruding Js"@en ;
+.
+con:MsBoundaryBottom-2
+  a gsog:Rock_Body_Bottom ;
+  gsoc:hasPart con:MsBoundaryBottom-2_1 ;
+  gsoc:hasPart con:MsBoundaryBottom-2_2 ;
+  gsoc:hasPart con:MsBoundaryBottom-2_3 ;
+  gsoc:hostedBy con:MsFormation ;
+  gsoc:isParticipantIn [
+      a gspr:Deposition ;
+    ] ;
+  rdfs:comment "This is an unconformity; Ms overlies Jurassic sediment, Cretaceous dike and granite"@en ;
+  rdfs:comment "base of Ms formation"@en ;
+  rdfs:label "Base Ms"@en ;
+.
+con:MsBoundaryBottom-2_1
+  a gsog:Rock_Body_Bottom ;
+  gsoc:hostedBy con:MsFormation ;
+  rdfs:comment "surface separating Ms on top of Js"@en ;
+  rdfs:label "Ms overlies Js"@en ;
+.
+con:MsBoundaryBottom-2_2
+  a gsog:Rock_Body_Bottom ;
+  gsoc:hostedBy con:MsFormation ;
+  rdfs:comment "surface separating Ms on top of Kd"@en ;
+  rdfs:label "Ms overlies Kd dike"@en ;
+.
+con:MsBoundaryBottom-2_3
+  a gsog:Rock_Body_Bottom ;
+  gsoc:hostedBy con:MsFormation ;
+  rdfs:comment "surface separating Ms on top of Kg"@en ;
+  rdfs:label "Ms overlies Kg"@en ;
+.
+con:MsBoundaryTop-1
+  a gsog:Rock_Body_Top ;
+  gsoc:hostedBy con:MsFormation ;
+  rdfs:comment "This is a simple disconformable contact"@en ;
+  rdfs:comment "top of Ms formation"@en ;
+  rdfs:label "Top Ms"@en ;
 .
 con:MsFormation
   a gsog:Formation ;
@@ -226,18 +329,18 @@ con:XmRockBody
       a gslth:gneiss ;
       gsoc:hasQuality [
           a gsop:Metamorphic_Grade ;
-		  gsoc:hasValue [
-		    a gsmg:medium_metamorphic_grade
-			]
+          gsoc:hasValue [
+              a gsmg:medium_metamorphic_grade ;
+            ] ;
         ] ;
     ] ;
 .
 con:baseJs-6
   a gsog:Rock_Body_Bottom ;
-  gsoc:hostedBy con:JsFormation ;
   gsoc:hasPart con:baseJs-6_1 ;
   gsoc:hasPart con:baseJs-6_2 ;
   gsoc:hasPart con:baseJs-6_3 ;
+  gsoc:hostedBy con:JsFormation ;
 .
 con:baseJs-6_1
   a gsog:Rock_Body_Bottom ;
@@ -256,37 +359,6 @@ con:baseJs-6_3
   gsoc:hostedBy con:JsFormation ;
   gsoc:isParticipantIn con:JsDeposition ;
   rdfs:comment "Js on Xm surface"@en ;
-.
-con:MsBoundaryBottom-2
-  a gsog:Rock_Body_Bottom ;
-  gsoc:hasPart con:MsBoundaryBottom-2_1 ;
-  gsoc:hasPart con:MsBoundaryBottom-2_2 ;
-  gsoc:hasPart con:MsBoundaryBottom-2_3 ;
-  gsoc:hostedBy con:MsFormation ;
-  gsoc:isParticipantIn [
-      a gspr:Deposition ;
-    ] ;
-  rdfs:comment "This is an unconformity; Ms overlies Jurassic sediment, Cretaceous dike and granite"@en ;
-  rdfs:comment "base of Ms formation"@en ;
-  rdfs:label "Base Ms"@en ;
-.
-con:MsBoundaryBottom-2_1
-  a gsog:Rock_Body_Bottom ;
-  gsoc:hostedBy con:MsFormation ;
-  rdfs:comment "surface separating Ms on top of Js"@en ;
-  rdfs:label "Ms overlies Js"@en ;
-.
-con:MsBoundaryBottom-2_2
-  a gsog:Rock_Body_Bottom ;
-  gsoc:hostedBy con:MsFormation ;
-  rdfs:comment "surface separating Ms on top of Kd"@en ;
-  rdfs:label "Ms overlies Kd dike"@en ;
-.
-con:MsBoundaryBottom-2_3
-  a gsog:Rock_Body_Bottom ;
-  gsoc:hostedBy con:MsFormation ;
-  rdfs:comment "surface separating Ms on top of Kg"@en ;
-  rdfs:label "Ms overlies Kg"@en ;
 .
 con:contact_Js_on_Os
   a gsog:Contact ;
@@ -320,8 +392,8 @@ con:contact_Kd_in_Js
   gsoc:hasYoungerHost con:KdDike ;
   gsoc:hostedBy con:KdBoundaryInJs-3_1_4 ;
   gsoc:hostedBy con:KdBoundaryInJs-3_2_4 ;
-  gsoc:hostedBy con:downSide-3_1_4 ;
   gsoc:hostedBy con:KdBoundaryUpSide-3_2_4 ;
+  gsoc:hostedBy con:downSide-3_1_4 ;
   rdfs:label "relational feature, Kd dike intrudes Js formation"@en ;
 .
 con:contact_Kg_in_Js
@@ -336,58 +408,22 @@ con:contact_Ms_on_Js
   a gsog:Contact ;
   gsoc:hasOlderHost con:JsFormation ;
   gsoc:hasOlderHost con:topJs-2_1 ;
-  gsoc:hasYoungerHost con:MsFormation ;
   gsoc:hasYoungerHost con:MsBoundaryBottom-2_1 ;
+  gsoc:hasYoungerHost con:MsFormation ;
   rdfs:label "relational feature, Miocene Ms formation overlies Jurassic Js formation"@en ;
 .
 con:contact_Ms_on_Kg
   a gsog:Contact ;
   gsoc:hasOlderHost con:KgBoundaryErosionSurface-2_3 ;
   gsoc:hasOlderHost con:KgGranite ;
-  gsoc:hasYoungerHost con:MsFormation ;
   gsoc:hasYoungerHost con:MsBoundaryBottom-2_3 ;
+  gsoc:hasYoungerHost con:MsFormation ;
   rdfs:label "relational feature, Ms formation overlies Kg Granite on erosion surface"@en ;
-.
-con:KdBoundaryDownSide-3_1_4
-  a gsog:Rock_Body_Boundary ;
-  gsoc:hostedBy con:KdDike ;
-  rdfs:comment "surface separating dike from rocks beneath it"@en ;
-  rdfs:label "dike intrudes Js, lower"@en ;
-.
-con:KdBoundaryDownSide-3_1
-  a gsog:Rock_Body_Boundary ;
-  gsoc:hostedBy con:KdDike ;
-  gsoc:hasPart con:KdBoundaryDownSide-3_1_1 ;
-  gsoc:hasPart con:KdBoundaryDownSide-3_1_2 ;
-  gsoc:hasPart con:KdBoundaryDownSide-3_1_3 ;
-  gsoc:hasPart con:KdBoundaryDownSide-3_1_4 ;
-  gsoc:isParticipantIn [
-      a gspr:Intrusion ;
-    ] ;
-  rdfs:comment "lower side of dike"@en ;
-.
-con:KdBoundaryDownSide-3_1_1
-  a gsog:Rock_Body_Boundary ;
-  gsoc:hostedBy con:KdDike ;
-  rdfs:comment "could have more properties describing contact effectw sith Xm here"@en ;
-.
-con:KdBoundaryDownSide-3_1_2
-  a gsog:Rock_Body_Boundary ;
-  gsoc:hostedBy con:KdDike ;
-.
-con:KdBoundaryDownSide-3_1_3
-  a gsog:Rock_Body_Boundary ;
-  gsoc:hostedBy con:KdDike ;
-.
-con:KdBoundaryDownSide-3_1_4
-  a gsog:Rock_Body_Boundary ;
-  gsoc:hostedBy con:KdDike ;
-  rdfs:comment "dike intrudes Js"@en ;
 .
 con:topJs-2
   a gsog:Rock_Body_Top ;
-  gsoc:hostedBy con:JsFormation ;
   gsoc:hasPart con:topJs-2_1 ;
+  gsoc:hostedBy con:JsFormation ;
   gsoc:isParticipantIn [
       a gspr:Erosion ;
     ] ;
@@ -399,51 +435,13 @@ con:topJs-2_1
       a gspr:Erosion ;
     ] ;
 .
-con:MsBoundaryTop-1
-  a gsog:Rock_Body_Top ;
-  gsoc:hostedBy con:MsFormation ;
-  rdfs:comment "This is a simple disconformable contact"@en ;
-  rdfs:comment "top of Ms formation"@en ;
-  rdfs:label "Top Ms"@en ;
-.
-con:KdBoundaryUpSide-3_2
-  a gsog:Rock_Body_Boundary ;
-  gsoc:hostedBy con:KdDike ;
-  gsoc:hasPart con:KdBoundaryUpSide-3_2_1 ;
-  gsoc:hasPart con:KdBoundaryUpSide-3_2_2 ;
-  gsoc:hasPart con:KdBoundaryUpSide-3_2_3 ;
-  gsoc:hasPart con:KdBoundaryUpSide-3_2_4 ;
-  gsoc:isParticipantIn [
-      a gspr:Intrusion ;
-    ] ;
-  rdfs:comment "upper side of dike"@en ;
-.
-con:KdBoundaryUpSide-3_2_1
-  a gsog:Rock_Body_Boundary ;
-  gsoc:hostedBy con:KdDike ;
-  rdfs:comment "dike intrudes Xm"@en ;
-.
-con:KdBoundaryUpSide-3_2_2
-  a gsog:Rock_Body_Boundary ;
-  gsoc:hostedBy con:KdDike ;
-  rdfs:comment "dike intrudes Cb"@en ;
-.
-con:KdBoundaryUpSide-3_2_3
-  a gsog:Rock_Body_Boundary ;
-  gsoc:hostedBy con:KdDike ;
-  rdfs:comment "dike intrudes Kg"@en ;
-.
-con:KdBoundaryUpSide-3_2_4
-  a gsog:Rock_Body_Boundary ;
-  gsoc:hostedBy con:KdDike ;
-  rdfs:comment "dike intrudes Js"@en ;
-.
 <http://loop3d.org/GSO/ontology/2020/1/ex-complexcontact/ontology>
   a owl:Ontology ;
   rdfs:comment "Focus is Js, a Jurassic age sedimentary unit that has a lower clastic part with an internal tuff marker bed, and an upper limestone part. The unit unconformably overlies tilted Paleozoic strata that overly Early Proterozoic metamorphic rocks; it is intruded by a Cretaceous granite, and the granite and Js are intruded by a Cretaceous diorite dike. After the igneous activity a period of exumation and erosion removed the cover on the Jurassic sediment and Cretaceous igneous rocks, and Late Miocene sediment covered this unconformity."@en ;
   rdfs:comment "Xm, Cb, Os, and Ss and their boundary surfaces not elucidated here"@en ;
   rdfs:comment "this example references the GeologyScenarioForTesting diagram"@en ;
   owl:imports <http://loop3d.org/GSO/ontology/2020/1/ex-formationJs/ontology> ;
+  owl:imports <http://loop3d.org/GSO/ontology/2020/1/geologicquality/ontology> ;
   owl:imports <http://loop3d.org/GSO/ontology/2020/1/loop3dmaster> ;
 .
 ejs:JsFormation

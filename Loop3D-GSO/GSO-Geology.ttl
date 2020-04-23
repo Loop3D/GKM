@@ -1,10 +1,10 @@
 # baseURI: http://loop3d.org/GSO/ontology/2020/1/geologicfeature/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/common/ontology
-# imports: http://loop3d.org/GSO/ontology/2020/1/geologicproperty/ontology
+# imports: http://loop3d.org/GSO/ontology/2020/1/geologicquality/ontology
 
 @prefix : <http://loop3d.org/GSO/ontology/2020/1/geologicfeature/> .
 @prefix gsoc: <http://loop3d.org/GSO/ontology/2020/1/common/> .
-@prefix gsop: <http://loop3d.org/GSO/ontology/2020/1/geologicproperty/> .
+@prefix gsop: <http://loop3d.org/GSO/ontology/2020/1/geologicquality/> .
 @prefix gspr: <http://loop3d.org/GSO/ontology/2020/1/geologicprocess/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -54,6 +54,21 @@ gsoc:Glass
       owl:onProperty gsoc:isConstituentOf ;
     ] ;
 .
+
+:Separation
+  a owl:Class ;
+  rdfs:comment "a vector (magnitude and orientation) specifying the distance between the intersection of a surface on opposite sides of a displacment surface. In 3-D is the projection of a vector normal to the displaced surface into the displacment surface, but might also be specified as offset of the intersection of displacement surface and marker surface in some other profile view (e.g. horizontal/map view, or a cross section)"@en ;
+  rdfs:label "Separation"@en ;
+  rdfs:subClassOf :Displacement ;
+.
+
+:Slip
+  a owl:Class ;
+  rdfs:comment "a vector (magnitude and orientation) that links a peircing point on opposite sides of a displacement surface."@en ;
+  rdfs:label "Slip"@en ;
+  rdfs:subClassOf :Displacement ;
+.
+
 :Additive_Process
   a owl:Class ;
   rdfs:comment "process that introduces new matter into the model space"@en ;
@@ -655,7 +670,7 @@ Probably should specify a Temporal Reference System used to assign coordinate va
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty gsoc:hasUOM ;
-      owl:someValuesFrom gsoc:Any_Unit_of_Measure ;
+      owl:someValuesFrom gsoc:Unit_of_Measure ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
@@ -1576,7 +1591,7 @@ RBT (x) <--> RBD (x) ^ exists z forall y [(isPartOf (y,z) ^ hasHost (z,x)) -> (b
   a owl:Ontology ;
   rdfs:comment "Base geologic feature classes, constraints, and relationships"@en ;
   owl:imports gsoc:ontology ;
-  owl:imports gsop:ontology ;
+  owl:imports <http://loop3d.org/GSO/ontology/2020/1/geologicquality/ontology> ;
 .
 :overlies
   a owl:ObjectProperty ;

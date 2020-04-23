@@ -1,5 +1,6 @@
 # baseURI: http://loop3d.org/GSO/ontology/2020/1/geologicunit/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/common/ontology
+# imports: http://loop3d.org/GSO/ontology/2020/1/geologicquality/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/geologicunit/rockbodypart/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/metamorphicfacies/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/metamorphicgrade/ontology
@@ -8,17 +9,12 @@
 @prefix gsgu: <http://loop3d.org/GSO/ontology/2020/1/geologicunit/> .
 @prefix gsoc: <http://loop3d.org/GSO/ontology/2020/1/common/> .
 @prefix gsog: <http://loop3d.org/GSO/ontology/2020/1/geologicfeature/> .
-@prefix gsop: <http://loop3d.org/GSO/ontology/2020/1/geologicproperty/> .
+@prefix gsop: <http://loop3d.org/GSO/ontology/2020/1/geologicquality/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-
-gsgu:lithodemic_unit
-  rdfs:comment "Lithodemic unit is not recognized by the international Stratigraphic code (Salvador, 1994) {@en} The 'Guide for geological nomenclature in Sweden', RA Kumpulainen, 2017 adopts the NACSN 2005 terminology.  The British Geological survey defines a vocabulary of subdivisions of the 'lithodeme' defined by NACSN to reflect common geologic field usage (Gillespie, M R, Stephenson, D, and Millward, D. 2008. BGS classification of lithodemic units: Proposals for classifying units of intrusive rock. British Geological Survey Research Report, RR/08/05. 31pp.).  The BGS terminology is partially adopted here."@en ;
-  rdfs:subClassOf gsog:Geologic_Unit ;
-.
 
 gsgu:Bedding_Pattern
   a owl:Class ;
@@ -303,27 +299,6 @@ gsgu:excavation_unit
   rdfs:label "excavation unit"@en ;
   rdfs:subClassOf gsgu:lithogenetic_unit ;
 .
-gsgu:geologicunitproperties
-  a owl:Class ;
-  rdfs:label "Geologic_Unit_Properties"@en ;
-  rdfs:subClassOf gsoc:Quality ;
-  owl:equivalentClass [
-      a owl:Class ;
-      owl:unionOf (
-          gsop:Alteration_Degree
-          gsop:Alteration_Distribution
-          gsop:Alteration_Type
-          gsop:Metamorphic_Facies
-          gsop:Metamorphic_Grade
-          gsgu:Bedding_Pattern
-          gsgu:Bedding_Style
-          gsgu:Bedding_Thickness_Category
-          gsgu:Geologic_Unit_Body_Morphology
-          gsgu:Geologic_Unit_Composition_Category
-          gsgu:Geologic_Unit_Outcrop_Character
-        ) ;
-    ] ;
-.
 gsgu:geomorphologic_unit
   a owl:Class ;
   rdfs:comment "Geologic unit defined by surface landform, e.g. hummocky moraine"@en ;
@@ -390,6 +365,7 @@ gsgu:ontology
   rdfs:comment "dct:modified-- 2020-01-30"@en ;
   rdfs:label "Geologic Unit"@en ;
   owl:imports gsoc:ontology ;
+  owl:imports <http://loop3d.org/GSO/ontology/2020/1/geologicquality/ontology> ;
   owl:imports <http://loop3d.org/GSO/ontology/2020/1/geologicunit/rockbodypart/ontology> ;
   owl:imports <http://loop3d.org/GSO/ontology/2020/1/metamorphicfacies/ontology> ;
   owl:imports <http://loop3d.org/GSO/ontology/2020/1/metamorphicgrade/ontology> ;

@@ -1,5 +1,6 @@
 # baseURI: http://loop3d.org/GSO/ontology/2020/1/ex-materialCb
 # imports: http://loop3d.org/GSO/ontology/2020/1/ex-complexcontact/ontology
+# imports: http://loop3d.org/GSO/ontology/2020/1/geologicquality/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/loop3dmaster
 # prefix: bol
 
@@ -16,7 +17,7 @@
 @prefix gsog: <http://loop3d.org/GSO/ontology/2020/1/geologicfeature/> .
 @prefix gsop: <http://loop3d.org/GSO/ontology/2020/1/geologicproperty/> .
 @prefix gspr: <http://loop3d.org/GSO/ontology/2020/1/geologicprocess/> .
-@prefix gsps: <http://loop3d.org/GSO/ontology/2020/1/lithology/particleshape/> .
+@prefix gsps: <http://loop3d.org/GSO/ontology/2020/1/lithology/particleroundness/> .
 @prefix gspt: <http://loop3d.org/GSO/ontology/2020/1/lithology/particletype/> .
 @prefix gstime: <http://loop3d.org/GSO/ontology/2020/1/ischart/> .
 @prefix gsuom: <http://loop3d.org/GSO/ontology/2020/1/uom/> .
@@ -33,73 +34,78 @@
   rdfs:comment "Stephen M. Richard 2019-05-03"@en ;
   rdfs:comment "description of rock material constituents of Bolsa Quartzite Formation"@en ;
   owl:imports <http://loop3d.org/GSO/ontology/2020/1/ex-complexcontact/ontology> ;
+  owl:imports <http://loop3d.org/GSO/ontology/2020/1/geologicquality/ontology> ;
   owl:imports <http://loop3d.org/GSO/ontology/2020/1/loop3dmaster> ;
 .
 bol:Bolsa_Quartzite_Material
   a gsog:Rock_Material ;
   a gslth:arenite ;
   gsoc:hasConstituent bol:Clay_matrix ;
-  gsoc:hasConstituent [
-	  a gspt:mineral_clast ;
-	  rdfs:label "feldspar grains, inline blank node example";
-	  gsoc:hasRole [a gsog:Clast] ;
-	  gsoc:hasQuality [
-		  a gsoc:Proportion ;
-		  gsoc:hasDataValue "40"^^xsd:decimal ;
-		  gsoc:hasUOM [a gsuom:percent ] ;
-		  rdfs:label "proportion of feldspar grains"@en ;
-		];
-	  gsoc:hasConstituent [
-		a gsmin:feldspar ;
-		  gsoc:hasConstituent [
-			  a gsel:calcium ;
-			] ;
-		  gsoc:hasConstituent [
-			  a gsel:oxygen ;
-			] ;
-		  gsoc:hasConstituent [
-			  a gsel:potassium ;
-			] ;
-		  gsoc:hasConstituent [
-			  a gsel:silicon ;
-			] ;
-		  gsoc:hasConstituent [
-			  a gsel:sodium ;
-			] ;
-		  rdfs:label "specific feldspar in this material"@en ;
-	  ] ;
-	  gsoc:hasQuality [
-		  a gslth:Grain_Size_Max ;
-		  gsoc:hasDataValue "5"^^xsd:decimal ;
-		  gsoc:hasUOM [
-			  a gsuom:millimeter ;
-			] ;
-		  rdfs:label "5 mm maximum"@en ;
-		] ;
-	  gsoc:hasQuality [
-		  a gslth:Grain_Size_Min ;
-		  gsoc:hasDataValue ".02"^^xsd:decimal ;
-		  gsoc:hasUOM [
-			  a gsuom:millimeter ;
-			] ;
-		  rdfs:label "0.02 mm minimum"@en ;
-		] ;	
-	  gsoc:hasQuality [
-		  a gslth:Grain_Shape ;
-		  gsoc:hasValue [
-			  a gsps:sub_angular ;
-			] ;
-		  rdfs:label "subangular grains"@en ;
-		] ;
-	  gsoc:hasQuality [
-		  a gslth:Grain_Shape ;
-		  gsoc:hasValue [
-			  a gsps:sub_rounded ;
-			] ;
-		  rdfs:label "subrounded grains"@en ;
-		] ;
-	  ] ;
   gsoc:hasConstituent bol:Quartz_grains ;
+  gsoc:hasConstituent [
+      a gspt:mineral_clast ;
+      gsoc:hasConstituent [
+          a gsmin:feldspar ;
+          gsoc:hasConstituent [
+              a gsel:calcium ;
+            ] ;
+          gsoc:hasConstituent [
+              a gsel:oxygen ;
+            ] ;
+          gsoc:hasConstituent [
+              a gsel:potassium ;
+            ] ;
+          gsoc:hasConstituent [
+              a gsel:silicon ;
+            ] ;
+          gsoc:hasConstituent [
+              a gsel:sodium ;
+            ] ;
+          rdfs:label "specific feldspar in this material"@en ;
+        ] ;
+      gsoc:hasQuality [
+          a gsoc:Proportion ;
+          gsoc:hasDataValue "40"^^xsd:decimal ;
+          gsoc:hasUOM [
+              a gsuom:percent ;
+            ] ;
+          rdfs:label "proportion of feldspar grains"@en ;
+        ] ;
+      gsoc:hasQuality [
+          a gslth:Grain_Roundness ;
+          gsoc:hasValue [
+              a gsps:sub_angular ;
+            ] ;
+          rdfs:label "subangular grains"@en ;
+        ] ;
+      gsoc:hasQuality [
+          a gslth:Grain_Roundness ;
+          gsoc:hasValue [
+              a gsps:sub_rounded ;
+            ] ;
+          rdfs:label "subrounded grains"@en ;
+        ] ;
+      gsoc:hasQuality [
+          a gslth:Grain_Size_Max ;
+          gsoc:hasDataValue "5"^^xsd:decimal ;
+          gsoc:hasUOM [
+              a gsuom:millimeter ;
+            ] ;
+          rdfs:label "5 mm maximum"@en ;
+        ] ;
+      gsoc:hasQuality [
+          a gslth:Grain_Size_Min ;
+          gsoc:hasDataValue .02 ;
+          gsoc:hasUOM [
+              a gsuom:millimeter ;
+            ] ;
+          rdfs:label "0.02 mm minimum"@en ;
+        ] ;
+      gsoc:hasRole [
+          a gsog:Clast ;
+        ] ;
+      rdfs:label "feldspar grains, inline blank node example" ;
+    ] ;
   gsoc:hasQuality [
       a gsop:Rock_Material_Color ;
       gsoc:hasValue <http://colors.org/maroonbrown> ;
@@ -133,41 +139,49 @@ bol:Bolsa_Quartzite_Material
 .
 bol:Clay_matrix
   a gsog:Granular_Material ;
-  gsoc:hasRole [a gsog:Matrix] ;
   a gspt:syngenetic_particle ;
-  gsoc:hasQuality [
-	  a gsoc:Proportion ;
-	  gsoc:hasDataValue "5"^^xsd:decimal ;
-	  gsoc:hasUOM [ a gsuom:percent ] ;
-   ] ;
   gsoc:hasConstituent [
       a gsmin:claymineral ;
     ] ;
   gsoc:hasQuality [
+      a gsoc:Proportion ;
+      gsoc:hasDataValue "5"^^xsd:decimal ;
+      gsoc:hasUOM [
+          a gsuom:percent ;
+        ] ;
+    ] ;
+  gsoc:hasQuality [
       a gslth:Grain_Size_Max ;
-      gsoc:hasDataValue "0.005"^^xsd:decimal ;
+      gsoc:hasDataValue 0.005 ;
       gsoc:hasUOM [
           a gsuom:millimeter ;
         ] ;
     ] ;
+  gsoc:hasRole [
+      a gsog:Matrix ;
+    ] ;
   rdfs:comment "Detrital clay-size fraction modified during diagensis"@en ;
   rdfs:label "Clay matrix constituent"@en ;
 .
-
-
 bol:Quartz_grains
   a gsog:Clastic_Granular_Material ;
   a gspt:mineral_clast ;
   gsoc:hasConstituent bol:Quartz_mineral ;
-  rdfs:label "Quartz grains in Bolsa_Quartzite_Material";
-  gsoc:hasRole [a gsog:Clast] ; 
-  
-  
   gsoc:hasQuality [
-    a gsoc:Proportion ;
-	  gsoc:hasDataValue "45"^^xsd:decimal ;
-	  gsoc:hasUOM [ a gsuom:percent ] ;
-  ];
+      a gsoc:Proportion ;
+      gsoc:hasDataValue "45"^^xsd:decimal ;
+      gsoc:hasUOM [
+          a gsuom:percent ;
+        ] ;
+    ] ;
+  gsoc:hasQuality [
+      a gslth:Grain_Roundness ;
+      gsoc:hasValue [
+          a gsps:rounded ;
+          a gsps:sub_rounded ;
+        ] ;
+      rdfs:label "subrounded to rounded grains"@en ;
+    ] ;
   gsoc:hasQuality [
       a gslth:Grain_Size_Average ;
       gsoc:hasDataValue "3"^^xsd:decimal ;
@@ -176,7 +190,7 @@ bol:Quartz_grains
           gsoc:determinedBy [
               a gsoc:First_Standard_Deviation_Calculation ;
             ] ;
-          gsoc:hasDataValue "0.06"^^xsd:decimal ;
+          gsoc:hasDataValue 0.06 ;
           gsoc:hasUOM [
               a gsuom:millimeter ;
             ] ;
@@ -188,25 +202,22 @@ bol:Quartz_grains
   gsoc:hasQuality [
       a gslth:Grain_Size_Max ;
       gsoc:hasDataValue "8"^^xsd:decimal ;
-      gsoc:hasUOM [ a gsuom:millimeter ];
-    ] ;
-  gsoc:hasQuality [
-      a gslth:Grain_Size_Min ;
-      gsoc:hasDataValue "0.05"^^xsd:decimal ;
       gsoc:hasUOM [
           a gsuom:millimeter ;
         ] ;
     ] ;
   gsoc:hasQuality [
-      a gslth:Grain_Shape ;
-      gsoc:hasValue [
-          a gsps:rounded ;
-          a gsps:sub_rounded ;
+      a gslth:Grain_Size_Min ;
+      gsoc:hasDataValue 0.05 ;
+      gsoc:hasUOM [
+          a gsuom:millimeter ;
         ] ;
-      rdfs:label "subrounded to rounded grains"@en ;
     ] ;
+  gsoc:hasRole [
+      a gsog:Clast ;
+    ] ;
+  rdfs:label "Quartz grains in Bolsa_Quartzite_Material" ;
 .
-
 bol:Quartz_mineral
   a gsmin:quartz ;
   gsoc:hasConstituent [
@@ -218,4 +229,3 @@ bol:Quartz_mineral
   rdfs:comment "include instance of mineral to describe particular physical character and composition of mineral in this material"@en ;
   rdfs:label "specific quartz in this material"@en ;
 .
-

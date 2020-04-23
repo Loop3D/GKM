@@ -1,4 +1,5 @@
 # baseURI: http://loop3d.org/GSO/ontology/2020/1/foldexample
+# imports: http://loop3d.org/GSO/ontology/2020/1/geologicquality/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/loop3dmaster
 # prefix: exfold
 
@@ -19,9 +20,9 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-
 <http://loop3d.org/GSO/ontology/2020/1/foldexample>
   a owl:Ontology ;
+  owl:imports <http://loop3d.org/GSO/ontology/2020/1/geologicquality/ontology> ;
   owl:imports <http://loop3d.org/GSO/ontology/2020/1/loop3dmaster> ;
   owl:versionIRI <http://loop3d.org/GSO/ontology/2020/1/foldexample> ;
 .
@@ -35,12 +36,16 @@ exfold:Fold_1
           gsoc:hasQuality [
               a gsop:Azimuth ;
               gsoc:hasDataValue "330"^^xsd:decimal ;
-			  gsoc:hasUOM [ a gsuom:degree  ] ;
+              gsoc:hasUOM [
+                  a gsuom:degree ;
+                ] ;
             ] ;
           gsoc:hasQuality [
               a gsop:Plunge ;
               gsoc:hasDataValue "33"^^xsd:decimal ;
-			  gsoc:hasUOM [ a gsuom:degree  ] ;
+              gsoc:hasUOM [
+                  a gsuom:degree ;
+                ] ;
             ] ;
         ] ;
       gsoc:hosts exfold:HingeSurface_1 ;
@@ -49,11 +54,13 @@ exfold:Fold_1
   gsoc:hasQuality [
       a gssf:Fold_Amplitude ;
       gsoc:hasDataValue "10"^^xsd:decimal ;
-      gsoc:hasUOM [ a gsuom:meter  ] ;
+      gsoc:hasUOM [
+          a gsuom:meter ;
+        ] ;
     ] ;
   gsoc:hasQuality [
       a gssf:Fold_Profile_Type ;
-	  gsoc:hasDataValue "antiform"@en ;
+      gsoc:hasDataValue "antiform"@en ;
     ] ;
   rdfs:comment "test fold properties"@en ;
   rdfs:label "is test fold"@en ;
@@ -65,16 +72,19 @@ exfold:HingeSurface_1
       gsoc:hasQuality [
           a gsop:Azimuth ;
           gsoc:hasDataValue "310"^^xsd:decimal ;
-		  gsoc:hasUOM [ a gsuom:degree  ] ;
+          gsoc:hasUOM [
+              a gsuom:degree ;
+            ] ;
         ] ;
       gsoc:hasQuality [
           a gsop:Dip ;
           gsoc:hasDataValue "78"^^xsd:decimal ;
-		  gsoc:hasUOM [ a gsuom:degree  ] ;
+          gsoc:hasUOM [
+              a gsuom:degree ;
+            ] ;
         ] ;
       gsop:Plane_Orientation_Convention [
           a gsop:Strike_Dip_RHR ;
         ] ;
     ] ;
 .
-
