@@ -54,21 +54,6 @@ gsoc:Glass
       owl:onProperty gsoc:isConstituentOf ;
     ] ;
 .
-
-:Separation
-  a owl:Class ;
-  rdfs:comment "a vector (magnitude and orientation) specifying the distance between the intersection of a surface on opposite sides of a displacment surface. In 3-D is the projection of a vector normal to the displaced surface into the displacment surface, but might also be specified as offset of the intersection of displacement surface and marker surface in some other profile view (e.g. horizontal/map view, or a cross section)"@en ;
-  rdfs:label "Separation"@en ;
-  rdfs:subClassOf :Displacement ;
-.
-
-:Slip
-  a owl:Class ;
-  rdfs:comment "a vector (magnitude and orientation) that links a peircing point on opposite sides of a displacement surface."@en ;
-  rdfs:label "Slip"@en ;
-  rdfs:subClassOf :Displacement ;
-.
-
 :Additive_Process
   a owl:Class ;
   rdfs:comment "process that introduces new matter into the model space"@en ;
@@ -151,7 +136,7 @@ gsoc:Glass
 .
 :Biogenic_Granular_Material
   a owl:Class ;
-  rdfs:comment "use to describe body fossil components in a fossiliferous rock, e.g. crinoid columnals, radiolaria in chert, ammonites, shell hash...."@en ;
+  rdfs:comment "Granular material that consistss of particles formed by the physiological activities of organisms (plants, animals, protozoa). Includes body parts that are incorporated into a sediment aggregate, as well as fecal pellets or coprolites.  Includes biogenic objects that are whole or fragmentary (bioclasts), can be fossilized or non-fossilized use to describe body fossil components in a fossiliferous rock, e.g. crinoid columnals, radiolaria in chert, ammonites, shell hash...."@en ;
   rdfs:subClassOf :Granular_Particle_Material ;
 .
 :Boundary_Stratotype
@@ -184,6 +169,7 @@ gsoc:Glass
 .
 :Clast
   a owl:Class ;
+  rdfs:comment "A role for any fragment of material that is a constituent in a rock material that formed by the accumulation of such fragments before lithification."@en ;
   rdfs:label "Clast"@en ;
   rdfs:subClassOf :Amount_Of_Matter_Role ;
 .
@@ -1166,6 +1152,12 @@ RBT (x) <--> RBD (x) ^ exists z forall y [(isPartOf (y,z) ^ hasHost (z,x)) -> (b
   rdfs:label "Sedimentary Structure  "@en ;
   rdfs:subClassOf :Geologic_Structure ;
 .
+:Separation
+  a owl:Class ;
+  rdfs:comment "a vector (magnitude and orientation) specifying the distance between the intersection of a surface on opposite sides of a displacment surface. In 3-D is the projection of a vector normal to the displaced surface into the displacment surface, but might also be specified as offset of the intersection of displacement surface and marker surface in some other profile view (e.g. horizontal/map view, or a cross section)"@en ;
+  rdfs:label "Separation"@en ;
+  rdfs:subClassOf :Displacement ;
+.
 :Series
   a owl:Class ;
   rdfs:subClassOf :Chronostratigraphic_Unit ;
@@ -1174,6 +1166,12 @@ RBT (x) <--> RBD (x) ^ exists z forall y [(isPartOf (y,z) ^ hasHost (z,x)) -> (b
       owl:onProperty gsoc:isReferenceFor ;
       owl:someValuesFrom :Epoch ;
     ] ;
+.
+:Slip
+  a owl:Class ;
+  rdfs:comment "a vector (magnitude and orientation) that links a peircing point on opposite sides of a displacement surface."@en ;
+  rdfs:label "Slip"@en ;
+  rdfs:subClassOf :Displacement ;
 .
 :Stage
   a owl:Class ;
@@ -1591,7 +1589,7 @@ RBT (x) <--> RBD (x) ^ exists z forall y [(isPartOf (y,z) ^ hasHost (z,x)) -> (b
   a owl:Ontology ;
   rdfs:comment "Base geologic feature classes, constraints, and relationships"@en ;
   owl:imports gsoc:ontology ;
-  owl:imports <http://loop3d.org/GSO/ontology/2020/1/geologicquality/ontology> ;
+  owl:imports gsop:ontology ;
 .
 :overlies
   a owl:ObjectProperty ;
