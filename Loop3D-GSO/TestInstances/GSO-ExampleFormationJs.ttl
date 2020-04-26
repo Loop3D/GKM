@@ -54,7 +54,7 @@ ejs:JsFormation
   rdfs:label "Js Formation"@en ;
 .
 ejs:JsFormation-lower
-  a gsog:Rock_Body_Part ;
+  a   gsrbp:stratigraphic_part ;
   gsoc:hasPart ejs:JsFormationMarker-6_4 ;
   gsoc:hasPart ejs:baseJs-6 ;
   gsoc:hasPart ejs:stratPart_1 ;
@@ -63,6 +63,26 @@ ejs:JsFormation-lower
   gsog:underlies ejs:JsFormation-upper ;
   rdfs:comment "underlies, overlies, within are subproperty of relatedTo"@en ;
 .
+
+ejs:JsFormation-upper
+  a   gsrbp:stratigraphic_part ;
+  rdsf:comment "massive limestone with abundant ammonites in a micrite matrix";
+  gsoc:hasConstituent [
+		a gslth:limestone; 
+		gsoc:hasConstituent [ 
+			a gspt:micrite; 
+			gsoc:hasRole gspt:Sedimentary_Matrix;
+			gsoc:hasConstituent [ a gsmin:calcite ]
+		]; 
+		gsoc:hasConstituent [
+			a gspt:material_fossil;
+			gsoc:hasRole gspt:Floating_Clast;
+			gsoc:hasSourceOrganism https://en.wikipedia.org/wiki/Ammonitida
+		]
+	]
+  .
+  
+  
 ejs:JsFormationMarker-6_4
   a gsrbp:marker_bed ;
   gsoc:hasConstituent <http://uri.org/Ballyloghlin_tuff> ;
