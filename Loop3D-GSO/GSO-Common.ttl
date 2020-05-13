@@ -7,14 +7,6 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-:hasSourceOrganism
-  a owl:ObjectProperty ;
-  rdfs:comment "relationship between a biogenic material or feature and the organism that produced the feature. For preserved body parts, relationship is direct; for trace fossil structures relationship is interpretive."@en ;
-  rdfs:label "Source organism "@en ;
-  rdfs:subPropertyOf :isFundamentallyRelatedTo ;
-.
-
-
 :Amount_Of_Matter
   a owl:Class ;
   rdfs:comment "The amount of matter type can be subdivided into [a volume] of (1) material (rock material), or (2) state of a material (solid, fluid), to enable designation of lumps of rock or lumps of fluid."@en ;
@@ -48,8 +40,6 @@
       owl:someValuesFrom :State_Of_Matter ;
     ] ;
 .
-
-
 :Calculation
   a owl:Class ;
   rdfs:comment "A determination of the value of some property using analytical methods and other data input "@en ;
@@ -816,6 +806,7 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
 .
 :age_interval_contains
   a owl:ObjectProperty ;
+  a owl:TransitiveProperty ;
   rdfs:comment "target interval is completely within the source interval; source begins before target and ends after target. inverse of During"@en ;
   rdfs:label "age interval contains"@en ;
   rdfs:subPropertyOf :isTemporallyRelatedTo ;
@@ -1101,6 +1092,12 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   a owl:ObjectProperty ;
   a owl:TransitiveProperty ;
   rdfs:subPropertyOf :isFundamentallyRelatedTo ;
+.
+:isDerivedFrom
+  a owl:ObjectProperty ;
+  rdfs:comment "relationship between a biogenic material or feature and the organism that produced the feature. For preserved body parts, relationship is direct; for trace fossil structures relationship is interpretive."@en ;
+  rdfs:label "Source organism "@en ;
+  rdfs:subPropertyOf :hasPrecursor ;
 .
 :isFundamentallyRelatedTo
   a owl:ObjectProperty ;
