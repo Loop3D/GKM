@@ -173,6 +173,18 @@ gsoc:Glass
   rdfs:label "Clast"@en ;
   rdfs:subClassOf :Amount_Of_Matter_Role ;
 .
+:Clast_Imbrication
+  a owl:Class ;
+  rdfs:comment "" ;
+  rdfs:label "Clast imbrication "@en ;
+  rdfs:subClassOf :Sedimentary_Fabric ;
+.
+:Clast_Supported
+  a owl:Class ;
+  rdfs:comment "" ;
+  rdfs:label "Clast supported "@en ;
+  rdfs:subClassOf :Sedimentary_Fabric ;
+.
 :Clastic_Granular_Material
   a owl:Class ;
   rdfs:comment "Use for clastic sedimentary components --conglomerate clast types, sand components, clay matrix. Also for deformation-producted clasts in tectonic breccia."@en ;
@@ -263,19 +275,18 @@ Contact(x) <--> exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RB
   rdfs:label "crystal constituent "@en ;
   rdfs:subClassOf :Amount_Of_Matter_Role ;
 .
-:Crystal_Preferred_Orientation
-  a owl:Class ;
-  rdfs:comment "Fabric defined by preferred crystallographic or grain shape orientation in a rock material."@en ;
-  rdfs:label "preferred orientation "@en ;
-  rdfs:subClassOf gsoc:Integral_Feature ;
-  rdfs:subClassOf :Geologic_Structure ;
-.
 :Crystallized_Particle_Material
   a owl:Class ;
   rdfs:comment "Constituent particles/grains that are the product of crystallization during formation of a rock material (see NADMC1 2004). Serves to distinguish crystalline from granular rocks (Struik, 2002). Includes constituents crystallized in evaporite environments, during diagenesis or hydrothermal alteration, or in other low-temperature environments."@en ;
   rdfs:comment "particle material is distinguished from a particle in an 'amount of matter role' in that if a 'material' is removed from its rock context, it is still identifiable as that material, whereas identifying a particle in a role requires knowing the rock context for the particle-- if it is removed from the rock it just becomes some particle."@en ;
   rdfs:comment "use to describe crystalline grain types in igneous, metamorphic and metasomatic rocks, e.g. the plagioclase phenocrysts, groundmass quartz, biotite phenocrysts, Andalusite porphyroblasts..."@en ;
   rdfs:subClassOf :Granular_Material ;
+.
+:Crystallographic_Preferred_Orientation_
+  a owl:Class ;
+  rdfs:comment "fabric defined by a preferred orientation of the crystallographic axes of mineral particles in a rock."@en ;
+  rdfs:label "Crystallographic preferred orientation "@en ;
+  rdfs:subClassOf :Particle_Preferred_Orientation ;
 .
 :Deformation
   a owl:Class ;
@@ -460,8 +471,7 @@ Contact(x) <--> exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RB
   rdfs:comment "Fabric defined by the planar arrangement of textural or structural features (fabric elements)."@en ;
   rdfs:comment "dct:source--  Jackson 1997"@en ;
   rdfs:label "Foliation"@en ;
-  rdfs:subClassOf gsoc:Integral_Feature ;
-  rdfs:subClassOf :Geologic_Structure ;
+  rdfs:subClassOf :Lithologic_Fabric ;
 .
 :Formation
   a owl:Class ;
@@ -733,6 +743,12 @@ Probably should specify a Temporal Reference System used to assign coordinate va
       owl:someValuesFrom :Contact ;
     ] ;
 .
+:Graded_Bedding
+  a owl:Class ;
+  rdfs:comment "" ;
+  rdfs:label "Graded bedding "@en ;
+  rdfs:subClassOf :Sedimentary_Fabric ;
+.
 :Granular_Material
   a owl:Class ;
   rdfs:comment "A rock body constituent consisting of particles that share a set of characteristics, e.g. genesis, particle size (distribution), mineralogy, shape.  For example. the sand that is a constituent in a sandstone, or the feldspar phenocrysts that are a constituent in a granite."@en ;
@@ -822,8 +838,15 @@ Probably should specify a Temporal Reference System used to assign coordinate va
   rdfs:comment "Nongenetic term for a penetrative linear structure."@en ;
   rdfs:comment "dct:source--  Neuendorf et al 2005, CGI lineationtype SKOS vocabulary 2016-11-21"@en ;
   rdfs:label "Lineation"@en ;
+  rdfs:subClassOf :Lithologic_Fabric ;
+.
+:Lithologic_Fabric
+  a owl:Class ;
+  rdfs:comment "The spatial and geometric configuration of all the elements that make it up. Describes the shape and characteristics of individual parts of a rock and the manner in which the parts are distributed and oriented. In sedimentary rocks, the fabric developed depends on the depositional environment and can provide information on current directions at the time of deposition. In structural geology, fabrics may provide information on both the orientation and magnitude of the strains that have affected a particular piece of deformed rock."@en ;
+  rdfs:comment """dct:source--  Hobbs BE, Means WD, & Williams PF. (1976). An outline of structural geology. John Wiley & sons, p.73.
+ Twiss RJ and Moores EM. (2007). Structural Geology, 2nd Edition, WH Freeman and Co., p.497; Wikipedia https://en.wikipedia.org/wiki/Fabric_(geology); Neuendorf et al., 2005, AGI Glossary of Geology; Sander, 1930."""@en ;
+  rdfs:label "Fabric "@en ;
   rdfs:subClassOf gsoc:Integral_Feature ;
-  rdfs:subClassOf :Geologic_Structure ;
 .
 :Lithosome
   a owl:Class ;
@@ -857,6 +880,12 @@ Probably should specify a Temporal Reference System used to assign coordinate va
   rdfs:comment "Material in which something is enclosed or embedded (3b, https://www.merriam-webster.com/dictionary/matrix)"@en ;
   rdfs:label "Matrix"@en ;
   rdfs:subClassOf :Amount_Of_Matter_Role ;
+.
+:Matrix_Supported
+  a owl:Class ;
+  rdfs:comment "" ;
+  rdfs:label "Matrix supported "@en ;
+  rdfs:subClassOf :Sedimentary_Fabric ;
 .
 :Member
   a owl:Class ;
@@ -949,6 +978,18 @@ Probably should specify a Temporal Reference System used to assign coordinate va
       owl:onProperty gsoc:covers ;
       owl:someValuesFrom :Granular_Material ;
     ] ;
+.
+:Particle_Preferred_Orientation
+  a owl:Class ;
+  rdfs:comment "Fabric defined by preferred crystallographic or grain shape orientation in a rock material."@en ;
+  rdfs:label "preferred orientation "@en ;
+  rdfs:subClassOf :Lithologic_Fabric ;
+.
+:Particle_Shape_Fabric
+  a owl:Class ;
+  rdfs:comment "Fabric defined by alignment of the dimensional axes of prolate or oblate particles in a rock. The fabric might result from primary depositional or crystallization process, or from subsequent deformation"@en ;
+  rdfs:label "Particle shape fabric "@en ;
+  rdfs:subClassOf :Particle_Preferred_Orientation ;
 .
 :Pendant
   a owl:Class ;
@@ -1143,8 +1184,7 @@ RBT (x) <--> RBD (x) ^ exists z forall y [(isPartOf (y,z) ^ hasHost (z,x)) -> (b
   a owl:Class ;
   rdfs:comment "Fabrics in sedimentary rock like \"clast-supported\",  \"matrix-supported\", \"cross-bedding\", and \"graded bed\" are considered kinds of Integral Feature/GeologicStructure because they depend on the configuration of parts of a rock body."@en ;
   rdfs:label "Sedimentary Fabric  "@en ;
-  rdfs:subClassOf gsoc:Integral_Feature ;
-  rdfs:subClassOf :Sedimentary_Structure ;
+  rdfs:subClassOf :Lithologic_Fabric ;
 .
 :Sedimentary_Structure
   a owl:Class ;
@@ -1523,9 +1563,10 @@ RBT (x) <--> RBD (x) ^ exists z forall y [(isPartOf (y,z) ^ hasHost (z,x)) -> (b
 :isPartOfTimeScale
   a owl:ObjectProperty ;
   rdfs:comment "object property linking a time interval to a time scale. This relation is not transitive"@en ;
+  rdfs:domain gsoc:Time_Region ;
   rdfs:label "in Time Scale "@en ;
   rdfs:range :Geologic_Time_Scale ;
-  rdfs:subPropertyOf gsoc:isFundamentallyRelatedTo ;
+  rdfs:subPropertyOf gsoc:isPartOf ;
 .
 :isTransformedFrom
   a owl:ObjectProperty ;
@@ -1533,7 +1574,7 @@ RBT (x) <--> RBD (x) ^ exists z forall y [(isPartOf (y,z) ^ hasHost (z,x)) -> (b
   rdfs:domain :Rock_Material ;
   rdfs:label "has protolith"@en ;
   rdfs:range :Rock_Material ;
-  rdfs:subPropertyOf :isGeologicallyRelatedTo ;
+  rdfs:subPropertyOf gsoc:hasPrecursor ;
 .
 :isTransformedInto
   a owl:ObjectProperty ;
@@ -1541,7 +1582,7 @@ RBT (x) <--> RBD (x) ^ exists z forall y [(isPartOf (y,z) ^ hasHost (z,x)) -> (b
   rdfs:domain :Rock_Material ;
   rdfs:label "protolith of"@en ;
   rdfs:range :Rock_Material ;
-  rdfs:subPropertyOf :isGeologicallyRelatedTo ;
+  rdfs:subPropertyOf gsoc:isFundamentallyRelatedTo ;
 .
 :lithophysae
   a owl:Class ;
@@ -1669,18 +1710,9 @@ RBT (x) <--> RBD (x) ^ exists z forall y [(isPartOf (y,z) ^ hasHost (z,x)) -> (b
 gspr:Ductile_Flow
   a owl:Class ;
 .
-gsop:hasInput
-  a owl:ObjectProperty ;
-.
-gsop:hasOutput
-  a owl:ObjectProperty ;
-.
 owl:maxQualifiedCardinality
   a owl:AnnotationProperty ;
 .
 owl:qualifiedCardinality
   a owl:AnnotationProperty ;
 .
-[
-  owl:maxQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
-].
