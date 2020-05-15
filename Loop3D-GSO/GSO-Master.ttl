@@ -45,66 +45,8 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-gsoc:hasPrecursor
-  a owl:ObjectProperty ;
-  rdfs:comment "association from an endurant to some other endurant from which it was derived. Relates metamorphic rock to protolith, fossil to living organism." ;
-  rdfs:label "precursor "@en ;
-  rdfs:subPropertyOf gsoc:isFundamentallyRelatedTo ;
-.
-gsop:Alteration_Degree
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom [
-          a owl:Class ;
-          owl:unionOf [
-              a rdf:List ;
-              rdf:first gsog:Geologic_Unit ;
-              rdf:rest [
-                  a rdf:List ;
-                  rdf:first gsog:Rock_Material ;
-                  rdf:rest () ;
-                ] ;
-            ] ;
-        ] ;
-      owl:onProperty gsoc:isQualityOf ;
-    ] ;
-.
-gsop:Alteration_Distribution
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom [
-          a owl:Class ;
-          owl:unionOf [
-              a rdf:List ;
-              rdf:first gsog:Geologic_Unit ;
-              rdf:rest [
-                  a rdf:List ;
-                  rdf:first gsog:Rock_Material ;
-                  rdf:rest () ;
-                ] ;
-            ] ;
-        ] ;
-      owl:onProperty gsoc:isQualityOf ;
-    ] ;
-.
-gsop:Alteration_Type
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom [
-          a owl:Class ;
-          owl:unionOf [
-              a rdf:List ;
-              rdf:first gsog:Geologic_Unit ;
-              rdf:rest [
-                  a rdf:List ;
-                  rdf:first gsog:Rock_Material ;
-                  rdf:rest () ;
-                ] ;
-            ] ;
-        ] ;
-      owl:onProperty gsoc:isQualityOf ;
-    ] ;
-.
+
+
 <http://loop3d.org/GSO/ontology/2020/1/loop3dmaster>
   a owl:Ontology ;
   rdfs:comment "This is a shell to import all the various peices needed for geologic instances."@en ;
@@ -126,10 +68,4 @@ gsop:Alteration_Type
   owl:imports gsar:ontology ;
   owl:imports gsmin:ontology ;
   owl:imports gsuom:ontology ;
-.
-<http://loop3d.org/GSO/ontology/2020/1/metamorphicgrade/metamorphosed>
-  rdfs:subClassOf gsop:Metamorphic_Grade ;
-.
-<http://loop3d.org/GSO/ontology/2020/1/metamorphicgrade/not_metamorphosed>
-  rdfs:subClassOf gsop:Metamorphic_Grade ;
 .

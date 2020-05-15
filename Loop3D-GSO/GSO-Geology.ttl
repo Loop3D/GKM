@@ -12,7 +12,65 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
+#domain and range restrictions on classes from other modules that use gsog: namespace elements are defined here
+
+gsop:Alteration_Degree
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom [
+          a owl:Class ;
+          owl:unionOf [
+              a rdf:List ;
+              rdf:first :Geologic_Unit ;
+              rdf:rest [
+                  a rdf:List ;
+                  rdf:first :Rock_Material ;
+                  rdf:rest () ;
+                ] ;
+            ] ;
+        ] ;
+      owl:onProperty gsoc:isQualityOf ;
+    ] ;
+.
+gsop:Alteration_Distribution
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom [
+          a owl:Class ;
+          owl:unionOf [
+              a rdf:List ;
+              rdf:first :Geologic_Unit ;
+              rdf:rest [
+                  a rdf:List ;
+                  rdf:first :Rock_Material ;
+                  rdf:rest () ;
+                ] ;
+            ] ;
+        ] ;
+      owl:onProperty gsoc:isQualityOf ;
+    ] ;
+.
+gsop:Alteration_Type
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom [
+          a owl:Class ;
+          owl:unionOf [
+              a rdf:List ;
+              rdf:first :Geologic_Unit ;
+              rdf:rest [
+                  a rdf:List ;
+                  rdf:first :Rock_Material ;
+                  rdf:rest () ;
+                ] ;
+            ] ;
+        ] ;
+      owl:onProperty gsoc:isQualityOf ;
+    ] ;
+.
+
 gsoc:Element
+  rdfs:comment "isConstituentOf range restriction to gsog:Mineral, gsog:Rock and gsog:Granular_Material are defined in Geology module"@en ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom [
@@ -35,8 +93,7 @@ gsoc:Element
     ] ;
 .
 gsoc:Glass
-  a owl:Class ;
-  rdfs:comment "Amorphous product of rapid cooling of melted earth material. Generally product of igneous activity, frictional melting or bolide impact."@en ;
+  rdfs:comment "isConstituentOf range restriction to gsog:Rock and gsog:Granular_Material are defined in Geology module"@en ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom [
@@ -54,6 +111,9 @@ gsoc:Glass
       owl:onProperty gsoc:isConstituentOf ;
     ] ;
 .
+
+# gsog: namespace classes
+
 :Additive_Process
   a owl:Class ;
   rdfs:comment "process that introduces new matter into the model space"@en ;
@@ -1350,12 +1410,12 @@ RBT (x) <--> RBD (x) ^ exists z forall y [(isPartOf (y,z) ^ hasHost (z,x)) -> (b
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom gsoc:Amount_Of_Matter ;
-      owl:onProperty gsop:hasInput ;
+      owl:onProperty gsoc:hasInput ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom gsoc:Amount_Of_Matter ;
-      owl:onProperty gsop:hasOutput ;
+      owl:onProperty gsoc:hasOutput ;
     ] ;
 .
 :Volcanic_Glass
@@ -1701,10 +1761,4 @@ RBT (x) <--> RBD (x) ^ exists z forall y [(isPartOf (y,z) ^ hasHost (z,x)) -> (b
 .
 gspr:Ductile_Flow
   a owl:Class ;
-.
-owl:maxQualifiedCardinality
-  a owl:AnnotationProperty ;
-.
-owl:qualifiedCardinality
-  a owl:AnnotationProperty ;
 .
