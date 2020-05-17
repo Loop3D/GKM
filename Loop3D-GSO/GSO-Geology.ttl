@@ -4,7 +4,7 @@
 
 @prefix : <http://loop3d.org/GSO/ontology/2020/1/geologicfeature/> .
 @prefix gsoc: <http://loop3d.org/GSO/ontology/2020/1/common/> .
-@prefix gsop: <http://loop3d.org/GSO/ontology/2020/1/geologicquality/> .
+@prefix gsoq: <http://loop3d.org/GSO/ontology/2020/1/geologicquality/> .
 @prefix gspr: <http://loop3d.org/GSO/ontology/2020/1/geologicprocess/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -192,6 +192,7 @@ gsoc:Glass
 .
 :Complex
   a owl:Class ;
+  rdfs:comment "A lithostratigraphic unit composed of diverse types of any class or classes or rocks (sedimentary, igneous, metamorphic) and characterized by irregularly mixed lithology or by highly complicated structural relations. https://stratigraphy.org/guide/litho ."@en ;
   rdfs:label "Complex"@en ;
   rdfs:subClassOf :Lithostratigraphic_Unit ;
   rdfs:subClassOf [
@@ -328,7 +329,7 @@ Contact(x) <--> exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RB
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty gsoc:hasQuality ;
-      owl:someValuesFrom gsop:Thickness ;
+      owl:someValuesFrom gsoq:Thickness ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
@@ -740,7 +741,7 @@ Probably should specify a Temporal Reference System used to assign coordinate va
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty gsoc:hasQuality ;
-      owl:someValuesFrom gsop:Thickness ;
+      owl:someValuesFrom gsoq:Thickness ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
@@ -1627,7 +1628,7 @@ RBT (x) <--> RBD (x) ^ exists z forall y [(isPartOf (y,z) ^ hasHost (z,x)) -> (b
   a owl:Ontology ;
   rdfs:comment "Base geologic feature classes, constraints, and relationships"@en ;
   owl:imports gsoc:ontology ;
-  owl:imports gsop:ontology ;
+  owl:imports gsoq:ontology ;
 .
 :overlies
   a owl:ObjectProperty ;
@@ -1707,7 +1708,7 @@ RBT (x) <--> RBD (x) ^ exists z forall y [(isPartOf (y,z) ^ hasHost (z,x)) -> (b
 gspr:Ductile_Flow
   a owl:Class ;
 .
-gsop:Alteration_Degree
+gsoq:Alteration_Degree
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom [
@@ -1725,7 +1726,7 @@ gsop:Alteration_Degree
       owl:onProperty gsoc:isQualityOf ;
     ] ;
 .
-gsop:Alteration_Distribution
+gsoq:Alteration_Distribution
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom [
@@ -1743,7 +1744,7 @@ gsop:Alteration_Distribution
       owl:onProperty gsoc:isQualityOf ;
     ] ;
 .
-gsop:Alteration_Type
+gsoq:Alteration_Type
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom [
