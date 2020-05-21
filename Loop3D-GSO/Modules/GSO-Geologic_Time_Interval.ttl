@@ -12,6 +12,22 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
+gsoc:age_interval_contains
+  rdfs:domain gsoc:Time_Interval ;
+.
+gsoc:age_interval_in
+  rdfs:range gsog:Geologic_Time_Interval ;
+.
+gsog:Eon
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom [
+          a owl:Class ;
+          owl:complementOf gsog:Supereon ;
+        ] ;
+      owl:onProperty gsoc:age_interval_contains ;
+    ] ;
+.
 gstime:Aalenian
   a gsog:Age_Rank ;
   gsoc:age_starts gstime:MiddleJurassic ;
@@ -371,7 +387,7 @@ gstime:BaseAeronian
     ] ;
   gsoc:isPartOf gstime:isc2017-02 ;
   gsoc:isPartOf gstime:isc2020-01 ;
-  gsog:hasDate "440.8"^^xsd:decimal ;
+  gsog:hasDate 440.8 ;
   rdfs:label "Base of Aeronian"@en ;
 .
 gstime:BaseAeronian2004
