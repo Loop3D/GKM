@@ -11,8 +11,6 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-
-
 gsoq:Alteration_Degree
   a owl:Class ;
   rdfs:comment "Specification of the strength of observed alteration. Can be used on Geologic_Unit or Rock_Material"@en ;
@@ -48,6 +46,17 @@ gsoq:Azimuth
       a owl:Restriction ;
       owl:onProperty gsoc:hasQuality ;
       owl:someValuesFrom gsoc:Unit_of_Measure ;
+    ] ;
+.
+gsoq:Density
+  a owl:Class ;
+  rdfs:comment "The mass per unit volume of an Amount of Matter"@en ;
+  rdfs:label "Density "@en ;
+  rdfs:subClassOf gsoc:Quality ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom gsoc:Amount_Of_Matter ;
+      owl:onProperty gsoc:isQualityOf ;
     ] ;
 .
 gsoq:Dip
@@ -86,6 +95,18 @@ gsoq:Line_Orientation
       a owl:Restriction ;
       owl:onProperty gsoc:hasQuality ;
       owl:someValuesFrom gsoq:Plunge ;
+    ] ;
+.
+gsoq:Magnetic_Susceptibility
+  a owl:Class ;
+  rdfs:comment "a measure of how much a material will become magnetized in an applied magnetic field. It is the ratio of magnetization M (magnetic moment per unit volume) to the applied magnetizing field intensity H. This allows a simple classification, into two categories, of most materials' responses to an applied magnetic field: an alignment with the magnetic field, χ > 0, called paramagnetism, or an alignment against the field, χ < 0, called diamagnetism."@en ;
+  rdfs:comment "dct:source -- https://en.wikipedia.org/wiki/Magnetic_susceptibility" ;
+  rdfs:label "Magnetic susceptibility "@en ;
+  rdfs:subClassOf gsoc:Quality ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom gsoc:Amount_Of_Matter ;
+      owl:onProperty gsoc:isQualityOf ;
     ] ;
 .
 gsoq:Metamorphic_Facies
