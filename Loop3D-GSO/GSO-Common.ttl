@@ -7,14 +7,6 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-
-:hasPrecursor
-  a owl:ObjectProperty ;
-  rdfs:comment "association from an endurant to some other endurant from which it was derived. Relates metamorphic rock to protolith, fossil to living organism." ;
-  rdfs:label "precursor "@en ;
-  rdfs:subPropertyOf :isFundamentallyRelatedTo ;
-.
-
 :Amount_Of_Matter
   a owl:Class ;
   rdfs:comment "The amount of matter type can be subdivided into [a volume] of (1) material (rock material), or (2) state of a material (solid, fluid), to enable designation of lumps of rock or lumps of fluid."@en ;
@@ -176,7 +168,7 @@
 .
 :Feature
   a owl:Class ;
-  rdfs:comment "A feature is an  Endurant that is ontologically dependent on at least one host  Endurant and a focal entity that are related by some essential relation. The identity of a feature is distinct from the identity of its host. Dependency on the host through is a hosting relation that holds between the Feature and at least one other distinct particular individual Endurant, the host. A feature is specifically dependent on its host. A feature can be either specifically or generically dependent on a  focal entity (e.g. knot in string). The focal is some spatially located individual Endurant that participates in the essential relation on which the feature ontologically depends. The focal entities are in sum spatially co-located with the feature at any time the feature exists."@en ;
+  rdfs:comment "A feature is an Endurant that is ontologically dependent on at least one Endurant that is its host,  and on a focal entity that is related by some essential relation. The identity of a feature is distinct from the identity of its host. Dependency on the host through is a hosting relation that holds between the Feature and at least one other distinct particular individual Endurant, the host. A feature is specifically dependent on its host. A feature can be either specifically or generically dependent on a  focal entity (e.g. knot in string). The focal is some spatially located individual Endurant that participates in the essential relation on which the feature ontologically depends. The focal entities are in sum spatially co-located with the feature at any time the feature exists."@en ;
   rdfs:label "Feature"@en ;
   rdfs:subClassOf :Endurant ;
   rdfs:subClassOf [
@@ -325,6 +317,12 @@ Need SHACL rule that count Inherant.isPartOf = 0"""@en ;
   rdfs:label "Mean Value Calculation"@en ;
   rdfs:subClassOf :Statistical_Calculation ;
 .
+:Measurement_Activity
+  a owl:Class ;
+  rdfs:comment "A process by which the value of some property or quality of an entity is determined.  Conceptually a subclass of prov:Activity."@en ;
+  rdfs:label "Measurement activity "@en ;
+  rdfs:subClassOf :Process ;
+.
 :Minimum_Value_Calculation
   a owl:Class ;
   rdfs:comment "report a minimum value for a value range "@en ;
@@ -345,7 +343,7 @@ Need SHACL rule that count Inherant.isPartOf = 0"""@en ;
 .
 :Observation
   a owl:Class ;
-  rdfs:comment "A direct determination of the value of some property "@en ;
+  rdfs:comment "An event that results in the direct determination of the value of some property; typically will haveConstituent relation so a Measurement_Activity that describes the observation process."@en ;
   rdfs:label "Observation "@en ;
   rdfs:subClassOf :Determining_Event ;
 .
@@ -1005,6 +1003,12 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   a owl:ObjectProperty ;
   rdfs:subPropertyOf :isFundamentallyRelatedTo ;
   owl:inverseOf :isParticipantIn ;
+.
+:hasPrecursor
+  a owl:ObjectProperty ;
+  rdfs:comment "association from an endurant to some other endurant from which it was derived. Relates metamorphic rock to protolith, fossil to living organism." ;
+  rdfs:label "precursor "@en ;
+  rdfs:subPropertyOf :isFundamentallyRelatedTo ;
 .
 :hasQuality
   a owl:ObjectProperty ;
