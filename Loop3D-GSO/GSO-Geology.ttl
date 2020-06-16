@@ -434,6 +434,22 @@ Contact(x) <--> exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RB
       owl:someValuesFrom :Era ;
     ] ;
 .
+:Fabric
+  a owl:Class ;
+  rdfs:comment "A spatial or geometric arrangement of parts of a rock body or features within the rock body that is present throughout the body."@en ;
+  rdfs:label "Fabric "@en ;
+  rdfs:subClassOf gsoc:Quality ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom :Rock_Body ;
+      owl:onProperty gsoc:isQualityOf ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasValue ;
+      owl:someValuesFrom gsoc:Integral_Feature ;
+    ] ;
+.
 :Facies
   a owl:Class ;
   rdfs:comment "Represents a particular body of rock that is a lateral variant of a lithostratigraphic unit, or a variant of a lithodemic unit. Contrast with lithosome in being a particular, connected body of rock, as opposed to a kind of rock body that is repeated in many places in a unit."@en ;
