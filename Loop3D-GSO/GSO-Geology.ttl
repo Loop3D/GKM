@@ -41,6 +41,30 @@ gsoc:Glass
       owl:onProperty gsoc:isConstituentOf ;
     ] ;
 .
+
+:Alteration_Degree
+  a owl:Class ;
+  rdfs:comment "Specification of the strength of observed alteration. Can be used on Geologic_Unit or Rock_Material"@en ;
+  rdfs:isDefinedBy "GeoSciML v4"@en ;
+  rdfs:label "Alteration degree"@en ;
+  rdfs:subClassOf gsoc:Quality ;
+.
+:Alteration_Distribution
+  a owl:Class ;
+  rdfs:comment "AlterationDistribution describes the spatial distribution or geometry of alteration zones. eg: patchy, spotted, banded, viens, vein breccia, pervasive, disseminated, etc"@en ;
+  rdfs:isDefinedBy "GeoSciML v4"@en ;
+  rdfs:label "Alteration distribution"@en ;
+  rdfs:subClassOf gsoc:Quality ;
+.
+:Alteration_Type
+  a owl:Class ;
+  rdfs:comment "Specification of alteration types (eg; potassic, argillic, advanced argillic)"@en ;
+  rdfs:isDefinedBy "GeoSciML v4"@en ;
+  rdfs:label "Alteration type"@en ;
+  rdfs:subClassOf gsoc:Quality ;
+.
+
+
 :Additive_Process
   a owl:Class ;
   rdfs:comment "process that introduces new matter into the model space"@en ;
@@ -1698,7 +1722,7 @@ RBT (x) <--> RBD (x) ^ exists z forall y [(isPartOf (y,z) ^ hasHost (z,x)) -> (b
 gspr:Ductile_Flow
   a owl:Class ;
 .
-gsoq:Alteration_Degree
+:Alteration_Degree
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom [
@@ -1711,7 +1735,7 @@ gsoq:Alteration_Degree
       owl:onProperty gsoc:isQualityOf ;
     ] ;
 .
-gsoq:Alteration_Distribution
+:Alteration_Distribution
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom [
@@ -1724,7 +1748,7 @@ gsoq:Alteration_Distribution
       owl:onProperty gsoc:isQualityOf ;
     ] ;
 .
-gsoq:Alteration_Type
+:Alteration_Type
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom [
