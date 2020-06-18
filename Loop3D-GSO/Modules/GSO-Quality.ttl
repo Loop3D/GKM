@@ -11,7 +11,6 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-
 gsoq:Azimuth
   a owl:Class ;
   rdfs:comment "Bearing of a horizontal line relative to north. Use for specifying the orientation of planar features."@en ;
@@ -37,6 +36,22 @@ gsoq:Density
       a owl:Restriction ;
       owl:allValuesFrom gsoc:Amount_Of_Matter ;
       owl:onProperty gsoc:isQualityOf ;
+    ] ;
+.
+gsoq:Diameter
+  a owl:Class ;
+  rdfs:comment "The (approximate) average length of line segments that pass through the center of an object and whose endpoints lie on the outside boundary of the object. Use to characterize the size of a broadly spheroidal object like a pluton or a rock sample."@en ;
+  rdfs:label "Diameter "@en ;
+  rdfs:subClassOf gsoc:Quality ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom xsd:decimal ;
+      owl:onProperty gsoc:hasDataValue ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasQuality ;
+      owl:someValuesFrom gsoc:Unit_of_Measure ;
     ] ;
 .
 gsoq:Dip
