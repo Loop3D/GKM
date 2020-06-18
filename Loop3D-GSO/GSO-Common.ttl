@@ -65,7 +65,7 @@
 .
 :Determining_Event
   a owl:Class ;
-  rdfs:comment "An observation, calculation, or inference envent used to determine the value of one or more properties. The suggested hook here is to use PROV and or SOSA vocabulary to populate Determining_Event subclasses."@en ;
+  rdfs:comment "An event responsible for the origing of some particular.  For qualities, an observation, calculation, or inference event used to determine the value of one or more qualities. The suggested hook here is to use PROV and or SOSA vocabulary to populate Determining_Event subclasses."@en ;
   rdfs:label "Determining Event "@en ;
   rdfs:subClassOf :Event ;
 .
@@ -568,7 +568,7 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
 .
 :Shape
   a owl:Class ;
-  rdfs:comment "Property to specify the shape of an object. Lots of possible property spaces under this, e.g. (in geology) roundness, sphericity, aspect ratio. These are implemented as separate properties linked to gsoc:Shape via isQualityOf"@en ;
+  rdfs:comment "Property to specify the shape of an object. Lots of possible property spaces under this, e.g. (in geology) roundness, sphericity, aspect ratio. These are implemented as separate properties linked to gsoc:Shape via hasQuality"@en ;
   rdfs:label "Shape Property"@en ;
   rdfs:subClassOf :Quality ;
 .
@@ -627,7 +627,7 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
 .
 :Spatial_Location
   a owl:Class ;
-  rdfs:comment "A physical property that spacifies the position of an entity relative to some spatial reference system."@en ;
+  rdfs:comment "A physical property that specifies the position of an entity relative to some spatial reference system. Details of how locations should be specified for GSO remain to be resolved. For now use WKT strings (ogc:WKTLiteral, https://www.w3.org/2011/02/GeoSPARQL.pdf)  as data values."@en ;
   rdfs:label "Spatial Location"@en ;
   rdfs:subClassOf :Quality ;
   rdfs:subClassOf [
