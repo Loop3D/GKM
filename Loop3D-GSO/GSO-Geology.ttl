@@ -41,30 +41,6 @@ gsoc:Glass
       owl:onProperty gsoc:isConstituentOf ;
     ] ;
 .
-
-:Alteration_Degree
-  a owl:Class ;
-  rdfs:comment "Specification of the strength of observed alteration. Can be used on Geologic_Unit or Rock_Material"@en ;
-  rdfs:isDefinedBy "GeoSciML v4"@en ;
-  rdfs:label "Alteration degree"@en ;
-  rdfs:subClassOf gsoc:Quality ;
-.
-:Alteration_Distribution
-  a owl:Class ;
-  rdfs:comment "AlterationDistribution describes the spatial distribution or geometry of alteration zones. eg: patchy, spotted, banded, viens, vein breccia, pervasive, disseminated, etc"@en ;
-  rdfs:isDefinedBy "GeoSciML v4"@en ;
-  rdfs:label "Alteration distribution"@en ;
-  rdfs:subClassOf gsoc:Quality ;
-.
-:Alteration_Type
-  a owl:Class ;
-  rdfs:comment "Specification of alteration types (eg; potassic, argillic, advanced argillic)"@en ;
-  rdfs:isDefinedBy "GeoSciML v4"@en ;
-  rdfs:label "Alteration type"@en ;
-  rdfs:subClassOf gsoc:Quality ;
-.
-
-
 :Additive_Process
   a owl:Class ;
   rdfs:comment "process that introduces new matter into the model space"@en ;
@@ -96,6 +72,60 @@ gsoc:Glass
   rdfs:comment "dct:source--  CGI GTWG ParticleType vocabulary"@en ;
   rdfs:label "Aggregate non clastic particle"@en ;
   rdfs:subClassOf :Crystallized_Particle_Material ;
+.
+:Alteration_Degree
+  a owl:Class ;
+  rdfs:comment "Specification of the strength of observed alteration. Can be used on Geologic_Unit or Rock_Material"@en ;
+  rdfs:isDefinedBy "GeoSciML v4"@en ;
+  rdfs:label "Alteration degree"@en ;
+  rdfs:subClassOf gsoc:Quality ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom [
+          a owl:Class ;
+          owl:unionOf (
+              :Geologic_Unit
+              :Rock_Material
+            ) ;
+        ] ;
+      owl:onProperty gsoc:isQualityOf ;
+    ] ;
+.
+:Alteration_Distribution
+  a owl:Class ;
+  rdfs:comment "AlterationDistribution describes the spatial distribution or geometry of alteration zones. eg: patchy, spotted, banded, viens, vein breccia, pervasive, disseminated, etc"@en ;
+  rdfs:isDefinedBy "GeoSciML v4"@en ;
+  rdfs:label "Alteration distribution"@en ;
+  rdfs:subClassOf gsoc:Quality ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom [
+          a owl:Class ;
+          owl:unionOf (
+              :Geologic_Unit
+              :Rock_Material
+            ) ;
+        ] ;
+      owl:onProperty gsoc:isQualityOf ;
+    ] ;
+.
+:Alteration_Type
+  a owl:Class ;
+  rdfs:comment "Specification of alteration types (eg; potassic, argillic, advanced argillic)"@en ;
+  rdfs:isDefinedBy "GeoSciML v4"@en ;
+  rdfs:label "Alteration type"@en ;
+  rdfs:subClassOf gsoc:Quality ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom [
+          a owl:Class ;
+          owl:unionOf (
+              :Geologic_Unit
+              :Rock_Material
+            ) ;
+        ] ;
+      owl:onProperty gsoc:isQualityOf ;
+    ] ;
 .
 :Amount_Of_Matter_Role
   a owl:Class ;
@@ -143,7 +173,7 @@ gsoc:Glass
 .
 :Biogenic_Granular_Material
   a owl:Class ;
-  rdfs:comment "Granular material that consistss of particles formed by the physiological activities of organisms (plants, animals, protozoa). Includes body parts that are incorporated into a sediment aggregate, as well as fecal pellets or coprolites.  Includes biogenic objects that are whole or fragmentary (bioclasts), can be fossilized or non-fossilized use to describe body fossil components in a fossiliferous rock, e.g. crinoid columnals, radiolaria in chert, ammonites, shell hash...."@en ;
+  rdfs:comment "Granular material that consists of particles formed by the physiological activities of organisms (plants, animals, protozoa). Includes body parts that are incorporated into a sediment aggregate, as well as fecal pellets or coprolites.  Includes biogenic objects that are whole or fragmentary (bioclasts), can be fossilized or non-fossilized use to describe body fossil components in a fossiliferous rock, e.g. crinoid columnals, radiolaria in chert, ammonites, shell hash...."@en ;
   rdfs:subClassOf :Granular_Particle_Material ;
 .
 :Boundary_Stratotype
@@ -176,7 +206,7 @@ gsoc:Glass
 .
 :Clast
   a owl:Class ;
-  rdfs:comment "A role for any fragment of material that is a constituent in a rock material that formed by the accumulation of such fragments before lithification."@en ;
+  rdfs:comment "A role for any fragment of material that is a constituent in a rock material; applies to fragments formed before lithification (e.g. sedimentary clasts) as well as fragments formed by in-place deformation of pre-existing rock (e.g. cataclastic fragments)."@en ;
   rdfs:label "Clast"@en ;
   rdfs:subClassOf :Amount_Of_Matter_Role ;
 .
@@ -288,6 +318,12 @@ Contact(x) <--> exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RB
   rdfs:comment "Parent class for processes that change the shape or location of geologic entities. Includes strain and translation."@en ;
   rdfs:label "Deformation process"@en ;
   rdfs:subClassOf :Geologic_Process ;
+.
+:Deformation_Granular_Material
+  a owl:Class ;
+  rdfs:comment "Granular material that consists of fragments formed by comminution, tectonic grain size reduction, fracturing or other deformation processes operating on a pre-existing rock material. Fragments may have been displaced or mixed by processes in a deformation zone, but have not been transported by surficial sedimentary processes.  Includes fragments related to solution collapse."@en ;
+  rdfs:label "Deformation-related granular material "@en ;
+  rdfs:subClassOf :Granular_Particle_Material ;
 .
 :Displacement
   a owl:Class ;
@@ -1721,43 +1757,4 @@ RBT (x) <--> RBD (x) ^ exists z forall y [(isPartOf (y,z) ^ hasHost (z,x)) -> (b
 .
 gspr:Ductile_Flow
   a owl:Class ;
-.
-:Alteration_Degree
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom [
-          a owl:Class ;
-          owl:unionOf (
-              :Geologic_Unit
-              :Rock_Material
-            ) ;
-        ] ;
-      owl:onProperty gsoc:isQualityOf ;
-    ] ;
-.
-:Alteration_Distribution
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom [
-          a owl:Class ;
-          owl:unionOf (
-              :Geologic_Unit
-              :Rock_Material
-            ) ;
-        ] ;
-      owl:onProperty gsoc:isQualityOf ;
-    ] ;
-.
-:Alteration_Type
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom [
-          a owl:Class ;
-          owl:unionOf (
-              :Geologic_Unit
-              :Rock_Material
-            ) ;
-        ] ;
-      owl:onProperty gsoc:isQualityOf ;
-    ] ;
 .
