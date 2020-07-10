@@ -212,19 +212,20 @@ gsoc:Glass
 .
 :Clast_Imbrication
   a owl:Class ;
-  rdfs:comment "" ;
+  rdfs:comment "A sedimentary fabric characterized by disk-shaped or elongate fragments dipping in a preferred direcation at an angle to bedding."@en ;
   rdfs:label "Clast imbrication "@en ;
   rdfs:subClassOf :Sedimentary_Fabric ;
 .
 :Clast_Supported
   a owl:Class ;
-  rdfs:comment "" ;
+  rdfs:comment "A sedimentary fabric in which a framework of rock fragments in contact with each other forms the body of a clastic rock, typically with finer-grained matrix or cement in the intersticies between fragments"@en ;
   rdfs:label "Clast supported "@en ;
   rdfs:subClassOf :Sedimentary_Fabric ;
 .
 :Clastic_Granular_Material
   a owl:Class ;
   rdfs:comment "Use for clastic sedimentary components --conglomerate clast types, sand components, clay matrix. Also for deformation-producted clasts in tectonic breccia."@en ;
+  rdfs:label "Clastic granular material"@en ;
   rdfs:subClassOf :Granular_Particle_Material ;
 .
 :Complex
@@ -305,6 +306,7 @@ Contact(x) <--> exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RB
   rdfs:comment "Constituent particles/grains that are the product of crystallization during formation of a rock material (see NADMC1 2004). Serves to distinguish crystalline from granular rocks (Struik, 2002). Includes constituents crystallized in evaporite environments, during diagenesis or hydrothermal alteration, or in other low-temperature environments."@en ;
   rdfs:comment "particle material is distinguished from a particle in an 'amount of matter role' in that if a 'material' is removed from its rock context, it is still identifiable as that material, whereas identifying a particle in a role requires knowing the rock context for the particle-- if it is removed from the rock it just becomes some particle."@en ;
   rdfs:comment "use to describe crystalline grain types in igneous, metamorphic and metasomatic rocks, e.g. the plagioclase phenocrysts, groundmass quartz, biotite phenocrysts, Andalusite porphyroblasts..."@en ;
+  rdfs:label "Crystallized particle material"@en ;
   rdfs:subClassOf :Granular_Material ;
 .
 :Crystallographic_Preferred_Orientation_
@@ -833,7 +835,7 @@ Probably should specify a Temporal Reference System used to assign coordinate va
   rdfs:comment "A rock body constituent consisting of particles that share a set of characteristics, e.g. genesis, particle size (distribution), mineralogy, shape.  For example. the sand that is a constituent in a sandstone, or the feldspar phenocrysts that are a constituent in a granite."@en ;
   rdfs:comment "Particle is defined as a \\General term, used without restriction as to shape composition or internal structure, for a separable or distinct unit in a [compound material].\\ (Neuendorf et al, 2005).  Note that the term particle has no size denotation as used here."@en ;
   rdfs:comment "example top level subclasses are included in the Base Geology ontology (these are not complete), differentiated based on genesis for the most part. Detailed subclasses are defined by CGI particle type vocabulary and are imported in the Rock_Material module."@en ;
-  rdfs:label "Granular or Particulate constituents"@en ;
+  rdfs:label "Granular material"@en ;
   rdfs:subClassOf gsoc:Amount_Of_Matter ;
   rdfs:subClassOf [
       a owl:Restriction ;
@@ -857,7 +859,7 @@ Probably should specify a Temporal Reference System used to assign coordinate va
   a owl:Class ;
   rdfs:comment "Material consisting of a collection of pre-existing objects (particles, grains) before incorporation into a particulate aggregate. \\...a component of solid material that has the form of grains, clasts, fragments, or whole objects of any size, shape, composition, texture, and structure.\\ (NADMSC SLTTs, 2004)"@en ;
   rdfs:comment "dct:source--  NADM SLTTs 2004"@en ;
-  rdfs:label "granular particle"@en ;
+  rdfs:label "Granular particle material"@en ;
   rdfs:subClassOf :Granular_Material ;
 .
 :Group
@@ -1099,6 +1101,7 @@ Probably should specify a Temporal Reference System used to assign coordinate va
   a owl:Class ;
   rdfs:comment "Particles ejected during a volcanic eruption. (Jackson, 1997, p. 521). Clast whose origin is a direct result of volcanic process (excludes fragments in lava autobreccia) and has not been reworked by sedimentary processes (Gillespie and Styles 1999). Pyroclasts."@en ;
   rdfs:comment "Use for description of pyroclastic rocks"@en ;
+  rdfs:label "Pyroclastic granular material"@en ;
   rdfs:subClassOf :Clastic_Granular_Material ;
 .
 :Rock_Body
@@ -1311,7 +1314,8 @@ RBT (x) <--> RBD (x) ^ exists z forall y [(isPartOf (y,z) ^ hasHost (z,x)) -> (b
 .
 :Stratotype
   a owl:Class ;
-  rdfs:comment "Add SHACL rule that a Stratotype may not have a 'hasReference' relation"@en ;
+  rdfs:comment "a specific interval or point in a specific sequence of rock stata that constitues the reference standard  defining a stratigrphic unit or boundary"@en ;
+  rdfs:comment "rdfs:source -- based on Salvador 1994 (International Stratigraphic Guide: Int. Union Geo. Sciences and Geol. Soc. Am.), p.26, as repored in Neuendorf et al., 2005."@en ;
   rdfs:label "Stratotype"@en ;
   rdfs:subClassOf :Stratigraphic_Section ;
   rdfs:subClassOf [
