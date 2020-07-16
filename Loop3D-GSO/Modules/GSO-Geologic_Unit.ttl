@@ -18,7 +18,7 @@
 
 gsgu:Bedding_Pattern
   a owl:Class ;
-  rdfs:comment "Term(s) specifying patterns of bedding thickness or relationships between bedding packages. (eg; thinning upward, thickening upward)"@en ;
+  rdfs:comment "Term(s) specifying patterns of bedding thickness or relationships between bedding packages. (eg; thinning upward, thickening upward). A disposition."@en ;
   rdfs:isDefinedBy "GeoSciML v4"@en ;
   rdfs:label "Bedding pattern"@en ;
   rdfs:subClassOf gsoc:Quality ;
@@ -66,7 +66,7 @@ gsgu:Bedding_Style
       owl:someValuesFrom xsd:string ;
     ] ;
 .
-gsgu:Bedding_Thickness_Category
+gsgu:Bedding_Thickness
   a owl:Class ;
   rdfs:comment "Terms characterizing the thickness of bedding in the unit. "@en ;
   rdfs:isDefinedBy "GeoSciML v4"@en ;
@@ -99,80 +99,11 @@ gsgu:Complex
   rdfs:label "Complex "@en ;
   rdfs:subClassOf gsgu:lithodemic_unit ;
 .
-gsgu:Geologic_Unit_Body_Morphology
+gsgu:Exposure
   a owl:Class ;
-  rdfs:comment "The geometry or form of a Rock Body.  Examples include: dike (dyke), cone, fan, sheet, etc. Morphology is independent of the substance (Rock Material) that composes the Rock Body or process that formed it."@en ;
-  rdfs:isDefinedBy "based on GeoSciML v4"@en ;
-  rdfs:label "Body morphology"@en ;
+  rdfs:comment "how material is exposed at Earth surface, e.g. poorly exposed, well exposed."@en ;
+  rdfs:label "Exposure"@en ;
   rdfs:subClassOf gsoc:Quality ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom [
-          a owl:Class ;
-          owl:unionOf (
-              gsog:Geologic_Unit
-              gsog:Facies
-              gsog:Lithosome
-              <http://loop3d.org/GSO/ontology/2020/1/geologicunit/rockbodypart/stratigraphic_part>
-            ) ;
-        ] ;
-      owl:onProperty gsoc:isQualityOf ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty gsoc:hasDataValue ;
-      owl:someValuesFrom xsd:string ;
-    ] ;
-.
-gsgu:Geologic_Unit_Composition_Category
-  a owl:Class ;
-  rdfs:comment "Composition-based classification that requires integrating the character of the Rock Body over large area, not applicable at the rock-material/specimen level. Examples: alkalic, subaluminous, peraluminous, I-Type, carbonate, phosphate."@en ;
-  rdfs:isDefinedBy "GeoSciML v4"@en ;
-  rdfs:label "Composition category"@en ;
-  rdfs:subClassOf gsoc:Quality ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom [
-          a owl:Class ;
-          owl:unionOf (
-              gsog:Geologic_Unit
-              gsog:Facies
-              gsog:Lithosome
-              <http://loop3d.org/GSO/ontology/2020/1/geologicunit/rockbodypart/stratigraphic_part>
-            ) ;
-        ] ;
-      owl:onProperty gsoc:isQualityOf ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty gsoc:hasDataValue ;
-      owl:someValuesFrom xsd:string ;
-    ] ;
-.
-gsgu:Geologic_Unit_Outcrop_Character
-  a owl:Class ;
-  rdfs:comment "Describes the nature of outcrops formed by a Rock Body. Examples: bouldery, cliff-forming, ledge-forming, slope-forming, poorly exposed. Assign free text string value for now, controlled vocabulary is the goal."@en ;
-  rdfs:isDefinedBy "GeoSciML v4"@en ;
-  rdfs:label "Outcrop character"@en ;
-  rdfs:subClassOf gsoc:Quality ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom [
-          a owl:Class ;
-          owl:unionOf (
-              gsog:Geologic_Unit
-              gsog:Facies
-              gsog:Lithosome
-              <http://loop3d.org/GSO/ontology/2020/1/geologicunit/rockbodypart/stratigraphic_part>
-            ) ;
-        ] ;
-      owl:onProperty gsoc:isQualityOf ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty gsoc:hasDataValue ;
-      owl:someValuesFrom xsd:string ;
-    ] ;
 .
 gsgu:Igneous_Facies
   a owl:Class ;
@@ -199,6 +130,31 @@ gsgu:Intrusion
       owl:onProperty gsoc:hasPart ;
     ] ;
 .
+gsgu:Landform_Disposition
+  a owl:Class ;
+  rdfs:comment "Describes the nature of outcrops formed by a Rock Body. Examples: bouldery, cliff-forming, ledge-forming, slope-forming. Assign free text string value for now, controlled vocabulary is the goal."@en ;
+  rdfs:isDefinedBy "GeoSciML v4"@en ;
+  rdfs:label "Outcrop character"@en ;
+  rdfs:subClassOf gsoc:Quality ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom [
+          a owl:Class ;
+          owl:unionOf (
+              gsog:Geologic_Unit
+              gsog:Facies
+              gsog:Lithosome
+              gsog:Rock_Material
+            ) ;
+        ] ;
+      owl:onProperty gsoc:isQualityOf ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasDataValue ;
+      owl:someValuesFrom xsd:string ;
+    ] ;
+.
 gsgu:Lithodeme
   a owl:Class ;
   rdfs:comment "A body of intrusive, pervasively deformed, or highly metamorphosed rock, generally non-tabular and lacking primary depositional structures, and characterized by lithic homogeneity. It is mappable at the Earth's surface and traceable in the subsurface. For cartographic and hierarchical purposes, it is comparable to a formation"@en ;
@@ -222,6 +178,23 @@ gsgu:Pluton
             ) ;
         ] ;
       owl:onProperty gsoc:hasPart ;
+    ] ;
+.
+gsgu:Rock_Body_Shape
+  a owl:Class ;
+  rdfs:comment "The geometry or form of a Rock Body.  Examples include: dike (dyke), cone, fan, sheet, etc. Morphology is independent of the substance (Rock Material) that composes the Rock Body or process that formed it."@en ;
+  rdfs:isDefinedBy "based on GeoSciML v4"@en ;
+  rdfs:label "Body morphology"@en ;
+  rdfs:subClassOf gsoc:Shape ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom gsog:Rock_Body ;
+      owl:onProperty gsoc:isQualityOf ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasDataValue ;
+      owl:someValuesFrom xsd:string ;
     ] ;
 .
 gsgu:Sedimentary_Facies
