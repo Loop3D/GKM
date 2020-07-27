@@ -43,7 +43,7 @@ gsgu:Bedding_Pattern
 .
 gsgu:Bedding_Style
   a owl:Class ;
-  rdfs:comment "Term(s) specifying patterns of bedding thickness or relationships between bedding packages. (eg; thinning upward, thickening upward)"@en ;
+  rdfs:comment "Term(s) specifying the style of bedding in a stratified geologic unit, e.g. lenticular, irregular, planar, vague, massive"@en ;
   rdfs:isDefinedBy "GeoSciML v4"@en ;
   rdfs:label "Bedding style"@en ;
   rdfs:subClassOf gsoc:Quality ;
@@ -66,30 +66,20 @@ gsgu:Bedding_Style
       owl:someValuesFrom xsd:string ;
     ] ;
 .
-gsgu:Bedding_Thickness
+gsgu:Bedding_Thickness_Average
   a owl:Class ;
-  rdfs:comment "Terms characterizing the thickness of bedding in the unit. "@en ;
-  rdfs:isDefinedBy "GeoSciML v4"@en ;
-  rdfs:label "Bedding thickness"@en ;
-  rdfs:subClassOf gsoc:Quality ;
+  rdfs:comment "Numeric value for average thickness of bedding, in meters"@en ;
+  rdfs:label "Average bed thickness"@en ;
+  rdfs:subClassOf gsoq:Thickness ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:allValuesFrom [
-          a owl:Class ;
-          owl:unionOf (
-              gsog:Geologic_Unit
-              gsog:Facies
-              gsog:Lithosome
-              <http://loop3d.org/GSO/ontology/2020/1/geologicunit/rockbodypart/stratigraphic_part>
-              gsog:Bedding
-            ) ;
-        ] ;
-      owl:onProperty gsoc:isQualityOf ;
+      owl:allValuesFrom xsd:decimal ;
+      owl:onProperty gsoc:hasDataValue ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty gsoc:hasDataValue ;
-      owl:someValuesFrom xsd:string ;
+      owl:onProperty gsoc:hasQuality ;
+      owl:someValuesFrom gsoc:Unit_of_Measure ;
     ] ;
 .
 gsgu:Complex
