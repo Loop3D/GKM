@@ -13,6 +13,27 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
+gspr:Regional_Metamorphism
+  rdfs:subClassOf gspr:Metamorphic_Process ;
+.
+gspr:cataclastic_deformation
+  rdfs:subClassOf gsog:Deformation ;
+.
+gspr:subaerial_extrusion
+  rdfs:subClassOf gspr:Eruption ;
+.
+gspr:subaqueous_extrusion
+  rdfs:subClassOf gspr:Eruption ;
+.
+
+gspr:bolide_impact
+  a owl:Class ;
+  rdfs:comment "metamorphism resulting from the passage of a shock wave through a body of material, typically the result of impact of a planetary body (impactor) on a planetary surface (target)"@en ;
+  rdfs:comment "dct:source--  Smulikowski et al, 2003"@en ;
+  rdfs:label "impact process"@en ;
+  rdfs:subClassOf gsog:Deformation ;
+.
+
 gspr:Accretion
   a owl:Class ;
   rdfs:comment "The addition of material to a continent. Typically involves convergent or transform motion."@en ;
@@ -20,13 +41,6 @@ gspr:Accretion
   rdfs:label "accretion"@en ;
   rdfs:subClassOf gsog:Additive_Process ;
   rdfs:subClassOf gspr:Tectonic_Process ;
-.
-gspr:Alteration
-  a owl:Class ;
-  rdfs:comment "General term for any change in the mineralogical or chemical composition of a rock. Typically related to interaction with hydrous fluids."@en ;
-  rdfs:comment "dct:source--  Fettes and Desmons, 2007"@en ;
-  rdfs:label "alteration"@en ;
-  rdfs:subClassOf gspr:Metamorphic_Process ;
 .
 gspr:Biological_Evolution
   a owl:Class ;
@@ -308,6 +322,12 @@ gspr:Intrusion
   rdfs:subClassOf gsog:Additive_Process ;
   rdfs:subClassOf gspr:Magmatic_Process ;
 .
+gspr:Lava_Flow
+  a owl:Class ;
+  rdfs:comment "process of melted rock flowing over the Earth's surface and solidifying to form new rock "@en ;
+  rdfs:label "Lava Flow "@en ;
+  rdfs:subClassOf gspr:Eruption ;
+.
 gspr:Magmatic_Cystallisation
   a owl:Class ;
   rdfs:comment "The process by which matter becomes crystalline, from a gaseous, fluid, or dispersed state"@en ;
@@ -367,6 +387,13 @@ gspr:Metamorphic_Process
   rdfs:label "metamorphic process"@en ;
   rdfs:subClassOf gsog:Geologic_Process ;
   rdfs:subClassOf gsog:Transformation ;
+.
+gspr:Metasomatism
+  a owl:Class ;
+  rdfs:comment "Processes causing open-system changes in chemical composition by reaction with an external source, typically involving chemical transport by a fluid medium flowing through the rock. Metasomatism typically involves introduction of chemical constituents into a rock volume. General term for any change in the mineralogical or chemical composition of a rock. Typically related to interaction with hydrous fluids."@en ;
+  rdfs:comment "dct:source--  Fettes and Desmons, 2007"@en ;
+  rdfs:label "Metasomatism or hydrothermal process"@en ;
+  rdfs:subClassOf gspr:Metamorphic_Process ;
 .
 gspr:Microfracturing
   a owl:Class ;
@@ -447,6 +474,12 @@ gspr:Pyroclastic_Eruption
   rdfs:comment "dct:source--  Orton, G.J., 1996. Volcanic environments. 485-567 in Readingh.G. (ed.), Sedimentary Environments: Processes, Facies and Stratigraphy, Third Edition. Blackwell Science, Oxford"@en ;
   rdfs:label "pyroclastic eruption"@en ;
   rdfs:subClassOf gspr:Eruption ;
+.
+gspr:Pyrometamorphism
+  a owl:Class ;
+  rdfs:comment "metamorphism caused by high-temperature near surface events like lightning strikes,  underground coal fires or nuclear reactions."@en ;
+  rdfs:label "Pyrometamorphism "@en ;
+  rdfs:subClassOf gspr:Metamorphic_Process ;
 .
 gspr:Rifting
   a owl:Class ;
@@ -566,6 +599,9 @@ gspr:Wind_Erosion
   rdfs:subClassOf gspr:Erosion ;
 .
 gspr:deep_water_oxygen_depletion
+  a owl:Class ;
+  rdfs:comment "" ;
+  rdfs:label "Pyrometamorphism "@en ;
   rdfs:subClassOf gsog:Subtractive_Process ;
 .
 gspr:ontology
@@ -577,7 +613,7 @@ gspr:ontology
   rdfs:comment "dct:modified-- 2019-12-04"@en ;
   rdfs:label "Geologic processes"@en ;
   owl:imports gsog:ontology ;
-  owl:imports <http://loop3d.org/GSO/ontology/2020/1/geologicquality/ontology> ;
+  owl:imports gsoq:ontology ;
 .
 gspr:sea_level_fluctuation
   a owl:Class ;
