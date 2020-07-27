@@ -66,11 +66,11 @@ gsoc:Glass
       owl:someValuesFrom :Epoch ;
     ] ;
 .
-:Aggregate_non-clastic_particle
+:Aggregate_non-clastic_particle_material
   a owl:Class ;
-  rdfs:comment "Generic term for a non-clastic particle that is itself composed of an aggregation of particles."@en ;
+  rdfs:comment "Granular material consisting of non-clastic particles that are composed of an aggregation of particles."@en ;
   rdfs:comment "dct:source--  CGI GTWG ParticleType vocabulary"@en ;
-  rdfs:label "Aggregate non clastic particle"@en ;
+  rdfs:label "Aggregate non clastic particle material"@en ;
   rdfs:subClassOf :Crystallized_Particle_Material ;
 .
 :Alteration_Degree
@@ -91,45 +91,9 @@ gsoc:Glass
       owl:onProperty gsoc:isQualityOf ;
     ] ;
 .
-:Alteration_Distribution
-  a owl:Class ;
-  rdfs:comment "AlterationDistribution describes the spatial distribution or geometry of alteration zones. eg: patchy, spotted, banded, pervasive, disseminated, etc"@en ;
-  rdfs:isDefinedBy "GeoSciML v4"@en ;
-  rdfs:label "Alteration distribution"@en ;
-  rdfs:subClassOf gsoc:Distribution ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom [
-          a owl:Class ;
-          owl:unionOf (
-              :Geologic_Unit
-              :Rock_Material
-            ) ;
-        ] ;
-      owl:onProperty gsoc:isQualityOf ;
-    ] ;
-.
-:Alteration_Type
-  a owl:Class ;
-  rdfs:comment "Specification of alteration types (eg; potassic, argillic, advanced argillic)"@en ;
-  rdfs:isDefinedBy "GeoSciML v4"@en ;
-  rdfs:label "Alteration type"@en ;
-  rdfs:subClassOf gsoc:Quality ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom [
-          a owl:Class ;
-          owl:unionOf (
-              :Geologic_Unit
-              :Rock_Material
-            ) ;
-        ] ;
-      owl:onProperty gsoc:isQualityOf ;
-    ] ;
-.
 :Amount_Of_Matter_Role
   a owl:Class ;
-  rdfs:comment "" ;
+  rdfs:comment "particle material is distinguished from a particle in an 'amount of matter role' in that if a 'material' is removed from its rock context, it is still identifiable as that material, whereas identifying a particle in a role requires knowing the rock context for the particle-- if it is removed from the rock it just becomes some particle."@en ;
   rdfs:label "Amount of Matter Role  "@en ;
   rdfs:subClassOf gsoc:Role ;
   rdfs:subClassOf [
@@ -225,7 +189,7 @@ gsoc:Glass
 .
 :Clastic_Granular_Material
   a owl:Class ;
-  rdfs:comment "Use for clastic sedimentary components --conglomerate clast types, sand components, clay matrix. Also for deformation-producted clasts in tectonic breccia."@en ;
+  rdfs:comment "Granular material consisting of particles that are constituents in clastic sedimentary rock/sediment or volcaniclastic rock/sediment --conglomerate clast types, sand components, clay matrix."@en ;
   rdfs:label "Clastic granular material"@en ;
   rdfs:subClassOf :Granular_Particle_Material ;
 .
@@ -280,7 +244,7 @@ Contact(x) <--> exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RB
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onClass :Displacement ;
+      owl:onClass :Fault_Displacement ;
       owl:onProperty gsoc:hasQuality ;
       owl:qualifiedCardinality "0"^^xsd:nonNegativeInteger ;
     ] ;
@@ -304,9 +268,8 @@ Contact(x) <--> exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RB
 .
 :Crystallized_Particle_Material
   a owl:Class ;
-  rdfs:comment "Constituent particles/grains that are the product of crystallization during formation of a rock material (see NADMC1 2004). Serves to distinguish crystalline from granular rocks (Struik, 2002). Includes constituents crystallized in evaporite environments, during diagenesis or hydrothermal alteration, or in other low-temperature environments."@en ;
-  rdfs:comment "particle material is distinguished from a particle in an 'amount of matter role' in that if a 'material' is removed from its rock context, it is still identifiable as that material, whereas identifying a particle in a role requires knowing the rock context for the particle-- if it is removed from the rock it just becomes some particle."@en ;
-  rdfs:comment "use to describe crystalline grain types in igneous, metamorphic and metasomatic rocks, e.g. the plagioclase phenocrysts, groundmass quartz, biotite phenocrysts, Andalusite porphyroblasts..."@en ;
+  rdfs:comment "A granular material consisting of particles/grains that are the product of crystallization during formation of a rock material (see NADMC1 2004). Serves to distinguish crystalline from granular rocks (Struik, 2002). Includes constituents crystallized in evaporite environments, during diagenesis or hydrothermal alteration, or in other low-temperature environments."@en ;
+  rdfs:comment "Use to describe crystalline grain types in igneous, metamorphic and metasomatic rocks, e.g. the plagioclase phenocrysts, groundmass quartz, biotite phenocrysts, Andalusite porphyroblasts..."@en ;
   rdfs:label "Crystallized particle material"@en ;
   rdfs:subClassOf :Granular_Material ;
 .
@@ -318,7 +281,7 @@ Contact(x) <--> exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RB
 .
 :Deformation
   a owl:Class ;
-  rdfs:comment "Parent class for processes that change the shape or location of geologic entities. Includes strain and translation."@en ;
+  rdfs:comment "Parent class for processes that change the shape or location of geologic entities. Includes translation of rock bodies, and strain-related processes resulting in changes of shape of a rock body, including folding, faulting, shearing, or fabric development, deformation may be either brittle or ductile."@en ;
   rdfs:label "Deformation process"@en ;
   rdfs:subClassOf :Geologic_Process ;
 .
@@ -328,21 +291,11 @@ Contact(x) <--> exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RB
   rdfs:label "Deformation-related granular material "@en ;
   rdfs:subClassOf :Granular_Particle_Material ;
 .
-:Displacement
+:Disseminated
   a owl:Class ;
-  rdfs:label "Displacement"@en ;
-  rdfs:subClassOf gsoc:Quality ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom [
-          a owl:Class ;
-          owl:unionOf (
-              :Ductile_Shear_Zone
-              :Fault
-            ) ;
-        ] ;
-      owl:onProperty gsoc:isQualityOf ;
-    ] ;
+  rdfs:comment "Quality is scattered relatively uniformly through the quality carrier."@en ;
+  rdfs:label "Disseminated "@en ;
+  rdfs:subClassOf gsoc:Distribution ;
 .
 :Ductile_Shear_Zone
   a owl:Class ;
@@ -353,7 +306,7 @@ Contact(x) <--> exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RB
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty gsoc:hasQuality ;
-      owl:someValuesFrom :Displacement ;
+      owl:someValuesFrom :Fault_Displacement ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
@@ -497,22 +450,6 @@ Contact(x) <--> exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RB
       owl:someValuesFrom :Era ;
     ] ;
 .
-:Fabric
-  a owl:Class ;
-  rdfs:comment "A spatial or geometric arrangement of parts of a rock body or features within the rock body that is present throughout the body."@en ;
-  rdfs:label "Fabric "@en ;
-  rdfs:subClassOf gsoc:Quality ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom :Rock_Body ;
-      owl:onProperty gsoc:isQualityOf ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty gsoc:hasValue ;
-      owl:someValuesFrom gsoc:Integral_Feature ;
-    ] ;
-.
 :Facies
   a owl:Class ;
   rdfs:comment "Represents a particular body of rock that is a lateral variant of a lithostratigraphic unit, or a variant of a lithodemic unit. Contrast with lithosome in being a particular, connected body of rock, as opposed to a kind of rock body that is repeated in many places in a unit."@en ;
@@ -535,7 +472,7 @@ Contact(x) <--> exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RB
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-      owl:onClass :Displacement ;
+      owl:onClass :Fault_Displacement ;
       owl:onProperty gsoc:hasQuality ;
     ] ;
   rdfs:subClassOf [
@@ -543,6 +480,34 @@ Contact(x) <--> exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RB
       owl:onProperty gsoc:isParticipantIn ;
       owl:someValuesFrom :Deformation ;
     ] ;
+.
+:Fault_Displacement
+  a owl:Class ;
+  rdfs:label "Fault displacement"@en ;
+  rdfs:subClassOf gsoc:Quality ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom [
+          a owl:Class ;
+          owl:unionOf (
+              :Ductile_Shear_Zone
+              :Fault
+            ) ;
+        ] ;
+      owl:onProperty gsoc:isQualityOf ;
+    ] ;
+.
+:Fault_Separation
+  a owl:Class ;
+  rdfs:comment "a vector (magnitude and orientation) specifying the distance between the intersection of a surface on opposite sides of a displacment surface. In 3-D is the projection of a vector normal to the displaced surface into the displacment surface, but might also be specified as offset of the intersection of displacement surface and marker surface in some other profile view (e.g. horizontal/map view, or a cross section)"@en ;
+  rdfs:label "Separation"@en ;
+  rdfs:subClassOf gsoc:Quality ;
+.
+:Fault_Slip
+  a owl:Class ;
+  rdfs:comment "a vector (magnitude and orientation) that links a peircing point on opposite sides of a displacement surface."@en ;
+  rdfs:label "Slip"@en ;
+  rdfs:subClassOf gsoc:Quality ;
 .
 :Fault_Zone
   a owl:Class ;
@@ -836,7 +801,7 @@ Probably should specify a Temporal Reference System used to assign coordinate va
   a owl:Class ;
   rdfs:comment "A rock body constituent consisting of particles that share a set of characteristics, e.g. genesis, particle size (distribution), mineralogy, shape.  For example. the sand that is a constituent in a sandstone, or the feldspar phenocrysts that are a constituent in a granite."@en ;
   rdfs:comment "Particle is defined as a \\General term, used without restriction as to shape composition or internal structure, for a separable or distinct unit in a [compound material].\\ (Neuendorf et al, 2005).  Note that the term particle has no size denotation as used here."@en ;
-  rdfs:comment "example top level subclasses are included in the Base Geology ontology (these are not complete), differentiated based on genesis for the most part. Detailed subclasses are defined by CGI particle type vocabulary and are imported in the Rock_Material module."@en ;
+  rdfs:comment "example top level subclasses are included in the Base Geology module (gsog: namespace) (these are not complete), differentiated based on genesis for the most part. Detailed subclasses are defined by in the material category vocabulary and are imported in the Rock_Material module."@en ;
   rdfs:label "Granular material"@en ;
   rdfs:subClassOf gsoc:Amount_Of_Matter ;
   rdfs:subClassOf [
@@ -903,6 +868,12 @@ Probably should specify a Temporal Reference System used to assign coordinate va
   rdfs:label "Joint"@en ;
   rdfs:subClassOf :Fracture ;
 .
+:Layered_Distribution
+  a owl:Class ;
+  rdfs:comment "quality is exhibited in sheet like zones, e.g. along veins or fractures."@en ;
+  rdfs:label "Layered distribution "@en ;
+  rdfs:subClassOf gsoc:Distribution ;
+.
 :Lineation
   a owl:Class ;
   rdfs:comment "Nongenetic term for a penetrative linear structure."@en ;
@@ -917,6 +888,11 @@ Probably should specify a Temporal Reference System used to assign coordinate va
  Twiss RJ and Moores EM. (2007). Structural Geology, 2nd Edition, WH Freeman and Co., p.497; Wikipedia https://en.wikipedia.org/wiki/Fabric_(geology); Neuendorf et al., 2005, AGI Glossary of Geology; Sander, 1930."""@en ;
   rdfs:label "Fabric "@en ;
   rdfs:subClassOf gsoc:Integral_Feature ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hostedBy ;
+      owl:someValuesFrom :Rock_Body ;
+    ] ;
 .
 :Lithosome
   a owl:Class ;
@@ -1000,7 +976,7 @@ Probably should specify a Temporal Reference System used to assign coordinate va
       owl:someValuesFrom gsoc:Element ;
     ] ;
 .
-:Mono-mineralic_crystal_particle
+:Mono-mineralic_crystal_particle_material
   a owl:Class ;
   rdfs:comment "Typical grain constituent in a phaneritic igneous or metamorphic rock, visible to naked eye or with hand lense. Particle are individual mineral grains that have crystallized from melt or through metamorphic processes.  In deformed rocks, these my have some subgrain structure but at the scale of description are considered individual particles in a granular material constituent of a rock."@en ;
   rdfs:label "mono-mineralic crystal particle "@en ;
@@ -1048,6 +1024,13 @@ Probably should specify a Temporal Reference System used to assign coordinate va
   rdfs:comment "Fabric defined by alignment of the dimensional axes of prolate or oblate particles in a rock. The fabric might result from primary depositional or crystallization process, or from subsequent deformation"@en ;
   rdfs:label "Particle shape fabric "@en ;
   rdfs:subClassOf :Particle_Preferred_Orientation ;
+.
+:Patchy_Distribution
+  a owl:Class ;
+  rdfs:comment "Quality is exhibited in local concentrations separated by regions without the quality. Typically used to describe alteration distribution."@en ;
+  rdfs:isDefinedBy "GeoSciML v4"@en ;
+  rdfs:label "Patchy distribution"@en ;
+  rdfs:subClassOf gsoc:Distribution ;
 .
 :Pendant
   a owl:Class ;
@@ -1098,13 +1081,6 @@ Probably should specify a Temporal Reference System used to assign coordinate va
       owl:onProperty gsoc:age_interval_in ;
       owl:someValuesFrom :Era ;
     ] ;
-.
-:Pyroclastic_Granular_Material
-  a owl:Class ;
-  rdfs:comment "Particles ejected during a volcanic eruption. (Jackson, 1997, p. 521). Clast whose origin is a direct result of volcanic process (excludes fragments in lava autobreccia) and has not been reworked by sedimentary processes (Gillespie and Styles 1999). Pyroclasts."@en ;
-  rdfs:comment "Use for description of pyroclastic rocks"@en ;
-  rdfs:label "Pyroclastic granular material"@en ;
-  rdfs:subClassOf :Clastic_Granular_Material ;
 .
 :Rock_Body
   a owl:Class ;
@@ -1170,8 +1146,9 @@ RBT (x) <--> RBD (x) ^ exists z forall y [(isPartOf (y,z) ^ hasHost (z,x)) -> (b
 .
 :Rock_Material
   a owl:Class ;
-  rdfs:comment "A material consisting of an aggregation of particles composed of mineral, glass, or other rock material. General concept for any rock, sediment, or other solid constituent of the Earth."@en ;
-  rdfs:comment "need SHACL rule for isPartOf exactly 0 'Rock Body'"@en ;
+  rdfs:comment "A material consisting of an aggregation of particles composed of mineral, glass, or other rock material. General concept for any rock, sediment, or other solid constituent of the Earth.  This is 'top' of the lithology category hierarchy with standard rock names, and should be used to indicate 'any rock or unconsolidated material'."@en ;
+  rdfs:comment "Rock_material properties a bound in the Rock_Material module"@en ;
+  rdfs:comment "dct:source--  NADM C1 2004"@en ;
   rdfs:label "Rock Material"@en ;
   rdfs:subClassOf gsoc:Amount_Of_Matter ;
   rdfs:subClassOf :Rock_Body ;
@@ -1256,12 +1233,6 @@ RBT (x) <--> RBD (x) ^ exists z forall y [(isPartOf (y,z) ^ hasHost (z,x)) -> (b
   rdfs:label "Sedimentary Structure  "@en ;
   rdfs:subClassOf :Geologic_Structure ;
 .
-:Separation
-  a owl:Class ;
-  rdfs:comment "a vector (magnitude and orientation) specifying the distance between the intersection of a surface on opposite sides of a displacment surface. In 3-D is the projection of a vector normal to the displaced surface into the displacment surface, but might also be specified as offset of the intersection of displacement surface and marker surface in some other profile view (e.g. horizontal/map view, or a cross section)"@en ;
-  rdfs:label "Separation"@en ;
-  rdfs:subClassOf :Displacement ;
-.
 :Series
   a owl:Class ;
   rdfs:subClassOf :Chronostratigraphic_Unit ;
@@ -1270,12 +1241,6 @@ RBT (x) <--> RBD (x) ^ exists z forall y [(isPartOf (y,z) ^ hasHost (z,x)) -> (b
       owl:onProperty gsoc:isReferenceFor ;
       owl:someValuesFrom :Epoch ;
     ] ;
-.
-:Slip
-  a owl:Class ;
-  rdfs:comment "a vector (magnitude and orientation) that links a peircing point on opposite sides of a displacement surface."@en ;
-  rdfs:label "Slip"@en ;
-  rdfs:subClassOf :Displacement ;
 .
 :Stage
   a owl:Class ;
@@ -1304,7 +1269,7 @@ RBT (x) <--> RBD (x) ^ exists z forall y [(isPartOf (y,z) ^ hasHost (z,x)) -> (b
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty :hasSpatialProperty ;
+      owl:onProperty gsoc:hasSpatialProperty ;
       owl:someValuesFrom gsoc:Spatial_Location ;
     ] ;
 .
@@ -1551,9 +1516,6 @@ RBT (x) <--> RBD (x) ^ exists z forall y [(isPartOf (y,z) ^ hasHost (z,x)) -> (b
   rdfs:range :Geologic_Date_Interval ;
   rdfs:subPropertyOf gsoc:age_starts ;
 .
-:hasSpatialProperty
-  a owl:ObjectProperty ;
-.
 :hasYoungerDate
   a owl:ObjectProperty ;
   rdfs:comment "assign a younger age boundary as a time instant for a time interval"@en ;
@@ -1738,6 +1700,13 @@ RBT (x) <--> RBD (x) ^ exists z forall y [(isPartOf (y,z) ^ hasHost (z,x)) -> (b
   rdfs:label "previous time interval"@en ;
   rdfs:range :Geologic_Date_Interval ;
   rdfs:subPropertyOf gsoc:age_met_by ;
+.
+:pyroclastic_granular_material
+  a owl:Class ;
+  rdfs:comment "Particles ejected during a volcanic eruption. (Jackson, 1997, p. 521). Clast whose origin is a direct result of volcanic process (excludes fragments in lava autobreccia) and has not been reworked by sedimentary processes (Gillespie and Styles 1999). Pyroclasts."@en ;
+  rdfs:comment "Use for description of pyroclastic rocks"@en ;
+  rdfs:label "Pyroclastic granular material"@en ;
+  rdfs:subClassOf :Clastic_Granular_Material ;
 .
 :underlies
   a owl:ObjectProperty ;
