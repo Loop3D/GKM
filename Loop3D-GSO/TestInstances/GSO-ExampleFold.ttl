@@ -1,5 +1,6 @@
 # baseURI: http://loop3d.org/GSO/ontology/2020/1/foldexample
 # imports: http://loop3d.org/GSO/ontology/2020/1/geologicquality/ontology
+# imports: http://loop3d.org/GSO/ontology/2020/1/lithology/particletype/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/loop3dmaster
 # prefix: exfold
 
@@ -22,12 +23,13 @@
 
 <http://loop3d.org/GSO/ontology/2020/1/foldexample>
   a owl:Ontology ;
-  owl:imports <http://loop3d.org/GSO/ontology/2020/1/geologicquality/ontology> ;
+  owl:imports gsoq:ontology ;
+  owl:imports <http://loop3d.org/GSO/ontology/2020/1/lithology/particletype/ontology> ;
   owl:imports <http://loop3d.org/GSO/ontology/2020/1/loop3dmaster> ;
   owl:versionIRI <http://loop3d.org/GSO/ontology/2020/1/foldexample> ;
 .
 exfold:Fold_1
-  a gsog:Fold ;
+  a gsog:Antiform ;
   gsoc:hasPart exfold:HingeSurface_1 ;
   gsoc:hasPart [
       a gssf:Fold_Hinge ;
@@ -57,10 +59,6 @@ exfold:Fold_1
       gsoc:hasUOM [
           a gsuom:meter ;
         ] ;
-    ] ;
-  gsoc:hasQuality [
-      a gssf:Fold_Profile_Type ;
-      gsoc:hasDataValue "antiform"@en ;
     ] ;
   rdfs:comment "test fold properties"@en ;
   rdfs:label "is test fold"@en ;
