@@ -15,11 +15,6 @@
   rdfs:subClassOf :Physical_Endurant ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:allValuesFrom :Amount_Of_Matter ;
-      owl:onProperty :hasConstituent ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
       owl:allValuesFrom [
           a owl:Class ;
           owl:unionOf [
@@ -312,12 +307,6 @@ Need SHACL rule that count Inherant.isPartOf = 0"""@en ;
   rdfs:label "Mean Value Calculation"@en ;
   rdfs:subClassOf :Statistical_Calculation ;
 .
-:Measurement_Process
-  a owl:Class ;
-  rdfs:comment "A process by which the value of some property or quality of an entity is determined.  Conceptually a subclass of prov:Activity."@en ;
-  rdfs:label "Measurement activity "@en ;
-  rdfs:subClassOf :Process ;
-.
 :Minimum_Value_Calculation
   a owl:Class ;
   rdfs:comment "report a minimum value for a value range "@en ;
@@ -341,6 +330,12 @@ Need SHACL rule that count Inherant.isPartOf = 0"""@en ;
   rdfs:comment "An event that results in the direct determination of the value of some property; typically will haveConstituent relation so a Measurement_Activity that describes the observation process."@en ;
   rdfs:label "Observation "@en ;
   rdfs:subClassOf :Determining_Event ;
+.
+:Observation_Process
+  a owl:Class ;
+  rdfs:comment "A process by which the value of some property or quality of an entity is determined.  Conceptually a subclass of prov:Activity."@en ;
+  rdfs:label "Measurement activity "@en ;
+  rdfs:subClassOf :Process ;
 .
 :Part_Feature
   a owl:Class ;
@@ -727,7 +722,7 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
 .
 :Ubiquitous_Distribution
   a owl:Class ;
-  rdfs:comment "Quality is everywhere present in the host particular"@en ;
+  rdfs:comment "Quality is everywhere present in the host"@en ;
   rdfs:label "ubiquitous distribution"@en ;
   rdfs:subClassOf :Distribution ;
 .
@@ -749,8 +744,14 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
 :Variable_Distribution
   a owl:Class ;
   rdfs:comment "Quality is not present in all instances of the host particular "@en ;
-  rdfs:label "variable distribution" ;
+  rdfs:label "variable distribution"@en ;
   rdfs:subClassOf :Distribution ;
+.
+:Variable_Intensity
+  a owl:Class ;
+  rdfs:comment "Intensity varies spatially "@en ;
+  rdfs:label "Variable intensity "@en ;
+  rdfs:subClassOf :Intensity ;
 .
 :Weak_Intensity
   a owl:Class ;
@@ -952,8 +953,8 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
 .
 :hasIndirectSpatialLocation
   a owl:ObjectProperty ;
-  rdfs:comment "" ;
-  rdfs:label "has indirect spatial location" ;
+  rdfs:comment "Indirect spatial location of a Perdurant or Situation is the union of the spatial location of all participants in Perdurant or parts of the Situation. {@en} " ;
+  rdfs:label "has indirect spatial location"@en ;
   rdfs:subPropertyOf :isSpatiallyRelatedTo ;
 .
 :hasIndirectTemporalLocation
@@ -1034,6 +1035,10 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   rdfs:label "has Setting"@en ;
   rdfs:range :Geologic_Setting ;
   rdfs:subPropertyOf :isFundamentallyRelatedTo ;
+.
+:hasSpatialProperty
+  a owl:ObjectProperty ;
+  rdfs:label "has spatial property"@en ;
 .
 :hasUOM
   a owl:ObjectProperty ;
