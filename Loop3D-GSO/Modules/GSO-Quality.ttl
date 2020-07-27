@@ -11,6 +11,22 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
+gsoc:Observation
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasConstituent ;
+      owl:someValuesFrom gsoc:Observation_Process ;
+    ] ;
+.
+gsoc:hasDataValue
+  rdfs:domain gsoc:Quality ;
+.
+gsoq:Average_Measured_Value
+  a owl:Class ;
+  rdfs:comment "" ;
+  rdfs:label "Average Measured Value "@en ;
+  rdfs:subClassOf gsoq:Measured_Value ;
+.
 gsoq:Azimuth
   a owl:Class ;
   rdfs:comment "Bearing of a horizontal line relative to north. Use for specifying the orientation of planar features."@en ;
@@ -18,13 +34,8 @@ gsoq:Azimuth
   rdfs:subClassOf gsoq:Orientation ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:allValuesFrom xsd:decimal ;
-      owl:onProperty gsoc:hasDataValue ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
       owl:onProperty gsoc:hasQuality ;
-      owl:someValuesFrom gsoc:Unit_of_Measure ;
+      owl:someValuesFrom gsoq:Measured_Value ;
     ] ;
 .
 gsoq:Density
@@ -42,7 +53,7 @@ gsoq:Diameter
   a owl:Class ;
   rdfs:comment "The (approximate) average length of line segments that pass through the center of an object and whose endpoints lie on the outside boundary of the object. Use to characterize the size of a broadly spheroidal object like a pluton or a rock sample."@en ;
   rdfs:label "Diameter "@en ;
-  rdfs:subClassOf gsoc:Quality ;
+  rdfs:subClassOf gsoq:Size ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom xsd:decimal ;
@@ -61,13 +72,8 @@ gsoq:Dip
   rdfs:subClassOf gsoq:Orientation ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:allValuesFrom xsd:decimal ;
-      owl:onProperty gsoc:hasDataValue ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
       owl:onProperty gsoc:hasQuality ;
-      owl:someValuesFrom gsoc:Unit_of_Measure ;
+      owl:someValuesFrom gsoq:Measured_Value ;
     ] ;
 .
 gsoq:Dip_Dip_Direction
@@ -76,6 +82,12 @@ gsoq:Dip_Dip_Direction
   rdfs:label "Dip and Dip Direction"@en ;
   rdfs:subClassOf gsoq:Plane_Orientation_Convention ;
 .
+gsoq:Facing
+  a owl:Class ;
+  rdfs:comment "property to specify if a surface is directed, i.e. has a top and bottom. Values: {upright, overturned, unknown}"@en ;
+  rdfs:label "facing direction"@en ;
+  rdfs:subClassOf gsoq:Orientation ;
+.
 gsoq:Line_Orientation
   a owl:Class ;
   rdfs:comment "specification of the orientation of a line in space, using a trend (bearing of horizontal projection of line relative to geographic north) and plunge (inclination of line measured positive downward in degrees from local horizontal).  TBD:  add 'isdirected property to indicate if the line is directed (e.g. sense of shear), values should be Boolean,"@en ;
@@ -83,13 +95,14 @@ gsoq:Line_Orientation
   rdfs:subClassOf gsoq:Orientation ;
   rdfs:subClassOf [
       a owl:Restriction ;
+      owl:allValuesFrom [
+          a owl:Class ;
+          owl:unionOf (
+              gsoq:Azimuth
+              gsoq:Plunge
+            ) ;
+        ] ;
       owl:onProperty gsoc:hasQuality ;
-      owl:someValuesFrom gsoq:Azimuth ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty gsoc:hasQuality ;
-      owl:someValuesFrom gsoq:Plunge ;
     ] ;
 .
 gsoq:Magnetic_Susceptibility
@@ -102,6 +115,38 @@ gsoq:Magnetic_Susceptibility
       a owl:Restriction ;
       owl:allValuesFrom gsoc:Amount_Of_Matter ;
       owl:onProperty gsoc:isQualityOf ;
+    ] ;
+.
+gsoq:Maximum_Measured_Value
+  a owl:Class ;
+  rdfs:comment "" ;
+  rdfs:label "Maximum Measured Value "@en ;
+  rdfs:subClassOf gsoq:Measured_Value ;
+.
+gsoq:Measured_Value
+  a owl:Class ;
+  rdfs:comment "Quality that specifies the numeric measured value of some other quality in some context"@en ;
+  rdfs:label "Measured Value "@en ;
+  rdfs:subClassOf gsoc:Quality ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom xsd:decimal ;
+      owl:onProperty gsoc:hasDataValue ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:determinedBy ;
+      owl:someValuesFrom gsoc:Observation ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasQuality ;
+      owl:someValuesFrom gsoc:Simple_Uncertainty ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasUOM ;
+      owl:someValuesFrom gsoc:Unit_of_Measure ;
     ] ;
 .
 gsoq:Metamorphic_Facies
@@ -120,6 +165,12 @@ gsoq:Metamorphic_Grade
   rdfs:label "Metamorphic grade"@en ;
   rdfs:subClassOf gsoc:Quality ;
 .
+gsoq:Minimum_Measured_Value
+  a owl:Class ;
+  rdfs:comment "" ;
+  rdfs:label "Minimum Measured Value "@en ;
+  rdfs:subClassOf gsoq:Measured_Value ;
+.
 gsoq:Orientation
   a owl:Class ;
   rdfs:subClassOf gsoc:Quality ;
@@ -128,7 +179,7 @@ gsoq:Overturned
   a owl:Class ;
   rdfs:comment "top of surface is facing downward, toward Earth interior."@en ;
   rdfs:label "Overturned facing"@en ;
-  rdfs:subClassOf gsoq:Surface_Facing ;
+  rdfs:subClassOf gsoq:Facing ;
 .
 gsoq:Peak_Pressure
   a owl:Class ;
@@ -153,29 +204,26 @@ gsoq:Plane_Orientation
   rdfs:subClassOf gsoq:Orientation ;
   rdfs:subClassOf [
       a owl:Restriction ;
+      owl:allValuesFrom [
+          a owl:Class ;
+          owl:unionOf (
+              gsoq:Azimuth
+              gsoq:Dip
+              gsoq:Facing
+            ) ;
+        ] ;
       owl:onProperty gsoc:hasQuality ;
-      owl:someValuesFrom gsoq:Azimuth ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty gsoc:hasQuality ;
-      owl:someValuesFrom gsoq:Dip ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty gsoc:hasQuality ;
+      owl:onProperty gsoc:determinedBy ;
       owl:someValuesFrom gsoq:Plane_Orientation_Convention ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty gsoc:hasQuality ;
-      owl:someValuesFrom gsoq:Surface_Facing ;
     ] ;
 .
 gsoq:Plane_Orientation_Convention
   a owl:Class ;
   rdfs:label "Plane orientation convention"@en ;
-  rdfs:subClassOf gsoc:Quality ;
+  rdfs:subClassOf gsoc:Observation_Process ;
 .
 gsoq:Plunge
   a owl:Class ;
@@ -184,14 +232,21 @@ gsoq:Plunge
   rdfs:subClassOf gsoq:Orientation ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:allValuesFrom xsd:decimal ;
-      owl:onProperty gsoc:hasDataValue ;
+      owl:onProperty gsoc:hasQuality ;
+      owl:someValuesFrom gsoq:Measured_Value ;
     ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty gsoc:hasUOM ;
-      owl:someValuesFrom gsoc:Unit_of_Measure ;
-    ] ;
+.
+gsoq:Size
+  a owl:Class ;
+  rdfs:comment "Generic quality that specifies the size of an object or collection of objects; values may be quantitative or qualitative"@en ;
+  rdfs:label "Size"@en ;
+  rdfs:subClassOf gsoc:Quality ;
+.
+gsoq:Strike_Dip_Azimuth360
+  a owl:Class ;
+  rdfs:comment "" ;
+  rdfs:label "Azimuth Dip 0-360 "@en ;
+  rdfs:subClassOf gsoq:Plane_Orientation_Convention ;
 .
 gsoq:Strike_Dip_RHR
   a owl:Class ;
@@ -199,20 +254,9 @@ gsoq:Strike_Dip_RHR
   rdfs:label "Right hand rule strike and dip"@en ;
   rdfs:subClassOf gsoq:Plane_Orientation_Convention ;
 .
-gsoq:Surface_Facing
-  a owl:Class ;
-  rdfs:comment "property to specify if a surface is directed, i.e. has a top and bottom. Values: {upright, overturned, unknown}"@en ;
-  rdfs:label "facing direction"@en ;
-  rdfs:subClassOf gsoc:Quality ;
-.
 gsoq:Thickness
   a owl:Class ;
-  rdfs:subClassOf gsoc:Quality ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom xsd:decimal ;
-      owl:onProperty gsoc:hasDataValue ;
-    ] ;
+  rdfs:subClassOf gsoq:Size ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty gsoc:hasQuality ;
@@ -223,13 +267,13 @@ gsoq:Unknown_Facing
   a owl:Class ;
   rdfs:comment "Facing direction is unknown {@en}	"@en ;
   rdfs:label "Unknown Facing Direction"@en ;
-  rdfs:subClassOf gsoq:Surface_Facing ;
+  rdfs:subClassOf gsoq:Facing ;
 .
 gsoq:Upright
   a owl:Class ;
   rdfs:comment "top of surface is away from center of earth."@en ;
   rdfs:label "Upright Facing"@en ;
-  rdfs:subClassOf gsoq:Surface_Facing ;
+  rdfs:subClassOf gsoq:Facing ;
 .
 gsoq:ontology
   a owl:Ontology ;
