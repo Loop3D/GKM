@@ -1,5 +1,5 @@
 # baseURI: http://loop3d.org/GSO/ontology/2020/1/loop3dmaster
-# imports: http://loop3d.org/GSO/ontology/2020/1/alterationtype/ontology
+# imports: http://loop3d.org/GSO/ontology/2020/1/alteredrockmaterial/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/common/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/element/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/eventenvironment/ontology
@@ -15,19 +15,20 @@
 # imports: http://loop3d.org/GSO/ontology/2020/1/ischart/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/lithology/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/lithology/particleaspectratio/ontology
+# imports: http://loop3d.org/GSO/ontology/2020/1/lithology/particletype/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/mineral/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/uom/ontology
 
 @prefix : <http://loop3d.org/GSO/ontology/2020/1/loop3dmaster/> .
 @prefix fold: <http://loop3d.org/GSO/ontology/2020/1/geologicstructure/fold/> .
 @prefix gsar: <http://loop3d.org/GSO/ontology/2020/1/lithology/particleaspectratio/> .
-@prefix gscc: <http://loop3d.org/GSO/ontology/2020/1/lithology/compositioncategory/> .
 @prefix gsel: <http://loop3d.org/GSO/ontology/2020/1/element/> .
 @prefix gsen: <http://loop3d.org/GSO/ontology/2020/1/eventenvironment/> .
 @prefix gsfa: <http://loop3d.org/GSO/ontology/2020/1/geologicstructure/fault/> .
 @prefix gsfo: <http://loop3d.org/GSO/ontology/2020/1/geologicstructure/foliation/> .
 @prefix gsgu: <http://loop3d.org/GSO/ontology/2020/1/geologicunit/> .
 @prefix gslth: <http://loop3d.org/GSO/ontology/2020/1/lithology/> .
+@prefix gsmc: <http://loop3d.org/GSO/ontology/2020/1/lithology/materialcategory/> .
 @prefix gsmin: <http://loop3d.org/GSO/ontology/2020/1/mineral/> .
 @prefix gsoc: <http://loop3d.org/GSO/ontology/2020/1/common/> .
 @prefix gsog: <http://loop3d.org/GSO/ontology/2020/1/geologicfeature/> .
@@ -45,11 +46,77 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-
+gsoc:hasRole
+  owl:inverseOf gsoc:hasRolePlayer ;
+.
+gsoc:hasRolePlayer
+  owl:inverseOf gsoc:hasRole ;
+.
+gsoc:hasSetting
+  owl:inverseOf gsoc:isSettingFor ;
+.
+gsoc:isConstituentOf
+  owl:inverseOf gsoc:hasConstituent ;
+.
+gsoc:isQualityOf
+  owl:inverseOf gsoc:hasQuality ;
+.
+gsog:Fault_Displacement
+  rdfs:comment "Quality that specifies the relative movement between two sides of a fault.  Component qualities include movement sense, separation sense, slip, movement magnitude, movement vector."@en ;
+.
+gsog:Fault_Separation
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom gsog:Fault_Displacement ;
+      owl:onProperty gsoc:isQualityOf ;
+    ] ;
+.
+gsog:Fault_Slip
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom gsog:Fault_Displacement ;
+      owl:onProperty gsoc:isQualityOf ;
+    ] ;
+.
+gsog:isTransformedFrom
+  owl:inverseOf gsog:isTransformedInto ;
+.
+gsog:isTransformedInto
+  owl:inverseOf gsog:isTransformedFrom ;
+.
+gsoq:Plane_Orientation_Convention
+  rdfs:subClassOf gsoc:Observation_Process ;
+.
+gsfa:Fault_Movement_Sense
+  rdfs:subClassOf gsoc:Quality ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom gsog:Fault_Displacement ;
+      owl:onProperty gsoc:isQualityOf ;
+    ] ;
+.
+fold:Horizontal_Line
+  rdfs:subClassOf gsoq:Line_Orientation ;
+.
+fold:Inclined
+  rdfs:subClassOf gsoq:Plane_Orientation ;
+.
+fold:Plunging_Line
+  rdfs:subClassOf gsoq:Line_Orientation ;
+.
+fold:Recumbent
+  rdfs:subClassOf gsoq:Plane_Orientation ;
+.
+fold:Upright
+  rdfs:subClassOf gsoq:Plane_Orientation ;
+.
+fold:Vertical_Line
+  rdfs:subClassOf gsoq:Line_Orientation ;
+.
 <http://loop3d.org/GSO/ontology/2020/1/loop3dmaster>
   a owl:Ontology ;
   rdfs:comment "This is a shell to import all the various peices needed for geologic instances."@en ;
-  owl:imports <http://loop3d.org/GSO/ontology/2020/1/alterationtype/ontology> ;
+  owl:imports <http://loop3d.org/GSO/ontology/2020/1/alteredrockmaterial/ontology> ;
   owl:imports gsoc:ontology ;
   owl:imports gsel:ontology ;
   owl:imports gsen:ontology ;
@@ -65,6 +132,28 @@
   owl:imports gstime:ontology ;
   owl:imports gslth:ontology ;
   owl:imports gsar:ontology ;
+  owl:imports <http://loop3d.org/GSO/ontology/2020/1/lithology/particletype/ontology> ;
   owl:imports gsmin:ontology ;
   owl:imports gsuom:ontology ;
 .
+[
+  a owl:Class ;
+  owl:unionOf (
+      xsd:decimal
+      xsd:string
+    ) ;
+].
+[
+  a owl:Class ;
+  owl:unionOf (
+      xsd:decimal
+      xsd:string
+    ) ;
+].
+[
+  a owl:Class ;
+  owl:unionOf (
+      xsd:decimal
+      xsd:string
+    ) ;
+].
