@@ -330,6 +330,11 @@ Need SHACL rule that count Inherant.isPartOf = 0"""@en ;
   rdfs:comment "An event that results in the direct determination of the value of some property; typically will haveConstituent relation so a Measurement_Activity that describes the observation process."@en ;
   rdfs:label "Observation "@en ;
   rdfs:subClassOf :Determining_Event ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty :hasConstituent ;
+      owl:someValuesFrom :Observation_Process ;
+    ] ;
 .
 :Observation_Process
   a owl:Class ;
@@ -574,7 +579,7 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
 .
 :Situation
   a owl:Class ;
-  rdfs:comment "" ;
+  rdfs:comment "distinguishing characteristics are necessary but not reliably sufficien" ;
   rdfs:label "Situation"@en ;
   rdfs:subClassOf :Endurant ;
   rdfs:subClassOf [
@@ -926,6 +931,7 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
 :hasDataValue
   a owl:DatatypeProperty ;
   rdfs:comment "value is a literal, could be a number or string-- xsd:SimpleType"@en ;
+  rdfs:domain :Quality ;
   rdfs:label "has data value"@en ;
   rdfs:range xsd:anySimpleType ;
 .
@@ -1017,6 +1023,7 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   rdfs:comment "" ;
   rdfs:label "has role  "@en ;
   rdfs:subPropertyOf :hasInherant ;
+  owl:inverseOf :hasRolePlayer ;
 .
 :hasRoleObject
   a owl:ObjectProperty ;
@@ -1028,6 +1035,7 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   rdfs:comment "" ;
   rdfs:label "has role player  "@en ;
   rdfs:subPropertyOf :inheresIn ;
+  owl:inverseOf :hasRole ;
 .
 :hasSetting
   a owl:ObjectProperty ;
@@ -1035,6 +1043,7 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   rdfs:label "has Setting"@en ;
   rdfs:range :Geologic_Setting ;
   rdfs:subPropertyOf :isFundamentallyRelatedTo ;
+  owl:inverseOf :isSettingFor ;
 .
 :hasSpatialProperty
   a owl:ObjectProperty ;
@@ -1099,6 +1108,7 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   a owl:ObjectProperty ;
   a owl:TransitiveProperty ;
   rdfs:subPropertyOf :isFundamentallyRelatedTo ;
+  owl:inverseOf :hasConstituent ;
 .
 :isDerivedFrom
   a owl:ObjectProperty ;
@@ -1175,6 +1185,7 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   rdfs:comment "link from physical property to a class that exhibits the property"@en ;
   rdfs:label "is Property Of"@en ;
   rdfs:subPropertyOf :inheresIn ;
+  owl:inverseOf :hasQuality ;
 .
 :isReferenceFor
   a owl:ObjectProperty ;

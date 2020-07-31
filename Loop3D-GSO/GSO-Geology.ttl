@@ -12,6 +12,9 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
+
+
+
 gsoc:Element
   rdfs:comment "isConstituentOf range restriction to gsog:Mineral, gsog:Rock and gsog:Granular_Material are defined in Geology module"@en ;
   rdfs:subClassOf [
@@ -41,6 +44,35 @@ gsoc:Glass
       owl:onProperty gsoc:isConstituentOf ;
     ] ;
 .
+
+:isTransformedFrom
+  owl:inverseOf :isTransformedInto ;
+.
+:isTransformedInto
+  owl:inverseOf :isTransformedFrom ;
+.
+
+:Fault_Separation
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom :Fault_Displacement ;
+      owl:onProperty gsoc:isQualityOf ;
+    ] ;
+.
+
+:Fault_Slip
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom :Fault_Displacement ;
+      owl:onProperty gsoc:isQualityOf ;
+    ] ;
+.
+
+
+:Fault_Displacement
+  rdfs:comment "Quality that specifies the relative movement between two sides of a fault.  Component qualities include movement sense, separation sense, slip, movement magnitude, movement vector."@en ;
+.
+
 :Additive_Process
   a owl:Class ;
   rdfs:comment "process that introduces new matter into the model space"@en ;
