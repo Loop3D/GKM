@@ -8,13 +8,14 @@
 @prefix gsen: <http://loop3d.org/GSO/ontology/2020/1/eventenvironment> .
 @prefix gsgu: <http://loop3d.org/GSO/ontology/2020/1/geologicunit/> .
 @prefix gslth: <http://loop3d.org/GSO/ontology/2020/1/lithology/> .
+@prefix gsmc: <http://loop3d.org/GSO/ontology/2020/1/lithology/materialcategory/> .
 @prefix gsmf: <http://loop3d.org/GSO/ontology/2020/1/metamorphicfacies/> .
 @prefix gsmin: <http://loop3d.org/GSO/ontology/2020/1/mineral/> .
 @prefix gsoc: <http://loop3d.org/GSO/ontology/2020/1/common/> .
 @prefix gsog: <http://loop3d.org/GSO/ontology/2020/1/geologicfeature/> .
 @prefix gsoq: <http://loop3d.org/GSO/ontology/2020/1/geologicquality/> .
 @prefix gspr: <http://loop3d.org/GSO/ontology/2020/1/geologicprocess/> .
-@prefix gspt: <http://loop3d.org/GSO/ontology/2020/1/lithology/particletype/> .
+@prefix gsptr: <http://loop3d.org/GSO/ontology/2020/1/lithology/particlerole/> .
 @prefix gsrbp: <http://loop3d.org/GSO/ontology/2020/1/geologicunit/rockbodypart/> .
 @prefix gstime: <http://loop3d.org/GSO/ontology/2020/1/ischart/> .
 @prefix gsuom: <http://loop3d.org/GSO/ontology/2020/1/uom/> .
@@ -71,16 +72,16 @@ ejs:JsFormation-upper
   gsoc:hasConstituent [
       a gslth:limestone ;
       gsoc:hasConstituent [
-          a gspt:material_fossil ;
-          gsoc:hasRole gspt:Floating_Clast ;
+          a gsmc:material_fossil_granular_material ;
+          gsoc:hasRole gsptr:Floating_Clast ;
           gsoc:isDerivedFrom <https://en.wikipedia.org/wiki/Ammonitida> ;
         ] ;
       gsoc:hasConstituent [
-          a gspt:micrite ;
+          a gsmc:micrite ;
           gsoc:hasConstituent [
               a gsmin:calcite ;
             ] ;
-          gsoc:hasRole gspt:Sedimentary_Matrix ;
+          gsoc:hasRole gsptr:Sedimentary_Matrix ;
         ] ;
     ] ;
   rdfs:comment "massive limestone with abundant ammonites in a micrite matrix" ;
@@ -199,7 +200,5 @@ ejs:stratPart_3
   a owl:Ontology ;
   rdfs:comment "Stephen M. Richard 2019-05-02"@en ;
   rdfs:comment "details of description of Js unit in GeologyScenarioForTesting.pptx"@en ;
-  owl:imports gsoq:ontology ;
-  owl:imports gspt:ontology ;
   owl:imports <http://loop3d.org/GSO/ontology/2020/1/loop3dmaster> ;
 .
