@@ -1,26 +1,26 @@
 # baseURI: http://loop3d.org/GSO/ontology/2020/1/lithology/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/geologicfeature/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/geologicquality/ontology
-# imports: http://loop3d.org/GSO/ontology/2020/1/lithology/compositioncategory/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/lithology/consolidationdegree/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/lithology/geneticcategory/ontology
+# imports: http://loop3d.org/GSO/ontology/2020/1/lithology/materialcategory/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/lithology/particleaspectratio/ontology
-# imports: http://loop3d.org/GSO/ontology/2020/1/lithology/particletype/ontology
+# imports: http://loop3d.org/GSO/ontology/2020/1/lithology/particlerole/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/metamorphicfacies/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/metamorphicgrade/ontology
 
 @prefix : <http://loop3d.org/GSO/ontology/2020/1/lithology/> .
 @prefix dcam: <http://purl.org/dc/dcam/> .
 @prefix gsar: <http://loop3d.org/GSO/ontology/2020/1/lithology/particleaspectratio/> .
-@prefix gscc: <http://loop3d.org/GSO/ontology/2020/1/lithology/compositioncategory/> .
 @prefix gsgc: <http://loop3d.org/GSO/ontology/2020/1/lithology/geneticcategory/> .
+@prefix gsmc: <http://loop3d.org/GSO/ontology/2020/1/lithology/materialcategory/> .
 @prefix gsmf: <http://loop3d.org/GSO/ontology/2020/1/metamorphicfacies/> .
 @prefix gsmg: <http://loop3d.org/GSO/ontology/2020/1/metamorphicgrade/> .
 @prefix gsoc: <http://loop3d.org/GSO/ontology/2020/1/common/> .
 @prefix gsog: <http://loop3d.org/GSO/ontology/2020/1/geologicfeature/> .
 @prefix gsoq: <http://loop3d.org/GSO/ontology/2020/1/geologicquality/> .
 @prefix gsps: <http://loop3d.org/GSO/ontology/2020/1/lithology/particleroundness/> .
-@prefix gspt: <http://loop3d.org/GSO/ontology/2020/1/lithology/particletype/> .
+@prefix gsptr: <http://loop3d.org/GSO/ontology/2020/1/lithology/particlerole/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -41,13 +41,6 @@ gsog:Granular_Material
       owl:someValuesFrom :Particle_Sorting ;
     ] ;
 .
-gsog:Rock_Material
-  a owl:Class ;
-  rdfs:comment "Rock_material properties a bound in the Rock_Material module"@en ;
-.
-gsoq:Metamorphic_Grade
-  a owl:Class ;
-.
 :Consolidation_Degree
   a owl:Class ;
   rdfs:comment "A property that specifies the degree to which an aggregation of EarthMaterial particles is a distinct solid material. Consolidation and induration are related concepts specified by this property. They define a continuum from unconsolidated material to very hard rock. Induration is the degree to which a consolidated material is made hard, operationally determined by how difficult it is to break a piece of the material. Consolidated materials may have varying degrees of induration (NADMSC, 2004)"@en ;
@@ -62,11 +55,13 @@ gsoq:Metamorphic_Grade
 .
 :Grain_Roundness
   a owl:Class ;
+  rdfs:comment "Roundness is the degree of smoothing due to abrasion of sedimentary particles. It is expressed as the ratio of the average radius of curvature of the edges or corners to the radius of curvature of the maximum inscribed sphere."@en ;
+  rdfs:comment "dct:source -- https://en.wikipedia.org/wiki/Roundness_(geology)" ;
   rdfs:label "Grain Shape"@en ;
   rdfs:subClassOf gsoc:Quality ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:allValuesFrom gsoc:Shape ;
+      owl:allValuesFrom :Particle_Shape ;
       owl:onProperty gsoc:isQualityOf ;
     ] ;
 .
@@ -74,7 +69,7 @@ gsoq:Metamorphic_Grade
   a owl:Class ;
   rdfs:comment "generaly property for specification of grain size; sub-properties have value spaces for different size specification types."@en ;
   rdfs:label "Grain Size property "@en ;
-  rdfs:subClassOf gsoc:Quality ;
+  rdfs:subClassOf gsoq:Size ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom [
@@ -106,18 +101,6 @@ gsoq:Metamorphic_Grade
       a owl:Restriction ;
       owl:onProperty gsoc:hasUOM ;
       owl:someValuesFrom gsoc:Unit_of_Measure ;
-    ] ;
-.
-:Grain_Size_Category
-  a owl:Class ;
-  rdfs:comment "grain size range expressed using a named size category vocabulary"@en ;
-  rdfs:isDefinedBy "GeoSciML v3"@en ;
-  rdfs:label "Grain size term"@en ;
-  rdfs:subClassOf :Grain_Size ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom xsd:string ;
-      owl:onProperty gsoc:hasDataValue ;
     ] ;
 .
 :Grain_Size_Max
@@ -152,21 +135,47 @@ gsoq:Metamorphic_Grade
       owl:someValuesFrom gsoc:Unit_of_Measure ;
     ] ;
 .
+:Material
+  a owl:Class ;
+  rdfs:comment "Material categories defined based on gross chemical or mineralogical character. Multiple constituents might apply to Rock_Material, Glass, Granular_Material, or Mineral. Classes include broad chemical classifications such as silicate, carbonate, ferromagnesian, oxide."@en ;
+  rdfs:isDefinedBy "Extracted from GeoSciML v4"@en ;
+  rdfs:label "Material"@en ;
+  rdfs:subClassOf gsoc:Amount_Of_Matter ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom [
+          a owl:Class ;
+          owl:unionOf (
+              gsog:Rock_Material
+              gsoc:Glass
+              gsog:Granular_Material
+              gsog:Mineral
+            ) ;
+        ] ;
+      owl:onProperty gsoc:isConstituentOf ;
+    ] ;
+.
 :Particle_Aspect_Ratio
   a owl:Class ;
-  rdfs:comment "AspectRatio describes the geometry of particles based on the ratios of lengths of long, intermediate and short axes of grains. Equates to sphericity in sedimentary rocks (ie: the degree to which the shape of a particle approximates a sphere).  A quantitative specification based on the ratio of lengths of long, intermediate and short axes of grain shape (Sneed and Folk, 1958; Zingg, 1935). (eg: prolate, slightly flattened, very bladed, equant, acicular, tabular) "@en ;
+  rdfs:comment "Property to describe the geometry of particles based on the (average) ratio of the length of long, intermediate and short axes of grains. Equates to sphericity in sedimentary rocks (ie: the degree to which the shape of a particle approximates a sphere).  A quantitative specification based on the ratio of lengths of long, intermediate and short axes of grain shape (Sneed and Folk, 1958; Zingg, 1935). (eg: prolate, slightly flattened, very bladed, equant, acicular, tabular)"@en ;
   rdfs:isDefinedBy "GeoSciML v4"@en ;
   rdfs:label "Particle aspect ratio "@en ;
   rdfs:subClassOf gsoc:Quality ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:allValuesFrom gsoc:Shape ;
+      owl:allValuesFrom :Particle_Shape ;
       owl:onProperty gsoc:isQualityOf ;
     ] ;
 .
+:Particle_Shape
+  a owl:Class ;
+  rdfs:comment "Quality that specifies the shape of a particle or object (mm to decimeter scale) "@en ;
+  rdfs:label "Particle_Shape "@en ;
+  rdfs:subClassOf gsoc:Shape ;
+.
 :Particle_Sorting
   a owl:Class ;
-  rdfs:comment "The Sorting attribute holds text terms to specify size distribution of particles in a CompoundMaterial. Terminology for sorting in sedimentary rocks is based on the quantitative Graphic Standard Deviation (IGSD) scheme proposed by Folk (1968, 1974).  Example terms for this attribute may include sedimentary terms such as well sorted and poorly sorted, or igneous terms such as porphyritic, equigranuilar, seriate."@en ;
+  rdfs:comment "The Sorting attribute holds text terms to specify size distribution of particles in a CompoundMaterial. Terminology for sorting in sedimentary rocks is based in the quantitative Graphic Standard Deviation (IGSD) scheme proposed by Folk (1968, 1974).  Example terms for this attribute may include sedimentary terms such as well sorted and poorly sorted, or igneous terms such as porphyritic, equigranuilar, seriate."@en ;
   rdfs:isDefinedBy "GeoSciML v4"@en ;
   rdfs:label "Particle sorting"@en ;
   rdfs:subClassOf gsoc:Quality ;
@@ -189,30 +198,6 @@ gsoq:Metamorphic_Grade
                 ] ;
             ] ;
         ] ;
-      owl:onProperty gsoc:isQualityOf ;
-    ] ;
-.
-:Rock_Material_Composition_Category
-  a owl:Class ;
-  rdfs:comment "Term to specify the gross compositional character of a rock material. Composition as used here is loosely construed to include both chemical composition and petrograpic composition, thus multiple values may be applied to a single rock, e.g. metaluminous and alkalic, undersaturated and basic, etc. Terms would typically include broad chemical classifications such as silicate, carbonate, ferromagnesian, oxide.  However, this attribute may have different terminology for different kinds of rocks - for example sandstone petrographic classification terms (e.g. feldspathic) might be placed here."@en ;
-  rdfs:isDefinedBy "GeoSciML v4"@en ;
-  rdfs:label "Rock material composition category"@en ;
-  rdfs:subClassOf gsoc:Quality ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom gsog:Rock_Material ;
-      owl:onProperty gsoc:isQualityOf ;
-    ] ;
-.
-:Rock_Material_Genetic_Category
-  a owl:Class ;
-  rdfs:comment "A term that represents a summary geologic history of the material. (ie, a genetic process classifier term) Examples include igneous, sedimentary, metamorphic, shock metamorphic, volcanic, pyroclastic."@en ;
-  rdfs:isDefinedBy "GeoSciML v4"@en ;
-  rdfs:label "Rock material genetic category"@en ;
-  rdfs:subClassOf gsoc:Quality ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom gsog:Rock_Material ;
       owl:onProperty gsoc:isQualityOf ;
     ] ;
 .
@@ -327,7 +312,7 @@ gsoq:Metamorphic_Grade
   rdfs:comment "Material known to have artificial (human-related) origin; insufficient information to classify in more detail."@en ;
   rdfs:comment "dct:source--  This vocabulary"@en ;
   rdfs:label "anthropogenic material"@en ;
-  rdfs:subClassOf :compound_material ;
+  rdfs:subClassOf gsog:Rock_Material ;
 .
 :anthropogenic_unconsolidated_material
   a owl:Class ;
@@ -482,7 +467,7 @@ gsoq:Metamorphic_Grade
   rdfs:comment "Coarse-grained material composed of angular broken rock fragments; the fragments typically have sharp edges and unworn corners. The fragments may be held together by a mineral cement or in a fine-grained matrix, and consolidated or nonconsolidated. Clasts may be of any composition or origin. In sedimentary environments, breccia is used for material that consists entirely of angular fragments, mostly derived from a single source rock body, as in a rock avalanche deposit, and matrix is interpreted to be the product of comminution of clasts during transport. Diamictite or diamicton is used when the material reflects mixing of rock from a variety of sources, some sub angular or subrounded clasts may be present, and matrix is pre-existing fine grained material that is not a direct product of the brecciation/deposition process."@en ;
   rdfs:comment "dct:source--  Neuendorf et al. 2005"@en ;
   rdfs:label "breccia"@en ;
-  rdfs:subClassOf :compound_material ;
+  rdfs:subClassOf gsog:Rock_Material ;
 .
 :breccia_gouge_series
   a owl:Class ;
@@ -726,7 +711,7 @@ gsoq:Metamorphic_Grade
   rdfs:comment "Material of unspecified consolidation state formed by geological modification of pre-existing materials outside the realm of igneous and sedimentary processes. Includes rocks formed by impact metamorphism, standard dynamothermal metamorphism, brittle deformation, weathering, metasomatism and hydrothermal alteration (diagenesis is a sedimentary process in this context)."@en ;
   rdfs:comment "dct:source--  SLTTm 2004"@en ;
   rdfs:label "composite genesis material"@en ;
-  rdfs:subClassOf :compound_material ;
+  rdfs:subClassOf gsog:Rock_Material ;
 .
 :composite_genesis_rock
   a owl:Class ;
@@ -735,13 +720,6 @@ gsoq:Metamorphic_Grade
   rdfs:label "composite genesis rock"@en ;
   rdfs:subClassOf :composite_genesis_material ;
   rdfs:subClassOf :rock ;
-.
-:compound_material
-  a owl:Class ;
-  rdfs:comment "An Earth Material composed of an aggregation of particles of Earth Material, possibly including other compound Materials. This is 'top' of lithology category hierarchy, and should be used to indicate 'any rock or unconsolidated material'."@en ;
-  rdfs:comment "dct:source--  NADM C1 2004"@en ;
-  rdfs:label "compound material"@en ;
-  rdfs:subClassOf gsog:Rock_Material ;
 .
 :crystalline_carbonate
   a owl:Class ;
@@ -1276,12 +1254,15 @@ gsoq:Metamorphic_Grade
   rdfs:subClassOf :massive_sulfide ;
   rdfs:subClassOf :metasomatic_rock ;
 .
+:hypabyssal_intrusive_rock
+  rdfs:subClassOf :igneous_rock ;
+.
 :igneous_material
   a owl:Class ;
   rdfs:comment "Earth material formed as a result of igneous processes, eg. intrusion and cooling of magma in the crust, volcanic eruption."@en ;
   rdfs:comment "dct:source--  This vocabulary"@en ;
   rdfs:label "igneous material"@en ;
-  rdfs:subClassOf :compound_material ;
+  rdfs:subClassOf gsog:Rock_Material ;
 .
 :igneous_rock
   a owl:Class ;
@@ -1471,6 +1452,12 @@ gsoq:Metamorphic_Grade
   rdfs:label "metamorphic rock"@en ;
   rdfs:subClassOf :composite_genesis_rock ;
 .
+:metaplutonic_rock
+  rdfs:subClassOf :metamorphic_rock ;
+.
+:metasedimentary_rock
+  rdfs:subClassOf :metamorphic_rock ;
+.
 :metasomatic_rock
   a owl:Class ;
   rdfs:comment "Rock that has fabric and composition indicating open-system mineralogical and chemical changes in response to interaction with a fluid phase, typically water rich."@en ;
@@ -1478,6 +1465,9 @@ gsoq:Metamorphic_Grade
   rdfs:comment "dct:source--  This vocabulary"@en ;
   rdfs:label "metasomatic rock"@en ;
   rdfs:subClassOf :composite_genesis_rock ;
+.
+:metavolcanic_rock
+  rdfs:subClassOf :metamorphic_rock ;
 .
 :mica_schist
   a owl:Class ;
@@ -1602,11 +1592,11 @@ gsoq:Metamorphic_Grade
   rdfs:label "GSO Rock Material ontology."@en ;
   owl:imports gsog:ontology ;
   owl:imports gsoq:ontology ;
-  owl:imports gscc:ontology ;
   owl:imports <http://loop3d.org/GSO/ontology/2020/1/lithology/consolidationdegree/ontology> ;
   owl:imports gsgc:ontology ;
+  owl:imports gsmc:ontology ;
   owl:imports gsar:ontology ;
-  owl:imports gspt:ontology ;
+  owl:imports gsptr:ontology ;
   owl:imports gsmf:ontology ;
   owl:imports gsmg:ontology ;
 .
@@ -1796,6 +1786,9 @@ gsoq:Metamorphic_Grade
   rdfs:comment "dct:source--  NADM metamorphic rock vocabulary SLTTm1.0; Marshak and Mitra 1988"@en ;
   rdfs:label "phyllonite"@en ;
   rdfs:subClassOf :mylonitic_rock ;
+.
+:plutonic_igneous_rock
+  rdfs:subClassOf :igneous_rock ;
 .
 :porphyry
   a owl:Class ;
@@ -1990,7 +1983,7 @@ gsoq:Metamorphic_Grade
   rdfs:comment "Consolidated aggregate of one or more EarthMaterials, or a body of undifferentiated mineral matter, or of solid organic material. Includes mineral aggregates such as granite, shale, marble; glassy matter such as obsidian; and organic material such a coal. Excludes unconsolidated materials."@en ;
   rdfs:comment "dct:source--  Jackson, 1997; NADM C1 2004; Neuendorf et al 2005"@en ;
   rdfs:label "rock"@en ;
-  rdfs:subClassOf :compound_material ;
+  rdfs:subClassOf gsog:Rock_Material ;
 .
 :rock_gypsum_or_anhydrite
   a owl:Class ;
@@ -2056,7 +2049,7 @@ gsoq:Metamorphic_Grade
   rdfs:comment "Material formed by accumulation of solid fragmental material deposited by air, water or ice, or material that accumulated by other natural agents such as chemical precipitation from solution or secretion by organisms. Includes both sediment and sedimentary rock. Includes epiclastic deposits. All stated composition criteria are based on the mineral/ compound material (GeoSciML term)/particulate fraction of the material, irrespective of porosity or the pore-fluid. No distinctions are made based on porosity or pore fluid composition (except organic rich sediment in which liquid hydrocarbon content may be considered)."@en ;
   rdfs:comment "dct:source--  SLTTs 2004"@en ;
   rdfs:label "sedimentary material"@en ;
-  rdfs:subClassOf :compound_material ;
+  rdfs:subClassOf gsog:Rock_Material ;
 .
 :sedimentary_rock
   a owl:Class ;
@@ -2270,6 +2263,7 @@ gsoq:Metamorphic_Grade
   rdfs:comment "In practice, it is likely that any rock for which there is suspicion that it may consist of redeposited pyroclastic material, usually based on sedimentary structures, irrespective of the presence or percentage of clearly epiclastic particles, would be called a tuffite. 50 percent cutoff with epiclastic rock is in contrast with LeMaitre et al., but is used for consistentency with other sedimentary rock categories following the pattern that the rock name reflects the predominant constituent."@en ;
   rdfs:comment "Rock consists of more than 50 percent particles of indeterminate pyroclastic or epiclastic origin and less than 75 percent particles of clearly pyroclastic origin. commonly the rock is laminated or exhibits size grading. (based on LeMaitre et al. 2002; Murawski and Meyer 1998)."@en ;
   rdfs:comment "dct:source--  LeMaitre et al. 2002; Murawski and Meyer 1998"@en ;
+  rdfs:comment "synonym: volcaniclastic rock" ;
   rdfs:label "tuffit"@de ;
   rdfs:label "tuffite"@en ;
   rdfs:subClassOf :rock ;
@@ -2293,7 +2287,7 @@ gsoq:Metamorphic_Grade
   rdfs:comment "compoundMaterial composed of an aggregation of particles that do not adhere to each other strongly enough that the aggregate can be considered a solid in its own right."@en ;
   rdfs:comment "dct:source--  This vocabulary"@en ;
   rdfs:label "unconsolidated material"@en ;
-  rdfs:subClassOf :compound_material ;
+  rdfs:subClassOf gsog:Rock_Material ;
 .
 :wacke
   a owl:Class ;
@@ -2303,10 +2297,4 @@ gsoq:Metamorphic_Grade
   rdfs:label "piedra"@es ;
   rdfs:label "wacke"@en ;
   rdfs:subClassOf :clastic_sandstone ;
-.
-gsmg:metamorphosed
-  rdfs:subClassOf gsoq:Metamorphic_Grade ;
-.
-gsmg:not_metamorphosed
-  rdfs:subClassOf gsoq:Metamorphic_Grade ;
 .

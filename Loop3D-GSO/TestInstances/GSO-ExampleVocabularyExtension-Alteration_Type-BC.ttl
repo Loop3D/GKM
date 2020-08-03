@@ -1,9 +1,7 @@
 # baseURI: http://loop3d.org/GSO/ontology/2020/1/alterationtype-bc/ontology
-# imports: http://loop3d.org/GSO/ontology/2020/1/alterationtype/ontology ;
-# prefix: bcalt
+# imports: http://loop3d.org/GSO/ontology/2020/1/alteredrockmaterial/ontology
 
-
-@prefix alty: <http://loop3d.org/GSO/ontology/2020/1/alterationtype/> .
+@prefix alty: <http://loop3d.org/GSO/ontology/2020/1/alteredrockmaterial/> .
 @prefix bcalt: <http://loop3d.org/GSO/ontology/2020/1/alterationtype-bc/> .
 @prefix gsoq: <http://loop3d.org/GSO/ontology/2020/1/geologicquality/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
@@ -12,62 +10,49 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-
+bcalt:disseminated_sulphide_altered_rock
+  a owl:Class ;
+  rdfs:comment "Alteration characterized by introduction of various sulphide minerals as framework constituents in altered rock."@en ;
+  rdfs:comment "dct:source--  British Columbia Geological Survey, 2008, Rock Properties Database"@en ;
+  rdfs:comment "dct:source-- SMR provisional 2020-06-15"@en ;
+  rdfs:label "disseminated sulphide minerals alteration"@en ;
+  rdfs:subClassOf bcalt:introduced_sulphide_altered_rock ;
+.
+bcalt:introduced_sulphide_altered_rock
+  a owl:Class ;
+  rdfs:comment "Alteration characterized by introduction of various sulphide minerals as framework constituents in altered rock."@en ;
+  rdfs:comment "Alteration characterized by introduction of various sulphide minerals into a protolith rock as a product of hydrothermal alteration, includes veinlets, disseminated, replacement..."@en ;
+  rdfs:comment "dct:source--  British Columbia Geological Survey, 2008, Rock Properties Database"@en ;
+  rdfs:comment "dct:source-- SMR provisional 2020-06-15"@en ;
+  rdfs:label "disseminated sulphide minerals alteration"@en ;
+  rdfs:label "sulphide minerals present"@en ;
+  rdfs:subClassOf alty:altered_rock ;
+.
+bcalt:near_surface_oxidized_rock
+  a owl:Class ;
+  rdfs:comment "dct:source--  British Columbia Geological Survey, 2008, Rock Properties Database"@en ;
+  rdfs:comment "dct:source-- SMR provisional 2020-06-15"@en ;
+  rdfs:comment "sulphides replaced by oxide minerals, acid leaching due to sulphide to acid reactions."@en ;
+  rdfs:label "Near surface oxidation alteration"@en ;
+  rdfs:subClassOf alty:altered_rock ;
+.
 bcalt:ontology
   a owl:Ontology ;
   rdfs:comment "Extend CGI alteration type vocabulary to account for alteration reported in British Columbia Geological Survey, 2008, Rock Properties Database"@en ;
-  rdfs:comment "dct:source-- SMR provisional 2020-06-15" @en ;
   rdfs:comment "dct:date-- 2020-06-15 "@en ;
+  rdfs:comment "dct:source -- British Columbia Geological Survey, 2008, Rock Properties Database:  Ministry of Energy, Mines and Petroleum Resources, BC Geological Survey, access online at https://catalogue.data.gov.bc.ca/dataset/2dc8a4f1-c8f8-4603-813e-855af99b7ba5/resource/51f0620a-42cf-458f-821c-bdd895f24fdc/download/of2008-4rpd.xls; see accompanying report http://www.geosciencebc.com/i/pdf/FinalReports/GBCReport_2008-9.pdf"@en ;
+  rdfs:comment "dct:source-- SMR provisional 2020-06-15"@en ;
   rdfs:label "British Columbia Alteration Type"@en ;
-    rdfs:comment "dct:source -- British Columbia Geological Survey, 2008, Rock Properties Database:  Ministry of Energy, Mines and Petroleum Resources, BC Geological Survey, access online at https://catalogue.data.gov.bc.ca/dataset/2dc8a4f1-c8f8-4603-813e-855af99b7ba5/resource/51f0620a-42cf-458f-821c-bdd895f24fdc/download/of2008-4rpd.xls; see accompanying report http://www.geosciencebc.com/i/pdf/FinalReports/GBCReport_2008-9.pdf" @en ;
-    owl:imports alty:ontology ;
+  owl:imports alty:ontology ;
 .
-
-bcalt:disseminated_sulphide_mineral
+bcalt:sulphide_veinlet_altered_rock
   a owl:Class ;
-  rdfs:comment "dct:source--  British Columbia Geological Survey, 2008, Rock Properties Database"@en ;
-  rdfs:comment "Alteration characterized by introduction of various sulphide minerals as framework constituents in altered rock."@en ;
-  rdfs:comment "dct:source-- SMR provisional 2020-06-15" @en ;
-  rdfs:label "disseminated sulphide minerals alteration"@en ;
-  rdfs:subClassOf bcalt:introduced_sulphide_mineral ;
-.
-
-bcalt:introduced_sulphide_mineral
-  a owl:Class ;
-  rdfs:comment "dct:source--  British Columbia Geological Survey, 2008, Rock Properties Database"@en ;
-  rdfs:comment "Alteration characterized by introduction of various sulphide minerals into a protolith rock as a product of hydrothermal alteration, includes veinlets, disseminated, replacement..."@en ;
-  rdfs:comment "dct:source-- SMR provisional 2020-06-15" @en ;
-  rdfs:label "sulphide minerals present"@en ;
-  rdfs:subClassOf alty:altered ;
-.
-
-
-bcalt:sulphide_veinlet_alteration
-  a owl:Class ;
-  rdfs:comment "dct:source--  British Columbia Geological Survey, 2008, Rock Properties Database"@en ;
   rdfs:comment "Alteration characterized by introduction of various sulphide minerals as veinlets in rock body. Silica and other minerals may accompany sulphides in veinlets; alteration halos around veinlets are tricky to describe--TBD!."@en ;
-  rdfs:comment "dct:source-- SMR provisional 2020-06-15" @en ;
+  rdfs:comment "dct:source--  British Columbia Geological Survey, 2008, Rock Properties Database"@en ;
+  rdfs:comment "dct:source-- SMR provisional 2020-06-15"@en ;
   rdfs:label "sulphide minerals in veinlets"@en ;
-  rdfs:subClassOf bcalt:introduced_sulphide_mineral ;
+  rdfs:subClassOf bcalt:introduced_sulphide_altered_rock ;
 .
-
-alty:pyritic_alteration    rdfs:subClassOf bcalt:introduced_sulphide_mineral .
-
-bcalt:introduced_sulphide_mineral
-  a owl:Class ;
-  rdfs:comment "dct:source--  British Columbia Geological Survey, 2008, Rock Properties Database"@en ;
-  rdfs:comment "Alteration characterized by introduction of various sulphide minerals as framework constituents in altered rock."@en ;
-  rdfs:comment "dct:source-- SMR provisional 2020-06-15" @en ;
-  rdfs:label "disseminated sulphide minerals alteration"@en ;
-  rdfs:subClassOf alty:altered ;
-.
-
-
-bcalt:near_surface_oxidation
-  a owl:Class ;
-  rdfs:comment "dct:source--  British Columbia Geological Survey, 2008, Rock Properties Database"@en ;
-  rdfs:comment "sulphides replaced by oxide minerals, acid leaching due to sulphide to acid reactions."@en ;
-  rdfs:comment "dct:source-- SMR provisional 2020-06-15" @en ;
-  rdfs:label "Near surface oxidation alteration"@en ;
-  rdfs:subClassOf alty:altered ;
+alty:pyritic_altered_rock
+  rdfs:subClassOf bcalt:introduced_sulphide_altered_rock ;
 .
