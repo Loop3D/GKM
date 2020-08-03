@@ -12,9 +12,6 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-
-
-
 gsoc:Element
   rdfs:comment "isConstituentOf range restriction to gsog:Mineral, gsog:Rock and gsog:Granular_Material are defined in Geology module"@en ;
   rdfs:subClassOf [
@@ -44,35 +41,6 @@ gsoc:Glass
       owl:onProperty gsoc:isConstituentOf ;
     ] ;
 .
-
-:isTransformedFrom
-  owl:inverseOf :isTransformedInto ;
-.
-:isTransformedInto
-  owl:inverseOf :isTransformedFrom ;
-.
-
-:Fault_Separation
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom :Fault_Displacement ;
-      owl:onProperty gsoc:isQualityOf ;
-    ] ;
-.
-
-:Fault_Slip
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom :Fault_Displacement ;
-      owl:onProperty gsoc:isQualityOf ;
-    ] ;
-.
-
-
-:Fault_Displacement
-  rdfs:comment "Quality that specifies the relative movement between two sides of a fault.  Component qualities include movement sense, separation sense, slip, movement magnitude, movement vector."@en ;
-.
-
 :Additive_Process
   a owl:Class ;
   rdfs:comment "process that introduces new matter into the model space"@en ;
@@ -515,6 +483,7 @@ Contact(x) <--> exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RB
 .
 :Fault_Displacement
   a owl:Class ;
+  rdfs:comment "Quality that specifies the relative movement between two sides of a fault.  Component qualities include movement sense, separation sense, slip, movement magnitude, movement vector."@en ;
   rdfs:label "Fault displacement"@en ;
   rdfs:subClassOf gsoc:Quality ;
   rdfs:subClassOf [
@@ -534,12 +503,22 @@ Contact(x) <--> exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RB
   rdfs:comment "a vector (magnitude and orientation) specifying the distance between the intersection of a surface on opposite sides of a displacment surface. In 3-D is the projection of a vector normal to the displaced surface into the displacment surface, but might also be specified as offset of the intersection of displacement surface and marker surface in some other profile view (e.g. horizontal/map view, or a cross section)"@en ;
   rdfs:label "Separation"@en ;
   rdfs:subClassOf gsoc:Quality ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom :Fault_Displacement ;
+      owl:onProperty gsoc:isQualityOf ;
+    ] ;
 .
 :Fault_Slip
   a owl:Class ;
   rdfs:comment "a vector (magnitude and orientation) that links a peircing point on opposite sides of a displacement surface."@en ;
   rdfs:label "Slip"@en ;
   rdfs:subClassOf gsoc:Quality ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom :Fault_Displacement ;
+      owl:onProperty gsoc:isQualityOf ;
+    ] ;
 .
 :Fault_Zone
   a owl:Class ;
@@ -550,10 +529,17 @@ Contact(x) <--> exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RB
 :Fold
   a owl:Class ;
   rdfs:comment "A curve or bend of a planar structure, such as rock strata, bedding planes, foliation or cleavage. A fold is usually the product of deformation, involving the compression of strata, but may include primary structures, as its definition is descriptive, not genetic. (Neuendorf et al., 2011)."@en ;
+  rdfs:comment "One or more systematically curved layers, surfaces, or lines in a rock body. Fold denotes a structure formed by the deformation of a GeologicStructure to form a structure that may be described by the translation of an abstract line (the fold axis) parallel to itself along some curvilinear path (the fold profile). Folds have a hinge zone (zone of maximum curvature along the surface) and limbs (parts of the deformed surface not in the hinge zone).  Folds are described by an axial surface, hinge line , profile geometry, the solid angle between the limbs, and the relationships between adjacent folded surfaces if the folded structure is a Layering fabric (similar, parallel). (GeoSciML v3.2)"@en ;
+  rdfs:comment "Subclasses are defined based on concave/convex geometry of fold relative to earth surface, and relationship to younging direction in folded strata if known."@en ;
   rdfs:label "Fold"@en ;
   rdfs:seeAlso <http://linked.data.gov.au/def/geofeatures/Fold> ;
   rdfs:subClassOf gsoc:Morphologic_Feature ;
   rdfs:subClassOf :Geologic_Structure ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hostedBy ;
+      owl:someValuesFrom :Geologic_Structure ;
+    ] ;
 .
 :Foliation
   a owl:Class ;
@@ -1211,7 +1197,7 @@ RBT (x) <--> RBD (x) ^ exists z forall y [(isPartOf (y,z) ^ hasHost (z,x)) -> (b
 :Rock_Object
   a owl:Class ;
   rdfs:comment "A part of the Earth that can be identified in some way and that has a Unity property."@en ;
-  rdfs:label "Rock Object  "@en ;
+  rdfs:label "Rock Object"@en ;
   rdfs:subClassOf gsoc:Physical_Object ;
   rdfs:subClassOf :Rock_Body ;
   rdfs:subClassOf [
@@ -1633,6 +1619,7 @@ RBT (x) <--> RBD (x) ^ exists z forall y [(isPartOf (y,z) ^ hasHost (z,x)) -> (b
   rdfs:label "has protolith"@en ;
   rdfs:range :Rock_Material ;
   rdfs:subPropertyOf gsoc:hasPrecursor ;
+  owl:inverseOf :isTransformedInto ;
 .
 :isTransformedInto
   a owl:ObjectProperty ;
@@ -1641,6 +1628,7 @@ RBT (x) <--> RBD (x) ^ exists z forall y [(isPartOf (y,z) ^ hasHost (z,x)) -> (b
   rdfs:label "protolith of"@en ;
   rdfs:range :Rock_Material ;
   rdfs:subPropertyOf gsoc:isFundamentallyRelatedTo ;
+  owl:inverseOf :isTransformedFrom ;
 .
 :lithophysae
   a owl:Class ;
