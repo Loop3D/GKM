@@ -30,15 +30,11 @@
 
 rol:SMR2011-12-16-01
   a gsog:Rock_Object ;
-  gsoc:hasConstituent [
-      a gslth:shale ;
-    ] ;
+  gsoc:hasConstituent [   a gslth:shale  ] ;
   gsoc:hasQuality [
       a gsoq:Diameter ;
       gsoc:hasDataValue "100"^^xsd:decimal ;
-      gsoc:hasUOM [
-          a gsuom:millimeter ;
-        ] ;
+      gsoc:hasUOM [ a gsuom:millimeter ] ;
     ] ;
   gsoc:hasRole [
       a gsog:Rock_Sample ;
@@ -81,7 +77,7 @@ rol:markerbedx
   gsoc:hasConstituent [
       a gslth:conglomerate ;
       gsoc:hasConstituent [
-          a gspt:lithic_clast ;
+          a gsmc:epiclastic_granular_material ;
           gsoc:hasConstituent [
               a gslth:diorite ;
             ] ;
@@ -113,83 +109,64 @@ rol:markerbedx
                   a gsuom:millimeter ;
                 ] ;
             ] ;
-          gsoc:hasRole gsog:Clast ;
+          gsoc:hasRole gsptr:Framework_Clast ;
           rdfs:label "60 percent of clasts are sub-rounded diorite, 6-15 cm diameter"@en ;
         ] ;
       gsoc:hasConstituent [
-          a gspt:lithic_clast ;
-          gsoc:hasConstituent [
-              a gspt:lithic_clast ;
-              gsoc:hasConstituent [
-                  a gslth:granite ;
-                ] ;
-              gsoc:hasQuality [
-                  a gsoc:Proportion ;
-                  gsoc:hasDataValue "40"^^xsd:decimal ;
-                  gsoc:hasUOM [
-                      a gsuom:percent ;
-                    ] ;
-                ] ;
-              gsoc:hasQuality [
-                  a gsoc:Shape ;
-                  gsoc:hasQuality [
-                      a gslth:Grain_Roundness ;
-                      gsoc:hasDataValue "Well rounded"@en ;
-                    ] ;
-                  rdfs:comment "shape is a composite property, with components roundness, aspect ratio"@en ;
-                ] ;
-              gsoc:hasQuality [
-                  a gslth:Grain_Size_Max ;
-                  gsoc:hasDataValue "80"^^xsd:decimal ;
-                  gsoc:hasUOM [
-                      a gsuom:millimeter ;
-                    ] ;
-                ] ;
-              gsoc:hasQuality [
-                  a gslth:Grain_Size_Min ;
-                  gsoc:hasDataValue "30"^^xsd:decimal ;
-                  gsoc:hasUOM [
-                      a gsuom:millimeter ;
-                    ] ;
-                ] ;
-              gsoc:hasRole gsog:Clast ;
-              rdfs:label "40 percent of clasts are well rounded granite, 3-8 cm diameter"@en ;
-            ] ;
-          gsoc:hasQuality [
-              a gsoc:Proportion ;
-              gsoc:hasDataValue "80"^^xsd:decimal ;
-              gsoc:hasUOM [
-                  a gsuom:percent ;
-                ] ;
-              rdfs:label "80 percent of rock is clasts"@en ;
-            ] ;
-          gsoc:hasRole gspt:Framework_Clast ;
-          rdfs:comment "clast-supported conglomerate, 80 percent clasts"@en ;
-          rdfs:label "Framework clasts"@en ;
-        ] ;
-      rdfs:label "Marker bed X conglomeraate"@en ;
+		  a gsmc:epiclastic_granular_material ;
+		  gsoc:hasConstituent [ a gslth:granite ] ;
+		  gsoc:hasQuality [
+			  a gsoc:Proportion ;
+			  gsoc:hasDataValue "40"^^xsd:decimal ;
+			  gsoc:hasUOM [a gsuom:percent  ] ;
+			] ;
+		  gsoc:hasQuality [
+			  a gsoc:Shape ;
+			  gsoc:hasQuality [
+				  a gslth:Grain_Roundness ;
+				  gsoc:hasDataValue "Well rounded"@en ;
+				] ;
+			  rdfs:comment "shape is a composite property, with components roundness, aspect ratio"@en ;
+			] ;
+		  gsoc:hasQuality [
+			  a gslth:Grain_Size_Max ;
+			  gsoc:hasDataValue "80"^^xsd:decimal ;
+			  gsoc:hasUOM [
+				  a gsuom:millimeter ;
+				] ;
+			] ;
+		  gsoc:hasQuality [
+			  a gslth:Grain_Size_Min ;
+			  gsoc:hasDataValue "30"^^xsd:decimal ;
+			  gsoc:hasUOM [
+				  a gsuom:millimeter ;
+				] ;
+			] ;
+		  gsoc:hasRole gsptr:Framework_Clast ;
+		  rdfs:label "40 percent of clasts are well rounded granite, 3-8 cm diameter"@en ;
+		] ;
+	  gsoc:hasQuality [
+		  a gsoc:Proportion ;
+		  gsoc:hasDataValue "80"^^xsd:decimal ;
+		  gsoc:hasUOM [  a gsuom:percent ] ;
+		  rdfs:label "80 percent of rock is conglomerate"@en ;
+		  ] ;
+	  rdfs:comment "clast-supported conglomerate, 80 percent clasts"@en ;
+      rdfs:label "Marker bed X conglomerate"@en ;
     ] ;
   rdfs:label "Marker bed X"@en ;
 .
 rol:ontology
   a owl:Ontology ;
-  owl:imports gspt:ontology ;
   owl:imports <http://loop3d.org/GSO/ontology/2020/1/loop3dmaster> ;
 .
 rol:plutonz
   a gsog:Rock_Object ;
-  gsoc:hasConstituent [
-      a gslth:granite ;
-    ] ;
+  gsoc:hasConstituent [ a gslth:granite ] ;
   gsoc:hasPart [
-      a gslth:metamorphic_rock ;
-      gsoc:hasQuality [
-          a gslth:Rock_Material_Genetic_Category ;
-          gsoc:hasValue gslth:metasedimentary_rock ;
-        ] ;
-      gsoc:hasRole [
-          a gsog:Pendant ;
-        ] ;
+      a gslth:metamorphic_rock;
+	  a gslth:metasedimentary_rock ;
+      gsoc:hasRole [ a gsog:Pendant  ] ;
       gsog:isTransformedFrom rol:formationx ;
     ] ;
   rdfs:label "Pluton Z"@en ;
