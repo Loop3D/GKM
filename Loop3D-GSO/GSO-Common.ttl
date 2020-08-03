@@ -10,14 +10,9 @@
 :Amount_Of_Matter
   a owl:Class ;
   rdfs:comment "The amount of matter type can be subdivided into [a volume] of (1) material (rock material), or (2) state of a material (solid, fluid), to enable designation of lumps of rock or lumps of fluid."@en ;
-  rdfs:comment "The common trait of amounts of matter is that they are endurants with no unity (according to Gangemi et a. 2001 none of them is an essential whole). Amounts of matter - 'stuffs' referred to by mass nouns like 'gold', 'iron', 'wood', 'sand', 'meat', etc. - are mereologically invariant, in the sense that they change their identity when they change some parts."@en ;
+  rdfs:comment "The common trait of amounts of matter is that they are endurants with no unity (according to Gangemi et al. 2001 none of them is an essential whole). Amounts of matter - 'stuffs' referred to by mass nouns like 'gold', 'iron', 'wood', 'sand', 'meat', etc. - are mereologically invariant, in the sense that they change their identity when they change some parts."@en ;
   rdfs:label "Amount of Matter"@en ;
   rdfs:subClassOf :Physical_Endurant ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom :Amount_Of_Matter ;
-      owl:onProperty :hasConstituent ;
-    ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom [
@@ -312,12 +307,6 @@ Need SHACL rule that count Inherant.isPartOf = 0"""@en ;
   rdfs:label "Mean Value Calculation"@en ;
   rdfs:subClassOf :Statistical_Calculation ;
 .
-:Measurement_Process
-  a owl:Class ;
-  rdfs:comment "A process by which the value of some property or quality of an entity is determined.  Conceptually a subclass of prov:Activity."@en ;
-  rdfs:label "Measurement activity "@en ;
-  rdfs:subClassOf :Process ;
-.
 :Minimum_Value_Calculation
   a owl:Class ;
   rdfs:comment "report a minimum value for a value range "@en ;
@@ -341,6 +330,17 @@ Need SHACL rule that count Inherant.isPartOf = 0"""@en ;
   rdfs:comment "An event that results in the direct determination of the value of some property; typically will haveConstituent relation so a Measurement_Activity that describes the observation process."@en ;
   rdfs:label "Observation "@en ;
   rdfs:subClassOf :Determining_Event ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty :hasConstituent ;
+      owl:someValuesFrom :Observation_Process ;
+    ] ;
+.
+:Observation_Process
+  a owl:Class ;
+  rdfs:comment "A process by which the value of some property or quality of an entity is determined.  Conceptually a subclass of prov:Activity."@en ;
+  rdfs:label "Measurement activity "@en ;
+  rdfs:subClassOf :Process ;
 .
 :Part_Feature
   a owl:Class ;
@@ -395,6 +395,7 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
 :Physical_Endurant
   a owl:Class ;
   rdfs:comment "An endurant having a direct physical (at least spatial) quality."@en ;
+  rdfs:label "Physical Endurant"@en ;
   rdfs:subClassOf :Endurant ;
   rdfs:subClassOf [
       a owl:Restriction ;
@@ -579,7 +580,7 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
 .
 :Situation
   a owl:Class ;
-  rdfs:comment "" ;
+  rdfs:comment "distinguishing characteristics are necessary but not reliably sufficien" ;
   rdfs:label "Situation"@en ;
   rdfs:subClassOf :Endurant ;
   rdfs:subClassOf [
@@ -727,7 +728,7 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
 .
 :Ubiquitous_Distribution
   a owl:Class ;
-  rdfs:comment "Quality is everywhere present in the host particular"@en ;
+  rdfs:comment "Quality is everywhere present in the host."@en ;
   rdfs:label "ubiquitous distribution"@en ;
   rdfs:subClassOf :Distribution ;
 .
@@ -749,8 +750,14 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
 :Variable_Distribution
   a owl:Class ;
   rdfs:comment "Quality is not present in all instances of the host particular "@en ;
-  rdfs:label "variable distribution" ;
+  rdfs:label "variable distribution"@en ;
   rdfs:subClassOf :Distribution ;
+.
+:Variable_Intensity
+  a owl:Class ;
+  rdfs:comment "Intensity varies spatially "@en ;
+  rdfs:label "Variable intensity "@en ;
+  rdfs:subClassOf :Intensity ;
 .
 :Weak_Intensity
   a owl:Class ;
@@ -925,6 +932,7 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
 :hasDataValue
   a owl:DatatypeProperty ;
   rdfs:comment "value is a literal, could be a number or string-- xsd:SimpleType"@en ;
+  rdfs:domain :Quality ;
   rdfs:label "has data value"@en ;
   rdfs:range xsd:anySimpleType ;
 .
@@ -952,8 +960,8 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
 .
 :hasIndirectSpatialLocation
   a owl:ObjectProperty ;
-  rdfs:comment "" ;
-  rdfs:label "has indirect spatial location" ;
+  rdfs:comment "Indirect spatial location of a Perdurant or Situation is the union of the spatial location of all participants in Perdurant or parts of the Situation. {@en} " ;
+  rdfs:label "has indirect spatial location"@en ;
   rdfs:subPropertyOf :isSpatiallyRelatedTo ;
 .
 :hasIndirectTemporalLocation
@@ -1016,6 +1024,7 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   rdfs:comment "" ;
   rdfs:label "has role  "@en ;
   rdfs:subPropertyOf :hasInherant ;
+  owl:inverseOf :hasRolePlayer ;
 .
 :hasRoleObject
   a owl:ObjectProperty ;
@@ -1027,6 +1036,7 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   rdfs:comment "" ;
   rdfs:label "has role player  "@en ;
   rdfs:subPropertyOf :inheresIn ;
+  owl:inverseOf :hasRole ;
 .
 :hasSetting
   a owl:ObjectProperty ;
@@ -1034,6 +1044,11 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   rdfs:label "has Setting"@en ;
   rdfs:range :Geologic_Setting ;
   rdfs:subPropertyOf :isFundamentallyRelatedTo ;
+  owl:inverseOf :isSettingFor ;
+.
+:hasSpatialProperty
+  a owl:ObjectProperty ;
+  rdfs:label "has spatial property"@en ;
 .
 :hasUOM
   a owl:ObjectProperty ;
@@ -1094,6 +1109,7 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   a owl:ObjectProperty ;
   a owl:TransitiveProperty ;
   rdfs:subPropertyOf :isFundamentallyRelatedTo ;
+  owl:inverseOf :hasConstituent ;
 .
 :isDerivedFrom
   a owl:ObjectProperty ;
@@ -1170,6 +1186,7 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   rdfs:comment "link from physical property to a class that exhibits the property"@en ;
   rdfs:label "is Property Of"@en ;
   rdfs:subPropertyOf :inheresIn ;
+  owl:inverseOf :hasQuality ;
 .
 :isReferenceFor
   a owl:ObjectProperty ;
