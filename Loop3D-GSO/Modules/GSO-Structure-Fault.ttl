@@ -26,7 +26,7 @@ gsog:Fault_Zone
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty gsoc:isColocatedWith ;
-      owl:someValuesFrom gsgu:deformation_unit ;
+      owl:someValuesFrom gsgu:Deformation_Unit ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
@@ -34,17 +34,6 @@ gsog:Fault_Zone
       owl:someValuesFrom gsog:Deformation ;
     ] ;
 .
-
-
-gsfa:Fault_Movement_Sense
-  rdfs:subClassOf gsoc:Quality ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom gsog:Fault_Displacement ;
-      owl:onProperty gsoc:isQualityOf ;
-    ] ;
-.
-
 gsfa:Fault_Movement_Magnitude
   a owl:Class ;
   rdfs:comment "magnitude of slip or separation"@en ;
@@ -70,6 +59,12 @@ gsfa:Fault_Movement_Sense
   a owl:Class ;
   rdfs:comment "Quality that specifies the relative sense of displacement (right, left, up, down) between rocks on opposites of a fault."@en ;
   rdfs:label "Fault movement sense "@en ;
+  rdfs:subClassOf gsoc:Quality ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom gsog:Fault_Displacement ;
+      owl:onProperty gsoc:isQualityOf ;
+    ] ;
 .
 gsfa:Fault_Movement_Vector
   a owl:Class ;
