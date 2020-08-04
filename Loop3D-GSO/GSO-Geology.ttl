@@ -66,13 +66,6 @@ gsoc:Glass
       owl:someValuesFrom :Epoch ;
     ] ;
 .
-:Aggregate_non-clastic_particle_material
-  a owl:Class ;
-  rdfs:comment "Granular material consisting of non-clastic particles that are composed of an aggregation of particles."@en ;
-  rdfs:comment "dct:source--  CGI GTWG ParticleType vocabulary"@en ;
-  rdfs:label "Aggregate non clastic particle material"@en ;
-  rdfs:subClassOf :Crystallized_Particle_Material ;
-.
 :Alteration_Degree
   a owl:Class ;
   rdfs:comment "Specification of the strength of observed alteration. Can be used on Geologic_Unit or Rock_Material"@en ;
@@ -129,17 +122,6 @@ gsoc:Glass
   rdfs:subClassOf :Foliation ;
   rdfs:subClassOf :Sedimentary_Fabric ;
 .
-:Bedding_Package
-  a owl:Class ;
-  rdfs:comment "A sub-map scale sequence of strata, e.g. bouma sequence, fining-upward sequence, interbedded sandstone and mudstone... "@en ;
-  rdfs:label "Bedding Package "@en ;
-  rdfs:subClassOf :Lithosome ;
-.
-:Biogenic_Granular_Material
-  a owl:Class ;
-  rdfs:comment "Granular material that consists of particles formed by the physiological activities of organisms (plants, animals, protozoa). Includes body parts that are incorporated into a sediment aggregate, as well as fecal pellets or coprolites.  Includes biogenic objects that are whole or fragmentary (bioclasts), can be fossilized or non-fossilized use to describe body fossil components in a fossiliferous rock, e.g. crinoid columnals, radiolaria in chert, ammonites, shell hash...."@en ;
-  rdfs:subClassOf :Granular_Particle_Material ;
-.
 :Boundary_Stratotype
   a owl:Class ;
   rdfs:comment "A stratigraphic section that contains a designated point in a stratigraphic sequence of essentially continuous deposition, preferably marine, chosen for its correlation potential. http://www.stratigraphy.org/upload/bak/chron.htm"@en ;
@@ -186,12 +168,6 @@ gsoc:Glass
   rdfs:comment "A sedimentary fabric in which a framework of rock fragments in contact with each other forms the body of a clastic rock, typically with finer-grained matrix or cement in the intersticies between fragments"@en ;
   rdfs:label "Clast supported "@en ;
   rdfs:subClassOf :Sedimentary_Fabric ;
-.
-:Clastic_Granular_Material
-  a owl:Class ;
-  rdfs:comment "Granular material consisting of particles that are constituents in clastic sedimentary rock/sediment or volcaniclastic rock/sediment --conglomerate clast types, sand components, clay matrix."@en ;
-  rdfs:label "Clastic granular material"@en ;
-  rdfs:subClassOf :Granular_Particle_Material ;
 .
 :Complex
   a owl:Class ;
@@ -249,29 +225,11 @@ Contact(x) <--> exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RB
       owl:qualifiedCardinality "0"^^xsd:nonNegativeInteger ;
     ] ;
 .
-:Crystal
-  a owl:Class ;
-  rdfs:comment "An object composed of a single mineral species, with a characteristic geometrical shape, bounded by flat faces with specific, characteristic orientations reflecting a consistent, highly ordered internal arrangement of constituent atoms."@en ;
-  rdfs:label "Crystal"@en ;
-  rdfs:subClassOf :Rock_Object ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom :Mineral ;
-      owl:onProperty gsoc:hasConstituent ;
-    ] ;
-.
 :Crystal_Constituent
   a owl:Class ;
   rdfs:comment "constituent is formed by crystallization from melt or by metamorphic processes. Distinct from constituent roles related to clastic processes, or diagenetic processes. "@en ;
   rdfs:label "crystal constituent "@en ;
   rdfs:subClassOf :Amount_Of_Matter_Role ;
-.
-:Crystallized_Particle_Material
-  a owl:Class ;
-  rdfs:comment "A granular material consisting of particles/grains that are the product of crystallization during formation of a rock material (see NADMC1 2004). Serves to distinguish crystalline from granular rocks (Struik, 2002). Includes constituents crystallized in evaporite environments, during diagenesis or hydrothermal alteration, or in other low-temperature environments."@en ;
-  rdfs:comment "Use to describe crystalline grain types in igneous, metamorphic and metasomatic rocks, e.g. the plagioclase phenocrysts, groundmass quartz, biotite phenocrysts, Andalusite porphyroblasts..."@en ;
-  rdfs:label "Crystallized particle material"@en ;
-  rdfs:subClassOf :Granular_Material ;
 .
 :Crystallographic_Preferred_Orientation_
   a owl:Class ;
@@ -284,12 +242,6 @@ Contact(x) <--> exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RB
   rdfs:comment "Parent class for processes that change the shape or location of geologic entities. Includes translation of rock bodies, and strain-related processes resulting in changes of shape of a rock body, including folding, faulting, shearing, or fabric development, deformation may be either brittle or ductile."@en ;
   rdfs:label "Deformation process"@en ;
   rdfs:subClassOf :Geologic_Process ;
-.
-:Deformation_Granular_Material
-  a owl:Class ;
-  rdfs:comment "Granular material that consists of fragments formed by comminution, tectonic grain size reduction, fracturing or other deformation processes operating on a pre-existing rock material. Fragments may have been displaced or mixed by processes in a deformation zone, but have not been transported by surficial sedimentary processes.  Includes fragments related to solution collapse."@en ;
-  rdfs:label "Deformation-related granular material "@en ;
-  rdfs:subClassOf :Granular_Particle_Material ;
 .
 :Disseminated
   a owl:Class ;
@@ -840,13 +792,6 @@ Probably should specify a Temporal Reference System used to assign coordinate va
         ] ;
     ] ;
 .
-:Granular_Particle_Material
-  a owl:Class ;
-  rdfs:comment "Material consisting of a collection of pre-existing objects (particles, grains) before incorporation into a particulate aggregate. \\...a component of solid material that has the form of grains, clasts, fragments, or whole objects of any size, shape, composition, texture, and structure.\\ (NADMSC SLTTs, 2004)"@en ;
-  rdfs:comment "dct:source--  NADM SLTTs 2004"@en ;
-  rdfs:label "Granular particle material"@en ;
-  rdfs:subClassOf :Granular_Material ;
-.
 :Group
   a owl:Class ;
   rdfs:subClassOf :Lithostratigraphic_Unit ;
@@ -993,26 +938,6 @@ Probably should specify a Temporal Reference System used to assign coordinate va
       owl:onProperty gsoc:hasConstituent ;
       owl:someValuesFrom gsoc:Element ;
     ] ;
-.
-:Mono-mineralic_crystal_particle_material
-  a owl:Class ;
-  rdfs:comment "Typical grain constituent in a phaneritic igneous or metamorphic rock, visible to naked eye or with hand lense. Particle are individual mineral grains that have crystallized from melt or through metamorphic processes.  In deformed rocks, these my have some subgrain structure but at the scale of description are considered individual particles in a granular material constituent of a rock."@en ;
-  rdfs:label "mono-mineralic crystal particle "@en ;
-  rdfs:subClassOf :Crystallized_Particle_Material ;
-.
-:Nodule
-  a owl:Class ;
-  rdfs:comment "An irregularly rounded mass of a mineral or mineral aggregate normally having a warty or knobby surface and no internal structure, usually with a contrasting composition from the enclosing sediment or rock matrix in which it is embedded, and that can be separated as a discrete mass from the host material."@en ;
-  rdfs:comment "dct:source--  Neuendorf et al., 2005"@en ;
-  rdfs:label "Nodule"@en ;
-  rdfs:subClassOf :Rock_Object ;
-.
-:Orb
-  a owl:Class ;
-  rdfs:comment "Igneous constituent typically mafic, equant rounded spheroid with concentric mineralogic banding"@en ;
-  rdfs:comment "dct:source--  CGI GTWG vocabulary"@en ;
-  rdfs:label "Orb"@en ;
-  rdfs:subClassOf :Rock_Object ;
 .
 :Outcrop
   a owl:Class ;
@@ -1231,14 +1156,6 @@ RBT (x) <--> RBD (x) ^ exists z forall y [(isPartOf (y,z) ^ hasHost (z,x)) -> (b
       owl:someValuesFrom :Rock_Body ;
     ] ;
 .
-:Schlieren
-  a owl:Class ;
-  rdfs:comment "a tabular body, generally a few cm to a few metres long, within a plutonic rock, having different mineral proportions and colour to the surrounding rock"@en ;
-  rdfs:comment "could be considered a primary structure or  a role ..."@en ;
-  rdfs:comment "dct:source--  GGIPAC"@en ;
-  rdfs:label "Schlieren"@en ;
-  rdfs:subClassOf :Rock_Body_Role ;
-.
 :Sedimentary_Fabric
   a owl:Class ;
   rdfs:comment "Fabrics in sedimentary rock like \"clast-supported\",  \"matrix-supported\", \"cross-bedding\", and \"graded bed\" are considered kinds of Integral Feature/GeologicStructure because they depend on the configuration of parts of a rock body."@en ;
@@ -1401,13 +1318,6 @@ RBT (x) <--> RBD (x) ^ exists z forall y [(isPartOf (y,z) ^ hasHost (z,x)) -> (b
         ] ;
     ] ;
 .
-:Syngenetic_Nodule
-  a owl:Class ;
-  rdfs:comment "Particle formed by chemical precipitation at sediment-water interface, lacking layered structure that characterizes coated grains. Includes glauconite grains, manganese nodules, phosphate grains. Manganese nodule--\\An irregular, black to brown, friable"@en ;
-  rdfs:comment "dct:source--  NADM SLTTs 2004, Jackson 1997"@en ;
-  rdfs:label "syngenetic nodule"@en ;
-  rdfs:subClassOf :Nodule ;
-.
 :System
   a owl:Class ;
   rdfs:subClassOf :Chronostratigraphic_Unit ;
@@ -1438,13 +1348,6 @@ RBT (x) <--> RBD (x) ^ exists z forall y [(isPartOf (y,z) ^ hasHost (z,x)) -> (b
   rdfs:comment "Glass formed by rapid cooling of lava "@en ;
   rdfs:label "Volcanic Glass  "@en ;
   rdfs:subClassOf gsoc:Glass ;
-.
-:Xenolith
-  a owl:Class ;
-  rdfs:comment "Inclusion of pre-intrusive country rock in intrusive igneous matrix, cm to about 10 meter diameter in longest dimension. Use term pendant for larger blocks or for lithologically heterogeneous blocks."@en ;
-  rdfs:comment "dct:source--  Neuendorf et al. 2005, Cobbing, 2000, This vocabulary"@en ;
-  rdfs:label "Xenolith"@en ;
-  rdfs:subClassOf :Inclusion ;
 .
 :amygdule
   a owl:Class ;
@@ -1553,20 +1456,6 @@ RBT (x) <--> RBD (x) ^ exists z forall y [(isPartOf (y,z) ^ hasHost (z,x)) -> (b
   rdfs:label "younger bounding time interval"@en ;
   rdfs:range :Geologic_Date_Interval ;
   rdfs:subPropertyOf gsoc:age_finishes ;
-.
-:hydrothermal_vein
-  a owl:Class ;
-  rdfs:comment "A tabular or sheet-like part of a compound material formed by hydrothermal (or other metasomatic) mineral filling a fracture, may be associated with replacement of the host rock adjacent to the body"@en ;
-  rdfs:comment "dct:source--  Neuendorf et al 2005, CGI GTWG vocabulary"@en ;
-  rdfs:label "hydrothermal vein"@en ;
-  rdfs:subClassOf :Intrusive_sheet ;
-.
-:igneous_vein
-  a owl:Class ;
-  rdfs:comment "A tabular or sheet like part of a compound material formed by the intrusion of magma. Syn dike"@en ;
-  rdfs:comment "dct:source--  CGI GTWG vocabulary"@en ;
-  rdfs:label "igneous vein"@en ;
-  rdfs:subClassOf :Intrusive_sheet ;
 .
 :intrudes
   a owl:ObjectProperty ;
@@ -1721,13 +1610,6 @@ RBT (x) <--> RBD (x) ^ exists z forall y [(isPartOf (y,z) ^ hasHost (z,x)) -> (b
   rdfs:range :Geologic_Date_Interval ;
   rdfs:subPropertyOf gsoc:age_met_by ;
 .
-:pyroclastic_granular_material
-  a owl:Class ;
-  rdfs:comment "Particles ejected during a volcanic eruption. (Jackson, 1997, p. 521). Clast whose origin is a direct result of volcanic process (excludes fragments in lava autobreccia) and has not been reworked by sedimentary processes (Gillespie and Styles 1999). Pyroclasts."@en ;
-  rdfs:comment "Use for description of pyroclastic rocks"@en ;
-  rdfs:label "Pyroclastic granular material"@en ;
-  rdfs:subClassOf :Clastic_Granular_Material ;
-.
 :underlies
   a owl:ObjectProperty ;
   rdfs:comment "Relationship between rock bodies in which subject body is below and in contact with the object body in geographic refernce system (the object might or might not be younger than the subject). Generally applied to stratified rock bodies"@en ;
@@ -1752,4 +1634,71 @@ RBT (x) <--> RBD (x) ^ exists z forall y [(isPartOf (y,z) ^ hasHost (z,x)) -> (b
 .
 gspr:Ductile_Flow
   a owl:Class ;
+.
+<http://loop3d.org/GSO/ontology/2020/1/geologicunit/rockbodyrole/Schlieren>
+  a owl:Class ;
+  rdfs:comment "a tabular body, generally a few cm to a few metres long, within a plutonic rock, having different mineral proportions and colour to the surrounding rock"@en ;
+  rdfs:comment "could be considered a primary structure or  a role ..."@en ;
+  rdfs:comment "dct:source--  GGIPAC"@en ;
+  rdfs:label "Schlieren"@en ;
+  rdfs:subClassOf :Rock_Body_Role ;
+.
+<http://loop3d.org/GSO/ontology/2020/1/geologicunit/rockbodyrole/Xenolith>
+  a owl:Class ;
+  rdfs:comment "Inclusion of pre-intrusive country rock in intrusive igneous matrix, cm to about 10 meter diameter in longest dimension. Use term pendant for larger blocks or for lithologically heterogeneous blocks."@en ;
+  rdfs:comment "dct:source--  Neuendorf et al. 2005, Cobbing, 2000, This vocabulary"@en ;
+  rdfs:label "Xenolith"@en ;
+  rdfs:subClassOf :Inclusion ;
+.
+<http://loop3d.org/GSO/ontology/2020/1/geologicunit/rockbodyrole/hydrothermal_vein>
+  a owl:Class ;
+  rdfs:comment "A tabular or sheet-like part of a compound material formed by hydrothermal (or other metasomatic) mineral filling a fracture, may be associated with replacement of the host rock adjacent to the body"@en ;
+  rdfs:comment "dct:source--  Neuendorf et al 2005, CGI GTWG vocabulary"@en ;
+  rdfs:label "hydrothermal vein"@en ;
+  rdfs:subClassOf :Intrusive_sheet ;
+.
+<http://loop3d.org/GSO/ontology/2020/1/geologicunit/rockbodyrole/igneous_vein>
+  a owl:Class ;
+  rdfs:comment "A tabular or sheet like part of a compound material formed by the intrusion of magma. Syn dike"@en ;
+  rdfs:comment "dct:source--  CGI GTWG vocabulary"@en ;
+  rdfs:label "igneous vein"@en ;
+  rdfs:subClassOf :Intrusive_sheet ;
+.
+<http://loop3d.org/GSO/ontology/2020/1/geologicunit/rockobject/Bedding_Package>
+  a owl:Class ;
+  rdfs:comment "A sub-map scale sequence of strata, e.g. bouma sequence, fining-upward sequence, interbedded sandstone and mudstone... "@en ;
+  rdfs:label "Bedding Package "@en ;
+  rdfs:subClassOf :Lithosome ;
+.
+<http://loop3d.org/GSO/ontology/2020/1/geologicunit/rockobject/Crystal>
+  a owl:Class ;
+  rdfs:comment "An object composed of a single mineral species, with a characteristic geometrical shape, bounded by flat faces with specific, characteristic orientations reflecting a consistent, highly ordered internal arrangement of constituent atoms."@en ;
+  rdfs:label "Crystal"@en ;
+  rdfs:subClassOf :Rock_Object ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom :Mineral ;
+      owl:onProperty gsoc:hasConstituent ;
+    ] ;
+.
+<http://loop3d.org/GSO/ontology/2020/1/geologicunit/rockobject/Nodule>
+  a owl:Class ;
+  rdfs:comment "An irregularly rounded mass of a mineral or mineral aggregate normally having a warty or knobby surface and no internal structure, usually with a contrasting composition from the enclosing sediment or rock matrix in which it is embedded, and that can be separated as a discrete mass from the host material."@en ;
+  rdfs:comment "dct:source--  Neuendorf et al., 2005"@en ;
+  rdfs:label "Nodule"@en ;
+  rdfs:subClassOf :Rock_Object ;
+.
+<http://loop3d.org/GSO/ontology/2020/1/geologicunit/rockobject/Orb>
+  a owl:Class ;
+  rdfs:comment "Igneous constituent typically mafic, equant rounded spheroid with concentric mineralogic banding"@en ;
+  rdfs:comment "dct:source--  CGI GTWG vocabulary"@en ;
+  rdfs:label "Orb"@en ;
+  rdfs:subClassOf :Rock_Object ;
+.
+<http://loop3d.org/GSO/ontology/2020/1/geologicunit/rockobject/Syngenetic_Nodule>
+  a owl:Class ;
+  rdfs:comment "Particle formed by chemical precipitation at sediment-water interface, lacking layered structure that characterizes coated grains. Includes glauconite grains, manganese nodules, phosphate grains. Manganese nodule--\\An irregular, black to brown, friable"@en ;
+  rdfs:comment "dct:source--  NADM SLTTs 2004, Jackson 1997"@en ;
+  rdfs:label "syngenetic nodule"@en ;
+  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2020/1/geologicunit/rockobject/Nodule> ;
 .

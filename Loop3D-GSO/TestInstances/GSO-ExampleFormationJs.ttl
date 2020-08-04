@@ -1,6 +1,4 @@
 # baseURI: http://loop3d.org/GSO/ontology/2020/1/ex-formationJs/ontology
-# imports: http://loop3d.org/GSO/ontology/2020/1/geologicquality/ontology
-# imports: http://loop3d.org/GSO/ontology/2020/1/lithology/particletype/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/loop3dmaster
 
 @prefix con: <http://loop3d.org/GSO/ontology/2020/1/ex-complexcontact#> .
@@ -8,7 +6,6 @@
 @prefix gsen: <http://loop3d.org/GSO/ontology/2020/1/eventenvironment> .
 @prefix gsgu: <http://loop3d.org/GSO/ontology/2020/1/geologicunit/> .
 @prefix gslth: <http://loop3d.org/GSO/ontology/2020/1/lithology/> .
-@prefix gsmc: <http://loop3d.org/GSO/ontology/2020/1/lithology/materialcategory/> .
 @prefix gsmf: <http://loop3d.org/GSO/ontology/2020/1/metamorphicfacies/> .
 @prefix gsmin: <http://loop3d.org/GSO/ontology/2020/1/mineral/> .
 @prefix gsoc: <http://loop3d.org/GSO/ontology/2020/1/common/> .
@@ -16,7 +13,8 @@
 @prefix gsoq: <http://loop3d.org/GSO/ontology/2020/1/geologicquality/> .
 @prefix gspr: <http://loop3d.org/GSO/ontology/2020/1/geologicprocess/> .
 @prefix gsptr: <http://loop3d.org/GSO/ontology/2020/1/lithology/particlerole/> .
-@prefix gsrbp: <http://loop3d.org/GSO/ontology/2020/1/geologicunit/rockbodypart/> .
+@prefix gsro: <http://loop3d.org/GSO/ontology/2020/1/geologicunit/rockobject/> .
+@prefix gsrbr: <http://loop3d.org/GSO/ontology/2020/1/geologicunit/rockbodyrole/> .
 @prefix gstime: <http://loop3d.org/GSO/ontology/2020/1/ischart/> .
 @prefix gsuom: <http://loop3d.org/GSO/ontology/2020/1/uom/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
@@ -58,7 +56,7 @@ ejs:JsFormation
   rdfs:label "Js Formation"@en ;
 .
 ejs:JsFormation-lower
-  a gsrbp:stratigraphic_part ;
+  a <http://loop3d.org/GSO/ontology/2020/1/geologicunit/rockobject/Stratigraphic_Part> ;
   gsoc:hasPart ejs:JsFormationMarker-6_4 ;
   gsoc:hasPart ejs:baseJs-6 ;
   gsoc:hasPart ejs:stratPart_1 ;
@@ -68,16 +66,16 @@ ejs:JsFormation-lower
   rdfs:comment "underlies, overlies, within are subproperty of relatedTo"@en ;
 .
 ejs:JsFormation-upper
-  a gsrbp:stratigraphic_part ;
+  a <http://loop3d.org/GSO/ontology/2020/1/geologicunit/rockobject/Stratigraphic_Part> ;
   gsoc:hasConstituent [
-      a gslth:limestone ;
+      a gslth:Limestone ;
       gsoc:hasConstituent [
-          a gsmc:material_fossil_granular_material ;
+          a <http://loop3d.org/GSO/ontology/2020/1/lithology/granularmaterial/Material_Fossil_Particle_Material> ;
           gsoc:hasRole gsptr:Floating_Clast ;
           gsoc:isDerivedFrom <https://en.wikipedia.org/wiki/Ammonitida> ;
         ] ;
       gsoc:hasConstituent [
-          a gsmc:micrite ;
+          a <http://loop3d.org/GSO/ontology/2020/1/lithology/granularmaterial/Micrite> ;
           gsoc:hasConstituent [
               a gsmin:calcite ;
             ] ;
@@ -87,7 +85,7 @@ ejs:JsFormation-upper
   rdfs:comment "massive limestone with abundant ammonites in a micrite matrix" ;
 .
 ejs:JsFormationMarker-6_4
-  a gsrbp:marker_bed ;
+  a <http://loop3d.org/GSO/ontology/2020/1/geologicunit/rockobject/Marker_Bed> ;
   gsoc:hasConstituent <http://uri.org/Ballyloghlin_tuff> ;
   gsoc:hasPart [
       a gsog:Rock_Body_Bottom ;
@@ -155,17 +153,17 @@ ejs:contactJs-stratPart_2-stratPart_3
   rdfs:label "internal gradational contact "@en ;
 .
 ejs:stratPart_1
-  a gsrbp:stratigraphic_part ;
-  gsoc:hasConstituent gslth:arenite ;
-  gsoc:hasConstituent gslth:clastic_conglomerate ;
+  a <http://loop3d.org/GSO/ontology/2020/1/geologicunit/rockobject/Stratigraphic_Part> ;
+  gsoc:hasConstituent gslth:Arenite ;
+  gsoc:hasConstituent gslth:Clastic_Conglomerate ;
   gsoc:hasPart ejs:baseJs-6 ;
   gsog:underlies ejs:stratPart_2 ;
   rdfs:comment "need to capture gradational fining upward relationship"@en ;
 .
 ejs:stratPart_2
-  a gsrbp:stratigraphic_part ;
+  a <http://loop3d.org/GSO/ontology/2020/1/geologicunit/rockobject/Stratigraphic_Part> ;
   gsoc:hasConstituent [
-      a gslth:clastic_sandstone ;
+      a gslth:Clastic_Sandstone ;
     ] ;
   gsoc:hasPart [
       a gsog:Rock_Body_Bottom ;
@@ -177,9 +175,9 @@ ejs:stratPart_2
   gsog:underlies ejs:stratPart_3 ;
 .
 ejs:stratPart_3
-  a gsrbp:stratigraphic_part ;
+  a <http://loop3d.org/GSO/ontology/2020/1/geologicunit/rockobject/Stratigraphic_Part> ;
   gsoc:hasConstituent [
-      a gslth:clastic_sandstone ;
+      a gslth:Clastic_Sandstone ;
       rdfs:label "fine-Grained sandstone"@en ;
     ] ;
   gsoc:hasPart [

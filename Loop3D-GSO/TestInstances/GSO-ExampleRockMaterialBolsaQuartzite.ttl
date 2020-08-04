@@ -1,7 +1,5 @@
 # baseURI: http://loop3d.org/GSO/ontology/2020/1/ex-materialCb
 # imports: http://loop3d.org/GSO/ontology/2020/1/ex-complexcontact/ontology
-# imports: http://loop3d.org/GSO/ontology/2020/1/geologicquality/ontology
-# imports: http://loop3d.org/GSO/ontology/2020/1/lithology/particletype/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/loop3dmaster
 # prefix: bol
 
@@ -10,9 +8,8 @@
 @prefix con: <http://loop3d.org/GSO/ontology/2020/1/ex-complexcontact#> .
 @prefix gsel: <http://loop3d.org/GSO/ontology/2020/1/element/> .
 @prefix gsen: <http://loop3d.org/GSO/ontology/2020/1/eventenvironment> .
-@prefix gsgc: <http://loop3d.org/GSO/ontology/2020/1/lithology/geneticcategory/> .
+@prefix gsgm: <http://loop3d.org/GSO/ontology/2020/1/lithology/granularmaterial/> .
 @prefix gslth: <http://loop3d.org/GSO/ontology/2020/1/lithology/> .
-@prefix gsmc: <http://loop3d.org/GSO/ontology/2020/1/lithology/materialcategory/> .
 @prefix gsmin: <http://loop3d.org/GSO/ontology/2020/1/mineral/> .
 @prefix gsoc: <http://loop3d.org/GSO/ontology/2020/1/common/> .
 @prefix gsog: <http://loop3d.org/GSO/ontology/2020/1/geologicfeature/> .
@@ -39,12 +36,11 @@
 .
 bol:Bolsa_Quartzite_Material
   a gsog:Rock_Material ;
-  a gslth:arenite ;
-  a gsmc:arkosic_epiclastic_material ;
+  a gslth:Arenite ;
   gsoc:hasConstituent bol:Clay_matrix ;
   gsoc:hasConstituent bol:Quartz_grains ;
   gsoc:hasConstituent [
-      a gsmc:epiclastic_granular_material ;
+      a gsgm:Epiclastic_Particle_Material ;
       gsoc:hasConstituent [
           a gsmin:feldspar ;
           gsoc:hasConstituent [
@@ -73,32 +69,42 @@ bol:Bolsa_Quartzite_Material
           rdfs:label "proportion of feldspar grains"@en ;
         ] ;
       gsoc:hasQuality [
-		gslth:Particle_Shape [
-			gsoc:hasQuality [
-			  a gslth:Grain_Roundness ;
-			  gsoc:hasValue [ a gsps:sub_angular ] ;
-			  rdfs:label "subangular grains"@en ;
-			] ;
-		  gsoc:hasQuality [
-			  a gslth:Grain_Roundness ;
-			  gsoc:hasValue [ a gsps:sub_rounded ] ;
-			  rdfs:label "subrounded grains"@en ;
-			] 
-		  ]
-		];
-      gsoc:hasQuality [
           a gslth:Grain_Size_Max ;
           gsoc:hasDataValue "5"^^xsd:decimal ;
-          gsoc:hasUOM [a gsuom:millimeter ] ;
+          gsoc:hasUOM [
+              a gsuom:millimeter ;
+            ] ;
           rdfs:label "5 mm maximum"@en ;
         ] ;
       gsoc:hasQuality [
           a gslth:Grain_Size_Min ;
           gsoc:hasDataValue .02 ;
-          gsoc:hasUOM [ a gsuom:millimeter ] ;
+          gsoc:hasUOM [
+              a gsuom:millimeter ;
+            ] ;
           rdfs:label "0.02 mm minimum"@en ;
         ] ;
-      gsoc:hasRole [ a gsog:Clast ] ;
+      gsoc:hasQuality [
+          gslth:Particle_Shape [
+              gsoc:hasQuality [
+                  a gslth:Grain_Roundness ;
+                  gsoc:hasValue [
+                      a gsps:sub_angular ;
+                    ] ;
+                  rdfs:label "subangular grains"@en ;
+                ] ;
+              gsoc:hasQuality [
+                  a gslth:Grain_Roundness ;
+                  gsoc:hasValue [
+                      a gsps:sub_rounded ;
+                    ] ;
+                  rdfs:label "subrounded grains"@en ;
+                ] ;
+            ] ;
+        ] ;
+      gsoc:hasRole [
+          a gsog:Clast ;
+        ] ;
       rdfs:label "feldspar grains, inline blank node example" ;
     ] ;
   gsoc:hasQuality [
@@ -113,18 +119,17 @@ bol:Bolsa_Quartzite_Material
         ] ;
       rdfs:label "well consolidated" ;
     ] ;
-
+  gsoc:isConstituentOf con:CbFormation ;
   gsoc:isParticipantIn [
       a gspr:Traction_Saltation_or_Suspension_Deposition ;
       rdfs:label "clastic sedimentary genesis" ;
     ] ;
-  gsoc:isConstituentOf con:CbFormation ;
   rdfs:comment "describe proportions of constituents, feldspar with blank node, quartz and matrix with label nodes to test variations"@en ;
   rdfs:label "Bolsa Quartzite, basal arkose"@en ;
 .
 bol:Clay_matrix
   a gsog:Granular_Material ;
-  a gsmc:Syngenetic_granular_material ;
+  a gsgm:Syngenetic_Particle_Material ;
   gsoc:hasConstituent [
       a gsmin:claymineral ;
     ] ;
@@ -149,26 +154,16 @@ bol:Clay_matrix
   rdfs:label "Clay matrix constituent"@en ;
 .
 bol:Quartz_grains
-  a gsog:Clastic_Granular_Material ;
-  a gsmc:epiclastic_granular_material ;
+  a gsgm:Clastic_Granular_Material ;
+  a gsgm:Epiclastic_Particle_Material ;
   gsoc:hasConstituent bol:Quartz_mineral ;
   gsoc:hasQuality [
       a gsoc:Proportion ;
       gsoc:hasDataValue "45"^^xsd:decimal ;
-      gsoc:hasUOM [a gsuom:percent ] 
+      gsoc:hasUOM [
+          a gsuom:percent ;
+        ] ;
     ] ;
-	
-  gsoc:hasQuality [
-	a gslth:Particle_Shape ;
-	gsoc:hasQuality [
-	  a gslth:Grain_Roundness ;
-	  gsoc:hasValue [
-		  a gsps:rounded ;
-		  a gsps:sub_rounded 
-		] ;
-	  rdfs:label "subrounded to rounded grains"@en ;
-	] 
-	];
   gsoc:hasQuality [
       a gslth:Grain_Size_Average ;
       gsoc:hasDataValue "3"^^xsd:decimal ;
@@ -196,12 +191,26 @@ bol:Quartz_grains
   gsoc:hasQuality [
       a gslth:Grain_Size_Min ;
       gsoc:hasDataValue 0.05 ;
-      gsoc:hasUOM [a gsuom:millimeter ] ;
+      gsoc:hasUOM [
+          a gsuom:millimeter ;
+        ] ;
     ] ;
-  gsoc:hasRole [a gsog:Clast ] ;
+  gsoc:hasQuality [
+      a gslth:Particle_Shape ;
+      gsoc:hasQuality [
+          a gslth:Grain_Roundness ;
+          gsoc:hasValue [
+              a gsps:rounded ;
+              a gsps:sub_rounded ;
+            ] ;
+          rdfs:label "subrounded to rounded grains"@en ;
+        ] ;
+    ] ;
+  gsoc:hasRole [
+      a gsog:Clast ;
+    ] ;
   rdfs:label "Quartz grains in Bolsa_Quartzite_Material" ;
 .
-
 bol:Quartz_mineral
   a gsmin:quartz ;
   gsoc:hasConstituent [
