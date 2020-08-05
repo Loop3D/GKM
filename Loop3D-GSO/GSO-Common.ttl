@@ -111,10 +111,15 @@
       owl:onProperty :isParticipantIn ;
       owl:someValuesFrom [
           a owl:Class ;
-          owl:unionOf (
-              :Event
-              :Process
-            ) ;
+          owl:unionOf [
+              a rdf:List ;
+              rdf:first :Event ;
+              rdf:rest [
+                  a rdf:List ;
+                  rdf:first :Process ;
+                  rdf:rest () ;
+                ] ;
+            ] ;
         ] ;
     ] ;
   owl:disjointWith :Perdurant ;
@@ -876,7 +881,6 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   rdfs:subPropertyOf :age_disjoint ;
 .
 :containedBy
-  a owl:NamedIndividual ;
   a owl:ObjectProperty ;
   rdfs:comment "The interior and boundary of the subject spatial region intesect only the interior of the object spatial region. Subject region is in the interior of the object region."@en ;
   rdfs:comment "dct:source--  https://en.wikipedia.org/wiki/DE-9IM, from Clementini and others(1993, 1994) based on the seminal works of Egenhofer and others (1990, 1991)"@en ;
@@ -932,7 +936,6 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
 :hasDataValue
   a owl:DatatypeProperty ;
   rdfs:comment "value is a literal, could be a number or string-- xsd:SimpleType"@en ;
-  rdfs:domain :Quality ;
   rdfs:label "has data value"@en ;
   rdfs:range xsd:anySimpleType ;
 .
@@ -1036,7 +1039,6 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   rdfs:comment "" ;
   rdfs:label "has role player  "@en ;
   rdfs:subPropertyOf :inheresIn ;
-  owl:inverseOf :hasRole ;
 .
 :hasSetting
   a owl:ObjectProperty ;
@@ -1109,7 +1111,6 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   a owl:ObjectProperty ;
   a owl:TransitiveProperty ;
   rdfs:subPropertyOf :isFundamentallyRelatedTo ;
-  owl:inverseOf :hasConstituent ;
 .
 :isDerivedFrom
   a owl:ObjectProperty ;
@@ -1186,7 +1187,6 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   rdfs:comment "link from physical property to a class that exhibits the property"@en ;
   rdfs:label "is Property Of"@en ;
   rdfs:subPropertyOf :inheresIn ;
-  owl:inverseOf :hasQuality ;
 .
 :isReferenceFor
   a owl:ObjectProperty ;
@@ -1271,7 +1271,6 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   rdfs:subPropertyOf :isSpatiallyRelatedTo ;
 .
 :spatiallyTouch
-  a owl:NamedIndividual ;
   a owl:ObjectProperty ;
   rdfs:comment "dct:source--  https://en.wikipedia.org/wiki/DE-9IM, from Clementini and others(1993, 1994) based on the seminal works of Egenhofer and others (1990, 1991)" ;
   rdfs:comment "skos:altLabel--  spatially meet"@en ;
