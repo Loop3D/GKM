@@ -10,6 +10,46 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
+
+<http://loop3d.org/GSO/ontology/2020/1/geologicunit/rockobject/Bedding_Package>
+  a owl:Class ;
+  rdfs:comment "A sub-map scale sequence of strata, e.g. bouma sequence, fining-upward sequence, interbedded sandstone and mudstone... "@en ;
+  rdfs:label "Bedding Package "@en ;
+  rdfs:subClassOf :Lithosome ;
+.
+<http://loop3d.org/GSO/ontology/2020/1/geologicunit/rockobject/Crystal>
+  a owl:Class ;
+  rdfs:comment "An object composed of a single mineral species, with a characteristic geometrical shape, bounded by flat faces with specific, characteristic orientations reflecting a consistent, highly ordered internal arrangement of constituent atoms."@en ;
+  rdfs:label "Crystal"@en ;
+  rdfs:subClassOf :Rock_Object ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom :Mineral ;
+      owl:onProperty gsoc:hasConstituent ;
+    ] ;
+.
+<http://loop3d.org/GSO/ontology/2020/1/geologicunit/rockobject/Nodule>
+  a owl:Class ;
+  rdfs:comment "An irregularly rounded mass of a mineral or mineral aggregate normally having a warty or knobby surface and no internal structure, usually with a contrasting composition from the enclosing sediment or rock matrix in which it is embedded, and that can be separated as a discrete mass from the host material."@en ;
+  rdfs:comment "dct:source--  Neuendorf et al., 2005"@en ;
+  rdfs:label "Nodule"@en ;
+  rdfs:subClassOf :Rock_Object ;
+.
+<http://loop3d.org/GSO/ontology/2020/1/geologicunit/rockobject/Orb>
+  a owl:Class ;
+  rdfs:comment "Igneous constituent typically mafic, equant rounded spheroid with concentric mineralogic banding"@en ;
+  rdfs:comment "dct:source--  CGI GTWG vocabulary"@en ;
+  rdfs:label "Orb"@en ;
+  rdfs:subClassOf :Rock_Object ;
+.
+<http://loop3d.org/GSO/ontology/2020/1/geologicunit/rockobject/Syngenetic_Nodule>
+  a owl:Class ;
+  rdfs:comment "Particle formed by chemical precipitation at sediment-water interface, lacking layered structure that characterizes coated grains. Includes glauconite grains, manganese nodules, phosphate grains. Manganese nodule--\\An irregular, black to brown, friable"@en ;
+  rdfs:comment "dct:source--  NADM SLTTs 2004, Jackson 1997"@en ;
+  rdfs:label "syngenetic nodule"@en ;
+  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2020/1/geologicunit/rockobject/Nodule> ;
+.
+
 gsro:Bed_Lithosome
   a owl:Class ;
   rdfs:comment "Lithosome in lithostratigraphic unit that occurs as individual beds interleaved with other constituents on the outcrop (m) scale or larger."@en ;
