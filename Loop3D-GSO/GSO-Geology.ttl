@@ -240,7 +240,7 @@ Contact(x) <--> exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RB
 :Deformation
   a owl:Class ;
   rdfs:comment "Parent class for processes that change the shape or location of geologic entities. Includes translation of rock bodies, and strain-related processes resulting in changes of shape of a rock body, including folding, faulting, shearing, or fabric development, deformation may be either brittle or ductile."@en ;
-  rdfs:label "Deformation process"@en ;
+  rdfs:label "Deformation Process"@en ;
   rdfs:subClassOf :Geologic_Process ;
 .
 :Disseminated
@@ -528,10 +528,10 @@ Contact(x) <--> exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RB
       owl:onProperty gsoc:isPartOf ;
     ] ;
 .
-:Fossil
+:Fossil_Object
   a owl:Class ;
   rdfs:comment "NOTE--this class is intended to represent individual fossil objects. If some kind of material fossils are granular constituents in a sedimentary rock, they should be represented using 'Biogenic_Granular_Material, with sub classes for different kinds of fossils, e.g. in crinoid grainstone, radiolarian chert, diatomite."@en ;
-  rdfs:label "Fossil"@en ;
+  rdfs:label "Fossil object"@en ;
   rdfs:subClassOf :Rock_Object ;
 .
 :Fracture
@@ -819,9 +819,9 @@ Probably should specify a Temporal Reference System used to assign coordinate va
   rdfs:label "Inclusion"@en ;
   rdfs:subClassOf :Rock_Body_Role ;
 .
-:Intrusive_sheet
+:Intrusive_Sheet
   a owl:Class ;
-  rdfs:comment "A tabular or sheet-like part of a compound material, genetic origin not specified"@en ;
+  rdfs:comment "A tabular or sheet-like part of a rock body, genetic origin includes Intrusion_Process. Includes dikes, sills, and hydrothermal veins."@en ;
   rdfs:comment "dct:source--  CGI GTWG vocabualry"@en ;
   rdfs:label "Intrusive sheet"@en ;
   rdfs:subClassOf :Rock_Body_Role ;
@@ -883,6 +883,12 @@ Probably should specify a Temporal Reference System used to assign coordinate va
       owl:allValuesFrom :Lithostratigraphic_Unit ;
       owl:onProperty gsoc:isPartOf ;
     ] ;
+.
+:Main_Body
+  a owl:Class ;
+  rdfs:comment "Role played by rock body part or constituent that forms most of the unit, and is host to parts in other roles." ;
+  rdfs:label "Main body role "@en ;
+  rdfs:subClassOf :Rock_Body_Role ;
 .
 :Matrix
   a owl:Class ;
@@ -1059,7 +1065,7 @@ The exterior-facing material of a rock body.  A rock body boundary can have a th
 .
 :Rock_Body_Role
   a owl:Class ;
-  rdfs:comment "Roles that relate rock bodies"@en ;
+  rdfs:comment "Roles that relate rock body parts"@en ;
   rdfs:label "Rock Body Role"@en ;
   rdfs:subClassOf gsoc:Role ;
   rdfs:subClassOf [
@@ -1343,12 +1349,6 @@ RBT (x) <--> RBD (x) ^ exists z forall y [(isPartOf (y,z) ^ hasHost (z,x)) -> (b
       owl:onProperty gsoc:hasOutput ;
     ] ;
 .
-:Volcanic_Glass
-  a owl:Class ;
-  rdfs:comment "Glass formed by rapid cooling of lava "@en ;
-  rdfs:label "Volcanic Glass  "@en ;
-  rdfs:subClassOf gsoc:Glass ;
-.
 :amygdule
   a owl:Class ;
   rdfs:comment "Cavity filled with secondary minerals, denotes that cavities are filled vesicles, thus restricted to volcanic rock. Have to model as a cavity/with material.  Rock hosts cavity"@en ;
@@ -1402,12 +1402,6 @@ RBT (x) <--> RBD (x) ^ exists z forall y [(isPartOf (y,z) ^ hasHost (z,x)) -> (b
   rdfs:comment "dct:source--  based on Neuendorf et al 2005"@en ;
   rdfs:label "fenestra"@en ;
   rdfs:subClassOf :vug ;
-.
-:hasAgeDate
-  a owl:ObjectProperty ;
-  rdfs:comment "property to assigne a Geologic_Time_Date to a Perdurant."@en ;
-  rdfs:label "has age date"@en ;
-  rdfs:range gsoc:Time_Instant ;
 .
 :hasDate
   a owl:DatatypeProperty ;
@@ -1634,71 +1628,4 @@ RBT (x) <--> RBD (x) ^ exists z forall y [(isPartOf (y,z) ^ hasHost (z,x)) -> (b
 .
 gspr:Ductile_Flow
   a owl:Class ;
-.
-<http://loop3d.org/GSO/ontology/2020/1/geologicunit/rockbodyrole/Schlieren>
-  a owl:Class ;
-  rdfs:comment "a tabular body, generally a few cm to a few metres long, within a plutonic rock, having different mineral proportions and colour to the surrounding rock"@en ;
-  rdfs:comment "could be considered a primary structure or  a role ..."@en ;
-  rdfs:comment "dct:source--  GGIPAC"@en ;
-  rdfs:label "Schlieren"@en ;
-  rdfs:subClassOf :Rock_Body_Role ;
-.
-<http://loop3d.org/GSO/ontology/2020/1/geologicunit/rockbodyrole/Xenolith>
-  a owl:Class ;
-  rdfs:comment "Inclusion of pre-intrusive country rock in intrusive igneous matrix, cm to about 10 meter diameter in longest dimension. Use term pendant for larger blocks or for lithologically heterogeneous blocks."@en ;
-  rdfs:comment "dct:source--  Neuendorf et al. 2005, Cobbing, 2000, This vocabulary"@en ;
-  rdfs:label "Xenolith"@en ;
-  rdfs:subClassOf :Inclusion ;
-.
-<http://loop3d.org/GSO/ontology/2020/1/geologicunit/rockbodyrole/hydrothermal_vein>
-  a owl:Class ;
-  rdfs:comment "A tabular or sheet-like part of a compound material formed by hydrothermal (or other metasomatic) mineral filling a fracture, may be associated with replacement of the host rock adjacent to the body"@en ;
-  rdfs:comment "dct:source--  Neuendorf et al 2005, CGI GTWG vocabulary"@en ;
-  rdfs:label "hydrothermal vein"@en ;
-  rdfs:subClassOf :Intrusive_sheet ;
-.
-<http://loop3d.org/GSO/ontology/2020/1/geologicunit/rockbodyrole/igneous_vein>
-  a owl:Class ;
-  rdfs:comment "A tabular or sheet like part of a compound material formed by the intrusion of magma. Syn dike"@en ;
-  rdfs:comment "dct:source--  CGI GTWG vocabulary"@en ;
-  rdfs:label "igneous vein"@en ;
-  rdfs:subClassOf :Intrusive_sheet ;
-.
-<http://loop3d.org/GSO/ontology/2020/1/geologicunit/rockobject/Bedding_Package>
-  a owl:Class ;
-  rdfs:comment "A sub-map scale sequence of strata, e.g. bouma sequence, fining-upward sequence, interbedded sandstone and mudstone... "@en ;
-  rdfs:label "Bedding Package "@en ;
-  rdfs:subClassOf :Lithosome ;
-.
-<http://loop3d.org/GSO/ontology/2020/1/geologicunit/rockobject/Crystal>
-  a owl:Class ;
-  rdfs:comment "An object composed of a single mineral species, with a characteristic geometrical shape, bounded by flat faces with specific, characteristic orientations reflecting a consistent, highly ordered internal arrangement of constituent atoms."@en ;
-  rdfs:label "Crystal"@en ;
-  rdfs:subClassOf :Rock_Object ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom :Mineral ;
-      owl:onProperty gsoc:hasConstituent ;
-    ] ;
-.
-<http://loop3d.org/GSO/ontology/2020/1/geologicunit/rockobject/Nodule>
-  a owl:Class ;
-  rdfs:comment "An irregularly rounded mass of a mineral or mineral aggregate normally having a warty or knobby surface and no internal structure, usually with a contrasting composition from the enclosing sediment or rock matrix in which it is embedded, and that can be separated as a discrete mass from the host material."@en ;
-  rdfs:comment "dct:source--  Neuendorf et al., 2005"@en ;
-  rdfs:label "Nodule"@en ;
-  rdfs:subClassOf :Rock_Object ;
-.
-<http://loop3d.org/GSO/ontology/2020/1/geologicunit/rockobject/Orb>
-  a owl:Class ;
-  rdfs:comment "Igneous constituent typically mafic, equant rounded spheroid with concentric mineralogic banding"@en ;
-  rdfs:comment "dct:source--  CGI GTWG vocabulary"@en ;
-  rdfs:label "Orb"@en ;
-  rdfs:subClassOf :Rock_Object ;
-.
-<http://loop3d.org/GSO/ontology/2020/1/geologicunit/rockobject/Syngenetic_Nodule>
-  a owl:Class ;
-  rdfs:comment "Particle formed by chemical precipitation at sediment-water interface, lacking layered structure that characterizes coated grains. Includes glauconite grains, manganese nodules, phosphate grains. Manganese nodule--\\An irregular, black to brown, friable"@en ;
-  rdfs:comment "dct:source--  NADM SLTTs 2004, Jackson 1997"@en ;
-  rdfs:label "syngenetic nodule"@en ;
-  rdfs:subClassOf <http://loop3d.org/GSO/ontology/2020/1/geologicunit/rockobject/Nodule> ;
 .

@@ -17,12 +17,29 @@ gsro:Bed_Lithosome
   rdfs:label "bed lithosome"@en ;
   rdfs:subClassOf gsog:Lithosome ;
 .
+gsro:Bedding_Package
+  a owl:Class ;
+  rdfs:comment "A sub-map scale sequence of strata, e.g. bouma sequence, fining-upward sequence, interbedded sandstone and mudstone... "@en ;
+  rdfs:label "Bedding Package "@en ;
+  rdfs:subClassOf gsog:Lithosome ;
+.
 gsro:Concretion
   a owl:Class ;
   rdfs:comment "A hard, compact mass or aggregate of mineral matter, normally subspherical but commonly oblate, disc-shaped or irregular. Formed from precipitation from solution about a nucleus or centre."@en ;
   rdfs:comment "dct:source--  Neuendorf et al. 2005"@en ;
   rdfs:label "Concretion"@en ;
   rdfs:subClassOf gsog:Rock_Object ;
+.
+gsro:Crystal
+  a owl:Class ;
+  rdfs:comment "An object composed of a single mineral species, with a characteristic geometrical shape, bounded by flat faces with specific, characteristic orientations reflecting a consistent, highly ordered internal arrangement of constituent atoms."@en ;
+  rdfs:label "Crystal"@en ;
+  rdfs:subClassOf gsog:Rock_Object ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom gsog:Mineral ;
+      owl:onProperty gsoc:hasConstituent ;
+    ] ;
 .
 gsro:Cyclic_Bedding_Package
   a owl:Class ;
@@ -59,12 +76,33 @@ gsro:Marker_Bed
   rdfs:label "marker bed"@en ;
   rdfs:subClassOf gsog:Bed ;
 .
+gsro:Nodule
+  a owl:Class ;
+  rdfs:comment "An irregularly rounded mass of a mineral or mineral aggregate normally having a warty or knobby surface and no internal structure, usually with a contrasting composition from the enclosing sediment or rock matrix in which it is embedded, and that can be separated as a discrete mass from the host material."@en ;
+  rdfs:comment "dct:source--  Neuendorf et al., 2005"@en ;
+  rdfs:label "Nodule"@en ;
+  rdfs:subClassOf gsog:Rock_Object ;
+.
+gsro:Orb
+  a owl:Class ;
+  rdfs:comment "Igneous constituent typically mafic, equant rounded spheroid with concentric mineralogic banding"@en ;
+  rdfs:comment "dct:source--  CGI GTWG vocabulary"@en ;
+  rdfs:label "Orb"@en ;
+  rdfs:subClassOf gsog:Rock_Object ;
+.
 gsro:Stratigraphic_Part
   a owl:Class ;
   rdfs:comment "A geologic unit part that occupies a particular stratigraphic position within a geologic unit. Part is a particular body of rock, but is not designated with one of the formal lithostratigraphic or lithdemic rank terms."@en ;
   rdfs:comment "dct:source--  based on CGI rockbodypart vocabulary 2016-11-21; hierarchy position modified in GSO."@en ;
   rdfs:label "stratigraphic part"@en ;
   rdfs:subClassOf gsog:Lithostratigraphic_Unit ;
+.
+gsro:Syngenetic_Nodule
+  a owl:Class ;
+  rdfs:comment "Particle formed by chemical precipitation at sediment-water interface, lacking layered structure that characterizes coated grains. Includes glauconite grains, manganese nodules, phosphate grains. Manganese nodule--\\An irregular, black to brown, friable"@en ;
+  rdfs:comment "dct:source--  NADM SLTTs 2004, Jackson 1997"@en ;
+  rdfs:label "syngenetic nodule"@en ;
+  rdfs:subClassOf gsro:Nodule ;
 .
 gsro:Vein_Or_Dike_Lithosome
   a owl:Class ;
