@@ -27,6 +27,15 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
+gsoc:hasDataValue
+  rdfs:domain [
+      a owl:Class ;
+      owl:unionOf (
+          gsoc:Quality
+          gsog:Geologic_Time_Date
+        ) ;
+    ] ;
+.
 gsog:Granular_Material
   a owl:Class ;
   rdfs:comment "Granular material properties are bound in the Rock_Material module"@en ;
@@ -948,7 +957,6 @@ gslth:Glass_Rich_Igneous_Rock
 .
 gslth:Glassy_Igneous_Rock
   a owl:Class ;
-  rdfs:comment "Change percent criteria from 90 to 80 percent for version 2009."@en ;
   rdfs:comment "Igneous rock that consists of greater than 80 percent massive glass."@en ;
   rdfs:comment "Note that this category is used for massive glassy rocks. Much of the pyroclastic material in a pyroclastic rock may be composed of glass, but the rock is named based on its fragmental nature."@en ;
   rdfs:comment "dct:source--  This vocabulary"@en ;
@@ -994,15 +1002,10 @@ gslth:Grain_Size
       a owl:Restriction ;
       owl:allValuesFrom [
           a owl:Class ;
-          owl:unionOf [
-              a rdf:List ;
-              rdf:first gsog:Granular_Material ;
-              rdf:rest [
-                  a rdf:List ;
-                  rdf:first gsog:Rock_Material ;
-                  rdf:rest () ;
-                ] ;
-            ] ;
+          owl:unionOf (
+              gsog:Granular_Material
+              gsog:Rock_Material
+            ) ;
         ] ;
       owl:onProperty gsoc:isQualityOf ;
     ] ;
@@ -1603,15 +1606,10 @@ gslth:Particle_Sorting
       a owl:Restriction ;
       owl:allValuesFrom [
           a owl:Class ;
-          owl:unionOf [
-              a rdf:List ;
-              rdf:first gsog:Granular_Material ;
-              rdf:rest [
-                  a rdf:List ;
-                  rdf:first gsog:Rock_Material ;
-                  rdf:rest () ;
-                ] ;
-            ] ;
+          owl:unionOf (
+              gsog:Granular_Material
+              gsog:Rock_Material
+            ) ;
         ] ;
       owl:onProperty gsoc:isQualityOf ;
     ] ;

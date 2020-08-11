@@ -15,34 +15,35 @@
 # imports: http://loop3d.org/GSO/ontology/2020/1/geologicunit/rockbodyrole/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/geologicunit/rockobject/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/ischart/ontology
+# imports: http://loop3d.org/GSO/ontology/2020/1/lithology/granularmaterial/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/lithology/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/lithology/particleaspectratio/ontology
-# imports: http://loop3d.org/GSO/ontology/2020/1/lithology/granularmaterial/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/mineral/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/uom/ontology
 
 @prefix : <http://loop3d.org/GSO/ontology/2020/1/loop3dmaster/> .
 @prefix alty: <http://loop3d.org/GSO/ontology/2020/1/alteredrockmaterial/> .
 @prefix fold: <http://loop3d.org/GSO/ontology/2020/1/geologicstructure/fold/> .
+@prefix gsar: <http://loop3d.org/GSO/ontology/2020/1/lithology/particleaspectratio/> .
 @prefix gsel: <http://loop3d.org/GSO/ontology/2020/1/element/> .
 @prefix gsen: <http://loop3d.org/GSO/ontology/2020/1/eventenvironment/> .
 @prefix gsfa: <http://loop3d.org/GSO/ontology/2020/1/geologicstructure/fault/> .
 @prefix gsfo: <http://loop3d.org/GSO/ontology/2020/1/geologicstructure/foliation/> .
 @prefix gscn: <http://loop3d.org/GSO/ontology/2020/1/geologicstructure/contact/> .
+@prefix gsgm: <http://loop3d.org/GSO/ontology/2020/1/lithology/granularmaterial/> .
 @prefix gsgu: <http://loop3d.org/GSO/ontology/2020/1/geologicunit/> .
+@prefix gslth: <http://loop3d.org/GSO/ontology/2020/1/lithology/> .
 @prefix gsmin: <http://loop3d.org/GSO/ontology/2020/1/mineral/> .
 @prefix gsoc: <http://loop3d.org/GSO/ontology/2020/1/common/> .
 @prefix gsog: <http://loop3d.org/GSO/ontology/2020/1/geologicfeature/> .
 @prefix gsol: <http://loop3d.org/GSO/ontology/2020/1/geologicstructure/lineation/> .
 @prefix gsoq: <http://loop3d.org/GSO/ontology/2020/1/geologicquality/> .
 @prefix gspr: <http://loop3d.org/GSO/ontology/2020/1/geologicprocess/> .
-@prefix gslth: <http://loop3d.org/GSO/ontology/2020/1/lithology/> .
-@prefix gsgm: <http://loop3d.org/GSO/ontology/2020/1/lithology/granularmaterial/> .
 @prefix gsps: <http://loop3d.org/GSO/ontology/2020/1/lithology/particleroundness/> .
 @prefix gsptr: <http://loop3d.org/GSO/ontology/2020/1/lithology/particlerole/> .
-@prefix gsro: <http://loop3d.org/GSO/ontology/2020/1/geologicunit/rockobject/> .
 @prefix gsrbr: <http://loop3d.org/GSO/ontology/2020/1/geologicunit/rockbodyrole/> .
-@prefix gsar: <http://loop3d.org/GSO/ontology/2020/1/lithology/particleaspectratio/> .
+@prefix gsro: <http://loop3d.org/GSO/ontology/2020/1/geologicunit/rockobject/> .
+@prefix gssf: <http://loop3d.org/GSO/ontology/2020/1/geologicstructure/contact/> .
 @prefix gstime: <http://loop3d.org/GSO/ontology/2020/1/ischart/> .
 @prefix gsuom: <http://loop3d.org/GSO/ontology/2020/1/uom/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
@@ -52,7 +53,13 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-
+gsoq:Thickness
+  rdfs:comment "Quality of a tabular or sheet like body that is its linear dimension normal to its long dimensions. Could be quantified numerically or categorically (e.g. thin, thick, very thick)"@en ;
+  rdfs:label "Thickness"@en ;
+.
+gslth:Glassy_Igneous_Rock
+  rdfs:subClassOf gsoc:Glass ;
+.
 <http://loop3d.org/GSO/ontology/2020/1/loop3dmaster>
   a owl:Ontology ;
   rdfs:comment "This is a shell to import all the various peices needed for geologic instances."@en ;
@@ -60,22 +67,24 @@
   owl:imports fold:ontology ;
   owl:imports gsar:ontology ;
   owl:imports gscn:ontology ;
+  owl:imports gsoc:ontology ;
   owl:imports gsel:ontology ;
   owl:imports gsen:ontology ;
-  owl:imports gsfa:ontology ;
-  owl:imports gsfo:ontology ;
-  owl:imports gsgm:ontology ;
-  owl:imports gsgu:ontology ;
-  owl:imports gslth:ontology ;
-  owl:imports gsmin:ontology ;
-  owl:imports gsoc:ontology ;
   owl:imports gsog:ontology ;
-  owl:imports gsol:ontology ;
-  owl:imports gsoq:ontology ;
   owl:imports gspr:ontology ;
+  owl:imports gsoq:ontology ;
+  owl:imports gssf:ontology ;
+  owl:imports gsfa:ontology ;
+  owl:imports fold:ontology ;
+  owl:imports gsfo:ontology ;
+  owl:imports gsol:ontology ;
+  owl:imports gsgu:ontology ;
   owl:imports gsrbr:ontology ;
   owl:imports gsro:ontology ;
   owl:imports gstime:ontology ;
+  owl:imports gsgm:ontology ;
+  owl:imports gslth:ontology ;
+  owl:imports gsar:ontology ;
+  owl:imports gsmin:ontology ;
   owl:imports gsuom:ontology ;
 .
-

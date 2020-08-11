@@ -11,11 +11,6 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-gsoc:Plane_Orientation_Convention
-  a owl:Class ;
-  rdfs:label "Plane orientation convention"@en ;
-  rdfs:subClassOf gsoc:Observation_Process ;
-.
 gsoq:Average_Measured_Value
   a owl:Class ;
   rdfs:comment "" ;
@@ -24,7 +19,7 @@ gsoq:Average_Measured_Value
 .
 gsoq:Azimuth
   a owl:Class ;
-  rdfs:comment "Bearing of a horizontal line relative to north. Use for specifying the orientation of planar features."@en ;
+  rdfs:comment "Bearing of a horizontal line relative to north. Use for specifying the orientation of planar or linear features."@en ;
   rdfs:label "Azimuth"@en ;
   rdfs:subClassOf gsoq:Orientation ;
   rdfs:subClassOf [
@@ -71,12 +66,6 @@ gsoq:Dip
       owl:someValuesFrom gsoq:Measured_Value ;
     ] ;
 .
-gsoq:Dip_Dip_Direction
-  a owl:Class ;
-  rdfs:comment "The orientation measurement consists of a dip and a dip direction. Dip is the angle that the structural surface (eg bedding, fault plane) makes with the horizontal measured perpendicular to the strike of the structure and in the vertical plane Dip direction is the azimuth perpindicular to the strike of the structure"@en ;
-  rdfs:label "Dip and Dip Direction"@en ;
-  rdfs:subClassOf gsoc:Plane_Orientation_Convention ;
-.
 gsoq:Facing
   a owl:Class ;
   rdfs:comment "property to specify if a surface is directed, i.e. has a top and bottom. Values: {upright, overturned, unknown}"@en ;
@@ -92,10 +81,15 @@ gsoq:Line_Orientation
       a owl:Restriction ;
       owl:allValuesFrom [
           a owl:Class ;
-          owl:unionOf (
-              gsoq:Azimuth
-              gsoq:Plunge
-            ) ;
+          owl:unionOf [
+              a rdf:List ;
+              rdf:first gsoq:Azimuth ;
+              rdf:rest [
+                  a rdf:List ;
+                  rdf:first gsoq:Plunge ;
+                  rdf:rest () ;
+                ] ;
+            ] ;
         ] ;
       owl:onProperty gsoc:hasQuality ;
     ] ;
@@ -192,10 +186,36 @@ gsoq:Peak_Temperature
   rdfs:label "Peak temperature"@en ;
   rdfs:subClassOf gsoc:Quality ;
 .
-gsoq:Plane_Orientation
+gsoq:Plane_Orientation_dip_dipdir
   a owl:Class ;
-  rdfs:comment "specification of the orientation of a plane in space, using a dip (inclination of line of maximum imnclination contained in the plane, measured positive downward in degrees from local horizontal) and either a strike or dip direction"@en ;
+  rdfs:comment "specification of the orientation of a plane in space, using a dip (inclination of line of maximum inclination contained in the plane, measured positive downward in degrees from local horizontal) and the azimuth normal to the strike in the dip direction"@en ;
   rdfs:label "Plane orientation (dip and dip direction)"@en ;
+  rdfs:subClassOf gsoq:Orientation ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom [
+          a owl:Class ;
+          owl:unionOf [
+              a rdf:List ;
+              rdf:first gsoq:Azimuth ;
+              rdf:rest [
+                  a rdf:List ;
+                  rdf:first gsoq:Dip ;
+                  rdf:rest [
+                      a rdf:List ;
+                      rdf:first gsoq:Facing ;
+                      rdf:rest () ;
+                    ] ;
+                ] ;
+            ] ;
+        ] ;
+      owl:onProperty gsoc:hasQuality ;
+    ] ;
+.
+gsoq:Plane_Orientation_strike_dip
+  a owl:Class ;
+  rdfs:comment "A plane orientation reported with the Azimuth value in the direction of strike such that the dip is to the right when facing in the azimuth direction."@en ;
+  rdfs:label "Plane orientation (strike and dip)"@en ;
   rdfs:subClassOf gsoq:Orientation ;
   rdfs:subClassOf [
       a owl:Restriction ;
@@ -208,11 +228,6 @@ gsoq:Plane_Orientation
             ) ;
         ] ;
       owl:onProperty gsoc:hasQuality ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty gsoc:determinedBy ;
-      owl:someValuesFrom gsoc:Plane_Orientation_Convention ;
     ] ;
 .
 gsoq:Plunge
@@ -232,26 +247,9 @@ gsoq:Size
   rdfs:label "Size"@en ;
   rdfs:subClassOf gsoc:Quality ;
 .
-gsoq:Strike_Dip_Azimuth360
-  a owl:Class ;
-  rdfs:comment "" ;
-  rdfs:label "Azimuth Dip 0-360 "@en ;
-  rdfs:subClassOf gsoc:Plane_Orientation_Convention ;
-.
-gsoq:Strike_Dip_RHR
-  a owl:Class ;
-  rdfs:comment "The strike and dip of planar data is listed according to the ‘right-hand rule’ or, as one looks along the strike direction, the surface dips to the right. Dip is the angle that the structural surface (eg bedding, fault plane) makes with the horizontal measured perpindicular to the strike of the structure and in the vertical plane"@en ;
-  rdfs:label "Right hand rule strike and dip"@en ;
-  rdfs:subClassOf gsoc:Plane_Orientation_Convention ;
-.
 gsoq:Thickness
   a owl:Class ;
   rdfs:subClassOf gsoq:Size ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty gsoc:hasQuality ;
-      owl:someValuesFrom gsoc:Unit_of_Measure ;
-    ] ;
 .
 gsoq:Unknown_Facing
   a owl:Class ;
