@@ -1,0 +1,51 @@
+gsoc:hasDirectTemporalLocation 
+	[ rdf:type gsog:Geologic_Time_Date ;
+	  gsoc:age_started_by gstime:Neoproterozoic ;
+	  rdfs:label "Neoproterozoic Age"@en
+	] ,
+						
+						
+gsoc:hasDirectTemporalLocation		
+   [ rdf:type gsog:Geologic_Time_Interval ;
+		 gsoc:age_started_by 
+			[ rdf:type gsoc:Time_Numeric_Position ;
+			  gsoc:determinedBy 
+				[ rdf:type gsoc:Inference ;
+				  rdfs:comment "TBD -- adopt conventions for better representation of data provenance" ,
+				  rdfs:comment "dct:source https://eprints.ucm.es/59104/1/0656.pdf  
+				   youngest single crystal detrital zircons in Lower Villalba unit, sub concordant 206Pb/238U date from single crystals. (Fernandez-Suarez et al. 2000a)" 
+				] ;
+			gsoc:hasNumericPosition "700"^^xsd:decimal ;
+			gsoc:hasTRS [ 
+				rdf:type gsog:Chronometric_Geologic_Time
+				hasUOM: gsuom:ma
+				]
+			] ;
+		  gsog:age_finished_by
+			[ rdf:type gsoc:Time_Numeric_Position ;
+				gsoc:determinedBy [ rdf:type gsoc:Inference ;
+					rdfs:comment "TBD -- adopt conventions for better representation of data provenance",
+					rdfs:comment "approximate age of plutons intruding correlative Tineo Series (Fernandez-Suarez et al. 2000a) dct:source https://eprints.ucm.es/59104/1/0656.pdf"
+				] ;
+				gsoc:hasNumericPosition "600"^^xsd:decimal ;
+				gsoc:hasTRS [ 
+					rdf:type gsog:Chronometric_Geologic_Time
+					hasUOM: gsuom:ma
+				]
+			] ;
+		  rdfs:label "Neoproterozoic, approximately 700-600 Ma"@en
+		] 
+		
+		
+  gsoc:hasDirectTemporalLocation [
+      a gsog:Geologic_Time_Interval ;
+      gsoc:age_started_by [
+		a gsoc:Time_Nominal_Position
+		gsoc:hasNominalPosition gstime:Cambrian ] ;
+      gsoc:age_finished_by [
+		a gsoc:Time_Nominal_Position
+		gsoc:hasNominalPosition gstime:Mississippian ];
+      rdfs:description "lower Paleozoic age specified as the interval between Cambrian and Mississippian. gstime instances are assumed to instantiate classes that have a defined TRS (e.g. https://stratigraphy.org/icschart/ChronostratChart2012)" ;
+      rdfs:label "Lower Paleozoic Age"@en ;
+    ] ;
+ 
