@@ -7,6 +7,18 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
+:hasDataValue
+  rdfs:domain :Quality ;
+.
+
+:Spatial_Location
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty :hasDataValue ;
+      owl:someValuesFrom xsd:string ;
+    ] ;
+.
+
 :Amount_Of_Matter
   a owl:Class ;
   rdfs:comment "The amount of matter type can be subdivided into [a volume] of (1) material (rock material), or (2) state of a material (solid, fluid), to enable designation of lumps of rock or lumps of fluid."@en ;
@@ -697,6 +709,17 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   rdfs:label "strong development" ;
   rdfs:subClassOf :Intensity ;
 .
+:Temporal_Location
+  a owl:Class ;
+  rdfs:comment "time coordinate location for a time instant"@en ;
+  rdfs:label "Temporal location "@en ;
+  rdfs:subClassOf :Quality ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty :hasDataValue ;
+      owl:someValuesFrom xsd:anySimpleType ;
+    ] ;
+.
 :Time_Instant
   a owl:Class ;
   rdfs:comment "represents a point location in time."@en ;
@@ -1287,3 +1310,45 @@ xsd:anySimpleType
 xsd:date
   a rdfs:Datatype ;
 .
+[
+  a owl:Class ;
+  owl:unionOf (
+      xsd:dateTime
+      xsd:decimal
+    ) ;
+].
+[
+  a owl:Class ;
+  owl:unionOf (
+      xsd:dateTime
+      xsd:decimal
+    ) ;
+].
+[
+  a owl:Class ;
+  owl:unionOf (
+      xsd:dateTime
+      xsd:decimal
+    ) ;
+].
+[
+  a owl:Class ;
+  owl:unionOf (
+      xsd:decimal
+      xsd:dateTime
+    ) ;
+].
+[
+  a owl:Class ;
+  owl:unionOf (
+      xsd:decimal
+      xsd:dateTime
+    ) ;
+].
+[
+  a owl:Class ;
+  owl:unionOf (
+      xsd:decimal
+      xsd:dateTime
+    ) ;
+].
