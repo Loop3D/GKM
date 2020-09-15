@@ -7,18 +7,6 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-:hasDataValue
-  rdfs:domain :Quality ;
-.
-
-:Spatial_Location
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty :hasDataValue ;
-      owl:someValuesFrom xsd:string ;
-    ] ;
-.
-
 :Amount_Of_Matter
   a owl:Class ;
   rdfs:comment "The amount of matter type can be subdivided into [a volume] of (1) material (rock material), or (2) state of a material (solid, fluid), to enable designation of lumps of rock or lumps of fluid."@en ;
@@ -116,7 +104,7 @@
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty :hasIndirectTemporalLocation ;
+      owl:onProperty :indirectTemporalOccupies ;
       owl:someValuesFrom :Time_Region ;
     ] ;
   rdfs:subClassOf [
@@ -149,13 +137,13 @@
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty :hasConstituent ;
-      owl:someValuesFrom :Process ;
+      owl:onProperty :directTemporalOccupies ;
+      owl:someValuesFrom :Time_Region ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty :hasDirectTemporalLocation ;
-      owl:someValuesFrom :Time_Region ;
+      owl:onProperty :hasConstituent ;
+      owl:someValuesFrom :Process ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
@@ -497,7 +485,7 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty :hasDirectTemporalLocation ;
+      owl:onProperty :directTemporalOccupies ;
       owl:someValuesFrom :Time_Region ;
     ] ;
   rdfs:subClassOf [
@@ -639,6 +627,11 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   rdfs:comment "A physical property that specifies the position of an entity relative to some spatial reference system. Details of how locations should be specified for GSO remain to be resolved. For now use WKT strings (ogc:WKTLiteral, https://www.w3.org/2011/02/GeoSPARQL.pdf)  as data values."@en ;
   rdfs:label "Spatial Location"@en ;
   rdfs:subClassOf :Quality ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty :hasDataValue ;
+      owl:someValuesFrom xsd:string ;
+    ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty :isQualityOf ;
@@ -950,6 +943,14 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   rdfs:range :Determining_Event ;
   rdfs:subPropertyOf :isFundamentallyRelatedTo ;
 .
+:directTemporalOccupies
+  a owl:ObjectProperty ;
+  rdfs:comment ""@en ;
+  rdfs:label "has direct temporal location"@en ;
+  rdfs:range :Time_Region ;
+  rdfs:subPropertyOf :isTemporallyRelatedTo ;
+  owl:inverseOf :isTemporalLocationFor ;
+.
 :hasConstituent
   a owl:ObjectProperty ;
   a owl:TransitiveProperty ;
@@ -961,6 +962,7 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
 :hasDataValue
   a owl:DatatypeProperty ;
   rdfs:comment "value is a literal, could be a number or string-- xsd:SimpleType"@en ;
+  rdfs:domain :Quality ;
   rdfs:label "has data value"@en ;
   rdfs:range xsd:anySimpleType ;
 .
@@ -971,14 +973,6 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   rdfs:label "has direct spatial location"@en ;
   rdfs:range :Spatial_Region ;
   rdfs:subPropertyOf :isSpatiallyRelatedTo ;
-.
-:hasDirectTemporalLocation
-  a owl:ObjectProperty ;
-  rdfs:comment ""@en ;
-  rdfs:label "has direct temporal location"@en ;
-  rdfs:range :Time_Region ;
-  rdfs:subPropertyOf :isTemporallyRelatedTo ;
-  owl:inverseOf :isTemporalLocationFor ;
 .
 :hasHistory
   a owl:ObjectProperty ;
@@ -991,13 +985,6 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   rdfs:comment "Indirect spatial location of a Perdurant or Situation is the union of the spatial location of all participants in Perdurant or parts of the Situation. {@en} " ;
   rdfs:label "has indirect spatial location"@en ;
   rdfs:subPropertyOf :isSpatiallyRelatedTo ;
-.
-:hasIndirectTemporalLocation
-  a owl:ObjectProperty ;
-  rdfs:comment "" ;
-  rdfs:label "has indirect temporal location"@en ;
-  rdfs:range :Time_Region ;
-  rdfs:subPropertyOf :isTemporallyRelatedTo ;
 .
 :hasInherant
   a owl:ObjectProperty ;
@@ -1106,6 +1093,13 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   rdfs:comment ""@en ;
   rdfs:label "hosts"@en ;
   rdfs:subPropertyOf :isFundamentallyRelatedTo ;
+.
+:indirectTemporalOccupies
+  a owl:ObjectProperty ;
+  rdfs:comment "" ;
+  rdfs:label "has indirect temporal location"@en ;
+  rdfs:range :Time_Region ;
+  rdfs:subPropertyOf :isTemporallyRelatedTo ;
 .
 :inheresIn
   a owl:ObjectProperty ;
