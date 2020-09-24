@@ -1,4 +1,5 @@
 # baseURI: http://loop3d.org/GSO/ontology/2020/1/ex-formationJs/ontology
+
 # imports: http://loop3d.org/GSO/ontology/2020/1/loop3dmaster
 
 @prefix con: <http://loop3d.org/GSO/ontology/2020/1/ex-complexcontact#> .
@@ -29,8 +30,8 @@ ejs:JsFormation
   a gsog:Formation ;
   gsoc:hasDirectTemporalLocation [
       a gsog:Geologic_Time_Interval ;
-      gsog:hasOlderInterval gstime:LowerJurassic ;
       gsog:hasYoungerInterval gstime:LowerJurassic ;
+      gsog:time_interval_starts gstime:LowerJurassic ;
       rdfs:label "Lower Jurassic Age"@en ;
     ] ;
   gsoc:hasPart con:KdInJsDikeContact-3_1_4 ;
@@ -71,12 +72,12 @@ ejs:JsFormation-upper
   gsoc:hasConstituent [
       a gslth:Limestone ;
       gsoc:hasConstituent [
-          a <http://loop3d.org/GSO/ontology/2020/1/lithology/granularmaterial/Material_Fossil_Particle_Material> ;
+          a gsgm:Material_Fossil_Particle_Material ;
           gsoc:hasRole gsptr:Floating_Clast ;
           gsoc:isDerivedFrom <https://en.wikipedia.org/wiki/Ammonitida> ;
         ] ;
       gsoc:hasConstituent [
-          a <http://loop3d.org/GSO/ontology/2020/1/lithology/granularmaterial/Micrite> ;
+          a gsgm:Micrite ;
           gsoc:hasConstituent [
               a gsmin:calcite ;
             ] ;
@@ -199,5 +200,6 @@ ejs:stratPart_3
   a owl:Ontology ;
   rdfs:comment "Stephen M. Richard 2019-05-02"@en ;
   rdfs:comment "details of description of Js unit in GeologyScenarioForTesting.pptx"@en ;
+
   owl:imports <http://loop3d.org/GSO/ontology/2020/1/loop3dmaster> ;
 .

@@ -7,6 +7,10 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
+:age_interval_contains
+  rdfs:domain :Time_Interval ;
+.
+
 :Amount_Of_Matter
   a owl:Class ;
   rdfs:comment "The amount of matter type can be subdivided into [a volume] of (1) material (rock material), or (2) state of a material (solid, fluid), to enable designation of lumps of rock or lumps of fluid."@en ;
@@ -147,11 +151,6 @@
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty :hasIndirectSpatialLocation ;
-      owl:someValuesFrom :Spatial_Region ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
       owl:onProperty :hasParticipant ;
       owl:someValuesFrom :Endurant ;
     ] ;
@@ -159,6 +158,11 @@
       a owl:Restriction ;
       owl:onProperty :hasReference ;
       owl:someValuesFrom :Event ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty :indirectSpatialLocation ;
+      owl:someValuesFrom :Spatial_Region ;
     ] ;
   owl:disjointWith :Process ;
 .
@@ -253,7 +257,7 @@ Need SHACL rule that count Inherant.isPartOf = 0"""@en ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty :hasIndirectSpatialLocation ;
+      owl:onProperty :indirectSpatialLocation ;
       owl:someValuesFrom :Spatial_Region ;
     ] ;
   rdfs:subClassOf [
@@ -303,19 +307,19 @@ Need SHACL rule that count Inherant.isPartOf = 0"""@en ;
 .
 :Maximum_Value_Calculation
   a owl:Class ;
-  rdfs:comment "report a maximum value for a value range "@en ;
+  rdfs:comment "report a maximum value for a value range"@en ;
   rdfs:label "Maximum Value Calculation"@en ;
   rdfs:subClassOf :Statistical_Calculation ;
 .
 :Mean_Value_Calculation
   a owl:Class ;
-  rdfs:comment "report a mean value for a value range "@en ;
+  rdfs:comment "report a mean value for a value range"@en ;
   rdfs:label "Mean Value Calculation"@en ;
   rdfs:subClassOf :Statistical_Calculation ;
 .
 :Minimum_Value_Calculation
   a owl:Class ;
-  rdfs:comment "report a minimum value for a value range "@en ;
+  rdfs:comment "report a minimum value for a value range"@en ;
   rdfs:label "Minimum Value Calculation"@en ;
   rdfs:subClassOf :Statistical_Calculation ;
 .
@@ -330,6 +334,11 @@ Need SHACL rule that count Inherant.isPartOf = 0"""@en ;
   rdfs:comment "Morphologic Feature (MF): A feature that is not a part of its host, but characterized by the form or structure of the host: Morphological features can have morphological properties e.g. orientation, thickness, fold profile, etc.  - smile or frown / lips.    - mountain / planet surface (protrusion in the planet surface).  - graben and horst / planet surface (protrusion or depression in the planet surface caused by faulting).  - geological fold: rock body with a certain shape.   MF(x) --> MDF (x) ^ exist y [hosts (y,x) ^ not partOf (x,y)]"@en ;
   rdfs:label "Morphologic Feature"@en ;
   rdfs:subClassOf :Inherent_Feature ;
+.
+:Notional_Endurant
+  a owl:Class ;
+  rdfs:label "Notional Endurant "@en ;
+  rdfs:subClassOf :Endurant ;
 .
 :Observation
   a owl:Class ;
@@ -416,7 +425,7 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty :hasDirectSpatialLocation ;
+      owl:onProperty :directSpatialLocation ;
       owl:someValuesFrom :Spatial_Region ;
     ] ;
 .
@@ -490,11 +499,6 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty :hasIndirectSpatialLocation ;
-      owl:someValuesFrom :Spatial_Region ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
       owl:onProperty :hasParticipant ;
       owl:someValuesFrom :Endurant ;
     ] ;
@@ -502,6 +506,11 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
       a owl:Restriction ;
       owl:onProperty :hasReference ;
       owl:someValuesFrom :Process ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty :indirectSpatialLocation ;
+      owl:someValuesFrom :Spatial_Region ;
     ] ;
 .
 :Proportion
@@ -546,6 +555,12 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
       owl:onProperty :isQualityOf ;
       owl:someValuesFrom :Particular ;
     ] ;
+.
+:Reference_System
+  a owl:Class ;
+  rdfs:comment "endurant that establishes a frame of reference for locating a particular in some space; the reference system has a dependeny on the space it partitions."@en ;
+  rdfs:label "Reference System "@en ;
+  rdfs:subClassOf :Notional_Endurant ;
 .
 :Role
   a owl:Class ;
@@ -597,13 +612,13 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty :hasIndirectSpatialLocation ;
-      owl:someValuesFrom :Spatial_Region ;
+      owl:onProperty :hasPart ;
+      owl:someValuesFrom :Endurant ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty :hasPart ;
-      owl:someValuesFrom :Endurant ;
+      owl:onProperty :indirectSpatialLocation ;
+      owl:someValuesFrom :Spatial_Region ;
     ] ;
 .
 :Solid
@@ -702,17 +717,6 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   rdfs:label "strong development" ;
   rdfs:subClassOf :Intensity ;
 .
-:Temporal_Location
-  a owl:Class ;
-  rdfs:comment "time coordinate location for a time instant"@en ;
-  rdfs:label "Temporal location "@en ;
-  rdfs:subClassOf :Quality ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty :hasDataValue ;
-      owl:someValuesFrom xsd:anySimpleType ;
-    ] ;
-.
 :Time_Instant
   a owl:Class ;
   rdfs:comment "represents a point location in time."@en ;
@@ -741,7 +745,7 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
           a owl:Class ;
           owl:complementOf :Time_Region ;
         ] ;
-      owl:onProperty :isTemporalLocationFor ;
+      owl:onProperty :directTemporalLocation ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
@@ -943,13 +947,26 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   rdfs:range :Determining_Event ;
   rdfs:subPropertyOf :isFundamentallyRelatedTo ;
 .
+:directSpatialLocation
+  a owl:InverseFunctionalProperty ;
+  a owl:ObjectProperty ;
+  rdfs:comment "Geographic disposition of an endurant."@en ;
+  rdfs:label "has direct spatial location"@en ;
+  rdfs:range :Spatial_Region ;
+  rdfs:subPropertyOf :isSpatiallyRelatedTo ;
+.
+:directTemporalLocation
+  a owl:ObjectProperty ;
+  rdfs:label "direct Temporal Location"@en ;
+  rdfs:subPropertyOf :isTemporallyRelatedTo ;
+.
 :directTemporalOccupies
   a owl:ObjectProperty ;
-  rdfs:comment ""@en ;
-  rdfs:label "has direct temporal location"@en ;
+  rdfs:comment "property that associates a process or event with a specific temporal region"@en ;
+  rdfs:label "direct Temporal Occupies"@en ;
   rdfs:range :Time_Region ;
   rdfs:subPropertyOf :isTemporallyRelatedTo ;
-  owl:inverseOf :isTemporalLocationFor ;
+  owl:inverseOf :directTemporalLocation ;
 .
 :hasConstituent
   a owl:ObjectProperty ;
@@ -966,25 +983,18 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   rdfs:label "has data value"@en ;
   rdfs:range xsd:anySimpleType ;
 .
-:hasDirectSpatialLocation
-  a owl:InverseFunctionalProperty ;
+:hasEnd
   a owl:ObjectProperty ;
-  rdfs:comment "Geographic disposition of an endurant."@en ;
-  rdfs:label "has direct spatial location"@en ;
-  rdfs:range :Spatial_Region ;
-  rdfs:subPropertyOf :isSpatiallyRelatedTo ;
+  rdfs:comment "" ;
+  rdfs:label "has End "@en ;
+  rdfs:range :Time_Instant ;
+  rdfs:subPropertyOf :hasTemporalPart ;
 .
 :hasHistory
   a owl:ObjectProperty ;
   rdfs:comment "relates an Endurant to a sequence of 1 to many events."@en ;
   rdfs:label "has History"@en ;
   rdfs:subPropertyOf :isTemporallyRelatedTo ;
-.
-:hasIndirectSpatialLocation
-  a owl:ObjectProperty ;
-  rdfs:comment "Indirect spatial location of a Perdurant or Situation is the union of the spatial location of all participants in Perdurant or parts of the Situation. {@en} " ;
-  rdfs:label "has indirect spatial location"@en ;
-  rdfs:subPropertyOf :isSpatiallyRelatedTo ;
 .
 :hasInherant
   a owl:ObjectProperty ;
@@ -1034,6 +1044,12 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   rdfs:subPropertyOf :isFundamentallyRelatedTo ;
   owl:inverseOf :isReferenceFor ;
 .
+:hasReferenceSystem
+  a rdf:Property ;
+  rdfs:comment "property that associates a reference system with a measured value"@en ;
+  rdfs:label "has Reference System "@en ;
+  rdfs:range :Reference_System ;
+.
 :hasRole
   a owl:ObjectProperty ;
   rdfs:comment "" ;
@@ -1063,6 +1079,20 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
 :hasSpatialProperty
   a owl:ObjectProperty ;
   rdfs:label "has spatial property"@en ;
+.
+:hasStart
+  a owl:ObjectProperty ;
+  rdfs:comment "" ;
+  rdfs:label "has Start "@en ;
+  rdfs:range :Time_Instant ;
+  rdfs:subPropertyOf :hasTemporalPart ;
+.
+:hasTemporalPart
+  a owl:ObjectProperty ;
+  rdfs:domain :Time_Region ;
+  rdfs:label "has Temporal Part "@en ;
+  rdfs:range :Time_Region ;
+  rdfs:subPropertyOf :hasPart ;
 .
 :hasUOM
   a owl:ObjectProperty ;
@@ -1094,10 +1124,16 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   rdfs:label "hosts"@en ;
   rdfs:subPropertyOf :isFundamentallyRelatedTo ;
 .
+:indirectSpatialLocation
+  a owl:ObjectProperty ;
+  rdfs:comment "Indirect spatial location of a Perdurant or Situation is the union of the spatial location of all participants in Perdurant or parts of the Situation."@en ;
+  rdfs:label "has indirect spatial location"@en ;
+  rdfs:subPropertyOf :isSpatiallyRelatedTo ;
+.
 :indirectTemporalOccupies
   a owl:ObjectProperty ;
   rdfs:comment "" ;
-  rdfs:label "has indirect temporal location"@en ;
+  rdfs:label "indirect temporal location"@en ;
   rdfs:range :Time_Region ;
   rdfs:subPropertyOf :isTemporallyRelatedTo ;
 .
@@ -1204,7 +1240,7 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   a owl:ObjectProperty ;
   rdfs:comment "OWL ObjectProperty that binds a Property to some other Particular in which that property inheres."@en ;
   rdfs:comment "link from physical property to a class that exhibits the property"@en ;
-  rdfs:label "is Property Of"@en ;
+  rdfs:label "is Quality Of"@en ;
   rdfs:subPropertyOf :inheresIn ;
 .
 :isReferenceFor
@@ -1233,16 +1269,17 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   rdfs:label "Spatially related to "@en ;
   rdfs:subPropertyOf :isRelatedto ;
 .
-:isTemporalLocationFor
-  a owl:ObjectProperty ;
-  rdfs:label "isTemporalLocationFor"@en ;
-  rdfs:subPropertyOf :isTemporallyRelatedTo ;
-.
 :isTemporallyRelatedTo
   a owl:ObjectProperty ;
   rdfs:comment "Temporal relationships are relationships either directly between Temporal_Regions, or between the Endurants or Perdurants based on the temporal region with which they are associated (either explicitly or implicitly)"@en ;
   rdfs:label "is Temporally Related To"@en ;
   rdfs:subPropertyOf :isRelatedto ;
+.
+:isValueOf
+  a owl:ObjectProperty ;
+  rdfs:comment "property that binds a Quality Value to a Quality"@en ;
+  rdfs:label "is value of "@en ;
+  rdfs:subPropertyOf :inheresIn ;
 .
 :ontology
   a owl:Ontology ;

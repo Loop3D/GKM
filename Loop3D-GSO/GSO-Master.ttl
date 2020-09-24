@@ -53,26 +53,12 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-gsoc:hasEnd
-  a owl:ObjectProperty ;
-  rdfs:comment "" ;
-  rdfs:label "has End "@en ;
-  rdfs:range gsoc:Time_Instant ;
-  rdfs:subPropertyOf gsoc:hasTemporalPart ;
-.
-gsoc:hasStart
-  a owl:ObjectProperty ;
-  rdfs:comment "" ;
-  rdfs:label "has Start "@en ;
-  rdfs:range gsoc:Time_Instant ;
-  rdfs:subPropertyOf gsoc:hasTemporalPart ;
-.
-gsoc:hasTemporalPart
-  a owl:ObjectProperty ;
-  rdfs:domain gsoc:Time_Region ;
-  rdfs:label "has Temporal Part "@en ;
-  rdfs:range gsoc:Time_Region ;
-  rdfs:subPropertyOf gsoc:hasPart ;
+gsoq:Numeric_Value
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom xsd:decimal ;
+      owl:onProperty gsoc:hasDataValue ;
+    ] ;
 .
 <http://loop3d.org/GSO/ontology/2020/1/loop3dmaster>
   a owl:Ontology ;

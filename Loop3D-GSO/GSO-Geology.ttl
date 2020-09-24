@@ -1,6 +1,5 @@
 # baseURI: http://loop3d.org/GSO/ontology/2020/1/geologicfeature/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/common/ontology
-# imports: http://loop3d.org/GSO/ontology/2020/1/geologicquality/ontology
 
 @prefix : <http://loop3d.org/GSO/ontology/2020/1/geologicfeature/> .
 @prefix gsoc: <http://loop3d.org/GSO/ontology/2020/1/common/> .
@@ -40,6 +39,9 @@ gsoc:Glass
         ] ;
       owl:onProperty gsoc:isConstituentOf ;
     ] ;
+.
+gsoc:age_interval_in
+  rdfs:range :Geologic_Time_Interval ;
 .
 :Additive_Process
   a owl:Class ;
@@ -275,6 +277,14 @@ Contact(x) <--> exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RB
   a owl:Class ;
   rdfs:comment "How will this be defined?  Must contain at least one Era and have duration longer than some Era?"@en ;
   rdfs:subClassOf :Geologic_Date_Interval ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom [
+          a owl:Class ;
+          owl:complementOf :Supereon ;
+        ] ;
+      owl:onProperty gsoc:age_interval_contains ;
+    ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom [
@@ -588,12 +598,12 @@ Contact(x) <--> exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RB
   rdfs:subClassOf :Geologic_Time_Interval ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty :hasOlderInterval ;
+      owl:onProperty :hasYoungerInterval ;
       owl:someValuesFrom :Geologic_Time_Interval ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty :hasYoungerInterval ;
+      owl:onProperty :time_interval_starts ;
       owl:someValuesFrom :Geologic_Time_Interval ;
     ] ;
 .
@@ -886,8 +896,8 @@ Probably should specify a Temporal Reference System used to assign coordinate va
 .
 :Main_Body
   a owl:Class ;
-  rdfs:comment "Role played by rock body part or constituent that forms most of the unit, and is host to parts in other roles." ;
-  rdfs:label "Main body role "@en ;
+  rdfs:comment "Role played by rock body part or constituent that forms most of the unit, and is host to parts in other roles."@en ;
+  rdfs:label "Main body role"@en ;
   rdfs:subClassOf :Rock_Body_Role ;
 .
 :Matrix
@@ -1424,13 +1434,6 @@ RBT (x) <--> RBD (x) ^ exists z forall y [(isPartOf (y,z) ^ hasHost (z,x)) -> (b
   a owl:ObjectProperty ;
   rdfs:subPropertyOf gsoc:hostedBy ;
 .
-:hasOlderInterval
-  a owl:ObjectProperty ;
-  rdfs:comment "assign an older age boundary for a time interval as a time interval, e.g. Jurassic thru Cretaceous, older age is Jurassic."@en ;
-  rdfs:label "older bounding time interval"@en ;
-  rdfs:range :Geologic_Date_Interval ;
-  rdfs:subPropertyOf gsoc:age_starts ;
-.
 :hasYoungerDate
   a owl:ObjectProperty ;
   rdfs:comment "assign a younger age boundary as a time instant for a time interval"@en ;
@@ -1559,7 +1562,6 @@ RBT (x) <--> RBD (x) ^ exists z forall y [(isPartOf (y,z) ^ hasHost (z,x)) -> (b
   a owl:Ontology ;
   rdfs:comment "Base geologic feature classes, constraints, and relationships"@en ;
   owl:imports gsoc:ontology ;
-  owl:imports gsoq:ontology ;
 .
 :overlies
   a owl:ObjectProperty ;
@@ -1603,6 +1605,13 @@ RBT (x) <--> RBD (x) ^ exists z forall y [(isPartOf (y,z) ^ hasHost (z,x)) -> (b
   rdfs:label "previous time interval"@en ;
   rdfs:range :Geologic_Date_Interval ;
   rdfs:subPropertyOf gsoc:age_met_by ;
+.
+:time_interval_starts
+  a owl:ObjectProperty ;
+  rdfs:comment "assign an older age boundary for a time interval as a time interval, e.g. Jurassic thru Cretaceous, older age is Jurassic."@en ;
+  rdfs:label "older bounding time interval"@en ;
+  rdfs:range :Geologic_Date_Interval ;
+  rdfs:subPropertyOf gsoc:age_starts ;
 .
 :underlies
   a owl:ObjectProperty ;

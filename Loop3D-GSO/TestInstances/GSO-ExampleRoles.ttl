@@ -1,7 +1,9 @@
 # baseURI: http://loop3d.org/GSO/ontology/2020/1/ex-roles/ontology
+
 # imports: http://loop3d.org/GSO/ontology/2020/1/loop3dmaster
 
 @prefix cnsd: <http://loop3d.org/GSO/ontology/2020/1/lithology/consolidationdegree/> .
+@prefix gscn: <http://loop3d.org/GSO/ontology/2020/1/geologicstructure/contact/> .
 @prefix gsel: <http://loop3d.org/GSO/ontology/2020/1/element/> .
 @prefix gsen: <http://loop3d.org/GSO/ontology/2020/1/eventenvironment> .
 @prefix gsgm: <http://loop3d.org/GSO/ontology/2020/1/lithology/granularmaterial/> .
@@ -15,9 +17,8 @@
 @prefix gspr: <http://loop3d.org/GSO/ontology/2020/1/geologicprocess/> .
 @prefix gsps: <http://loop3d.org/GSO/ontology/2020/1/lithology/particleroundness/> .
 @prefix gsptr: <http://loop3d.org/GSO/ontology/2020/1/lithology/particlerole/> .
-@prefix gsro: <http://loop3d.org/GSO/ontology/2020/1/geologicunit/rockobject/> .
 @prefix gsrbr: <http://loop3d.org/GSO/ontology/2020/1/geologicunit/rockbodyrole/> .
-@prefix gscn: <http://loop3d.org/GSO/ontology/2020/1/geologicstructure/contact/> .
+@prefix gsro: <http://loop3d.org/GSO/ontology/2020/1/geologicunit/rockobject/> .
 @prefix gstime: <http://loop3d.org/GSO/ontology/2020/1/ischart/> .
 @prefix gsuom: <http://loop3d.org/GSO/ontology/2020/1/uom/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
@@ -43,7 +44,7 @@ rol:SMR2011-12-16-01
       a gsog:Rock_Sample ;
       gsoc:determinedBy [
           a gsoc:Determining_Event ;
-          gsoc:hasIndirectSpatialLocation [
+          gsoc:indirectSpatialLocation [
               a gsoc:Spatial_Region ;
               gsoc:hasQuality [
                   a gsoc:Spatial_Location ;
@@ -64,7 +65,7 @@ rol:formationx
   rdfs:label "Formation X"@en ;
 .
 rol:markerbedx
-  a <http://loop3d.org/GSO/ontology/2020/1/geologicunit/rockobject/Marker_Bed> ;
+  a gsro:Marker_Bed ;
   gsoc:hasConstituent [
       a gslth:Clastic_Sandstone ;
       gsoc:hasQuality [
@@ -81,9 +82,7 @@ rol:markerbedx
       a gslth:conglomerate ;
       gsoc:hasConstituent [
           a gsgm:Epiclastic_Particle_Material ;
-          gsoc:hasConstituent [
-              a gslth:Diorite ;
-            ] ;
+          gsoc:hasConstituent [a gslth:Diorite ] ;
           gsoc:hasQuality [
               a gsoc:Proportion ;
               gsoc:hasDataValue "60"^^xsd:decimal ;
@@ -98,20 +97,25 @@ rol:markerbedx
                   gsoc:hasDataValue "Sub-rounded"@en ;
                 ] ;
             ] ;
-          gsoc:hasQuality [
-              a gslth:Grain_Size_Max ;
-              gsoc:hasDataValue "150"^^xsd:decimal ;
-              gsoc:hasUOM [
-                  a gsuom:millimeter ;
-                ] ;
-            ] ;
-          gsoc:hasQuality [
-              a gslth:Grain_Size_Min ;
-              gsoc:hasDataValue "60"^^xsd:decimal ;
-              gsoc:hasUOM [
-                  a gsuom:millimeter ;
-                ] ;
-            ] ;
+		  gsoc:hasQuality [
+			  a gslth:Grain_Size ;
+			  rdfs:label "60-150 mm diameter clasts";
+			  gsoc:hasQuality [
+				a gsoq:Quality_Range
+				gsoq:hasEndValue [
+					a gsoq:Numeric_Value;
+					gsoc:hasDataValue "150"^^xsd:decimal ;
+					gsoc:hasUOM [ a gsuom:millimeter ] ;
+					rdfs:label "150 mm maximum"@en ;
+				] ;
+				gsoq:hasStartValue [
+				  a gsoq:Numeric_Value ;
+				  gsoc:hasDataValue "60"^^xsd:decimal ;
+				  gsoc:hasUOM [ a gsuom:millimeter ] ;
+				  rdfs:label "60 mm minimum"@en ;
+				] 
+			]
+		  ];	
           gsoc:hasRole gsptr:Framework_Clast ;
           rdfs:label "60 percent of clasts are sub-rounded diorite, 6-15 cm diameter"@en ;
         ] ;
@@ -135,20 +139,25 @@ rol:markerbedx
                 ] ;
               rdfs:comment "shape is a composite property, with components roundness, aspect ratio"@en ;
             ] ;
-          gsoc:hasQuality [
-              a gslth:Grain_Size_Max ;
-              gsoc:hasDataValue "80"^^xsd:decimal ;
-              gsoc:hasUOM [
-                  a gsuom:millimeter ;
-                ] ;
-            ] ;
-          gsoc:hasQuality [
-              a gslth:Grain_Size_Min ;
-              gsoc:hasDataValue "30"^^xsd:decimal ;
-              gsoc:hasUOM [
-                  a gsuom:millimeter ;
-                ] ;
-            ] ;
+		  gsoc:hasQuality [
+			  a gslth:Grain_Size ;
+			  rdfs:label "30-80 mm diameter crystals";
+			  gsoc:hasQuality [
+				a gsoq:Quality_Range
+				gsoq:hasEndValue [
+					a gsoq:Numeric_Value;
+					gsoc:hasDataValue "80"^^xsd:decimal ;
+					gsoc:hasUOM [ a gsuom:millimeter ] ;
+					rdfs:label "80 mm maximum"@en ;
+				] ;
+				gsoq:hasStartValue [
+				  a gsoq:Numeric_Value ;
+				  gsoc:hasDataValue "30"^^xsd:decimal ;
+				  gsoc:hasUOM [ a gsuom:millimeter ] ;
+				  rdfs:label "30 mm minimum"@en ;
+				] 
+			]
+		  ];	
           gsoc:hasRole gsptr:Framework_Clast ;
           rdfs:label "40 percent of clasts are well rounded granite, 3-8 cm diameter"@en ;
         ] ;
@@ -167,19 +176,24 @@ rol:markerbedx
 .
 rol:ontology
   a owl:Ontology ;
+
   owl:imports <http://loop3d.org/GSO/ontology/2020/1/loop3dmaster> ;
 .
 rol:plutonz
   a gsog:Rock_Object ;
   gsoc:hasPart [
-      a gslth:Granite ;
-	  gsoc:hasRole [ a gsog:Main_Body ] ;
+      a gsog:Rock_Object ;
+      a gslth:Metasedimentary_Rock ;
+      gsoc:hasRole [
+          a gsog:Pendant ;
+        ] ;
+      gsog:isTransformedFrom rol:formationx ;
     ] ;
   gsoc:hasPart [
-      a gslth:Metasedimentary_Rock, gsog:Rock_Object ;
-	  
-      gsoc:hasRole [ a gsog:Pendant ] ;
-      gsog:isTransformedFrom rol:formationx ;
+      a gslth:Granite ;
+      gsoc:hasRole [
+          a gsog:Main_Body ;
+        ] ;
     ] ;
   rdfs:label "Pluton Z"@en ;
 .
@@ -193,20 +207,25 @@ rol:rhyoliteoftubac
               a gsoc:Shape ;
               gsoc:hasDataValue "euhedral" ;
             ] ;
-          gsoc:hasQuality [
-              a gslth:Grain_Size_Max ;
-              gsoc:hasDataValue "1"^^xsd:decimal ;
-              gsoc:hasUOM [
-                  a gsuom:millimeter ;
-                ] ;
-            ] ;
-          gsoc:hasQuality [
-              a gslth:Grain_Size_Min ;
-              gsoc:hasDataValue "3"^^xsd:decimal ;
-              gsoc:hasUOM [
-                  a gsuom:millimeter ;
-                ] ;
-            ] ;
+		  gsoc:hasQuality [
+			  a gslth:Grain_Size ;
+			  rdfs:label "1-3 mm diameter crystals";
+			  gsoc:hasQuality [
+				a gsoq:Quality_Range
+				gsoq:hasEndValue [
+					a gsoq:Numeric_Value;
+					gsoc:hasDataValue "3"^^xsd:decimal ;
+					gsoc:hasUOM [ a gsuom:millimeter ] ;
+					rdfs:label "3 mm maximum"@en ;
+				] ;
+				gsoq:hasStartValue [
+				  a gsoq:Numeric_Value ;
+				  gsoc:hasDataValue "1"^^xsd:decimal ;
+				  gsoc:hasUOM [ a gsuom:millimeter ] ;
+				  rdfs:label "1 mm minimum"@en ;
+				] 
+			]
+		  ];	
           gsoc:hasRole [
               a gsptr:Phenocryst ;
             ] ;

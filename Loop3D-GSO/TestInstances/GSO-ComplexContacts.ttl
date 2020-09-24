@@ -1,6 +1,5 @@
 # baseURI: http://loop3d.org/GSO/ontology/2020/1/ex-complexcontact/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/ex-formationJs/ontology
-# imports: http://loop3d.org/GSO/ontology/2020/1/geologicquality/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/loop3dmaster
 
 @prefix : <http://loop3d.org/GSO/ontology/2020/1/ex-complexcontact#> .
@@ -27,8 +26,8 @@ con:CbFormation
   a gsog:Formation ;
   gsoc:hasDirectTemporalLocation [
       a gsog:Geologic_Time_Interval ;
-      gsog:hasOlderInterval gstime:Cambrian ;
       gsog:hasYoungerInterval gstime:Cambrian ;
+      gsog:time_interval_starts gstime:Cambrian ;
       rdfs:label "Cambrian Age"@en ;
     ] ;
   rdfs:label "Bolsa Quartzite (Cambrian)"@en ;
@@ -122,13 +121,16 @@ con:KdDike
   a gsgu:Intrusion ;
   gsoc:hasConstituent [
       a gslth:Diorite ;
-      gsoc:hasQuality [
-          a gslth:Grain_Size_Average ;
-          gsoc:hasDataValue .05 ;
-          gsoc:hasUOM [
-              a gsuom:millimeter ;
-            ] ;
-        ] ;
+	  gsoc:hasQuality [
+		  a gslth:Grain_Size ;
+		  gsoc:hasQuality [
+			  a gsoq:Numeric_Value ;
+			  rdfs:label "average grain size 0.05 mm";
+			  gsoc:determinedBy [a gsoc:Mean_Value_Calculation ];
+			  gsoc:hasDataValue ".05"^^xsd:decimal ;
+			  gsoc:hasUOM [  a gsuom:millimeter ] ;
+			  ] ;
+		   ] ;
     ] ;
   gsoc:hasPart con:KdBoundaryDownSide-3_1 ;
   gsoc:hasPart con:KdBoundaryUnderMs ;
@@ -161,13 +163,16 @@ con:KgGranite
   a gsog:Intrusion ;
   gsoc:hasConstituent [
       a gslth:Granitoid ;
-      gsoc:hasQuality [
-          gsoc:hasDataValue "5"^^xsd:decimal ;
-          gsoc:hasUOM [
-              a gsuom:millimeter ;
-            ] ;
-          rdfs:type gslth:Grain_Size_Average ;
-        ] ;
+	  gsoc:hasQuality [
+		  a gslth:Grain_Size ;
+		  gsoc:hasQuality [
+			a gsoq:Numeric_Value ;
+			rdfs:label "average grain size 5 mm";
+			gsoc:determinedBy [a gsoc:Mean_Value_Calculation ];
+			gsoc:hasDataValue "5"^^xsd:decimal ;
+			gsoc:hasUOM [ a gsuom:millimeter ] ;
+			] ;
+		] ;
     ] ;
   gsoc:hasPart con:KgBoundaryErosionSurface-2_3 ;
   gsoc:hasPart con:KgIntrusiveBoundary-3_1_3 ;
@@ -294,8 +299,8 @@ con:OsFormation
   a gsog:Formation ;
   gsoc:hasDirectTemporalLocation [
       a gsog:Geologic_Time_Interval ;
-      gsog:hasOlderInterval gstime:Ordovician ;
       gsog:hasYoungerInterval gstime:Ordovician ;
+      gsog:time_interval_starts gstime:Ordovician ;
     ] ;
   rdfs:label "Sedimentary Rocks (Ordovician)"@en ;
 .
@@ -307,8 +312,8 @@ con:SsFormation
   a gsog:Formation ;
   gsoc:hasDirectTemporalLocation [
       a gsog:Geologic_Time_Interval ;
-      gsog:hasOlderInterval gstime:Silurian ;
       gsog:hasYoungerInterval gstime:Silurian ;
+      gsog:time_interval_starts gstime:Silurian ;
     ] ;
   rdfs:label "Sedimentary Rocks (Silurian)"@en ;
 .
@@ -437,15 +442,14 @@ con:topJs-2_1
   rdfs:comment "Xm, Cb, Os, and Ss and their boundary surfaces not elucidated here"@en ;
   rdfs:comment "this example references the GeologyScenarioForTesting diagram"@en ;
   owl:imports <http://loop3d.org/GSO/ontology/2020/1/ex-formationJs/ontology> ;
-  owl:imports gsoq:ontology ;
   owl:imports <http://loop3d.org/GSO/ontology/2020/1/loop3dmaster> ;
 .
 ejs:JsFormation
   a gsog:Formation ;
   gsoc:hasDirectTemporalLocation [
       a gsog:Geologic_Time_Interval ;
-      gsog:hasOlderInterval gstime:Jurassic ;
       gsog:hasYoungerInterval gstime:Jurassic ;
+      gsog:time_interval_starts gstime:Jurassic ;
       rdfs:label "Jurassic Age"@en ;
     ] ;
   gsoc:hasPart con:KdBoundaryInJs-3_1_4 ;

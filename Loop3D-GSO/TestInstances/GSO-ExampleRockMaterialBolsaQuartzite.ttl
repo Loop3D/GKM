@@ -1,5 +1,6 @@
 # baseURI: http://loop3d.org/GSO/ontology/2020/1/ex-materialCb
 # imports: http://loop3d.org/GSO/ontology/2020/1/ex-complexcontact/ontology
+
 # imports: http://loop3d.org/GSO/ontology/2020/1/loop3dmaster
 # prefix: bol
 
@@ -32,6 +33,7 @@
   rdfs:comment "Stephen M. Richard 2019-05-03; update 2020-07-31 for refactored qualities"@en ;
   rdfs:comment "description of rock material constituents of Bolsa Quartzite Formation"@en ;
   owl:imports <http://loop3d.org/GSO/ontology/2020/1/ex-complexcontact/ontology> ;
+
   owl:imports <http://loop3d.org/GSO/ontology/2020/1/loop3dmaster> ;
 .
 bol:Bolsa_Quartzite_Material
@@ -41,7 +43,6 @@ bol:Bolsa_Quartzite_Material
   gsoc:hasConstituent bol:Quartz_grains ;
   gsoc:hasConstituent [
       a gsgm:Epiclastic_Particle_Material ;
-	  rdfs:comment "inline description of feldspar grains in the sandstone";
       gsoc:hasConstituent [
           a gsmin:feldspar ;
           gsoc:hasConstituent [
@@ -69,22 +70,25 @@ bol:Bolsa_Quartzite_Material
             ] ;
           rdfs:label "proportion of feldspar grains"@en ;
         ] ;
-      gsoc:hasQuality [
-          a gslth:Grain_Size_Max ;
-          gsoc:hasDataValue "5"^^xsd:decimal ;
-          gsoc:hasUOM [
-              a gsuom:millimeter ;
-            ] ;
-          rdfs:label "5 mm maximum"@en ;
-        ] ;
-      gsoc:hasQuality [
-          a gslth:Grain_Size_Min ;
-          gsoc:hasDataValue .02 ;
-          gsoc:hasUOM [
-              a gsuom:millimeter ;
-            ] ;
-          rdfs:label "0.02 mm minimum"@en ;
-        ] ;
+     	gsoc:hasQuality [
+			  a gslth:Grain_Size ;
+			  rdfs:label "0.2 to 5 mm diameter clasts";
+			  gsoc:hasQuality [
+				a gsoq:Quality_Range
+				gsoq:hasEndValue [
+					a gsoq:Numeric_Value;
+					gsoc:hasDataValue "5"^^xsd:decimal ;
+					gsoc:hasUOM [ a gsuom:millimeter ] ;
+					rdfs:label "5 mm maximum"@en ;
+				] ;
+				gsoq:hasStartValue [
+				  a gsoq:Numeric_Value ;
+				  gsoc:hasDataValue "0.2"^^xsd:decimal ;
+				  gsoc:hasUOM [ a gsuom:millimeter ] ;
+				  rdfs:label "0.2 mm minimum"@en ;
+				] 
+			]
+		  ];
       gsoc:hasQuality [
           gslth:Particle_Shape [
               gsoc:hasQuality [
@@ -106,6 +110,7 @@ bol:Bolsa_Quartzite_Material
       gsoc:hasRole [
           a gsog:Clast ;
         ] ;
+      rdfs:comment "inline description of feldspar grains in the sandstone" ;
       rdfs:label "feldspar grains, inline blank node example" ;
     ] ;
   gsoc:hasQuality [
@@ -142,11 +147,13 @@ bol:Clay_matrix
         ] ;
     ] ;
   gsoc:hasQuality [
-      a gslth:Grain_Size_Max ;
-      gsoc:hasDataValue 0.005 ;
-      gsoc:hasUOM [
-          a gsuom:millimeter ;
-        ] ;
+      a gslth:Grain_Size ;
+	  gsoc:hasQuality [
+		a gsoq:Numeric_Value ;
+		rdfs:label "maximum grain size 0.005 mm"; 
+		gsoc:determinedBy [a gsoc:Maximum_Value_Calculation ];
+		gsoc:hasDataValue "0.005"^^xsd:decimal ;
+		gsoc:hasUOM [ a gsuom:millimeter  ] ;
     ] ;
   gsoc:hasRole [
       a gsog:Matrix ;
@@ -165,34 +172,31 @@ bol:Quartz_grains
         ] ;
     ] ;
   gsoc:hasQuality [
-      a gslth:Grain_Size_Average ;
-      gsoc:hasDataValue "3"^^xsd:decimal ;
+      a gslth:Grain_Size ;
       gsoc:hasQuality [
-          a gsoc:Simple_Uncertainty ;
-          gsoc:determinedBy [
-              a gsoc:First_Standard_Deviation_Calculation ;
+          a gsoq:Numeric_Value ;
+		  rdfs:label "average grain size 3 +/- 0.06 mm";
+		  gsoc:determinedBy [a gsoc:Mean_Value_Calculation ];
+          gsoc:hasDataValue "3"^^xsd:decimal ;
+          gsoc:hasUOM [ a gsuom:millimeter  ] ;
+          gsoc:hasQuality [
+              a gsoc:Simple_Uncertainty ;
+              gsoc:determinedBy [ a gsoc:First_Standard_Deviation_Calculation ] ;
+              gsoc:hasDataValue "0.06"^^xsd:decimal ;
+              gsoc:hasUOM [a gsuom:millimeter ] ;
             ] ;
-          gsoc:hasDataValue 0.06 ;
-          gsoc:hasUOM [
-              a gsuom:millimeter ;
-            ] ;
         ] ;
-      gsoc:hasUOM [
-          a gsuom:millimeter ;
-        ] ;
-    ] ;
-  gsoc:hasQuality [
-      a gslth:Grain_Size_Max ;
-      gsoc:hasDataValue "8"^^xsd:decimal ;
-      gsoc:hasUOM [
-          a gsuom:millimeter ;
-        ] ;
-    ] ;
-  gsoc:hasQuality [
-      a gslth:Grain_Size_Min ;
-      gsoc:hasDataValue 0.05 ;
-      gsoc:hasUOM [
-          a gsuom:millimeter ;
+      gsoc:hasQuality [
+          a gsoq:Quality_Range ;
+		  gsoq:hasEndValue [
+			a gsoq:Numeric_Value;
+			gsoc:hasDataValue "8"^^xsd:decimal ;
+			gsoc:hasUOM [ a gsuom:millimeter  ] 
+			] ;
+		  gsoq:hasStartValue [
+			a gsoq:Numeric_Value ;
+			gsoc:hasDataValue "0.05"^^xsd:decimal ;
+			gsoc:hasUOM [ a gsuom:millimeter ] 
         ] ;
     ] ;
   gsoc:hasQuality [

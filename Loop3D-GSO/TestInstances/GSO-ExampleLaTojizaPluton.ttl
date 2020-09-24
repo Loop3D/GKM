@@ -1,765 +1,799 @@
+# baseURI: http://loop3d.org/GSO/ontology/2020/1/ex-plutontojiza/ontology
+
+# imports: http://loop3d.org/GSO/ontology/2020/1/loop3dmaster
+
 @prefix : <http://loop3d.org/GSO/ontology/2020/1/ex-plutontojiza#> .
-@prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix toj: <http://loop3d.org/GSO/ontology/2020/1/ex-complexcontact#> .
-@prefix xml: <http://www.w3.org/XML/1998/namespace> .
-@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix cnsd: <http://loop3d.org/GSO/ontology/2020/1/lithology/consolidationdegree/> .
+@prefix gscn: <http://loop3d.org/GSO/ontology/2020/1/geologicstructure/contact/> .
 @prefix gsel: <http://loop3d.org/GSO/ontology/2020/1/element/> .
 @prefix gsen: <http://loop3d.org/GSO/ontology/2020/1/eventenvironment> .
 @prefix gsgu: <http://loop3d.org/GSO/ontology/2020/1/geologicunit/> .
+@prefix gslth: <http://loop3d.org/GSO/ontology/2020/1/lithology/> .
 @prefix gsmg: <http://loop3d.org/GSO/ontology/2020/1/metamorphicgrade/> .
+@prefix gsmin: <http://loop3d.org/GSO/ontology/2020/1/mineral/> .
 @prefix gsoc: <http://loop3d.org/GSO/ontology/2020/1/common/> .
 @prefix gsog: <http://loop3d.org/GSO/ontology/2020/1/geologicfeature/> .
 @prefix gsoq: <http://loop3d.org/GSO/ontology/2020/1/geologicquality/> .
 @prefix gspr: <http://loop3d.org/GSO/ontology/2020/1/geologicprocess/> .
 @prefix gsps: <http://loop3d.org/GSO/ontology/2020/1/lithology/particleroundness/> .
 @prefix gsptr: <http://loop3d.org/GSO/ontology/2020/1/lithology/particletype/> .
-@prefix gscn: <http://loop3d.org/GSO/ontology/2020/1/geologicstructure/contact/> .
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix gslth: <http://loop3d.org/GSO/ontology/2020/1/lithology/> .
-@prefix gsmin: <http://loop3d.org/GSO/ontology/2020/1/mineral/> .
-@prefix gsuom: <http://loop3d.org/GSO/ontology/2020/1/uom/> .
 @prefix gstime: <http://loop3d.org/GSO/ontology/2020/1/ischart/> .
+@prefix gsuom: <http://loop3d.org/GSO/ontology/2020/1/uom/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix toj: <http://loop3d.org/GSO/ontology/2020/1/ex-complexcontact#> .
 @prefix turtle: <http://www.semanticweb.org/owl/owlapi/turtle#> .
-@base <http://loop3d.org/GSO/ontology/2020/1/ex-plutontojiza> .
-
-<http://loop3d.org/GSO/ontology/2020/1/ex-plutontojiza> rdf:type owl:Ontology ;
-     owl:imports <http://loop3d.org/GSO/ontology/2020/1/loop3dmaster> ,
-                 gsmin:ontology ;
-     rdfs:comment "Example description of pluton with pendants, enclaves, composition variations"@en ,
-                  "Stephen M. Richard 2020-04-10"@en ,
-                  "based on descriptions in A. ARANGUREN, J. CUEVAS, J. M. TUBI´A, T. ROMA´ N-BERDIEL, A. CASAS-SAINZ, & A. CASAS-PONSATI, 2003, Granite laccolith emplacement in the Iberian arc: AMS and gravity study of the La Tojiza pluton (NW Spain): Journal of the Geological Society, London, Vol. 160, 2003, pp. 435–445. DOI: 10.1144/0016-764902-079"@en .
-
-#################################################################
-#    Annotation properties
-#################################################################
-
-###  http://loop3d.org/GSO/ontology/2020/1/common/determinedBy
-gsoc:determinedBy rdf:type owl:AnnotationProperty .
-
-
-###  http://loop3d.org/GSO/ontology/2020/1/common/hasConstituent
-gsoc:hasConstituent rdf:type owl:AnnotationProperty .
-
-
-###  http://loop3d.org/GSO/ontology/2020/1/common/hasDataValue
-gsoc:hasDataValue rdf:type owl:AnnotationProperty .
-
-
-###  http://loop3d.org/GSO/ontology/2020/1/common/hasDate
-gsoc:hasDate rdf:type owl:AnnotationProperty .
-
-
-###  http://loop3d.org/GSO/ontology/2020/1/common/hasDirectTemporalLocation
-gsoc:hasDirectTemporalLocation rdf:type owl:AnnotationProperty .
-
-
-###  http://loop3d.org/GSO/ontology/2020/1/common/hasPart
-gsoc:hasPart rdf:type owl:AnnotationProperty .
-
-
-###  http://loop3d.org/GSO/ontology/2020/1/common/hasQuality
-gsoc:hasQuality rdf:type owl:AnnotationProperty .
-
-
-###  http://loop3d.org/GSO/ontology/2020/1/common/hasRole
-gsoc:hasRole rdf:type owl:AnnotationProperty .
-
-
-###  http://loop3d.org/GSO/ontology/2020/1/common/hasUOM
-gsoc:hasUOM rdf:type owl:AnnotationProperty .
-
-
-###  http://loop3d.org/GSO/ontology/2020/1/common/hasValue
-gsoc:hasValue rdf:type owl:AnnotationProperty .
-
-
-###  http://loop3d.org/GSO/ontology/2020/1/common/hostedBy
-gsoc:hostedBy rdf:type owl:AnnotationProperty .
-
-
-###  http://loop3d.org/GSO/ontology/2020/1/common/hosts
-gsoc:hosts rdf:type owl:AnnotationProperty .
-
-
-###  http://loop3d.org/GSO/ontology/2020/1/geologicfeature/hasDate
-gsog:hasDate rdf:type owl:AnnotationProperty .
-
-
-###  http://loop3d.org/GSO/ontology/2020/1/geologicfeature/hasOlderDate
-gsog:hasOlderDate rdf:type owl:AnnotationProperty .
-
-
-###  http://loop3d.org/GSO/ontology/2020/1/geologicfeature/hasOlderHost
-gsog:hasOlderHost rdf:type owl:AnnotationProperty .
-
-
-###  http://loop3d.org/GSO/ontology/2020/1/geologicfeature/hasOlderInterval
-gsog:hasOlderInterval rdf:type owl:AnnotationProperty .
-
-
-###  http://loop3d.org/GSO/ontology/2020/1/geologicfeature/hasYoungerDate
-gsog:hasYoungerDate rdf:type owl:AnnotationProperty .
-
-
-###  http://loop3d.org/GSO/ontology/2020/1/geologicfeature/hasYoungerHost
-gsog:hasYoungerHost rdf:type owl:AnnotationProperty .
-
-
-###  http://loop3d.org/GSO/ontology/2020/1/geologicfeature/hasYoungerInterval
-gsog:hasYoungerInterval rdf:type owl:AnnotationProperty .
-
-
-###  http://loop3d.org/GSO/ontology/2020/1/geologicfeature/intrudes
-gsog:intrudes rdf:type owl:AnnotationProperty .
-
-
-#################################################################
-#    Classes
-#################################################################
-
-###  http://loop3d.org/GSO/ontology/2020/1/common/Geologic_Time_Date
-gsog:Geologic_Time_Date rdf:type owl:Class .
-
-
-
-###  http://loop3d.org/GSO/ontology/2020/1/geologicquality/Grain_Size_Max
-gslth:Grain_Size_Max rdf:type owl:Class .
-
-
-###  http://loop3d.org/GSO/ontology/2020/1/geologicquality/Grain_Size_Min
-gslth:Grain_Size_Min rdf:type owl:Class .
-
-
-#################################################################
-#    Individuals
-#################################################################
-
-###  http://loop3d.org/GSO/ontology/2020/1/ex-complexcontact#cambrianBoundaryLaTojiza
-toj:cambrianBoundaryLaTojiza rdf:type owl:NamedIndividual .
-
-
-###  http://loop3d.org/GSO/ontology/2020/1/ex-complexcontact#cambrianBoundaryLaTojiza_2
-toj:cambrianBoundaryLaTojiza_2 rdf:type owl:NamedIndividual ,
-              gsog:Rock_Body_Boundary ;
-     gsoc:hasPart toj:cambrianBoundaryLaTojiza_2_1 ,
-                  toj:cambrianBoundaryLaTojiza_2_2 ,
-                  toj:cambrianBoundaryLaTojiza_2_3 ,
-                  toj:cambrianBoundaryLaTojiza_2_4 ;
-     gsoc:hostedBy toj:cambrianformation ;
-     rdfs:comment "boundary has 4 distinct segments" .
-
-
-###  http://loop3d.org/GSO/ontology/2020/1/ex-complexcontact#cambrianBoundaryLaTojiza_2_1
-toj:cambrianBoundaryLaTojiza_2_1 rdf:type owl:NamedIndividual ,
-                gsog:Rock_Body_Boundary ;
-       gsoc:hostedBy toj:cambrianformation .
-
-
-###  http://loop3d.org/GSO/ontology/2020/1/ex-complexcontact#cambrianBoundaryLaTojiza_2_2
-toj:cambrianBoundaryLaTojiza_2_2 rdf:type owl:NamedIndividual ,
-                gsog:Rock_Body_Boundary ;
-       gsoc:hostedBy toj:cambrianformation .
-
-
-###  http://loop3d.org/GSO/ontology/2020/1/ex-complexcontact#cambrianBoundaryLaTojiza_2_3
-toj:cambrianBoundaryLaTojiza_2_3 rdf:type owl:NamedIndividual ,
-                gsog:Rock_Body_Boundary ;
-       gsoc:hostedBy toj:cambrianformation .
-
-
-###  http://loop3d.org/GSO/ontology/2020/1/ex-complexcontact#cambrianBoundaryLaTojiza_2_4
-toj:cambrianBoundaryLaTojiza_2_4 rdf:type owl:NamedIndividual ,
-                gsog:Rock_Body_Boundary ;
-       gsoc:hostedBy toj:cambrianformation .
-
-
-###  http://loop3d.org/GSO/ontology/2020/1/ex-complexcontact#cambrianBoundaryOrdovician
-toj:cambrianBoundaryOrdovician rdf:type owl:NamedIndividual ,
-              gsog:Rock_Body_Top ;
-     gsoc:hostedBy toj:cambrianformation .
-
-
-###  http://loop3d.org/GSO/ontology/2020/1/ex-complexcontact#cambrianBoundaryVillalbaSeries
-toj:cambrianBoundaryVillalbaSeries rdf:type owl:NamedIndividual ,
-                  gsog:Rock_Body_Bottom ;
-         gsoc:hostedBy toj:cambrianformation .
-
-
-###  http://loop3d.org/GSO/ontology/2020/1/ex-complexcontact#cambrianformation
-toj:cambrianformation rdf:type owl:NamedIndividual ,
-     gsog:Formation ;
-         gsoc:hasConstituent [ rdf:type gslth:slate ] ,
-                [ rdf:type gslth:quartzite   ] ;
-        gsoc:hasDirectTemporalLocation [ rdf:type gsog:Geologic_Time_Interval ;
-		   gsog:hasOlderInterval gstime:Cambrian ;
-		   gsog:hasYoungerInterval gstime:Cambrian ;
-		   rdfs:label "Cambrian Age"@en
-          ] ;
-        gsoc:hasPart toj:cambrianBoundaryLaTojiza ,
-			 toj:cambrianBoundaryOrdovician ,
-			 toj:cambrianBoundaryVillalbaSeries ;
-        gsoc:hasQuality [ rdf:type gsoq:Metamorphic_Grade ;
-              gsoc:hasValue [ rdf:type gsmg:low_metamorphic_grade ] ;
-              rdfs:label "low grade"@en
-            ] .
-
-
-###  http://loop3d.org/GSO/ontology/2020/1/ex-complexcontact#latojizaBoundaryCambrian_2
-toj:latojizaBoundaryCambrian_2 rdf:type owl:NamedIndividual ,
-              gsog:Rock_Body_Boundary .
-
-
-###  http://loop3d.org/GSO/ontology/2020/1/ex-complexcontact#latojizaBoundaryOrdovician_3
-toj:latojizaBoundaryOrdovician_3 rdf:type owl:NamedIndividual ,
-                gsog:Rock_Body_Boundary .
-
-
-###  http://loop3d.org/GSO/ontology/2020/1/ex-complexcontact#latojizaBoundarySanCiprian_4
-toj:latojizaBoundarySanCiprian_4 rdf:type owl:NamedIndividual ,
-                gsog:Rock_Body_Boundary .
-
-
-###  http://loop3d.org/GSO/ontology/2020/1/ex-complexcontact#latojizaBoundaryVillalba_1
-toj:latojizaBoundaryVillalba_1 rdf:type owl:NamedIndividual ,
-              gsog:Rock_Body_Boundary .
-
-
-###  http://loop3d.org/GSO/ontology/2020/1/ex-complexcontact#latojizaCambrianContact
-toj:latojizaCambrianContact rdf:type owl:NamedIndividual ,
-          gscn:igneous_intrusive_contact ;
-  gsoc:hostedBy toj:cambrianBoundaryLaTojiza_2 ,
-                toj:latojizaBoundaryCambrian_2 ;
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+toj:cambrianBoundaryLaTojiza
+  a owl:NamedIndividual ;
+.
+toj:cambrianBoundaryLaTojiza_2
+  a gsog:Rock_Body_Boundary ;
+  a owl:NamedIndividual ;
+  gsoc:hasPart toj:cambrianBoundaryLaTojiza_2_1 ;
+  gsoc:hasPart toj:cambrianBoundaryLaTojiza_2_2 ;
+  gsoc:hasPart toj:cambrianBoundaryLaTojiza_2_3 ;
+  gsoc:hasPart toj:cambrianBoundaryLaTojiza_2_4 ;
+  gsoc:hostedBy toj:cambrianformation ;
+  rdfs:comment "boundary has 4 distinct segments" ;
+.
+toj:cambrianBoundaryLaTojiza_2_1
+  a gsog:Rock_Body_Boundary ;
+  a owl:NamedIndividual ;
+  gsoc:hostedBy toj:cambrianformation ;
+.
+toj:cambrianBoundaryLaTojiza_2_2
+  a gsog:Rock_Body_Boundary ;
+  a owl:NamedIndividual ;
+  gsoc:hostedBy toj:cambrianformation ;
+.
+toj:cambrianBoundaryLaTojiza_2_3
+  a gsog:Rock_Body_Boundary ;
+  a owl:NamedIndividual ;
+  gsoc:hostedBy toj:cambrianformation ;
+.
+toj:cambrianBoundaryLaTojiza_2_4
+  a gsog:Rock_Body_Boundary ;
+  a owl:NamedIndividual ;
+  gsoc:hostedBy toj:cambrianformation ;
+.
+toj:cambrianBoundaryOrdovician
+  a gsog:Rock_Body_Top ;
+  a owl:NamedIndividual ;
+  gsoc:hostedBy toj:cambrianformation ;
+.
+toj:cambrianBoundaryVillalbaSeries
+  a gsog:Rock_Body_Bottom ;
+  a owl:NamedIndividual ;
+  gsoc:hostedBy toj:cambrianformation ;
+.
+toj:cambrianformation
+  a gsog:Formation ;
+  a owl:NamedIndividual ;
+  gsoc:hasConstituent [
+      a gslth:quartzite ;
+    ] ;
+  gsoc:hasConstituent [
+      a gslth:slate ;
+    ] ;
+  gsoc:hasDirectTemporalLocation [
+      a gsog:Geologic_Time_Interval ;
+      gsog:hasYoungerInterval gstime:Cambrian ;
+      gsog:time_interval_starts gstime:Cambrian ;
+      rdfs:label "Cambrian Age"@en ;
+    ] ;
+  gsoc:hasPart toj:cambrianBoundaryLaTojiza ;
+  gsoc:hasPart toj:cambrianBoundaryOrdovician ;
+  gsoc:hasPart toj:cambrianBoundaryVillalbaSeries ;
+  gsoc:hasQuality [
+      a gsoq:Metamorphic_Grade ;
+      gsoc:hasValue [
+          a gsmg:low_metamorphic_grade ;
+        ] ;
+      rdfs:label "low grade"@en ;
+    ] ;
+.
+toj:latojizaBoundaryCambrian_2
+  a gsog:Rock_Body_Boundary ;
+  a owl:NamedIndividual ;
+.
+toj:latojizaBoundaryOrdovician_3
+  a gsog:Rock_Body_Boundary ;
+  a owl:NamedIndividual ;
+.
+toj:latojizaBoundarySanCiprian_4
+  a gsog:Rock_Body_Boundary ;
+  a owl:NamedIndividual ;
+.
+toj:latojizaBoundaryVillalba_1
+  a gsog:Rock_Body_Boundary ;
+  a owl:NamedIndividual ;
+.
+toj:latojizaCambrianContact
+  a gscn:igneous_intrusive_contact ;
+  a owl:NamedIndividual ;
+  gsoc:hostedBy toj:cambrianBoundaryLaTojiza_2 ;
+  gsoc:hostedBy toj:latojizaBoundaryCambrian_2 ;
   gsog:hasOlderHost toj:cambrianformation ;
   gsog:hasYoungerHost toj:latojizapluton ;
-  rdfs:comment "Contact between Cambrian Formation and La Tojiza Pluton. Contact has 4 segments"@en .
-
-
-###  http://loop3d.org/GSO/ontology/2020/1/ex-complexcontact#latojizaOrdovicianContact
-toj:latojizaOrdovicianContact rdf:type owl:NamedIndividual ,
-             gscn:igneous_intrusive_contact ;
-    gsoc:hostedBy toj:latojizaBoundaryOrdovician_3 ,
-                  toj:ordovicianBoundaryLaTojiza_3 ;
-    gsog:hasOlderHost toj:ordovicianformation ;
-    gsog:hasYoungerHost toj:latojizapluton ;
-    rdfs:comment "Contact between Ordovician Formation and La Tojiza Pluton. Contact has one segment"@en .
-
-
-###  http://loop3d.org/GSO/ontology/2020/1/ex-complexcontact#latojizaVillalbaContact
-toj:latojizaVillalbaContact rdf:type owl:NamedIndividual ,
-           gscn:igneous_intrusive_contact ;
-  gsoc:hostedBy toj:latojizaBoundaryVillalba_1 ,
-                toj:villalbaBoundaryLaTojiza_1 ;
+  rdfs:comment "Contact between Cambrian Formation and La Tojiza Pluton. Contact has 4 segments"@en ;
+.
+toj:latojizaOrdovicianContact
+  a gscn:igneous_intrusive_contact ;
+  a owl:NamedIndividual ;
+  gsoc:hostedBy toj:latojizaBoundaryOrdovician_3 ;
+  gsoc:hostedBy toj:ordovicianBoundaryLaTojiza_3 ;
+  gsog:hasOlderHost toj:ordovicianformation ;
+  gsog:hasYoungerHost toj:latojizapluton ;
+  rdfs:comment "Contact between Ordovician Formation and La Tojiza Pluton. Contact has one segment"@en ;
+.
+toj:latojizaVillalbaContact
+  a gscn:igneous_intrusive_contact ;
+  a owl:NamedIndividual ;
+  gsoc:hostedBy toj:latojizaBoundaryVillalba_1 ;
+  gsoc:hostedBy toj:villalbaBoundaryLaTojiza_1 ;
   gsog:hasOlderHost toj:villalbaseries ;
   gsog:hasYoungerHost toj:latojizapluton ;
-  rdfs:comment "Contact between Villalba Series and La Tojiza Pluton. Contact has 2 segments"@en .
-
-
-###  http://loop3d.org/GSO/ontology/2020/1/ex-complexcontact#latojizafinegrained
-toj:latojizafinegrained rdf:type owl:NamedIndividual ,
-       gsgu:Igneous_Facies ;
-            gsoc:hasConstituent [ rdf:type gslth:granite ;
-            gsoc:hasConstituent [ rdf:type gsog:Mono-mineralic_crystal_particle ;
-                gsoc:hasConstituent [ rdf:type gsmin:alkali_feldspar] ;
-                gsoc:hasRole [ rdf:type gsptr:Framework_Crystals
-   ]
-              ] ,
-              [ rdf:type gsog:Mono-mineralic_crystal_particle ;
-                gsoc:hasConstituent [ rdf:type gsmin:plagioclase
-          ] ;
-                gsoc:hasRole [ rdf:type gsptr:Framework_Crystals
-   ]
-              ] ,
-              [ rdf:type gsog:Mono-mineralic_crystal_particle ;
-                gsoc:hasConstituent [ rdf:type gsmin:biotite
-          ] ;
-                gsoc:hasRole [ rdf:type gsptr:Framework_Crystals
-   ]
-              ] ,
-              [ rdf:type gsog:Mono-mineralic_crystal_particle ;
-                gsoc:hasConstituent [ rdf:type gsmin:quartz
-          ] ;
-                gsoc:hasQuality [ rdf:type gslth:Grain_Shape ;
-        gsoc:hasValue [ rdf:type gsps:rounded
-                      ]
-      ] ;
-                gsoc:hasRole [ rdf:type gsptr:Framework_Crystals
-   ]
-              ] ,
-              [ rdf:type gsog:Mono-mineralic_crystal_particle ;
-                gsoc:hasConstituent [ rdf:type gsmin:apatite
-          ] ;
-                gsoc:hasRole [ rdf:type gsptr:Accessory_Crystals
-   ]
-              ] ,
-              [ rdf:type gsog:Mono-mineralic_crystal_particle ;
-                gsoc:hasConstituent [ rdf:type gsmin:zircon
-          ] ;
-                gsoc:hasRole [ rdf:type gsptr:Accessory_Crystals
-   ]
-              ] ,
-              [ rdf:type gsog:Mono-mineralic_crystal_particle ;
-                gsoc:hasConstituent [ rdf:type gsmin:ilmenite
-          ] ;
-                gsoc:hasRole [ rdf:type gsptr:Accessory_Crystals
-   ]
-              ] ,
-              [ rdf:type gsog:Mono-mineralic_crystal_particle ;
-                gsoc:hasConstituent [ rdf:type gsmin:muscovite
-          ] ;
-                gsoc:hasRole [ rdf:type gsptr:Accessory_Crystals
-   ]
-              ] ,
-              [ rdf:type gsog:Mono-mineralic_crystal_particle ;
-                gsoc:hasConstituent [ rdf:type gsmin:garnetgroup
-          ] ;
-                gsoc:hasRole [ rdf:type gsptr:Accessory_Crystals
-   ]
-              ] ;
-                    gsoc:hasQuality [ rdf:type gslth:Particle_Sorting_Category ;
-            gsoc:hasDataValue "Equigranular" ;
-            rdfs:label "equigranular texture"@en
-          ] ,
-          [ rdf:type gslth:Grain_Size_Max ;
-            gsoc:hasDataValue 3 ;
-            gsoc:hasUOM [ rdf:type gsuom:millimeter
-                        ] ;
-            rdfs:label "fine grain size: 3 mm maximum"@en
-          ] ,
-          [ rdf:type gslth:Grain_Size_Min ;
-            gsoc:hasDataValue 0.05 ;
-            gsoc:hasUOM [ rdf:type gsuom:millimeter
-                        ] ;
-            rdfs:label "fine grain size: .05 mm minimum"@en
-          ]
-                  ] ;
-                        rdfs:comment "The amount of muscovite and garnet increases, and grain size decreases, towards the eastern and southern pluton borders. contain rounded grains of quartz visible to the naked eye. Most samples are equigranular. Phases are not mapped separately" .
-
-
-###  http://loop3d.org/GSO/ontology/2020/1/ex-complexcontact#latojizamain
-toj:latojizamain rdf:type owl:NamedIndividual ,
-                          gsgu:Igneous_Facies ;
-                 gsoc:hasConstituent [ rdf:type gslth:granite ;
-             gsoc:hasConstituent [ rdf:type gsog:Mono-mineralic_crystal_particle ;
-         gsoc:hasConstituent [ rdf:type gsmin:alkali_feldspar
-   ] ;
-         gsoc:hasRole [ rdf:type gsptr:Framework_Crystals
-                      ]
-       ] ,
-       [ rdf:type gsog:Mono-mineralic_crystal_particle ;
-         gsoc:hasConstituent [ rdf:type gsmin:plagioclase
-   ] ;
-         gsoc:hasRole [ rdf:type gsptr:Framework_Crystals
-                      ]
-       ] ,
-       [ rdf:type gsog:Mono-mineralic_crystal_particle ;
-         gsoc:hasConstituent [ rdf:type gsmin:biotite
-   ] ;
-         gsoc:hasRole [ rdf:type gsptr:Framework_Crystals
-                      ]
-       ] ,
-       [ rdf:type gsog:Mono-mineralic_crystal_particle ;
-         gsoc:hasConstituent [ rdf:type gsmin:quartz
-   ] ;
-         gsoc:hasQuality [ rdf:type gslth:Grain_Shape ;
-                           gsoc:hasValue [ rdf:type gsps:rounded
-               ]
-                         ] ;
-         gsoc:hasRole [ rdf:type gsptr:Framework_Crystals
-                      ]
-       ] ,
-       [ rdf:type gsog:Mono-mineralic_crystal_particle ;
-         gsoc:hasConstituent [ rdf:type gsmin:apatite
-   ] ;
-         gsoc:hasRole [ rdf:type gsptr:Accessory_Crystals
-                      ]
-       ] ,
-       [ rdf:type gsog:Mono-mineralic_crystal_particle ;
-         gsoc:hasConstituent [ rdf:type gsmin:zircon
-   ] ;
-         gsoc:hasRole [ rdf:type gsptr:Accessory_Crystals
-                      ]
-       ] ,
-       [ rdf:type gsog:Mono-mineralic_crystal_particle ;
-         gsoc:hasConstituent [ rdf:type gsmin:ilmenite
-   ] ;
-         gsoc:hasRole [ rdf:type gsptr:Accessory_Crystals
-                      ]
-       ] ,
-       [ rdf:type gsog:Mono-mineralic_crystal_particle ;
-         gsoc:hasConstituent [ rdf:type gsmin:muscovite
-   ] ;
-         gsoc:hasRole [ rdf:type gsptr:Accessory_Crystals
-                      ]
-       ] ,
-       [ rdf:type gsog:Mono-mineralic_crystal_particle ;
-         gsoc:hasConstituent [ rdf:type gsmin:garnetgroup
-   ] ;
-         gsoc:hasRole [ rdf:type gsptr:Accessory_Crystals
-                      ]
-       ] ;
-             gsoc:hasQuality [ rdf:type gslth:Particle_Sorting_Category ;
-     gsoc:hasDataValue "Equigranular" ;
-     rdfs:label "equigranular texture"@en
-   ] ,
-   [ rdf:type gslth:Grain_Size_Max ;
-     gsoc:hasDataValue 10 ;
-     gsoc:hasUOM [ rdf:type gsuom:millimeter
-                 ] ;
-     rdfs:label "coarse grain size: 10 mm maximum"@en
-   ] ,
-   [ rdf:type gslth:Grain_Size_Min ;
-     gsoc:hasDataValue 3 ;
-     gsoc:hasUOM [ rdf:type gsuom:millimeter
-                 ] ;
-     rdfs:label "medium grain size: 3 mm minimum"@en
-   ] ,
-   [ rdf:type gslth:Grain_Shape ;
-     gsoc:hasValue [ rdf:type gsps:anhedral
-                   ] ;
-     rdfs:label "anhedral grains"@en
-   ] ,
-   [ rdf:type gslth:Grain_Shape ;
-     gsoc:hasValue [ rdf:type gsps:subhedral
-                   ] ;
-     rdfs:label "subhedral grains"@en
-   ]
-           ] ;
-                 rdfs:comment "medium- to coarse-grained granite consists of quartz, K-feldspar, plagioclase and biotite. Apatite, ilmenite, zircon, muscovite and, locally, garnet are accessory minerals; contains rounded grains of quartz visible to the naked eye. Most samples are equigranular" .
-
-
-###  http://loop3d.org/GSO/ontology/2020/1/ex-complexcontact#latojizapendants
-toj:latojizapendants rdf:type owl:NamedIndividual ,
-    gsgu:lithologic_unit ;
-                     gsoc:hasConstituent [ rdf:type gslth:schist
-               ] ;
-                     gsoc:hasRole [ rdf:type gsog:Pendant
-        ] ;
-                     rdfs:comment "Large xenoliths and roof pendants of country rocks occur mainly in the central part of the intrusion" .
-
-
-###  http://loop3d.org/GSO/ontology/2020/1/ex-complexcontact#latojizapluton
-toj:latojizapluton rdf:type owl:NamedIndividual ,
-  gsog:Formation ;
-                   gsoc:hasDirectTemporalLocation [ rdf:type gsog:Geologic_Time_Date ;
-                          gsoc:determinedBy [ rdf:type gsoc:Observation ;
-                    rdfs:comment "TBD -- adopt conventions for better representation of data provenance" ,
-       "U-Pb zircon (Fernandez-Suarez et al. 2000)" ,
-       "dct:source DOI: 10.1144/jgs.157.3.565"
-                  ] ;
-                          gsoc:hasQuality [ rdf:type gsoc:Simple_Uncertainty ;
-                  gsoc:hasDataValue 2 ;
-                  gsoc:hasUOM [ rdf:type gsuom:ma
-    ]
-                ] ;
-                          gsoc:hasUOM [ rdf:type gsuom:ma
+  rdfs:comment "Contact between Villalba Series and La Tojiza Pluton. Contact has 2 segments"@en ;
+.
+toj:latojizafinegrained
+  a gsgu:Igneous_Facies ;
+  a owl:NamedIndividual ;
+  gsoc:hasConstituent [
+      a gslth:granite ;
+      gsoc:hasConstituent [
+          a gsog:Mono-mineralic_crystal_particle ;
+          gsoc:hasConstituent [
+              a gsmin:alkali_feldspar ;
             ] ;
-                          gsog:hasDate 295 ;
-                          rdfs:label "Variscan, Post tectonic, Permian"@en
-                        ] ;
-                   gsoc:hasPart toj:latojizaBoundaryCambrian_2 ,
-      toj:latojizaBoundaryOrdovician_3 ,
-      toj:latojizaBoundarySanCiprian_4 ,
-      toj:latojizaBoundaryVillalba_1 ,
-      toj:latojizafinegrained ,
-      toj:latojizamain ,
-      toj:latojizapendants ,
-      toj:latojizaporphyritic ;
-                   gsoc:hosts [ rdf:type gsog:Crystal_Preferred_Orientation ;
-      gsoc:hasQuality [ rdf:type gsoc:Intensity ;
-                        gsoc:hasValue [ rdf:type gsoc:Weak_Intensity 
-            ]
-                      ] ;
-      rdfs:label "weak preferred orientation of feldspar and biotite;  considered to have developed exclusively in the magmatic state"
+          gsoc:hasRole [
+              a gsptr:Framework_Crystals ;
+            ] ;
+        ] ;
+      gsoc:hasConstituent [
+          a gsog:Mono-mineralic_crystal_particle ;
+          gsoc:hasConstituent [
+              a gsmin:apatite ;
+            ] ;
+          gsoc:hasRole [
+              a gsptr:Accessory_Crystals ;
+            ] ;
+        ] ;
+      gsoc:hasConstituent [
+          a gsog:Mono-mineralic_crystal_particle ;
+          gsoc:hasConstituent [
+              a gsmin:biotite ;
+            ] ;
+          gsoc:hasRole [
+              a gsptr:Framework_Crystals ;
+            ] ;
+        ] ;
+      gsoc:hasConstituent [
+          a gsog:Mono-mineralic_crystal_particle ;
+          gsoc:hasConstituent [
+              a gsmin:garnetgroup ;
+            ] ;
+          gsoc:hasRole [
+              a gsptr:Accessory_Crystals ;
+            ] ;
+        ] ;
+      gsoc:hasConstituent [
+          a gsog:Mono-mineralic_crystal_particle ;
+          gsoc:hasConstituent [
+              a gsmin:ilmenite ;
+            ] ;
+          gsoc:hasRole [
+              a gsptr:Accessory_Crystals ;
+            ] ;
+        ] ;
+      gsoc:hasConstituent [
+          a gsog:Mono-mineralic_crystal_particle ;
+          gsoc:hasConstituent [
+              a gsmin:muscovite ;
+            ] ;
+          gsoc:hasRole [
+              a gsptr:Accessory_Crystals ;
+            ] ;
+        ] ;
+      gsoc:hasConstituent [
+          a gsog:Mono-mineralic_crystal_particle ;
+          gsoc:hasConstituent [
+              a gsmin:plagioclase ;
+            ] ;
+          gsoc:hasRole [
+              a gsptr:Framework_Crystals ;
+            ] ;
+        ] ;
+      gsoc:hasConstituent [
+          a gsog:Mono-mineralic_crystal_particle ;
+          gsoc:hasConstituent [
+              a gsmin:quartz ;
+            ] ;
+          gsoc:hasQuality [
+              a gslth:Grain_Shape ;
+              gsoc:hasValue [
+                  a gsps:rounded ;
+                ] ;
+            ] ;
+          gsoc:hasRole [
+              a gsptr:Framework_Crystals ;
+            ] ;
+        ] ;
+      gsoc:hasConstituent [
+          a gsog:Mono-mineralic_crystal_particle ;
+          gsoc:hasConstituent [
+              a gsmin:zircon ;
+            ] ;
+          gsoc:hasRole [
+              a gsptr:Accessory_Crystals ;
+            ] ;
+        ] ;
+      gsoc:hasQuality [
+          a gslth:Grain_Size ;
+		  gsoc:hasQuality [
+			a gsoq:Quality_Range
+          	gsoq:hasEndValue [
+				a gsoq:Numeric_Value;
+				gsoc:hasDataValue 3 ;
+				gsoc:hasUOM [ a gsuom:millimeter ] ;
+			    rdfs:label "fine grain size: 3 mm maximum"@en ;
+			] ;
+			gsoq:hasStartValue [
+			  a gsoq:Numeric_Value ;
+			  gsoc:hasDataValue 0.05 ;
+			  gsoc:hasUOM [ a gsuom:millimeter ] ;
+			  rdfs:label "fine grain size: .05 mm minimum"@en ;
+			] 
+		]
+	  ];
+      gsoc:hasQuality [
+          a gslth:Particle_Sorting_Category ;
+          gsoc:hasDataValue "Equigranular" ;
+          rdfs:label "equigranular texture"@en ;
+        ] ;
     ] ;
-                   gsog:intrudes toj:cambrianformation ,
-       toj:ordovicianformation ,
-       toj:sancipriangranitoid ,
-       toj:villalbaseries ;
-                   rdfs:comment "medium- to coarse-grained granite, consists of quartz, K-feldspar, plagioclase and biotite. Apatite, ilmenite, zircon, muscovite and, locally, garnet are accessory minerals. The amount of muscovite and garnet increases, and grain size decreases, towards the eastern and southern pluton borders.  but most samples are equigranular. Both textural types contain rounded grains of quartz visible to the naked eye, pointing to the lack of solid-state deformation. Large xenoliths and roofpendants of country rocks occur mainly in the central part of the intrusion and enclaves of basic igneous rocks in its eastern part."@en ;
-                   rdfs:label "La Tojiza Pluton"@en .
-
-
-###  http://loop3d.org/GSO/ontology/2020/1/ex-complexcontact#latojizaporphyritic
-toj:latojizaporphyritic rdf:type owl:NamedIndividual ,
-       gsgu:Igneous_Facies ;
-                        gsoc:hasConstituent [ rdf:type gslth:granite ;
-                    gsoc:hasConstituent [ rdf:type gsmin:alkali_feldspar ;
-                gsoc:hasQuality [ rdf:type gslth:Grain_Size_Max ;
-        gsoc:hasDataValue 50 ;
-        gsoc:hasUOM [ rdf:type gsuom:millimeter
-                    ] ;
-        rdfs:label "5 cm maximum"@en
-      ] ,
-      [ rdf:type gslth:Grain_Size_Min ;
-        gsoc:hasDataValue 10 ;
-        gsoc:hasUOM [ rdf:type gsuom:millimeter
-                    ] ;
-        rdfs:label "1 cm minimum"@en
-      ] ;
-                gsoc:hasRole [ rdf:type gsptr:phenocryst
-   ] ;
-                rdfs:label "K-feldspar phenocrysts"
-              ] ,
-              [ rdf:type gsog:Mono-mineralic_crystal_particle ;
-                gsoc:hasConstituent [ rdf:type gsmin:alkali_feldspar
-          ] ;
-                gsoc:hasQuality [ rdf:type gslth:Grain_Size_Max ;
-        gsoc:hasDataValue 10 ;
-        gsoc:hasUOM [ rdf:type gsuom:millimeter
-                    ] ;
-        rdfs:label "5 cm maximum"@en
-      ] ,
-      [ rdf:type gslth:Grain_Size_Min ;
-        gsoc:hasDataValue 3 ;
-        gsoc:hasUOM [ rdf:type gsuom:millimeter
-                    ] ;
-        rdfs:label "1 cm minimum"@en
-      ] ;
-                gsoc:hasRole [ rdf:type gsptr:Groundmass
-   ] ;
-                rdfs:label "K-feldspar in groundmass"
-              ] ,
-              [ rdf:type gsog:Mono-mineralic_crystal_particle ;
-                gsoc:hasConstituent [ rdf:type gsmin:plagioclase
-          ] ;
-                gsoc:hasQuality [ rdf:type gslth:Grain_Size_Max ;
-        gsoc:hasDataValue 8 ;
-        gsoc:hasUOM [ rdf:type gsuom:millimeter
-                    ] ;
-        rdfs:label "5 cm maximum"@en
-      ] ,
-      [ rdf:type gslth:Grain_Size_Min ;
-        gsoc:hasDataValue 3 ;
-        gsoc:hasUOM [ rdf:type gsuom:millimeter
-                    ] ;
-        rdfs:label "1 cm minimum"@en
-      ] ;
-                gsoc:hasRole [ rdf:type gsptr:Groundmass
-   ] ;
-                rdfs:label "plagioclase in groundmass"
-              ] ,
-              [ rdf:type gsog:Mono-mineralic_crystal_particle ;
-                gsoc:hasConstituent [ rdf:type gsmin:biotite
-          ] ;
-                gsoc:hasQuality [ rdf:type gslth:Grain_Size_Max ;
-        gsoc:hasDataValue 5 ;
-        gsoc:hasUOM [ rdf:type gsuom:millimeter
-                    ] ;
-        rdfs:label "5 cm maximum"@en
-      ] ,
-      [ rdf:type gslth:Grain_Size_Min ;
-        gsoc:hasDataValue 1 ;
-        gsoc:hasUOM [ rdf:type gsuom:millimeter
-                    ] ;
-        rdfs:label "1 cm minimum"@en
-      ] ;
-                gsoc:hasRole [ rdf:type gsptr:Groundmass
-   ] ;
-                rdfs:label "biotite in groundmass"
-              ] ,
-              [ rdf:type gsog:Mono-mineralic_crystal_particle ;
-                gsoc:hasConstituent [ rdf:type gsmin:quartz
-          ] ;
-                gsoc:hasQuality [ rdf:type gslth:Grain_Shape ;
-        gsoc:hasValue [ rdf:type gsps:rounded
-                      ]
-      ] ,
-      [ rdf:type gslth:Grain_Size_Max ;
-        gsoc:hasDataValue 8 ;
-        gsoc:hasUOM [ rdf:type gsuom:millimeter
-                    ] ;
-        rdfs:label "5 cm maximum"@en
-      ] ,
-      [ rdf:type gslth:Grain_Size_Min ;
-        gsoc:hasDataValue 5 ;
-        gsoc:hasUOM [ rdf:type gsuom:millimeter
-                    ] ;
-        rdfs:label "1 cm minimum"@en
-      ] ;
-                gsoc:hasRole [ rdf:type gsptr:Groundmass
-   ] ;
-                rdfs:label "Quartz in groundmass"
-              ] ,
-              [ rdf:type gsog:Mono-mineralic_crystal_particle ;
-                gsoc:hasConstituent [ rdf:type gsmin:apatite
-          ] ;
-                gsoc:hasRole [ rdf:type gsptr:Accessory_Crystals
-   ]
-              ] ,
-              [ rdf:type gsog:Mono-mineralic_crystal_particle ;
-                gsoc:hasConstituent [ rdf:type gsmin:zircon
-          ] ;
-                gsoc:hasRole [ rdf:type gsptr:Accessory_Crystals
-   ]
-              ] ,
-              [ rdf:type gsog:Mono-mineralic_crystal_particle ;
-                gsoc:hasConstituent [ rdf:type gsmin:ilmenite
-          ] ;
-                gsoc:hasRole [ rdf:type gsptr:Accessory_Crystals
-   ]
-              ] ,
-              [ rdf:type gsog:Mono-mineralic_crystal_particle ;
-                gsoc:hasConstituent [ rdf:type gsmin:muscovite
-          ] ;
-                gsoc:hasRole [ rdf:type gsptr:Accessory_Crystals
-   ]
-              ] ,
-              [ rdf:type gsog:Mono-mineralic_crystal_particle ;
-                gsoc:hasConstituent [ rdf:type gsmin:garnetgroup
-          ] ;
-                gsoc:hasRole [ rdf:type gsptr:Accessory_Crystals
-   ]
-              ] ;
-                    gsoc:hasQuality [ rdf:type gslth:Particle_Sorting_Category ;
-            gsoc:hasDataValue "Porphyritic" ;
-            rdfs:label "porphyritic texture"@en
-          ]
-                  ] ;
-                        rdfs:comment "Some outcrops show porphyritic textures with euhedral, 1–5 cm, K-feldspar phenocrysts within a medium- to coarse-grained matrix; contains rounded grains of quartz visible to the naked eye" .
-
-
-###  http://loop3d.org/GSO/ontology/2020/1/ex-complexcontact#ordovicianBoundaryCambrian
-toj:ordovicianBoundaryCambrian rdf:type owl:NamedIndividual ,
-              gsog:Rock_Body_Bottom ;
-     gsoc:hostedBy toj:ordovicianformation .
-
-
-###  http://loop3d.org/GSO/ontology/2020/1/ex-complexcontact#ordovicianBoundaryLaTojiza
-toj:ordovicianBoundaryLaTojiza rdf:type owl:NamedIndividual .
-
-
-###  http://loop3d.org/GSO/ontology/2020/1/ex-complexcontact#ordovicianBoundaryLaTojiza_3
-toj:ordovicianBoundaryLaTojiza_3 rdf:type owl:NamedIndividual ,
-                gsog:Rock_Body_Boundary ;
-       gsoc:hostedBy toj:ordovicianformation .
-
-
-###  http://loop3d.org/GSO/ontology/2020/1/ex-complexcontact#ordovicianformation
-toj:ordovicianformation rdf:type owl:NamedIndividual ,
-       gsog:Formation ;
-                        gsoc:hasConstituent [ rdf:type gslth:slate
-                  ] ;
-                        gsoc:hasDirectTemporalLocation [ rdf:type gsog:Geologic_Time_Interval ;
-     gsog:hasOlderInterval gstime:Ordovician ;
-     gsog:hasYoungerInterval gstime:Ordovician ;
-     rdfs:label "Ordovician Age"@en
-   ] ;
-                        gsoc:hasPart toj:ordovicianBoundaryCambrian ,
-           toj:ordovicianBoundaryLaTojiza ;
-                        gsoc:hasQuality [ rdf:type gsoq:Metamorphic_Grade ;
-                gsoc:hasValue [ rdf:type gsmg:low_metamorphic_grade
+  rdfs:comment "The amount of muscovite and garnet increases, and grain size decreases, towards the eastern and southern pluton borders. contain rounded grains of quartz visible to the naked eye. Most samples are equigranular. Phases are not mapped separately" ;
+.
+toj:latojizamain
+  a gsgu:Igneous_Facies ;
+  a owl:NamedIndividual ;
+  gsoc:hasConstituent [
+      a gslth:granite ;
+      gsoc:hasConstituent [
+          a gsog:Mono-mineralic_crystal_particle ;
+          gsoc:hasConstituent [
+              a gsmin:alkali_feldspar ;
+            ] ;
+          gsoc:hasRole [
+              a gsptr:Framework_Crystals ;
+            ] ;
+        ] ;
+      gsoc:hasConstituent [
+          a gsog:Mono-mineralic_crystal_particle ;
+          gsoc:hasConstituent [
+              a gsmin:apatite ;
+            ] ;
+          gsoc:hasRole [
+              a gsptr:Accessory_Crystals ;
+            ] ;
+        ] ;
+      gsoc:hasConstituent [
+          a gsog:Mono-mineralic_crystal_particle ;
+          gsoc:hasConstituent [
+              a gsmin:biotite ;
+            ] ;
+          gsoc:hasRole [
+              a gsptr:Framework_Crystals ;
+            ] ;
+        ] ;
+      gsoc:hasConstituent [
+          a gsog:Mono-mineralic_crystal_particle ;
+          gsoc:hasConstituent [
+              a gsmin:garnetgroup ;
+            ] ;
+          gsoc:hasRole [
+              a gsptr:Accessory_Crystals ;
+            ] ;
+        ] ;
+      gsoc:hasConstituent [
+          a gsog:Mono-mineralic_crystal_particle ;
+          gsoc:hasConstituent [
+              a gsmin:ilmenite ;
+            ] ;
+          gsoc:hasRole [
+              a gsptr:Accessory_Crystals ;
+            ] ;
+        ] ;
+      gsoc:hasConstituent [
+          a gsog:Mono-mineralic_crystal_particle ;
+          gsoc:hasConstituent [
+              a gsmin:muscovite ;
+            ] ;
+          gsoc:hasRole [
+              a gsptr:Accessory_Crystals ;
+            ] ;
+        ] ;
+      gsoc:hasConstituent [
+          a gsog:Mono-mineralic_crystal_particle ;
+          gsoc:hasConstituent [
+              a gsmin:plagioclase ;
+            ] ;
+          gsoc:hasRole [
+              a gsptr:Framework_Crystals ;
+            ] ;
+        ] ;
+      gsoc:hasConstituent [
+          a gsog:Mono-mineralic_crystal_particle ;
+          gsoc:hasConstituent [
+              a gsmin:quartz ;
+            ] ;
+          gsoc:hasQuality [
+              a gslth:Grain_Shape ;
+              gsoc:hasValue [
+                  a gsps:rounded ;
+                ] ;
+            ] ;
+          gsoc:hasRole [
+              a gsptr:Framework_Crystals ;
+            ] ;
+        ] ;
+      gsoc:hasConstituent [
+          a gsog:Mono-mineralic_crystal_particle ;
+          gsoc:hasConstituent [
+              a gsmin:zircon ;
+            ] ;
+          gsoc:hasRole [
+              a gsptr:Accessory_Crystals ;
+            ] ;
+        ] ;
+      gsoc:hasQuality [
+          a gslth:Grain_Shape ;
+          gsoc:hasValue [
+              a gsps:anhedral ;
+            ] ;
+          rdfs:label "anhedral grains"@en ;
+        ] ;
+      gsoc:hasQuality [
+          a gslth:Grain_Shape ;
+          gsoc:hasValue [ a gsps:subhedral ] ;
+          rdfs:label "subhedral grains"@en ;
+        ] ;
+ 
+      gsoc:hasQuality [
+          a gslth:Grain_Size ;
+		  rdfs:label "Medium to coarse-grained";
+		  gsoc:hasQuality [
+			a gsoq:Quality_Range
+          	gsoq:hasEndValue [
+				a gsoq:Numeric_Value;
+				gsoc:hasDataValue "10"^^xsd:decimal ;
+				gsoc:hasUOM [ a gsuom:millimeter ] ;
+			    rdfs:label "coarse grain size: 10 mm maximum"@en ;
+			] ;
+			gsoq:hasStartValue [
+			  a gsoq:Numeric_Value ;
+			  gsoc:hasDataValue "3"^^xsd:decimal ;
+			  gsoc:hasUOM [ a gsuom:millimeter ] ;
+			  rdfs:label "medium grain size: 3 mm minimum"@en ;
+			] 
+		]
+	  ];		
+		
+      gsoc:hasQuality [
+          a gslth:Particle_Sorting_Category ;
+          gsoc:hasDataValue "Equigranular" ;
+          rdfs:label "equigranular texture"@en ;
+        ] ;
     ] ;
-                rdfs:label "low grade"@en
-              ] .
-
-
-###  http://loop3d.org/GSO/ontology/2020/1/ex-complexcontact#sanciprianBoundaryLaTojiza
-toj:sanciprianBoundaryLaTojiza rdf:type owl:NamedIndividual ,
-              gsog:Rock_Body_Boundary ;
-     gsoc:hostedBy toj:sancipriangranitoid .
-
-
-###  http://loop3d.org/GSO/ontology/2020/1/ex-complexcontact#sancipriangranitoid
-toj:sancipriangranitoid rdf:type owl:NamedIndividual ,
-       gsog:Formation ;
-                        gsoc:hasConstituent [ rdf:type gslth:granite ;
-                    gsoc:hasConstituent [ rdf:type gsmin:muscovite
-              ] ,
-              [ rdf:type gsmin:biotite
-              ]
-                  ] ;
-                        gsoc:hasDirectTemporalLocation [ rdf:type gsog:Geologic_Time_Date ;
-     gsoc:determinedBy [ rdf:type gsoc:Observation ;
-                         rdfs:comment "TBD -- adopt conventions for better representation of data provenance" ,
-            "U-Pb interpreted date from zircon mantles, interpreted as age of magmatic crystallization. NOTE that this age is younger that the reported age for La Tojiza granite (295 Ma) which is reported to intrude San Ciprian Granite " ,
-            "dct:source An example of low-Th/U zircon overgrowths of magmatic origin in a late orogenic Variscan intrusion: the San Ciprián massif (NW Spain) Lopez-Sanchez,Marco A. et al. Journal of the Geological Society(2016),173(2):282  http://dx.doi.org/10.1144/jgs2015-071"
-                       ] ;
-     gsoc:hasUOM [ rdf:type gsuom:ma
-                 ] ;
-     gsog:hasDate 287 ;
-     rdfs:label "Variscan, Permian, syn-tectonic"@en
-   ] ;
-                        gsoc:hasPart toj:sanciprianBoundaryLaTojiza ;
-                        rdfs:label "San Ciprian massif" .
-
-
-###  http://loop3d.org/GSO/ontology/2020/1/ex-complexcontact#villalbaBoundaryCambrian
-toj:villalbaBoundaryCambrian rdf:type owl:NamedIndividual ,
-            gsog:Rock_Body_Top ;
-   gsoc:hostedBy toj:villalbaseries .
-
-
-###  http://loop3d.org/GSO/ontology/2020/1/ex-complexcontact#villalbaBoundaryLaTojiza
-toj:villalbaBoundaryLaTojiza rdf:type owl:NamedIndividual .
-
-
-###  http://loop3d.org/GSO/ontology/2020/1/ex-complexcontact#villalbaBoundaryLaTojiza_1
-toj:villalbaBoundaryLaTojiza_1 rdf:type owl:NamedIndividual ,
-              gsog:Rock_Body_Boundary ;
-     gsoc:hasPart toj:villalbaBoundaryLaTojiza_1_1 ,
-                  toj:villalbaBoundaryLaTojiza_1_2 ;
-     gsoc:hostedBy toj:villalbaseries .
-
-
-###  http://loop3d.org/GSO/ontology/2020/1/ex-complexcontact#villalbaBoundaryLaTojiza_1_1
-toj:villalbaBoundaryLaTojiza_1_1 rdf:type owl:NamedIndividual ,
-                gsog:Rock_Body_Boundary ;
-       gsoc:hostedBy toj:villalbaseries .
-
-
-###  http://loop3d.org/GSO/ontology/2020/1/ex-complexcontact#villalbaBoundaryLaTojiza_1_2
-toj:villalbaBoundaryLaTojiza_1_2 rdf:type owl:NamedIndividual ,
-                gsog:Rock_Body_Boundary ;
-       gsoc:hostedBy toj:villalbaseries .
-
-
-###  http://loop3d.org/GSO/ontology/2020/1/ex-complexcontact#villalbaseries
-toj:villalbaseries rdf:type owl:NamedIndividual ,
-  gsog:Formation ;
-                   gsoc:hasConstituent [ rdf:type gslth:schist ;
-               rdfs:label "metagraywacke"
-             ] ;
-                   gsoc:hasDirectTemporalLocation [ rdf:type gsog:Geologic_Time_Interval ;
-                          gsog:hasOlderInterval gstime:Neoproterozoic ;
-                          gsog:hasYoungerInterval gstime:Neoproterozoic ;
-                          rdfs:label "Neoproterozoic Age"@en
-                        ] ,
-						
-						
-						
-                   [ rdf:type gsog:Geologic_Date_Interval ;
-                          gsog:hasOlderDate [ rdf:type gsog:Geologic_Time_Date ;
-                          gsoc:determinedBy [ rdf:type gsoc:Inference ;
-                          rdfs:comment "TBD -- adopt conventions for better representation of data provenance" ,
-                           "dct:source https://eprints.ucm.es/59104/1/0656.pdf" ,
-                           "youngest single crystal detrital zircons in Lower Villalba unit, sub concordant 206Pb/238U date from single crystals. (Fernandez-Suarez et al. 2000a)"
-                             ] ;
-                    gsoc:hasDate 700 ;
-                    gsoc:hasUOM [ rdf:type gsuom:ma
-                    ]
-                  ] ;
-                          gsog:hasYoungerDate [ rdf:type gsog:Geologic_Time_Date ;
-                      gsoc:determinedBy [ rdf:type gsoc:Inference ;
-                rdfs:comment "TBD -- adopt conventions for better representation of data provenance" ,
-                             "approximate age of plutons intruding correlative Tineo Series (Fernandez-Suarez et al. 2000a)" ,
-                             "dct:source https://eprints.ucm.es/59104/1/0656.pdf"
-              ] ;
-                      gsoc:hasDate 600 ;
-                      gsoc:hasUOM [ rdf:type gsuom:ma
-        ]
-                    ] ;
-                          rdfs:label "Neoproterozoic, approximately 700-600 Ma"@en
-                        ] ;
-                   gsoc:hasPart toj:villalbaBoundaryCambrian ,
-      toj:villalbaBoundaryLaTojiza ;
-                   gsoc:hasQuality [ rdf:type gsoq:Metamorphic_Grade ;
-           gsoc:hasValue [ rdf:type gsmg:low_metamorphic_grade
-                         ] ;
-           rdfs:label "low grade"@en
-         ] ;
-                   rdfs:label "Villalba Series" .
-
-
-###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
+  rdfs:comment "medium- to coarse-grained granite consists of quartz, K-feldspar, plagioclase and biotite. Apatite, ilmenite, zircon, muscovite and, locally, garnet are accessory minerals; contains rounded grains of quartz visible to the naked eye. Most samples are equigranular" ;
+.
+toj:latojizapendants
+  a gsgu:lithologic_unit ;
+  a owl:NamedIndividual ;
+  gsoc:hasConstituent [
+      a gslth:schist ;
+    ] ;
+  gsoc:hasRole [
+      a gsog:Pendant ;
+    ] ;
+  rdfs:comment "Large xenoliths and roof pendants of country rocks occur mainly in the central part of the intrusion" ;
+.
+toj:latojizapluton
+  a gsog:Formation ;
+  gsoc:hasDirectTemporalLocation [
+      a gsog:Geologic_Time_Date ;
+      gsoc:determinedBy [
+          a gsoc:Observation ;
+          rdfs:comment "TBD -- adopt conventions for better representation of data provenance" ;
+          rdfs:comment "U-Pb zircon (Fernandez-Suarez et al. 2000)" ;
+          rdfs:comment "dct:source DOI: 10.1144/jgs.157.3.565" ;
+        ] ;
+      gsoc:hasQuality [
+          a gsoc:Simple_Uncertainty ;
+          gsoc:hasDataValue 2 ;
+          gsoc:hasUOM [
+              a gsuom:ma ;
+            ] ;
+        ] ;
+      gsoc:hasUOM [
+          a gsuom:ma ;
+        ] ;
+      gsog:hasDate 295 ;
+      rdfs:label "Variscan, Post tectonic, Permian"@en ;
+    ] ;
+  gsoc:hasPart toj:latojizaBoundaryCambrian_2 ;
+  gsoc:hasPart toj:latojizaBoundaryOrdovician_3 ;
+  gsoc:hasPart toj:latojizaBoundarySanCiprian_4 ;
+  gsoc:hasPart toj:latojizaBoundaryVillalba_1 ;
+  gsoc:hasPart toj:latojizafinegrained ;
+  gsoc:hasPart toj:latojizamain ;
+  gsoc:hasPart toj:latojizapendants ;
+  gsoc:hasPart toj:latojizaporphyritic ;
+  gsoc:hosts [
+      a gsog:Crystal_Preferred_Orientation ;
+      gsoc:hasQuality [
+          a gsoc:Intensity ;
+          gsoc:hasValue [
+              a gsoc:Weak_Intensity ;
+            ] ;
+        ] ;
+      rdfs:label "weak preferred orientation of feldspar and biotite;  considered to have developed exclusively in the magmatic state" ;
+    ] ;
+  gsog:intrudes toj:cambrianformation ;
+  gsog:intrudes toj:ordovicianformation ;
+  gsog:intrudes toj:sancipriangranitoid ;
+  gsog:intrudes toj:villalbaseries ;
+  rdfs:comment "medium- to coarse-grained granite, consists of quartz, K-feldspar, plagioclase and biotite. Apatite, ilmenite, zircon, muscovite and, locally, garnet are accessory minerals. The amount of muscovite and garnet increases, and grain size decreases, towards the eastern and southern pluton borders.  but most samples are equigranular. Both textural types contain rounded grains of quartz visible to the naked eye, pointing to the lack of solid-state deformation. Large xenoliths and roofpendants of country rocks occur mainly in the central part of the intrusion and enclaves of basic igneous rocks in its eastern part."@en ;
+  rdfs:label "La Tojiza Pluton"@en ;
+.
+toj:latojizaporphyritic
+  a gsgu:Igneous_Facies ;
+  a owl:NamedIndividual ;
+  gsoc:hasConstituent [
+      a gslth:granite ;
+      gsoc:hasConstituent [
+          a gsog:Mono-mineralic_crystal_particle ;
+          gsoc:hasConstituent [  a gsmin:alkali_feldspar ] ;
+		  gsoc:hasQuality [
+			  a gslth:Grain_Size ;
+			  rdfs:label "1 to 5 mm diameter crystals";
+			  gsoc:hasQuality [
+				a gsoq:Quality_Range
+				gsoq:hasEndValue [
+					a gsoq:Numeric_Value;
+					gsoc:hasDataValue "5"^^xsd:decimal ;
+					gsoc:hasUOM [ a gsuom:millimeter ] ;
+					rdfs:label "5 mm maximum"@en ;
+				] ;
+				gsoq:hasStartValue [
+				  a gsoq:Numeric_Value ;
+				  gsoc:hasDataValue "1"^^xsd:decimal ;
+				  gsoc:hasUOM [ a gsuom:millimeter ] ;
+				  rdfs:label "1 mm minimum"@en ;
+				] 
+			]
+		  ];		
+          gsoc:hasRole [ a gsptr:Groundmass ] ;
+          rdfs:label "K-feldspar in groundmass" ;
+        ] ;
+      gsoc:hasConstituent [
+          a gsog:Mono-mineralic_crystal_particle ;
+          gsoc:hasConstituent [ a gsmin:apatite ] ;
+          gsoc:hasRole [ a gsptr:Accessory_Crystals ] ;
+        ] ;
+      gsoc:hasConstituent [
+          a gsog:Mono-mineralic_crystal_particle ;
+          gsoc:hasConstituent [
+              a gsmin:biotite ;
+            ] ;
+          
+		  gsoc:hasQuality [
+			  a gslth:Grain_Size ;
+			  rdfs:label "1 to 3 mm diameter crystals";
+			  gsoc:hasQuality [
+				a gsoq:Quality_Range
+				gsoq:hasEndValue [
+					a gsoq:Numeric_Value;
+					gsoc:hasDataValue "3"^^xsd:decimal ;
+					gsoc:hasUOM [ a gsuom:millimeter ] ;
+					rdfs:label "3 mm maximum"@en ;
+				] ;
+				gsoq:hasStartValue [
+				  a gsoq:Numeric_Value ;
+				  gsoc:hasDataValue "1"^^xsd:decimal ;
+				  gsoc:hasUOM [ a gsuom:millimeter ] ;
+				  rdfs:label "1 mm minimum"@en ;
+				] 
+			]
+		  ];		  
+		  
+          gsoc:hasRole [
+              a gsptr:Groundmass ;
+            ] ;
+          rdfs:label "biotite in groundmass" ;
+        ] ;
+      gsoc:hasConstituent [
+          a gsog:Mono-mineralic_crystal_particle ;
+          gsoc:hasConstituent [
+              a gsmin:garnetgroup ;
+            ] ;
+          gsoc:hasRole [
+              a gsptr:Accessory_Crystals ;
+            ] ;
+        ] ;
+      gsoc:hasConstituent [
+          a gsog:Mono-mineralic_crystal_particle ;
+          gsoc:hasConstituent [
+              a gsmin:ilmenite ;
+            ] ;
+          gsoc:hasRole [
+              a gsptr:Accessory_Crystals ;
+            ] ;
+        ] ;
+      gsoc:hasConstituent [
+          a gsog:Mono-mineralic_crystal_particle ;
+          gsoc:hasConstituent [
+              a gsmin:muscovite ;
+            ] ;
+          gsoc:hasRole [
+              a gsptr:Accessory_Crystals ;
+            ] ;
+        ] ;
+      gsoc:hasConstituent [
+          a gsog:Mono-mineralic_crystal_particle ;
+          gsoc:hasConstituent [
+              a gsmin:plagioclase ;
+            ] ;
+          	gsoc:hasQuality [
+			  a gslth:Grain_Size ;
+			  rdfs:label "3 to 8 mm diameter crystals";
+			  gsoc:hasQuality [
+				a gsoq:Quality_Range
+				gsoq:hasEndValue [
+					a gsoq:Numeric_Value;
+					gsoc:hasDataValue "8"^^xsd:decimal ;
+					gsoc:hasUOM [ a gsuom:millimeter ] ;
+					rdfs:label "8 mm maximum"@en ;
+				] ;
+				gsoq:hasStartValue [
+				  a gsoq:Numeric_Value ;
+				  gsoc:hasDataValue "3"^^xsd:decimal ;
+				  gsoc:hasUOM [ a gsuom:millimeter ] ;
+				  rdfs:label "3 mm minimum"@en ;
+				] 
+			]
+		  ];
+          gsoc:hasRole [
+              a gsptr:Groundmass ;
+            ] ;
+          rdfs:label "plagioclase in groundmass" ;
+        ] ;
+      gsoc:hasConstituent [
+          a gsog:Mono-mineralic_crystal_particle ;
+          gsoc:hasConstituent [a gsmin:quartz ] ;
+          gsoc:hasQuality [
+              a gslth:Grain_Shape ;
+              gsoc:hasValue [a gsps:rounded  ] ;
+            ] ;
+			
+		  gsoc:hasQuality [
+			  a gslth:Grain_Size ;
+			  rdfs:label "5-8 mm diameter crystals";
+			  gsoc:hasQuality [
+				a gsoq:Quality_Range
+				gsoq:hasEndValue [
+					a gsoq:Numeric_Value;
+					gsoc:hasDataValue "8"^^xsd:decimal ;
+					gsoc:hasUOM [ a gsuom:millimeter ] ;
+					rdfs:label "8 mm maximum"@en ;
+				] ;
+				gsoq:hasStartValue [
+				  a gsoq:Numeric_Value ;
+				  gsoc:hasDataValue "5"^^xsd:decimal ;
+				  gsoc:hasUOM [ a gsuom:millimeter ] ;
+				  rdfs:label "5 mm minimum"@en ;
+				] 
+			]
+		  ];	
+          gsoc:hasRole [a gsptr:Groundmass ] ;
+          rdfs:label "Quartz in groundmass" ;
+        ] ;
+      gsoc:hasConstituent [
+          a gsog:Mono-mineralic_crystal_particle ;
+          gsoc:hasConstituent [
+              a gsmin:zircon ;
+            ] ;
+          gsoc:hasRole [
+              a gsptr:Accessory_Crystals ;
+            ] ;
+        ] ;
+      gsoc:hasConstituent [
+          a gsmin:alkali_feldspar ;
+		  gsoc:hasQuality [
+			  a gslth:Grain_Size ;
+			  rdfs:label "1 to 5 cm diameter phenocrysts";
+			  gsoc:hasQuality [
+				a gsoq:Quality_Range
+				gsoq:hasEndValue [
+					a gsoq:Numeric_Value;
+					gsoc:hasDataValue "50"^^xsd:decimal ;
+					gsoc:hasUOM [ a gsuom:millimeter ] ;
+					rdfs:label "5 cm maximum"@en ;
+				] ;
+				gsoq:hasStartValue [
+				  a gsoq:Numeric_Value ;
+				  gsoc:hasDataValue "10"^^xsd:decimal ;
+				  gsoc:hasUOM [ a gsuom:millimeter ] ;
+				  rdfs:label "1 cm minimum"@en ;
+				] 
+			]
+		  ];	
+          gsoc:hasRole [ a gsptr:phenocryst  ] ;
+          rdfs:label "K-feldspar phenocrysts" ;
+        ] ;
+      gsoc:hasQuality [
+          a gslth:Particle_Sorting_Category ;
+          gsoc:hasDataValue "Porphyritic" ;
+          rdfs:label "porphyritic texture"@en ;
+        ] ;
+    ] ;
+  rdfs:comment "Some outcrops show porphyritic textures with euhedral, 1–5 cm, K-feldspar phenocrysts within a medium- to coarse-grained matrix; contains rounded grains of quartz visible to the naked eye" ;
+.
+toj:ordovicianBoundaryCambrian
+  a gsog:Rock_Body_Bottom ;
+  a owl:NamedIndividual ;
+  gsoc:hostedBy toj:ordovicianformation ;
+.
+toj:ordovicianBoundaryLaTojiza
+  a owl:NamedIndividual ;
+.
+toj:ordovicianBoundaryLaTojiza_3
+  a gsog:Rock_Body_Boundary ;
+  a owl:NamedIndividual ;
+  gsoc:hostedBy toj:ordovicianformation ;
+.
+toj:ordovicianformation
+  a gsog:Formation ;
+  a owl:NamedIndividual ;
+  gsoc:hasConstituent [
+      a gslth:slate ;
+    ] ;
+  gsoc:hasDirectTemporalLocation [
+      a gsog:Geologic_Time_Interval ;
+      gsog:hasYoungerInterval gstime:Ordovician ;
+      gsog:time_interval_starts gstime:Ordovician ;
+      rdfs:label "Ordovician Age"@en ;
+    ] ;
+  gsoc:hasPart toj:ordovicianBoundaryCambrian ;
+  gsoc:hasPart toj:ordovicianBoundaryLaTojiza ;
+  gsoc:hasQuality [
+      a gsoq:Metamorphic_Grade ;
+      gsoc:hasValue [
+          a gsmg:low_metamorphic_grade ;
+        ] ;
+      rdfs:label "low grade"@en ;
+    ] ;
+.
+toj:sanciprianBoundaryLaTojiza
+  a gsog:Rock_Body_Boundary ;
+  a owl:NamedIndividual ;
+  gsoc:hostedBy toj:sancipriangranitoid ;
+.
+toj:sancipriangranitoid
+  a gsog:Formation ;
+  a owl:NamedIndividual ;
+  gsoc:hasConstituent [
+      a gslth:granite ;
+      gsoc:hasConstituent [
+          a gsmin:biotite ;
+        ] ;
+      gsoc:hasConstituent [
+          a gsmin:muscovite ;
+        ] ;
+    ] ;
+  gsoc:hasDirectTemporalLocation [
+      a gsog:Geologic_Time_Date ;
+      gsoc:determinedBy [
+          a gsoc:Observation ;
+          rdfs:comment "TBD -- adopt conventions for better representation of data provenance" ;
+          rdfs:comment "U-Pb interpreted date from zircon mantles, interpreted as age of magmatic crystallization. NOTE that this age is younger that the reported age for La Tojiza granite (295 Ma) which is reported to intrude San Ciprian Granite " ;
+          rdfs:comment "dct:source An example of low-Th/U zircon overgrowths of magmatic origin in a late orogenic Variscan intrusion: the San Ciprián massif (NW Spain) Lopez-Sanchez,Marco A. et al. Journal of the Geological Society(2016),173(2):282  http://dx.doi.org/10.1144/jgs2015-071" ;
+        ] ;
+      gsoc:hasUOM [
+          a gsuom:ma ;
+        ] ;
+      gsog:hasDate 287 ;
+      rdfs:label "Variscan, Permian, syn-tectonic"@en ;
+    ] ;
+  gsoc:hasPart toj:sanciprianBoundaryLaTojiza ;
+  rdfs:label "San Ciprian massif" ;
+.
+toj:villalbaBoundaryCambrian
+  a gsog:Rock_Body_Top ;
+  a owl:NamedIndividual ;
+  gsoc:hostedBy toj:villalbaseries ;
+.
+toj:villalbaBoundaryLaTojiza
+  a owl:NamedIndividual ;
+.
+toj:villalbaBoundaryLaTojiza_1
+  a gsog:Rock_Body_Boundary ;
+  a owl:NamedIndividual ;
+  gsoc:hasPart toj:villalbaBoundaryLaTojiza_1_1 ;
+  gsoc:hasPart toj:villalbaBoundaryLaTojiza_1_2 ;
+  gsoc:hostedBy toj:villalbaseries ;
+.
+toj:villalbaBoundaryLaTojiza_1_1
+  a gsog:Rock_Body_Boundary ;
+  a owl:NamedIndividual ;
+  gsoc:hostedBy toj:villalbaseries ;
+.
+toj:villalbaBoundaryLaTojiza_1_2
+  a gsog:Rock_Body_Boundary ;
+  a owl:NamedIndividual ;
+  gsoc:hostedBy toj:villalbaseries ;
+.
+toj:villalbaseries
+  a gsog:Formation ;
+  a owl:NamedIndividual ;
+  gsoc:hasConstituent [
+      a gslth:schist ;
+      rdfs:label "metagraywacke" ;
+    ] ;
+  gsoc:hasDirectTemporalLocation [
+      a gsog:Geologic_Date_Interval ;
+      gsog:hasOlderDate [
+          a gsog:Geologic_Time_Date ;
+          gsoc:determinedBy [
+              a gsoc:Inference ;
+              rdfs:comment "TBD -- adopt conventions for better representation of data provenance" ;
+              rdfs:comment "dct:source https://eprints.ucm.es/59104/1/0656.pdf" ;
+              rdfs:comment "youngest single crystal detrital zircons in Lower Villalba unit, sub concordant 206Pb/238U date from single crystals. (Fernandez-Suarez et al. 2000a)" ;
+            ] ;
+          gsoc:hasDate 700 ;
+          gsoc:hasUOM [
+              a gsuom:ma ;
+            ] ;
+        ] ;
+      gsog:hasYoungerDate [
+          a gsog:Geologic_Time_Date ;
+          gsoc:determinedBy [
+              a gsoc:Inference ;
+              rdfs:comment "TBD -- adopt conventions for better representation of data provenance" ;
+              rdfs:comment "approximate age of plutons intruding correlative Tineo Series (Fernandez-Suarez et al. 2000a)" ;
+              rdfs:comment "dct:source https://eprints.ucm.es/59104/1/0656.pdf" ;
+            ] ;
+          gsoc:hasDate 600 ;
+          gsoc:hasUOM [
+              a gsuom:ma ;
+            ] ;
+        ] ;
+      rdfs:label "Neoproterozoic, approximately 700-600 Ma"@en ;
+    ] ;
+  gsoc:hasDirectTemporalLocation [
+      a gsog:Geologic_Time_Interval ;
+      gsog:hasYoungerInterval gstime:Neoproterozoic ;
+      gsog:time_interval_starts gstime:Neoproterozoic ;
+      rdfs:label "Neoproterozoic Age"@en ;
+    ] ;
+  gsoc:hasPart toj:villalbaBoundaryCambrian ;
+  gsoc:hasPart toj:villalbaBoundaryLaTojiza ;
+  gsoc:hasQuality [
+      a gsoq:Metamorphic_Grade ;
+      gsoc:hasValue [
+          a gsmg:low_metamorphic_grade ;
+        ] ;
+      rdfs:label "low grade"@en ;
+    ] ;
+  rdfs:label "Villalba Series" ;
+.
+<http://loop3d.org/GSO/ontology/2020/1/ex-plutontojiza/ontology>
+  a owl:Ontology ;
+  rdfs:comment "Example description of pluton with pendants, enclaves, composition variations"@en ;
+  rdfs:comment "Stephen M. Richard 2020-04-10"@en ;
+  rdfs:comment "based on descriptions in A. ARANGUREN, J. CUEVAS, J. M. TUBI´A, T. ROMA´ N-BERDIEL, A. CASAS-SAINZ, & A. CASAS-PONSATI, 2003, Granite laccolith emplacement in the Iberian arc: AMS and gravity study of the La Tojiza pluton (NW Spain): Journal of the Geological Society, London, Vol. 160, 2003, pp. 435–445. DOI: 10.1144/0016-764902-079"@en ;
+  owl:imports <http://loop3d.org/GSO/ontology/2020/1/loop3dmaster> ;
+.

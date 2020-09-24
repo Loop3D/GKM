@@ -1,7 +1,6 @@
 # baseURI: http://loop3d.org/GSO/ontology/2020/1/geologicquality/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/common/ontology
 
-@prefix : <http://loop3d.org/GSO/ontology/2020/1/geologicquality/ontology#> .
 @prefix gsoc: <http://loop3d.org/GSO/ontology/2020/1/common/> .
 @prefix gsog: <http://loop3d.org/GSO/ontology/2020/1/geologicfeature/> .
 @prefix gsoq: <http://loop3d.org/GSO/ontology/2020/1/geologicquality/> .
@@ -11,17 +10,8 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-gsoq:Thickness
-  rdfs:comment "Quality of a tabular or sheet like body that is its linear dimension normal to its long dimensions. Could be quantified numerically or categorically (e.g. thin, thick, very thick)"@en ;
-  rdfs:label "Thickness"@en ;
-.
-
-
-gsoq:Average_Measured_Value
-  a owl:Class ;
-  rdfs:comment "" ;
-  rdfs:label "Average Measured Value "@en ;
-  rdfs:subClassOf gsoq:Measured_Value ;
+gsoc:directTemporalLocation
+  rdfs:range gsoq:Temporal_Location ;
 .
 gsoq:Azimuth
   a owl:Class ;
@@ -50,16 +40,6 @@ gsoq:Diameter
   rdfs:comment "The (approximate) average length of line segments that pass through the center of an object and whose endpoints lie on the outside boundary of the object. Use to characterize the size of a broadly spheroidal object like a pluton or a rock sample."@en ;
   rdfs:label "Diameter "@en ;
   rdfs:subClassOf gsoq:Size ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom xsd:decimal ;
-      owl:onProperty gsoc:hasDataValue ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty gsoc:hasQuality ;
-      owl:someValuesFrom gsoc:Unit_of_Measure ;
-    ] ;
 .
 gsoq:Dip
   a owl:Class ;
@@ -69,6 +49,17 @@ gsoq:Dip
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty gsoc:hasQuality ;
+      owl:someValuesFrom gsoq:Measured_Value ;
+    ] ;
+.
+gsoq:Duration
+  a owl:Class ;
+  rdfs:comment "Quality that specifies the length of a time interval in some appropriate temporal reference system"@en ;
+  rdfs:label "Duration "@en ;
+  rdfs:subClassOf gsoq:Temporal_Quality ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasValue ;
       owl:someValuesFrom gsoq:Measured_Value ;
     ] ;
 .
@@ -112,20 +103,14 @@ gsoq:Magnetic_Susceptibility
       owl:onProperty gsoc:isQualityOf ;
     ] ;
 .
-gsoq:Maximum_Measured_Value
-  a owl:Class ;
-  rdfs:comment "" ;
-  rdfs:label "Maximum Measured Value "@en ;
-  rdfs:subClassOf gsoq:Measured_Value ;
-.
 gsoq:Measured_Value
   a owl:Class ;
   rdfs:comment "Quality that specifies the numeric measured value of some other quality in some context."@en ;
-  rdfs:label "Measured Value "@en ;
-  rdfs:subClassOf gsoc:Quality ;
+  rdfs:label "Measured Value"@en ;
+  rdfs:subClassOf gsoq:Quality_Value ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:allValuesFrom xsd:decimal ;
+      owl:allValuesFrom xsd:anySimpleType ;
       owl:onProperty gsoc:hasDataValue ;
     ] ;
   rdfs:subClassOf [
@@ -137,6 +122,11 @@ gsoq:Measured_Value
       a owl:Restriction ;
       owl:onProperty gsoc:hasQuality ;
       owl:someValuesFrom gsoc:Simple_Uncertainty ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasReferenceSystem ;
+      owl:someValuesFrom gsoc:Reference_System ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
@@ -160,14 +150,16 @@ gsoq:Metamorphic_Grade
   rdfs:label "Metamorphic grade"@en ;
   rdfs:subClassOf gsoc:Quality ;
 .
-gsoq:Minimum_Measured_Value
+gsoq:Numeric_Value
   a owl:Class ;
-  rdfs:comment "" ;
-  rdfs:label "Minimum Measured Value "@en ;
+  rdfs:comment "Quality that specifies a numeric value for some quality"@en ;
+  rdfs:label "Numeric Value "@en ;
   rdfs:subClassOf gsoq:Measured_Value ;
 .
 gsoq:Orientation
   a owl:Class ;
+  rdfs:comment "quality used to specify the disposition of a line or plane in space"@en ;
+  rdfs:label "Orientation"@en ;
   rdfs:subClassOf gsoc:Quality ;
 .
 gsoq:Overturned
@@ -196,7 +188,7 @@ gsoq:Plane_Orientation_dip_dipdir
   a owl:Class ;
   rdfs:comment "specification of the orientation of a plane in space, using a dip (inclination of line of maximum inclination contained in the plane, measured positive downward in degrees from local horizontal) and the azimuth normal to the strike in the dip direction"@en ;
   rdfs:label "Plane orientation (dip and dip direction)"@en ;
-  rdfs:subClassOf gsoq:Orientation ;
+  rdfs:subClassOf gsoq:Plane_orientation ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom [
@@ -222,7 +214,7 @@ gsoq:Plane_Orientation_strike_dip
   a owl:Class ;
   rdfs:comment "A plane orientation reported with the Azimuth value in the direction of strike such that the dip is to the right when facing in the azimuth direction."@en ;
   rdfs:label "Plane orientation (strike and dip)"@en ;
-  rdfs:subClassOf gsoq:Orientation ;
+  rdfs:subClassOf gsoq:Plane_orientation ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom [
@@ -236,6 +228,12 @@ gsoq:Plane_Orientation_strike_dip
       owl:onProperty gsoc:hasQuality ;
     ] ;
 .
+gsoq:Plane_orientation
+  a owl:Class ;
+  rdfs:comment "Quality to specify the orientation of a surface in a geogaphic reference system"@en ;
+  rdfs:label "Plane orientation "@en ;
+  rdfs:subClassOf gsoq:Orientation ;
+.
 gsoq:Plunge
   a owl:Class ;
   rdfs:comment "Numeric value should be between +90 and -90.   Negative values only valid if the linear feature is directed."@en ;
@@ -247,15 +245,111 @@ gsoq:Plunge
       owl:someValuesFrom gsoq:Measured_Value ;
     ] ;
 .
+gsoq:Quality_Range
+  a owl:Class ;
+  rdfs:comment "Quality that specifies a quality value with minimum and maximum value in some partially ordered value space."@en ;
+  rdfs:label "Quality Range "@en ;
+  rdfs:subClassOf gsoq:Quality_Value ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoq:hasEndValue ;
+      owl:someValuesFrom gsoq:Measured_Value ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoq:hasStartValue ;
+      owl:someValuesFrom gsoq:Measured_Value ;
+    ] ;
+.
+gsoq:Quality_Value
+  a owl:Class ;
+  rdfs:comment "quality the specifies a numeric value or range of values for some quality"@en ;
+  rdfs:label "Quality Value"@en ;
+  rdfs:subClassOf gsoc:Quality ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:isValueOf ;
+      owl:someValuesFrom gsoc:Quality ;
+    ] ;
+.
 gsoq:Size
   a owl:Class ;
   rdfs:comment "Generic quality that specifies the size of an object or collection of objects; values may be quantitative or qualitative"@en ;
   rdfs:label "Size"@en ;
   rdfs:subClassOf gsoc:Quality ;
 .
+gsoq:Temporal_Location
+  a owl:Class ;
+  rdfs:comment "time coordinate location for a temporal entity,either as an instant or interval.  This is an abstract class, instance should alway be either Time Instant Location or Time Interval Location"@en ;
+  rdfs:label "Temporal location "@en ;
+  rdfs:subClassOf gsoq:Temporal_Quality ;
+.
+gsoq:Temporal_Quality
+  a owl:Class ;
+  rdfs:comment "Quality that specifies the temporal location or duration that is the extent of some TimeRegion"@en ;
+  rdfs:label "Temporal Quality"@en ;
+  rdfs:subClassOf gsoc:Quality ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:isQualityOf ;
+      owl:someValuesFrom gsoc:Time_Region ;
+    ] ;
+.
+gsoq:Temporal_Range
+  a owl:Class ;
+  rdfs:comment "Quality that specifies a quality value for a Temporal Location that is a time interval with a start and end temporal value"@en ;
+  rdfs:label "Temporal Range "@en ;
+  rdfs:subClassOf gsoq:Quality_Range ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom gsoq:Temporal_Value ;
+      owl:onProperty gsoq:hasEndValue ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom gsoq:Temporal_Value ;
+      owl:onProperty gsoq:hasStartValue ;
+    ] ;
+.
+gsoq:Temporal_Value
+  a owl:Class ;
+  rdfs:comment "Quality that specifies a temporal location"@en ;
+  rdfs:label "Temporal Value "@en ;
+  rdfs:subClassOf gsoq:Measured_Value ;
+.
 gsoq:Thickness
   a owl:Class ;
+  rdfs:comment "Quality of a tabular or sheet like body that is its linear dimension normal to its long dimensions. Could be quantified numerically or categorically (e.g. thin, thick, very thick)"@en ;
+  rdfs:label "Thickness"@en ;
   rdfs:subClassOf gsoq:Size ;
+.
+gsoq:Time_Instant_Location
+  a owl:Class ;
+  rdfs:comment "quality the specifies the temporal coordinates of a time instant in some temporal reference system"@en ;
+  rdfs:label "Time Instant Location"@en ;
+  rdfs:subClassOf gsoq:Temporal_Location ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasValue ;
+      owl:someValuesFrom gsoq:Time_Instant_Value ;
+    ] ;
+.
+gsoq:Time_Instant_Value
+  a owl:Class ;
+  rdfs:comment "Quality that specifies a temporal location with a temporal coordinate or an xsd dateTime"@en ;
+  rdfs:label "Time Instant Value "@en ;
+  rdfs:subClassOf gsoq:Temporal_Value ;
+.
+gsoq:Time_Interval_Location
+  a owl:Class ;
+  rdfs:comment "quality the specifies the temporal coordinates of the beginning and end of time interval in some temporal reference system"@en ;
+  rdfs:label "Time Interval Location"@en ;
+  rdfs:subClassOf gsoq:Temporal_Location ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasValue ;
+      owl:someValuesFrom gsoq:Temporal_Range ;
+    ] ;
 .
 gsoq:Unknown_Facing
   a owl:Class ;
@@ -268,6 +362,20 @@ gsoq:Upright
   rdfs:comment "top of surface is away from center of earth."@en ;
   rdfs:label "Upright Facing"@en ;
   rdfs:subClassOf gsoq:Facing ;
+.
+gsoq:hasEndValue
+  a rdf:Property ;
+  rdfs:comment "property that assigns the upper bound quantifier to a Quality value range"@en ;
+  rdfs:label "has end value "@en ;
+  rdfs:range gsoq:Measured_Value ;
+  rdfs:subPropertyOf gsoc:hasValue ;
+.
+gsoq:hasStartValue
+  a rdf:Property ;
+  rdfs:comment "property that assigns the lower bound quantifier to a Quality value range"@en ;
+  rdfs:label "has start value "@en ;
+  rdfs:range gsoq:Measured_Value ;
+  rdfs:subPropertyOf gsoc:hasValue ;
 .
 gsoq:ontology
   a owl:Ontology ;

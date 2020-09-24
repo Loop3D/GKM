@@ -1,7 +1,6 @@
 # baseURI: http://loop3d.org/GSO/ontology/2020/1/geologicstructure/fold/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/common/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/geologicfeature/ontology
-# imports: http://loop3d.org/GSO/ontology/2020/1/geologicquality/ontology
 
 @prefix : <http://loop3d.org/GSO/ontology/2020/1/geologicstructure/fold/> .
 @prefix gsoc: <http://loop3d.org/GSO/ontology/2020/1/common/> .
@@ -13,8 +12,13 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-gsoc:hasValue
-  a owl:DatatypeProperty ;
+
+gsoq:Size
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasQuality ;
+      owl:someValuesFrom gsoq:Measured_Value ;
+    ] ;
 .
 :Anticline
   a owl:Class ;
@@ -270,7 +274,7 @@ gsoc:hasValue
   rdfs:comment "Surface dips between 10 and 80 degrees; typically used to describe orientation of fold hing surface or axial surface, but could be applied to any geologic surface."@en ;
   rdfs:comment "dct:source -- Fleuty (1964) Folds classification." ;
   rdfs:label "Inclinded "@en ;
-  rdfs:subClassOf gsoq:Plane_Orientation_dip_dipdir ;
+  rdfs:subClassOf gsoq:Plane_orientation ;
 .
 :Is_Periodic
   a owl:Class ;
@@ -329,7 +333,7 @@ gsoc:hasValue
   rdfs:comment "Surface dips between 0 and 10 degrees; typically used to describe orientation of fold hing surface or axial surface, but could be applied to any geologic surface."@en ;
   rdfs:comment "dct:source -- Fleuty (1964) Folds classification." ;
   rdfs:label "Recumbent "@en ;
-  rdfs:subClassOf gsoq:Plane_Orientation_dip_dipdir ;
+  rdfs:subClassOf gsoq:Plane_orientation ;
 .
 :Recumbent_Fold
   a owl:Class ;
@@ -371,7 +375,7 @@ gsoc:hasValue
   rdfs:comment "Surface dips between 80 and 90 degrees; typically used to describe orientation of fold hing surface or axial surface, but could be applied to any geologic surface."@en ;
   rdfs:comment "dct:source -- Fleuty (1964) Folds classification." ;
   rdfs:label "Upright "@en ;
-  rdfs:subClassOf gsoq:Plane_Orientation_dip_dipdir ;
+  rdfs:subClassOf gsoq:Plane_orientation ;
 .
 :Vertical_Fold
   a owl:Class ;
@@ -392,5 +396,4 @@ gsoc:hasValue
   rdfs:comment "extension module for properties related to folds"@en ;
   owl:imports gsoc:ontology ;
   owl:imports gsog:ontology ;
-  owl:imports gsoq:ontology ;
 .
