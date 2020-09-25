@@ -7,10 +7,6 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-:age_interval_contains
-  rdfs:domain :Time_Interval ;
-.
-
 :Amount_Of_Matter
   a owl:Class ;
   rdfs:comment "The amount of matter type can be subdivided into [a volume] of (1) material (rock material), or (2) state of a material (solid, fluid), to enable designation of lumps of rock or lumps of fluid."@en ;
@@ -162,7 +158,7 @@
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty :indirectSpatialLocation ;
-      owl:someValuesFrom :Spatial_Region ;
+      owl:someValuesFrom :Spatial_Location ;
     ] ;
   owl:disjointWith :Process ;
 .
@@ -719,7 +715,7 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
 .
 :Time_Instant
   a owl:Class ;
-  rdfs:comment "represents a point location in time."@en ;
+  rdfs:comment "represents a point location in time. A time instant does not have parts."@en ;
   rdfs:label "Time Instant"@en ;
   rdfs:subClassOf :Time_Region ;
 .
@@ -731,21 +727,13 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
 .
 :Time_Region
   a owl:Class ;
-  rdfs:comment ""@en ;
+  rdfs:comment "Temporal quality is used to represent the temporal location. Region includes time instant and time interval."@en ;
   rdfs:label "Time Region"@en ;
   rdfs:subClassOf :Perdurant ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom :Time_Region ;
       owl:onProperty :hasPart ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom [
-          a owl:Class ;
-          owl:complementOf :Time_Region ;
-        ] ;
-      owl:onProperty :directTemporalLocation ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
@@ -791,116 +779,6 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   rdfs:comment "Quality is present but difficult to discern "@en ;
   rdfs:label "weak development"@en ;
   rdfs:subClassOf :Intensity ;
-.
-:age_disjoint
-  a owl:ObjectProperty ;
-  rdfs:comment "the union of Allen Before and After; Age intervals of subject and object do not touch or intersect."@en ;
-  rdfs:label "age disjoint"@en ;
-  rdfs:subPropertyOf :isTemporallyRelatedTo ;
-.
-:age_during
-  a owl:ObjectProperty ;
-  rdfs:comment "interval A is entirely contained in interval B; B starts before A and B ends after A. Allen relation."@en ;
-  rdfs:label "age during"@en ;
-  rdfs:subPropertyOf :age_interval_in ;
-  rdfs:subPropertyOf :age_not_older_than ;
-  owl:inverseOf :age_interval_contains ;
-.
-:age_equivalent_To
-  a owl:ObjectProperty ;
-  rdfs:comment "A is equivalent to B if they represent expressions of the same event. Same as Allen A Equals B."@en ;
-  rdfs:comment "One of six binary relations between geologic events defined by Burns (1975)"@en ;
-  rdfs:label "age equivalent"@en ;
-  rdfs:subPropertyOf :isTemporallyRelatedTo ;
-.
-:age_finished_by
-  a owl:ObjectProperty ;
-  rdfs:comment "source interval begins before target; source and target end simultaneously; inverse of finishes"@en ;
-  rdfs:label "age interval finished by"@en ;
-  rdfs:subPropertyOf :isTemporallyRelatedTo ;
-  owl:inverseOf :age_finishes ;
-.
-:age_finishes
-  a owl:ObjectProperty ;
-  rdfs:comment "Target interval starts before source interval, and source and target interval end at the same instant. Allen Relation"@en ;
-  rdfs:label "age finishes"@en ;
-  rdfs:subPropertyOf :age_interval_in ;
-  rdfs:subPropertyOf :age_not_older_than ;
-.
-:age_incomparable_to
-  a owl:ObjectProperty ;
-  rdfs:comment "A is incomparable to be if there is not enough information to determine an age relationship"@en ;
-  rdfs:comment "One of six binary relations between geolgoic events defined by Burns (1975)"@en ;
-  rdfs:label "age incomparable"@en ;
-  rdfs:subPropertyOf :isTemporallyRelatedTo ;
-.
-:age_interval_contains
-  a owl:ObjectProperty ;
-  a owl:TransitiveProperty ;
-  rdfs:comment "target interval is completely within the source interval; source begins before target and ends after target. inverse of During"@en ;
-  rdfs:label "age interval contains"@en ;
-  rdfs:subPropertyOf :isTemporallyRelatedTo ;
-.
-:age_interval_in
-  a owl:ObjectProperty ;
-  rdfs:comment "Source interval is contained in target interval; union of during, starts, and finishes. Target interval may start before or end after source interval"@en ;
-  rdfs:label "age interval in"@en ;
-  rdfs:subPropertyOf :isTemporallyRelatedTo ;
-.
-:age_meets
-  a owl:ObjectProperty ;
-  rdfs:comment "A covers B -- A is immediately younger than B (there are no events between A and B) Same as Allen A meets B."@en ;
-  rdfs:comment "One of six binary relations between geologic events defined by Burns (1975)"@en ;
-  rdfs:comment "Source interval ends at the beginning of the target interval; there is no intervening time; inverse of age_met_by"@en ;
-  rdfs:label "age meets"@en ;
-  rdfs:subPropertyOf :isTemporallyRelatedTo ;
-  owl:inverseOf :age_met_by ;
-.
-:age_met_by
-  a owl:ObjectProperty ;
-  rdfs:comment "Source interval starts at the end of the target interval; there is no intervening time; inverse of meets"@en ;
-  rdfs:label "age met by"@en ;
-  rdfs:subPropertyOf :isTemporallyRelatedTo ;
-.
-:age_not_older_than
-  a owl:ObjectProperty ;
-  rdfs:comment "Event B is not older than event A; B is either younger than A, B is equivalent to A, or B is incomparable to A. (Burns, 1975; Mathematical Geology, Vol. 7, No. 4)"@en ;
-  rdfs:label "not older than"@en ;
-  rdfs:subPropertyOf :isTemporallyRelatedTo ;
-.
-:age_older_than
-  a owl:ObjectProperty ;
-  rdfs:comment "Age associated with subject is entirely prior to age associated with object"@en ;
-  rdfs:comment "Event A is older than event B if A has occurred prior to B. (Burns, 1975; Mathematical Geology, Vol. 7, No. 4) Equivalent to Allen A Before B."@en ;
-  rdfs:label "older than"@en ;
-  rdfs:subPropertyOf :age_disjoint ;
-  owl:inverseOf :age_younger_than ;
-.
-:age_overlaps
-  a owl:ObjectProperty ;
-  rdfs:comment "target interval starts before source interval ends, and target inteval ends after source interval. Allen Relation"@en ;
-  rdfs:label "age overlaps"@en ;
-  rdfs:subPropertyOf :isTemporallyRelatedTo ;
-.
-:age_started_by
-  a owl:ObjectProperty ;
-  rdfs:comment "source and target start simultaneously; source interval ends after target; ; inverse of starts"@en ;
-  rdfs:label "age interval started by"@en ;
-  rdfs:subPropertyOf :isTemporallyRelatedTo ;
-  owl:inverseOf :age_starts ;
-.
-:age_starts
-  a owl:ObjectProperty ;
-  rdfs:comment "source and target intervals start as same instance, target interval ends after source interval; Allen Relation"@en ;
-  rdfs:label "age starts"@en ;
-  rdfs:subPropertyOf :age_interval_in ;
-.
-:age_younger_than
-  a owl:ObjectProperty ;
-  rdfs:comment "Age associated with subject is entirely after the age associated with object"@en ;
-  rdfs:comment "Event A is younger than event B if A has occurred after  B.  Same as Allen A After B.  (Burns, 1975; Mathematical Geology, Vol. 7, No. 4)"@en ;
-  rdfs:label "younger than"@en ;
-  rdfs:subPropertyOf :age_disjoint ;
 .
 :containedBy
   a owl:ObjectProperty ;
@@ -950,8 +828,16 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
 :directSpatialLocation
   a owl:InverseFunctionalProperty ;
   a owl:ObjectProperty ;
-  rdfs:comment "Geographic disposition of an endurant."@en ;
-  rdfs:label "has direct spatial location"@en ;
+  rdfs:comment "The location of the space occupied by an endurant."@en ;
+  rdfs:label "direct spatial location"@en ;
+  rdfs:range :Spatial_Location ;
+  rdfs:subPropertyOf :isSpatiallyRelatedTo ;
+.
+:directSpatialOccupies
+  a owl:InverseFunctionalProperty ;
+  a owl:ObjectProperty ;
+  rdfs:comment "The spatial region occupied by an endurant. The region has a spatial location"@en ;
+  rdfs:label "direct spatial occupies"@en ;
   rdfs:range :Spatial_Region ;
   rdfs:subPropertyOf :isSpatiallyRelatedTo ;
 .
@@ -1128,12 +1014,25 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   a owl:ObjectProperty ;
   rdfs:comment "Indirect spatial location of a Perdurant or Situation is the union of the spatial location of all participants in Perdurant or parts of the Situation."@en ;
   rdfs:label "has indirect spatial location"@en ;
+  rdfs:range :Spatial_Location ;
   rdfs:subPropertyOf :isSpatiallyRelatedTo ;
+.
+:indirectSpatialOccupies
+  a owl:ObjectProperty ;
+  rdfs:comment "The space occupied by the endurant that is a participant in a Perdurant or Situation; The union of the spatial location of all participants in Perdurant or parts of the Situation."@en ;
+  rdfs:label "indirect spatial occupies"@en ;
+  rdfs:range :Spatial_Region ;
+  rdfs:subPropertyOf :isSpatiallyRelatedTo ;
+.
+:indirectTemporalLocation
+  a owl:ObjectProperty ;
+  rdfs:label "indirect Temporal Location"@en ;
+  rdfs:subPropertyOf :isTemporallyRelatedTo ;
 .
 :indirectTemporalOccupies
   a owl:ObjectProperty ;
   rdfs:comment "" ;
-  rdfs:label "indirect temporal location"@en ;
+  rdfs:label "indirect Temporal Occupies"@en ;
   rdfs:range :Time_Region ;
   rdfs:subPropertyOf :isTemporallyRelatedTo ;
 .
@@ -1334,6 +1233,117 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   rdfs:comment "the boundary  and only the boundary of the subect intersects the boundary of the object spatial region"@en ;
   rdfs:label "Spatially Touch"@en ;
   rdfs:subPropertyOf :isSpatiallyRelatedTo ;
+.
+:time_disjoint
+  a owl:ObjectProperty ;
+  rdfs:comment "the union of Allen Before and After; Age intervals of subject and object do not touch or intersect."@en ;
+  rdfs:label "age disjoint"@en ;
+  rdfs:subPropertyOf :isTemporallyRelatedTo ;
+.
+:time_during
+  a owl:ObjectProperty ;
+  rdfs:comment "interval A is entirely contained in interval B; B starts before A and B ends after A. Allen relation."@en ;
+  rdfs:label "age during"@en ;
+  rdfs:subPropertyOf :time_interval_in ;
+  rdfs:subPropertyOf :time_not_older_than ;
+  owl:inverseOf :time_interval_contains ;
+.
+:time_equivalent_to
+  a owl:ObjectProperty ;
+  rdfs:comment "A is equivalent to B if they represent expressions of the same event. Same as Allen A Equals B."@en ;
+  rdfs:comment "One of six binary relations between geologic events defined by Burns (1975)"@en ;
+  rdfs:label "age equivalent"@en ;
+  rdfs:subPropertyOf :isTemporallyRelatedTo ;
+.
+:time_finished_by
+  a owl:ObjectProperty ;
+  rdfs:comment "source interval begins before target; source and target end simultaneously; inverse of finishes"@en ;
+  rdfs:label "age interval finished by"@en ;
+  rdfs:subPropertyOf :isTemporallyRelatedTo ;
+  owl:inverseOf :time_finishes ;
+.
+:time_finishes
+  a owl:ObjectProperty ;
+  rdfs:comment "assign a younger age boundary for a Time Region (instant or interval). Target TimeRegion starts before source TimeRegion, and source and target TimeRegion end at the same instant. Allen Relation"@en ;
+  rdfs:label "age finishes"@en ;
+  rdfs:subPropertyOf :time_interval_in ;
+  rdfs:subPropertyOf :time_not_older_than ;
+.
+:time_incomparable_to
+  a owl:ObjectProperty ;
+  rdfs:comment "A is incomparable to be if there is not enough information to determine an age relationship"@en ;
+  rdfs:comment "One of six binary relations between geolgoic events defined by Burns (1975)"@en ;
+  rdfs:label "age incomparable"@en ;
+  rdfs:subPropertyOf :isTemporallyRelatedTo ;
+.
+:time_interval_contains
+  a owl:ObjectProperty ;
+  a owl:TransitiveProperty ;
+  rdfs:comment "target interval is completely within the source interval; source begins before target and ends after target. inverse of During"@en ;
+  rdfs:domain :Time_Interval ;
+  rdfs:label "age interval contains"@en ;
+  rdfs:subPropertyOf :isTemporallyRelatedTo ;
+.
+:time_interval_in
+  a owl:ObjectProperty ;
+  rdfs:comment "Source interval is contained in target interval; union of during, starts, and finishes. Target interval may start before or end after source interval"@en ;
+  rdfs:label "age interval in"@en ;
+  rdfs:subPropertyOf :isTemporallyRelatedTo ;
+.
+:time_meets
+  a owl:ObjectProperty ;
+  rdfs:comment "A covers B -- A is immediately younger than B (there are no events between A and B) Same as Allen A meets B."@en ;
+  rdfs:comment "One of six binary relations between geologic events defined by Burns (1975)"@en ;
+  rdfs:comment "Source TimeRegion ends at the beginning of the target TimeRegion; there is no intervening time; inverse of age_met_by"@en ;
+  rdfs:label "age meets"@en ;
+  rdfs:subPropertyOf :isTemporallyRelatedTo ;
+  owl:inverseOf :time_met_by ;
+.
+:time_met_by
+  a owl:ObjectProperty ;
+  rdfs:comment "Source TimeRegion starts at the end of the target TimeRegion; there is no intervening time; inverse of meets"@en ;
+  rdfs:label "age met by"@en ;
+  rdfs:subPropertyOf :isTemporallyRelatedTo ;
+.
+:time_not_older_than
+  a owl:ObjectProperty ;
+  rdfs:comment "Event B is not older than event A; B is either younger than A, B is equivalent to A, or B is incomparable to A. (Burns, 1975; Mathematical Geology, Vol. 7, No. 4)"@en ;
+  rdfs:label "not older than"@en ;
+  rdfs:subPropertyOf :isTemporallyRelatedTo ;
+.
+:time_older_than
+  a owl:ObjectProperty ;
+  rdfs:comment "Age associated with subject is entirely prior to age associated with object"@en ;
+  rdfs:comment "Event A is older than event B if A has occurred prior to B. (Burns, 1975; Mathematical Geology, Vol. 7, No. 4) Equivalent to Allen A Before B."@en ;
+  rdfs:label "older than"@en ;
+  rdfs:subPropertyOf :time_disjoint ;
+  owl:inverseOf :time_younger_than ;
+.
+:time_overlaps
+  a owl:ObjectProperty ;
+  rdfs:comment "target interval starts before source interval ends, and target inteval ends after source interval. Allen Relation"@en ;
+  rdfs:label "age overlaps"@en ;
+  rdfs:subPropertyOf :isTemporallyRelatedTo ;
+.
+:time_started_by
+  a owl:ObjectProperty ;
+  rdfs:comment "source and target start simultaneously; source interval ends after target; ; inverse of starts"@en ;
+  rdfs:label "age interval started by"@en ;
+  rdfs:subPropertyOf :isTemporallyRelatedTo ;
+  owl:inverseOf :time_starts ;
+.
+:time_starts
+  a owl:ObjectProperty ;
+  rdfs:comment "assign an older age boundary for a time interval as a Time Region. Source and target TimeRegions start as same instance, target TimeRegion ends after source TimeRegion; Allen Relation"@en ;
+  rdfs:label "age starts"@en ;
+  rdfs:subPropertyOf :time_interval_in ;
+.
+:time_younger_than
+  a owl:ObjectProperty ;
+  rdfs:comment "Age associated with subject is entirely after the age associated with object"@en ;
+  rdfs:comment "Event A is younger than event B if A has occurred after  B.  Same as Allen A After B.  (Burns, 1975; Mathematical Geology, Vol. 7, No. 4)"@en ;
+  rdfs:label "younger than"@en ;
+  rdfs:subPropertyOf :time_disjoint ;
 .
 xsd:anySimpleType
   a rdfs:Datatype ;

@@ -1,5 +1,4 @@
 # baseURI: http://loop3d.org/GSO/ontology/2020/1/faultexample2/ontology
-
 # imports: http://loop3d.org/GSO/ontology/2020/1/loop3dmaster
 
 @prefix : <http://loop3d.org/GSO/ontology/2020/1/faultexample2#> .
@@ -7,6 +6,7 @@
 @prefix gsen: <http://loop3d.org/GSO/ontology/2020/1/eventenvironment/> .
 @prefix gsoc: <http://loop3d.org/GSO/ontology/2020/1/common/> .
 @prefix gsog: <http://loop3d.org/GSO/ontology/2020/1/geologicfeature/> .
+@prefix gsoq: <http://loop3d.org/GSO/ontology/2020/1/geologicquality/> .
 @prefix gspr: <http://loop3d.org/GSO/ontology/2020/1/geologicprocess/> .
 @prefix gstime: <http://loop3d.org/GSO/ontology/2020/1/ischart/> .
 @prefix gsuom: <http://qudt.org/vocab/unit#> .
@@ -17,7 +17,6 @@
 
 <http://loop3d.org/GSO/ontology/2020/1/faultexample2/ontology>
   a owl:Ontology ;
-
   owl:imports <http://loop3d.org/GSO/ontology/2020/1/loop3dmaster> ;
   owl:versionIRI <http://loop3d.org/GSO/ontology/2020/1/faultexample2> ;
 .
@@ -50,40 +49,66 @@ fau2:Basin_Fill_Tilting_Event
   rdfs:label "Oligocene-Miocene faulting and tilting"@en ;
 .
 fau2:EarlyProterozoic1780-1690
-  a gsog:Geologic_Date_Interval ;
-  gsog:hasOlderDate [
-      a gsog:Geologic_Time_Date ;
+  a gsoc:Time_Interval ;
+  gsog:time_interval_finishes [
+      a gsoc:Time_Instant ;
       gsoc:hasQuality [
-          a gsoc:Simple_Uncertainty ;
-          gsoc:hasDataValue "12"^^xsd:decimal ;
-          gsoc:hasUOM [
-              a gsuom:ma ;
+          a gsoq:Time_Instant_Location ;
+          gsoc:hasValue [
+              a gsoc:Time_Instant_Value ;
+              gsoc:hasQuality [
+                  a gsoc:Simple_Uncertainty ;
+                  gsoc:hasDataValue "18"^^xsd:decimal ;
+                  gsoc:hasUOM [
+                      a gsuom:ma ;
+                    ] ;
+                ] ;
+              gsoc:hasUOM [
+                  a gsuom:ma ;
+                ] ;
+              gsog:hasDate "1690"^^xsd:decimal ;
             ] ;
         ] ;
-      gsoc:hasUOM [
-          a gsuom:ma ;
-        ] ;
-      gsog:hasDate "1780"^^xsd:decimal ;
     ] ;
-  gsog:hasYoungerDate [
-      a gsog:Geologic_Time_Date ;
+  gsog:time_interval_starts [
+      a gsoc:Time_Instant ;
       gsoc:hasQuality [
-          a gsoc:Simple_Uncertainty ;
-          gsoc:hasDataValue "18"^^xsd:decimal ;
-          gsoc:hasUOM [
-              a gsuom:ma ;
+          a gsoq:Time_Instant_Location ;
+          gsoc:hasValue [
+              a gsoc:Time_Instant_Value ;
+              gsoc:hasQuality [
+                  a gsoc:Simple_Uncertainty ;
+                  gsoc:hasDataValue "12"^^xsd:decimal ;
+                  gsoc:hasUOM [
+                      a gsuom:ma ;
+                    ] ;
+                ] ;
+              gsoc:hasUOM [
+                  a gsuom:ma ;
+                ] ;
+              gsog:hasDate "1780"^^xsd:decimal ;
             ] ;
         ] ;
-      gsoc:hasUOM [
-          a gsuom:ma ;
-        ] ;
-      gsog:hasDate "1690"^^xsd:decimal ;
     ] ;
   rdfs:label "Early Proterozoic 1780-1690 Ma"@en ;
 .
 fau2:LaramideDuctileBasementInterval
   a gsog:Geologic_Date_Interval ;
-  gsog:hasOlderDate [
+  gsog:time_instant_finishes [
+      a gsog:Geologic_Time_Date ;
+      gsoc:hasQuality [
+          a gsoc:Simple_Uncertainty ;
+          gsoc:hasDataValue 1.0 ;
+          gsoc:hasUOM [
+              a gsuom:ma ;
+            ] ;
+        ] ;
+      gsoc:hasUOM [
+          a gsuom:ma ;
+        ] ;
+      gsog:hasDate "45"^^xsd:decimal ;
+    ] ;
+  gsog:time_instant_starts [
       a gsog:Geologic_Time_Date ;
       gsoc:determinedBy [
           a gsoc:Observation ;
@@ -100,20 +125,6 @@ fau2:LaramideDuctileBasementInterval
           a gsuom:ma ;
         ] ;
       gsog:hasDate "61"^^xsd:decimal ;
-    ] ;
-  gsog:hasYoungerDate [
-      a gsog:Geologic_Time_Date ;
-      gsoc:hasQuality [
-          a gsoc:Simple_Uncertainty ;
-          gsoc:hasDataValue 1.0 ;
-          gsoc:hasUOM [
-              a gsuom:ma ;
-            ] ;
-        ] ;
-      gsoc:hasUOM [
-          a gsuom:ma ;
-        ] ;
-      gsog:hasDate "45"^^xsd:decimal ;
     ] ;
   rdfs:label "Laramide 61-45 Ma"@en ;
 .
@@ -213,21 +224,7 @@ fau2:TertiaryExtensionBasinFillInterval
 .
 fau2:WildernessGraniteIntrusionInterval
   a gsog:Geologic_Date_Interval ;
-  gsog:hasOlderDate [
-      a gsog:Geologic_Time_Date ;
-      gsoc:hasQuality [
-          a gsoc:Simple_Uncertainty ;
-          gsoc:hasDataValue 0.3 ;
-          gsoc:hasUOM [
-              a gsuom:ma ;
-            ] ;
-        ] ;
-      gsoc:hasUOM [
-          a gsuom:ma ;
-        ] ;
-      gsog:hasDate "55"^^xsd:decimal ;
-    ] ;
-  gsog:hasYoungerDate [
+  gsog:time_instant_finishes [
       a gsog:Geologic_Time_Date ;
       gsoc:hasQuality [
           a gsoc:Simple_Uncertainty ;
@@ -240,6 +237,20 @@ fau2:WildernessGraniteIntrusionInterval
           a gsuom:ma ;
         ] ;
       gsog:hasDate "42"^^xsd:decimal ;
+    ] ;
+  gsog:time_instant_starts [
+      a gsog:Geologic_Time_Date ;
+      gsoc:hasQuality [
+          a gsoc:Simple_Uncertainty ;
+          gsoc:hasDataValue 0.3 ;
+          gsoc:hasUOM [
+              a gsuom:ma ;
+            ] ;
+        ] ;
+      gsoc:hasUOM [
+          a gsuom:ma ;
+        ] ;
+      gsog:hasDate "55"^^xsd:decimal ;
     ] ;
   rdfs:label "Laramide 55-42 Ma"@en ;
 .

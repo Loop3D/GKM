@@ -40,7 +40,7 @@ gsoc:Glass
       owl:onProperty gsoc:isConstituentOf ;
     ] ;
 .
-gsoc:age_interval_in
+gsoc:time_interval_in
   rdfs:range :Geologic_Time_Interval ;
 .
 :Additive_Process
@@ -53,18 +53,18 @@ gsoc:age_interval_in
   a owl:Class ;
   rdfs:comment "most granular geochronologic time interval; one or more Ages are grouped into an Epoch"@en ;
   rdfs:label "Age (time scale rank)"@en ;
-  rdfs:subClassOf :Geologic_Date_Interval ;
+  rdfs:subClassOf :Geologic_Time_Interval ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom [
           a owl:Class ;
           owl:complementOf :Age_Rank ;
         ] ;
-      owl:onProperty gsoc:age_interval_in ;
+      owl:onProperty gsoc:time_interval_in ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty gsoc:age_interval_in ;
+      owl:onProperty gsoc:time_interval_in ;
       owl:someValuesFrom :Epoch ;
     ] ;
 .
@@ -276,14 +276,14 @@ Contact(x) <--> exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RB
 :Eon
   a owl:Class ;
   rdfs:comment "How will this be defined?  Must contain at least one Era and have duration longer than some Era?"@en ;
-  rdfs:subClassOf :Geologic_Date_Interval ;
+  rdfs:subClassOf :Geologic_Time_Interval ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom [
           a owl:Class ;
           owl:complementOf :Supereon ;
         ] ;
-      owl:onProperty gsoc:age_interval_contains ;
+      owl:onProperty gsoc:time_interval_contains ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
@@ -300,7 +300,7 @@ Contact(x) <--> exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RB
                 ) ;
             ] ;
         ] ;
-      owl:onProperty gsoc:age_interval_in ;
+      owl:onProperty gsoc:time_interval_in ;
     ] ;
 .
 :Eonothem
@@ -316,7 +316,7 @@ Contact(x) <--> exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RB
   a owl:Class ;
   rdfs:comment "An Epoch may be subdivided into Ages. Epochs are grouped into Periods. Example epochs: Eocene, Pleistocene"@en ;
   rdfs:label "Epoch"@en ;
-  rdfs:subClassOf :Geologic_Date_Interval ;
+  rdfs:subClassOf :Geologic_Time_Interval ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom [
@@ -329,7 +329,7 @@ Contact(x) <--> exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RB
                 ) ;
             ] ;
         ] ;
-      owl:onProperty gsoc:age_interval_in ;
+      owl:onProperty gsoc:time_interval_in ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
@@ -347,11 +347,11 @@ Contact(x) <--> exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RB
                 ) ;
             ] ;
         ] ;
-      owl:onProperty gsoc:age_interval_contains ;
+      owl:onProperty gsoc:time_interval_contains ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty gsoc:age_interval_in ;
+      owl:onProperty gsoc:time_interval_in ;
       owl:someValuesFrom [
           a owl:Class ;
           owl:unionOf (
@@ -364,7 +364,7 @@ Contact(x) <--> exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RB
 :Era
   a owl:Class ;
   rdfs:comment "Named rank for geochronologic time interval. An Era may be subdivided into Periods. Eras are grouped into Eons"@en ;
-  rdfs:subClassOf :Geologic_Date_Interval ;
+  rdfs:subClassOf :Geologic_Time_Interval ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom [
@@ -378,7 +378,7 @@ Contact(x) <--> exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RB
                 ) ;
             ] ;
         ] ;
-      owl:onProperty gsoc:age_interval_contains ;
+      owl:onProperty gsoc:time_interval_contains ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
@@ -395,11 +395,11 @@ Contact(x) <--> exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RB
                 ) ;
             ] ;
         ] ;
-      owl:onProperty gsoc:age_interval_in ;
+      owl:onProperty gsoc:time_interval_in ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty gsoc:age_interval_in ;
+      owl:onProperty gsoc:time_interval_in ;
       owl:someValuesFrom :Eon ;
     ] ;
 .
@@ -598,7 +598,7 @@ Contact(x) <--> exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RB
   rdfs:subClassOf :Geologic_Time_Interval ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty :hasYoungerInterval ;
+      owl:onProperty :time_interval_finishes ;
       owl:someValuesFrom :Geologic_Time_Interval ;
     ] ;
   rdfs:subClassOf [
@@ -615,17 +615,17 @@ Contact(x) <--> exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RB
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom gsoc:Time_Instant ;
-      owl:onProperty :hasOlderDate ;
+      owl:onProperty :time_instant_finishes ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom gsoc:Time_Instant ;
-      owl:onProperty :hasYoungerDate ;
+      owl:onProperty :time_instant_starts ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom :Geologic_Date_Interval ;
-      owl:onProperty gsoc:age_interval_contains ;
+      owl:onProperty gsoc:time_interval_contains ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
@@ -1002,7 +1002,7 @@ Probably should specify a Temporal Reference System used to assign coordinate va
 :Period
   a owl:Class ;
   rdfs:comment "Named rank for geochronologic time interval. Periods may be subdivided into Epochs. Periods are grouped into an Era."@en ;
-  rdfs:subClassOf :Geologic_Date_Interval ;
+  rdfs:subClassOf :Geologic_Time_Interval ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom [
@@ -1017,7 +1017,7 @@ Probably should specify a Temporal Reference System used to assign coordinate va
                 ) ;
             ] ;
         ] ;
-      owl:onProperty gsoc:age_interval_contains ;
+      owl:onProperty gsoc:time_interval_contains ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
@@ -1033,11 +1033,11 @@ Probably should specify a Temporal Reference System used to assign coordinate va
                 ) ;
             ] ;
         ] ;
-      owl:onProperty gsoc:age_interval_in ;
+      owl:onProperty gsoc:time_interval_in ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty gsoc:age_interval_in ;
+      owl:onProperty gsoc:time_interval_in ;
       owl:someValuesFrom :Era ;
     ] ;
 .
@@ -1245,7 +1245,7 @@ RBT (x) <--> RBD (x) ^ exists z forall y [(isPartOf (y,z) ^ hasHost (z,x)) -> (b
 :Sub-Period
   a owl:Class ;
   rdfs:comment "Named rank for geochronologic time interval. Sub-Periods may be subdivided into Epochs. Sub-Periods are grouped into a period."@en ;
-  rdfs:subClassOf :Geologic_Date_Interval ;
+  rdfs:subClassOf :Geologic_Time_Interval ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom [
@@ -1259,7 +1259,7 @@ RBT (x) <--> RBD (x) ^ exists z forall y [(isPartOf (y,z) ^ hasHost (z,x)) -> (b
                 ) ;
             ] ;
         ] ;
-      owl:onProperty gsoc:age_interval_in ;
+      owl:onProperty gsoc:time_interval_in ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
@@ -1276,11 +1276,11 @@ RBT (x) <--> RBD (x) ^ exists z forall y [(isPartOf (y,z) ^ hasHost (z,x)) -> (b
                 ) ;
             ] ;
         ] ;
-      owl:onProperty gsoc:age_interval_contains ;
+      owl:onProperty gsoc:time_interval_contains ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty gsoc:age_interval_in ;
+      owl:onProperty gsoc:time_interval_in ;
       owl:someValuesFrom :Period ;
     ] ;
 .
@@ -1303,18 +1303,18 @@ RBT (x) <--> RBD (x) ^ exists z forall y [(isPartOf (y,z) ^ hasHost (z,x)) -> (b
   a owl:Class ;
   rdfs:comment "hight ranking geochronlogic time interval, parts are eons"@en ;
   rdfs:label "Supereon"@en ;
-  rdfs:subClassOf :Geologic_Date_Interval ;
+  rdfs:subClassOf :Geologic_Time_Interval ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom [
           a owl:Class ;
           owl:complementOf :Supereon ;
         ] ;
-      owl:onProperty gsoc:age_interval_contains ;
+      owl:onProperty gsoc:time_interval_contains ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty gsoc:age_interval_contains ;
+      owl:onProperty gsoc:time_interval_contains ;
       owl:someValuesFrom :Eon ;
     ] ;
 .
@@ -1423,36 +1423,15 @@ RBT (x) <--> RBD (x) ^ exists z forall y [(isPartOf (y,z) ^ hasHost (z,x)) -> (b
   rdfs:range :Rock_Material ;
   rdfs:subPropertyOf gsoc:hasConstituent ;
 .
-:hasOlderDate
-  a owl:ObjectProperty ;
-  rdfs:comment "assign an older age boundary as a time instant for a time interval"@en ;
-  rdfs:label "older bounding time position"@en ;
-  rdfs:range gsoc:Time_Instant ;
-  rdfs:subPropertyOf gsoc:age_starts ;
-.
 :hasOlderHost
   a owl:ObjectProperty ;
   rdfs:subPropertyOf gsoc:hostedBy ;
-.
-:hasYoungerDate
-  a owl:ObjectProperty ;
-  rdfs:comment "assign a younger age boundary as a time instant for a time interval"@en ;
-  rdfs:label "younger bounding time position"@en ;
-  rdfs:range gsoc:Time_Instant ;
-  rdfs:subPropertyOf gsoc:age_finishes ;
 .
 :hasYoungerHost
   a owl:ObjectProperty ;
   rdfs:comment "for a feature that is hosted by multiple entities, e.g. a contact, specify the younger hosting entity."@en ;
   rdfs:label "younger host"@en ;
   rdfs:subPropertyOf gsoc:hostedBy ;
-.
-:hasYoungerInterval
-  a owl:ObjectProperty ;
-  rdfs:comment "assign a younger age boundary for a time interval as a time interval, e.g. Jurassic thru Cretaceous, younger age is Cretaceous."@en ;
-  rdfs:label "younger bounding time interval"@en ;
-  rdfs:range :Geologic_Date_Interval ;
-  rdfs:subPropertyOf gsoc:age_finishes ;
 .
 :intrudes
   a owl:ObjectProperty ;
@@ -1552,11 +1531,11 @@ RBT (x) <--> RBD (x) ^ exists z forall y [(isPartOf (y,z) ^ hasHost (z,x)) -> (b
 .
 :nextTimeInterval
   a owl:ObjectProperty ;
-  rdfs:comment "Source interval ends at the beginning of the target interval; there is no intervening time; inverse of age_met_by"@en ;
+  rdfs:comment "Source TimeInterval ends at the beginning of the target TimeInterval; there is no intervening time; inverse of age_met_by"@en ;
   rdfs:domain :Geologic_Date_Interval ;
   rdfs:label "next time interval"@en ;
   rdfs:range :Geologic_Date_Interval ;
-  rdfs:subPropertyOf gsoc:age_meets ;
+  rdfs:subPropertyOf gsoc:time_meets ;
 .
 :ontology
   a owl:Ontology ;
@@ -1600,18 +1579,39 @@ RBT (x) <--> RBD (x) ^ exists z forall y [(isPartOf (y,z) ^ hasHost (z,x)) -> (b
 .
 :previousTimeInterval
   a owl:ObjectProperty ;
-  rdfs:comment "Source interval starts at the end of the target interval; there is no intervening time; inverse of meets"@en ;
+  rdfs:comment "Source TimeInterval starts at the end of the target TimeInterval; there is no intervening time; inverse of meets"@en ;
   rdfs:domain :Geologic_Date_Interval ;
   rdfs:label "previous time interval"@en ;
   rdfs:range :Geologic_Date_Interval ;
-  rdfs:subPropertyOf gsoc:age_met_by ;
+  rdfs:subPropertyOf gsoc:time_met_by ;
+.
+:time_instant_finishes
+  a owl:ObjectProperty ;
+  rdfs:comment "assign a younger age boundary as a time instant for a time interval"@en ;
+  rdfs:label "younger bounding time position"@en ;
+  rdfs:range gsoc:Time_Instant ;
+  rdfs:subPropertyOf gsoc:time_finishes ;
+.
+:time_instant_starts
+  a owl:ObjectProperty ;
+  rdfs:comment "assign an older age boundary as a time instant for a time interval"@en ;
+  rdfs:label "older bounding time position"@en ;
+  rdfs:range gsoc:Time_Instant ;
+  rdfs:subPropertyOf gsoc:time_starts ;
+.
+:time_interval_finishes
+  a owl:ObjectProperty ;
+  rdfs:comment "assign a younger age boundary for a time interval as a time interval, e.g. Jurassic thru Cretaceous, younger age is Cretaceous."@en ;
+  rdfs:label "younger bounding time interval"@en ;
+  rdfs:range :Geologic_Date_Interval ;
+  rdfs:subPropertyOf gsoc:time_finishes ;
 .
 :time_interval_starts
   a owl:ObjectProperty ;
-  rdfs:comment "assign an older age boundary for a time interval as a time interval, e.g. Jurassic thru Cretaceous, older age is Jurassic."@en ;
+  rdfs:comment "assign an older age boundary for a time interval as an interval, e.g. Jurassic thru Cretaceous, older age is Jurassic."@en ;
   rdfs:label "older bounding time interval"@en ;
   rdfs:range :Geologic_Date_Interval ;
-  rdfs:subPropertyOf gsoc:age_starts ;
+  rdfs:subPropertyOf gsoc:time_starts ;
 .
 :underlies
   a owl:ObjectProperty ;

@@ -10,7 +10,24 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
+gsoc:Time_Instant
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:directTemporalLocation ;
+      owl:someValuesFrom gsoq:Time_Instant_Location ;
+    ] ;
+.
+gsoc:Time_Region
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:directTemporalLocation ;
+      owl:someValuesFrom gsoq:Temporal_Location ;
+    ] ;
+.
 gsoc:directTemporalLocation
+  rdfs:range gsoq:Temporal_Location ;
+.
+gsoc:indirectTemporalLocation
   rdfs:range gsoq:Temporal_Location ;
 .
 gsoq:Azimuth
@@ -323,6 +340,11 @@ gsoq:Thickness
   rdfs:label "Thickness"@en ;
   rdfs:subClassOf gsoq:Size ;
 .
+gsoq:Time_Date_Value
+  a owl:Class ;
+  rdfs:label "Time Date Value "@en ;
+  rdfs:subClassOf gsoq:Temporal_Value ;
+.
 gsoq:Time_Instant_Location
   a owl:Class ;
   rdfs:comment "quality the specifies the temporal coordinates of a time instant in some temporal reference system"@en ;
@@ -331,14 +353,8 @@ gsoq:Time_Instant_Location
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty gsoc:hasValue ;
-      owl:someValuesFrom gsoq:Time_Instant_Value ;
+      owl:someValuesFrom gsoq:Time_Numeric_Value ;
     ] ;
-.
-gsoq:Time_Instant_Value
-  a owl:Class ;
-  rdfs:comment "Quality that specifies a temporal location with a temporal coordinate or an xsd dateTime"@en ;
-  rdfs:label "Time Instant Value "@en ;
-  rdfs:subClassOf gsoq:Temporal_Value ;
 .
 gsoq:Time_Interval_Location
   a owl:Class ;
@@ -350,6 +366,12 @@ gsoq:Time_Interval_Location
       owl:onProperty gsoc:hasValue ;
       owl:someValuesFrom gsoq:Temporal_Range ;
     ] ;
+.
+gsoq:Time_Numeric_Value
+  a owl:Class ;
+  rdfs:comment "Quality that specifies a temporal location with a temporal coordinate or an xsd dateTime"@en ;
+  rdfs:label "Time Instant Value "@en ;
+  rdfs:subClassOf gsoq:Temporal_Value ;
 .
 gsoq:Unknown_Facing
   a owl:Class ;

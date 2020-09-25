@@ -1,5 +1,4 @@
 # baseURI: http://loop3d.org/GSO/ontology/2020/1/ex-plutontojiza/ontology
-
 # imports: http://loop3d.org/GSO/ontology/2020/1/loop3dmaster
 
 @prefix : <http://loop3d.org/GSO/ontology/2020/1/ex-plutontojiza#> .
@@ -233,22 +232,26 @@ toj:latojizafinegrained
         ] ;
       gsoc:hasQuality [
           a gslth:Grain_Size ;
-		  gsoc:hasQuality [
-			a gsoq:Quality_Range
-          	gsoq:hasEndValue [
-				a gsoq:Numeric_Value;
-				gsoc:hasDataValue 3 ;
-				gsoc:hasUOM [ a gsuom:millimeter ] ;
-			    rdfs:label "fine grain size: 3 mm maximum"@en ;
-			] ;
-			gsoq:hasStartValue [
-			  a gsoq:Numeric_Value ;
-			  gsoc:hasDataValue 0.05 ;
-			  gsoc:hasUOM [ a gsuom:millimeter ] ;
-			  rdfs:label "fine grain size: .05 mm minimum"@en ;
-			] 
-		]
-	  ];
+          gsoc:hasQuality [
+              a gsoq:Quality_Range ;
+              gsoq:hasEndValue [
+                  a gsoq:Numeric_Value ;
+                  gsoc:hasDataValue 3 ;
+                  gsoc:hasUOM [
+                      a gsuom:millimeter ;
+                    ] ;
+                  rdfs:label "fine grain size: 3 mm maximum"@en ;
+                ] ;
+              gsoq:hasStartValue [
+                  a gsoq:Numeric_Value ;
+                  gsoc:hasDataValue 0.05 ;
+                  gsoc:hasUOM [
+                      a gsuom:millimeter ;
+                    ] ;
+                  rdfs:label "fine grain size: .05 mm minimum"@en ;
+                ] ;
+            ] ;
+        ] ;
       gsoc:hasQuality [
           a gslth:Particle_Sorting_Category ;
           gsoc:hasDataValue "Equigranular" ;
@@ -358,30 +361,34 @@ toj:latojizamain
         ] ;
       gsoc:hasQuality [
           a gslth:Grain_Shape ;
-          gsoc:hasValue [ a gsps:subhedral ] ;
+          gsoc:hasValue [
+              a gsps:subhedral ;
+            ] ;
           rdfs:label "subhedral grains"@en ;
         ] ;
- 
       gsoc:hasQuality [
           a gslth:Grain_Size ;
-		  rdfs:label "Medium to coarse-grained";
-		  gsoc:hasQuality [
-			a gsoq:Quality_Range
-          	gsoq:hasEndValue [
-				a gsoq:Numeric_Value;
-				gsoc:hasDataValue "10"^^xsd:decimal ;
-				gsoc:hasUOM [ a gsuom:millimeter ] ;
-			    rdfs:label "coarse grain size: 10 mm maximum"@en ;
-			] ;
-			gsoq:hasStartValue [
-			  a gsoq:Numeric_Value ;
-			  gsoc:hasDataValue "3"^^xsd:decimal ;
-			  gsoc:hasUOM [ a gsuom:millimeter ] ;
-			  rdfs:label "medium grain size: 3 mm minimum"@en ;
-			] 
-		]
-	  ];		
-		
+          gsoc:hasQuality [
+              a gsoq:Quality_Range ;
+              gsoq:hasEndValue [
+                  a gsoq:Numeric_Value ;
+                  gsoc:hasDataValue "10"^^xsd:decimal ;
+                  gsoc:hasUOM [
+                      a gsuom:millimeter ;
+                    ] ;
+                  rdfs:label "coarse grain size: 10 mm maximum"@en ;
+                ] ;
+              gsoq:hasStartValue [
+                  a gsoq:Numeric_Value ;
+                  gsoc:hasDataValue "3"^^xsd:decimal ;
+                  gsoc:hasUOM [
+                      a gsuom:millimeter ;
+                    ] ;
+                  rdfs:label "medium grain size: 3 mm minimum"@en ;
+                ] ;
+            ] ;
+          rdfs:label "Medium to coarse-grained" ;
+        ] ;
       gsoc:hasQuality [
           a gslth:Particle_Sorting_Category ;
           gsoc:hasDataValue "Equigranular" ;
@@ -456,60 +463,74 @@ toj:latojizaporphyritic
       a gslth:granite ;
       gsoc:hasConstituent [
           a gsog:Mono-mineralic_crystal_particle ;
-          gsoc:hasConstituent [  a gsmin:alkali_feldspar ] ;
-		  gsoc:hasQuality [
-			  a gslth:Grain_Size ;
-			  rdfs:label "1 to 5 mm diameter crystals";
-			  gsoc:hasQuality [
-				a gsoq:Quality_Range
-				gsoq:hasEndValue [
-					a gsoq:Numeric_Value;
-					gsoc:hasDataValue "5"^^xsd:decimal ;
-					gsoc:hasUOM [ a gsuom:millimeter ] ;
-					rdfs:label "5 mm maximum"@en ;
-				] ;
-				gsoq:hasStartValue [
-				  a gsoq:Numeric_Value ;
-				  gsoc:hasDataValue "1"^^xsd:decimal ;
-				  gsoc:hasUOM [ a gsuom:millimeter ] ;
-				  rdfs:label "1 mm minimum"@en ;
-				] 
-			]
-		  ];		
-          gsoc:hasRole [ a gsptr:Groundmass ] ;
+          gsoc:hasConstituent [
+              a gsmin:alkali_feldspar ;
+            ] ;
+          gsoc:hasQuality [
+              a gslth:Grain_Size ;
+              gsoc:hasQuality [
+                  a gsoq:Quality_Range ;
+                  gsoq:hasEndValue [
+                      a gsoq:Numeric_Value ;
+                      gsoc:hasDataValue "5"^^xsd:decimal ;
+                      gsoc:hasUOM [
+                          a gsuom:millimeter ;
+                        ] ;
+                      rdfs:label "5 mm maximum"@en ;
+                    ] ;
+                  gsoq:hasStartValue [
+                      a gsoq:Numeric_Value ;
+                      gsoc:hasDataValue "1"^^xsd:decimal ;
+                      gsoc:hasUOM [
+                          a gsuom:millimeter ;
+                        ] ;
+                      rdfs:label "1 mm minimum"@en ;
+                    ] ;
+                ] ;
+              rdfs:label "1 to 5 mm diameter crystals" ;
+            ] ;
+          gsoc:hasRole [
+              a gsptr:Groundmass ;
+            ] ;
           rdfs:label "K-feldspar in groundmass" ;
         ] ;
       gsoc:hasConstituent [
           a gsog:Mono-mineralic_crystal_particle ;
-          gsoc:hasConstituent [ a gsmin:apatite ] ;
-          gsoc:hasRole [ a gsptr:Accessory_Crystals ] ;
+          gsoc:hasConstituent [
+              a gsmin:apatite ;
+            ] ;
+          gsoc:hasRole [
+              a gsptr:Accessory_Crystals ;
+            ] ;
         ] ;
       gsoc:hasConstituent [
           a gsog:Mono-mineralic_crystal_particle ;
           gsoc:hasConstituent [
               a gsmin:biotite ;
             ] ;
-          
-		  gsoc:hasQuality [
-			  a gslth:Grain_Size ;
-			  rdfs:label "1 to 3 mm diameter crystals";
-			  gsoc:hasQuality [
-				a gsoq:Quality_Range
-				gsoq:hasEndValue [
-					a gsoq:Numeric_Value;
-					gsoc:hasDataValue "3"^^xsd:decimal ;
-					gsoc:hasUOM [ a gsuom:millimeter ] ;
-					rdfs:label "3 mm maximum"@en ;
-				] ;
-				gsoq:hasStartValue [
-				  a gsoq:Numeric_Value ;
-				  gsoc:hasDataValue "1"^^xsd:decimal ;
-				  gsoc:hasUOM [ a gsuom:millimeter ] ;
-				  rdfs:label "1 mm minimum"@en ;
-				] 
-			]
-		  ];		  
-		  
+          gsoc:hasQuality [
+              a gslth:Grain_Size ;
+              gsoc:hasQuality [
+                  a gsoq:Quality_Range ;
+                  gsoq:hasEndValue [
+                      a gsoq:Numeric_Value ;
+                      gsoc:hasDataValue "3"^^xsd:decimal ;
+                      gsoc:hasUOM [
+                          a gsuom:millimeter ;
+                        ] ;
+                      rdfs:label "3 mm maximum"@en ;
+                    ] ;
+                  gsoq:hasStartValue [
+                      a gsoq:Numeric_Value ;
+                      gsoc:hasDataValue "1"^^xsd:decimal ;
+                      gsoc:hasUOM [
+                          a gsuom:millimeter ;
+                        ] ;
+                      rdfs:label "1 mm minimum"@en ;
+                    ] ;
+                ] ;
+              rdfs:label "1 to 3 mm diameter crystals" ;
+            ] ;
           gsoc:hasRole [
               a gsptr:Groundmass ;
             ] ;
@@ -547,25 +568,29 @@ toj:latojizaporphyritic
           gsoc:hasConstituent [
               a gsmin:plagioclase ;
             ] ;
-          	gsoc:hasQuality [
-			  a gslth:Grain_Size ;
-			  rdfs:label "3 to 8 mm diameter crystals";
-			  gsoc:hasQuality [
-				a gsoq:Quality_Range
-				gsoq:hasEndValue [
-					a gsoq:Numeric_Value;
-					gsoc:hasDataValue "8"^^xsd:decimal ;
-					gsoc:hasUOM [ a gsuom:millimeter ] ;
-					rdfs:label "8 mm maximum"@en ;
-				] ;
-				gsoq:hasStartValue [
-				  a gsoq:Numeric_Value ;
-				  gsoc:hasDataValue "3"^^xsd:decimal ;
-				  gsoc:hasUOM [ a gsuom:millimeter ] ;
-				  rdfs:label "3 mm minimum"@en ;
-				] 
-			]
-		  ];
+          gsoc:hasQuality [
+              a gslth:Grain_Size ;
+              gsoc:hasQuality [
+                  a gsoq:Quality_Range ;
+                  gsoq:hasEndValue [
+                      a gsoq:Numeric_Value ;
+                      gsoc:hasDataValue "8"^^xsd:decimal ;
+                      gsoc:hasUOM [
+                          a gsuom:millimeter ;
+                        ] ;
+                      rdfs:label "8 mm maximum"@en ;
+                    ] ;
+                  gsoq:hasStartValue [
+                      a gsoq:Numeric_Value ;
+                      gsoc:hasDataValue "3"^^xsd:decimal ;
+                      gsoc:hasUOM [
+                          a gsuom:millimeter ;
+                        ] ;
+                      rdfs:label "3 mm minimum"@en ;
+                    ] ;
+                ] ;
+              rdfs:label "3 to 8 mm diameter crystals" ;
+            ] ;
           gsoc:hasRole [
               a gsptr:Groundmass ;
             ] ;
@@ -573,32 +598,41 @@ toj:latojizaporphyritic
         ] ;
       gsoc:hasConstituent [
           a gsog:Mono-mineralic_crystal_particle ;
-          gsoc:hasConstituent [a gsmin:quartz ] ;
+          gsoc:hasConstituent [
+              a gsmin:quartz ;
+            ] ;
           gsoc:hasQuality [
               a gslth:Grain_Shape ;
-              gsoc:hasValue [a gsps:rounded  ] ;
+              gsoc:hasValue [
+                  a gsps:rounded ;
+                ] ;
             ] ;
-			
-		  gsoc:hasQuality [
-			  a gslth:Grain_Size ;
-			  rdfs:label "5-8 mm diameter crystals";
-			  gsoc:hasQuality [
-				a gsoq:Quality_Range
-				gsoq:hasEndValue [
-					a gsoq:Numeric_Value;
-					gsoc:hasDataValue "8"^^xsd:decimal ;
-					gsoc:hasUOM [ a gsuom:millimeter ] ;
-					rdfs:label "8 mm maximum"@en ;
-				] ;
-				gsoq:hasStartValue [
-				  a gsoq:Numeric_Value ;
-				  gsoc:hasDataValue "5"^^xsd:decimal ;
-				  gsoc:hasUOM [ a gsuom:millimeter ] ;
-				  rdfs:label "5 mm minimum"@en ;
-				] 
-			]
-		  ];	
-          gsoc:hasRole [a gsptr:Groundmass ] ;
+          gsoc:hasQuality [
+              a gslth:Grain_Size ;
+              gsoc:hasQuality [
+                  a gsoq:Quality_Range ;
+                  gsoq:hasEndValue [
+                      a gsoq:Numeric_Value ;
+                      gsoc:hasDataValue "8"^^xsd:decimal ;
+                      gsoc:hasUOM [
+                          a gsuom:millimeter ;
+                        ] ;
+                      rdfs:label "8 mm maximum"@en ;
+                    ] ;
+                  gsoq:hasStartValue [
+                      a gsoq:Numeric_Value ;
+                      gsoc:hasDataValue "5"^^xsd:decimal ;
+                      gsoc:hasUOM [
+                          a gsuom:millimeter ;
+                        ] ;
+                      rdfs:label "5 mm minimum"@en ;
+                    ] ;
+                ] ;
+              rdfs:label "5-8 mm diameter crystals" ;
+            ] ;
+          gsoc:hasRole [
+              a gsptr:Groundmass ;
+            ] ;
           rdfs:label "Quartz in groundmass" ;
         ] ;
       gsoc:hasConstituent [
@@ -612,26 +646,32 @@ toj:latojizaporphyritic
         ] ;
       gsoc:hasConstituent [
           a gsmin:alkali_feldspar ;
-		  gsoc:hasQuality [
-			  a gslth:Grain_Size ;
-			  rdfs:label "1 to 5 cm diameter phenocrysts";
-			  gsoc:hasQuality [
-				a gsoq:Quality_Range
-				gsoq:hasEndValue [
-					a gsoq:Numeric_Value;
-					gsoc:hasDataValue "50"^^xsd:decimal ;
-					gsoc:hasUOM [ a gsuom:millimeter ] ;
-					rdfs:label "5 cm maximum"@en ;
-				] ;
-				gsoq:hasStartValue [
-				  a gsoq:Numeric_Value ;
-				  gsoc:hasDataValue "10"^^xsd:decimal ;
-				  gsoc:hasUOM [ a gsuom:millimeter ] ;
-				  rdfs:label "1 cm minimum"@en ;
-				] 
-			]
-		  ];	
-          gsoc:hasRole [ a gsptr:phenocryst  ] ;
+          gsoc:hasQuality [
+              a gslth:Grain_Size ;
+              gsoc:hasQuality [
+                  a gsoq:Quality_Range ;
+                  gsoq:hasEndValue [
+                      a gsoq:Numeric_Value ;
+                      gsoc:hasDataValue "50"^^xsd:decimal ;
+                      gsoc:hasUOM [
+                          a gsuom:millimeter ;
+                        ] ;
+                      rdfs:label "5 cm maximum"@en ;
+                    ] ;
+                  gsoq:hasStartValue [
+                      a gsoq:Numeric_Value ;
+                      gsoc:hasDataValue "10"^^xsd:decimal ;
+                      gsoc:hasUOM [
+                          a gsuom:millimeter ;
+                        ] ;
+                      rdfs:label "1 cm minimum"@en ;
+                    ] ;
+                ] ;
+              rdfs:label "1 to 5 cm diameter phenocrysts" ;
+            ] ;
+          gsoc:hasRole [
+              a gsptr:phenocryst ;
+            ] ;
           rdfs:label "K-feldspar phenocrysts" ;
         ] ;
       gsoc:hasQuality [
@@ -745,20 +785,7 @@ toj:villalbaseries
     ] ;
   gsoc:hasDirectTemporalLocation [
       a gsog:Geologic_Date_Interval ;
-      gsog:hasOlderDate [
-          a gsog:Geologic_Time_Date ;
-          gsoc:determinedBy [
-              a gsoc:Inference ;
-              rdfs:comment "TBD -- adopt conventions for better representation of data provenance" ;
-              rdfs:comment "dct:source https://eprints.ucm.es/59104/1/0656.pdf" ;
-              rdfs:comment "youngest single crystal detrital zircons in Lower Villalba unit, sub concordant 206Pb/238U date from single crystals. (Fernandez-Suarez et al. 2000a)" ;
-            ] ;
-          gsoc:hasDate 700 ;
-          gsoc:hasUOM [
-              a gsuom:ma ;
-            ] ;
-        ] ;
-      gsog:hasYoungerDate [
+      gsog:time_instant_finishes [
           a gsog:Geologic_Time_Date ;
           gsoc:determinedBy [
               a gsoc:Inference ;
@@ -767,6 +794,19 @@ toj:villalbaseries
               rdfs:comment "dct:source https://eprints.ucm.es/59104/1/0656.pdf" ;
             ] ;
           gsoc:hasDate 600 ;
+          gsoc:hasUOM [
+              a gsuom:ma ;
+            ] ;
+        ] ;
+      gsog:time_instant_starts [
+          a gsog:Geologic_Time_Date ;
+          gsoc:determinedBy [
+              a gsoc:Inference ;
+              rdfs:comment "TBD -- adopt conventions for better representation of data provenance" ;
+              rdfs:comment "dct:source https://eprints.ucm.es/59104/1/0656.pdf" ;
+              rdfs:comment "youngest single crystal detrital zircons in Lower Villalba unit, sub concordant 206Pb/238U date from single crystals. (Fernandez-Suarez et al. 2000a)" ;
+            ] ;
+          gsoc:hasDate 700 ;
           gsoc:hasUOM [
               a gsuom:ma ;
             ] ;
