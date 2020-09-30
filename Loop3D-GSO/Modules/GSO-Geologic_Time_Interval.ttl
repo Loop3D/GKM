@@ -1,10 +1,13 @@
 # baseURI: http://loop3d.org/GSO/ontology/2020/1/ischart/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/geologicfeature/ontology
+# imports: http://loop3d.org/GSO/ontology/2020/1/geologicquality/ontology
+# imports: http://loop3d.org/GSO/ontology/2020/1/uom/ontology
 
 @prefix : <http://loop3d.org/GSO/ontology/2020/1/ischart/> .
 @prefix gsoc: <http://loop3d.org/GSO/ontology/2020/1/common/> .
 @prefix gsog: <http://loop3d.org/GSO/ontology/2020/1/geologicfeature/> .
 @prefix gsoq: <http://loop3d.org/GSO/ontology/2020/1/geologicquality/> .
+@prefix gst: <http://loop3d.org/GSO/ontology/2020/1/geotime/> .
 @prefix gstime: <http://loop3d.org/GSO/ontology/2020/1/ischart/> .
 @prefix gsuom: <http://loop3d.org/GSO/ontology/2020/1/uom/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
@@ -175,20 +178,20 @@ gstime:Aquitanian2004
   rdfs:comment "younger bound -20.43 Ma"@en ;
   rdfs:label "Aquitanian Age"@en ;
 .
-gstime:Archaen2004
+gstime:Archean2004
   a gsog:Eon ;
   gsoc:isPartOf gstime:isc2004-04 ;
   gsoc:time_finished_by gstime:Neoarchean ;
   gsoc:time_interval_contains gstime:Mesoarchean ;
   gsoc:time_interval_contains gstime:Paleoarchean ;
   gsoc:time_interval_in gstime:Precambrian ;
-  gsoc:time_starts gstime:Eoarchean2004 ;
+  gsoc:time_started_by gstime:Eoarchean2004 ;
   gsog:nextTimeInterval gstime:Proterozoic2004 ;
   gsog:time_instant_finishes gstime:BaseProterozoic ;
   gsog:time_instant_starts gstime:FormationOfEarth ;
-  rdfs:comment "Archaen as defined in 2004-04, before acceptance of Hadean into ISC. The lower age bound is undefined but asserted as Age of Earth here"@en ;
+  rdfs:comment "Archean as defined in 2004-04, before acceptance of Hadean into ISC. The lower age bound is undefined but asserted as Age of Earth here"@en ;
   rdfs:comment "dc:source-- Robb Et al., 2004, The Precambrian: The Archean and Proteroazoic Eons, in Gradstein, Ogg, Smith eds,  A Geoogic Time Scale 2004, p131"@en ;
-  rdfs:label "Archaen  "@en ;
+  rdfs:label "Archean  "@en ;
 .
 gstime:Archean
   a gsog:Eon ;
@@ -363,9 +366,9 @@ gstime:Bartonian2004
 gstime:BaseAeronian
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 440.8 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -384,9 +387,9 @@ gstime:BaseAeronian
 gstime:BaseAeronian2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 439.0 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -404,24 +407,21 @@ gstime:BaseAeronian2004
 .
 gstime:BaseAeronianSP
   a gsog:GSSP ;
-  gsoc:isPartOf gstime:isc2004-04 ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "Geol. Series, Nat. Mus. Wales, 9, p. 36 50, 1989"@en ;
   rdfs:comment "Trefawr Track Section, Wales, UK"@en ;
   rdfs:comment "dct:source--  Episodes 8/2, p. 101 103, 1985 "@en ;
   rdfs:label "GSSP Base of Aeronian"@en ;
   rdfs:seeAlso <http://stratigraphy.science.purdue.edu/references/Silurian1.pdf> ;
   rdfs:seeAlso <http://www.stratigraphy.org/GSSP/Rhu-Tely&Pridoli.pdf> ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
   owl:versionInfo "1984" ;
 .
 gstime:BaseAlbian
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue "113"^^xsd:decimal ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -440,9 +440,9 @@ gstime:BaseAlbian
 gstime:BaseAlbian2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue "112"^^xsd:decimal ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -459,21 +459,19 @@ gstime:BaseAlbian2004
 .
 gstime:BaseAlbianSP
   a gsog:GSSP ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "The lowest occurrence of the planktonic foraminifer Microhedbergella renilaevis, which is 37.4 m above the base of the section and 0.4 m above the base of the laminated Niveau Kilian bed, Col de Pré-Guittard section lies 11 km northwest of Rémuzat and 19 km northwest of Rosans in the Départment of Drôme at 44 29′ 47.78″N, 5 18′ 42.36″E (Lambert coordinates 836,42;3248, 95; 1;25,000 topographic sheet Série Bleu 3138E, La Motte-Chalançon), Southeastern France"@en ;
   rdfs:comment "dc:source -- Kennedy, W.J., A.S. Gale, B.T. Huber, M.R. Petrizzo, P. Bown, H.C. Jenkyns (2017). The Global Boundary Stratotype Section and Point (GSSP) for the base of the Albian Stage, of the Cretaceous, the Col de Pré-Guittard section, Arnayon, Drôme, France. Episodes: 40, 177-188."@en ;
   rdfs:label "GSSP Base of Albian"@en ;
   rdfs:seeAlso <http://cretaceous.stratigraphy.org/gssps/gssp-of-albian-stage/> ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
   owl:versionInfo "2016-04" ;
 .
 gstime:BaseAptian
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue "125"^^xsd:decimal ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -494,30 +492,33 @@ gstime:BaseAptian
 .
 gstime:BaseAptianSP
   a gsog:Stratigraphic_Point ;
-  gsoc:isPartOf gstime:isc2004-04 ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "candidate is Gorgo a Cerbara, Piobbico, Umbria-Marche, central Italy"@en ;
   rdfs:label "Stratotype Point Base of Aptian"@en ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
 .
 gstime:BaseArchean
   a gsog:GSSA ;
-  gsoc:hasUOM [
-      a gsuom:ma ;
+  gsoc:directTemporalLocation [
+      a gsoc:Time_Instant_Location ;
+      gsoc:hasValue [
+          a gsoc:Time_Numeric_Value ;
+          gsoc:hasDataValue "4000"^^xsd:decimal ;
+          gsoc:hasUOM [
+              a gsuom:ma ;
+            ] ;
+        ] ;
     ] ;
   gsoc:isPartOf gstime:isc2004-04 ;
   gsoc:isPartOf gstime:isc2017-02 ;
   gsoc:isPartOf gstime:isc2020-01 ;
-  gsog:hasDate "4000"^^xsd:decimal ;
   rdfs:label "Base of Archean"@en ;
 .
 gstime:BaseArtinskian
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 290.1 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -536,9 +537,9 @@ gstime:BaseArtinskian
 gstime:BaseArtinskian2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 284.4 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -556,19 +557,16 @@ gstime:BaseArtinskian2004
 .
 gstime:BaseArtinskianSP
   a gsog:Stratigraphic_Point ;
-  gsoc:isPartOf gstime:isc2004-04 ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "candidates are in southern Ural Mtns."@en ;
   rdfs:label "Stratotype Point Base of Artinskian"@en ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
 .
 gstime:BaseBajocian
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 170.3 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -587,9 +585,9 @@ gstime:BaseBajocian
 gstime:BaseBajocian2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 171.6 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -607,22 +605,19 @@ gstime:BaseBajocian2004
 .
 gstime:BaseBajocianSP
   a gsog:GSSP ;
-  gsoc:isPartOf gstime:isc2004-04 ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "base of Bed AB 11, Murtinheira Section, Cabo Mondego, Portugal"@en ;
   rdfs:comment "dct:source--  Episodes 20/1, p.16  22, 1997"@en ;
   rdfs:label "GSSP Base of Bajocian"@en ;
   rdfs:seeAlso <http://stratigraphy.science.purdue.edu/references/Bajocian.pdf> ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
   owl:versionInfo "1996" ;
 .
 gstime:BaseBarremian
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 129.4 ;
           gsoc:hasUOM [
               a gsuom:ma ;
@@ -637,9 +632,9 @@ gstime:BaseBarremian
 gstime:BaseBarremian2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 130.0 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -657,19 +652,16 @@ gstime:BaseBarremian2004
 .
 gstime:BaseBarremianSP
   a gsog:Stratigraphic_Point ;
-  gsoc:isPartOf gstime:isc2004-04 ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "candidate is Río Argos near Caravaca, Murcia Province, Spain"@en ;
   rdfs:label "Stratotype Point Base of Barremian"@en ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
 .
 gstime:BaseBartonian
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 41.2 ;
           gsoc:hasUOM [
               a gsuom:ma ;
@@ -684,9 +676,9 @@ gstime:BaseBartonian
 gstime:BaseBartonian2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 40.4 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -704,19 +696,16 @@ gstime:BaseBartonian2004
 .
 gstime:BaseBartonianSP
   a gsog:Stratigraphic_Point ;
-  gsoc:isPartOf gstime:isc2004-04 ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "Contessa highway section near Gubio, Central Apennines, Italy"@en ;
   rdfs:label "Stratotype Point Base of Bartonian"@en ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
 .
 gstime:BaseBathonian
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 168.3 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -735,9 +724,9 @@ gstime:BaseBathonian
 gstime:BaseBathonian2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 167.7 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -754,22 +743,20 @@ gstime:BaseBathonian2004
 .
 gstime:BaseBathonianSP
   a gsog:GSSP ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "Episodes 32/4, p. 222 - 248, 2009" ;
   rdfs:comment "base of limestone bed RB07, Ravin du Bes, Bas Auran area, Alpes de Haute Provence, France"@en ;
   rdfs:label "GSSP Base of Bathonian"@en ;
   rdfs:seeAlso <http://www.stratigraphy.org/GSSP/Bajocian.pdf> ;
   rdfs:seeAlso <http://www.stratigraphy.org/GSSP/Bathonian.pdf> ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
   owl:versionInfo "2008" ;
 .
 gstime:BaseBurdigalian
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 20.44 ;
           gsoc:hasUOM [
               a gsuom:ma ;
@@ -784,9 +771,9 @@ gstime:BaseBurdigalian
 gstime:BaseBurdigalian2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 20.43 ;
           gsoc:hasUOM [
               a gsuom:ma ;
@@ -800,19 +787,16 @@ gstime:BaseBurdigalian2004
 .
 gstime:BaseBurdigalianSP
   a gsog:Stratigraphic_Point ;
-  gsoc:isPartOf gstime:isc2004-04 ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "Potentially in astronomically tuned ODP core"@en ;
   rdfs:label "Stratotype Point Base of Burdigalian"@en ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
 .
 gstime:BaseCalabrian
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 1.8 ;
           gsoc:hasUOM [
               a gsuom:ma ;
@@ -826,24 +810,21 @@ gstime:BaseCalabrian
 .
 gstime:BaseCalabrianSP
   a gsog:GSSP ;
-  gsoc:isPartOf gstime:isc2004-04 ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "Vrica, Italy. Ratified 1985 as Base of Pleistocene; Ratified 2011 as Base of Calabrian; note Gelasian is now basal unit of Pleistocene"@en ;
   rdfs:comment "dct:source--  Episodes 35/3, p. 388-397, 2012"@en ;
   rdfs:comment "dct:source--  Episodes 8/2, p. 116  120, 1985, define base of Pleistocene"@en ;
   rdfs:label "GSSP Base of Calabrian"@en ;
   rdfs:seeAlso <http://www.stratigraphy.org/GSSP/Calabrian1.pdf> ;
   rdfs:seeAlso <http://www.stratigraphy.org/GSSP/Calabrian2.pdf> ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
   owl:versionInfo "1985" ;
 .
 gstime:BaseCallovian
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 166.1 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -862,9 +843,9 @@ gstime:BaseCallovian
 gstime:BaseCallovian2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 164.7 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -882,19 +863,16 @@ gstime:BaseCallovian2004
 .
 gstime:BaseCallovianSP
   a gsog:Stratigraphic_Point ;
-  gsoc:isPartOf gstime:isc2004-04 ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "candidates are Pfeffingen (Swabian Alb, SW Germany) and in Russia"@en ;
   rdfs:label "Stratotype Point Base of Callovian"@en ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
 .
 gstime:BaseCambrianSeries2
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue "521"^^xsd:decimal ;
           gsoc:hasUOM [
               a gsuom:ma ;
@@ -909,18 +887,15 @@ gstime:BaseCambrianSeries2
 .
 gstime:BaseCambrianSeries2SP
   a gsog:Stratigraphic_Point ;
-  gsoc:isPartOf gstime:isc2004-04 ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:label "Stratotype Point Base of Cambrian Stage 3"@en ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
 .
 gstime:BaseCambrianSeries3
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue "509"^^xsd:decimal ;
           gsoc:hasUOM [
               a gsuom:ma ;
@@ -934,18 +909,16 @@ gstime:BaseCambrianSeries3
 .
 gstime:BaseCambrianSeries3SP
   a gsog:Stratigraphic_Point ;
-  gsoc:isPartOf gstime:isc2004-04 ;
-  gsoc:isPartOf gstime:isc2017-02 ;
   rdfs:comment "candidate sections are Wuliu-Zengjiayan (east Guizhou, China) and Split Mountain (Nevada, USA)"@en ;
   rdfs:label "Stratotype Point Base of Cambrian Stage 5"@en ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
 .
 gstime:BaseCambrianStage10
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 489.5 ;
           gsoc:hasUOM [
               a gsuom:ma ;
@@ -959,19 +932,16 @@ gstime:BaseCambrianStage10
 .
 gstime:BaseCambrianStage10SP
   a gsog:Stratigraphic_Point ;
-  gsoc:isPartOf gstime:isc2004-04 ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "candidate section is Duibian (Zhejiang province, China)"@en ;
   rdfs:label "Stratotype Point Base of Cambrian Stage 10"@en ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
 .
 gstime:BaseCambrianStage2
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue "529"^^xsd:decimal ;
           gsoc:hasUOM [
               a gsuom:ma ;
@@ -986,18 +956,15 @@ gstime:BaseCambrianStage2
 .
 gstime:BaseCambrianStage2SP
   a gsog:Stratigraphic_Point ;
-  gsoc:isPartOf gstime:isc2004-04 ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:label "Stratotype Point Base of Cambrian Stage 2"@en ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
 .
 gstime:BaseCambrianStage4
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue "514"^^xsd:decimal ;
           gsoc:hasUOM [
               a gsuom:ma ;
@@ -1012,18 +979,15 @@ gstime:BaseCambrianStage4
 .
 gstime:BaseCambrianStage4SP
   a gsog:Stratigraphic_Point ;
-  gsoc:isPartOf gstime:isc2004-04 ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:label "Stratotype Point Base of Cambrian Stage 4"@en ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
 .
 gstime:BaseCampanian
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 83.6 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -1042,9 +1006,9 @@ gstime:BaseCampanian
 gstime:BaseCampanian2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 83.5 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -1062,19 +1026,16 @@ gstime:BaseCampanian2004
 .
 gstime:BaseCampanianSP
   a gsog:Stratigraphic_Point ;
-  gsoc:isPartOf gstime:isc2004-04 ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "candidates are in southern England and in Texas"@en ;
   rdfs:label "Stratotype Point Base of Campanian"@en ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
 .
 gstime:BaseCapitanian
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 265.1 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -1093,9 +1054,9 @@ gstime:BaseCapitanian
 gstime:BaseCapitanian2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 265.38 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -1113,20 +1074,17 @@ gstime:BaseCapitanian2004
 .
 gstime:BaseCapitanianSP
   a gsog:GSSP ;
-  gsoc:isPartOf gstime:isc2004-04 ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "4.5m above the base of the outcrop section of the Pinery Limestone Member of the Bell Canyon Formation, Nipple Hill, SE Guadalupe Mountains, Texas, U.S.A"@en ;
   rdfs:label "GSSP Base of Capitanian"@en ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
   owl:versionInfo "2001" ;
 .
 gstime:BaseCarboniferous
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 358.9 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -1145,9 +1103,9 @@ gstime:BaseCarboniferous
 gstime:BaseCarboniferous2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 359.2 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -1165,23 +1123,20 @@ gstime:BaseCarboniferous2004
 .
 gstime:BaseCarboniferousSP
   a gsog:GSSP ;
-  gsoc:isPartOf gstime:isc2004-04 ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "Newsletters on Stratigraphy, 43/2, p. 195 205, 2009 "@en ;
   rdfs:comment "base of Bed 89 in Trench E’, (but FAD now known to be at base of Bed 85), La Serre, France"@en ;
   rdfs:comment "dct:source--  Episodes 14/4, p. 331 336, 1991 "@en ;
   rdfs:label "GSSP Base of Carboniferous - Mississippian - Tournaisian"@en ;
   rdfs:seeAlso <http://www.stratigraphy.org/GSSP/Tournaisian.pdf> ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
   owl:versionInfo "1990" ;
 .
 gstime:BaseCenozoic
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue "66"^^xsd:decimal ;
           gsoc:hasUOM [
               a gsuom:ma ;
@@ -1196,9 +1151,9 @@ gstime:BaseCenozoic
 gstime:BaseCenozoic2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 65.5 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -1216,22 +1171,19 @@ gstime:BaseCenozoic2004
 .
 gstime:BaseCenozoicSP
   a gsog:GSSP ;
-  gsoc:isPartOf gstime:isc2004-04 ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "Oued Djerfane, west of El Kef, Tunisia"@en ;
   rdfs:comment "dct:source--  Episodes 29/4, p. 263  278, 2006"@en ;
   rdfs:label "GSSP Base of Cenozoic"@en ;
   rdfs:seeAlso <http://www.stratigraphy.org/GSSP/Danian.pdf> ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
   owl:versionInfo "1991" ;
 .
 gstime:BaseChanghsingian
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 254.14 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -1250,9 +1202,9 @@ gstime:BaseChanghsingian
 gstime:BaseChanghsingian2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 253.8 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -1269,21 +1221,19 @@ gstime:BaseChanghsingian2004
 .
 gstime:BaseChanghsingianSP
   a gsog:GSSP ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "base of Bed 4a- 2, 88 cm above the base of the Changxing Limestone at the Meishan D Section, Meishan, Zhejiang Province, China"@en ;
   rdfs:comment "dct:source--  Episodes 29/3, p. 175 182, 2006"@en ;
   rdfs:label "GSSP Base of Changhsingian"@en ;
   rdfs:seeAlso <http://www.stratigraphy.org/GSSP/Changhsiangian.pdf> ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
   owl:versionInfo "2005" ;
 .
 gstime:BaseChattian
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 27.82 ;
           gsoc:hasUOM [
               a gsuom:ma ;
@@ -1298,9 +1248,9 @@ gstime:BaseChattian
 gstime:BaseChattian2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 28.4 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -1317,20 +1267,18 @@ gstime:BaseChattian2004
 .
 gstime:BaseChattianSP
   a gsog:GSSP ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "Possibly Monte Cagnero, Umbria-Marche region, Italy"@en ;
   rdfs:comment "dct:source--  Rodolfo Coccioni, Alessandro Montanari, David Bice,Graham Williams, 14 others; March 2018, The Global Stratotype Section and Point (GSSP) for the base of the Chattian Stage (Paleogene System, Oligocene Series) at Monte Cagnero, Italy; , Episodes 41(1):17-32; DOI: 10.18814/epiiugs/2018/v41i1/018003."@en ;
   rdfs:label "GSSP Base of Chattian"@en ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
   owl:versionInfo "2016-09" ;
 .
 gstime:BaseChibanian2020
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 0.774 ;
           gsoc:hasUOM [
               a gsuom:ma ;
@@ -1344,7 +1292,6 @@ gstime:BaseChibanian2020
 .
 gstime:BaseChibanianSP2020
   a gsog:GSSP ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "The base of the Chibanian Stage of the Middle Pleistocene Subseries is defined at 1.1 m below the directional midpoint of the Matuyama-Brunhes reversal at the base of a regional lithostratigraphic marker, the Byk-E tephra bed in the Chiba Section, Chiba Prefecture, Japan"@en ;
   rdfs:label "GSSP Base of Chibanian"@en ;
   rdfs:seeAlso <https://en.wikipedia.org/wiki/Chibanian> ;
@@ -1353,9 +1300,9 @@ gstime:BaseChibanianSP2020
 gstime:BaseConiacian
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 89.8 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -1374,9 +1321,9 @@ gstime:BaseConiacian
 gstime:BaseConiacian2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 89.3 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -1394,19 +1341,16 @@ gstime:BaseConiacian2004
 .
 gstime:BaseConiacianSP
   a gsog:Stratigraphic_Point ;
-  gsoc:isPartOf gstime:isc2004-04 ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "candidates are in Poland (Slupia Nadbrzena), USA (Pueblo, Colorado), and Germany (Salzgitter-Salder Quarry)"@en ;
   rdfs:label "Stratotype Point Base of Coniaician"@en ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
 .
 gstime:BaseCretaceous
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue "145"^^xsd:decimal ;
           gsoc:hasUOM [
               a gsuom:ma ;
@@ -1421,9 +1365,9 @@ gstime:BaseCretaceous
 gstime:BaseCretaceous2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 145.5 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -1441,45 +1385,59 @@ gstime:BaseCretaceous2004
 .
 gstime:BaseCretaceousSP
   a gsog:Stratigraphic_Point ;
-  gsoc:isPartOf gstime:isc2004-04 ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "Candidates include: (1) Magnetic -- base of Chron M18r, (2) Base of Calpionellid zone B, (3) ammonite FAD of Berriasella jacobi"@en ;
   rdfs:label "Stratotype Point Base of Cretaceous"@en ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
 .
-gstime:BaseCryogenian
-  a gsog:Geochronologic_Boundary ;
+
+gstime:BaseCryogenian2004
+  a gsog:GSSA ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
-          gsoc:hasDataValue "720"^^xsd:decimal ;
+          a gsoc:Time_Numeric_Value ;
+          gsoc:hasDataValue "850"^^xsd:decimal ;
           gsoc:hasUOM [
               a gsuom:ma ;
             ] ;
         ] ;
     ] ;
   gsoc:isPartOf gstime:isc2004-04 ;
+  rdfs:comment "Ratified 1990, Episodes 14/2,1991"@en ;
+  rdfs:label "Base of Cryogenian"@en ;
+.
+
+
+gstime:BaseCryogenian
+  a gsog:Geochronologic_Boundary ;
+  gsoc:hasQuality [
+      a gsoc:Time_Instant_Location ;
+      gsoc:hasValue [
+          a gsoc:Time_Numeric_Value ;
+          gsoc:hasDataValue "720"^^xsd:decimal ;
+          gsoc:hasUOM [
+              a gsuom:ma ;
+            ] ;
+        ] ;
+    ] ;
   gsoc:isPartOf gstime:isc2017-02 ;
   gsoc:isPartOf gstime:isc2020-01 ;
+  rdfs:comment "Ratified 1990, Episodes 14/2,1991; age assignment updated 2016?"@en ;
   rdfs:label "Base of Cryogenian"@en ;
 .
 gstime:BaseCryogenianSP
   a gsog:Stratigraphic_Point ;
-  gsoc:isPartOf gstime:isc2004-04 ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
-  rdfs:comment "Defined chronometrically; but will be replaced by GSSP. First glacial episode occurred after 750 Ma"@en ;
+  rdfs:comment "Defined chronometrically; but will be replaced by GSSP. The new Cryogenian GSSP will be placed at a globally correlative level that lies stratigraphically beneath the first appearance of widespread glaciation and is assigned in the interim a ‘calibrated age’ of circa 720 Ma (Episodes Vol. 39, no. 1)"@en ;
   rdfs:label "Stratotype Point Base of Cryogenian"@en ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://doi.org/10.18814/epiiugs/2016/v39i1/89231> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
 .
 gstime:BaseDarriwilian
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 467.3 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -1498,9 +1456,9 @@ gstime:BaseDarriwilian
 gstime:BaseDarriwilian2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 468.1 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -1518,23 +1476,20 @@ gstime:BaseDarriwilian2004
 .
 gstime:BaseDarriwilianSP
   a gsog:GSSP ;
-  gsoc:isPartOf gstime:isc2004-04 ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "base of Bed AEP 184, Huangnitang section, Changshan, Zhejiang Province, SE China"@en ;
   rdfs:comment "dct:source--  Episodes 20/3, p. 158 166, 1997"@en ;
   rdfs:label "GSSP Base of Darriwilian"@en ;
   rdfs:seeAlso <http://stratigraphy.science.purdue.edu/references/Darriwilian.pdf> ;
   rdfs:seeAlso <http://www.stratigraphy.org/GSSP/Darriwilian.pdf> ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
   owl:versionInfo "1987" ;
 .
 gstime:BaseDevonian
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 419.2 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -1553,9 +1508,9 @@ gstime:BaseDevonian
 gstime:BaseDevonian2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 416.0 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -1573,21 +1528,18 @@ gstime:BaseDevonian2004
 .
 gstime:BaseDevonianSP
   a gsog:GSSP ;
-  gsoc:isPartOf gstime:isc2004-04 ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "dct:source--  IUGS Series A, 5, p. 96 109, 1977"@en ;
   rdfs:comment "within Bed 20, Klonk, near Prague, Czech Republic"@en ;
   rdfs:label "GSSP Base of Devonian - Lower Devonian - Lochkovian"@en ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
   owl:versionInfo "1972" ;
 .
 gstime:BaseDrumian
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 504.5 ;
           gsoc:hasUOM [
               a gsuom:ma ;
@@ -1602,33 +1554,37 @@ gstime:BaseDrumian
 .
 gstime:BaseDrumianSP
   a gsog:GSSP ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "at the base of a dark-gray thinly laminated calcisiltite layer, 62 m above the base of the Wheeler Formation, Drum Mountains, Millard County, Utah, USA"@en ;
   rdfs:comment "dct:source--  Episodes 30/2,p. 85 95, 2007"@en ;
   rdfs:label "GSSP Base of Drumian"@en ;
   rdfs:seeAlso <http://stratigraphy.science.purdue.edu/references/Drumian0.pdf> ;
   rdfs:seeAlso <http://www.stratigraphy.org/GSSP/Drumian.pdf> ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
   owl:versionInfo "2006" ;
 .
 gstime:BaseEctasian
   a gsog:GSSA ;
-  gsoc:hasUOM [
-      a gsuom:ma ;
+  gsoc:directTemporalLocation [
+      a gsoc:Time_Instant_Location ;
+      gsoc:hasValue [
+          a gsoc:Time_Numeric_Value ;
+          gsoc:hasDataValue "1400"^^xsd:decimal ;
+          gsoc:hasUOM [
+              a gsuom:ma ;
+            ] ;
+        ] ;
     ] ;
   gsoc:isPartOf gstime:isc2004-04 ;
   gsoc:isPartOf gstime:isc2017-02 ;
   gsoc:isPartOf gstime:isc2020-01 ;
-  gsog:hasDate "1400"^^xsd:decimal ;
   rdfs:label "Base of Ectasian"@en ;
 .
 gstime:BaseEdiacaran
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue "635"^^xsd:decimal ;
           gsoc:hasUOM [
               a gsuom:ma ;
@@ -1643,9 +1599,9 @@ gstime:BaseEdiacaran
 gstime:BaseEdiacaran2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue "630"^^xsd:decimal ;
           gsoc:hasUOM [
               a gsuom:ma ;
@@ -1659,23 +1615,20 @@ gstime:BaseEdiacaran2004
 .
 gstime:BaseEdiacaranSP
   a gsog:GSSP ;
-  gsoc:isPartOf gstime:isc2004-04 ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "base of the Marinoan cap carbonate, Enorama Creek, Flinders Ranges, South Australia"@en ;
   rdfs:comment "dct:source--  Lethaia 39, p.13 30, 2006"@en ;
   rdfs:label "GSSP Base of Ediacaran"@en ;
   rdfs:seeAlso <http://stratigraphy.science.purdue.edu/references/EdiacaranGSSP_Lethaia060.pdf> ;
   rdfs:seeAlso <http://www.stratigraphy.org/GSSP/Ediacaran.pdf> ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
   owl:versionInfo "1990" ;
 .
 gstime:BaseEmsian
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 407.6 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -1694,9 +1647,9 @@ gstime:BaseEmsian
 gstime:BaseEmsian2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 407.0 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -1713,23 +1666,20 @@ gstime:BaseEmsian2004
 .
 gstime:BaseEmsianSP
   a gsog:GSSP ;
-  gsoc:isPartOf gstime:isc2004-04 ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "base of Bed 9/5, Zinzil'ban Gorge in the Kitab State Geological Reserve, Uzbekistan"@en ;
   rdfs:comment "dct:source--  Episodes 20/4, p. 235 240, 1997"@en ;
   rdfs:label "GSSP Base of Emsian"@en ;
   rdfs:seeAlso <http://stratigraphy.science.purdue.edu/references/Emsian.pdf> ;
   rdfs:seeAlso <http://www.stratigraphy.org/GSSP/Emsian.pdf> ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
   owl:versionInfo "1995" ;
 .
 gstime:BaseEocene
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue "56"^^xsd:decimal ;
           gsoc:hasUOM [
               a gsuom:ma ;
@@ -1744,9 +1694,9 @@ gstime:BaseEocene
 gstime:BaseEocene2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 55.8 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -1764,23 +1714,20 @@ gstime:BaseEocene2004
 .
 gstime:BaseEoceneSP
   a gsog:GSSP ;
-  gsoc:isPartOf gstime:isc2004-04 ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "Base of Bed 1 in DBH subsection, Dababiya, near Luxor, Egypt"@en ;
   rdfs:comment "Micropaleontology 49/1, p.41 59, 2003"@en ;
   rdfs:comment "dct:source--  Episodes 30/4, p. 271 286, 2007"@en ;
   rdfs:label "GSSP Base of Eocene - Ypresian"@en ;
   rdfs:seeAlso <http://www.stratigraphy.org/GSSP/Ypresian.pdf> ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
   owl:versionInfo "2003" ;
 .
 gstime:BaseFamennian
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 372.2 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -1799,9 +1746,9 @@ gstime:BaseFamennian
 gstime:BaseFamennian2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 374.5 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -1819,23 +1766,20 @@ gstime:BaseFamennian2004
 .
 gstime:BaseFamennianSP
   a gsog:GSSP ;
-  gsoc:isPartOf gstime:isc2004-04 ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "Base of Bed 32a, Coumiac Quarry, near Cessenon, Montagne Noire, France"@en ;
   rdfs:comment "dct:source--  Episodes 16/4, p. 433 441, 1993"@en ;
   rdfs:label "GSSP Base of Famennian"@en ;
   rdfs:seeAlso <http://stratigraphy.science.purdue.edu/references/Famennian.pdf> ;
   rdfs:seeAlso <http://www.stratigraphy.org/GSSP/Famennian.pdf> ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
   owl:versionInfo "1993" ;
 .
 gstime:BaseFloian
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 477.7 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -1853,23 +1797,20 @@ gstime:BaseFloian
 .
 gstime:BaseFloianSP
   a gsog:GSSP ;
-  gsoc:isPartOf gstime:isc2004-04 ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "dct:source--  Episodes 27/4, p. 265 272, 2004"@en ;
   rdfs:comment "in the lower Tøyen Shale, 2.1m above the top of the Cambrian, Diabasbrottet, Hunneberg, Sweden"@en ;
   rdfs:label "GSSP Base of Floian"@en ;
   rdfs:seeAlso <http://stratigraphy.science.purdue.edu/references/Floian.pdf> ;
   rdfs:seeAlso <http://www.stratigraphy.org/GSSP/Floian.pdf> ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
   owl:versionInfo "2002" ;
 .
 gstime:BaseFurongian
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue "497"^^xsd:decimal ;
           gsoc:hasUOM [
               a gsuom:ma ;
@@ -1884,9 +1825,9 @@ gstime:BaseFurongian
 gstime:BaseFurongian2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue "501"^^xsd:decimal ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -1904,22 +1845,19 @@ gstime:BaseFurongian2004
 .
 gstime:BaseFurongianSP
   a gsog:GSSP ;
-  gsoc:isPartOf gstime:isc2004-04 ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "at 396 m in the Huaqiao Formation, Wuling Mountains, Huayuan County, NW Hunan Province, China"@en ;
   rdfs:comment "dct:source--  Lethaia 37, p. 365 379, 2004"@en ;
   rdfs:label "GSSP Base of Furongian Series - Paibian"@en ;
   rdfs:seeAlso <http://www.stratigraphy.org/GSSP/Paibian.pdf> ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
   owl:versionInfo "2003" ;
 .
 gstime:BaseGelasian
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 2.58 ;
           gsoc:hasUOM [
               a gsuom:ma ;
@@ -1935,9 +1873,9 @@ gstime:BaseGelasian
 gstime:BaseGelasian2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 2.588 ;
           gsoc:hasUOM [
               a gsuom:ma ;
@@ -1952,24 +1890,21 @@ gstime:BaseGelasian2004
 .
 gstime:BaseGelasianSP
   a gsog:GSSP ;
-  gsoc:isPartOf gstime:isc2004-04 ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "Episodes 33/3, p. 152-158, 2010"@en ;
   rdfs:comment "Monte San Nicola, Sicily, Italy Ratified 1996 as base of Gelasian; Ratified 2009 as base of Pleistocene and Quaternary"@en ;
   rdfs:comment "dct:source--  Episodes 21/2, p. 82 87, 1998"@en ;
   rdfs:label "GSSP Base of Quaternary"@en ;
   rdfs:seeAlso <http://www.stratigraphy.org/GSSP/Gelasian.pdf> ;
   rdfs:seeAlso <http://www.stratigraphy.org/GSSP/Quaternary&Pleistocene.pdf> ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
   owl:versionInfo "1996" ;
 .
 gstime:BaseGivetian
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 387.7 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -1988,9 +1923,9 @@ gstime:BaseGivetian
 gstime:BaseGivetian2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 391.8 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -2008,23 +1943,20 @@ gstime:BaseGivetian2004
 .
 gstime:BaseGivetianSP
   a gsog:GSSP ;
-  gsoc:isPartOf gstime:isc2004-04 ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "base of Bed 123, Jebel Mech Irdane, Morocco"@en ;
   rdfs:comment "dct:source--  Episodes 18/3, p. 107 115, 1995"@en ;
   rdfs:label "GSSP Base of Givetian"@en ;
   rdfs:seeAlso <http://stratigraphy.science.purdue.edu/references/Givetian.pdf> ;
   rdfs:seeAlso <http://www.stratigraphy.org/GSSP/Givetian.pdf> ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
   owl:versionInfo "1994" ;
 .
 gstime:BaseGuadalupian
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 272.95 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -2043,9 +1975,9 @@ gstime:BaseGuadalupian
 gstime:BaseGuadalupian2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 270.6 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -2063,21 +1995,18 @@ gstime:BaseGuadalupian2004
 .
 gstime:BaseGuadalupianSP
   a gsog:GSSP ;
-  gsoc:isPartOf gstime:isc2004-04 ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "42.7m above the base of the Cutoff Formation, Stratotype Canyon, Texas, U.S.A"@en ;
   rdfs:comment "No citation for definition of base Gaudalupian (Roadian) from ICS; related pubs: Mei, S.L. & Henderson, C.M. 2002. Conodont definition of the Kungurian (Cisuralian) and Roadian (Guadalupian) boundary. In: Hills, L.V., Henderson, C.M. & Bamber, E.W. (eds) Carboniferous and Permian of the World. Canadian Society of Petroleum Geologists, Memoirs, 19, 529–551.  For Details, see SPENCER G. LUCAS,  SHU-ZHONG SHEN, 2018, The Permian timescale: an introduction: DOI: 10.1144/SP450.15."@en ;
   rdfs:label "GSSP Base of Guadalupian"@en ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
   owl:versionInfo "2001" ;
 .
 gstime:BaseGuzhangian
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 500.5 ;
           gsoc:hasUOM [
               a gsuom:ma ;
@@ -2092,21 +2021,19 @@ gstime:BaseGuzhangian
 .
 gstime:BaseGuzhangianSP
   a gsog:GSSP ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "121.3 m above the base of the Huaqiao Formation, Louyixi, Guzhang County, NW Hunan Province, S. China"@en ;
   rdfs:comment "dct:source--  Episodes 32/1, p.41-55, 2009"@en ;
   rdfs:label "GSSP Base of Guzhangian "@en ;
   rdfs:seeAlso <http://www.stratigraphy.org/GSSP/Guzhangian.pdf> ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
   owl:versionInfo "2008" ;
 .
 gstime:BaseGzhelian
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 303.7 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -2125,9 +2052,9 @@ gstime:BaseGzhelian
 gstime:BaseGzhelian2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 303.9 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -2145,19 +2072,16 @@ gstime:BaseGzhelian2004
 .
 gstime:BaseGzhelianSP
   a gsog:Stratigraphic_Point ;
-  gsoc:isPartOf gstime:isc2004-04 ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "candidates are in southern Urals or Nashui (south China)."@en ;
   rdfs:label "Stratotype Point Base of Gzhelian"@en ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
 .
 gstime:BaseHauterivian
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 132.9 ;
           gsoc:hasUOM [
               a gsuom:ma ;
@@ -2171,9 +2095,9 @@ gstime:BaseHauterivian
 gstime:BaseHauterivian2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 136.4 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -2191,9 +2115,9 @@ gstime:BaseHauterivian2004
 gstime:BaseHauterivian2020
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 132.6 ;
           gsoc:hasUOM [
               a gsuom:ma ;
@@ -2206,15 +2130,12 @@ gstime:BaseHauterivian2020
 .
 gstime:BaseHauterivianSP
   a gsog:Stratigraphic_Point ;
-  gsoc:isPartOf gstime:isc2004-04 ;
-  gsoc:isPartOf gstime:isc2017-02 ;
   rdfs:comment "candidate is La Charce village, Drôme Province, southeast France"@en ;
   rdfs:label "Stratotype Point Base of Barremian"@en ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
 .
 gstime:BaseHauterivianSP2020
   a gsog:GSSP ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "Defined at the base of Bed 189 of the La Charce Section, Drôme, France. This level coincides with the first appearance of the ammonite genus Acanthodiscus which marks the base of the Acanthodiscus radiatus ammonite zone. The GSSP is located 550m west of the village of La Charce, Drôme, France at a latitude of 44.46944 N and a longitude of 5.44372 E."@en ;
   rdfs:label "GSSP Base of Hauterivian"@en ;
   rdfs:seeAlso <https://timescalefoundation.org/gssp/detail.php?periodid=48&top_parentid=35> ;
@@ -2223,9 +2144,9 @@ gstime:BaseHauterivianSP2020
 gstime:BaseHirnantian
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 445.2 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -2244,9 +2165,9 @@ gstime:BaseHirnantian
 gstime:BaseHirnantian2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 445.6 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -2262,22 +2183,20 @@ gstime:BaseHirnantian2004
 .
 gstime:BaseHirnantianSP
   a gsog:GSSP ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "0.39m below the base of the Kuanyinchiao Bed, Wangjiawan North section, N of Yichang city, Western Hubei Province, China"@en ;
   rdfs:comment "dct:source--  Episodes 29/3, p. 183 196, 2006"@en ;
   rdfs:label "GSSP Base of Hirnantian"@en ;
   rdfs:seeAlso <http://stratigraphy.science.purdue.edu/references/Hirnantian.pdf> ;
   rdfs:seeAlso <http://www.stratigraphy.org/GSSP/Hirnantian.pdf> ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
   owl:versionInfo "2006" ;
 .
 gstime:BaseHolocene
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 0.0117 ;
           gsoc:hasUOM [
               a gsuom:ma ;
@@ -2292,9 +2211,9 @@ gstime:BaseHolocene
 gstime:BaseHolocene2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 0.00115 ;
           gsoc:hasUOM [
               a gsuom:ma ;
@@ -2307,23 +2226,21 @@ gstime:BaseHolocene2004
 .
 gstime:BaseHoloceneSP
   a gsog:GSSP ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "J. Quaternary Sci., Vol. 24 pp. 3–17, 2009"@en ;
   rdfs:comment "NorthGRIP ice core, central Greenland"@en ;
   rdfs:comment "dct:source--  Episodes 31/2, 2008"@en ;
   rdfs:label "GSSP Base of Holocene"@en ;
   rdfs:seeAlso <http://stratigraphy.science.purdue.edu/references/HoloceneGSSP_JQuatSci090.pdf> ;
   rdfs:seeAlso <http://www.stratigraphy.org/GSSP/Holocene.pdf> ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
   owl:versionInfo "2008" ;
 .
 gstime:BaseHomerian
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 430.5 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -2342,9 +2259,9 @@ gstime:BaseHomerian
 gstime:BaseHomerian2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 426.2 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -2362,9 +2279,6 @@ gstime:BaseHomerian2004
 .
 gstime:BaseHomerianSP
   a gsog:GSSP ;
-  gsoc:isPartOf gstime:isc2004-04 ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "Geol. Series, Nat. Mus. Wales, 9, p. 51 73, 1989"@en ;
   rdfs:comment "dct:source--  Episodes 5/3, p. 21 23, 1982"@en ;
   rdfs:comment "dct:source--  Lethaia 14"@en ;
@@ -2372,15 +2286,15 @@ gstime:BaseHomerianSP
   rdfs:label "GSSP Base of Homerian"@en ;
   rdfs:seeAlso <http://stratigraphy.science.purdue.edu/references/Silurian2.pdf> ;
   rdfs:seeAlso <http://www.stratigraphy.org/GSSP/Sheinwoodian-Ludfordian.pdf> ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
   owl:versionInfo "1980" ;
 .
 gstime:BaseJiangshanian
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue "494"^^xsd:decimal ;
           gsoc:hasUOM [
               a gsuom:ma ;
@@ -2394,21 +2308,19 @@ gstime:BaseJiangshanian
 .
 gstime:BaseJiangshanianSP
   a gsog:GSSP ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "dct:source--  Episodes 35/4, p.462-477, 2012"@en ;
   rdfs:comment "the base of a limestone (wackestone) layer 108.12 m above the base of the Huayansi Formation in the Duibian B section, coinciding with the first appearance of the cosmopolitan agnostoid trilobite Agnostotes orientalis (base of the A. orientalis Zone), Zhejiang province, China"@en ;
   rdfs:label "GSSP Base of Jiangshanian"@en ;
   rdfs:seeAlso <http://www.stratigraphy.org/GSSP/Jiangshanian.pdf> ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
   owl:versionInfo "2011" ;
 .
 gstime:BaseJurassic
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 201.3 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -2428,9 +2340,9 @@ gstime:BaseJurassic
 gstime:BaseJurassic2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 199.6 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -2446,21 +2358,19 @@ gstime:BaseJurassic2004
 .
 gstime:BaseJurassicSP
   a gsog:GSSP ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "5.80 m above top of Koessen Formation, Kuhjoch section,Tyrol, Austria"@en ;
   rdfs:comment "dct:source--  Episodes 36/3, p. 162-198, 2013"@en ;
   rdfs:label "GSSP Base of Jurassic"@en ;
   rdfs:seeAlso <http://www.stratigraphy.org/GSSP/Hettangian.pdf> ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
   owl:versionInfo "2010" ;
 .
 gstime:BaseKatian
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue "453"^^xsd:decimal ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -2478,22 +2388,20 @@ gstime:BaseKatian
 .
 gstime:BaseKatianSP
   a gsog:GSSP ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "4.0m above the base of the Bigfork Chert, Black Knob Ridge Section, Atoka, Oklahoma (USA)"@en ;
   rdfs:comment "dct:source--  Episodes 30/4, p.258 270, 2007"@en ;
   rdfs:label "GSSP Base of Katian"@en ;
   rdfs:seeAlso <http://www.episodes.org/backissues/304/304.htm> ;
   rdfs:seeAlso <http://www.stratigraphy.org/GSSP/Katian.pdf> ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
   owl:versionInfo "2006" ;
 .
 gstime:BaseKimmeridgian
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 157.3 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -2512,9 +2420,9 @@ gstime:BaseKimmeridgian
 gstime:BaseKimmeridgian2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 155.7 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -2532,19 +2440,16 @@ gstime:BaseKimmeridgian2004
 .
 gstime:BaseKimmeridgianSP
   a gsog:Stratigraphic_Point ;
-  gsoc:isPartOf gstime:isc2004-04 ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "candidate is Flodigarry (Isle of Skye, NW Scotland)"@en ;
   rdfs:label "Stratotype Point Base of Kimmeridgian"@en ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
 .
 gstime:BaseKungurian
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 283.5 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -2563,9 +2468,9 @@ gstime:BaseKungurian
 gstime:BaseKungurian2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 275.6 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -2583,19 +2488,16 @@ gstime:BaseKungurian2004
 .
 gstime:BaseKungurianSP
   a gsog:Stratigraphic_Point ;
-  gsoc:isPartOf gstime:isc2004-04 ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "candidates are in southern Ural Mtns."@en ;
   rdfs:label "Stratotype Point Base of Kungurian"@en ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
 .
 gstime:BaseLadinian
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue "242"^^xsd:decimal ;
           gsoc:hasUOM [
               a gsuom:ma ;
@@ -2610,9 +2512,9 @@ gstime:BaseLadinian
 gstime:BaseLadinian2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue "237"^^xsd:decimal ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -2629,21 +2531,19 @@ gstime:BaseLadinian2004
 .
 gstime:BaseLadinianSP
   a gsog:GSSP ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "base of a 15 – 20cm thick limestone bed overlying a distinctive groove (“Chiesense groove”) of limestone nodules in a shaly matrix, located about 5m above the base of the Buchenstein Beds, Bagolino, Province of Brescia, Northern Italy"@en ;
   rdfs:comment "dct:source--  Episodes 28/4, p. 233  244, 2005"@en ;
   rdfs:label "GSSP Base of Ladinian"@en ;
   rdfs:seeAlso <http://stratigraphy.science.purdue.edu/references/Ladinian.pdf> ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
   owl:versionInfo "2005" ;
 .
 gstime:BaseLanghian
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 15.97 ;
           gsoc:hasUOM [
               a gsuom:ma ;
@@ -2658,19 +2558,16 @@ gstime:BaseLanghian
 .
 gstime:BaseLanghianSP
   a gsog:Stratigraphic_Point ;
-  gsoc:isPartOf gstime:isc2004-04 ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "Potentially in astronomically tuned ODP core (Leg 154) or in Italy (Moria or La Vedova)"@en ;
   rdfs:label "Stratotype Point Base of Langhian"@en ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
 .
 gstime:BaseLopingian
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 259.1 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -2689,9 +2586,9 @@ gstime:BaseLopingian
 gstime:BaseLopingian2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 260.4 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -2709,22 +2606,19 @@ gstime:BaseLopingian2004
 .
 gstime:BaseLopingianSP
   a gsog:GSSP ;
-  gsoc:isPartOf gstime:isc2004-04 ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "base of Bed 6k in the Penglaitan Section, Penglaitan, Guanxi Province, South China"@en ;
   rdfs:comment "dct:source--  Episodes 29/4, p. 253 262, 2006 "@en ;
   rdfs:label "GSSP Base of Lopingian"@en ;
   rdfs:seeAlso <http://www.stratigraphy.org/GSSP/Wuchiapingian.pdf> ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
   owl:versionInfo "2004" ;
 .
 gstime:BaseLudfordian
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 425.6 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -2743,9 +2637,9 @@ gstime:BaseLudfordian
 gstime:BaseLudfordian2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 421.3 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -2763,9 +2657,6 @@ gstime:BaseLudfordian2004
 .
 gstime:BaseLudfordianSP
   a gsog:GSSP ;
-  gsoc:isPartOf gstime:isc2004-04 ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "Geol. Series, Nat. Mus. Wales, 9, p. 73 90, 1989"@en ;
   rdfs:comment "Lethaia 14"@en ;
   rdfs:comment "coincident with the base of the Leintwardine Formationm near Ludlow, UK"@en ;
@@ -2773,15 +2664,15 @@ gstime:BaseLudfordianSP
   rdfs:label "GSSP Base of Ludfordian"@en ;
   rdfs:seeAlso <http://stratigraphy.science.purdue.edu/references/Silurian2.pdf> ;
   rdfs:seeAlso <http://www.stratigraphy.org/GSSP/Sheinwoodian-Ludfordian.pdf> ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
   owl:versionInfo "1980" ;
 .
 gstime:BaseLudlow
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 427.4 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -2800,9 +2691,9 @@ gstime:BaseLudlow
 gstime:BaseLudlow2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 422.9 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -2820,24 +2711,21 @@ gstime:BaseLudlow2004
 .
 gstime:BaseLudlowSP
   a gsog:GSSP ;
-  gsoc:isPartOf gstime:isc2004-04 ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "coincident with the base of the Lower Elton Formation, near Ludlow, UK"@en ;
   rdfs:comment "dct:source--  Episodes 5/3, p. 21-23, 1982; "@en ;
   rdfs:comment "dct:source-- Geol. Series, Nat. Mus. Wales, 9, p. 73  90, 1989"@en ;
   rdfs:comment "dct:source-- Lethaia 14"@en ;
   rdfs:label "GSSP Base of Ludlow Series - Gorstian"@en ;
   rdfs:seeAlso <http://www.stratigraphy.org/GSSP/Sheinwoodian-Ludfordian.pdf> ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
   owl:versionInfo "1980" ;
 .
 gstime:BaseLutetian
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 47.8 ;
           gsoc:hasUOM [
               a gsuom:ma ;
@@ -2852,9 +2740,9 @@ gstime:BaseLutetian
 gstime:BaseLutetian2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 48.6 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -2872,21 +2760,19 @@ gstime:BaseLutetian2004
 .
 gstime:BaseLutetianSP
   a gsog:GSSP ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "dark marl at 167.85 m in Gorrondatxe sea-cliff section, Basque Country, Spain"@en ;
   rdfs:comment "dct:source--  Episodes 34/2, p.86 - 108, 2011"@en ;
   rdfs:label "GSSP Base of Lutetian"@en ;
   rdfs:seeAlso <http://www.stratigraphy.org/GSSP/Lutetian.pdf> ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
   owl:versionInfo "2011" ;
 .
 gstime:BaseMaastrichtian
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 72.1 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -2905,9 +2791,9 @@ gstime:BaseMaastrichtian
 gstime:BaseMaastrichtian2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 70.6 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -2925,22 +2811,19 @@ gstime:BaseMaastrichtian2004
 .
 gstime:BaseMaastrichtianSP
   a gsog:GSSP ;
-  gsoc:isPartOf gstime:isc2004-04 ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "dct:source--  Episodes 24/4, p. 229  238, 2001"@en ;
   rdfs:comment "level 115.2 on platform IV of the geological site, Tercis les Bains, Landes, France"@en ;
   rdfs:label "GSSP Base of Maastrichtian"@en ;
   rdfs:seeAlso <http://www.stratigraphy.org/GSSP/Maastrichtian.pdf> ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
   owl:versionInfo "2001" ;
 .
 gstime:BaseMeghalayan2020
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 0.004200 ;
           gsoc:hasUOM [
               a gsuom:ma ;
@@ -2948,9 +2831,9 @@ gstime:BaseMeghalayan2020
         ] ;
     ] ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 0.004200 ;
           gsoc:hasUOM [
               a gsuom:ma ;
@@ -2968,7 +2851,7 @@ gstime:BaseMeghalayanAuxSP
   rdfs:comment "dct:source-- International Commission on Stratigraphy - Formal subdivision of the Holocene Series/Epoch"@en ;
   rdfs:label "Auxiliary Stratotype Point Base of Meghalayan"@en ;
   rdfs:seeAlso <http://stratigraphy.org/index.php/ics-news-and-meetings/125-formal-subdivision-of-the-holocene-series-epoch> ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
   owl:versionInfo "2018"@en ;
 .
 gstime:BaseMeghalayanSP
@@ -2977,37 +2860,49 @@ gstime:BaseMeghalayanSP
   rdfs:comment "dct:source-- International Commission on Stratigraphy - Formal subdivision of the Holocene Series/Epoch"@en ;
   rdfs:label "GSSP Base of Meghalayan"@en ;
   rdfs:seeAlso <http://stratigraphy.org/index.php/ics-news-and-meetings/125-formal-subdivision-of-the-holocene-series-epoch> ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
   owl:versionInfo "2018-06-26" ;
 .
 gstime:BaseMesoarchean
   a gsog:GSSA ;
-  gsoc:hasUOM [
-      a gsuom:ma ;
+  gsoc:directTemporalLocation [
+      a gsoc:Time_Instant_Location ;
+      gsoc:hasValue [
+          a gsoc:Time_Numeric_Value ;
+          gsoc:hasDataValue "3200"^^xsd:decimal ;
+          gsoc:hasUOM [
+              a gsuom:ma ;
+            ] ;
+        ] ;
     ] ;
   gsoc:isPartOf gstime:isc2004-04 ;
   gsoc:isPartOf gstime:isc2017-02 ;
   gsoc:isPartOf gstime:isc2020-01 ;
-  gsog:hasDate "3200"^^xsd:decimal ;
   rdfs:label "Base of Mesoarchean"@en ;
 .
 gstime:BaseMesoproterozoic
   a gsog:GSSA ;
-  gsoc:hasUOM [
-      a gsuom:ma ;
+  gsoc:directTemporalLocation [
+      a gsoc:Time_Instant_Location ;
+      gsoc:hasValue [
+          a gsoc:Time_Numeric_Value ;
+          gsoc:hasDataValue "1600"^^xsd:decimal ;
+          gsoc:hasUOM [
+              a gsuom:ma ;
+            ] ;
+        ] ;
     ] ;
   gsoc:isPartOf gstime:isc2004-04 ;
   gsoc:isPartOf gstime:isc2017-02 ;
   gsoc:isPartOf gstime:isc2020-01 ;
-  gsog:hasDate "1600"^^xsd:decimal ;
   rdfs:label "Base of Mesoproterozoic"@en ;
 .
 gstime:BaseMesozoic
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 251.902 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -3026,9 +2921,9 @@ gstime:BaseMesozoic
 gstime:BaseMesozoic2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 251.0 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -3046,22 +2941,19 @@ gstime:BaseMesozoic2004
 .
 gstime:BaseMesozoicSP
   a gsog:GSSP ;
-  gsoc:isPartOf gstime:isc2004-04 ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "base of Bed 27c in the Meishan D Section, Meishan, Zhejiang Province, China"@en ;
   rdfs:comment "dct:source--  Episodes 24/2, p. 102  114, 2001"@en ;
   rdfs:label "GSSP Base of Mesozoic"@en ;
   rdfs:seeAlso <http://www.stratigraphy.org/GSSP/Induan.pdf> ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
   owl:versionInfo "2001" ;
 .
 gstime:BaseMessinian
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 7.246 ;
           gsoc:hasUOM [
               a gsuom:ma ;
@@ -3076,9 +2968,9 @@ gstime:BaseMessinian
 gstime:BaseMessinian2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 7.248 ;
           gsoc:hasUOM [
               a gsuom:ma ;
@@ -3092,23 +2984,20 @@ gstime:BaseMessinian2004
 .
 gstime:BaseMessinianSP
   a gsog:GSSP ;
-  gsoc:isPartOf gstime:isc2004-04 ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "Oued Akrech, Morocco"@en ;
   rdfs:comment "dct:source--  Episodes 23/3, p. 172  178, 2000"@en ;
   rdfs:label "GSSP Base of Messinian"@en ;
   rdfs:seeAlso <http://stratigraphy.science.purdue.edu/references/Messinian.pdf> ;
   rdfs:seeAlso <http://www.stratigraphy.org/GSSP/Messinian.pdf> ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
   owl:versionInfo "2000" ;
 .
 gstime:BaseMiddleCambrian
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 513.0 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -3127,9 +3016,9 @@ gstime:BaseMiddleCambrian
 gstime:BaseMiddleDevonian
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 393.3 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -3148,9 +3037,9 @@ gstime:BaseMiddleDevonian
 gstime:BaseMiddleDevonian2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 397.5 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -3168,22 +3057,19 @@ gstime:BaseMiddleDevonian2004
 .
 gstime:BaseMiddleDevonianSP
   a gsog:GSSP ;
-  gsoc:isPartOf gstime:isc2004-04 ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "21.25m above the base of the exposed section, base of sample station WP30, Wetteldorf, Eifel Hills, Germany"@en ;
   rdfs:comment "dct:source--  Episodes 8/2, p. 104 109, 1985"@en ;
   rdfs:label "GSSP Base of Middle Devonian - Eifelian"@en ;
   rdfs:seeAlso <http://www.stratigraphy.org/GSSP/Eifelian.pdf> ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
   owl:versionInfo "1985" ;
 .
 gstime:BaseMiddleJurassic
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 174.1 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -3202,9 +3088,9 @@ gstime:BaseMiddleJurassic
 gstime:BaseMiddleJurassic2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 175.6 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -3222,22 +3108,19 @@ gstime:BaseMiddleJurassic2004
 .
 gstime:BaseMiddleJurassicSP
   a gsog:GSSP ;
-  gsoc:isPartOf gstime:isc2004-04 ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "base of Bed FZ 107, Fuentelsaz, Spain"@en ;
   rdfs:comment "dct:source--  Episodes 24/3, p.166 175, 2001"@en ;
   rdfs:label "GSSP Base of Middle Jurassic"@en ;
   rdfs:seeAlso <http://www.stratigraphy.org/GSSP/Aalenian.pdf> ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
   owl:versionInfo "2000" ;
 .
 gstime:BaseMiddleMississippian
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 346.7 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -3256,9 +3139,9 @@ gstime:BaseMiddleMississippian
 gstime:BaseMiddleMississippian2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 345.3 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -3275,21 +3158,19 @@ gstime:BaseMiddleMississippian2004
 .
 gstime:BaseMiddleMississippianSP
   a gsog:GSSP ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "base of bed 83 in the Pengchong Section, Pengchong, south China"@en ;
   rdfs:comment "dct:source--  Episodes 26/2, p. 105 –115, 2003"@en ;
   rdfs:label "GSSP Base of Middle Mississippian / Visean"@en ;
   rdfs:seeAlso <http://www.stratigraphy.org/GSSP/Visean.pdf> ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
   owl:versionInfo "2008" ;
 .
 gstime:BaseMiddleOrdovician
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue "470"^^xsd:decimal ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -3308,9 +3189,9 @@ gstime:BaseMiddleOrdovician
 gstime:BaseMiddleOrdovician2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 471.8 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -3328,23 +3209,21 @@ gstime:BaseMiddleOrdovician2004
 .
 gstime:BaseMiddleOrdovicianSP
   a gsog:GSSP ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "10.57 m above base of the Dawan Formation, Huanghuachang Section, NE of Yichang city, Hubei Province, S. China"@en ;
   rdfs:comment "Episodes 32/2, p. 96 113, 2009"@en ;
   rdfs:comment "dct:source--  Episodes 28/2, p. 105  117, 2005"@en ;
   rdfs:label "GSSP Base of Middle Ordovician - Dapingian"@en ;
   rdfs:seeAlso <http://www.stratigraphy.org/GSSP/Dapingian1.pdf> ;
   rdfs:seeAlso <http://www.stratigraphy.org/GSSP/Dapingian2.pdf> ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
   owl:versionInfo "2007" ;
 .
 gstime:BaseMiddlePennsylvanian
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 315.2 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -3363,9 +3242,9 @@ gstime:BaseMiddlePennsylvanian
 gstime:BaseMiddlePennsylvanian2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 311.7 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -3383,19 +3262,16 @@ gstime:BaseMiddlePennsylvanian2004
 .
 gstime:BaseMiddlePennsylvanianSP
   a gsog:Stratigraphic_Point ;
-  gsoc:isPartOf gstime:isc2004-04 ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "candidates are in southern Urals or Nashui (south China)."@en ;
   rdfs:label "Stratotype Point Base of Middle Pennsylvanian"@en ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
 .
 gstime:BaseMiddlePleistocene
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 0.781 ;
           gsoc:hasUOM [
               a gsuom:ma ;
@@ -3409,9 +3285,9 @@ gstime:BaseMiddlePleistocene
 gstime:BaseMiddleTriassic
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 247.2 ;
           gsoc:hasUOM [
               a gsuom:ma ;
@@ -3426,9 +3302,9 @@ gstime:BaseMiddleTriassic
 gstime:BaseMiddleTriassic2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 245.0 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -3446,31 +3322,34 @@ gstime:BaseMiddleTriassic2004
 .
 gstime:BaseMiddleTriassicSP
   a gsog:Stratigraphic_Point ;
-  gsoc:isPartOf gstime:isc2004-04 ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "Candidate section at Desli Caira (Dobrogea, Romania); significant sections in Guizhou Province (China) and South Primorye (Russia)"@en ;
   rdfs:comment "dct:source--  Albertiana 36, 2007"@en ;
   rdfs:label "Stratotype Point Base of Middle Triassic"@en ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
 .
 gstime:BaseNeoarchean
   a gsog:GSSA ;
-  gsoc:hasUOM [
-      a gsuom:ma ;
+  gsoc:directTemporalLocation [
+      a gsoc:Time_Instant_Location ;
+      gsoc:hasValue [
+          a gsoc:Time_Numeric_Value ;
+          gsoc:hasDataValue "2800"^^xsd:decimal ;
+          gsoc:hasUOM [
+              a gsuom:ma ;
+            ] ;
+        ] ;
     ] ;
   gsoc:isPartOf gstime:isc2004-04 ;
   gsoc:isPartOf gstime:isc2017-02 ;
   gsoc:isPartOf gstime:isc2020-01 ;
-  gsog:hasDate "2800"^^xsd:decimal ;
   rdfs:label "Base of Neoarchean"@en ;
 .
 gstime:BaseNeogene
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 23.03 ;
           gsoc:hasUOM [
               a gsuom:ma ;
@@ -3485,33 +3364,36 @@ gstime:BaseNeogene
 .
 gstime:BaseNeogeneSP
   a gsog:GSSP ;
-  gsoc:isPartOf gstime:isc2004-04 ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "Lemme Carrioso Section, Allessandria Province, Italy"@en ;
   rdfs:comment "dct:source--  Episodes 20/1, p. 23  28, 1997"@en ;
   rdfs:label "GSSP Base of Neogene"@en ;
   rdfs:seeAlso <http://www.stratigraphy.org/GSSP/Aquitanian.pdf> ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
   owl:versionInfo "1996" ;
 .
 gstime:BaseNeoproterozoic
   a gsog:GSSA ;
-  gsoc:hasUOM [
-      a gsuom:ma ;
+  gsoc:directTemporalLocation [
+      a gsoc:Time_Instant_Location ;
+      gsoc:hasValue [
+          a gsoc:Time_Numeric_Value ;
+          gsoc:hasDataValue "1000"^^xsd:decimal ;
+          gsoc:hasUOM [
+              a gsuom:ma ;
+            ] ;
+        ] ;
     ] ;
   gsoc:isPartOf gstime:isc2004-04 ;
   gsoc:isPartOf gstime:isc2017-02 ;
   gsoc:isPartOf gstime:isc2020-01 ;
-  gsog:hasDate "1000"^^xsd:decimal ;
   rdfs:label "Base of Neoproterozoic"@en ;
 .
 gstime:BaseNorian
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue "227"^^xsd:decimal ;
           gsoc:hasUOM [
               a gsuom:ma ;
@@ -3526,9 +3408,9 @@ gstime:BaseNorian
 gstime:BaseNorian2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 216.5 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -3546,29 +3428,16 @@ gstime:BaseNorian2004
 .
 gstime:BaseNorianSP
   a gsog:Stratigraphic_Point ;
-  gsoc:isPartOf gstime:isc2004-04 ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "Candidates are Black Bear Ridge in British Columbia (Canada) and Pizzo Mondello, Sicily (Italy)"@en ;
   rdfs:label "Stratotype Point Base of Norian"@en ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
 .
 gstime:BaseNorthgrippian2020
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
-          gsoc:hasDataValue .008276 ;
-          gsoc:hasUOM [
-              a gsuom:ma ;
-            ] ;
-        ] ;
-    ] ;
-  gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
-      gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue .008276 ;
           gsoc:hasUOM [
               a gsuom:ma ;
@@ -3585,7 +3454,7 @@ gstime:BaseNorthgrippianAuxSP2020
   rdfs:comment "dct:source International Commission on Stratigraphy - Formal subdivision of the Holocene Series/Epoch"@en ;
   rdfs:label "Auxiliary Stratotype Point Base of Northgrippian"@en ;
   rdfs:seeAlso <http://stratigraphy.org/index.php/ics-news-and-meetings/125-formal-subdivision-of-the-holocene-series-epoch> ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
   owl:versionInfo "2018"@en ;
 .
 gstime:BaseNorthgrippianSP2020
@@ -3601,9 +3470,9 @@ gstime:BaseNorthgrippianSP2020
 gstime:BaseOlenekian
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 251.2 ;
           gsoc:hasUOM [
               a gsuom:ma ;
@@ -3618,9 +3487,9 @@ gstime:BaseOlenekian
 gstime:BaseOlenekian2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 249.7 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -3638,20 +3507,17 @@ gstime:BaseOlenekian2004
 .
 gstime:BaseOlenekianSP
   a gsog:Stratigraphic_Point ;
-  gsoc:isPartOf gstime:isc2004-04 ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "Candidate Stratotype Point Mud (Muth) village, Spiti valley, northwest India"@en ;
   rdfs:comment "dct:source--  Albertiana 36, 2007"@en ;
   rdfs:label "Stratotype Point Base of Olenekian"@en ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
 .
 gstime:BaseOligocene
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 33.9 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -3670,22 +3536,19 @@ gstime:BaseOligocene
 .
 gstime:BaseOligoceneSP
   a gsog:GSSP ;
-  gsoc:isPartOf gstime:isc2004-04 ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "Massignano, near Ancona, Italy"@en ;
   rdfs:comment "dct:source--  Episodes 16/3, p.379  382, 2001"@en ;
   rdfs:label "GSSP Base of Oligocene"@en ;
   rdfs:seeAlso <http://www.stratigraphy.org/GSSP/Rupelian.pdf> ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
   owl:versionInfo "1992" ;
 .
 gstime:BaseOrdovician
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 485.4 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -3704,9 +3567,9 @@ gstime:BaseOrdovician
 gstime:BaseOrdovician2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 488.3 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -3724,22 +3587,19 @@ gstime:BaseOrdovician2004
 .
 gstime:BaseOrdovicianSP
   a gsog:GSSP ;
-  gsoc:isPartOf gstime:isc2004-04 ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "at the 101.8m level, within Bed 23, in the measured section, Green Point Section, western Newfoundland"@en ;
   rdfs:comment "dct:source--  Episodes 24/1, p.   19  28, 2001"@en ;
   rdfs:label "GSSP Base of Ordovician - Lower Ordovician - Tremadocian"@en ;
   rdfs:seeAlso <http://www.stratigraphy.org/GSSP/Tremadocian.pdf> ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
   owl:versionInfo "2000" ;
 .
 gstime:BaseOrdovicianStage2
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 478.6 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -3758,32 +3618,44 @@ gstime:BaseOrdovicianStage2
 .
 gstime:BaseOrosirian
   a gsog:GSSA ;
-  gsoc:hasUOM [
-      a gsuom:ma ;
+  gsoc:directTemporalLocation [
+      a gsoc:Time_Instant_Location ;
+      gsoc:hasValue [
+          a gsoc:Time_Numeric_Value ;
+          gsoc:hasDataValue "2050"^^xsd:decimal ;
+          gsoc:hasUOM [
+              a gsuom:ma ;
+            ] ;
+        ] ;
     ] ;
   gsoc:isPartOf gstime:isc2004-04 ;
   gsoc:isPartOf gstime:isc2017-02 ;
   gsoc:isPartOf gstime:isc2020-01 ;
-  gsog:hasDate "2050"^^xsd:decimal ;
   rdfs:label "Base of Orosirian"@en ;
 .
 gstime:BasePaleoarchean
   a gsog:GSSA ;
-  gsoc:hasUOM [
-      a gsuom:ma ;
+  gsoc:directTemporalLocation [
+      a gsoc:Time_Instant_Location ;
+      gsoc:hasValue [
+          a gsoc:Time_Numeric_Value ;
+          gsoc:hasDataValue "3600"^^xsd:decimal ;
+          gsoc:hasUOM [
+              a gsuom:ma ;
+            ] ;
+        ] ;
     ] ;
   gsoc:isPartOf gstime:isc2004-04 ;
   gsoc:isPartOf gstime:isc2017-02 ;
   gsoc:isPartOf gstime:isc2020-01 ;
-  gsog:hasDate "3600"^^xsd:decimal ;
   rdfs:label "Base of Paleoarchean"@en ;
 .
 gstime:BasePennsylvanian
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 323.2 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -3802,9 +3674,9 @@ gstime:BasePennsylvanian
 gstime:BasePennsylvanian2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 318.1 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -3822,22 +3694,19 @@ gstime:BasePennsylvanian2004
 .
 gstime:BasePennsylvanianSP
   a gsog:GSSP ;
-  gsoc:isPartOf gstime:isc2004-04 ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "82.9m above the top of the Battleship Formation in the lower Bird Spring Formation, Arrow Canyon, Nevada"@en ;
   rdfs:comment "dct:source--  Episodes 22/4, p. 272 283, 1999"@en ;
   rdfs:label "GSSP Base of Pennsylvanian"@en ;
   rdfs:seeAlso <http://www.stratigraphy.org/GSSP/Bashkirian.pdf> ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
   owl:versionInfo "1996" ;
 .
 gstime:BasePermian
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 298.9 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -3856,9 +3725,9 @@ gstime:BasePermian
 gstime:BasePermian2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 299.0 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -3876,22 +3745,19 @@ gstime:BasePermian2004
 .
 gstime:BasePermianSP
   a gsog:GSSP ;
-  gsoc:isPartOf gstime:isc2004-04 ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "27m above the base of Bed 19, Aidaralash Creek, Kazakhstan"@en ;
   rdfs:comment "dct:source--  Episodes 21/1, p. 11 18, 1998"@en ;
   rdfs:label "GSSP Base of Permian"@en ;
   rdfs:seeAlso <http://www.stratigraphy.org/GSSP/Asselian.pdf> ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
   owl:versionInfo "1996" ;
 .
 gstime:BasePhanerozoic
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue "541"^^xsd:decimal ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -3910,9 +3776,9 @@ gstime:BasePhanerozoic
 gstime:BasePhanerozoic2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue "542"^^xsd:decimal ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -3930,22 +3796,19 @@ gstime:BasePhanerozoic2004
 .
 gstime:BasePhanerozoicSP
   a gsog:GSSP ;
-  gsoc:isPartOf gstime:isc2004-04 ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "2.4m above the base of Member 2 in the Chapel Island Formation, Fortune Head, SE Newfoundland, Canada"@en ;
   rdfs:comment "dct:source--  Episodes 17/1 2, p. 95 100, 1994"@en ;
   rdfs:label "GSSP Base of Phanerozoic"@en ;
   rdfs:seeAlso <http://www.stratigraphy.org/GSSP/Fortunian.pdf> ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
   owl:versionInfo "1992" ;
 .
 gstime:BasePiacenzian
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 3.6 ;
           gsoc:hasUOM [
               a gsuom:ma ;
@@ -3960,22 +3823,19 @@ gstime:BasePiacenzian
 .
 gstime:BasePiacenzianSP
   a gsog:GSSP ;
-  gsoc:isPartOf gstime:isc2004-04 ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "Punta Piccola, Sicily, Italy"@en ;
   rdfs:comment "dct:source--  Episodes 21/2, p. 88 93, 1998"@en ;
   rdfs:label "GSSP Base of Piacenzian"@en ;
   rdfs:seeAlso <http://www.stratigraphy.org/GSSP/Piacenzian.pdf> ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
   owl:versionInfo "1997" ;
 .
 gstime:BasePleistocene2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 1.806 ;
           gsoc:hasUOM [
               a gsuom:ma ;
@@ -3991,9 +3851,9 @@ gstime:BasePleistocene2004
 gstime:BasePliensbachian
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 190.8 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -4012,9 +3872,9 @@ gstime:BasePliensbachian
 gstime:BasePliensbachian2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 189.6 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -4032,23 +3892,20 @@ gstime:BasePliensbachian2004
 .
 gstime:BasePliensbachianSP
   a gsog:GSSP ;
-  gsoc:isPartOf gstime:isc2004-04 ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "base of Bed 73b, Wine Haven, Robin Hoods Bay, Yorkshire Coast, England"@en ;
   rdfs:comment "dct:source--  Episodes 29/2, p.93  106, 2006"@en ;
   rdfs:label "GSSP Base of Pliensbachian"@en ;
   rdfs:seeAlso <http://stratigraphy.science.purdue.edu/references/Pliensbachian.pdf> ;
   rdfs:seeAlso <http://www.stratigraphy.org/GSSP/Pliensbachian.pdf> ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
   owl:versionInfo "1997" ;
 .
 gstime:BasePliocene
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 5.333 ;
           gsoc:hasUOM [
               a gsuom:ma ;
@@ -4063,22 +3920,19 @@ gstime:BasePliocene
 .
 gstime:BasePlioceneSP
   a gsog:GSSP ;
-  gsoc:isPartOf gstime:isc2004-04 ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "Eraclea Minoa, Sicily, Italy"@en ;
   rdfs:comment "dct:source--  Episodes 23/3, p. 179  187, 2000"@en ;
   rdfs:label "GSSP Base of Pliocene"@en ;
   rdfs:seeAlso <http://www.stratigraphy.org/GSSP/Zanclean.pdf> ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
   owl:versionInfo "2000" ;
 .
 gstime:BasePragian
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 410.8 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -4097,9 +3951,9 @@ gstime:BasePragian
 gstime:BasePragian2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 411.2 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -4117,22 +3971,19 @@ gstime:BasePragian2004
 .
 gstime:BasePragianSP
   a gsog:GSSP ;
-  gsoc:isPartOf gstime:isc2004-04 ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "base of Bed 12 in Velká Chuchle Quarry, Velka Chuchle, Prague, Czech Republic"@en ;
   rdfs:comment "dct:source--  Episodes 12/2, p. 109 113, 1989"@en ;
   rdfs:label "GSSP Base of Pragian"@en ;
   rdfs:seeAlso <http://www.stratigraphy.org/GSSP/Pragian.pdf> ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
   owl:versionInfo "1989" ;
 .
 gstime:BasePriabonian
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 37.8 ;
           gsoc:hasUOM [
               a gsuom:ma ;
@@ -4147,9 +3998,9 @@ gstime:BasePriabonian
 gstime:BasePriabonian2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 37.2 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -4167,19 +4018,16 @@ gstime:BasePriabonian2004
 .
 gstime:BasePriabonianSP
   a gsog:Stratigraphic_Point ;
-  gsoc:isPartOf gstime:isc2004-04 ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "Alano section, Piave River; Veneto Prealps, Belluno province, N. Italy"@en ;
   rdfs:label "Stratotype Point Base of Priabonian"@en ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
 .
 gstime:BasePridoli
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue "423"^^xsd:decimal ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -4198,9 +4046,9 @@ gstime:BasePridoli
 gstime:BasePridoli2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 418.7 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -4218,34 +4066,37 @@ gstime:BasePridoli2004
 .
 gstime:BasePridoliSP
   a gsog:GSSP ;
-  gsoc:isPartOf gstime:isc2004-04 ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "Geol. Series, Nat. Mus. Wales, 9, p. 90  100, 1989"@en ;
   rdfs:comment "Požáry Section, Reporyje, Prague, Czech Republic"@en ;
   rdfs:comment "dct:source--  Episodes 8/2, p. 101 103, 1985"@en ;
   rdfs:label "GSSP Base of Pridoli"@en ;
   rdfs:seeAlso <http://www.stratigraphy.org/GSSP/Rhu-Tely&Pridoli.pdf> ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
   owl:versionInfo "1984" ;
 .
 gstime:BaseProterozoic
   a gsog:GSSA ;
-  gsoc:hasUOM [
-      a gsuom:ma ;
+  gsoc:directTemporalLocation [
+      a gsoc:Time_Instant_Location ;
+      gsoc:hasValue [
+          a gsoc:Time_Numeric_Value ;
+          gsoc:hasDataValue "2500"^^xsd:decimal ;
+          gsoc:hasUOM [
+              a gsuom:ma ;
+            ] ;
+        ] ;
     ] ;
   gsoc:isPartOf gstime:isc2004-04 ;
   gsoc:isPartOf gstime:isc2017-02 ;
   gsoc:isPartOf gstime:isc2020-01 ;
-  gsog:hasDate "2500"^^xsd:decimal ;
   rdfs:label "Base of Proterozoic"@en ;
 .
 gstime:BaseRhaetian
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 208.5 ;
           gsoc:hasUOM [
               a gsuom:ma ;
@@ -4260,9 +4111,9 @@ gstime:BaseRhaetian
 gstime:BaseRhaetian2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 203.6 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -4280,30 +4131,33 @@ gstime:BaseRhaetian2004
 .
 gstime:BaseRhaetianSP
   a gsog:Stratigraphic_Point ;
-  gsoc:isPartOf gstime:isc2004-04 ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "Key sections in Austria, British Columbia (Canada), and Turkey"@en ;
   rdfs:label "Stratotype Point Base of Rhaetian"@en ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
 .
 gstime:BaseRhyacian
   a gsog:GSSA ;
-  gsoc:hasUOM [
-      a gsuom:ma ;
+  gsoc:directTemporalLocation [
+      a gsoc:Time_Instant_Location ;
+      gsoc:hasValue [
+          a gsoc:Time_Numeric_Value ;
+          gsoc:hasDataValue "2300"^^xsd:decimal ;
+          gsoc:hasUOM [
+              a gsuom:ma ;
+            ] ;
+        ] ;
     ] ;
   gsoc:isPartOf gstime:isc2004-04 ;
   gsoc:isPartOf gstime:isc2017-02 ;
   gsoc:isPartOf gstime:isc2020-01 ;
-  gsog:hasDate "2300"^^xsd:decimal ;
   rdfs:label "Base of Rhyacian"@en ;
 .
 gstime:BaseSakmarian
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue "295"^^xsd:decimal ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -4321,9 +4175,9 @@ gstime:BaseSakmarian
 gstime:BaseSakmarian2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 294.6 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -4341,9 +4195,9 @@ gstime:BaseSakmarian2004
 gstime:BaseSakmarian2020
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 293.52 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -4360,15 +4214,12 @@ gstime:BaseSakmarian2020
 .
 gstime:BaseSakmarianSP
   a gsog:Stratigraphic_Point ;
-  gsoc:isPartOf gstime:isc2004-04 ;
-  gsoc:isPartOf gstime:isc2017-02 ;
   rdfs:comment "candidate is at Kondurovsky, Orenburg Province, Russia."@en ;
   rdfs:label "Stratotype Point Base of Sakmarian"@en ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
 .
 gstime:BaseSakmarianSP2020
   a gsog:GSSP ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "The base of the Sakmarian Stage is defined in Bed 26/3 at 55.4m above the base of the Usolka Section, southern Urals, Russia. It coincides with the first occurrence of conodont Mesogondolella monstra."@en ;
   rdfs:label "GSSP Base of Sakmarian"@en ;
   rdfs:seeAlso <https://timescalefoundation.org/gssp/detail.php?periodid=89&top_parentid=77> ;
@@ -4377,9 +4228,9 @@ gstime:BaseSakmarianSP2020
 gstime:BaseSantonian
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 86.3 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -4399,9 +4250,9 @@ gstime:BaseSantonian
 gstime:BaseSantonian2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 85.8 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -4418,21 +4269,19 @@ gstime:BaseSantonian2004
 .
 gstime:BaseSantonianSP
   a gsog:GSSP ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "94.4 m in the Cantera de Margas quarry section, Olazagutia, Navarra, Spain"@en ;
   rdfs:comment "dct:source--  Episodes 37/1, p. 2-13, 2014"@en ;
   rdfs:label "GSSP Base of Santonian"@en ;
   rdfs:seeAlso <http://www.episodes.co.in/contents/2014/march/pp2-13.pdf> ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
   owl:versionInfo "2013" ;
 .
 gstime:BaseSelandian
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 61.6 ;
           gsoc:hasUOM [
               a gsuom:ma ;
@@ -4447,9 +4296,9 @@ gstime:BaseSelandian
 gstime:BaseSelandian2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 61.7 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -4466,21 +4315,19 @@ gstime:BaseSelandian2004
 .
 gstime:BaseSelandianSP
   a gsog:GSSP ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "base of the red marls of Itzurun Formation, Zumaia section, northern Spain"@en ;
   rdfs:comment "dct:source--  Episodes 34/4, p.220 - 243, 2011"@en ;
   rdfs:label "GSSP Base of Selandian"@en ;
   rdfs:seeAlso <http://www.stratigraphy.org/GSSP/Selandian&Thanetian.pdf> ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
   owl:versionInfo "2008" ;
 .
 gstime:BaseSerravallian
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 13.82 ;
           gsoc:hasUOM [
               a gsuom:ma ;
@@ -4495,9 +4342,9 @@ gstime:BaseSerravallian
 gstime:BaseSerravallian2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 13.65 ;
           gsoc:hasUOM [
               a gsuom:ma ;
@@ -4510,21 +4357,19 @@ gstime:BaseSerravallian2004
 .
 gstime:BaseSerravallianSP
   a gsog:GSSP ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "Ras il Pellegrin section, Fomm Ir- Rih Bay, west coast of Malta"@en ;
   rdfs:comment "dct:source--  Episodes, 32/3, 152 - 166, 2009"@en ;
   rdfs:label "GSSP Base of Serravallian"@en ;
   rdfs:seeAlso <http://www.stratigraphy.org/GSSP/Serravallian.pdf> ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
   owl:versionInfo "2007" ;
 .
 gstime:BaseSilurian
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 443.8 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -4543,9 +4388,9 @@ gstime:BaseSilurian
 gstime:BaseSilurian2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 443.7 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -4563,24 +4408,21 @@ gstime:BaseSilurian2004
 .
 gstime:BaseSilurianSP
   a gsog:GSSP ;
-  gsoc:isPartOf gstime:isc2004-04 ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "1.6m above the base of the Birkhill Shale Formation, within Bed 96, Dobs Linn, Scotland"@en ;
   rdfs:comment "Silurian Times No. 14 (2006)"@en ;
   rdfs:comment "dct:source--  Episodes 8/2, p. 101 103, 1985"@en ;
   rdfs:comment "dct:source-- Geol. Series, Nat. Mus. Wales, 9, p. 90 - 100, 1989" ;
   rdfs:label "GSSP Base of Silurian - Llandovery - Rhuddanian"@en ;
   rdfs:seeAlso <http://www.stratigraphy.org/GSSP/Rhu-Tely&Pridoli.pdf> ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
   owl:versionInfo "1984" ;
 .
 gstime:BaseSinemurian
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 199.3 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -4599,9 +4441,9 @@ gstime:BaseSinemurian
 gstime:BaseSinemurian2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 196.5 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -4619,44 +4461,53 @@ gstime:BaseSinemurian2004
 .
 gstime:BaseSinemurianSP
   a gsog:GSSP ;
-  gsoc:isPartOf gstime:isc2004-04 ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "0.90 m above the base of Bed 145, East Quantoxhead, SW England"@en ;
   rdfs:comment "dct:source--  Episodes 25/1, p. 22 28, 2002"@en ;
   rdfs:label "GSSP Base of Sinemurian"@en ;
   rdfs:seeAlso <http://stratigraphy.science.purdue.edu/references/Sinemurian.pdf> ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
   owl:versionInfo "2000" ;
 .
 gstime:BaseStatherian
   a gsog:GSSA ;
-  gsoc:hasUOM [
-      a gsuom:ma ;
+  gsoc:directTemporalLocation [
+      a gsoc:Time_Instant_Location ;
+      gsoc:hasValue [
+          a gsoc:Time_Numeric_Value ;
+          gsoc:hasDataValue "1800"^^xsd:decimal ;
+          gsoc:hasUOM [
+              a gsuom:ma ;
+            ] ;
+        ] ;
     ] ;
   gsoc:isPartOf gstime:isc2004-04 ;
   gsoc:isPartOf gstime:isc2017-02 ;
   gsoc:isPartOf gstime:isc2020-01 ;
-  gsog:hasDate "1800"^^xsd:decimal ;
   rdfs:label "Base of Statherian"@en ;
 .
 gstime:BaseStenian
   a gsog:GSSA ;
-  gsoc:hasUOM [
-      a gsuom:ma ;
+  gsoc:directTemporalLocation [
+      a gsoc:Time_Instant_Location ;
+      gsoc:hasValue [
+          a gsoc:Time_Numeric_Value ;
+          gsoc:hasDataValue "1200"^^xsd:decimal ;
+          gsoc:hasUOM [
+              a gsuom:ma ;
+            ] ;
+        ] ;
     ] ;
   gsoc:isPartOf gstime:isc2004-04 ;
   gsoc:isPartOf gstime:isc2017-02 ;
   gsoc:isPartOf gstime:isc2020-01 ;
-  gsog:hasDate "1200"^^xsd:decimal ;
   rdfs:label "Base of Stenian"@en ;
 .
 gstime:BaseTelychian
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 438.5 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -4675,9 +4526,9 @@ gstime:BaseTelychian
 gstime:BaseTelychian2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 436.0 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -4695,24 +4546,21 @@ gstime:BaseTelychian2004
 .
 gstime:BaseTelychianSP
   a gsog:GSSP ;
-  gsoc:isPartOf gstime:isc2004-04 ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "Episodes 8/2, p. 101-103, 1985"@en ;
   rdfs:comment "dct:source--   Geol. Series, Nat. Mus. Wales, 9, p. 36-50, 1989"@en ;
   rdfs:comment "within the Wormwood Formation, Cefn-cerig Road Section, Wales, UK"@en ;
   rdfs:label "GSSP Base of Telychian"@en ;
   rdfs:seeAlso <http://stratigraphy.science.purdue.edu/references/Silurian1.pdf> ;
   rdfs:seeAlso <http://www.stratigraphy.org/GSSP/Rhu-Tely&Pridoli.pdf> ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
   owl:versionInfo "1984" ;
 .
 gstime:BaseThanetian
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 59.2 ;
           gsoc:hasUOM [
               a gsuom:ma ;
@@ -4727,23 +4575,9 @@ gstime:BaseThanetian
 gstime:BaseThanetian2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
-          gsoc:hasDataValue 58.7 ;
-          gsoc:hasQuality [
-              a gsoc:Simple_Uncertainty ;
-              gsoc:hasDataValue 0.2 ;
-            ] ;
-          gsoc:hasUOM [
-              a gsuom:ma ;
-            ] ;
-        ] ;
-    ] ;
-  gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
-      gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 58.7 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -4761,22 +4595,20 @@ gstime:BaseThanetian2004
 .
 gstime:BaseThanetianSP
   a gsog:GSSP ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "30.5m above the base of Itzurun Formation, Zumaia section, northern Spain"@en ;
   rdfs:comment "dct:source--  Episodes 34/4, p.220 - 243, 2011"@en ;
   rdfs:label "GSSP Base of Thanetian"@en ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/Selandian&Thanetian.pdf> ;
+  rdfs:seeAlso <http://www.episodes.org/journal/view.html?volume=34&number=4&spage=220&vmd=Full> ;
   rdfs:seeAlso <http://www.stratigraphy.org/GSSP/Sinemurian.pdf> ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
   owl:versionInfo "2008" ;
 .
 gstime:BaseTithonian
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 152.1 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -4795,9 +4627,9 @@ gstime:BaseTithonian
 gstime:BaseTithonian2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 150.8 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -4815,19 +4647,16 @@ gstime:BaseTithonian2004
 .
 gstime:BaseTithonianSP
   a gsog:Stratigraphic_Point ;
-  gsoc:isPartOf gstime:isc2004-04 ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "candidates are Mt. Crussol or Canjuers (SE France) and Fornazzo (Sicily, S. Italy)"@en ;
   rdfs:label "Stratotype Point Base of Tithonian"@en ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
 .
 gstime:BaseToarcian
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 182.7 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -4846,9 +4675,9 @@ gstime:BaseToarcian
 gstime:BaseToarcian2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 183.0 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -4865,20 +4694,18 @@ gstime:BaseToarcian2004
 .
 gstime:BaseToarcianSP
   a gsog:GSSP ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "Rocha, R. B. et al. Toarcian Stage of Lower Jurassic defined by the Global Boundary Stratotype Section and Point (GSSP) at the Peniche section (Portugal). Episodes 39, 460–481 (2016)."@en ;
   rdfs:comment "base of bed 15e (Couches de passage), uppermost Lemede Formation, Peniche (Portugal)"@en ;
   rdfs:label "GSSP Base of Toarcian"@en ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
   owl:versionInfo "2014" ;
 .
 gstime:BaseTortonian
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 11.63 ;
           gsoc:hasUOM [
               a gsuom:ma ;
@@ -4893,9 +4720,9 @@ gstime:BaseTortonian
 gstime:BaseTortonian2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 11.608 ;
           gsoc:hasUOM [
               a gsuom:ma ;
@@ -4909,23 +4736,20 @@ gstime:BaseTortonian2004
 .
 gstime:BaseTortonianSP
   a gsog:GSSP ;
-  gsoc:isPartOf gstime:isc2004-04 ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "Monte dei Corvi Beach, near Ancona, Italy"@en ;
   rdfs:comment "dct:source--  Episodes 28/1, p. 6  17, 2005"@en ;
   rdfs:label "GSSP Base of Tortonian"@en ;
   rdfs:seeAlso <http://stratigraphy.science.purdue.edu/references/Tortonian.pdf> ;
   rdfs:seeAlso <http://www.stratigraphy.org/GSSP/Tortonian.pdf> ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
   owl:versionInfo "2003" ;
 .
 gstime:BaseTuronian
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 93.9 ;
           gsoc:hasUOM [
               a gsuom:ma ;
@@ -4940,9 +4764,9 @@ gstime:BaseTuronian
 gstime:BaseTuronian2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 93.5 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -4960,22 +4784,19 @@ gstime:BaseTuronian2004
 .
 gstime:BaseTuronianSP
   a gsog:GSSP ;
-  gsoc:isPartOf gstime:isc2004-04 ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "base of Bed 86 of the Bridge Creek Limestone Member, Pueblo, Colorado, USA"@en ;
   rdfs:comment "dct:source--  Episodes 28/2,p. 93  104, 2005"@en ;
   rdfs:label "GSSP Base of Turonian"@en ;
   rdfs:seeAlso <http://www.stratigraphy.org/GSSP/Turonian.pdf> ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
   owl:versionInfo "2003" ;
 .
 gstime:BaseUpperCretaceous
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 100.5 ;
           gsoc:hasUOM [
               a gsuom:ma ;
@@ -4990,9 +4811,9 @@ gstime:BaseUpperCretaceous
 gstime:BaseUpperCretaceous2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 99.6 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -5010,22 +4831,19 @@ gstime:BaseUpperCretaceous2004
 .
 gstime:BaseUpperCretaceousSP
   a gsog:GSSP ;
-  gsoc:isPartOf gstime:isc2004-04 ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "36 meters below the top of the Marnes Bleues Formation on the south side of Mount Risou, Hautes Alpes, France"@en ;
   rdfs:comment "dct:source--  Episodes 27/1, p. 21 32, 2004"@en ;
   rdfs:label "GSSP Base of Upper Cretaceous"@en ;
   rdfs:seeAlso <http://www.stratigraphy.org/GSSP/Cenomanian.pdf> ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
   owl:versionInfo "2002" ;
 .
 gstime:BaseUpperDevonian
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 382.7 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -5044,9 +4862,9 @@ gstime:BaseUpperDevonian
 gstime:BaseUpperDevonian2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 385.3 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -5064,22 +4882,19 @@ gstime:BaseUpperDevonian2004
 .
 gstime:BaseUpperDevonianSP
   a gsog:GSSP ;
-  gsoc:isPartOf gstime:isc2004-04 ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "base of Bed 42’ at Col du Puech de la Suque section E, Montage Noire, France"@en ;
   rdfs:comment "dct:source--  Episodes 10/2, p. 97101, 1987"@en ;
   rdfs:label "GSSP Base of Upper Devonian - Frasnian"@en ;
   rdfs:seeAlso <http://www.stratigraphy.org/GSSP/Frasnian.pdf> ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
   owl:versionInfo "1986" ;
 .
 gstime:BaseUpperJurassic
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 163.5 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -5098,9 +4913,9 @@ gstime:BaseUpperJurassic
 gstime:BaseUpperJurassic2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 161.2 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -5118,19 +4933,16 @@ gstime:BaseUpperJurassic2004
 .
 gstime:BaseUpperJurassicSP
   a gsog:Stratigraphic_Point ;
-  gsoc:isPartOf gstime:isc2004-04 ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "candidates are Redcliff Point (Dorset, SW England) and Savouron (Provence, SE France)"@en ;
   rdfs:label "Stratotype Point Base of Upper Jurassic"@en ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
 .
 gstime:BaseUpperMississippian
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 330.9 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -5149,9 +4961,9 @@ gstime:BaseUpperMississippian
 gstime:BaseUpperMississippian2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 326.4 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -5169,19 +4981,16 @@ gstime:BaseUpperMississippian2004
 .
 gstime:BaseUpperMississippianSP
   a gsog:Stratigraphic_Point ;
-  gsoc:isPartOf gstime:isc2004-04 ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "candidates are Verkhnyaya Kardailovka (Urals) or Nashui (China)"@en ;
   rdfs:label "Stratotype Point Base of Upper Mississippian"@en ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
 .
 gstime:BaseUpperOrdovician
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 458.4 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -5200,9 +5009,9 @@ gstime:BaseUpperOrdovician
 gstime:BaseUpperOrdovician2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 460.9 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -5220,22 +5029,19 @@ gstime:BaseUpperOrdovician2004
 .
 gstime:BaseUpperOrdovicianSP
   a gsog:GSSP ;
-  gsoc:isPartOf gstime:isc2004-04 ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "1.4m below a phosphorite marker bed in the E14b outcrop, Sularp Brook, Fagelsang, Sweden"@en ;
   rdfs:comment "dct:source--  Episodes 23/2, p. 102 109, 2000"@en ;
   rdfs:label "GSSP Base of Upper Ordovician - Sandbian"@en ;
   rdfs:seeAlso <http://www.stratigraphy.org/GSSP/Sandbian.pdf> ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
   owl:versionInfo "2002" ;
 .
 gstime:BaseUpperPennsylvanian
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue "307"^^xsd:decimal ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -5254,9 +5060,9 @@ gstime:BaseUpperPennsylvanian
 gstime:BaseUpperPennsylvanian2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 306.35 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -5274,19 +5080,16 @@ gstime:BaseUpperPennsylvanian2004
 .
 gstime:BaseUpperPennsylvanianSP
   a gsog:Stratigraphic_Point ;
-  gsoc:isPartOf gstime:isc2004-04 ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "candidates are in southern Urals, southwest USA and Nashui (south China)."@en ;
   rdfs:label "Stratotype Point Base of Upper Pennsylvanian"@en ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
 .
 gstime:BaseUpperPleistocene
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 0.126 ;
           gsoc:hasUOM [
               a gsuom:ma ;
@@ -5301,9 +5104,9 @@ gstime:BaseUpperPleistocene
 gstime:BaseUpperPleistocene2020
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 0.129 ;
           gsoc:hasUOM [
               a gsuom:ma ;
@@ -5317,9 +5120,9 @@ gstime:BaseUpperPleistocene2020
 gstime:BaseUpperTriassic
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue "237"^^xsd:decimal ;
           gsoc:hasUOM [
               a gsuom:ma ;
@@ -5335,9 +5138,9 @@ gstime:BaseUpperTriassic
 gstime:BaseUpperTriassic2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue "228"^^xsd:decimal ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -5356,21 +5159,19 @@ gstime:BaseUpperTriassic2004
 .
 gstime:BaseUpperTriassicSP
   a gsog:GSSP ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "base of marly limestone bed SW4, 45m from base of San Cassiano Formation, Prati di Stuores, Dolomites, Italy"@en ;
   rdfs:comment "dct:source--  Episodes 35/3, p. 414 –430, 2012"@en ;
   rdfs:label "GSSP Base of Upper Triassic"@en ;
   rdfs:seeAlso <http://www.stratigraphy.org/GSSP/Carnian.pdf> ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
   owl:versionInfo "2008" ;
 .
 gstime:BaseValanginian
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 139.8 ;
           gsoc:hasUOM [
               a gsuom:ma ;
@@ -5385,9 +5186,9 @@ gstime:BaseValanginian
 gstime:BaseValanginian2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 140.2 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -5405,19 +5206,16 @@ gstime:BaseValanginian2004
 .
 gstime:BaseValanginianSP
   a gsog:Stratigraphic_Point ;
-  gsoc:isPartOf gstime:isc2004-04 ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "candidates are near Montbrunles- Bains (Drôme province, SE France) and Cañada Luenga (Betic Cordillera, S. Spain)"@en ;
   rdfs:label "Stratotype Point Base of Albian"@en ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
 .
 gstime:BaseWenlock
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 433.4 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -5436,9 +5234,9 @@ gstime:BaseWenlock
 gstime:BaseWenlock2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 428.2 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -5456,24 +5254,21 @@ gstime:BaseWenlock2004
 .
 gstime:BaseWenlockSP
   a gsog:GSSP ;
-  gsoc:isPartOf gstime:isc2004-04 ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "base of the Buildwas Formation, Hughley Brook, UK"@en ;
   rdfs:comment "dct:source--  Episodes 5/3, p. 21-23, 1982"@en ;
   rdfs:comment "dct:source--  Geol. Series, Nat. Mus. Wales, 9, p. 51 73, 1989"@en ;
   rdfs:comment "dct:source--  Lethaia 14"@en ;
   rdfs:label "GSSP Base of Wenlock Series - Sheinwoodian"@en ;
   rdfs:seeAlso <http://www.stratigraphy.org/GSSP/Sheinwoodian-Ludfordian.pdf> ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
   owl:versionInfo "1980" ;
 .
 gstime:BaseWordian
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 268.8 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -5492,9 +5287,9 @@ gstime:BaseWordian
 gstime:BaseWordian2004
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue 268.0 ;
           gsoc:hasQuality [
               a gsoc:Simple_Uncertainty ;
@@ -5512,20 +5307,17 @@ gstime:BaseWordian2004
 .
 gstime:BaseWordianSP
   a gsog:GSSP ;
-  gsoc:isPartOf gstime:isc2004-04 ;
-  gsoc:isPartOf gstime:isc2017-02 ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "7.6m above the base of the Getaway Ledge outcrop Section of the Getaway Limestone Member of the Cherry Canyon Formation, Guadalupe Pass, Texas, U.S.A"@en ;
   rdfs:label "GSSP Base of Wordian"@en ;
-  rdfs:seeAlso <http://www.stratigraphy.org/GSSP/index.html> ;
+  rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
   owl:versionInfo "2001" ;
 .
 gstime:BaseWuliuan2020
   a gsog:Geochronologic_Boundary ;
   gsoc:hasQuality [
-      a gsoq:Time_Instant_Location ;
+      a gsoc:Time_Instant_Location ;
       gsoc:hasValue [
-          a gsoq:Time_Instant_Value ;
+          a gsoc:Time_Numeric_Value ;
           gsoc:hasDataValue "509"^^xsd:decimal ;
           gsoc:hasUOM [
               a gsuom:ma ;
@@ -5539,7 +5331,6 @@ gstime:BaseWuliuan2020
 .
 gstime:BaseWuliuanSP2020
   a gsog:GSSP ;
-  gsoc:isPartOf gstime:isc2020-01 ;
   rdfs:comment "GSSP defined at the base of a silty mudstone layer (within bed 9) 52.8m above the base of the Kaili Formation in the Wuliu-Zengjiayan section in Jianhe County, eastern Guizhou Province, China. This level coincides with the first appearance of the cosmopolitan oryctocephalid trilobite Oryctocephalus indicus. Secondary indicators near the GSSP include the ROECE negative delta 13C excursion, the simultaneous appearance of acanthomorphic acritarchs, and a transgressive phase of a major eustatic event. The Wuliu-Zengjiayan section is situated along a hill ridge which is about 0.5km northeast of Balang Village, Jianhe County, GuizhouProvince, China at a latitude of  26.74738333 N and a longitude of 108.4138333 E. The GSSP is located inside the Jianhe Natural Reserve of Paleontological Fossils and the Miaoling National Geopark."@en ;
   rdfs:comment "dct:source-- Episodes 42/2, p.165-184, 2019" ;
   rdfs:label "Stratotype Point Base of Cambrian Stage 5"@en ;
@@ -6257,19 +6048,32 @@ gstime:Cretaceous2004
 .
 gstime:Cryogenian
   a gsog:Period ;
-  gsoc:isPartOf gstime:isc2004-04 ;
   gsoc:isPartOf gstime:isc2017-02 ;
   gsoc:isPartOf gstime:isc2020-01 ;
   gsoc:time_during gstime:Neoproterozoic ;
   gsog:nextTimeInterval gstime:Ediacaran ;
   gsog:previousTimeInterval gstime:Tonian ;
   gsog:time_instant_finishes gstime:BaseEdiacaran ;
-  gsog:time_instant_finishes gstime:BaseEdiacaran2004 ;
   gsog:time_instant_starts gstime:BaseCryogenian ;
   rdfs:comment "older bound -720 Ma"@en ;
   rdfs:comment "younger bound -635 Ma"@en ;
   rdfs:label "Cryogenian Period"@en ;
 .
+
+gstime:Cryogenian2004
+  a gsog:Period ;
+  gsoc:isPartOf gstime:isc2004-04 ;
+  gsoc:time_during gstime:Neoproterozoic ;
+  gsog:nextTimeInterval gstime:Ediacaran2004 ;
+  gsog:previousTimeInterval gstime:Tonian ;
+  gsog:time_instant_finishes gstime:BaseEdiacaran2004 ;
+  gsog:time_instant_starts gstime:BaseCryogenian2004 ;
+  rdfs:comment "older bound -850 Ma"@en ;
+  rdfs:comment "younger bound -630 Ma"@en ;
+  rdfs:label "Cryogenian Period"@en ;
+.
+
+
 gstime:Danian
   a gsog:Age_Rank ;
   gsoc:isPartOf gstime:isc2017-02 ;
@@ -6334,9 +6138,7 @@ gstime:Darriwilian2004
   a gsog:Age_Rank ;
   gsoc:isPartOf gstime:isc2004-04 ;
   gsoc:time_finishes gstime:MiddleOrdovician2004 ;
-  gsog:nextTimeInterval gstime:Sandbian2004 ;
   gsog:nextTimeInterval gstime:UpperOrdovician2004 ;
-  gsog:previousTimeInterval gstime:Dapingian2004 ;
   gsog:time_instant_finishes gstime:BaseUpperOrdovician2004 ;
   gsog:time_instant_starts gstime:BaseDarriwilian2004 ;
   rdfs:comment "older bound -468.1 +|-1.6 Ma"@en ;
@@ -6526,10 +6328,11 @@ gstime:Eoarchean
 gstime:Eoarchean2004
   a gsog:Era ;
   gsoc:isPartOf gstime:isc2004-04 ;
-  gsog:nextTimeInterval gstime:Paleoarchean2004 ;
+  gsoc:time_starts gstime:Archean2004 ;
+  gsog:nextTimeInterval gstime:Paleoarchean ;
   gsog:time_instant_finishes gstime:BasePaleoarchean ;
   gsog:time_instant_starts gstime:FormationOfEarth ;
-  rdfs:comment "Eoarchaen as defined in 2004-04, before acceptance of Hadean into ISC. Age of lower bound is undefined but assigned Age of Earth here"@en ;
+  rdfs:comment "Eoarchean as defined in 2004-04, before acceptance of Hadean into ISC. Age of lower bound is undefined but assigned Age of Earth here"@en ;
   rdfs:comment "older bound -4567 Ma"@en ;
   rdfs:comment "younger bound -3600 Ma"@en ;
   rdfs:label "Eoarchean Era  "@en ;
@@ -6617,17 +6420,26 @@ gstime:Floian
 .
 gstime:FormationOfEarth
   a gsog:Geologic_Time_Date ;
-  gsoc:hasQuality [
-      a gsoc:Simple_Uncertainty ;
-      gsoc:hasDataValue 1.0 ;
-    ] ;
-  gsoc:hasUOM [
-      a gsuom:ma ;
+  gsoc:directTemporalLocation [
+      a gsoc:Time_Instant_Location ;
+      gsoc:hasValue [
+          a gsoc:Time_Numeric_Value ;
+          gsoc:hasDataValue "4567"^^xsd:decimal ;
+          gsoc:hasQuality [
+              a gsoc:Simple_Uncertainty ;
+              gsoc:hasDataValue 1.0 ;
+              gsoc:hasUOM [
+                  a gsuom:ma ;
+                ] ;
+            ] ;
+          gsoc:hasUOM [
+              a gsuom:ma ;
+            ] ;
+        ] ;
     ] ;
   gsoc:isPartOf gstime:isc2004-04 ;
   gsoc:isPartOf gstime:isc2017-02 ;
   gsoc:isPartOf gstime:isc2020-01 ;
-  gsog:hasDate "4567"^^xsd:decimal ;
   rdfs:label "Formation of the Earth"@en ;
 .
 gstime:Fortunian
@@ -6786,7 +6598,6 @@ gstime:Greenlandian2020
   a gsog:Age_Rank ;
   gsoc:isPartOf gstime:isc2020-01 ;
   gsoc:time_starts gstime:Holocene ;
-  gsog:nextTimeInterval gstime:Greenlandian ;
   gsog:nextTimeInterval gstime:Northgrippian2020 ;
   gsog:previousTimeInterval gstime:UpperPleistocene2020 ;
   gsog:time_instant_finishes gstime:BaseNorthgrippian2020 ;
@@ -7368,9 +7179,9 @@ gstime:LowerCambrian
   a gsog:Epoch ;
   gsoc:isPartOf gstime:isc2004-04 ;
   gsoc:time_starts gstime:Cambrian2004 ;
-  gsog:nextTimeInterval gstime:MiddleCambrian2004 ;
+  gsog:nextTimeInterval gstime:MiddleCambrian ;
   gsog:previousTimeInterval gstime:Proterozoic2004 ;
-  gsog:time_instant_finishes gstime:BaseMiddleCambrian2004 ;
+  gsog:time_instant_finishes gstime:BaseMiddleCambrian ;
   gsog:time_instant_starts gstime:BasePhanerozoic2004 ;
   rdfs:comment "Lower Cambian as defined in 2004-04. Gradstein et al. are unclear on precise determination of how Lower-Middle Cambrian boundary is defined. More research necessary."@en ;
   rdfs:comment "dc:source-- Gradstein, Ogg, Smith, 2004, A Geologic Time Scale 2004"@en ;
@@ -7872,7 +7683,7 @@ gstime:Miaolingian2020
   gsog:time_instant_starts gstime:BaseWuliuan2020 ;
   rdfs:comment "older bound -509 Ma"@en ;
   rdfs:comment "younger bound -497 Ma"@en ;
-  rdfs:label "Cambrian Series 3 Epoch"@en ;
+  rdfs:label "Miaolingian Epoch"@en ;
 .
 gstime:MiddleCambrian
   a gsog:Epoch ;
@@ -8262,7 +8073,6 @@ gstime:Neoproterozoic2004
   gsoc:time_interval_contains gstime:Cryogenian ;
   gsoc:time_started_by gstime:Tonian ;
   gsog:nextTimeInterval gstime:Cambrian2004 ;
-  gsog:nextTimeInterval gstime:Fortunian2004 ;
   gsog:nextTimeInterval gstime:Paleozoic2004 ;
   gsog:nextTimeInterval gstime:Phanerozoic2004 ;
   gsog:previousTimeInterval gstime:Mesoproterozoic ;
@@ -8302,7 +8112,7 @@ gstime:Northgrippian2020
   a gsog:Age_Rank ;
   gsoc:isPartOf gstime:isc2020-01 ;
   gsoc:time_during gstime:Holocene ;
-  gsog:nextTimeInterval gstime:Meghalayan20202020 ;
+  gsog:nextTimeInterval gstime:Meghalayan2020 ;
   gsog:previousTimeInterval gstime:Greenlandian2020 ;
   gsog:time_instant_finishes gstime:BaseMeghalayan2020 ;
   gsog:time_instant_starts gstime:BaseNorthgrippian2020 ;
@@ -8462,7 +8272,7 @@ gstime:Paibian2004
   a gsog:Age_Rank ;
   gsoc:isPartOf gstime:isc2004-04 ;
   gsoc:time_starts gstime:Furongian2004 ;
-  gsog:previousTimeInterval gstime:MiddleCambrian2004 ;
+  gsog:previousTimeInterval gstime:MiddleCambrian ;
   gsog:time_instant_finishes gstime:BaseJiangshanian ;
   gsog:time_instant_starts gstime:BaseFurongian2004 ;
   rdfs:comment "dct:source-- Gradstein, Ogg, Smith, 2004, A Geologic Time Scale 2004"@en ;
@@ -8930,7 +8740,6 @@ gstime:Precambrian2004
   gsoc:time_finished_by gstime:Proterozoic2004 ;
   gsoc:time_started_by gstime:Archean2004 ;
   gsog:nextTimeInterval gstime:Cambrian2004 ;
-  gsog:nextTimeInterval gstime:Fortunian2004 ;
   gsog:nextTimeInterval gstime:Paleozoic2004 ;
   gsog:nextTimeInterval gstime:Phanerozoic2004 ;
   gsog:time_instant_finishes gstime:BasePhanerozoic2004 ;
@@ -8941,13 +8750,19 @@ gstime:Precambrian2004
 .
 gstime:Present
   a gsog:Geologic_Time_Date ;
-  gsoc:hasUOM [
-      a gsuom:ma ;
+  gsoc:directTemporalLocation [
+      a gsoc:Time_Instant_Location ;
+      gsoc:hasValue [
+          a gsoc:Time_Numeric_Value ;
+          gsoc:hasDataValue "0"^^xsd:decimal ;
+          gsoc:hasUOM [
+              a gsuom:ma ;
+            ] ;
+        ] ;
     ] ;
   gsoc:isPartOf gstime:isc2004-04 ;
   gsoc:isPartOf gstime:isc2017-02 ;
   gsoc:isPartOf gstime:isc2020-01 ;
-  gsog:hasDate "0"^^xsd:decimal ;
   rdfs:label "The Present"@en ;
 .
 gstime:Priabonian
@@ -9040,7 +8855,6 @@ gstime:Proterozoic2004
   gsoc:time_interval_contains gstime:Mesoproterozoic ;
   gsoc:time_started_by gstime:Paleoproterozoic ;
   gsog:nextTimeInterval gstime:Cambrian2004 ;
-  gsog:nextTimeInterval gstime:Fortunian2004 ;
   gsog:nextTimeInterval gstime:Paleozoic2004 ;
   gsog:nextTimeInterval gstime:Phanerozoic2004 ;
   gsog:previousTimeInterval gstime:Archean2004 ;
@@ -9575,6 +9389,7 @@ gstime:Thanetian2004
   gsog:previousTimeInterval gstime:Selandian2004 ;
   gsog:time_instant_finishes gstime:BaseEocene2004 ;
   gsog:time_instant_starts gstime:BaseThanetian2004 ;
+  rdfs:comment "The Thanetian Stage concept was first used by Renevier (1873) who included the Thanet Sands with Cyprina morris and the Woolwich and Reading Beds with Cyrena cuneiformis. Its meaning was subsequently narrowed by Dollfus (1880), who included only the Thanet Sands, the original type-strata on the Isle of Thanet in southeast England. Since 1880 the term Thanetian has consistently been used with the restricted meaning of Dollfus (Bignot et al. 1997). https://doi.org/10.18814/epiiugs/2011/v34i4/002"@en ;
   rdfs:comment "older bound -58.7 Ma"@en ;
   rdfs:comment "younger bound -55.8 Ma"@en ;
   rdfs:label "Thanetian Age"@en ;
@@ -10049,7 +9864,7 @@ gstime:UpperPleistocene2020
   a gsog:Age_Rank ;
   gsoc:isPartOf gstime:isc2020-01 ;
   gsoc:time_finishes gstime:Pleistocene ;
-  gsog:nextTimeInterval gstime:Greenlandian ;
+  gsog:nextTimeInterval gstime:Greenlandian2020 ;
   gsog:nextTimeInterval gstime:Holocene ;
   gsog:previousTimeInterval gstime:Calabrian2020 ;
   gsog:time_instant_finishes gstime:BaseHolocene ;
@@ -10258,7 +10073,7 @@ gstime:Wuliuan2020
   gsog:time_instant_starts gstime:BaseWuliuan2020 ;
   rdfs:comment "older bound -509 Ma"@en ;
   rdfs:comment "younger bound -504.5 Ma"@en ;
-  rdfs:label "Cambrian Stage 5 Age"@en ;
+  rdfs:label "Wuliuan Age"@en ;
 .
 gstime:Ypresian
   a gsog:Age_Rank ;
@@ -10401,24 +10216,25 @@ gstime:isc2018-07
   rdfs:comment "RDF/OWL representation of the 2018-07 edition of the International Chronostratigraphic Chart from the International Commission on Stratigraphy. Encoded using OWL implementation from GSO. Adapted from Cox&Richard OWL GeologicTime ontology"@en ;
   rdfs:comment "dc:source  Cohen, K.M., Finney, S.C., Gibbard, P.L. & Fan, J.-X. (2013; updated) The ICS  International  Chronostratigraphic Chart. Episodes 36: 199-204."@en ;
   rdfs:comment "dc:source  International  Chronostratigraphic Chart 2018"@en ;
-  rdfs:label "International Chronostratigraphic Chart (2018)"@en ;
+  rdfs:label "International Chronostratigraphic Chart (2018-07)"@en ;
 .
 gstime:isc2018-08
   a gsog:Geologic_Time_Scale ;
   rdfs:comment "RDF/OWL representation of the 2018-08 edition of the International Chronostratigraphic Chart from the International Commission on Stratigraphy. Encoded using OWL implementation from GSO. Adapted from Cox&Richard OWL GeologicTime ontology"@en ;
   rdfs:comment "dc:source  International  Chronostratigraphic Chart 2018"@en ;
-  rdfs:label "International Chronostratigraphic Chart (2018)"@en ;
+  rdfs:label "International Chronostratigraphic Chart (2018-08)"@en ;
 .
 gstime:isc2020-01
   a gsog:Geologic_Time_Scale ;
   rdfs:comment "RDF/OWL representation of the 2020-01 edition of the International Chronostratigraphic Chart from the International Commission on Stratigraphy. Encoded using OWL implementation from GSO. Adapted from Cox&Richard OWL GeologicTime ontology"@en ;
-  rdfs:comment "dc:source  International  Chronostratigraphic Chart 2018"@en ;
-  rdfs:label "International Chronostratigraphic Chart (2018)"@en ;
+  rdfs:comment "dc:source  International  Chronostratigraphic Chart 2020"@en ;
+  rdfs:label "International Chronostratigraphic Chart (2020)"@en ;
 .
 gstime:ontology
   a owl:Ontology ;
   rdfs:comment "Adapted for Loop3D geoscience ontology by SMR 2019-11-15"@en ;
   rdfs:label "Geologic Timescale Elements from the International Chronostratigraphic Chart 2017"@en ;
   owl:imports gsog:ontology ;
+  owl:imports gsuom:ontology ;
   owl:versionInfo "2019-12-03"@en ;
 .

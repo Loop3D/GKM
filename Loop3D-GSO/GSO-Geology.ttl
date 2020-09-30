@@ -41,7 +41,7 @@ gsoc:Glass
     ] ;
 .
 gsoc:time_interval_in
-  rdfs:range :Geologic_Time_Interval ;
+  rdfs:range gsoc:Perdurant ;
 .
 :Additive_Process
   a owl:Class ;
@@ -149,7 +149,7 @@ gsoc:time_interval_in
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty gsoc:isReferenceFor ;
-      owl:someValuesFrom :Geologic_Date_Interval ;
+      owl:someValuesFrom :Geologic_Time_Interval ;
     ] ;
 .
 :Clast
@@ -582,57 +582,19 @@ Contact(x) <--> exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RB
 .
 :Geochronologic_Boundary
   a owl:Class ;
-  rdfs:comment "a time instant that represents an event recorded by a reference physical statigraphic point"@en ;
+  rdfs:comment "A time instant that represents an event recorded by a reference physical statigraphic point. Revision: (2020-09-30) A temporal feature that is the boundary between two Geologic time Intervals, anchored by some stratigraphic point in the physical geologic record."@en ;
   rdfs:label "Geochronologic Boundary"@en ;
-  rdfs:subClassOf :Geologic_Time_Date ;
+  rdfs:subClassOf gsoc:Temporal_Feature ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:directTemporalOccupies ;
+      owl:someValuesFrom :Geologic_Time_Date ;
+    ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty gsoc:hasReference ;
       owl:someValuesFrom :Stratigraphic_Point ;
     ] ;
-.
-:Geologic_Age_Interval
-  a owl:Class ;
-  rdfs:comment "A time region that is defined by younger and older Geologic Date Intervals. Typically used for age assignments in geologic maps, where a map unit might include rocks of various ages."@en ;
-  rdfs:label "Geologic Age Interval "@en ;
-  rdfs:subClassOf :Geologic_Time_Interval ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty :time_interval_finishes ;
-      owl:someValuesFrom :Geologic_Time_Interval ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty :time_interval_starts ;
-      owl:someValuesFrom :Geologic_Time_Interval ;
-    ] ;
-.
-:Geologic_Date_Interval
-  a owl:Class ;
-  rdfs:comment "A time interval that is bounded by specified time instants.  same as Geochronologic_Age_Interval"@en ;
-  rdfs:label "Geologic Date Interval"@en ;
-  rdfs:subClassOf :Geologic_Time_Interval ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom gsoc:Time_Instant ;
-      owl:onProperty :time_instant_finishes ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom gsoc:Time_Instant ;
-      owl:onProperty :time_instant_starts ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom :Geologic_Date_Interval ;
-      owl:onProperty gsoc:time_interval_contains ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom :Geologic_Time_Scale ;
-      owl:onProperty gsoc:isPartOf ;
-    ] ;
-  owl:disjointWith :Geologic_Time_Date ;
 .
 :Geologic_Event
   a owl:Class ;
@@ -685,20 +647,10 @@ Probably should specify a Temporal Reference System used to assign coordinate va
   rdfs:comment "Need SHACL rule that gsoc:Simple_Uncertainty and Statistical_Calculation are recommended"@en ;
   rdfs:label "Geologic Time Date"@en ;
   rdfs:subClassOf gsoc:Time_Instant ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty gsoc:hasUOM ;
-      owl:someValuesFrom gsoc:Unit_of_Measure ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty :hasDate ;
-      owl:someValuesFrom xsd:decimal ;
-    ] ;
 .
 :Geologic_Time_Interval
   a owl:Class ;
-  rdfs:comment "A time interval that defined by its position between other time intervals, without necessarily specifying the bounding time instant temporal coordinates.  Same as Chronostratigraphic_Age_Interval"@en ;
+  rdfs:comment "A time interval that defined by its position between other time intervals, without necessarily specifying the bounding time instant temporal coordinates.  Geologic in the sense that the interval is either referenced to some particular rock body, or its boundaries (started_by, finished_by) are referenced to stratigraphic points.  Same as Chronostratigraphic_Age_Interval"@en ;
   rdfs:label "Geologic Time Interval"@en ;
   rdfs:subClassOf gsoc:Time_Interval ;
   rdfs:subClassOf [
@@ -714,8 +666,32 @@ Probably should specify a Temporal Reference System used to assign coordinate va
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-      owl:onClass :Chronostratigraphic_Unit ;
+      owl:onClass :Rock_Body ;
       owl:onProperty gsoc:hasReference ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onClass [
+          a owl:Class ;
+          owl:unionOf (
+              :Geologic_Time_Date
+              :Geochronologic_Boundary
+            ) ;
+        ] ;
+      owl:onProperty gsoc:time_finished_by ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onClass [
+          a owl:Class ;
+          owl:unionOf (
+              :Geologic_Time_Date
+              :Geochronologic_Boundary
+            ) ;
+        ] ;
+      owl:onProperty gsoc:time_started_by ;
     ] ;
 .
 :Geologic_Time_Scale
@@ -725,13 +701,19 @@ Probably should specify a Temporal Reference System used to assign coordinate va
   rdfs:subClassOf gsoc:Time_Interval ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:allValuesFrom :Geologic_Date_Interval ;
+      owl:allValuesFrom [
+          a owl:Class ;
+          owl:unionOf (
+              :Geologic_Time_Interval
+              :Geochronologic_Boundary
+            ) ;
+        ] ;
       owl:onProperty gsoc:hasPart ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty gsoc:hasPart ;
-      owl:someValuesFrom :Geologic_Date_Interval ;
+      owl:someValuesFrom :Geologic_Time_Interval ;
     ] ;
 .
 :Geologic_Unit
@@ -1532,9 +1514,7 @@ RBT (x) <--> RBD (x) ^ exists z forall y [(isPartOf (y,z) ^ hasHost (z,x)) -> (b
 :nextTimeInterval
   a owl:ObjectProperty ;
   rdfs:comment "Source TimeInterval ends at the beginning of the target TimeInterval; there is no intervening time; inverse of age_met_by"@en ;
-  rdfs:domain :Geologic_Date_Interval ;
   rdfs:label "next time interval"@en ;
-  rdfs:range :Geologic_Date_Interval ;
   rdfs:subPropertyOf gsoc:time_meets ;
 .
 :ontology
@@ -1580,9 +1560,7 @@ RBT (x) <--> RBD (x) ^ exists z forall y [(isPartOf (y,z) ^ hasHost (z,x)) -> (b
 :previousTimeInterval
   a owl:ObjectProperty ;
   rdfs:comment "Source TimeInterval starts at the end of the target TimeInterval; there is no intervening time; inverse of meets"@en ;
-  rdfs:domain :Geologic_Date_Interval ;
   rdfs:label "previous time interval"@en ;
-  rdfs:range :Geologic_Date_Interval ;
   rdfs:subPropertyOf gsoc:time_met_by ;
 .
 :time_instant_finishes
@@ -1603,14 +1581,12 @@ RBT (x) <--> RBD (x) ^ exists z forall y [(isPartOf (y,z) ^ hasHost (z,x)) -> (b
   a owl:ObjectProperty ;
   rdfs:comment "assign a younger age boundary for a time interval as a time interval, e.g. Jurassic thru Cretaceous, younger age is Cretaceous."@en ;
   rdfs:label "younger bounding time interval"@en ;
-  rdfs:range :Geologic_Date_Interval ;
   rdfs:subPropertyOf gsoc:time_finishes ;
 .
 :time_interval_starts
   a owl:ObjectProperty ;
   rdfs:comment "assign an older age boundary for a time interval as an interval, e.g. Jurassic thru Cretaceous, older age is Jurassic."@en ;
   rdfs:label "older bounding time interval"@en ;
-  rdfs:range :Geologic_Date_Interval ;
   rdfs:subPropertyOf gsoc:time_starts ;
 .
 :underlies
