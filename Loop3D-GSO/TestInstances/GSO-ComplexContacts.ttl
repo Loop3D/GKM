@@ -6,6 +6,7 @@
 @prefix con: <http://loop3d.org/GSO/ontology/2020/1/ex-complexcontact#> .
 @prefix ejs: <http://loop3d.org/GSO/ontology/2020/1/ex-formationJs#> .
 @prefix gscn: <http://loop3d.org/GSO/ontology/2020/1/geologicstructure/contact/> .
+@prefix gsen: <http://loop3d.org/GSO/ontology/2020/1/eventenvironment> .
 @prefix gsgu: <http://loop3d.org/GSO/ontology/2020/1/geologicunit/> .
 @prefix gslth: <http://loop3d.org/GSO/ontology/2020/1/lithology/> .
 @prefix gsmg: <http://loop3d.org/GSO/ontology/2020/1/metamorphicgrade/> .
@@ -24,11 +25,12 @@
 
 con:CbFormation
   a gsog:Formation ;
-  gsoc:hasDirectTemporalLocation [
-      a gsog:Geologic_Time_Interval ;
-      gsog:time_interval_finishes gstime:Cambrian ;
-      gsog:time_interval_starts gstime:Cambrian ;
-      rdfs:label "Cambrian Age"@en ;
+  gsoc:indirectTemporalOccupies gstime:Cambrian ;
+  gsoc:isParticipantIn  [
+	a gspr:Traction_Saltation_or_Suspension_Deposition ;
+	gsoc:hasSetting gsen:Inner_Neritic_Setting, gsen:Shoreline_Setting ;
+	gsoc:directTemporalOccupies gstime:Cambrian ;
+    rdfs:label "Cambrian Depositional Age"@en ;
     ] ;
   rdfs:label "Bolsa Quartzite (Cambrian)"@en ;
 .
@@ -128,7 +130,7 @@ con:KdDike
               gsoc:determinedBy [
                   a gsoc:Mean_Value_Calculation ;
                 ] ;
-              gsoc:hasDataValue .05 ;
+              gsoc:hasDataValue "0.05"^^xsd:decimal ;
               gsoc:hasUOM [
                   a gsuom:millimeter ;
                 ] ;
@@ -305,11 +307,7 @@ con:OsBoundary-6_2
 .
 con:OsFormation
   a gsog:Formation ;
-  gsoc:hasDirectTemporalLocation [
-      a gsog:Geologic_Time_Interval ;
-      gsog:time_interval_finishes gstime:Ordovician ;
-      gsog:time_interval_starts gstime:Ordovician ;
-    ] ;
+  gsoc:indirectTemporalOccupies gstime:Ordovician ;
   rdfs:label "Sedimentary Rocks (Ordovician)"@en ;
 .
 con:SsBoundary-6_1
@@ -318,11 +316,7 @@ con:SsBoundary-6_1
 .
 con:SsFormation
   a gsog:Formation ;
-  gsoc:hasDirectTemporalLocation [
-      a gsog:Geologic_Time_Interval ;
-      gsog:time_interval_finishes gstime:Silurian ;
-      gsog:time_interval_starts gstime:Silurian ;
-    ] ;
+  gsoc:indirectTemporalOccupies gstime:Silurian ;
   rdfs:label "Sedimentary Rocks (Silurian)"@en ;
 .
 con:XmBoundary-6_3
@@ -454,12 +448,8 @@ con:topJs-2_1
 .
 ejs:JsFormation
   a gsog:Formation ;
-  gsoc:hasDirectTemporalLocation [
-      a gsog:Geologic_Time_Interval ;
-      gsog:time_interval_finishes gstime:Jurassic ;
-      gsog:time_interval_starts gstime:Jurassic ;
-      rdfs:label "Jurassic Age"@en ;
-    ] ;
+  gsoc:indirectTemporalOcccupies gstime:Jurassic ;
+  rdfs:label "Jurassic Age"@en ;
   gsoc:hasPart con:KdBoundaryInJs-3_1_4 ;
   gsoc:hasPart con:KdBoundaryInJs-3_2_4 ;
   gsoc:hasPart con:KgBoundaryIntrudesJs-4_2 ;

@@ -29,43 +29,35 @@
   owl:versionIRI <http://loop3d.org/GSO/ontology/2020/1/ex-event1> ;
 .
 evn1:Cretaceous90Ma
-      a gsog:Geologic_Time_Date ;
-	    rdfs:label "90 Ma"@en  ;
-      gsoc:hasUOM [ a gsuom:ma ] ;
-      gsog:hasDate "90"^^xsd:decimal ;
-       gsoc:hasQuality [
+	  a gsoc:Time_Instant_Location ;
+	  rdfs:label "90 Ma"@en  ;
+	  gsoc:hasValue [
+		a gsoc:Time_Numeric_Value ;
+		gsoc:hasUOM [ a gsuom:ma ] ;
+		gsog:hasDataValue "90"^^xsd:decimal ;
+		gsoc:hasQuality [
 			a gsoc:Simple_Uncertainty ; 
 			gsoc:hasDataValue "8"^^xsd:decimal; 
 			gsoc:hasUOM [ a gsuom:ma ]  
-		] ;
+			] ;
+		]
  .
+
 evn1:Cretaceous_dike_intrusion
   a gsog:Geologic_Event ;
-  gsoc:hasDirectTemporalLocation evn1:Cretaceous90Ma ;
-  gsoc:hasConstituent [
-      a gspr:Intrusion_Process ;
-    ] ;
+  gsoc:directTemporalLocation evn1:Cretaceous90Ma ;
+  gsoc:hasConstituent [ a gspr:Intrusion_Process ] ;
   gsog:hasSetting [
       a gsen:upper_continental_crustal_setting ;
     ] ;
-  gsoc:age_younger_than evn1:Kg_Intrusion ;
+  gsoc:time_younger_than evn1:Kg_Intrusion ;
   rdfs:label "90 Ma Dike Intrusion"@en ;
 .
-evn1:Date110Ma
-  a gsog:Geologic_Time_Date ;
-  gsoc:hasUOM [a gsuom:ma ] ;
-  gsog:hasDate "110"^^xsd:decimal ;
-   gsoc:hasQuality [a gsoc:Simple_Uncertainty ; gsoc:hasDataValue "9"^^xsd:decimal ] ;
-  rdfs:label "110 Ma"@en  ;
-.
+
 evn1:HsGenesis
   a gsog:Geologic_Event ;
-  gsoc:hasDirectTemporalLocation [
-      a gsog:Geologic_Time_Interval ;
-      gsog:hasOlderInterval gstime:Holocene ;
-      gsog:hasYoungerInterval gstime:Holocene ;
-      rdfs:label "Holocene age"@en  ;
-    ] ;
+  gsoc:directTemporalOccupies  gstime:Holocene ;
+  rdfs:label "Holocene age"@en  ;
   gsoc:hasConstituent [
       a gspr:deposition ;
       rdfs:label "process of sedimentary deposition"@en ;
@@ -73,18 +65,14 @@ evn1:HsGenesis
   gsog:hasSetting [
       a gsen:alluvial_fan ;
     ] ;
-  gsoc:age_younger_than evn1:MsGenesis ;
+  gsoc:time_younger_than evn1:MsGenesis ;
   rdfs:comment "Deposition of Holocene sediments"@en ;
   rdfs:label "Holocene sediment deposition"@en ;
 .
 evn1:JsGenesis
   a gsog:Geologic_Event ;
-  gsoc:hasDirectTemporalLocation [
-      a gsog:Geologic_Time_Interval ;
-      gsog:hasOlderInterval gstime:Jurassic ;
-      gsog:hasYoungerInterval gstime:Jurassic ;
-      rdfs:label "Jurassic Age"@en  ;
-    ] ;
+  gsoc:directTemporalOccupies gstime:Jurassic ;
+  rdfs:label "Jurassic Age"@en  ;
   gsoc:hasConstituent [
       a gspr:deposition ;
     ] ;
@@ -98,45 +86,39 @@ evn1:JsGenesis
       a gsen:shoreline_settings ;
     ] ;
   rdfs:label "Jurassic sediment Deposition"@en ;
+  gsoc:time_younger_than evn1:Pre_Jurassic_Erosion ;
 .
+
 evn1:Kg_Intrusion
   a gsog:Geologic_Event ;
-  gsoc:hasDirectTemporalLocation [
-      a gsog:Geologic_Age_Instant ;
-      gsoc:determinedBy evn1:upbconcordantanalysis ;
-      gsog:hasAgeDate evn1:Date110Ma ;
-      rdfs:label "Cretaceous 110 Ma Age Date"@en ;
-    ] ;
-  gsoc:hasConstituent [
-      a gspr:Intrusion_Process ;
-    ] ;
-  gsog:hasSetting [
-      a gsen:middle_continental_crust_setting ;
-    ] ;
-  gsoc:age_younger_than evn1:JsGenesis ;
+  gsoc:directTemporalLocation [
+      a gsog:Time_Instant_Location 
+	  gsoc:hasValue  evn1:Date110Ma 
+	];
+  gsoc:hasConstituent [ a gspr:Intrusion_Process ] ;
+  gsog:hasSetting [ a gsen:middle_continental_crust_setting ] ;
+  gsoc:time_younger_than evn1:JsGenesis ;
   rdfs:label "Cretaceous Intrusion Event"@en ;
 .
-evn1:Miocene_Age
-  a gsog:Geologic_Time_Interval ;
-  gsog:hasOlderInterval gstime:Miocene ;
-  gsog:hasYoungerInterval gstime:Miocene ;
-  rdfs:label "Miocene Age"@en ;
+
+evn1:Date110Ma
+  gsoc:Time_Numeric_Value ;
+  gsoc:hasUOM [a gsuom:ma ] ;
+  gsog:hasDataValue "110"^^xsd:decimal ;
+  gsoc:hasQuality [
+	a gsoc:Simple_Uncertainty ; 
+	gsoc:hasDataValue "9"^^xsd:decimal 
+	] ;
+  rdfs:label "Cretaceous 110 Ma Age Date"@en  ;
+  gsoc:determinedBy evn1:upbconcordantanalysis ;
 .
+
 evn1:MsGenesis
   a gsog:Geologic_Event ;
-  gsoc:hasDirectTemporalLocation [
-      a gsog:Geologic_Time_Interval ;
-      gsog:hasOlderInterval gstime:Miocene ;
-      gsog:hasYoungerInterval gstime:Miocene ;
-      rdfs:label "Miocene Age"@en ;
-    ] ;
-  gsoc:hasConstituent [
-      a gspr:deposition ;
-    ] ;
-  gsog:hasSetting [
-      a gsen:lacustrine_setting ;
-    ] ;
-  gsoc:age_younger_than evn1:Cretaceous_dike_intrusion ;
+  gsoc:directTemporalOccupies gstime:Miocene ;
+  gsoc:hasConstituent [ a gspr:deposition ] ;
+  gsog:hasSetting [ a gsen:lacustrine_setting  ] ;
+  gsoc:time_younger_than evn1:Cretaceous_dike_intrusion ;
   rdfs:label "Miocene sediment Deposition"@en ;
 .
 evn1:Pre_Cretaceous_Burial
@@ -147,13 +129,18 @@ evn1:Pre_Cretaceous_Burial
 evn1:Pre_Jurassic_Erosion
   a gsog:Geologic_Event ;
   gsoc:hasConstituent [ a gspr:Erosion ];
+  gsoc:directTemporalOccupies [
+	a gsoc:Time_Interval;
+		gsog:time_interval_starts gstime:Silurian;
+		gsog:time_interval_finishes gstime:Triassic
+  ];
   rdfs:comment "Erosional unroofing of tilted Xm, Cb, Os and Ss "@en ;
   rdfs:label "Pre Jurassic Erosion "@en ;
 .
 evn1:Pre_Miocene_Erosion
   a gsog:Geologic_Event ;
-  gsoc:age_older_than evn1:MsGenesis ;
-  gsoc:age_younger_than evn1:Cretaceous_dike_intrusion ;
+  gsoc:time_older_than evn1:MsGenesis ;
+  gsoc:time_younger_than evn1:Cretaceous_dike_intrusion ;
   rdfs:comment "Erosional unroofing of Kg and Js "@en ;
   rdfs:label "Pre Miocene Erosion "@en ;
 .
