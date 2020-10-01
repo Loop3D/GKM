@@ -18,7 +18,7 @@ gsoq:Azimuth
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty gsoc:hasQuality ;
-      owl:someValuesFrom gsoq:Measured_Value ;
+      owl:someValuesFrom gsoc:Measured_Value ;
     ] ;
 .
 gsoq:Density
@@ -46,7 +46,7 @@ gsoq:Dip
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty gsoc:hasQuality ;
-      owl:someValuesFrom gsoq:Measured_Value ;
+      owl:someValuesFrom gsoc:Measured_Value ;
     ] ;
 .
 gsoq:Facing
@@ -133,11 +133,17 @@ gsoq:Peak_Temperature
   rdfs:label "Peak temperature"@en ;
   rdfs:subClassOf gsoc:Quality ;
 .
+gsoq:Plane_Orientation
+  a owl:Class ;
+  rdfs:comment "Quality to specify the orientation of a surface in a geogaphic reference system"@en ;
+  rdfs:label "Plane orientation "@en ;
+  rdfs:subClassOf gsoq:Orientation ;
+.
 gsoq:Plane_Orientation_dip_dipdir
   a owl:Class ;
   rdfs:comment "specification of the orientation of a plane in space, using a dip (inclination of line of maximum inclination contained in the plane, measured positive downward in degrees from local horizontal) and the azimuth normal to the strike in the dip direction"@en ;
   rdfs:label "Plane orientation (dip and dip direction)"@en ;
-  rdfs:subClassOf gsoq:Plane_orientation ;
+  rdfs:subClassOf gsoq:Plane_Orientation ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom [
@@ -163,7 +169,7 @@ gsoq:Plane_Orientation_strike_dip
   a owl:Class ;
   rdfs:comment "A plane orientation reported with the Azimuth value in the direction of strike such that the dip is to the right when facing in the azimuth direction."@en ;
   rdfs:label "Plane orientation (strike and dip)"@en ;
-  rdfs:subClassOf gsoq:Plane_orientation ;
+  rdfs:subClassOf gsoq:Plane_Orientation ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom [
@@ -177,12 +183,6 @@ gsoq:Plane_Orientation_strike_dip
       owl:onProperty gsoc:hasQuality ;
     ] ;
 .
-gsoq:Plane_orientation
-  a owl:Class ;
-  rdfs:comment "Quality to specify the orientation of a surface in a geogaphic reference system"@en ;
-  rdfs:label "Plane orientation "@en ;
-  rdfs:subClassOf gsoq:Orientation ;
-.
 gsoq:Plunge
   a owl:Class ;
   rdfs:comment "Numeric value should be between +90 and -90.   Negative values only valid if the linear feature is directed."@en ;
@@ -191,7 +191,7 @@ gsoq:Plunge
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty gsoc:hasQuality ;
-      owl:someValuesFrom gsoq:Measured_Value ;
+      owl:someValuesFrom gsoc:Measured_Value ;
     ] ;
 .
 gsoq:Size

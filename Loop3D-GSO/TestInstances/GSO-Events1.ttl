@@ -1,12 +1,12 @@
-# baseURI: http://loop3d.org/GSO/ontology/2020/1/ex-event1
-# imports: http://loop3d.org/GSO/ontology/2020/1/common
-# imports: http://loop3d.org/GSO/ontology/2020/1/eventenvironment
-# imports: http://loop3d.org/GSO/ontology/2020/1/geologicfeature
-# imports: http://loop3d.org/GSO/ontology/2020/1/ischart
+# baseURI: http://loop3d.org/GSO/ontology/2020/1/ex-event1/ontology
+# imports: http://loop3d.org/GSO/ontology/2020/1/common/ontology
+# imports: http://loop3d.org/GSO/ontology/2020/1/eventenvironment/ontology
+# imports: http://loop3d.org/GSO/ontology/2020/1/geologicfeature/ontology
+# imports: http://loop3d.org/GSO/ontology/2020/1/ischart/ontology
 
 @prefix evn1: <http://loop3d.org/GSO/ontology/2020/1/ex-event1/> .
 
-@prefix gsen: <http://loop3d.org/GSO/ontology/2020/1/eventenvironment> .
+@prefix gsen: <http://loop3d.org/GSO/ontology/2020/1/eventenvironment/> .
 @prefix gsoc: <http://loop3d.org/GSO/ontology/2020/1/common/> .
 @prefix gsog: <http://loop3d.org/GSO/ontology/2020/1/geologicfeature/> .
 @prefix gsoq: <http://loop3d.org/GSO/ontology/2020/1/geologicquality/> .
@@ -23,11 +23,11 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 
-<http://loop3d.org/GSO/ontology/2020/1/ex-event1>
+<http://loop3d.org/GSO/ontology/2020/1/ex-event1/ontology>
   a owl:Ontology ;
   owl:imports <http://loop3d.org/GSO/ontology/2020/1/loop3dmaster> ;
-  owl:versionIRI <http://loop3d.org/GSO/ontology/2020/1/ex-event1> ;
 .
+
 evn1:Cretaceous90Ma
 	  a gsoc:Time_Instant_Location ;
 	  rdfs:label "90 Ma"@en  ;
@@ -48,7 +48,7 @@ evn1:Cretaceous_dike_intrusion
   gsoc:directTemporalLocation evn1:Cretaceous90Ma ;
   gsoc:hasConstituent [ a gspr:Intrusion_Process ] ;
   gsog:hasSetting [
-      a gsen:upper_continental_crustal_setting ;
+      a gsen:Upper_Continental_Crust_Setting ;
     ] ;
   gsoc:time_younger_than evn1:Kg_Intrusion ;
   rdfs:label "90 Ma Dike Intrusion"@en ;
@@ -59,11 +59,11 @@ evn1:HsGenesis
   gsoc:directTemporalOccupies  gstime:Holocene ;
   rdfs:label "Holocene age"@en  ;
   gsoc:hasConstituent [
-      a gspr:deposition ;
+      a gspr:Deposition ;
       rdfs:label "process of sedimentary deposition"@en ;
     ] ;
   gsog:hasSetting [
-      a gsen:alluvial_fan ;
+      a gsen:Alluvial_Fan_Setting ;
     ] ;
   gsoc:time_younger_than evn1:MsGenesis ;
   rdfs:comment "Deposition of Holocene sediments"@en ;
@@ -74,16 +74,16 @@ evn1:JsGenesis
   gsoc:directTemporalOccupies gstime:Jurassic ;
   rdfs:label "Jurassic Age"@en  ;
   gsoc:hasConstituent [
-      a gspr:deposition ;
+      a gspr:Deposition ;
     ] ;
   gsog:hasSetting [
-      a gsen:coastal_plain_setting ;
+      a gsen:Coastal_Plain_Setting ;
     ] ;
   gsog:hasSetting [
-      a gsen:inner_neritic ;
+      a gsen:Inner_Neritic_Setting ;
     ] ;
   gsog:hasSetting [
-      a gsen:shoreline_settings ;
+      a gsen:Shoreline_Setting ;
     ] ;
   rdfs:label "Jurassic sediment Deposition"@en ;
   gsoc:time_younger_than evn1:Pre_Jurassic_Erosion ;
@@ -92,17 +92,17 @@ evn1:JsGenesis
 evn1:Kg_Intrusion
   a gsog:Geologic_Event ;
   gsoc:directTemporalLocation [
-      a gsog:Time_Instant_Location 
+      a gsoc:Time_Instant_Location ;
 	  gsoc:hasValue  evn1:Date110Ma 
 	];
   gsoc:hasConstituent [ a gspr:Intrusion_Process ] ;
-  gsog:hasSetting [ a gsen:middle_continental_crust_setting ] ;
+  gsog:hasSetting [ a gsen:Middle_Continental_Crust_Setting ] ;
   gsoc:time_younger_than evn1:JsGenesis ;
   rdfs:label "Cretaceous Intrusion Event"@en ;
 .
 
 evn1:Date110Ma
-  gsoc:Time_Numeric_Value ;
+  a gsoc:Time_Numeric_Value ;
   gsoc:hasUOM [a gsuom:ma ] ;
   gsog:hasDataValue "110"^^xsd:decimal ;
   gsoc:hasQuality [
@@ -116,8 +116,8 @@ evn1:Date110Ma
 evn1:MsGenesis
   a gsog:Geologic_Event ;
   gsoc:directTemporalOccupies gstime:Miocene ;
-  gsoc:hasConstituent [ a gspr:deposition ] ;
-  gsog:hasSetting [ a gsen:lacustrine_setting  ] ;
+  gsoc:hasConstituent [ a gspr:Deposition ] ;
+  gsog:hasSetting [ a gsen:Lacustrine_Setting  ] ;
   gsoc:time_younger_than evn1:Cretaceous_dike_intrusion ;
   rdfs:label "Miocene sediment Deposition"@en ;
 .
@@ -131,8 +131,8 @@ evn1:Pre_Jurassic_Erosion
   gsoc:hasConstituent [ a gspr:Erosion ];
   gsoc:directTemporalOccupies [
 	a gsoc:Time_Interval;
-		gsog:time_interval_starts gstime:Silurian;
-		gsog:time_interval_finishes gstime:Triassic
+		gsoc:Time_Interval_starts gstime:Silurian;
+		gsoc:Time_Interval_finishes gstime:Triassic
   ];
   rdfs:comment "Erosional unroofing of tilted Xm, Cb, Os and Ss "@en ;
   rdfs:label "Pre Jurassic Erosion "@en ;
