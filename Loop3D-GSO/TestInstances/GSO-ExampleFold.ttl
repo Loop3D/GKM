@@ -6,6 +6,7 @@
 @prefix : <http://loop3d.org/GSO/ontology/2020/1/foldexample#> .
 @prefix exfold: <http://loop3d.org/GSO/ontology/2020/1/foldexample#> .
 @prefix fau2: <http://loop3d.org/GSO/ontology/2020/1/faultstest2/> .
+@prefix fold: <http://loop3d.org/GSO/ontology/2020/1/geologicstructure/fold/> .
 @prefix gsen: <http://loop3d.org/GSO/ontology/2020/1/eventenvironment/> .
 @prefix gsoc: <http://loop3d.org/GSO/ontology/2020/1/common/> .
 @prefix gsog: <http://loop3d.org/GSO/ontology/2020/1/geologicfeature/> .
@@ -13,7 +14,7 @@
 @prefix gspr: <http://loop3d.org/GSO/ontology/2020/1/geologicprocess/> .
 @prefix gssf: <http://loop3d.org/GSO/ontology/2020/1/geologicstructure/fold/> .
 @prefix gstime: <http://loop3d.org/GSO/ontology/2020/1/ischart/> .
-@prefix gsuom: <http://qudt.org/vocab/unit#> .
+@prefix gsuom: <http://loop3d.org/GSO/ontology/2020/1/uom/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -64,6 +65,10 @@ exfold:Fold_1
 exfold:HingeSurface_1
   a gssf:Fold_Hinge_Surface ;
   gsoc:hasQuality [
+	a gsoq:Plane_Orientation ;
+	gsoc:hasValue fold:Steeply_Inclined
+	];
+  gsoc:hasQuality [
       a gsoq:Plane_Orientation_dip_dipdir ;
       gsoc:hasQuality [
           a gsoq:Azimuth ;
@@ -78,9 +83,6 @@ exfold:HingeSurface_1
           gsoc:hasUOM [
               a gsuom:degree ;
             ] ;
-        ] ;
-      gsoq:Plane_Orientation_Convention [
-          a gsoq:Strike_Dip_RHR ;
         ] ;
     ] ;
 .

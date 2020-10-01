@@ -1,13 +1,14 @@
-# baseURI: http://loop3d.org/GSO/ontology/2020/1/ex-plutontojiza/ontology
+ # baseURI: http://loop3d.org/GSO/ontology/2020/1/ex-plutontojiza/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/loop3dmaster
 
 @prefix : <http://loop3d.org/GSO/ontology/2020/1/ex-plutontojiza#> .
 @prefix cnsd: <http://loop3d.org/GSO/ontology/2020/1/lithology/consolidationdegree/> .
 @prefix gscn: <http://loop3d.org/GSO/ontology/2020/1/geologicstructure/contact/> .
 @prefix gsel: <http://loop3d.org/GSO/ontology/2020/1/element/> .
-@prefix gsen: <http://loop3d.org/GSO/ontology/2020/1/eventenvironment> .
+@prefix gsen: <http://loop3d.org/GSO/ontology/2020/1/eventenvironment/> .
 @prefix gsgu: <http://loop3d.org/GSO/ontology/2020/1/geologicunit/> .
 @prefix gslth: <http://loop3d.org/GSO/ontology/2020/1/lithology/> .
+@prefix gsgm: <http://loop3d.org/GSO/ontology/2020/1/lithology/granularmaterial/> .
 @prefix gsmg: <http://loop3d.org/GSO/ontology/2020/1/metamorphicgrade/> .
 @prefix gsmin: <http://loop3d.org/GSO/ontology/2020/1/mineral/> .
 @prefix gsoc: <http://loop3d.org/GSO/ontology/2020/1/common/> .
@@ -15,7 +16,7 @@
 @prefix gsoq: <http://loop3d.org/GSO/ontology/2020/1/geologicquality/> .
 @prefix gspr: <http://loop3d.org/GSO/ontology/2020/1/geologicprocess/> .
 @prefix gsps: <http://loop3d.org/GSO/ontology/2020/1/lithology/particleroundness/> .
-@prefix gsptr: <http://loop3d.org/GSO/ontology/2020/1/lithology/particletype/> .
+@prefix gsptr: <http://loop3d.org/GSO/ontology/2020/1/lithology/particlerole/> .
 @prefix gstime: <http://loop3d.org/GSO/ontology/2020/1/ischart/> .
 @prefix gsuom: <http://loop3d.org/GSO/ontology/2020/1/uom/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
@@ -72,10 +73,10 @@ toj:cambrianformation
   a owl:NamedIndividual ;
   rdfs:label "Cambrian Age sediments, slightly metamorphosed"@en ;
   gsoc:hasConstituent [
-      a gslth:quartzite ;
+      a gslth:Quartzite ;
     ] ;
   gsoc:hasConstituent [
-      a gslth:slate ;
+      a gslth:Slate ;
     ] ;
   gsoc:indirectTemporalOccupies gstime:Cambrian ;
   gsoc:isParticipantIn [
@@ -88,7 +89,7 @@ toj:cambrianformation
   gsoc:hasQuality [
       a gsoq:Metamorphic_Grade ;
       gsoc:hasValue [
-          a gsmg:low_metamorphic_grade ;
+          a gsmg:Low_Metamorphic_Grade ;
         ] ;
       rdfs:label "low grade"@en ;
     ] ;
@@ -110,7 +111,7 @@ toj:latojizaBoundaryVillalba_1
   a owl:NamedIndividual ;
 .
 toj:latojizaCambrianContact
-  a gscn:igneous_intrusive_contact ;
+  a gscn:Igneous_Intrusive_Contact ;
   a owl:NamedIndividual ;
   gsoc:hostedBy toj:cambrianBoundaryLaTojiza_2 ;
   gsoc:hostedBy toj:latojizaBoundaryCambrian_2 ;
@@ -119,7 +120,7 @@ toj:latojizaCambrianContact
   rdfs:comment "Contact between Cambrian Formation and La Tojiza Pluton. Contact has 4 segments"@en ;
 .
 toj:latojizaOrdovicianContact
-  a gscn:igneous_intrusive_contact ;
+  a gscn:Igneous_Intrusive_Contact ;
   a owl:NamedIndividual ;
   gsoc:hostedBy toj:latojizaBoundaryOrdovician_3 ;
   gsoc:hostedBy toj:ordovicianBoundaryLaTojiza_3 ;
@@ -128,7 +129,7 @@ toj:latojizaOrdovicianContact
   rdfs:comment "Contact between Ordovician Formation and La Tojiza Pluton. Contact has one segment"@en ;
 .
 toj:latojizaVillalbaContact
-  a gscn:igneous_intrusive_contact ;
+  a gscn:Igneous_Intrusive_Contact ;
   a owl:NamedIndividual ;
   gsoc:hostedBy toj:latojizaBoundaryVillalba_1 ;
   gsoc:hostedBy toj:villalbaBoundaryLaTojiza_1 ;
@@ -140,9 +141,9 @@ toj:latojizafinegrained
   a gsgu:Igneous_Facies ;
   a owl:NamedIndividual ;
   gsoc:hasConstituent [
-      a gslth:granite ;
+      a gslth:Granite ;
       gsoc:hasConstituent [
-          a gsog:Mono-mineralic_crystal_particle ;
+          a gsgm:Single_Crystal_Particle_Material ;
           gsoc:hasConstituent [
               a gsmin:alkali_feldspar ;
             ] ;
@@ -151,7 +152,7 @@ toj:latojizafinegrained
             ] ;
         ] ;
       gsoc:hasConstituent [
-          a gsog:Mono-mineralic_crystal_particle ;
+          a gsgm:Single_Crystal_Particle_Material ;
           gsoc:hasConstituent [
               a gsmin:apatite ;
             ] ;
@@ -160,7 +161,7 @@ toj:latojizafinegrained
             ] ;
         ] ;
       gsoc:hasConstituent [
-          a gsog:Mono-mineralic_crystal_particle ;
+          a gsgm:Single_Crystal_Particle_Material ;
           gsoc:hasConstituent [
               a gsmin:biotite ;
             ] ;
@@ -169,7 +170,7 @@ toj:latojizafinegrained
             ] ;
         ] ;
       gsoc:hasConstituent [
-          a gsog:Mono-mineralic_crystal_particle ;
+          a gsgm:Single_Crystal_Particle_Material ;
           gsoc:hasConstituent [
               a gsmin:garnetgroup ;
             ] ;
@@ -178,7 +179,7 @@ toj:latojizafinegrained
             ] ;
         ] ;
       gsoc:hasConstituent [
-          a gsog:Mono-mineralic_crystal_particle ;
+          a gsgm:Single_Crystal_Particle_Material ;
           gsoc:hasConstituent [
               a gsmin:ilmenite ;
             ] ;
@@ -187,7 +188,7 @@ toj:latojizafinegrained
             ] ;
         ] ;
       gsoc:hasConstituent [
-          a gsog:Mono-mineralic_crystal_particle ;
+          a gsgm:Single_Crystal_Particle_Material ;
           gsoc:hasConstituent [
               a gsmin:muscovite ;
             ] ;
@@ -196,7 +197,7 @@ toj:latojizafinegrained
             ] ;
         ] ;
       gsoc:hasConstituent [
-          a gsog:Mono-mineralic_crystal_particle ;
+          a gsgm:Single_Crystal_Particle_Material ;
           gsoc:hasConstituent [
               a gsmin:plagioclase ;
             ] ;
@@ -205,12 +206,12 @@ toj:latojizafinegrained
             ] ;
         ] ;
       gsoc:hasConstituent [
-          a gsog:Mono-mineralic_crystal_particle ;
+          a gsgm:Single_Crystal_Particle_Material ;
           gsoc:hasConstituent [
               a gsmin:quartz ;
             ] ;
           gsoc:hasQuality [
-              a gslth:Grain_Shape ;
+              a gslth:Grain_Roundness ;
               gsoc:hasValue [
                   a gsps:rounded ;
                 ] ;
@@ -220,7 +221,7 @@ toj:latojizafinegrained
             ] ;
         ] ;
       gsoc:hasConstituent [
-          a gsog:Mono-mineralic_crystal_particle ;
+          a gsgm:Single_Crystal_Particle_Material ;
           gsoc:hasConstituent [
               a gsmin:zircon ;
             ] ;
@@ -231,18 +232,18 @@ toj:latojizafinegrained
       gsoc:hasQuality [
           a gslth:Grain_Size ;
           gsoc:hasQuality [
-              a gsoq:Quality_Range ;
-              gsoq:hasEndValue [
-                  a gsoq:Numeric_Value ;
-                  gsoc:hasDataValue 3 ;
+              a gsoc:Quality_Range ;
+              gsoc:hasEndValue [
+                  a gsoc:Numeric_Value ;
+                  gsoc:hasDataValue "3"^^xsd:decimal ;
                   gsoc:hasUOM [
                       a gsuom:millimeter ;
                     ] ;
                   rdfs:label "fine grain size: 3 mm maximum"@en ;
                 ] ;
-              gsoq:hasStartValue [
-                  a gsoq:Numeric_Value ;
-                  gsoc:hasDataValue 0.05 ;
+              gsoc:hasStartValue [
+                  a gsoc:Numeric_Value ;
+                  gsoc:hasDataValue "0.05"^^xsd:decimal ;
                   gsoc:hasUOM [
                       a gsuom:millimeter ;
                     ] ;
@@ -251,7 +252,7 @@ toj:latojizafinegrained
             ] ;
         ] ;
       gsoc:hasQuality [
-          a gslth:Particle_Sorting_Category ;
+          a gslth:Particle_Sorting ;
           gsoc:hasDataValue "Equigranular" ;
           rdfs:label "equigranular texture"@en ;
         ] ;
@@ -262,9 +263,9 @@ toj:latojizamain
   a gsgu:Igneous_Facies ;
   a owl:NamedIndividual ;
   gsoc:hasConstituent [
-      a gslth:granite ;
+      a gslth:Granite ;
       gsoc:hasConstituent [
-          a gsog:Mono-mineralic_crystal_particle ;
+          a gsgm:Single_Crystal_Particle_Material ;
           gsoc:hasConstituent [
               a gsmin:alkali_feldspar ;
             ] ;
@@ -273,7 +274,7 @@ toj:latojizamain
             ] ;
         ] ;
       gsoc:hasConstituent [
-          a gsog:Mono-mineralic_crystal_particle ;
+          a gsgm:Single_Crystal_Particle_Material ;
           gsoc:hasConstituent [
               a gsmin:apatite ;
             ] ;
@@ -282,7 +283,7 @@ toj:latojizamain
             ] ;
         ] ;
       gsoc:hasConstituent [
-          a gsog:Mono-mineralic_crystal_particle ;
+          a gsgm:Single_Crystal_Particle_Material ;
           gsoc:hasConstituent [
               a gsmin:biotite ;
             ] ;
@@ -291,7 +292,7 @@ toj:latojizamain
             ] ;
         ] ;
       gsoc:hasConstituent [
-          a gsog:Mono-mineralic_crystal_particle ;
+          a gsgm:Single_Crystal_Particle_Material ;
           gsoc:hasConstituent [
               a gsmin:garnetgroup ;
             ] ;
@@ -300,7 +301,7 @@ toj:latojizamain
             ] ;
         ] ;
       gsoc:hasConstituent [
-          a gsog:Mono-mineralic_crystal_particle ;
+          a gsgm:Single_Crystal_Particle_Material ;
           gsoc:hasConstituent [
               a gsmin:ilmenite ;
             ] ;
@@ -309,7 +310,7 @@ toj:latojizamain
             ] ;
         ] ;
       gsoc:hasConstituent [
-          a gsog:Mono-mineralic_crystal_particle ;
+          a gsgm:Single_Crystal_Particle_Material ;
           gsoc:hasConstituent [
               a gsmin:muscovite ;
             ] ;
@@ -318,7 +319,7 @@ toj:latojizamain
             ] ;
         ] ;
       gsoc:hasConstituent [
-          a gsog:Mono-mineralic_crystal_particle ;
+          a gsgm:Single_Crystal_Particle_Material ;
           gsoc:hasConstituent [
               a gsmin:plagioclase ;
             ] ;
@@ -327,12 +328,12 @@ toj:latojizamain
             ] ;
         ] ;
       gsoc:hasConstituent [
-          a gsog:Mono-mineralic_crystal_particle ;
+          a gsgm:Single_Crystal_Particle_Material ;
           gsoc:hasConstituent [
               a gsmin:quartz ;
             ] ;
           gsoc:hasQuality [
-              a gslth:Grain_Shape ;
+              a gslth:Grain_Roundness ;
               gsoc:hasValue [
                   a gsps:rounded ;
                 ] ;
@@ -342,7 +343,7 @@ toj:latojizamain
             ] ;
         ] ;
       gsoc:hasConstituent [
-          a gsog:Mono-mineralic_crystal_particle ;
+          a gsgm:Single_Crystal_Particle_Material ;
           gsoc:hasConstituent [
               a gsmin:zircon ;
             ] ;
@@ -351,14 +352,14 @@ toj:latojizamain
             ] ;
         ] ;
       gsoc:hasQuality [
-          a gslth:Grain_Shape ;
+          a gslth:Grain_Roundness ;
           gsoc:hasValue [
               a gsps:anhedral ;
             ] ;
           rdfs:label "anhedral grains"@en ;
         ] ;
       gsoc:hasQuality [
-          a gslth:Grain_Shape ;
+          a gslth:Grain_Roundness ;
           gsoc:hasValue [
               a gsps:subhedral ;
             ] ;
@@ -367,17 +368,17 @@ toj:latojizamain
       gsoc:hasQuality [
           a gslth:Grain_Size ;
           gsoc:hasQuality [
-              a gsoq:Quality_Range ;
-              gsoq:hasEndValue [
-                  a gsoq:Numeric_Value ;
+              a gsoc:Quality_Range ;
+              gsoc:hasEndValue [
+                  a gsoc:Numeric_Value ;
                   gsoc:hasDataValue "10"^^xsd:decimal ;
                   gsoc:hasUOM [
                       a gsuom:millimeter ;
                     ] ;
                   rdfs:label "coarse grain size: 10 mm maximum"@en ;
                 ] ;
-              gsoq:hasStartValue [
-                  a gsoq:Numeric_Value ;
+              gsoc:hasStartValue [
+                  a gsoc:Numeric_Value ;
                   gsoc:hasDataValue "3"^^xsd:decimal ;
                   gsoc:hasUOM [
                       a gsuom:millimeter ;
@@ -388,7 +389,7 @@ toj:latojizamain
           rdfs:label "Medium to coarse-grained" ;
         ] ;
       gsoc:hasQuality [
-          a gslth:Particle_Sorting_Category ;
+          a gslth:Particle_Sorting ;
           gsoc:hasDataValue "Equigranular" ;
           rdfs:label "equigranular texture"@en ;
         ] ;
@@ -396,10 +397,10 @@ toj:latojizamain
   rdfs:comment "medium- to coarse-grained granite consists of quartz, K-feldspar, plagioclase and biotite. Apatite, ilmenite, zircon, muscovite and, locally, garnet are accessory minerals; contains rounded grains of quartz visible to the naked eye. Most samples are equigranular" ;
 .
 toj:latojizapendants
-  a gsgu:lithologic_unit ;
+  a gsgu:Lithologic_Unit ;
   a owl:NamedIndividual ;
   gsoc:hasConstituent [
-      a gslth:schist ;
+      a gslth:Schist ;
     ] ;
   gsoc:hasRole [
       a gsog:Pendant ;
@@ -409,13 +410,13 @@ toj:latojizapendants
 toj:latojizapluton
   a gsgu:Pluton ;
   gsoc:indirectTemporalLocation [
-	gsoc:Time_Instant_Location;
+	a gsoc:Time_Instant_Location;
 	gsoc:hasValue toj:latojizacrystallization ;
 	];
   gsoc:isParticipantIn [
 	a gspr:Magmatic_Cystallisation;
 	gsoc:directTemporalLocation [
-		gsoc:Time_Instant_Location;
+		a gsoc:Time_Instant_Location;
 		gsoc:hasValue toj:latojizacrystallization ;
 	]
   ]; 
@@ -428,14 +429,15 @@ toj:latojizapluton
   gsoc:hasPart toj:latojizapendants ;
   gsoc:hasPart toj:latojizaporphyritic ;
   gsoc:hosts [
-      a gsog:Crystal_Preferred_Orientation ;
+      a gsog:Crystallographic_Preferred_Orientation ;
       gsoc:hasQuality [
           a gsoc:Intensity ;
           gsoc:hasValue [
               a gsoc:Weak_Intensity ;
             ] ;
         ] ;
-      rdfs:label "weak preferred orientation of feldspar and biotite;  considered to have developed exclusively in the magmatic state" ;
+      rdfs:label "weak preferred orientation of feldspar and biotite;"@en ;
+	  rdfs:comment "considered to have developed exclusively in the magmatic state"@en ;
     ] ;
   gsog:intrudes toj:cambrianformation ;
   gsog:intrudes toj:ordovicianformation ;
@@ -447,11 +449,11 @@ toj:latojizapluton
 
 toj:latojizacrystallization
 	a gsoc:Time_Numeric_Value ;
-	rdfs:label "295 +|- 2 Ma, Variscan, Post tectonic, Permian"@en
+	rdfs:label "295 +|- 2 Ma, Variscan, Post tectonic, Permian"@en ;
 	gsoc:determinedBy [
 	  a gsoc:Observation ;
-	  rdfs:comment "TBD -- adopt conventions for better representation of data provenance" ;
-	  rdfs:comment "U-Pb zircon (Fernandez-Suarez et al. 2000)" ;
+	  rdfs:comment "TBD -- adopt conventions for better representation of data provenance"@en ;
+	  rdfs:comment "U-Pb zircon (Fernandez-Suarez et al. 2000)"@en ;
 	  rdfs:comment "dct:source DOI: 10.1144/jgs.157.3.565" ;
 	] ;
 	gsoc:hasQuality [
@@ -468,26 +470,26 @@ toj:latojizaporphyritic
   a gsgu:Igneous_Facies ;
   a owl:NamedIndividual ;
   gsoc:hasConstituent [
-      a gslth:granite ;
+      a gslth:Granite ;
       gsoc:hasConstituent [
-          a gsog:Mono-mineralic_crystal_particle ;
+          a gsgm:Single_Crystal_Particle_Material ;
           gsoc:hasConstituent [
               a gsmin:alkali_feldspar ;
             ] ;
           gsoc:hasQuality [
               a gslth:Grain_Size ;
               gsoc:hasQuality [
-                  a gsoq:Quality_Range ;
-                  gsoq:hasEndValue [
-                      a gsoq:Numeric_Value ;
+                  a gsoc:Quality_Range ;
+                  gsoc:hasEndValue [
+                      a gsoc:Numeric_Value ;
                       gsoc:hasDataValue "5"^^xsd:decimal ;
                       gsoc:hasUOM [
                           a gsuom:millimeter ;
                         ] ;
                       rdfs:label "5 mm maximum"@en ;
                     ] ;
-                  gsoq:hasStartValue [
-                      a gsoq:Numeric_Value ;
+                  gsoc:hasStartValue [
+                      a gsoc:Numeric_Value ;
                       gsoc:hasDataValue "1"^^xsd:decimal ;
                       gsoc:hasUOM [
                           a gsuom:millimeter ;
@@ -503,7 +505,7 @@ toj:latojizaporphyritic
           rdfs:label "K-feldspar in groundmass" ;
         ] ;
       gsoc:hasConstituent [
-          a gsog:Mono-mineralic_crystal_particle ;
+          a gsgm:Single_Crystal_Particle_Material ;
           gsoc:hasConstituent [
               a gsmin:apatite ;
             ] ;
@@ -512,24 +514,24 @@ toj:latojizaporphyritic
             ] ;
         ] ;
       gsoc:hasConstituent [
-          a gsog:Mono-mineralic_crystal_particle ;
+          a gsgm:Single_Crystal_Particle_Material ;
           gsoc:hasConstituent [
               a gsmin:biotite ;
             ] ;
           gsoc:hasQuality [
               a gslth:Grain_Size ;
               gsoc:hasQuality [
-                  a gsoq:Quality_Range ;
-                  gsoq:hasEndValue [
-                      a gsoq:Numeric_Value ;
+                  a gsoc:Quality_Range ;
+                  gsoc:hasEndValue [
+                      a gsoc:Numeric_Value ;
                       gsoc:hasDataValue "3"^^xsd:decimal ;
                       gsoc:hasUOM [
                           a gsuom:millimeter ;
                         ] ;
                       rdfs:label "3 mm maximum"@en ;
                     ] ;
-                  gsoq:hasStartValue [
-                      a gsoq:Numeric_Value ;
+                  gsoc:hasStartValue [
+                      a gsoc:Numeric_Value ;
                       gsoc:hasDataValue "1"^^xsd:decimal ;
                       gsoc:hasUOM [
                           a gsuom:millimeter ;
@@ -545,7 +547,7 @@ toj:latojizaporphyritic
           rdfs:label "biotite in groundmass" ;
         ] ;
       gsoc:hasConstituent [
-          a gsog:Mono-mineralic_crystal_particle ;
+          a gsgm:Single_Crystal_Particle_Material ;
           gsoc:hasConstituent [
               a gsmin:garnetgroup ;
             ] ;
@@ -554,7 +556,7 @@ toj:latojizaporphyritic
             ] ;
         ] ;
       gsoc:hasConstituent [
-          a gsog:Mono-mineralic_crystal_particle ;
+          a gsgm:Single_Crystal_Particle_Material ;
           gsoc:hasConstituent [
               a gsmin:ilmenite ;
             ] ;
@@ -563,7 +565,7 @@ toj:latojizaporphyritic
             ] ;
         ] ;
       gsoc:hasConstituent [
-          a gsog:Mono-mineralic_crystal_particle ;
+          a gsgm:Single_Crystal_Particle_Material ;
           gsoc:hasConstituent [
               a gsmin:muscovite ;
             ] ;
@@ -572,24 +574,24 @@ toj:latojizaporphyritic
             ] ;
         ] ;
       gsoc:hasConstituent [
-          a gsog:Mono-mineralic_crystal_particle ;
+          a gsgm:Single_Crystal_Particle_Material ;
           gsoc:hasConstituent [
               a gsmin:plagioclase ;
             ] ;
           gsoc:hasQuality [
               a gslth:Grain_Size ;
               gsoc:hasQuality [
-                  a gsoq:Quality_Range ;
-                  gsoq:hasEndValue [
-                      a gsoq:Numeric_Value ;
+                  a gsoc:Quality_Range ;
+                  gsoc:hasEndValue [
+                      a gsoc:Numeric_Value ;
                       gsoc:hasDataValue "8"^^xsd:decimal ;
                       gsoc:hasUOM [
                           a gsuom:millimeter ;
                         ] ;
                       rdfs:label "8 mm maximum"@en ;
                     ] ;
-                  gsoq:hasStartValue [
-                      a gsoq:Numeric_Value ;
+                  gsoc:hasStartValue [
+                      a gsoc:Numeric_Value ;
                       gsoc:hasDataValue "3"^^xsd:decimal ;
                       gsoc:hasUOM [
                           a gsuom:millimeter ;
@@ -605,12 +607,12 @@ toj:latojizaporphyritic
           rdfs:label "plagioclase in groundmass" ;
         ] ;
       gsoc:hasConstituent [
-          a gsog:Mono-mineralic_crystal_particle ;
+          a gsgm:Single_Crystal_Particle_Material ;
           gsoc:hasConstituent [
               a gsmin:quartz ;
             ] ;
           gsoc:hasQuality [
-              a gslth:Grain_Shape ;
+              a gslth:Grain_Roundness ;
               gsoc:hasValue [
                   a gsps:rounded ;
                 ] ;
@@ -618,17 +620,17 @@ toj:latojizaporphyritic
           gsoc:hasQuality [
               a gslth:Grain_Size ;
               gsoc:hasQuality [
-                  a gsoq:Quality_Range ;
-                  gsoq:hasEndValue [
-                      a gsoq:Numeric_Value ;
+                  a gsoc:Quality_Range ;
+                  gsoc:hasEndValue [
+                      a gsoc:Numeric_Value ;
                       gsoc:hasDataValue "8"^^xsd:decimal ;
                       gsoc:hasUOM [
                           a gsuom:millimeter ;
                         ] ;
                       rdfs:label "8 mm maximum"@en ;
                     ] ;
-                  gsoq:hasStartValue [
-                      a gsoq:Numeric_Value ;
+                  gsoc:hasStartValue [
+                      a gsoc:Numeric_Value ;
                       gsoc:hasDataValue "5"^^xsd:decimal ;
                       gsoc:hasUOM [
                           a gsuom:millimeter ;
@@ -644,7 +646,7 @@ toj:latojizaporphyritic
           rdfs:label "Quartz in groundmass" ;
         ] ;
       gsoc:hasConstituent [
-          a gsog:Mono-mineralic_crystal_particle ;
+          a gsgm:Single_Crystal_Particle_Material ;
           gsoc:hasConstituent [
               a gsmin:zircon ;
             ] ;
@@ -657,17 +659,17 @@ toj:latojizaporphyritic
           gsoc:hasQuality [
               a gslth:Grain_Size ;
               gsoc:hasQuality [
-                  a gsoq:Quality_Range ;
-                  gsoq:hasEndValue [
-                      a gsoq:Numeric_Value ;
+                  a gsoc:Quality_Range ;
+                  gsoc:hasEndValue [
+                      a gsoc:Numeric_Value ;
                       gsoc:hasDataValue "50"^^xsd:decimal ;
                       gsoc:hasUOM [
                           a gsuom:millimeter ;
                         ] ;
                       rdfs:label "5 cm maximum"@en ;
                     ] ;
-                  gsoq:hasStartValue [
-                      a gsoq:Numeric_Value ;
+                  gsoc:hasStartValue [
+                      a gsoc:Numeric_Value ;
                       gsoc:hasDataValue "10"^^xsd:decimal ;
                       gsoc:hasUOM [
                           a gsuom:millimeter ;
@@ -678,12 +680,12 @@ toj:latojizaporphyritic
               rdfs:label "1 to 5 cm diameter phenocrysts" ;
             ] ;
           gsoc:hasRole [
-              a gsptr:phenocryst ;
+              a gsptr:Phenocryst ;
             ] ;
           rdfs:label "K-feldspar phenocrysts" ;
         ] ;
       gsoc:hasQuality [
-          a gslth:Particle_Sorting_Category ;
+          a gslth:Particle_Sorting ;
           gsoc:hasDataValue "Porphyritic" ;
           rdfs:label "porphyritic texture"@en ;
         ] ;
@@ -707,7 +709,7 @@ toj:ordovicianformation
   a gsog:Formation ;
   rdfs:label "Ordovician Age"@en ;
   gsoc:hasConstituent [
-      a gslth:slate ;
+      a gslth:Slate ;
     ] ;
   gsoc:directTemporalOccupies gstime:Ordovician ;
   gsoc:hasPart toj:ordovicianBoundaryCambrian ;
@@ -715,7 +717,7 @@ toj:ordovicianformation
   gsoc:hasQuality [
       a gsoq:Metamorphic_Grade ;
       gsoc:hasValue [
-          a gsmg:low_metamorphic_grade ;
+          a gsmg:Low_Metamorphic_Grade ;
         ] ;
       rdfs:label "low grade"@en ;
     ] ;
@@ -729,7 +731,7 @@ toj:sancipriangranitoid
   a gsgu:Pluton ;
   a owl:NamedIndividual ;
   gsoc:hasConstituent [
-      a gslth:granite ;
+      a gslth:Granite ;
       gsoc:hasConstituent [
           a gsmin:biotite ;
         ] ;
@@ -740,12 +742,12 @@ toj:sancipriangranitoid
   gsoc:isParticipantIn [
    a gspr:Magmatic_Cystallisation;
    gsoc:directTemporalLocation [
-	a gsog:Time_Instant_Location ;
+	a gsoc:Time_Instant_Location ;
 	gsoc:hasValue toj:sancipriancrystallization
    ]
   ];
   gsoc:indirectTemporalLocation [
-  	a gsog:Time_Instant_Location ;
+  	a gsoc:Time_Instant_Location ;
 	gsoc:hasValue toj:sancipriancrystallization 
 	];
   gsoc:hasPart toj:sanciprianBoundaryLaTojiza ;
@@ -753,7 +755,7 @@ toj:sancipriangranitoid
 .
 
 toj:sancipriancrystallization
-		a gsoc:Time_Numeric_Value
+		a gsoc:Time_Numeric_Value ;
 		rdfs:label "287 Ma, Variscan, Permian, syn-tectonic"@en ;
 		gsoc:determinedBy [
 		  a gsoc:Observation ;
@@ -794,25 +796,27 @@ toj:villalbaseries
   a gsog:Formation ;
   a owl:NamedIndividual ;
   gsoc:hasConstituent [
-      a gslth:schist ;
+      a gslth:Schist ;
       rdfs:label "metagraywacke" ;
     ] ;
   gsoc:isParticipantIn [
 	a gspr:Deposition;
 	gsoc:directTemporalLocation [
-      a gsog:Time_Interval_Location ;
+      a gsoc:Time_Interval_Location ;
 	  rdfs:label "Neoproterozoic, approximately 700-600 Ma"@en ;
 	  gsoc:hasValue [
-		a gsoq:Temporal_Range;
+		a gsoc:Temporal_Range;
 	    gsog:hasStartValue toj:villalbadetritalzircon ;
 	    gsog:hasEndValue toj:intrusionintineo
-        ] ;
+        ] 
+	];
+  ];
   gsoc:indirectTemporalOccupies  gstime:Neoproterozoic ;
   gsoc:hasPart toj:villalbaBoundaryCambrian ;
   gsoc:hasPart toj:villalbaBoundaryLaTojiza ;
   gsoc:hasQuality [
       a gsoq:Metamorphic_Grade ;
-      gsoc:hasValue [ a gsmg:low_metamorphic_grade ] ;
+      gsoc:hasValue [ a gsmg:Low_Metamorphic_Grade ] ;
       rdfs:label "low grade metamorphism"@en ;
     ] ;
   rdfs:label "Villalba Series" ;
@@ -828,8 +832,7 @@ toj:intrusionintineo
 	  rdfs:comment "dct:source https://eprints.ucm.es/59104/1/0656.pdf" ;
 	] ;
 	gsoc:hasDataValue "600"^^xsd:decimal ;
-	gsoc:hasUOM [  a gsuom:ma ] ;
-
+	gsoc:hasUOM [ a gsuom:ma ] ;
 .
 
 toj:villalbadetritalzircon
