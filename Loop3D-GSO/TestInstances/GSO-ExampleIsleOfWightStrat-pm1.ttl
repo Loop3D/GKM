@@ -1,0 +1,112 @@
+# baseURI: http://loop3d.org/GSO/ontology/2020/1/ex-islewightstrat/ontology
+# imports: http://loop3d.org/GSO/ontology/2020/1/loop3dmaster
+
+@prefix con: <http://loop3d.org/GSO/ontology/2020/1/ex-complexcontact#> .
+@prefix iwh: <http://loop3d.org/GSO/ontology/2020/1/ex-islewightstrat#> .
+@prefix gscn: <http://loop3d.org/GSO/ontology/2020/1/geologicstructure/contact/> .
+@prefix gsen: <http://loop3d.org/GSO/ontology/2020/1/eventenvironment/> .
+@prefix gsgm: <http://loop3d.org/GSO/ontology/2020/1/lithology/granularmaterial/> .
+@prefix gsgu: <http://loop3d.org/GSO/ontology/2020/1/geologicunit/> .
+@prefix gslth: <http://loop3d.org/GSO/ontology/2020/1/lithology/> .
+@prefix gsmf: <http://loop3d.org/GSO/ontology/2020/1/metamorphicfacies/> .
+@prefix gsmin: <http://loop3d.org/GSO/ontology/2020/1/mineral/> .
+@prefix gsoc: <http://loop3d.org/GSO/ontology/2020/1/common/> .
+@prefix gsog: <http://loop3d.org/GSO/ontology/2020/1/geologicfeature/> .
+@prefix gsoq: <http://loop3d.org/GSO/ontology/2020/1/geologicquality/> .
+@prefix gspr: <http://loop3d.org/GSO/ontology/2020/1/geologicprocess/> .
+@prefix gsptr: <http://loop3d.org/GSO/ontology/2020/1/lithology/particlerole/> .
+@prefix gsrbr: <http://loop3d.org/GSO/ontology/2020/1/geologicunit/rockbodyrole/> .
+@prefix gsro: <http://loop3d.org/GSO/ontology/2020/1/geologicunit/rockobject/> .
+@prefix gstime: <http://loop3d.org/GSO/ontology/2020/1/ischart/> .
+@prefix gsuom: <http://loop3d.org/GSO/ontology/2020/1/uom/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix turtle: <http://www.semanticweb.org/owl/owlapi/turtle#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://loop3d.org/GSO/ontology/2020/1/ex-islewightstrat/ontology>
+  a owl:Ontology ;
+  rdfs:comment ""@en ;
+  rdfs:label "Isle of Wight Stratigraphy test, PM1"@en ;
+  owl:imports <http://loop3d.org/GSO/ontology/2020/1/loop3dmaster> ;
+.
+
+iwh:strat-SOLT
+  a gsog:Group ;
+  rdfs:label "Solent Group"@en ;
+  gsoq:indirectTemporalOccupies [
+	a gsoc:Time_Interval ;
+	  gsoc:time_started_by gstime:Rupelian ;
+	  gsoc:time_finished_by gstime:Priabonian ;
+	  rdfs:comment "dct:source -- HookerEtAl, 2009, DOI: 10.1130/2009.2452(12)"@en ;
+  ];
+  gsoc:isParticipantIn [
+      a gspr:Deposition; 
+	  rdfs:label "Deposition across Eocene-Oligocene boundary"@en ;
+	  gsoc:directTemporalOccupies [
+		a gsoc:Time_Interval ;
+		gsoc:time_started_by gstime:Rupelian ;
+		gsoc:time_finished_by gstime:Priabonian ;
+	]	
+	] ;
+  gsoc:hasPart iwh:strat-BOUL, iwh:strat-BEL, iwh:strat-HEHI ;
+  gsoc:hasPart iwh:BaseSolentGroup ;
+  gsog:overlies iwh:strat-BA ;
+  gsog:hasMaterialConstituent [ 
+	a gslth:Generic_Mudstone ;
+	gsoc:hasQuality [ 
+		a gsoc:Proportion;
+		gsoc:hasValue [a gsoq:Dominant_Constituent ]
+	  ]
+	] ;
+  gsog:hasMaterialConstituent [ 
+		a gslth:Limestone ;
+		gsoc:hasQuality [ 
+			a gsoc:Proportion ;
+			gsoc:hasValue [a gsoq:Subordinate_Constituent ]
+		  ]
+	] ;
+  rdfs:comment "Interbedded silty clays, calcareous clays and limestone"@en ;
+  gsoc:hasQuality [  
+	a gsoq:Thickness ;
+		gsoc:determinedBy [
+			a gsoc:Observation ;
+			gsoc:hasDataValue "regional IOW thickness; not proved in PM1"@en
+		] ;
+		gsoc:hasValue [
+			a gsoc:Quality_Range ;
+			gsoc:hasStartValue [ 
+				a gsoc:Numeric_Value ;
+				gsoc:hasDataValue "0" ;
+				gsoc:hasUOM [ a gsuom:meter ]
+			] ;
+			gsoc:hasEndValue [ 
+				a gsoc:Numeric_Value ;
+				gsoc:hasDataValue "200" ;
+				gsoc:hasUOM [ a gsuom:meter ]
+			] ;
+		]
+	] ; 
+  gsoc:hasSetting [ a gsen:Lacustrine_Setting, gsen:River_Plain_System_Setting, gsen:Marine_Setting ] ;
+  rdfs:comment "Predominantly non-marine, freshwater to brackish water, fluvial/terrestrial; locally fully marine"@en ;
+  rdfs:comment "dct:source -- ISBN:9780751837773, ISBN:9780852727720, DOI:10.1144/GOEWP"@en 
+.
+
+iwh:BaseSolentGroup 
+	a gsog:Rock_Body_Boundary ;
+	gsoc:hostedBy iwh:strat-SOLT; 
+	gsoc:isParticipantIn [ a gspr:Deposition ]
+.
+
+iwh:contact_solt_on_ba
+  a gscn:Conformable_Contact ;
+  gsoc:hasOlderHost iwh:strat-BA ;
+  gsoc:hasOlderHost iwh:TopBartonGroup ;
+  gsoc:hasYoungerHost iwh:BaseSolentGroup ;
+  gsoc:hasYoungerHost iwh:strat-SOLT ;
+  rdfs:label "Solent Group conformably overlies Barton group "@en ;
+  rdfs:comment "relational feature"@en
+.
+	
