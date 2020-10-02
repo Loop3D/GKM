@@ -49,6 +49,13 @@ gsoq:Dip
       owl:someValuesFrom gsoc:Measured_Value ;
     ] ;
 .
+gsoq:Dominant_Constituent
+  a owl:Class ;
+  rdfs:comment "Constituent is one of the most abundant."@en ;
+  rdfs:comment "Example-- in a typical granite, Quartz, plagioclase, and K-feldspar are the dominant constituents."@en ;
+  rdfs:label "Dominant Constituent"@en ;
+  rdfs:subClassOf gsoq:Present ;
+.
 gsoq:Facing
   a owl:Class ;
   rdfs:comment "property to specify if a surface is directed, i.e. has a top and bottom. Values: {upright, overturned, unknown}"@en ;
@@ -104,6 +111,13 @@ gsoq:Metamorphic_Grade
   rdfs:isDefinedBy "GeoSciML v4"@en ;
   rdfs:label "Metamorphic grade"@en ;
   rdfs:subClassOf gsoc:Quality ;
+.
+gsoq:Minor_Constituent
+  a owl:Class ;
+  rdfs:comment "Constituent is ubiquitous but not abundant"@en ;
+  rdfs:comment "Example -- in some granites, hornblende is a minor constituent."@en ;
+  rdfs:label "Minor Constituent"@en ;
+  rdfs:subClassOf gsoq:Present ;
 .
 gsoq:Orientation
   a owl:Class ;
@@ -194,11 +208,32 @@ gsoq:Plunge
       owl:someValuesFrom gsoc:Measured_Value ;
     ] ;
 .
+gsoq:Present
+  a owl:Class ;
+  rdfs:comment "A constituent is present, but in an unknown proportion."@en ;
+  rdfs:comment "This quality and its sub classes are used to express proportions when quantitiative measured values are not available."@en ;
+  rdfs:label "Present"@en ;
+  rdfs:subClassOf gsoc:Proportion ;
+.
+gsoq:Rare_Constituent
+  a owl:Class ;
+  rdfs:comment "Constituent is present but uncommon and rarely observed."@en ;
+  rdfs:comment "Example-- in a typical granite, zircon and apatite are rare constituents"@en ;
+  rdfs:label "Rare constituent "@en ;
+  rdfs:subClassOf gsoq:Present ;
+.
 gsoq:Size
   a owl:Class ;
   rdfs:comment "Generic quality that specifies the size of an object or collection of objects; values may be quantitative or qualitative"@en ;
   rdfs:label "Size"@en ;
   rdfs:subClassOf gsoc:Quality ;
+.
+gsoq:Subordinate_Constituent
+  a owl:Class ;
+  rdfs:comment "Constituent is less abundant than dominant constituent, but present in sufficient abundance to be an obvious constituent"@en ;
+  rdfs:comment "Example--in a typical granite, biotite is a subordinate constituent."@en ;
+  rdfs:label "Subordinate Constituent"@en ;
+  rdfs:subClassOf gsoq:Present ;
 .
 gsoq:Thickness
   a owl:Class ;
