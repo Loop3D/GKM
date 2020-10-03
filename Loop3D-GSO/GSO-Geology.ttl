@@ -227,6 +227,12 @@ Contact(x) <--> exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RB
       owl:qualifiedCardinality "0"^^xsd:nonNegativeInteger ;
     ] ;
 .
+:Cross_Stratification
+  a owl:Class ;
+  rdfs:comment "bedding in which bedding surfaces are arranged at an angle to the main (originally horizontal) stratification"@en ;
+  rdfs:label "Cross Stratification "@en ;
+  rdfs:subClassOf :Bedding ;
+.
 :Crystal_Constituent
   a owl:Class ;
   rdfs:comment "constituent is formed by crystallization from melt or by metamorphic processes. Distinct from constituent roles related to clastic processes, or diagenetic processes. "@en ;
@@ -1156,13 +1162,13 @@ RBT (x) <--> RBD (x) ^ exists z forall y [(isPartOf (y,z) ^ hasHost (z,x)) -> (b
 .
 :Sedimentary_Fabric
   a owl:Class ;
-  rdfs:comment "Fabrics in sedimentary rock like \"clast-supported\",  \"matrix-supported\", \"cross-bedding\", and \"graded bed\" are considered kinds of Integral Feature/GeologicStructure because they depend on the configuration of parts of a rock body."@en ;
+  rdfs:comment "Fabrics in sedimentary rock like \"clast-supported\",  \"matrix-supported\", \"cross-bedding\", and \"graded bed\" are considered kinds of Integral Feature/GeologicStructure because they depend on the configuration of parts of a rock body. Sedimentary_Fabric is used to represent penetrative feature in a rock body;  Sedimentary_Structure is used to describe discrete features in a sedimentary rock;"@en ;
   rdfs:label "Sedimentary Fabric  "@en ;
   rdfs:subClassOf :Lithologic_Fabric ;
 .
 :Sedimentary_Structure
   a owl:Class ;
-  rdfs:comment "Structures formed in sedimentary rocks related to depositional or diagenetic processes.   Includes trace fossils."@en ;
+  rdfs:comment "Structures formed in sedimentary rocks related to depositional or diagenetic processes.   Includes trace fossils. Sedimentary structure is used to describe discrete features in a sedimentary rock; penetrative structures (like bedding, cross bedding) are Sedimentary_Fabrics"@en ;
   rdfs:label "Sedimentary Structure  "@en ;
   rdfs:subClassOf :Geologic_Structure ;
 .
