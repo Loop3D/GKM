@@ -1,10 +1,8 @@
-# baseURI: http://loop3d.org/GSO/ontology/2020/1/faultstest2/
-# imports: http://loop3d.org/GSO/ontology/2020/1/lithology/particletype/ontology
+# baseURI: http://loop3d.org/GSO/ontology/2020/1/faultstest2/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/loop3dmaster
 # prefix: fau2
 
-@prefix : <http://loop3d.org/GSO/ontology/2020/1/faultstest2/> .
-@prefix fau2: <http://loop3d.org/GSO/ontology/2020/1/faultstest2/> .
+@prefix fau2: <http://loop3d.org/GSO/ontology/2020/1/faultstest2#> .
 @prefix gsen: <http://loop3d.org/GSO/ontology/2020/1/eventenvironment/> .
 @prefix gsoc: <http://loop3d.org/GSO/ontology/2020/1/common/> .
 @prefix gsog: <http://loop3d.org/GSO/ontology/2020/1/geologicfeature/> .
@@ -17,14 +15,17 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-fau2:
+<http://loop3d.org/GSO/ontology/2020/1/faultstest2/ontology> 
   a owl:Ontology ;
-  owl:imports <http://loop3d.org/GSO/ontology/2020/1/lithology/particletype/ontology> ;
   owl:imports <http://loop3d.org/GSO/ontology/2020/1/loop3dmaster> ;
-  owl:versionIRI fau2: ;
+  rdfs:label "Example complex geologic histry"@en; 
+  rdfs:comment "Example history representation, based on geology shown in EasternRinconMountainsXSec.png figure in the Loop3D-GSO.TestInstances directory"@en; 
 .
+
+
 fau2:Basement_Cover_Shear_Event
   a gsog:Geologic_Event ;
+  rdfs:comment "F2.1 in figure"@en ;
   gsoc:hasConstituent [
       a gspr:Ductile_Flow ;
       rdfs:label "Shear along basement-cover contact"@en ;
@@ -50,14 +51,14 @@ fau2:Basin_Fill_Tilting_Event
   gsog:hasSetting [
       a gsen:Extended_Terrane ;
     ] ;
-  rdfs:comment "Array of normal faults with tilting of blocks between faults, along with syn-deformation deposition in the basins formed. Faulting generally continued after sedimentation stopped."@en ;
+  rdfs:comment "Array of normal faults with tilting of blocks between faults, along with syn-deformation deposition in the basins formed. Faulting generally continued after sedimentation stopped. Manifest by fanning dips in the tan unit in the cross section figure."@en ;
   rdfs:label "Oligocene-Mid-Miocene faulting and tilting"@en ;
 .
 fau2:Detachment_Faulting
   a gsog:Geologic_Event ;
   gsoc:time_during fau2:Middle_Tertiary_Extension ;
-  rdfs:comment "Development of a large, low-angle normal fault that unroofs the Rincon Mountains, SE AZ " ;
-  rdfs:label "San Pedro Detachment Faulting  "@en ;
+  rdfs:comment "Development of a large, low-angle normal fault that unroofs the Rincon Mountains, SE AZ"@en ;
+  rdfs:label "San Pedro Detachment Faulting (F3)"@en ;
 .
 fau2:EarlyMioceneSedimentation
   a gsog:Geologic_Event ;
@@ -71,6 +72,7 @@ fau2:EarlyMioceneSedimentation
   gsoc:time_finishes fau2:Detachment_Faulting ;
   gsoc:time_starts fau2:Basin_Fill_Tilting_Event ;
   rdfs:comment "Deposition of conglomerate, sandstone, with minor interbedded tuff and volcanic rocks in basins formed in hanging wall of detachment system"@en ;
+  rdfs:comment "Tan unit in the cross section figure"@en ;
   rdfs:label "Oligocene to Mid Miocene Sediment accumulation"@en ;
 .
 fau2:EarlyProterozoic1780-1690
@@ -159,13 +161,14 @@ fau2:Laramide_Ductile_deformation
       a gsen:Middle_Continental_Crust_Setting ;
     ] ;
   rdfs:label "Late Laramide ductile flow in basement"@en ;
+  rdfs:comment "event manifested by fabrics in Proterozoic basement and overlying tectonites derived from Palezoic and Mesozoic sediments (gray and blue units, left side of cross section diagram."@en;
 .
 fau2:Laramide_Orogeny
   a gsog:Geologic_Event ;
   gsoc:time_interval_contains fau2:Laramide_Ductile_deformation ;
   gsoc:time_interval_contains fau2:Laramide_Thrust_Faulting ;
   gsoc:time_interval_contains fau2:Wilderness_Granite_Intrusion_Event ;
-  rdfs:comment "Late Cretaceous to Early Tertiary Deformation event in western North America, generally considered to have occurred between 80 Ma and 40 Ma.  Manifestations vary in different parts of the western North American Cordillera, but eastward migration of magmatism and deformation, particularly in the western USA are characteristic. " ;
+  rdfs:comment "Late Cretaceous to Early Tertiary Deformation event in western North America, generally considered to have occurred between 80 Ma and 40 Ma.  Manifestations vary in different parts of the western North American Cordillera, but eastward migration of magmatism and deformation, particularly in the western USA are characteristic."@en;
   rdfs:label "Laramide Orogeny "@en ;
 .
 fau2:Laramide_Thrust_Faulting
@@ -182,8 +185,8 @@ fau2:Laramide_Thrust_Faulting
       a gsen:Upper_Continental_Crust_Setting ;
     ] ;
   gsoc:time_started_by fau2:Laramide_Ductile_deformation ;
-  rdfs:comment "Development of thrust faults in upper crust"@en ;
-  rdfs:label "Laramide Thrust Faulting"@en ;
+  rdfs:comment "Development of thrust faults in upper crust. F1 in the cross section diagram"@en ;
+  rdfs:label "Laramide Thrust Faulting (F1)"@en ;
 .
 fau2:LateMioceneBasinFormation
   a gsog:Geologic_Event ;
@@ -194,8 +197,8 @@ fau2:LateMioceneBasinFormation
       a gspr:Traction_Saltation_or_Suspension_Deposition ;
     ] ;
   gsoc:time_finishes fau2:Middle_Tertiary_Extension ;
-  rdfs:comment "High angle faulting forming current physiographic mountain ranges and basins, with deposition of conglomerate, sandstone and mudstone in basins."@en ;
-  rdfs:label "Late Miocene Basin Formation"@en ;
+  rdfs:comment "High angle faulting forming current physiographic mountain ranges and basins, with deposition of conglomerate, sandstone and mudstone in basins. F4, F5 in the cross section diagram."@en ;
+  rdfs:label "Late Miocene Basin Formation (F5)"@en ;
 .
 fau2:MesozoicDepositionInterval
   a gsoc:Time_Interval ;
@@ -226,6 +229,7 @@ fau2:Mesozoic_Basin_Formation
 .
 fau2:Mesozoic_Sediment_Deposition
   a gsog:Geologic_Event ;
+  rdfs:comment "manifested by green stippled unit under thrust fault in the cross section diagram."@en ; 
   gsoc:hasConstituent [
       a gspr:Deposition ;
       rdfs:label "Intra and back arc sediment accumulation"@en ;
@@ -335,4 +339,5 @@ fau2:Wilderness_Granite_Intrusion_Event
       a gsen:Hinterland_Setting, gsen:Middle_Continental_Crust_Setting ;
     ] ;
   rdfs:label "Two-mica granite intrusion"@en ;
+  rdfs:comment "granitoid intrudes gray unit in lower left of cross section diagram, intrusions not shown in diagram"@en ;
 .
