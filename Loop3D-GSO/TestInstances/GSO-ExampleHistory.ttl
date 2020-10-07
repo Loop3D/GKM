@@ -1,10 +1,8 @@
-# baseURI: http://loop3d.org/GSO/ontology/2020/1/faultstest2/
-# imports: http://loop3d.org/GSO/ontology/2020/1/lithology/particletype/ontology
+# baseURI: http://loop3d.org/GSO/ontology/2020/1/ex-history/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/loop3dmaster
-# prefix: fau2
+# prefix: ehy
 
-@prefix : <http://loop3d.org/GSO/ontology/2020/1/faultstest2/> .
-@prefix fau2: <http://loop3d.org/GSO/ontology/2020/1/faultstest2/> .
+@prefix ehy: <http://loop3d.org/GSO/ontology/2020/1/ex-history#> .
 @prefix gsen: <http://loop3d.org/GSO/ontology/2020/1/eventenvironment/> .
 @prefix gsoc: <http://loop3d.org/GSO/ontology/2020/1/common/> .
 @prefix gsog: <http://loop3d.org/GSO/ontology/2020/1/geologicfeature/> .
@@ -17,20 +15,23 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-fau2:
+<http://loop3d.org/GSO/ontology/2020/1/ex-history/ontology> 
   a owl:Ontology ;
-  owl:imports <http://loop3d.org/GSO/ontology/2020/1/lithology/particletype/ontology> ;
   owl:imports <http://loop3d.org/GSO/ontology/2020/1/loop3dmaster> ;
-  owl:versionIRI fau2: ;
+  rdfs:label "Example complex geologic histry"@en; 
+  rdfs:comment "Example history representation, based on geology shown in EasternRinconMountainsXSec.png figure in the Loop3D-GSO.TestInstances directory"@en; 
 .
-fau2:Basement_Cover_Shear_Event
+
+
+ehy:Basement_Cover_Shear_Event
   a gsog:Geologic_Event ;
+  rdfs:comment "F2.1 in figure"@en ;
   gsoc:hasConstituent [
       a gspr:Ductile_Flow ;
       rdfs:label "Shear along basement-cover contact"@en ;
     ] ;
-  gsoc:directTemporalLocation fau2:LaramideDuctileBasementInterval ;
-  gsoc:isPartOf fau2:Laramide_Ductile_deformation ;
+  gsoc:directTemporalLocation ehy:LaramideDuctileBasementInterval ;
+  gsoc:isPartOf ehy:Laramide_Ductile_deformation ;
   gsog:hasSetting [
       a gsen:Hinterland_Setting ;
     ] ;
@@ -40,26 +41,26 @@ fau2:Basement_Cover_Shear_Event
   rdfs:comment "Strain localization at the boundary between Proterozoic crytalline rock and overlying Paleozoic sediments, apparently coeval with intrusion of two-mica granitoid (Wilderness Suite)"@en ;
   rdfs:label "Late Laramide Shear along basement-cover contact"@en ;
 .
-fau2:Basin_Fill_Tilting_Event
+ehy:Basin_Fill_Tilting_Event
   a gsog:Geologic_Event ;
   gsoc:hasConstituent [
       a gspr:Faulting ;
       rdfs:label "Normal faults bounding fault blocks"@en ;
     ] ;
-  gsoc:directTemporalOccupies fau2:TertiaryExtensionBasinFillInterval ;
+  gsoc:directTemporalOccupies ehy:TertiaryExtensionBasinFillInterval ;
   gsog:hasSetting [
       a gsen:Extended_Terrane ;
     ] ;
-  rdfs:comment "Array of normal faults with tilting of blocks between faults, along with syn-deformation deposition in the basins formed. Faulting generally continued after sedimentation stopped."@en ;
+  rdfs:comment "Array of normal faults with tilting of blocks between faults, along with syn-deformation deposition in the basins formed. Faulting generally continued after sedimentation stopped. Manifest by fanning dips in the tan unit in the cross section figure."@en ;
   rdfs:label "Oligocene-Mid-Miocene faulting and tilting"@en ;
 .
-fau2:Detachment_Faulting
+ehy:Detachment_Faulting
   a gsog:Geologic_Event ;
-  gsoc:time_during fau2:Middle_Tertiary_Extension ;
-  rdfs:comment "Development of a large, low-angle normal fault that unroofs the Rincon Mountains, SE AZ " ;
-  rdfs:label "San Pedro Detachment Faulting  "@en ;
+  gsoc:time_during ehy:Middle_Tertiary_Extension ;
+  rdfs:comment "Development of a large, low-angle normal fault that unroofs the Rincon Mountains, SE AZ"@en ;
+  rdfs:label "San Pedro Detachment Faulting (F3)"@en ;
 .
-fau2:EarlyMioceneSedimentation
+ehy:EarlyMioceneSedimentation
   a gsog:Geologic_Event ;
   gsoc:hasConstituent [
       a gspr:Debris_Flow_Deposition ;
@@ -67,13 +68,14 @@ fau2:EarlyMioceneSedimentation
   gsoc:hasConstituent [
       a gspr:Mass_Wasting_Deposition ;
     ] ;
-  gsoc:directTemporalOccupies fau2:TertiaryExtensionBasinFillInterval ;
-  gsoc:time_finishes fau2:Detachment_Faulting ;
-  gsoc:time_starts fau2:Basin_Fill_Tilting_Event ;
+  gsoc:directTemporalOccupies ehy:TertiaryExtensionBasinFillInterval ;
+  gsoc:time_finishes ehy:Detachment_Faulting ;
+  gsoc:time_starts ehy:Basin_Fill_Tilting_Event ;
   rdfs:comment "Deposition of conglomerate, sandstone, with minor interbedded tuff and volcanic rocks in basins formed in hanging wall of detachment system"@en ;
+  rdfs:comment "Tan unit in the cross section figure"@en ;
   rdfs:label "Oligocene to Mid Miocene Sediment accumulation"@en ;
 .
-fau2:EarlyProterozoic1780-1690
+ehy:EarlyProterozoic1780-1690
     a gsoc:Time_Interval_Location ;
 	rdfs:label "Early Proterozoic 1780-1690 Ma"@en ;
 	gsoc:hasValue [
@@ -102,7 +104,7 @@ fau2:EarlyProterozoic1780-1690
       ] ;
 .
 
-fau2:LaramideDuctileBasementInterval
+ehy:LaramideDuctileBasementInterval
   a gsoc:Time_Interval_Location ;
   rdfs:label "Laramide 61-45 Ma"@en ;
   gsoc:hasValue [
@@ -136,22 +138,22 @@ fau2:LaramideDuctileBasementInterval
    ]
 .
 
-fau2:LaramideFaultingInterval
+ehy:LaramideFaultingInterval
   a gsog:Geologic_Time_Interval ;
   gsoc:Time_Interval_finishes gstime:Danian ;
   gsoc:Time_Interval_starts gstime:Campanian ;
   rdfs:label "Early Laramide"@en ;
 .
-fau2:Laramide_Ductile_deformation
+ehy:Laramide_Ductile_deformation
   a gsog:Geologic_Event ;
   gsoc:hasConstituent [
       a gspr:Ductile_Flow ;
       rdfs:label "Mid-crustal remobilization"@en ;
     ] ;
-  gsoc:directTemporalLocation fau2:LaramideDuctileBasementInterval ;
-  gsoc:time_interval_contains fau2:Basement_Cover_Shear_Event ;
-  gsoc:time_interval_contains fau2:Wilderness_Granite_Intrusion_Event ;
-  gsoc:time_younger_than fau2:Mesozoic_Sediment_Deposition ;
+  gsoc:directTemporalLocation ehy:LaramideDuctileBasementInterval ;
+  gsoc:time_interval_contains ehy:Basement_Cover_Shear_Event ;
+  gsoc:time_interval_contains ehy:Wilderness_Granite_Intrusion_Event ;
+  gsoc:time_younger_than ehy:Mesozoic_Sediment_Deposition ;
   gsog:hasSetting [
       a gsen:Hinterland_Setting ;
     ] ;
@@ -159,16 +161,17 @@ fau2:Laramide_Ductile_deformation
       a gsen:Middle_Continental_Crust_Setting ;
     ] ;
   rdfs:label "Late Laramide ductile flow in basement"@en ;
+  rdfs:comment "event manifested by fabrics in Proterozoic basement and overlying tectonites derived from Palezoic and Mesozoic sediments (gray and blue units, left side of cross section diagram."@en;
 .
-fau2:Laramide_Orogeny
+ehy:Laramide_Orogeny
   a gsog:Geologic_Event ;
-  gsoc:time_interval_contains fau2:Laramide_Ductile_deformation ;
-  gsoc:time_interval_contains fau2:Laramide_Thrust_Faulting ;
-  gsoc:time_interval_contains fau2:Wilderness_Granite_Intrusion_Event ;
-  rdfs:comment "Late Cretaceous to Early Tertiary Deformation event in western North America, generally considered to have occurred between 80 Ma and 40 Ma.  Manifestations vary in different parts of the western North American Cordillera, but eastward migration of magmatism and deformation, particularly in the western USA are characteristic. " ;
+  gsoc:time_interval_contains ehy:Laramide_Ductile_deformation ;
+  gsoc:time_interval_contains ehy:Laramide_Thrust_Faulting ;
+  gsoc:time_interval_contains ehy:Wilderness_Granite_Intrusion_Event ;
+  rdfs:comment "Late Cretaceous to Early Tertiary Deformation event in western North America, generally considered to have occurred between 80 Ma and 40 Ma.  Manifestations vary in different parts of the western North American Cordillera, but eastward migration of magmatism and deformation, particularly in the western USA are characteristic."@en;
   rdfs:label "Laramide Orogeny "@en ;
 .
-fau2:Laramide_Thrust_Faulting
+ehy:Laramide_Thrust_Faulting
   a gsog:Geologic_Event ;
   gsoc:directTemporalOccupies [
       a gsoc:Time_Interval ;
@@ -181,11 +184,11 @@ fau2:Laramide_Thrust_Faulting
   gsoc:hasSetting [
       a gsen:Upper_Continental_Crust_Setting ;
     ] ;
-  gsoc:time_started_by fau2:Laramide_Ductile_deformation ;
-  rdfs:comment "Development of thrust faults in upper crust"@en ;
-  rdfs:label "Laramide Thrust Faulting"@en ;
+  gsoc:time_started_by ehy:Laramide_Ductile_deformation ;
+  rdfs:comment "Development of thrust faults in upper crust. F1 in the cross section diagram"@en ;
+  rdfs:label "Laramide Thrust Faulting (F1)"@en ;
 .
-fau2:LateMioceneBasinFormation
+ehy:LateMioceneBasinFormation
   a gsog:Geologic_Event ;
   gsoc:hasConstituent [
       a gspr:Faulting ;
@@ -193,29 +196,29 @@ fau2:LateMioceneBasinFormation
   gsoc:hasConstituent [
       a gspr:Traction_Saltation_or_Suspension_Deposition ;
     ] ;
-  gsoc:time_finishes fau2:Middle_Tertiary_Extension ;
-  rdfs:comment "High angle faulting forming current physiographic mountain ranges and basins, with deposition of conglomerate, sandstone and mudstone in basins."@en ;
-  rdfs:label "Late Miocene Basin Formation"@en ;
+  gsoc:time_finishes ehy:Middle_Tertiary_Extension ;
+  rdfs:comment "High angle faulting forming current physiographic mountain ranges and basins, with deposition of conglomerate, sandstone and mudstone in basins. F4, F5 in the cross section diagram."@en ;
+  rdfs:label "Late Miocene Basin Formation (F5)"@en ;
 .
-fau2:MesozoicDepositionInterval
+ehy:MesozoicDepositionInterval
   a gsoc:Time_Interval ;
   gsoc:Time_Interval_finishes gstime:Campanian ;
   gsoc:Time_Interval_starts gstime:MiddleTriassic ;
   rdfs:label "Middle Triassic to Campanian"@en ;
 .
-fau2:MesozoicFaultingInterval
+ehy:MesozoicFaultingInterval
   a gsoc:Time_Interval ;
   gsoc:Time_Interval_finishes gstime:LateJurassic ;
   gsoc:Time_Interval_starts gstime:MiddleTriassic ;
   rdfs:label "Middle Triassic to LateJurassic"@en ;
 .
-fau2:Mesozoic_Basin_Formation
+ehy:Mesozoic_Basin_Formation
   a gsog:Geologic_Event ;
   gsoc:hasConstituent [
       a gspr:Faulting ;
       rdfs:label "Intra or back arc basin formation"@en ;
     ] ;
-  gsoc:directTemporalOccupies fau2:MesozoicFaultingInterval ;
+  gsoc:directTemporalOccupies ehy:MesozoicFaultingInterval ;
   gsog:hasSetting [
       a gsen:Back_Arc_Setting ;
     ] ;
@@ -224,14 +227,15 @@ fau2:Mesozoic_Basin_Formation
     ] ;
   rdfs:label "Mesozoic basin formation faulting"@en ;
 .
-fau2:Mesozoic_Sediment_Deposition
+ehy:Mesozoic_Sediment_Deposition
   a gsog:Geologic_Event ;
+  rdfs:comment "manifested by green stippled unit under thrust fault in the cross section diagram."@en ; 
   gsoc:hasConstituent [
       a gspr:Deposition ;
       rdfs:label "Intra and back arc sediment accumulation"@en ;
     ] ;
-  gsoc:directTemporalOccupies fau2:MesozoicDepositionInterval ;
-  gsoc:time_started_by fau2:Mesozoic_Basin_Formation ;
+  gsoc:directTemporalOccupies ehy:MesozoicDepositionInterval ;
+  gsoc:time_started_by ehy:Mesozoic_Basin_Formation ;
   gsog:hasSetting [
       a gsen:Alluvial_Fan_Setting ;
     ] ;
@@ -244,53 +248,53 @@ fau2:Mesozoic_Sediment_Deposition
     ] ;
   rdfs:label "Mesozoic basin sediment deposition"@en ;
 .
-fau2:Middle_Tertiary_Extension
+ehy:Middle_Tertiary_Extension
   a gsog:Geologic_Event ;
-  gsoc:time_interval_contains fau2:Basin_Fill_Tilting_Event ;
-  gsoc:time_interval_contains fau2:EarlyMioceneSedimentation ;
-  gsoc:time_younger_than fau2:Laramide_Thrust_Faulting ;
+  gsoc:time_interval_contains ehy:Basin_Fill_Tilting_Event ;
+  gsoc:time_interval_contains ehy:EarlyMioceneSedimentation ;
+  gsoc:time_younger_than ehy:Laramide_Thrust_Faulting ;
   rdfs:comment "Crustal extension between late Oligocene and Late Miocene"@en ;
   rdfs:label "Middle Tertiary Extension "@en ;
 .
-fau2:PaleozoicDepositionInterval
+ehy:PaleozoicDepositionInterval
   a gsoc:Time_Interval ;
   gsoc:Time_Interval_finishes gstime:Permian ;
   gsoc:Time_Interval_starts gstime:Cambrian ;
   rdfs:label "Paleozoic"@en ;
 .
-fau2:Paleozoic_Sediment_Deposition
+ehy:Paleozoic_Sediment_Deposition
   a gsog:Geologic_Event ;
   gsoc:hasConstituent [
       a gspr:Deposition ;
       rdfs:label "Passive margin sediment accumulation"@en ;
     ] ;
-  gsoc:directTemporalOccupies fau2:PaleozoicDepositionInterval ;
-  gsoc:time_older_than fau2:Mesozoic_Basin_Formation ;
+  gsoc:directTemporalOccupies ehy:PaleozoicDepositionInterval ;
+  gsoc:time_older_than ehy:Mesozoic_Basin_Formation ;
   gsog:hasSetting [
       a gsen:Passive_Continental_Margin_Setting ;
     ] ;
   rdfs:label "Paleozoic passive margin sediment deposition"@en ;
 .
-fau2:Proterozoic_igneous_intrusion
+ehy:Proterozoic_igneous_intrusion
   a gsog:Geologic_Event ;
   gsoc:hasConstituent [
       a gspr:Intrusion_Process ;
     ] ;
-  gsoc:directTemporalLocation fau2:EarlyProterozoic1780-1690 ;
-  gsoc:time_older_than fau2:Paleozoic_Sediment_Deposition ;
+  gsoc:directTemporalLocation ehy:EarlyProterozoic1780-1690 ;
+  gsoc:time_older_than ehy:Paleozoic_Sediment_Deposition ;
   gsog:hasSetting [
       a gsen:Earth_Interior_Setting, gsen:Middle_Continental_Crust_Setting ;
     ] ;
   rdfs:label "Early Proterozoic granitoid intrusion"@en ;
 .
-fau2:TertiaryExtensionBasinFillInterval
+ehy:TertiaryExtensionBasinFillInterval
   a gsoc:Time_Interval ;
   gsoc:Time_Interval_finishes gstime:Burdigalian ;
   gsoc:Time_Interval_starts gstime:Chattian ;
   rdfs:label "Mid-Tertiary extensional basin formation interval"@en ;
 .
 
-fau2:WildernessGraniteIntrusionInterval
+ehy:WildernessGraniteIntrusionInterval
   a gsoc:Time_Interval_Location ;
   rdfs:label "Laramide 55-42 Ma"@en ;
   gsoc:hasValue [
@@ -323,16 +327,17 @@ fau2:WildernessGraniteIntrusionInterval
     ] ;
    ]
 .
-fau2:Wilderness_Granite_Intrusion_Event
+ehy:Wilderness_Granite_Intrusion_Event
   a gsog:Geologic_Event ;
   gsoc:hasConstituent [
       a gspr:Intrusion_Process ;
       rdfs:label "granitoid intrusion"@en ;
     ] ;
-  gsoc:directTemporalLocation fau2:WildernessGraniteIntrusionInterval ;
-  gsoc:isPartOf fau2:Laramide_Ductile_deformation ;
+  gsoc:directTemporalLocation ehy:WildernessGraniteIntrusionInterval ;
+  gsoc:isPartOf ehy:Laramide_Ductile_deformation ;
   gsog:hasSetting [
       a gsen:Hinterland_Setting, gsen:Middle_Continental_Crust_Setting ;
     ] ;
   rdfs:label "Two-mica granite intrusion"@en ;
+  rdfs:comment "granitoid intrudes gray unit in lower left of cross section diagram, intrusions not shown in diagram"@en ;
 .
