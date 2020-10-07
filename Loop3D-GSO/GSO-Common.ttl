@@ -9,32 +9,64 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
+gsoc:Spatial_Region
+  rdfs:subClassOf [
+      a owl:Class ;
+      owl:complementOf [
+          a owl:Restriction ;
+          owl:onProperty gsoc:hasConstituent ;
+          owl:someValuesFrom gsoc:Amount_Of_Matter ;
+        ] ;
+    ] ;
+.
+gsoc:directSpatialOccupies
+  rdfs:domain [
+      a owl:Class ;
+      owl:unionOf (
+          gsoc:Spatial_Endurant
+          gsoc:Endurant_Feature
+        ) ;
+    ] ;
+.
+
+
 gsoc:Amount_Of_Matter
   a owl:Class ;
   rdfs:comment "The amount of matter type can be subdivided into [a volume] of (1) material (rock material), or (2) state of a material (solid, fluid), to enable designation of lumps of rock or lumps of fluid."@en ;
   rdfs:comment "The common trait of amounts of matter is that they are endurants with no unity (according to Gangemi et al. 2001 none of them is an essential whole). Amounts of matter - 'stuffs' referred to by mass nouns like 'gold', 'iron', 'wood', 'sand', 'meat', etc. - are mereologically invariant, in the sense that they change their identity when they change some parts."@en ;
   rdfs:label "Amount of Matter"@en ;
-  rdfs:subClassOf gsoc:Physical_Endurant ;
+  rdfs:subClassOf gsoc:Material_Endurant ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:allValuesFrom [
-          a owl:Class ;
-          owl:unionOf [
-              a rdf:List ;
-              rdf:first gsoc:Amount_Of_Matter ;
-              rdf:rest [
-                  a rdf:List ;
-                  rdf:first gsoc:Physical_Object ;
-                  rdf:rest () ;
-                ] ;
-            ] ;
-        ] ;
+      owl:allValuesFrom gsoc:Material_Endurant ;
       owl:onProperty gsoc:isConstituentOf ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty gsoc:hasQuality ;
       owl:someValuesFrom gsoc:State_Of_Matter ;
+    ] ;
+.
+gsoc:Aspatial_Endurant
+  a owl:Class ;
+  rdfs:comment "need SHACL rule for directSpatialOccupies NO thing"@en ;
+  rdfs:label "Aspatial Endurant "@en ;
+  rdfs:subClassOf gsoc:Endurant ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom gsoc:Spatial_Region ;
+      owl:onProperty gsoc:indirectSpatialOccupies ;
+    ] ;
+.
+gsoc:Aspatial_Feature
+  a owl:Class ;
+  rdfs:comment "" ;
+  rdfs:label "Aspatial Feature "@en ;
+  rdfs:subClassOf gsoc:Endurant_Feature ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasConstituent ;
+      owl:someValuesFrom gsoc:Aspatial_Endurant ;
     ] ;
 .
 gsoc:Calculation
@@ -50,7 +82,7 @@ gsoc:Colour
   rdfs:subClassOf gsoc:Quality ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:allValuesFrom gsoc:Physical_Endurant ;
+      owl:allValuesFrom gsoc:Material_Endurant ;
       owl:onProperty gsoc:isQualityOf ;
     ] ;
 .
@@ -59,6 +91,12 @@ gsoc:Complex_Feature
   rdfs:comment ""@en ;
   rdfs:label "Complex Feature "@en ;
   rdfs:subClassOf gsoc:Part_Feature ;
+.
+gsoc:Dependence
+  a owl:Class ;
+  rdfs:comment "" ;
+  rdfs:label "Dependence "@en ;
+  rdfs:subClassOf gsoc:Relator ;
 .
 gsoc:Determining_Event
   a owl:Class ;
@@ -92,7 +130,12 @@ gsoc:Dynamic_Feature
   a owl:Class ;
   rdfs:comment "A feature for which the host participates in some perdurant (wave) i.e. some aspect of the host changes over time"@en ;
   rdfs:label "Dynamic Feature"@en ;
-  rdfs:subClassOf gsoc:Feature ;
+  rdfs:subClassOf gsoc:Endurant_Feature ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hostedBy ;
+      owl:someValuesFrom gsoc:Perdurant ;
+    ] ;
 .
 gsoc:Element
   a owl:Class ;
@@ -117,8 +160,13 @@ gsoc:Endurant
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
+      owl:allValuesFrom gsoc:Feature ;
+      owl:onProperty gsoc:hosts ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom gsoc:Time_Region ;
       owl:onProperty gsoc:indirectTemporalOccupies ;
-      owl:someValuesFrom gsoc:Time_Region ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
@@ -138,16 +186,28 @@ gsoc:Endurant
     ] ;
   owl:disjointWith gsoc:Perdurant ;
 .
+gsoc:Endurant_Feature
+  a owl:Class ;
+  rdfs:comment "Feature constituted by a spatial or aspatial endurant."@en ;
+  rdfs:label "Endurant Feature "@en ;
+  rdfs:subClassOf gsoc:Endurant ;
+  rdfs:subClassOf gsoc:Feature ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasConstituent ;
+      owl:someValuesFrom gsoc:Endurant ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hostedBy ;
+      owl:someValuesFrom gsoc:Particular ;
+    ] ;
+.
 gsoc:Event
   a owl:Class ;
   rdfs:comment "A event is an occurence that involves a change in state of some system.  \"Something that occurs in a certain place during a particular interval of time\" (https://www.dictionary.com/browse/event);  \"an occurrence; something that happens\" (https://wikidiff.com/event/process).  Event is dependent on at least one process"@en ;
   rdfs:label "Event"@en ;
   rdfs:subClassOf gsoc:Perdurant ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom gsoc:Event ;
-      owl:onProperty gsoc:hasPart ;
-    ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty gsoc:directTemporalOccupies ;
@@ -160,18 +220,13 @@ gsoc:Event
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty gsoc:hasParticipant ;
-      owl:someValuesFrom gsoc:Endurant ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty gsoc:hasReference ;
+      owl:onProperty gsoc:hasPart ;
       owl:someValuesFrom gsoc:Event ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty gsoc:indirectSpatialLocation ;
-      owl:someValuesFrom gsoc:Spatial_Location ;
+      owl:onProperty gsoc:hasParticipant ;
+      owl:someValuesFrom gsoc:Endurant ;
     ] ;
   owl:disjointWith gsoc:Process ;
 .
@@ -179,15 +234,25 @@ gsoc:Feature
   a owl:Class ;
   rdfs:comment "A feature is an Endurant that is ontologically dependent on at least one Endurant that is its host,  and on a focal entity that is related by some essential relation. The identity of a feature is distinct from the identity of its host. Dependency on the host through is a hosting relation that holds between the Feature and at least one other distinct particular individual Endurant, the host. A feature is specifically dependent on its host. A feature can be either specifically or generically dependent on a  focal entity (e.g. knot in string). The focal is some spatially located individual Endurant that participates in the essential relation on which the feature ontologically depends. The focal entities are in sum spatially co-located with the feature at any time the feature exists."@en ;
   rdfs:label "Feature"@en ;
-  rdfs:subClassOf gsoc:Endurant ;
+  rdfs:subClassOf gsoc:Particular ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty gsoc:hostedBy ;
-      owl:someValuesFrom gsoc:Endurant ;
+      owl:allValuesFrom gsoc:Relator ;
+      owl:onProperty gsoc:emerges ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty gsoc:isColocatedWith ;
+      owl:onProperty gsoc:emerges ;
+      owl:someValuesFrom gsoc:Relator ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasConstituent ;
+      owl:someValuesFrom gsoc:Particular ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hostedBy ;
       owl:someValuesFrom gsoc:Particular ;
     ] ;
 .
@@ -201,22 +266,9 @@ gsoc:Fluid
   a owl:Class ;
   rdfs:subClassOf gsoc:State_Of_Matter ;
 .
-gsoc:Gap
-  a owl:Class ;
-  rdfs:comment """A physical void with a scattered (disconnected) host, consisting of the spaces between the scattered parts of the host. e.g. porosity in a rock.  G(x) <--> exists y [hosts-v(y,x) ^ not ICon (y)].  ICon (x): x is interior connected (continuous, not scattered)  {@en}
-"""@en ;
-  rdfs:label "Gap"@en ;
-  rdfs:subClassOf gsoc:Physical_Void ;
-.
 gsoc:Gas
   a owl:Class ;
   rdfs:subClassOf gsoc:Fluid ;
-.
-gsoc:Geologic_Setting
-  a owl:Class ;
-  rdfs:comment "A situation defined by geologic particulars.  Example subtypes are shown in the GSO UML model. A full subtype hierarchy is implemented in the OWL ontology by importing the geologic environment concepts from the IUGS CGI SKOS vocabulary, implemented in the gsen: namespace (http://loop3d.org/GSO/ontology/2020/1/eventenvironment) here."@en ;
-  rdfs:label "Geologic Setting"@en ;
-  rdfs:subClassOf gsoc:Situation ;
 .
 gsoc:Glass
   a owl:Class ;
@@ -235,11 +287,22 @@ gsoc:Hole
   rdfs:label "Hole"@en ;
   rdfs:subClassOf gsoc:Physical_Void ;
 .
+gsoc:Immaterial_Boundary
+  a owl:Class ;
+  rdfs:comment "" ;
+  rdfs:label "Immaterial Boundary "@en ;
+  rdfs:subClassOf gsoc:Low_Dimension_Feature ;
+.
 gsoc:Immaterial_Feature
   a owl:Class ;
   rdfs:comment "A dependent place feature that is immaterial.  E.g. voids, shadows and relational features such as traffic intersections (meeting of roads).   MPF(x) <--> DPF(x) ^ not mat(x)"@en ;
   rdfs:label "Immaterial_Feature "@en ;
   rdfs:subClassOf gsoc:Spatial_Feature ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasConstituent ;
+      owl:someValuesFrom gsoc:Spatial_Region ;
+    ] ;
 .
 gsoc:Inference
   a owl:Class ;
@@ -253,7 +316,7 @@ gsoc:Inherant
   rdfs:comment """Need SHACL rule that a Inherant.hasPart is not allowed. count Inherent.hasPart = 0
 Need SHACL rule that count Inherant.isPartOf = 0"""@en ;
   rdfs:label "Inherant"@en ;
-  rdfs:subClassOf gsoc:Endurant ;
+  rdfs:subClassOf gsoc:Aspatial_Endurant ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom owl:Nothing ;
@@ -266,20 +329,31 @@ Need SHACL rule that count Inherant.isPartOf = 0"""@en ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty gsoc:indirectSpatialLocation ;
-      owl:someValuesFrom gsoc:Spatial_Region ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
       owl:onProperty gsoc:inheresIn ;
       owl:someValuesFrom gsoc:Particular ;
     ] ;
+.
+gsoc:Inherence
+  a owl:Class ;
+  rdfs:comment "" ;
+  rdfs:label "Inherence "@en ;
+  rdfs:subClassOf gsoc:Relator ;
 .
 gsoc:Inherent_Feature
   a owl:Class ;
   rdfs:comment "based on quality inhering in (essential relation) host. The quality is the focal; Quality inheres in both the feature and the host. Morphologic feature -- focal  is a specific shape (river bend, fold)"@en ;
   rdfs:label "Inherent Feature "@en ;
-  rdfs:subClassOf gsoc:Feature ;
+  rdfs:subClassOf gsoc:Aspatial_Feature ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:emerges ;
+      owl:someValuesFrom gsoc:Inherence ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasConstituent ;
+      owl:someValuesFrom gsoc:Inherant ;
+    ] ;
 .
 gsoc:Integral_Feature
   a owl:Class ;
@@ -308,11 +382,82 @@ gsoc:Low_Dimension_Feature
   rdfs:label "Low Dimension Feature "@en ;
   rdfs:subClassOf gsoc:Immaterial_Feature ;
 .
-gsoc:Material_Spatial_Feature
+gsoc:Marine_Setting
+  a owl:Class ;
+  rdfs:comment "" ;
+  rdfs:label "Marine Setting "@en ;
+  rdfs:subClassOf gsoc:Setting ;
+.
+gsoc:Material_Boundary
+  a owl:Class ;
+  rdfs:comment "" ;
+  rdfs:label "Material Boundary "@en ;
+  rdfs:subClassOf gsoc:Material_Feature ;
+.
+gsoc:Material_Endurant
+  a owl:Class ;
+  rdfs:comment "An endurant having a direct physical (at least spatial) quality."@en ;
+  rdfs:label "Physical Endurant"@en ;
+  rdfs:subClassOf gsoc:Spatial_Endurant ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom gsoc:Material_Endurant ;
+      owl:onProperty gsoc:hasPart ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom gsoc:Material_Endurant ;
+      owl:onProperty gsoc:hasReference ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasConstituent ;
+      owl:someValuesFrom gsoc:Amount_Of_Matter ;
+    ] ;
+.
+gsoc:Material_Feature
   a owl:Class ;
   rdfs:comment "Material Spatial Feature (MSF): A dependent place feature that is material. - my house's backyard, frontyard.  focal is the spatial relations.  LOGIC:  MSF(x) <--> SF(x) ^ mat(x)"@en ;
   rdfs:label "Material Spatial Feature "@en ;
   rdfs:subClassOf gsoc:Spatial_Feature ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasConstituent ;
+      owl:someValuesFrom gsoc:Material_Endurant ;
+    ] ;
+.
+gsoc:Material_Object
+  a owl:Class ;
+  rdfs:comment "Need SHACL rule for isConstituentOf NOthing (Particular)"@en ;
+  rdfs:comment "The main characteristic of Material Objects is that they are endurants with unity. However, they have no common unity criterion, since different subtypes of objects may have different unity criteria. Differently from aggregates, (most) material objects change some of their parts while keeping their identity, they can have therefore temporary parts. Often material objects (indeed, all endurants) are ontologically independent from occurrences (discussed below). However, if we admit that every object has a life, it is hard to exclude a mutual specific constant dependence between the two. Nevertheless, we may still use the notion of dependence to (weakly) characterize objects as being not specifically constantly dependent on other objects."@en ;
+  rdfs:label "Physical Object"@en ;
+  rdfs:subClassOf gsoc:Material_Endurant ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom gsoc:Material_Object ;
+      owl:onProperty gsoc:isPartOf ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom owl:Nothing ;
+      owl:onProperty gsoc:isConstituentOf ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom [
+          a owl:Class ;
+          owl:unionOf [
+              a rdf:List ;
+              rdf:first gsoc:Feature ;
+              rdf:rest [
+                  a rdf:List ;
+                  rdf:first gsoc:Material_Object ;
+                  rdf:rest () ;
+                ] ;
+            ] ;
+        ] ;
+      owl:onProperty gsoc:hasPart ;
+    ] ;
 .
 gsoc:Maximum_Value_Calculation
   a owl:Class ;
@@ -374,11 +519,27 @@ gsoc:Morphologic_Feature
   rdfs:comment "Morphologic Feature (MF): A feature that is not a part of its host, but characterized by the form or structure of the host: Morphological features can have morphological properties e.g. orientation, thickness, fold profile, etc.  - smile or frown / lips.    - mountain / planet surface (protrusion in the planet surface).  - graben and horst / planet surface (protrusion or depression in the planet surface caused by faulting).  - geological fold: rock body with a certain shape.   MF(x) --> MDF (x) ^ exist y [hosts (y,x) ^ not partOf (x,y)]"@en ;
   rdfs:label "Morphologic Feature"@en ;
   rdfs:subClassOf gsoc:Inherent_Feature ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasConstituent ;
+      owl:someValuesFrom gsoc:Shape ;
+    ] ;
 .
 gsoc:Notional_Endurant
   a owl:Class ;
+  rdfs:comment "Notional endurants do not occupy space, neither directly nor indirectly. E.g. a digital file, a thought, a number.  Notional endurants may occupy time - exist in time - such as a digital file, which has start and end time. They may also not occupy time - exist outside of time - such as universals (e.g. numbers), which are atemporal."@en ;
   rdfs:label "Notional Endurant "@en ;
-  rdfs:subClassOf gsoc:Endurant ;
+  rdfs:subClassOf gsoc:Aspatial_Endurant ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom owl:Nothing ;
+      owl:onProperty gsoc:indirectSpatialLocation ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom owl:Nothing ;
+      owl:onProperty gsoc:indirectSpatialOccupies ;
+    ] ;
 .
 gsoc:Numeric_Value
   a owl:Class ;
@@ -408,11 +569,68 @@ gsoc:Observation_Process
   rdfs:label "Measurement Activity"@en ;
   rdfs:subClassOf gsoc:Process ;
 .
+gsoc:Occurrence_Boundary
+  a owl:Class ;
+  rdfs:comment "" ;
+  rdfs:label "Occurrence Boundary "@en ;
+  rdfs:subClassOf gsoc:Occurrence_Feature ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hostedBy ;
+      owl:someValuesFrom [
+          a owl:Class ;
+          owl:unionOf (
+              gsoc:Process
+              gsoc:Event
+            ) ;
+        ] ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:isPartOf ;
+      owl:someValuesFrom [
+          a owl:Class ;
+          owl:unionOf (
+              gsoc:Process
+              gsoc:Event
+            ) ;
+        ] ;
+    ] ;
+.
+gsoc:Occurrence_Feature
+  a owl:Class ;
+  rdfs:comment "" ;
+  rdfs:label "Occurrence Feature "@en ;
+  rdfs:subClassOf gsoc:Perdurant_Feature ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hostedBy ;
+      owl:someValuesFrom [
+          a owl:Class ;
+          owl:unionOf (
+              gsoc:Process
+              gsoc:Event
+            ) ;
+        ] ;
+    ] ;
+.
 gsoc:Part_Feature
   a owl:Class ;
   rdfs:comment "proper part of host is focus (forehead, mountain top, boundary[as a material entity]) part of relation is essential to feature but not to host."@en ;
   rdfs:label "Part Feature "@en ;
   rdfs:subClassOf gsoc:Feature ;
+.
+gsoc:Parthood
+  a owl:Class ;
+  rdfs:comment "" ;
+  rdfs:label "Parthood "@en ;
+  rdfs:subClassOf gsoc:Relator ;
+.
+gsoc:Participation
+  a owl:Class ;
+  rdfs:comment "" ;
+  rdfs:label "Participation "@en ;
+  rdfs:subClassOf gsoc:Relator ;
 .
 gsoc:Particular
   a owl:Class ;
@@ -425,8 +643,36 @@ gsoc:Particular
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
+      owl:allValuesFrom gsoc:Particular ;
+      owl:onProperty gsoc:determinedBy ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom gsoc:Particular ;
+      owl:onProperty gsoc:hasReference ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
       owl:allValuesFrom gsoc:Situation ;
       owl:onProperty gsoc:hasSetting ;
+    ] ;
+.
+gsoc:Pause
+  a owl:Class ;
+  rdfs:comment "Pause within an event or process, e.g. Intermission during hockey game or theater performance (host = playing process, constituent = time interval)"@en ;
+  rdfs:label "Pause "@en ;
+  rdfs:subClassOf gsoc:Temporal_Void ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onClass [
+          a owl:Class ;
+          owl:unionOf (
+              gsoc:Process
+              gsoc:Event
+            ) ;
+        ] ;
+      owl:onProperty gsoc:hostedBy ;
+      owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
     ] ;
 .
 gsoc:Perdurant
@@ -450,6 +696,18 @@ gsoc:Perdurant
       owl:someValuesFrom gsoc:Time_Region ;
     ] ;
 .
+gsoc:Perdurant_Feature
+  a owl:Class ;
+  rdfs:comment "" ;
+  rdfs:label "Perdurant Feature "@en ;
+  rdfs:subClassOf gsoc:Feature ;
+  rdfs:subClassOf gsoc:Perdurant ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasConstituent ;
+      owl:someValuesFrom gsoc:Perdurant ;
+    ] ;
+.
 gsoc:Physical_Boundary
   a owl:Class ;
   rdfs:comment """Physical Boundary (PB):
@@ -459,57 +717,17 @@ PB(x) <--> RPF(x) ^ exists y,z [hosts(y,x) ^ partOf (x,y) ^ touches (x, compleme
   rdfs:label "Physical Boundary"@en ;
   rdfs:subClassOf gsoc:Part_Feature ;
 .
-gsoc:Physical_Endurant
+gsoc:Physical_Gap
   a owl:Class ;
-  rdfs:comment "An endurant having a direct physical (at least spatial) quality."@en ;
-  rdfs:label "Physical Endurant"@en ;
-  rdfs:subClassOf gsoc:Endurant ;
+  rdfs:comment """A physical void with a scattered (disconnected) host, consisting of the spaces between the scattered parts of the host. e.g. porosity in a rock.  G(x) <--> exists y [hosts-v(y,x) ^ not ICon (y)].  ICon (x): x is interior connected (continuous, not scattered)  {@en}
+"""@en ;
+  rdfs:label "Gap"@en ;
+  rdfs:subClassOf gsoc:Physical_Void ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:allValuesFrom gsoc:Physical_Endurant ;
-      owl:onProperty gsoc:hasPart ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom gsoc:Physical_Endurant ;
-      owl:onProperty gsoc:hasReference ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty gsoc:directSpatialLocation ;
-      owl:someValuesFrom gsoc:Spatial_Region ;
-    ] ;
-.
-gsoc:Physical_Object
-  a owl:Class ;
-  rdfs:comment "The main characteristic of physical objects is that they are endurants with unity. However, they have no common unity criterion, since different subtypes of objects may have different unity criteria. Differently from aggregates, (most) physical objects change some of their parts while keeping their identity, they can have therefore temporary parts. Often physical objects (indeed, all endurants) are ontologically independent from occurrences (discussed below). However, if we admit that every object has a life, it is hard to exclude a mutual specific constant dependence between the two. Nevertheless, we may still use the notion of dependence to (weakly) characterize objects as being not specifically constantly dependent on other objects."@en ;
-  rdfs:label "Physical Object"@en ;
-  rdfs:subClassOf gsoc:Physical_Endurant ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom gsoc:Physical_Object ;
-      owl:onProperty gsoc:isPartOf ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom [
-          a owl:Class ;
-          owl:unionOf [
-              a rdf:List ;
-              rdf:first gsoc:Feature ;
-              rdf:rest [
-                  a rdf:List ;
-                  rdf:first gsoc:Physical_Object ;
-                  rdf:rest () ;
-                ] ;
-            ] ;
-        ] ;
-      owl:onProperty gsoc:hasPart ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty gsoc:hasConstituent ;
-      owl:someValuesFrom gsoc:Amount_Of_Matter ;
+      owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+      owl:onClass gsoc:Material_Endurant ;
+      owl:onProperty gsoc:hostedBy ;
     ] ;
 .
 gsoc:Physical_Void
@@ -517,6 +735,11 @@ gsoc:Physical_Void
   rdfs:comment "A chunk of physical space adjacent to some material feature and surrounded by it. (holes,valleys, canyon, cave, gap, space between fingers). host must be self connected.  An empty physical space in 3D. Distinct from abstract mathematical spaces, which include spaces made from various reference frames, including coordinate systems imposed on the earth (these are abstract imposed on real space). V(x) <--> IPF(x) ^ exists y [hosts-v (y,x)]"@en ;
   rdfs:label "Physical Void"@en ;
   rdfs:subClassOf gsoc:Place_Feature ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hostedBy ;
+      owl:someValuesFrom gsoc:Material_Endurant ;
+    ] ;
 .
 gsoc:Place_Feature
   a owl:Class ;
@@ -552,11 +775,6 @@ gsoc:Process
       a owl:Restriction ;
       owl:onProperty gsoc:hasParticipant ;
       owl:someValuesFrom gsoc:Endurant ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty gsoc:hasReference ;
-      owl:someValuesFrom gsoc:Process ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
@@ -630,6 +848,18 @@ gsoc:Reference_System
   rdfs:label "Reference System "@en ;
   rdfs:subClassOf gsoc:Notional_Endurant ;
 .
+gsoc:Relator
+  a owl:Class ;
+  rdfs:comment "" ;
+  rdfs:label "Relator "@en ;
+  rdfs:subClassOf gsoc:Inherant ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+      owl:onClass gsoc:Particular ;
+      owl:onProperty gsoc:inheresIn ;
+    ] ;
+.
 gsoc:Role
   a owl:Class ;
   rdfs:comment "subclasses of role restrict the kinds of particular that can be RolePlayer and Role Object. Note that hasRolePlayer is subproperty of inheresIn."@en ;
@@ -644,6 +874,17 @@ gsoc:Role
       a owl:Restriction ;
       owl:onProperty gsoc:hasRolePlayer ;
       owl:someValuesFrom gsoc:Particular ;
+    ] ;
+.
+gsoc:Setting
+  a owl:Class ;
+  rdfs:comment "A situation defined by  particulars.  Example subtypes are shown in the GSO UML model. A full subtype hierarchy is implemented in the OWL ontology by importing the geologic environment concepts from the IUGS CGI SKOS vocabulary, implemented in the gsen: namespace (http://loop3d.org/GSO/ontology/2020/1/eventenvironment) here."@en ;
+  rdfs:label "Geologic Setting"@en ;
+  rdfs:subClassOf gsoc:Situation ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom gsoc:Particular ;
+      owl:onProperty gsoc:isSettingFor ;
     ] ;
 .
 gsoc:Shape
@@ -670,23 +911,13 @@ gsoc:Simple_Uncertainty
 .
 gsoc:Situation
   a owl:Class ;
-  rdfs:comment "distinguishing characteristics are necessary but not reliably sufficien" ;
+  rdfs:comment "distinguishing characteristics are necessary but not reliably sufficient"@en ;
   rdfs:label "Situation"@en ;
-  rdfs:subClassOf gsoc:Endurant ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom gsoc:Particular ;
-      owl:onProperty gsoc:isSettingFor ;
-    ] ;
+  rdfs:subClassOf gsoc:Particular ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty gsoc:hasPart ;
-      owl:someValuesFrom gsoc:Endurant ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty gsoc:indirectSpatialLocation ;
-      owl:someValuesFrom gsoc:Spatial_Region ;
+      owl:someValuesFrom gsoc:Particular ;
     ] ;
 .
 gsoc:Solid
@@ -699,17 +930,33 @@ gsoc:Sparse_Distribution
   rdfs:label "sparse distribution" ;
   rdfs:subClassOf gsoc:Distribution ;
 .
+gsoc:Spatial_Endurant
+  a owl:Class ;
+  rdfs:comment "" ;
+  rdfs:label "Spatial Endurant "@en ;
+  rdfs:subClassOf gsoc:Endurant ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:directSpatialOccupies ;
+      owl:someValuesFrom gsoc:Spatial_Region ;
+    ] ;
+.
 gsoc:Spatial_Feature
   a owl:Class ;
   rdfs:comment "A feature for which the host is involved in some essential spatial relation,e g. adjacency, containment, intersection, contact."@en ;
   rdfs:label "Spatial Feature "@en ;
-  rdfs:subClassOf gsoc:Feature ;
+  rdfs:subClassOf gsoc:Endurant_Feature ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasConstituent ;
+      owl:someValuesFrom gsoc:Spatial_Endurant ;
+    ] ;
 .
 gsoc:Spatial_Location
   a owl:Class ;
   rdfs:comment "A physical property that specifies the position of an entity relative to some spatial reference system. Details of how locations should be specified for GSO remain to be resolved. For now use WKT strings (ogc:WKTLiteral, https://www.w3.org/2011/02/GeoSPARQL.pdf)  as data values."@en ;
   rdfs:label "Spatial Location"@en ;
-  rdfs:subClassOf gsoc:Quality ;
+  rdfs:subClassOf gsoc:Spatial_Quality ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty gsoc:hasDataValue ;
@@ -717,36 +964,32 @@ gsoc:Spatial_Location
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
+      owl:onProperty gsoc:hasReferenceSystem ;
+      owl:someValuesFrom gsoc:Spatial_Reference_System ;
+    ] ;
+.
+gsoc:Spatial_Quality
+  a owl:Class ;
+  rdfs:comment "Quantifiers for dimensions of spatial regions or for location of spatial region in some reference frame."@en ;
+  rdfs:label "Spatial Quality "@en ;
+  rdfs:subClassOf gsoc:Quality ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
       owl:onProperty gsoc:isQualityOf ;
       owl:someValuesFrom gsoc:Spatial_Region ;
     ] ;
 .
+gsoc:Spatial_Reference_System
+  a owl:Class ;
+  rdfs:comment "" ;
+  rdfs:label "Spatial Reference System "@en ;
+  rdfs:subClassOf gsoc:Reference_System ;
+.
 gsoc:Spatial_Region
   a owl:Class ;
-  rdfs:comment "Need SHACL rule for isSpatialLocationFor NOT 'Spatial Region'"@en ;
+  rdfs:comment "Need SHACL rule for hasConstituent only NO Amount_Of_Matter"@en ;
   rdfs:label "Spatial Region"@en ;
-  rdfs:subClassOf gsoc:Endurant ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom gsoc:Spatial_Region ;
-      owl:onProperty gsoc:hasReference ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom [
-          a owl:Class ;
-          owl:unionOf [
-              a rdf:List ;
-              rdf:first gsoc:Physical_Void ;
-              rdf:rest [
-                  a rdf:List ;
-                  rdf:first gsoc:Spatial_Region ;
-                  rdf:rest () ;
-                ] ;
-            ] ;
-        ] ;
-      owl:onProperty gsoc:hasPart ;
-    ] ;
+  rdfs:subClassOf gsoc:Spatial_Endurant ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty gsoc:hasQuality ;
@@ -785,20 +1028,44 @@ gsoc:Strong_Intensity
   rdfs:label "strong development" ;
   rdfs:subClassOf gsoc:Intensity ;
 .
+gsoc:Temporal_Boundary
+  a owl:Class ;
+  rdfs:comment "examples: start of Jan.  host = Jan; constituent = start datetime of every Jan"@en ;
+  rdfs:label "Temporal Boundary "@en ;
+  rdfs:subClassOf gsoc:Time_Instant_Feature ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hostedBy ;
+      owl:someValuesFrom gsoc:Time_Interval_Feature ;
+    ] ;
+.
 gsoc:Temporal_Feature
   a owl:Class ;
   rdfs:comment "A feature for which either the constituent  is a Perdurant"@en ;
   rdfs:label "Temporal Feature "@en ;
-  rdfs:subClassOf gsoc:Perdurant ;
+  rdfs:subClassOf gsoc:Perdurant_Feature ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty gsoc:hasConstituent ;
-      owl:someValuesFrom gsoc:Perdurant ;
+      owl:someValuesFrom gsoc:Time_Region ;
     ] ;
+.
+gsoc:Temporal_Gap
+  a owl:Class ;
+  rdfs:comment "Gap in time between perdurants, E.g. offseason = time between end of sports season and beginning of next; hosts = sports seasons (2020 and 2021 NHL campaign events), constituent = time interval; relation = temporally disjoint"@en ;
+  rdfs:label "Temporal Gap "@en ;
+  rdfs:subClassOf gsoc:Temporal_Void ;
   rdfs:subClassOf [
       a owl:Restriction ;
+      owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+      owl:onClass [
+          a owl:Class ;
+          owl:unionOf (
+              gsoc:Process
+              gsoc:Event
+            ) ;
+        ] ;
       owl:onProperty gsoc:hostedBy ;
-      owl:someValuesFrom gsoc:Particular ;
     ] ;
 .
 gsoc:Temporal_Location
@@ -834,11 +1101,23 @@ gsoc:Temporal_Range
       owl:onProperty gsoc:hasStartValue ;
     ] ;
 .
+gsoc:Temporal_Reference_System
+  a owl:Class ;
+  rdfs:comment "" ;
+  rdfs:label "Temporal Reference System "@en ;
+  rdfs:subClassOf gsoc:Reference_System ;
+.
 gsoc:Temporal_Value
   a owl:Class ;
   rdfs:comment "Quality that specifies a temporal location"@en ;
   rdfs:label "Temporal Value "@en ;
   rdfs:subClassOf gsoc:Measured_Value ;
+.
+gsoc:Temporal_Void
+  a owl:Class ;
+  rdfs:comment "" ;
+  rdfs:label "Temporal Void "@en ;
+  rdfs:subClassOf gsoc:Time_Interval_Feature ;
 .
 gsoc:Time_Date_Value
   a owl:Class ;
@@ -869,6 +1148,17 @@ gsoc:Time_Instant
       a owl:Restriction ;
       owl:onProperty gsoc:hasQuality ;
       owl:someValuesFrom gsoc:Time_Instant_Location ;
+    ] ;
+.
+gsoc:Time_Instant_Feature
+  a owl:Class ;
+  rdfs:comment "" ;
+  rdfs:label "Time Instant Feature "@en ;
+  rdfs:subClassOf gsoc:Temporal_Feature ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasConstituent ;
+      owl:someValuesFrom gsoc:Time_Instant ;
     ] ;
 .
 gsoc:Time_Instant_Location
@@ -915,6 +1205,17 @@ gsoc:Time_Interval
       owl:someValuesFrom gsoc:Time_Interval_Location ;
     ] ;
 .
+gsoc:Time_Interval_Feature
+  a owl:Class ;
+  rdfs:comment "" ;
+  rdfs:label "Time Interval Feature "@en ;
+  rdfs:subClassOf gsoc:Temporal_Feature ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasConstituent ;
+      owl:someValuesFrom gsoc:Time_Interval ;
+    ] ;
+.
 gsoc:Time_Interval_Location
   a owl:Class ;
   rdfs:comment "quality the specifies the temporal coordinates of the beginning and end of time interval in some temporal reference system"@en ;
@@ -951,11 +1252,6 @@ gsoc:Time_Region
       a owl:Restriction ;
       owl:onProperty gsoc:hasQuality ;
       owl:someValuesFrom gsoc:Temporal_Quality ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty gsoc:hasReference ;
-      owl:someValuesFrom gsoc:Particular ;
     ] ;
 .
 gsoc:Ubiquitous_Distribution
@@ -1035,6 +1331,12 @@ gsoc:crosses
   rdfs:label "Spatially crosses"@en ;
   rdfs:subPropertyOf gsoc:isSpatiallyRelatedTo ;
 .
+gsoc:dependsOn
+  a owl:ObjectProperty ;
+  rdfs:comment "" ;
+  rdfs:label "Depends on"@en ;
+  rdfs:subPropertyOf gsoc:isFundamentallyRelatedTo ;
+.
 gsoc:determinedBy
   a owl:ObjectProperty ;
   rdfs:comment "Link from a particular to an event that defines that particular. Recommented practice is for target to be a class inherioting from Dolce Utralight (dul:) Event (gsoq:Event), e.g. sosa:Observation, or prov:Activity"@en ;
@@ -1047,14 +1349,6 @@ gsoc:determines
   rdfs:comment "Property that links a specific value of a fuzzy concept to the generic class representing that concept. E.g. a specific Geologic_Time_Interval (Jusassic in the 2017 ICS time scale) to the generic class representing all opinions about that interval. Source and target must be in the transitive closure of the same root class."@en ;
   rdfs:label "determines"@en ;
   rdfs:subPropertyOf gsoc:isFundamentallyRelatedTo ;
-.
-gsoc:directSpatialLocation
-  a owl:InverseFunctionalProperty ;
-  a owl:ObjectProperty ;
-  rdfs:comment "The location of the space occupied by an endurant."@en ;
-  rdfs:label "direct spatial location"@en ;
-  rdfs:range gsoc:Spatial_Location ;
-  rdfs:subPropertyOf gsoc:isSpatiallyRelatedTo ;
 .
 gsoc:directSpatialOccupies
   a owl:InverseFunctionalProperty ;
@@ -1077,10 +1371,22 @@ gsoc:directTemporalOccupies
   rdfs:range gsoc:Time_Region ;
   rdfs:subPropertyOf gsoc:isTemporallyRelatedTo ;
 .
+gsoc:emerges
+  a rdf:Property ;
+  rdfs:comment "" ;
+  rdfs:label "emerges "@en ;
+.
+gsoc:gDependsOn
+  a owl:ObjectProperty ;
+  rdfs:comment "generic  dependence" ;
+  rdfs:label "g depends on "@en ;
+.
 gsoc:hasConstituent
   a owl:ObjectProperty ;
   a owl:TransitiveProperty ;
+  rdfs:comment "anchoring entity for a Feature"@en ;
   rdfs:comment "leave domain and range unconstrained; would need to add more of the high level ontologic entities (Physical Endurant, Perdurant) to specify here."@en ;
+  rdfs:label "constituted by "@en ;
   rdfs:label "hasConstituent"@en ;
   rdfs:subPropertyOf gsoc:isFundamentallyRelatedTo ;
   owl:inverseOf gsoc:isConstituentOf ;
@@ -1097,6 +1403,13 @@ gsoc:hasDataValue
           xsd:string
         ) ;
     ] ;
+.
+gsoc:hasDependent
+  a owl:ObjectProperty ;
+  rdfs:comment "" ;
+  rdfs:label "has dependent"@en ;
+  rdfs:subPropertyOf gsoc:isFundamentallyRelatedTo ;
+  owl:inverseOf gsoc:dependsOn ;
 .
 gsoc:hasEnd
   a owl:ObjectProperty ;
@@ -1152,7 +1465,7 @@ gsoc:hasParticipant
 .
 gsoc:hasPrecursor
   a owl:ObjectProperty ;
-  rdfs:comment "association from an endurant to some other endurant from which it was derived. Relates metamorphic rock to protolith, fossil to living organism." ;
+  rdfs:comment "association from an endurant to some other endurant from which it was derived. Relates metamorphic rock to protolith, fossil to living organism."@en ;
   rdfs:label "precursor "@en ;
   rdfs:subPropertyOf gsoc:isFundamentallyRelatedTo ;
 .
@@ -1196,7 +1509,7 @@ gsoc:hasSetting
   a owl:ObjectProperty ;
   rdfs:comment ""@en ;
   rdfs:label "has Setting"@en ;
-  rdfs:range gsoc:Geologic_Setting ;
+  rdfs:range gsoc:Setting ;
   rdfs:subPropertyOf gsoc:isFundamentallyRelatedTo ;
   owl:inverseOf gsoc:isSettingFor ;
 .
@@ -1291,7 +1604,6 @@ gsoc:inheresIn
 gsoc:isColocatedWith
   a owl:ObjectProperty ;
   rdfs:comment "links material spatial feature to Endurant or Perdurant or Physical Property that shares the same location"@en ;
-  rdfs:domain gsoc:Feature ;
   rdfs:label "is colocated with"@en ;
   rdfs:range [
       a owl:Class ;
@@ -1419,6 +1731,12 @@ gsoc:partialEnvelope
   rdfs:comment "Proposed for 'wraps around'" ;
   rdfs:label "partial envelope" ;
   rdfs:subPropertyOf gsoc:isSpatiallyRelatedTo ;
+.
+gsoc:sDependsOn
+  a owl:ObjectProperty ;
+  rdfs:comment "specific dependence" ;
+  rdfs:label "s depends on "@en ;
+  rdfs:subPropertyOf gsoc:dependsOn ;
 .
 gsoc:satisfies
   rdfs:comment "" ;
