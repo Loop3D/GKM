@@ -10,14 +10,10 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-gsoq:Diameter
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty gsoc:hasValue ;
-      owl:someValuesFrom gsoc:Numeric_Value ;
-    ] ;
-.
 
+gsoq:Thickness
+  rdfs:subClassOf gsoc:Spatial_Quality ;
+.
 
 gsoq:Azimuth
   a owl:Class ;
@@ -45,7 +41,12 @@ gsoq:Diameter
   a owl:Class ;
   rdfs:comment "The (approximate) average length of line segments that pass through the center of an object and whose endpoints lie on the outside boundary of the object. Use to characterize the size of a broadly spheroidal object like a pluton or a rock sample."@en ;
   rdfs:label "Diameter "@en ;
-  rdfs:subClassOf gsoq:Size ;
+  rdfs:subClassOf gsoc:Spatial_Quality ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasValue ;
+      owl:someValuesFrom gsoc:Numeric_Value ;
+    ] ;
 .
 gsoq:Dip
   a owl:Class ;
@@ -231,12 +232,7 @@ gsoq:Rare_Constituent
   rdfs:label "Rare constituent "@en ;
   rdfs:subClassOf gsoq:Present ;
 .
-gsoq:Size
-  a owl:Class ;
-  rdfs:comment "Generic quality that specifies the size of an object or collection of objects; values may be quantitative or qualitative"@en ;
-  rdfs:label "Size"@en ;
-  rdfs:subClassOf gsoc:Quality ;
-.
+
 gsoq:Subordinate_Constituent
   a owl:Class ;
   rdfs:comment "Constituent is less abundant than dominant constituent, but present in sufficient abundance to be an obvious constituent"@en ;
@@ -248,7 +244,6 @@ gsoq:Thickness
   a owl:Class ;
   rdfs:comment "Quality of a tabular or sheet like body that is its linear dimension normal to its long dimensions. Could be quantified numerically or categorically (e.g. thin, thick, very thick)"@en ;
   rdfs:label "Thickness"@en ;
-  rdfs:subClassOf gsoq:Size ;
 .
 gsoq:Unknown_Facing
   a owl:Class ;

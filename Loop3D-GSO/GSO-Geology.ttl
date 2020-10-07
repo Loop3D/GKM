@@ -261,7 +261,7 @@ Contact(x) <--> exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RB
   a owl:Class ;
   rdfs:comment "a broadly planar zone of shear displacement within which deformation has occurred without loss of material continuity"@en ;
   rdfs:label "Ductile Shear Zone"@en ;
-  rdfs:subClassOf gsoc:Material_Spatial_Feature ;
+  rdfs:subClassOf gsoc:Material_Feature ;
   rdfs:subClassOf :Geologic_Structure ;
   rdfs:subClassOf [
       a owl:Restriction ;
@@ -492,7 +492,7 @@ Contact(x) <--> exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RB
   a owl:Class ;
   rdfs:comment "A material spatial feature that contains one or more fault surfaces as well as deformed rocks related to the faults located between and adjacent to the fault traces"@en ;
   rdfs:label "Fault Zone "@en ;
-  rdfs:subClassOf gsoc:Material_Spatial_Feature ;
+  rdfs:subClassOf gsoc:Material_Feature ;
 .
 :Fold
   a owl:Class ;
@@ -590,7 +590,7 @@ Contact(x) <--> exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RB
   a owl:Class ;
   rdfs:comment "A time instant that represents an event recorded by a reference physical statigraphic point. Revision: (2020-09-30) A temporal feature that is the boundary between two Geologic time Intervals, anchored by some stratigraphic point in the physical geologic record."@en ;
   rdfs:label "Geochronologic Boundary"@en ;
-  rdfs:subClassOf gsoc:Temporal_Feature ;
+  rdfs:subClassOf gsoc:Temporal_Boundary ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty gsoc:directTemporalOccupies ;
@@ -629,7 +629,7 @@ Contact(x) <--> exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RB
   a owl:Class ;
   rdfs:comment "A pattern in a rock body (foliation, fold), or a feature occurring between rock bodies (contact, fracture).  GeoSciML 3.2: A configuration of matter in the Earth based on describable inhomogeneity, pattern, or fracture in a Rock Body. The identity of a GeologicStructure is independent of the material that is the substrate for the structure.  Includes sedimentary structures."@en ;
   rdfs:label "Geologic Structure"@en ;
-  rdfs:subClassOf gsoc:Feature ;
+  rdfs:subClassOf gsoc:Endurant_Feature ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom :Geologic_Structure ;
@@ -747,7 +747,7 @@ Probably should specify a Temporal Reference System used to assign coordinate va
 :Gradational_Contact_Zone
   a owl:Class ;
   rdfs:label "Gradational Contact Zone"@en ;
-  rdfs:subClassOf gsoc:Material_Spatial_Feature ;
+  rdfs:subClassOf gsoc:Material_Feature ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty gsoc:hasQuality ;
@@ -932,7 +932,7 @@ Probably should specify a Temporal Reference System used to assign coordinate va
           a owl:Class ;
           owl:unionOf (
               :Granular_Material
-              :Rock_Material
+              :Rock_Body
             ) ;
         ] ;
       owl:onProperty gsoc:isConstituentOf ;
@@ -1033,7 +1033,7 @@ Probably should specify a Temporal Reference System used to assign coordinate va
   a owl:Class ;
   rdfs:comment "An endurant in which some Rock Material inheres, either as an 'amount of matter' (disembodied matter), or as a rock object"@en ;
   rdfs:label "Rock Body"@en ;
-  rdfs:subClassOf gsoc:Physical_Endurant ;
+  rdfs:subClassOf gsoc:Material_Endurant ;
 .
 :Rock_Body_Bottom
   a owl:Class ;
@@ -1101,13 +1101,19 @@ RBT (x) <--> RBD (x) ^ exists z forall y [(isPartOf (y,z) ^ hasHost (z,x)) -> (b
   rdfs:subClassOf :Rock_Body ;
   rdfs:subClassOf [
       a owl:Restriction ;
+      owl:allValuesFrom gsoc:Material_Object ;
+      owl:onProperty gsoc:isConstituentOf ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
       owl:allValuesFrom :Rock_Material ;
       owl:onProperty gsoc:hasPart ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:allValuesFrom :Rock_Object ;
-      owl:onProperty gsoc:isConstituentOf ;
+      owl:maxQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+      owl:onClass :Rock_Body_Role ;
+      owl:onProperty gsoc:hasRole ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
@@ -1127,7 +1133,7 @@ RBT (x) <--> RBD (x) ^ exists z forall y [(isPartOf (y,z) ^ hasHost (z,x)) -> (b
   a owl:Class ;
   rdfs:comment "A part of the Earth that can be identified in some way and that has a Unity property."@en ;
   rdfs:label "Rock Object"@en ;
-  rdfs:subClassOf gsoc:Physical_Object ;
+  rdfs:subClassOf gsoc:Material_Object ;
   rdfs:subClassOf :Rock_Body ;
   rdfs:subClassOf [
       a owl:Restriction ;
@@ -1143,6 +1149,12 @@ RBT (x) <--> RBD (x) ^ exists z forall y [(isPartOf (y,z) ^ hasHost (z,x)) -> (b
       a owl:Restriction ;
       owl:allValuesFrom :Rock_Object ;
       owl:onProperty gsoc:isPartOf ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+      owl:onClass :Amount_Of_Matter_Role ;
+      owl:onProperty gsoc:hasRole ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
@@ -1227,7 +1239,7 @@ RBT (x) <--> RBD (x) ^ exists z forall y [(isPartOf (y,z) ^ hasHost (z,x)) -> (b
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty gsoc:isReferenceFor ;
-      owl:someValuesFrom gsoc:Physical_Endurant ;
+      owl:someValuesFrom gsoc:Material_Endurant ;
     ] ;
 .
 :Sub-Period
