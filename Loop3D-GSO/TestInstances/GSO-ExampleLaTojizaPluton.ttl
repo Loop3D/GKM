@@ -1,4 +1,4 @@
- # baseURI: http://loop3d.org/GSO/ontology/2020/1/ex-plutontojiza/ontology
+# baseURI: http://loop3d.org/GSO/ontology/2020/1/ex-plutontojiza/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/loop3dmaster
 
 @prefix : <http://loop3d.org/GSO/ontology/2020/1/ex-plutontojiza#> .
@@ -6,9 +6,9 @@
 @prefix gscn: <http://loop3d.org/GSO/ontology/2020/1/geologicstructure/contact/> .
 @prefix gsel: <http://loop3d.org/GSO/ontology/2020/1/element/> .
 @prefix gsen: <http://loop3d.org/GSO/ontology/2020/1/eventenvironment/> .
+@prefix gsgm: <http://loop3d.org/GSO/ontology/2020/1/lithology/granularmaterial/> .
 @prefix gsgu: <http://loop3d.org/GSO/ontology/2020/1/geologicunit/> .
 @prefix gslth: <http://loop3d.org/GSO/ontology/2020/1/lithology/> .
-@prefix gsgm: <http://loop3d.org/GSO/ontology/2020/1/lithology/granularmaterial/> .
 @prefix gsmg: <http://loop3d.org/GSO/ontology/2020/1/metamorphicgrade/> .
 @prefix gsmin: <http://loop3d.org/GSO/ontology/2020/1/mineral/> .
 @prefix gsoc: <http://loop3d.org/GSO/ontology/2020/1/common/> .
@@ -71,18 +71,12 @@ toj:cambrianBoundaryVillalbaSeries
 toj:cambrianformation
   a gsog:Formation ;
   a owl:NamedIndividual ;
-  rdfs:label "Cambrian Age sediments, slightly metamorphosed"@en ;
   gsoc:hasConstituent [
       a gslth:Quartzite ;
     ] ;
   gsoc:hasConstituent [
       a gslth:Slate ;
     ] ;
-  gsoc:indirectTemporalOccupies gstime:Cambrian ;
-  gsoc:isParticipantIn [
-	a gspr:Deposition;
-	gsoc:directTemporalOccupies gstime:Cambrian
-	];
   gsoc:hasPart toj:cambrianBoundaryLaTojiza ;
   gsoc:hasPart toj:cambrianBoundaryOrdovician ;
   gsoc:hasPart toj:cambrianBoundaryVillalbaSeries ;
@@ -93,6 +87,26 @@ toj:cambrianformation
         ] ;
       rdfs:label "low grade"@en ;
     ] ;
+  gsoc:indirectTemporalOccupies gstime:Cambrian2017 ;
+  gsoc:isParticipantIn [
+      a gspr:Deposition ;
+      gsoc:directTemporalOccupies gstime:Cambrian2017 ;
+    ] ;
+  rdfs:label "Cambrian Age sediments, slightly metamorphosed"@en ;
+.
+toj:intrusionintineo
+  a gsoc:Time_Numeric_Value ;
+  gsoc:determinedBy [
+      a gsoc:Inference ;
+      rdfs:comment "TBD -- adopt conventions for better representation of data provenance"@en ;
+      rdfs:comment "approximate age of plutons intruding correlative Tineo Series (Fernandez-Suarez et al. 2000a)"@en ;
+      rdfs:comment "dct:source https://eprints.ucm.es/59104/1/0656.pdf" ;
+    ] ;
+  gsoc:hasDataValue "600"^^xsd:decimal ;
+  gsoc:hasUOM [
+      a gsuom:ma ;
+    ] ;
+  rdfs:label "approximately 600 Ma"@en ;
 .
 toj:latojizaBoundaryCambrian_2
   a gsog:Rock_Body_Boundary ;
@@ -136,6 +150,27 @@ toj:latojizaVillalbaContact
   gsog:hasOlderHost toj:villalbaseries ;
   gsog:hasYoungerHost toj:latojizapluton ;
   rdfs:comment "Contact between Villalba Series and La Tojiza Pluton. Contact has 2 segments"@en ;
+.
+toj:latojizacrystallization
+  a gsoc:Time_Numeric_Value ;
+  gsoc:determinedBy [
+      a gsoc:Observation ;
+      rdfs:comment "TBD -- adopt conventions for better representation of data provenance"@en ;
+      rdfs:comment "U-Pb zircon (Fernandez-Suarez et al. 2000)"@en ;
+      rdfs:comment "dct:source DOI: 10.1144/jgs.157.3.565" ;
+    ] ;
+  gsoc:hasQuality [
+      a gsoc:Simple_Uncertainty ;
+      gsoc:hasDataValue "2"^^xsd:decimal ;
+      gsoc:hasUOM [
+          a gsuom:ma ;
+        ] ;
+    ] ;
+  gsoc:hasUOM [
+      a gsuom:ma ;
+    ] ;
+  gsog:hasDataValue "295"^^xsd:decimal ;
+  rdfs:label "295 +|- 2 Ma, Variscan, Post tectonic, Permian"@en ;
 .
 toj:latojizafinegrained
   a gsgu:Igneous_Facies ;
@@ -243,7 +278,7 @@ toj:latojizafinegrained
                 ] ;
               gsoc:hasStartValue [
                   a gsoc:Numeric_Value ;
-                  gsoc:hasDataValue "0.05"^^xsd:decimal ;
+                  gsoc:hasDataValue 0.05 ;
                   gsoc:hasUOM [
                       a gsuom:millimeter ;
                     ] ;
@@ -409,17 +444,6 @@ toj:latojizapendants
 .
 toj:latojizapluton
   a gsgu:Pluton ;
-  gsoc:indirectTemporalLocation [
-	a gsoc:Time_Instant_Location;
-	gsoc:hasValue toj:latojizacrystallization ;
-	];
-  gsoc:isParticipantIn [
-	a gspr:Magmatic_Cystallisation;
-	gsoc:directTemporalLocation [
-		a gsoc:Time_Instant_Location;
-		gsoc:hasValue toj:latojizacrystallization ;
-	]
-  ]; 
   gsoc:hasPart toj:latojizaBoundaryCambrian_2 ;
   gsoc:hasPart toj:latojizaBoundaryOrdovician_3 ;
   gsoc:hasPart toj:latojizaBoundarySanCiprian_4 ;
@@ -436,8 +460,19 @@ toj:latojizapluton
               a gsoc:Weak_Intensity ;
             ] ;
         ] ;
+      rdfs:comment "considered to have developed exclusively in the magmatic state"@en ;
       rdfs:label "weak preferred orientation of feldspar and biotite;"@en ;
-	  rdfs:comment "considered to have developed exclusively in the magmatic state"@en ;
+    ] ;
+  gsoc:indirectTemporalLocation [
+      a gsoc:Time_Instant_Location ;
+      gsoc:hasValue toj:latojizacrystallization ;
+    ] ;
+  gsoc:isParticipantIn [
+      a gspr:Magmatic_Cystallisation ;
+      gsoc:directTemporalLocation [
+          a gsoc:Time_Instant_Location ;
+          gsoc:hasValue toj:latojizacrystallization ;
+        ] ;
     ] ;
   gsog:intrudes toj:cambrianformation ;
   gsog:intrudes toj:ordovicianformation ;
@@ -446,26 +481,6 @@ toj:latojizapluton
   rdfs:comment "medium- to coarse-grained granite, consists of quartz, K-feldspar, plagioclase and biotite. Apatite, ilmenite, zircon, muscovite and, locally, garnet are accessory minerals. The amount of muscovite and garnet increases, and grain size decreases, towards the eastern and southern pluton borders.  but most samples are equigranular. Both textural types contain rounded grains of quartz visible to the naked eye, pointing to the lack of solid-state deformation. Large xenoliths and roofpendants of country rocks occur mainly in the central part of the intrusion and enclaves of basic igneous rocks in its eastern part."@en ;
   rdfs:label "La Tojiza Pluton"@en ;
 .
-
-toj:latojizacrystallization
-	a gsoc:Time_Numeric_Value ;
-	rdfs:label "295 +|- 2 Ma, Variscan, Post tectonic, Permian"@en ;
-	gsoc:determinedBy [
-	  a gsoc:Observation ;
-	  rdfs:comment "TBD -- adopt conventions for better representation of data provenance"@en ;
-	  rdfs:comment "U-Pb zircon (Fernandez-Suarez et al. 2000)"@en ;
-	  rdfs:comment "dct:source DOI: 10.1144/jgs.157.3.565" ;
-	] ;
-	gsoc:hasQuality [
-	  a gsoc:Simple_Uncertainty ;
-	  gsoc:hasDataValue "2"^^xsd:decimal ;
-	  gsoc:hasUOM [a gsuom:ma ] ;
-	] ;
-	gsoc:hasUOM [a gsuom:ma ] ;
-	gsog:hasDataValue "295"^^xsd:decimal ;
-.
-
-
 toj:latojizaporphyritic
   a gsgu:Igneous_Facies ;
   a owl:NamedIndividual ;
@@ -707,11 +722,10 @@ toj:ordovicianBoundaryLaTojiza_3
 .
 toj:ordovicianformation
   a gsog:Formation ;
-  rdfs:label "Ordovician Age"@en ;
+  gsoc:directTemporalOccupies gstime:Ordovician2017 ;
   gsoc:hasConstituent [
       a gslth:Slate ;
     ] ;
-  gsoc:directTemporalOccupies gstime:Ordovician ;
   gsoc:hasPart toj:ordovicianBoundaryCambrian ;
   gsoc:hasPart toj:ordovicianBoundaryLaTojiza ;
   gsoc:hasQuality [
@@ -721,11 +735,26 @@ toj:ordovicianformation
         ] ;
       rdfs:label "low grade"@en ;
     ] ;
+  rdfs:label "Ordovician Age"@en ;
 .
 toj:sanciprianBoundaryLaTojiza
   a gsog:Rock_Body_Boundary ;
   a owl:NamedIndividual ;
   gsoc:hostedBy toj:sancipriangranitoid ;
+.
+toj:sancipriancrystallization
+  a gsoc:Time_Numeric_Value ;
+  gsoc:determinedBy [
+      a gsoc:Observation ;
+      rdfs:comment "TBD -- adopt conventions for better representation of data provenance" ;
+      rdfs:comment "U-Pb interpreted date from zircon mantles, interpreted as age of magmatic crystallization. NOTE that this age is younger that the reported age for La Tojiza granite (295 Ma) which is reported to intrude San Ciprian Granite " ;
+      rdfs:comment "dct:source An example of low-Th/U zircon overgrowths of magmatic origin in a late orogenic Variscan intrusion: the San Ciprián massif (NW Spain) Lopez-Sanchez,Marco A. et al. Journal of the Geological Society(2016),173(2):282  http://dx.doi.org/10.1144/jgs2015-071" ;
+    ] ;
+  gsoc:hasUOM [
+      a gsuom:ma ;
+    ] ;
+  gsog:hasDataValue "287"^^xsd:decimal ;
+  rdfs:label "287 Ma, Variscan, Permian, syn-tectonic"@en ;
 .
 toj:sancipriangranitoid
   a gsgu:Pluton ;
@@ -739,34 +768,20 @@ toj:sancipriangranitoid
           a gsmin:muscovite ;
         ] ;
     ] ;
-  gsoc:isParticipantIn [
-   a gspr:Magmatic_Cystallisation;
-   gsoc:directTemporalLocation [
-	a gsoc:Time_Instant_Location ;
-	gsoc:hasValue toj:sancipriancrystallization
-   ]
-  ];
-  gsoc:indirectTemporalLocation [
-  	a gsoc:Time_Instant_Location ;
-	gsoc:hasValue toj:sancipriancrystallization 
-	];
   gsoc:hasPart toj:sanciprianBoundaryLaTojiza ;
+  gsoc:indirectTemporalLocation [
+      a gsoc:Time_Instant_Location ;
+      gsoc:hasValue toj:sancipriancrystallization ;
+    ] ;
+  gsoc:isParticipantIn [
+      a gspr:Magmatic_Cystallisation ;
+      gsoc:directTemporalLocation [
+          a gsoc:Time_Instant_Location ;
+          gsoc:hasValue toj:sancipriancrystallization ;
+        ] ;
+    ] ;
   rdfs:label "San Ciprian massif" ;
 .
-
-toj:sancipriancrystallization
-		a gsoc:Time_Numeric_Value ;
-		rdfs:label "287 Ma, Variscan, Permian, syn-tectonic"@en ;
-		gsoc:determinedBy [
-		  a gsoc:Observation ;
-		  rdfs:comment "TBD -- adopt conventions for better representation of data provenance" ;
-		  rdfs:comment "U-Pb interpreted date from zircon mantles, interpreted as age of magmatic crystallization. NOTE that this age is younger that the reported age for La Tojiza granite (295 Ma) which is reported to intrude San Ciprian Granite " ;
-		  rdfs:comment "dct:source An example of low-Th/U zircon overgrowths of magmatic origin in a late orogenic Variscan intrusion: the San Ciprián massif (NW Spain) Lopez-Sanchez,Marco A. et al. Journal of the Geological Society(2016),173(2):282  http://dx.doi.org/10.1144/jgs2015-071" ;
-		] ;
-		gsoc:hasUOM [ a gsuom:ma ] ;
-		gsog:hasDataValue "287"^^xsd:decimal ;
-.
-
 toj:villalbaBoundaryCambrian
   a gsog:Rock_Body_Top ;
   a owl:NamedIndividual ;
@@ -792,6 +807,20 @@ toj:villalbaBoundaryLaTojiza_1_2
   a owl:NamedIndividual ;
   gsoc:hostedBy toj:villalbaseries ;
 .
+toj:villalbadetritalzircon
+  a gsoc:Time_Numeric_Value ;
+  gsoc:determinedBy [
+      a gsoc:Inference ;
+      rdfs:comment "TBD -- adopt conventions for better representation of data provenance"@en ;
+      rdfs:comment "dct:source https://eprints.ucm.es/59104/1/0656.pdf" ;
+      rdfs:comment "youngest single crystal detrital zircons in Lower Villalba unit, sub concordant 206Pb/238U date from single crystals. (Fernandez-Suarez et al. 2000a)"@en ;
+    ] ;
+  gsoc:hasDataValue "700"^^xsd:decimal ;
+  gsoc:hasUOM [
+      a gsuom:ma ;
+    ] ;
+  rdfs:label "700 Ma, single crystal detrital zircon, Lower Villalba"@en ;
+.
 toj:villalbaseries
   a gsog:Formation ;
   a owl:NamedIndividual ;
@@ -799,55 +828,30 @@ toj:villalbaseries
       a gslth:Schist ;
       rdfs:label "metagraywacke" ;
     ] ;
-  gsoc:isParticipantIn [
-	a gspr:Deposition;
-	gsoc:directTemporalLocation [
-      a gsoc:Time_Interval_Location ;
-	  rdfs:label "Neoproterozoic, approximately 700-600 Ma"@en ;
-	  gsoc:hasValue [
-		a gsoc:Temporal_Range;
-	    gsog:hasStartValue toj:villalbadetritalzircon ;
-	    gsog:hasEndValue toj:intrusionintineo
-        ] 
-	];
-  ];
-  gsoc:indirectTemporalOccupies  gstime:Neoproterozoic ;
   gsoc:hasPart toj:villalbaBoundaryCambrian ;
   gsoc:hasPart toj:villalbaBoundaryLaTojiza ;
   gsoc:hasQuality [
       a gsoq:Metamorphic_Grade ;
-      gsoc:hasValue [ a gsmg:Low_Metamorphic_Grade ] ;
+      gsoc:hasValue [
+          a gsmg:Low_Metamorphic_Grade ;
+        ] ;
       rdfs:label "low grade metamorphism"@en ;
+    ] ;
+  gsoc:indirectTemporalOccupies gstime:Neoproterozoic2017 ;
+  gsoc:isParticipantIn [
+      a gspr:Deposition ;
+      gsoc:directTemporalLocation [
+          a gsoc:Time_Interval_Location ;
+          gsoc:hasValue [
+              a gsoc:Temporal_Range ;
+              gsog:hasEndValue toj:intrusionintineo ;
+              gsog:hasStartValue toj:villalbadetritalzircon ;
+            ] ;
+          rdfs:label "Neoproterozoic, approximately 700-600 Ma"@en ;
+        ] ;
     ] ;
   rdfs:label "Villalba Series" ;
 .
-
-toj:intrusionintineo
-	a gsoc:Time_Numeric_Value;
-	rdfs:label "approximately 600 Ma"@en;
-	gsoc:determinedBy [
-	  a gsoc:Inference ;
-	  rdfs:comment "TBD -- adopt conventions for better representation of data provenance"@en ;
-	  rdfs:comment "approximate age of plutons intruding correlative Tineo Series (Fernandez-Suarez et al. 2000a)"@en ;
-	  rdfs:comment "dct:source https://eprints.ucm.es/59104/1/0656.pdf" ;
-	] ;
-	gsoc:hasDataValue "600"^^xsd:decimal ;
-	gsoc:hasUOM [ a gsuom:ma ] ;
-.
-
-toj:villalbadetritalzircon
-	a gsoc:Time_Numeric_Value;
-	rdfs:label "700 Ma, single crystal detrital zircon, Lower Villalba"@en ;
-	gsoc:determinedBy [
-	  a gsoc:Inference ;
-	  rdfs:comment "TBD -- adopt conventions for better representation of data provenance"@en ;
-	  rdfs:comment "dct:source https://eprints.ucm.es/59104/1/0656.pdf" ;
-	  rdfs:comment "youngest single crystal detrital zircons in Lower Villalba unit, sub concordant 206Pb/238U date from single crystals. (Fernandez-Suarez et al. 2000a)"@en ;
-	] ;
-	gsoc:hasDataValue "700"^^xsd:decimal ;
-	gsoc:hasUOM [ a gsuom:ma ] ;
-.
-
 <http://loop3d.org/GSO/ontology/2020/1/ex-plutontojiza/ontology>
   a owl:Ontology ;
   rdfs:comment "Example description of pluton with pendants, enclaves, composition variations"@en ;

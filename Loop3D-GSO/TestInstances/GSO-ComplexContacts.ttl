@@ -25,12 +25,13 @@
 
 con:CbFormation
   a gsog:Formation ;
-  gsoc:indirectTemporalOccupies gstime:Cambrian ;
-  gsoc:isParticipantIn  [
-	a gspr:Traction_Saltation_or_Suspension_Deposition ;
-	gsoc:hasSetting gsen:Inner_Neritic_Setting, gsen:Shoreline_Setting ;
-	gsoc:directTemporalOccupies gstime:Cambrian ;
-    rdfs:label "Cambrian Depositional Age"@en ;
+  gsoc:indirectTemporalOccupies gstime:Cambrian2017 ;
+  gsoc:isParticipantIn [
+      a gspr:Traction_Saltation_or_Suspension_Deposition ;
+      gsoc:directTemporalOccupies gstime:Cambrian2017 ;
+      gsoc:hasSetting gsen:Inner_Neritic_Setting ;
+      gsoc:hasSetting gsen:Shoreline_Setting ;
+      rdfs:label "Cambrian Depositional Age"@en ;
     ] ;
   rdfs:label "Bolsa Quartzite (Cambrian)"@en ;
 .
@@ -130,7 +131,7 @@ con:KdDike
               gsoc:determinedBy [
                   a gsoc:Mean_Value_Calculation ;
                 ] ;
-              gsoc:hasDataValue "0.05"^^xsd:decimal ;
+              gsoc:hasDataValue 0.05 ;
               gsoc:hasUOM [
                   a gsuom:millimeter ;
                 ] ;
@@ -146,9 +147,9 @@ con:KdDike
       gsoc:hasDataValue "Dike" ;
     ] ;
   gsog:intrudes con:CbFormation ;
-  gsog:intrudes ejs:JsFormation ;
   gsog:intrudes con:KgGranite ;
   gsog:intrudes con:XmRockBody ;
+  gsog:intrudes ejs:JsFormation ;
   rdfs:comment "dike has lots of intrusive contacts, on the hanging wall (up) and footwall (down) side of the dike, each contact is with a different unit."@en ;
   rdfs:comment "intrudes is subproperty of relatedTo"@en ;
   rdfs:label "Mafic Dike (Cretaceous)"@en ;
@@ -190,9 +191,9 @@ con:KgGranite
   gsoc:hasPart con:KgIntrusiveBoundary-4_1 ;
   gsoc:hasPart con:KgIntrusiveBoundary-4_2 ;
   gsog:intrudes con:CbFormation ;
-  gsog:intrudes ejs:JsFormation ;
   gsog:intrudes con:OsFormation ;
   gsog:intrudes con:XmRockBody ;
+  gsog:intrudes ejs:JsFormation ;
   rdfs:comment "contacts are complicated! Here are the parts:"@en ;
   rdfs:comment "intrudes is subproperty of relatedTo"@en ;
   rdfs:comment "intrusion has lots of intrusive contacts, each contact is with a different unit, also an erosion surface at the top, overlain by Ms."@en ;
@@ -307,7 +308,7 @@ con:OsBoundary-6_2
 .
 con:OsFormation
   a gsog:Formation ;
-  gsoc:indirectTemporalOccupies gstime:Ordovician ;
+  gsoc:indirectTemporalOccupies gstime:Ordovician2017 ;
   rdfs:label "Sedimentary Rocks (Ordovician)"@en ;
 .
 con:SsBoundary-6_1
@@ -316,7 +317,7 @@ con:SsBoundary-6_1
 .
 con:SsFormation
   a gsog:Formation ;
-  gsoc:indirectTemporalOccupies gstime:Silurian ;
+  gsoc:indirectTemporalOccupies gstime:Silurian2017 ;
   rdfs:label "Sedimentary Rocks (Silurian)"@en ;
 .
 con:XmBoundary-6_3
@@ -365,19 +366,19 @@ con:baseJs-6_3
 .
 con:contact_Js_on_Os
   a gscn:Angular_Unconformable_Contact ;
-  gsoc:hostedBy ejs:JsFormation ;
   gsoc:hostedBy con:OsBoundary-6_2 ;
   gsoc:hostedBy con:OsFormation ;
   gsoc:hostedBy con:baseJs-6_2 ;
+  gsoc:hostedBy ejs:JsFormation ;
   rdfs:comment "OsBoundary-6_2 is Erosional Surface"@en ;
   rdfs:label "relational feature, Js formation overlies Os Formation"@en ;
 .
 con:contact_Js_on_Ss
   a gscn:Angular_Unconformable_Contact ;
-  gsoc:hostedBy ejs:JsFormation ;
   gsoc:hostedBy con:SsBoundary-6_1 ;
   gsoc:hostedBy con:SsFormation ;
   gsoc:hostedBy con:baseJs-6_1 ;
+  gsoc:hostedBy ejs:JsFormation ;
   rdfs:comment "SsBoundary-6_1 is Erosional Surface"@en ;
   rdfs:label "relational feature, Js formation overlies Ss Formation"@en ;
 .
@@ -409,8 +410,8 @@ con:contact_Kg_in_Js
 .
 con:contact_Ms_on_Js
   a gsog:Contact ;
-  gsoc:hasOlderHost ejs:JsFormation ;
   gsoc:hasOlderHost con:topJs-2_1 ;
+  gsoc:hasOlderHost ejs:JsFormation ;
   gsoc:hasYoungerHost con:MsBoundaryBottom-2_1 ;
   gsoc:hasYoungerHost con:MsFormation ;
   rdfs:label "relational feature, Miocene Ms formation overlies Jurassic Js formation"@en ;
@@ -448,13 +449,12 @@ con:topJs-2_1
 .
 ejs:JsFormation
   a gsog:Formation ;
-  gsoc:indirectTemporalOcccupies gstime:Jurassic ;
   gsoc:hasPart con:KdBoundaryInJs-3_1_4 ;
   gsoc:hasPart con:KdBoundaryInJs-3_2_4 ;
   gsoc:hasPart con:KgBoundaryIntrudesJs-4_2 ;
   gsoc:hasPart con:baseJs-6 ;
   gsoc:hasPart con:topJs-2 ;
+  gsoc:indirectTemporalOcccupies gstime:Jurassic2017 ;
   rdfs:comment "details of unit description are in a separate Example: GSO-ExampleFormationJs.txt"@en ;
   rdfs:label "Js Formation, Jurassic age"@en ;
 .
-

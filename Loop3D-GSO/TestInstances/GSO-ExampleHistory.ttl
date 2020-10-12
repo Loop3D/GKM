@@ -1,6 +1,5 @@
 # baseURI: http://loop3d.org/GSO/ontology/2020/1/ex-history/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/loop3dmaster
-# prefix: ehy
 
 @prefix ehy: <http://loop3d.org/GSO/ontology/2020/1/ex-history#> .
 @prefix gsen: <http://loop3d.org/GSO/ontology/2020/1/eventenvironment/> .
@@ -15,22 +14,13 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<http://loop3d.org/GSO/ontology/2020/1/ex-history/ontology> 
-  a owl:Ontology ;
-  owl:imports <http://loop3d.org/GSO/ontology/2020/1/loop3dmaster> ;
-  rdfs:label "Example complex geologic histry"@en; 
-  rdfs:comment "Example history representation, based on geology shown in EasternRinconMountainsXSec.png figure in the Loop3D-GSO.TestInstances directory"@en; 
-.
-
-
 ehy:Basement_Cover_Shear_Event
   a gsog:Geologic_Event ;
-  rdfs:comment "F2.1 in figure"@en ;
+  gsoc:directTemporalOccupies ehy:LaramideDuctileBasementInterval ;
   gsoc:hasConstituent [
       a gspr:Ductile_Flow ;
       rdfs:label "Shear along basement-cover contact"@en ;
     ] ;
-  gsoc:directTemporalLocation ehy:LaramideDuctileBasementInterval ;
   gsoc:isPartOf ehy:Laramide_Ductile_deformation ;
   gsog:hasSetting [
       a gsen:Hinterland_Setting ;
@@ -38,16 +28,17 @@ ehy:Basement_Cover_Shear_Event
   gsog:hasSetting [
       a gsen:Middle_Continental_Crust_Setting ;
     ] ;
+  rdfs:comment "F2.1 in figure"@en ;
   rdfs:comment "Strain localization at the boundary between Proterozoic crytalline rock and overlying Paleozoic sediments, apparently coeval with intrusion of two-mica granitoid (Wilderness Suite)"@en ;
   rdfs:label "Late Laramide Shear along basement-cover contact"@en ;
 .
 ehy:Basin_Fill_Tilting_Event
   a gsog:Geologic_Event ;
+  gsoc:directTemporalOccupies ehy:TertiaryExtensionBasinFillInterval ;
   gsoc:hasConstituent [
       a gspr:Faulting ;
       rdfs:label "Normal faults bounding fault blocks"@en ;
     ] ;
-  gsoc:directTemporalOccupies ehy:TertiaryExtensionBasinFillInterval ;
   gsog:hasSetting [
       a gsen:Extended_Terrane ;
     ] ;
@@ -62,13 +53,13 @@ ehy:Detachment_Faulting
 .
 ehy:EarlyMioceneSedimentation
   a gsog:Geologic_Event ;
+  gsoc:directTemporalOccupies ehy:TertiaryExtensionBasinFillInterval ;
   gsoc:hasConstituent [
       a gspr:Debris_Flow_Deposition ;
     ] ;
   gsoc:hasConstituent [
       a gspr:Mass_Wasting_Deposition ;
     ] ;
-  gsoc:directTemporalOccupies ehy:TertiaryExtensionBasinFillInterval ;
   gsoc:time_finishes ehy:Detachment_Faulting ;
   gsoc:time_starts ehy:Basin_Fill_Tilting_Event ;
   rdfs:comment "Deposition of conglomerate, sandstone, with minor interbedded tuff and volcanic rocks in basins formed in hanging wall of detachment system"@en ;
@@ -76,81 +67,97 @@ ehy:EarlyMioceneSedimentation
   rdfs:label "Oligocene to Mid Miocene Sediment accumulation"@en ;
 .
 ehy:EarlyProterozoic1780-1690
-    a gsoc:Time_Interval_Location ;
-	rdfs:label "Early Proterozoic 1780-1690 Ma"@en ;
-	gsoc:hasValue [
-		a gsoc:Temporal_Range;
-		gsoc:hasEndValue [
-		  a gsoc:Time_Numeric_Value;
-		  gsog:hasDataValue "1690"^^xsd:decimal ;
-		  gsoc:hasUOM [ a gsuom:ma ] ;
-		  gsoc:hasQuality [
-			  a gsoc:Simple_Uncertainty ;
-			  gsoc:hasDataValue "18"^^xsd:decimal ;
-			  gsoc:hasUOM [ a gsuom:ma ] ;
-			] ;
-
-         ] ;
-		gsoc:hasStartValue [
-		  a gsoc:Time_Numeric_Value;
-		  gsog:hasDataValue "1780"^^xsd:decimal ;
-		  gsoc:hasUOM [ a gsuom:ma ] ;
-		  gsoc:hasQuality [
-			  a gsoc:Simple_Uncertainty ;
-			  gsoc:hasDataValue "12"^^xsd:decimal ;
-			  gsoc:hasUOM [ a gsuom:ma ] ;
-			] ;
-         ] ;
-      ] ;
-.
-
-ehy:LaramideDuctileBasementInterval
-  a gsoc:Time_Interval_Location ;
-  rdfs:label "Laramide 61-45 Ma"@en ;
+  a gsoc:Time_Interval ;
+  gsoc:hasQuality [
+    a gsoc:Tiime_Interval_Location ;
   gsoc:hasValue [
-	a gsoc:Temporal_Range ;
-	   gsoc:hasStartValue [
-		  a gsoc:Time_Numeric_Value ;
-		  gsog:hasDataValue "45"^^xsd:decimal ;
-		  gsoc:hasUOM [  a gsuom:ma ] ;
-		  gsoc:hasQuality [
-			  a gsoc:Simple_Uncertainty ;
-			  gsoc:hasDataValue 1.0 ;
-			  gsoc:hasUOM [ a gsuom:ma  ] ;
-			] ;
-		  		  
-		] ;
-		gsog:hasEndValue [
-		  a gsoc:Time_Numeric_Value ;
-		  gsog:hasDataValue "61"^^xsd:decimal ;
-		  gsoc:hasUOM [  a gsuom:ma ] ;
-		  gsoc:determinedBy [
-			  a gsoc:Observation ;
-			  rdfs:comment "youngest deformed intrusion, U-Pb zircon (Gehrels et al, 2015)"@en ;
-			  rdfs:label "61.0 +/- .04 Ma, U-Pb Zircon, concordant, youngest deformed intrusion"@en ;
-			] ;
-		  gsoc:hasQuality [
-			  a gsoc:Simple_Uncertainty ;
-			  gsoc:hasDataValue "0.04"^^xsd:decimal ;
-			  gsoc:hasUOM [ a gsuom:ma ] ;
-			] ;
-		] ;
-   ]
+      a gsoc:Temporal_Range ;
+      gsoc:hasEndValue [
+          a gsoc:Time_Numeric_Value ;
+          gsoc:hasQuality [
+              a gsoc:Simple_Uncertainty ;
+              gsoc:hasDataValue "18"^^xsd:decimal ;
+              gsoc:hasUOM [
+                  a gsuom:ma ;
+                ] ;
+            ] ;
+          gsoc:hasUOM [
+              a gsuom:ma ;
+            ] ;
+          gsog:hasDataValue "1690"^^xsd:decimal ;
+        ] ;
+      gsoc:hasStartValue [
+          a gsoc:Time_Numeric_Value ;
+          gsoc:hasQuality [
+              a gsoc:Simple_Uncertainty ;
+              gsoc:hasDataValue "12"^^xsd:decimal ;
+              gsoc:hasUOM [
+                  a gsuom:ma ;
+                ] ;
+            ] ;
+          gsoc:hasUOM [
+              a gsuom:ma ;
+            ] ;
+          gsog:hasDataValue "1780"^^xsd:decimal ;
+        ] ;
+    ] ;
+  rdfs:label "Early Proterozoic 1780-1690 Ma"@en ;
 .
-
+ehy:LaramideDuctileBasementInterval
+  a gsoc:Time_Interval ;
+  gsoc:hasQuality [
+	a gsoc:Tiime_Interval_Location; 
+  gsoc:hasValue [
+      a gsoc:Temporal_Range ;
+      gsoc:hasStartValue [
+          a gsoc:Time_Numeric_Value ;
+          gsoc:hasQuality [
+              a gsoc:Simple_Uncertainty ;
+              gsoc:hasDataValue "1.0"^^xsd:decimal ;
+              gsoc:hasUOM [
+                  a gsuom:ma ;
+                ] ;
+            ] ;
+          gsoc:hasUOM [
+              a gsuom:ma ;
+            ] ;
+          gsog:hasDataValue "45"^^xsd:decimal ;
+        ] ;
+      gsog:hasEndValue [
+          a gsoc:Time_Numeric_Value ;
+          gsoc:determinedBy [
+              a gsoc:Observation ;
+              rdfs:comment "youngest deformed intrusion, U-Pb zircon (Gehrels et al, 2015)"@en ;
+              rdfs:label "61.0 +/- .04 Ma, U-Pb Zircon, concordant, youngest deformed intrusion"@en ;
+            ] ;
+          gsoc:hasQuality [
+              a gsoc:Simple_Uncertainty ;
+              gsoc:hasDataValue "0.04"^^xsd:decimal ;
+              gsoc:hasUOM [
+                  a gsuom:ma ;
+                ] ;
+            ] ;
+          gsoc:hasUOM [
+              a gsuom:ma ;
+            ] ;
+          gsog:hasDataValue "61"^^xsd:decimal ;
+        ] ;
+    ] ;
+  rdfs:label "Laramide 61-45 Ma"@en ;
+.
 ehy:LaramideFaultingInterval
   a gsog:Geologic_Time_Interval ;
-  gsoc:Time_Interval_finishes gstime:Danian ;
-  gsoc:Time_Interval_starts gstime:Campanian ;
+  gsoc:Time_Interval_finishes gstime:Danian2017 ;
+  gsoc:Time_Interval_starts gstime:Campanian2017 ;
   rdfs:label "Early Laramide"@en ;
 .
 ehy:Laramide_Ductile_deformation
   a gsog:Geologic_Event ;
+  gsoc:directTemporalOccupies ehy:LaramideDuctileBasementInterval ;
   gsoc:hasConstituent [
       a gspr:Ductile_Flow ;
       rdfs:label "Mid-crustal remobilization"@en ;
     ] ;
-  gsoc:directTemporalLocation ehy:LaramideDuctileBasementInterval ;
   gsoc:time_interval_contains ehy:Basement_Cover_Shear_Event ;
   gsoc:time_interval_contains ehy:Wilderness_Granite_Intrusion_Event ;
   gsoc:time_younger_than ehy:Mesozoic_Sediment_Deposition ;
@@ -160,23 +167,23 @@ ehy:Laramide_Ductile_deformation
   gsog:hasSetting [
       a gsen:Middle_Continental_Crust_Setting ;
     ] ;
+  rdfs:comment "event manifested by fabrics in Proterozoic basement and overlying tectonites derived from Palezoic and Mesozoic sediments (gray and blue units, left side of cross section diagram."@en ;
   rdfs:label "Late Laramide ductile flow in basement"@en ;
-  rdfs:comment "event manifested by fabrics in Proterozoic basement and overlying tectonites derived from Palezoic and Mesozoic sediments (gray and blue units, left side of cross section diagram."@en;
 .
 ehy:Laramide_Orogeny
   a gsog:Geologic_Event ;
   gsoc:time_interval_contains ehy:Laramide_Ductile_deformation ;
   gsoc:time_interval_contains ehy:Laramide_Thrust_Faulting ;
   gsoc:time_interval_contains ehy:Wilderness_Granite_Intrusion_Event ;
-  rdfs:comment "Late Cretaceous to Early Tertiary Deformation event in western North America, generally considered to have occurred between 80 Ma and 40 Ma.  Manifestations vary in different parts of the western North American Cordillera, but eastward migration of magmatism and deformation, particularly in the western USA are characteristic."@en;
+  rdfs:comment "Late Cretaceous to Early Tertiary Deformation event in western North America, generally considered to have occurred between 80 Ma and 40 Ma.  Manifestations vary in different parts of the western North American Cordillera, but eastward migration of magmatism and deformation, particularly in the western USA are characteristic."@en ;
   rdfs:label "Laramide Orogeny "@en ;
 .
 ehy:Laramide_Thrust_Faulting
   a gsog:Geologic_Event ;
   gsoc:directTemporalOccupies [
       a gsoc:Time_Interval ;
-      gsoc:Time_Interval_finishes gstime:Danian ;
-      gsoc:Time_Interval_starts gstime:Campanian ;
+      gsoc:Time_Interval_finishes gstime:Danian2017 ;
+      gsoc:Time_Interval_starts gstime:Campanian2017 ;
     ] ;
   gsoc:hasSetting [
       a gsen:Foreland_Setting ;
@@ -202,23 +209,23 @@ ehy:LateMioceneBasinFormation
 .
 ehy:MesozoicDepositionInterval
   a gsoc:Time_Interval ;
-  gsoc:Time_Interval_finishes gstime:Campanian ;
-  gsoc:Time_Interval_starts gstime:MiddleTriassic ;
+  gsoc:Time_Interval_finishes gstime:Campanian2017 ;
+  gsoc:Time_Interval_starts gstime:MiddleTriassic2017 ;
   rdfs:label "Middle Triassic to Campanian"@en ;
 .
 ehy:MesozoicFaultingInterval
   a gsoc:Time_Interval ;
   gsoc:Time_Interval_finishes gstime:LateJurassic ;
-  gsoc:Time_Interval_starts gstime:MiddleTriassic ;
+  gsoc:Time_Interval_starts gstime:MiddleTriassic2017 ;
   rdfs:label "Middle Triassic to LateJurassic"@en ;
 .
 ehy:Mesozoic_Basin_Formation
   a gsog:Geologic_Event ;
+  gsoc:directTemporalOccupies ehy:MesozoicFaultingInterval ;
   gsoc:hasConstituent [
       a gspr:Faulting ;
       rdfs:label "Intra or back arc basin formation"@en ;
     ] ;
-  gsoc:directTemporalOccupies ehy:MesozoicFaultingInterval ;
   gsog:hasSetting [
       a gsen:Back_Arc_Setting ;
     ] ;
@@ -229,12 +236,11 @@ ehy:Mesozoic_Basin_Formation
 .
 ehy:Mesozoic_Sediment_Deposition
   a gsog:Geologic_Event ;
-  rdfs:comment "manifested by green stippled unit under thrust fault in the cross section diagram."@en ; 
+  gsoc:directTemporalOccupies ehy:MesozoicDepositionInterval ;
   gsoc:hasConstituent [
       a gspr:Deposition ;
       rdfs:label "Intra and back arc sediment accumulation"@en ;
     ] ;
-  gsoc:directTemporalOccupies ehy:MesozoicDepositionInterval ;
   gsoc:time_started_by ehy:Mesozoic_Basin_Formation ;
   gsog:hasSetting [
       a gsen:Alluvial_Fan_Setting ;
@@ -246,6 +252,7 @@ ehy:Mesozoic_Sediment_Deposition
       a gsen:Floodplain_Setting ;
       rdfs:label "Mesozoic sediment allvial setting"@en ;
     ] ;
+  rdfs:comment "manifested by green stippled unit under thrust fault in the cross section diagram."@en ;
   rdfs:label "Mesozoic basin sediment deposition"@en ;
 .
 ehy:Middle_Tertiary_Extension
@@ -258,17 +265,17 @@ ehy:Middle_Tertiary_Extension
 .
 ehy:PaleozoicDepositionInterval
   a gsoc:Time_Interval ;
-  gsoc:Time_Interval_finishes gstime:Permian ;
-  gsoc:Time_Interval_starts gstime:Cambrian ;
+  gsoc:Time_Interval_finishes gstime:Permian2017 ;
+  gsoc:Time_Interval_starts gstime:Cambrian2017 ;
   rdfs:label "Paleozoic"@en ;
 .
 ehy:Paleozoic_Sediment_Deposition
   a gsog:Geologic_Event ;
+  gsoc:directTemporalOccupies ehy:PaleozoicDepositionInterval ;
   gsoc:hasConstituent [
       a gspr:Deposition ;
       rdfs:label "Passive margin sediment accumulation"@en ;
     ] ;
-  gsoc:directTemporalOccupies ehy:PaleozoicDepositionInterval ;
   gsoc:time_older_than ehy:Mesozoic_Basin_Formation ;
   gsog:hasSetting [
       a gsen:Passive_Continental_Margin_Setting ;
@@ -277,67 +284,78 @@ ehy:Paleozoic_Sediment_Deposition
 .
 ehy:Proterozoic_igneous_intrusion
   a gsog:Geologic_Event ;
+  gsoc:directTemporalOccupies ehy:EarlyProterozoic1780-1690 ;
   gsoc:hasConstituent [
       a gspr:Intrusion_Process ;
     ] ;
-  gsoc:directTemporalLocation ehy:EarlyProterozoic1780-1690 ;
   gsoc:time_older_than ehy:Paleozoic_Sediment_Deposition ;
   gsog:hasSetting [
-      a gsen:Earth_Interior_Setting, gsen:Middle_Continental_Crust_Setting ;
+      a gsen:Earth_Interior_Setting ;
+      a gsen:Middle_Continental_Crust_Setting ;
     ] ;
   rdfs:label "Early Proterozoic granitoid intrusion"@en ;
 .
 ehy:TertiaryExtensionBasinFillInterval
   a gsoc:Time_Interval ;
-  gsoc:Time_Interval_finishes gstime:Burdigalian ;
-  gsoc:Time_Interval_starts gstime:Chattian ;
+  gsoc:Time_Interval_finishes gstime:Burdigalian2017 ;
+  gsoc:Time_Interval_starts gstime:Chattian2017 ;
   rdfs:label "Mid-Tertiary extensional basin formation interval"@en ;
 .
-
-ehy:WildernessGraniteIntrusionInterval
+ehy:WildernessGraniteIntrusionInterval 
+ a gsoc:Time_Interval; 
+ gsoc:hasQuality [
   a gsoc:Time_Interval_Location ;
-  rdfs:label "Laramide 55-42 Ma"@en ;
   gsoc:hasValue [
-	a gsoc:Temporal_Range;
-	gsoc:hasEndValue [
-      a gsoc:Time_Numeric_Value ;
-      gsoc:hasQuality [
-          a gsoc:Simple_Uncertainty ;
-          gsoc:hasDataValue "1.7"^^xsd:decimal ;
+      a gsoc:Temporal_Range ;
+      gsoc:hasEndValue [
+          a gsoc:Time_Numeric_Value ;
+          gsoc:hasQuality [
+              a gsoc:Simple_Uncertainty ;
+              gsoc:hasDataValue 1.7 ;
+              gsoc:hasUOM [
+                  a gsuom:ma ;
+                ] ;
+            ] ;
           gsoc:hasUOM [
               a gsuom:ma ;
             ] ;
+          gsog:hasDataValue "42"^^xsd:decimal ;
         ] ;
-      gsoc:hasUOM [ a gsuom:ma ] ;
-      gsog:hasDataValue "42"^^xsd:decimal ;
-    ] ;
-	gsoc:hasStartValue [
-      a gsoc:Time_Numeric_Value ;
-      gsoc:hasQuality [
-          a gsoc:Simple_Uncertainty ;
-          gsoc:hasDataValue "0.3"^^xsd:decimal ;
+      gsoc:hasStartValue [
+          a gsoc:Time_Numeric_Value ;
+          gsoc:hasQuality [
+              a gsoc:Simple_Uncertainty ;
+              gsoc:hasDataValue 0.3 ;
+              gsoc:hasUOM [
+                  a gsuom:ma ;
+                ] ;
+            ] ;
           gsoc:hasUOM [
               a gsuom:ma ;
             ] ;
+          gsog:hasDataValue "55"^^xsd:decimal ;
         ] ;
-      gsoc:hasUOM [
-          a gsuom:ma ;
-        ] ;
-      gsog:hasDataValue "55"^^xsd:decimal ;
     ] ;
-   ]
+  rdfs:label "Laramide 55-42 Ma"@en ;
 .
 ehy:Wilderness_Granite_Intrusion_Event
   a gsog:Geologic_Event ;
+  gsoc:directTemporalOccupies ehy:WildernessGraniteIntrusionInterval ;
   gsoc:hasConstituent [
       a gspr:Intrusion_Process ;
       rdfs:label "granitoid intrusion"@en ;
     ] ;
-  gsoc:directTemporalLocation ehy:WildernessGraniteIntrusionInterval ;
   gsoc:isPartOf ehy:Laramide_Ductile_deformation ;
   gsog:hasSetting [
-      a gsen:Hinterland_Setting, gsen:Middle_Continental_Crust_Setting ;
+      a gsen:Hinterland_Setting ;
+      a gsen:Middle_Continental_Crust_Setting ;
     ] ;
-  rdfs:label "Two-mica granite intrusion"@en ;
   rdfs:comment "granitoid intrudes gray unit in lower left of cross section diagram, intrusions not shown in diagram"@en ;
+  rdfs:label "Two-mica granite intrusion"@en ;
+.
+<http://loop3d.org/GSO/ontology/2020/1/ex-history/ontology>
+  a owl:Ontology ;
+  rdfs:comment "Example history representation, based on geology shown in EasternRinconMountainsXSec.png figure in the Loop3D-GSO.TestInstances directory"@en ;
+  rdfs:label "Example complex geologic histry"@en ;
+  owl:imports <http://loop3d.org/GSO/ontology/2020/1/loop3dmaster> ;
 .
