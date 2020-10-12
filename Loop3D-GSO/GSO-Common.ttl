@@ -9,26 +9,16 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-gsoc:Spatial_Region
-  rdfs:subClassOf [
-      a owl:Class ;
-      owl:complementOf [
-          a owl:Restriction ;
-          owl:onProperty gsoc:hasConstituent ;
-          owl:someValuesFrom gsoc:Amount_Of_Matter ;
-        ] ;
-    ] ;
-.
-gsoc:directSpatialOccupies
-  rdfs:domain [
-      a owl:Class ;
-      owl:unionOf (
-          gsoc:Spatial_Endurant
-          gsoc:Endurant_Feature
-        ) ;
-    ] ;
-.
 
+gsoc:gDependsOn
+  rdfs:subPropertyOf gsoc:dependsOn ;
+.
+gsoc:hasQuality
+  rdfs:range gsoc:Quality ;
+.
+gsoc:hasRole
+  rdfs:range gsoc:Role ;
+.
 
 gsoc:Amount_Of_Matter
   a owl:Class ;
@@ -991,6 +981,14 @@ gsoc:Spatial_Region
   rdfs:label "Spatial Region"@en ;
   rdfs:subClassOf gsoc:Spatial_Endurant ;
   rdfs:subClassOf [
+      a owl:Class ;
+      owl:complementOf [
+          a owl:Restriction ;
+          owl:onProperty gsoc:hasConstituent ;
+          owl:someValuesFrom gsoc:Amount_Of_Matter ;
+        ] ;
+    ] ;
+  rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty gsoc:hasQuality ;
       owl:someValuesFrom gsoc:Spatial_Location ;
@@ -1354,6 +1352,13 @@ gsoc:directSpatialOccupies
   a owl:InverseFunctionalProperty ;
   a owl:ObjectProperty ;
   rdfs:comment "The spatial region occupied by an endurant. The region has a spatial location"@en ;
+  rdfs:domain [
+      a owl:Class ;
+      owl:unionOf (
+          gsoc:Spatial_Endurant
+          gsoc:Endurant_Feature
+        ) ;
+    ] ;
   rdfs:label "direct spatial occupies"@en ;
   rdfs:range gsoc:Spatial_Region ;
   rdfs:subPropertyOf gsoc:isSpatiallyRelatedTo ;
@@ -1818,7 +1823,7 @@ gsoc:time_finishes
 gsoc:time_incomparable_to
   a owl:ObjectProperty ;
   rdfs:comment "A is incomparable to be if there is not enough information to determine an age relationship"@en ;
-  rdfs:comment "One of six binary relations between geolgoic events defined by Burns (1975)"@en ;
+  rdfs:comment "One of six binary relations between geologic events defined by Burns (1975)"@en ;
   rdfs:domain gsoc:Perdurant ;
   rdfs:label "age incomparable"@en ;
   rdfs:range gsoc:Perdurant ;
