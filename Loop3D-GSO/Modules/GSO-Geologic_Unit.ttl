@@ -23,7 +23,7 @@ gsgu:Allostratigraphic_Unit
 .
 gsgu:Alteration_Unit
   a owl:Class ;
-  rdfs:comment "Geologic unit defined by alteration process. Use gsog:isTransformedFrom relationship to link altered rock to protolith."@en ;
+  rdfs:comment "Geologic unit defined by alteration process. Use gsoc:isParticipantIn [a gspr:Metasomatism ;	gsoc:hasParticipant a gsog:Rock_Body ; [gsoc:hasRole [a gsoc:Protolith ] ] ] relationship to link altered rock to protolith. Participant could be part of a Geologic_Unit, or a Rock_Body hasConstituent lithology."@en ;
   rdfs:comment "dct:source--  CGI geologicunittype SKOS vocabulary 2012-11-24"@en ;
   rdfs:label "alteration unit"@en ;
   rdfs:subClassOf gsog:Geologic_Unit ;
@@ -247,10 +247,11 @@ gsgu:Pedostratigraphic_Unit
 .
 gsgu:Pluton
   a owl:Class ;
+  rdfs:comment "A pluton is any large igneous body that has congealed from magma underground. There are many sorts of pluton – including the lens-like and subhorizontal laccoliths and lopoliths, and the vertical or near-vertical sided stocks and batholiths. All these categories of pluton are defined on their overall apparent shape and relationship to the country rock. A batholith is the largest of the pluton types and by definition cover at least 100 square kilometres. A stock is a small discordant pluton, shaped like a batholith but falling below the necessary 100 square km in extent. (Dr Ted Nield, https://www.geolsoc.org.uk/Education-and-Careers/Ask-a-Geologist/Earth-Materials/Batholiths-and-Plutons "@en ;
   rdfs:comment "a body of intrusive rock, generally with a simple, regular margin, the whole being kilometre-scale or larger and with a cylindrical, lenticular or tabular shape; a pluton might consist of essentially one intrusion, or be a composite  of two or more spatially associated intrusions that are inferred to be related genetically."@en ;
   rdfs:comment "dct:Source -- based on Gillespie, M R, Stephenson, D, and Millward, D. 2008. BGS classification of lithodemic units: Proposals for classifying units of intrusive rock. British Geological Survey Research Report, RR/08/05. 31pp."@en ;
   rdfs:label "Pluton "@en ;
-  rdfs:subClassOf gsgu:Lithodemic_Unit ;
+  rdfs:subClassOf gsgu:Intrusion ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom [
@@ -296,7 +297,7 @@ gsgu:Sedimentary_Facies
 .
 gsgu:Suite
   a owl:Class ;
-  rdfs:comment "A geologic unit that comprises two or more associated Lithodemes, Plutons, Intrustions, or Igneous_Swarms of the same class (e.g., plutonic, metamorphic). For cartographic and hierarchical purposes, suite is comparable to group"@en ;
+  rdfs:comment "A geologic unit that comprises two or more associated Lithodemes, Plutons, Intrusions, or Igneous_Swarms of the same class (e.g., plutonic, metamorphic) that are interpreted to be genetically related. For cartographic and hierarchical purposes, suite is comparable to group"@en ;
   rdfs:comment "dct:source--  Based on NACSN-North American Commission on Stratigraphic Nomenclature, 2005, The American Association of Petroleum Geologists Bulletin, V. 89, No. 11, p. 1547-1591 . https://ngmdb.usgs.gov/Info/NACSN/Code2/code2.html#Article31Remarksa"@en ;
   rdfs:label "Suite"@en ;
   rdfs:subClassOf gsgu:Lithodemic_Unit ;
