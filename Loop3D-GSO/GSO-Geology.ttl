@@ -211,7 +211,7 @@ Contact(x) <--> exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RB
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-      owl:onClass :Geochronologic_Boundary ;
+      owl:onClass :Geologic_Time_Boundary ;
       owl:onProperty gsoc:isReferenceFor ;
     ] ;
   rdfs:subClassOf [
@@ -426,7 +426,7 @@ Contact(x) <--> exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RB
   rdfs:subClassOf :Rock_Object ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty gsoc:hasConstituent ;
+      owl:onProperty gsoc:hasMaterialConstituent ;
       owl:someValuesFrom :Rock_Material ;
     ] ;
 .
@@ -568,7 +568,6 @@ Contact(x) <--> exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RB
   rdfs:comment "A Geologic Time Date defined by the International Stratigraphic Commission, based on fiat assertion of a time coordinate."@en ;
   rdfs:comment "add SHACL rule that GSSA may not have property Simple_Uncertainty"@en ;
   rdfs:label "Global Standard Stratigraphic Age (GSSA)"@en ;
-  rdfs:subClassOf :Geologic_Time_Date ;
 .
 :GSSP
   a owl:Class ;
@@ -584,22 +583,6 @@ Contact(x) <--> exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RB
       a owl:Restriction ;
       owl:onProperty gsoc:hasReference ;
       owl:someValuesFrom :Stratotype ;
-    ] ;
-.
-:Geochronologic_Boundary
-  a owl:Class ;
-  rdfs:comment "A time instant that represents an event recorded by a reference physical statigraphic point. Revision: (2020-09-30) A temporal feature that is the boundary between two Geologic time Intervals, anchored by some stratigraphic point in the physical geologic record."@en ;
-  rdfs:label "Geochronologic Boundary"@en ;
-  rdfs:subClassOf gsoc:Temporal_Boundary ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty gsoc:directTemporalOccupies ;
-      owl:someValuesFrom :Geologic_Time_Date ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty gsoc:hasReference ;
-      owl:someValuesFrom :Stratigraphic_Point ;
     ] ;
 .
 :Geologic_Event
@@ -646,6 +629,22 @@ Contact(x) <--> exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RB
       owl:onProperty gsoc:hostedBy ;
     ] ;
 .
+:Geologic_Time_Boundary
+  a owl:Class ;
+  rdfs:comment "A time instant that represents an event recorded by a reference physical statigraphic point. Revision: (2020-09-30) A temporal feature that is the boundary between two Geologic time Intervals, anchored by some stratigraphic point in the physical geologic record."@en ;
+  rdfs:label "Geochronologic Boundary"@en ;
+  rdfs:subClassOf gsoc:Temporal_Boundary ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:determinedBy ;
+      owl:someValuesFrom :Stratigraphic_Point ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:directTemporalOccupies ;
+      owl:someValuesFrom :Geologic_Time_Date ;
+    ] ;
+.
 :Geologic_Time_Date
   a owl:Class ;
   rdfs:comment """A temporal coordinate value, located either by a point position (with uncertainty) on a time line, specified by a numeric coordinate (generally MYPB, but definitions of 'present' vary). Can be a GeochronologicBoundary if it is associated with a location in a particular stratigraphic section, or a GSSA if the numeric time coordinate is arbitrarily assigned.
@@ -675,30 +674,6 @@ Probably should specify a Temporal Reference System used to assign coordinate va
       owl:onClass :Rock_Body ;
       owl:onProperty gsoc:hasReference ;
     ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-      owl:onClass [
-          a owl:Class ;
-          owl:unionOf (
-              :Geologic_Time_Date
-              :Geochronologic_Boundary
-            ) ;
-        ] ;
-      owl:onProperty gsoc:time_finished_by ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-      owl:onClass [
-          a owl:Class ;
-          owl:unionOf (
-              :Geologic_Time_Date
-              :Geochronologic_Boundary
-            ) ;
-        ] ;
-      owl:onProperty gsoc:time_started_by ;
-    ] ;
 .
 :Geologic_Time_Scale
   a owl:Class ;
@@ -711,7 +686,7 @@ Probably should specify a Temporal Reference System used to assign coordinate va
           a owl:Class ;
           owl:unionOf (
               :Geologic_Time_Interval
-              :Geochronologic_Boundary
+              :Geologic_Time_Boundary
             ) ;
         ] ;
       owl:onProperty gsoc:hasPart ;
@@ -1476,24 +1451,6 @@ RBT (x) <--> RBD (x) ^ exists z forall y [(isPartOf (y,z) ^ hasHost (z,x)) -> (b
     ] ;
   rdfs:subPropertyOf :isGeologicallyRelatedTo ;
   owl:inverseOf :overprints ;
-.
-:isTransformedFrom
-  a owl:ObjectProperty ;
-  rdfs:comment "link from a subject rock_material to an object rock_material from which it was derived as the product of metamorphism, metasomatism, or alteration. Identifies protolith of composite genesis material."@en ;
-  rdfs:domain :Rock_Material ;
-  rdfs:label "has protolith"@en ;
-  rdfs:range :Rock_Material ;
-  rdfs:subPropertyOf gsoc:hasPrecursor ;
-  owl:inverseOf :isTransformedInto ;
-.
-:isTransformedInto
-  a owl:ObjectProperty ;
-  rdfs:comment "link from a subject rock_material to an object rock_material that is the product of metamorphism, metasomatism, or alteration of the subject rock."@en ;
-  rdfs:domain :Rock_Material ;
-  rdfs:label "protolith of"@en ;
-  rdfs:range :Rock_Material ;
-  rdfs:subPropertyOf gsoc:isFundamentallyRelatedTo ;
-  owl:inverseOf :isTransformedFrom ;
 .
 :lithophysae
   a owl:Class ;
