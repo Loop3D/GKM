@@ -10,15 +10,10 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 
-gsoc:gDependsOn
-  rdfs:subPropertyOf gsoc:dependsOn ;
+gsoc:Time_Region
+  rdfs:comment "Mapping: corresponds to http://www.w3.org/2006/time#TemporalEntity"@en ;
 .
-gsoc:hasQuality
-  rdfs:range gsoc:Quality ;
-.
-gsoc:hasRole
-  rdfs:range gsoc:Role ;
-.
+
 
 gsoc:Amount_Of_Matter
   a owl:Class ;
@@ -677,11 +672,6 @@ gsoc:Perdurant
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty gsoc:directTemporalLocation ;
-      owl:someValuesFrom gsoc:Temporal_Location ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
       owl:onProperty gsoc:directTemporalOccupies ;
       owl:someValuesFrom gsoc:Time_Region ;
     ] ;
@@ -1167,7 +1157,7 @@ gsoc:Time_Instant_Location
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty gsoc:hasValue ;
-      owl:someValuesFrom gsoc:Time_Numeric_Value ;
+      owl:someValuesFrom gsoc:Temporal_Value ;
     ] ;
 .
 gsoc:Time_Interval
@@ -1363,12 +1353,6 @@ gsoc:directSpatialOccupies
   rdfs:range gsoc:Spatial_Region ;
   rdfs:subPropertyOf gsoc:isSpatiallyRelatedTo ;
 .
-gsoc:directTemporalLocation
-  a owl:ObjectProperty ;
-  rdfs:label "direct Temporal Location"@en ;
-  rdfs:range gsoc:Temporal_Location ;
-  rdfs:subPropertyOf gsoc:isTemporallyRelatedTo ;
-.
 gsoc:directTemporalOccupies
   a owl:ObjectProperty ;
   rdfs:comment "property that associates a process or event with a specific temporal region"@en ;
@@ -1385,14 +1369,14 @@ gsoc:gDependsOn
   a owl:ObjectProperty ;
   rdfs:comment "generic  dependence" ;
   rdfs:label "g depends on "@en ;
+  rdfs:subPropertyOf gsoc:dependsOn ;
 .
 gsoc:hasConstituent
   a owl:ObjectProperty ;
   a owl:TransitiveProperty ;
   rdfs:comment "anchoring entity for a Feature"@en ;
   rdfs:comment "leave domain and range unconstrained; would need to add more of the high level ontologic entities (Physical Endurant, Perdurant) to specify here."@en ;
-  rdfs:label "constituted by "@en ;
-  rdfs:label "hasConstituent"@en ;
+  rdfs:label "has Constituent"@en ;
   rdfs:subPropertyOf gsoc:isFundamentallyRelatedTo ;
   owl:inverseOf gsoc:isConstituentOf ;
 .
@@ -1468,16 +1452,11 @@ gsoc:hasParticipant
   rdfs:subPropertyOf gsoc:isFundamentallyRelatedTo ;
   owl:inverseOf gsoc:isParticipantIn ;
 .
-gsoc:hasPrecursor
-  a owl:ObjectProperty ;
-  rdfs:comment "association from an endurant to some other endurant from which it was derived. Relates metamorphic rock to protolith, fossil to living organism."@en ;
-  rdfs:label "precursor "@en ;
-  rdfs:subPropertyOf gsoc:isFundamentallyRelatedTo ;
-.
 gsoc:hasQuality
   a owl:ObjectProperty ;
   rdfs:comment ""@en ;
   rdfs:label "has Quality "@en ;
+  rdfs:range gsoc:Quality ;
   rdfs:subPropertyOf gsoc:hasInherant ;
   owl:inverseOf gsoc:isQualityOf ;
 .
@@ -1496,6 +1475,7 @@ gsoc:hasRole
   a owl:ObjectProperty ;
   rdfs:comment "" ;
   rdfs:label "has role  "@en ;
+  rdfs:range gsoc:Role ;
   rdfs:subPropertyOf gsoc:hasInherant ;
   owl:inverseOf gsoc:hasRolePlayer ;
 .
@@ -1587,12 +1567,6 @@ gsoc:indirectSpatialOccupies
   rdfs:range gsoc:Spatial_Region ;
   rdfs:subPropertyOf gsoc:isSpatiallyRelatedTo ;
 .
-gsoc:indirectTemporalLocation
-  a owl:ObjectProperty ;
-  rdfs:label "indirect Temporal Location"@en ;
-  rdfs:range gsoc:Temporal_Location ;
-  rdfs:subPropertyOf gsoc:isTemporallyRelatedTo ;
-.
 gsoc:indirectTemporalOccupies
   a owl:ObjectProperty ;
   rdfs:comment "" ;
@@ -1629,12 +1603,7 @@ gsoc:isConstituentOf
   a owl:TransitiveProperty ;
   rdfs:subPropertyOf gsoc:isFundamentallyRelatedTo ;
 .
-gsoc:isDerivedFrom
-  a owl:ObjectProperty ;
-  rdfs:comment "relationship between a biogenic material or feature and the organism that produced the feature. For preserved body parts, relationship is direct; for trace fossil structures relationship is interpretive."@en ;
-  rdfs:label "Source organism "@en ;
-  rdfs:subPropertyOf gsoc:hasPrecursor ;
-.
+
 gsoc:isFundamentallyRelatedTo
   a owl:ObjectProperty ;
   rdfs:comment "relationships between Endurant, Perdurants, or Physical_Settings"@en ;
@@ -1910,6 +1879,7 @@ gsoc:time_younger_than
   rdfs:label "younger than"@en ;
   rdfs:subPropertyOf gsoc:time_disjoint ;
 .
+
 xsd:anySimpleType
   a rdfs:Datatype ;
 .
