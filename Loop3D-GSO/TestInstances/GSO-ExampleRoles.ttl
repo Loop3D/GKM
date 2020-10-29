@@ -180,20 +180,23 @@ rol:ontology
   owl:imports <http://loop3d.org/GSO/ontology/2020/1/loop3dmaster> ;
 .
 rol:plutonz
-  a gsog:Rock_Object ;
+  a gsgu:Pluton ;
   gsoc:hasPart [
       a gsog:Rock_Object ;
       a gslth:Metasedimentary_Rock ;
-      gsoc:hasRole [
-          a gsog:Pendant ;
-        ] ;
-      gsog:isTransformedFrom rol:formationx ;
+      gsoc:hasRole [  a gsog:Pendant ] ;
+	  gsoc:isParticipantIn [
+		a gspr:Metamorphic_Process ;
+		gsoc:hasParticipant [
+			a gsog:Rock_Body ;
+			gsoc:partOf rol:formationx ; 
+			gsoc:hasRole   [ a gsoc:Protolith ]
+		]
+	  ]
     ] ;
   gsoc:hasPart [
       a gslth:Granite ;
-      gsoc:hasRole [
-          a gsog:Main_Body ;
-        ] ;
+      gsoc:hasRole [a gsog:Main_Body ] ;
     ] ;
   rdfs:label "Pluton Z"@en ;
 .
