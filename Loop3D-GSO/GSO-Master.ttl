@@ -54,6 +54,16 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
+gsoc:Temporal_Boundary
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasConstituent ;
+      owl:someValuesFrom gsoc:Time_Instant ;
+    ] ;
+.
+gsog:GSSA
+  rdfs:subClassOf gsoc:Time_Instant ;
+.
 gsgu:Bedding_Thickness
   rdfs:subClassOf gsoq:Thickness ;
 .
@@ -82,4 +92,48 @@ gsgu:Bedding_Thickness
   owl:imports gsps:ontology ;
   owl:imports gsmin:ontology ;
   owl:imports gsuom:ontology ;
+.
+:Process_Input
+  a owl:Class ;
+  rdfs:comment "" ;
+  rdfs:label "Process Input "@en ;
+  rdfs:subClassOf :Process_Role ;
+.
+:Process_Output
+  a owl:Class ;
+  rdfs:comment "" ;
+  rdfs:label "Process Output "@en ;
+  rdfs:subClassOf :Process_Role ;
+.
+:Process_Role
+  a owl:Class ;
+  rdfs:comment "" ;
+  rdfs:label "Process Role "@en ;
+  rdfs:subClassOf gsoc:Role ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom gsoc:Endurant ;
+      owl:onProperty gsoc:hasRolePlayer ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom gsoc:Process ;
+      owl:onProperty gsoc:hasRoleObject ;
+    ] ;
+.
+:Protolith
+  a owl:Class ;
+  rdfs:comment "" ;
+  rdfs:label "Protolith "@en ;
+  rdfs:subClassOf :Process_Input ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom gsog:Rock_Body ;
+      owl:onProperty gsoc:hasRolePlayer ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom gspr:Metamorphic_Process ;
+      owl:onProperty gsoc:hasRoleObject ;
+    ] ;
 .
