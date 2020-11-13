@@ -18,7 +18,6 @@
 # imports: http://loop3d.org/GSO/ontology/2020/1/lithology/granularmaterial/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/lithology/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/lithology/particleaspectratio/ontology
-# imports: http://loop3d.org/GSO/ontology/2020/1/lithology/particleroundness/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/mineral/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/uom/ontology
 
@@ -54,18 +53,72 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-gsoc:Temporal_Boundary
+gsog:Geologic_Unit
+  rdfs:comment "Geologic unit is a particular type specifically dependent on some individual such as a particular process or event, or setting/context or location."@en ;
+.
+gsog:Non-Stratigraphic_Unit
+  a owl:Class ;
+  rdfs:comment "A geologic unit that was formed by processes such that it is not layered or layering does not follow law of superposition. Geologic unit not defined by spatio-temporal topology, e.g. does not obey laws of superposition"@en ;
+  rdfs:label "Non-Stratigraphic unit "@en ;
+  rdfs:subClassOf gsog:Geologic_Unit ;
+.
+gsog:Stratigraphic_Unit
+  a owl:Class ;
+  rdfs:comment "A geologic unit that is broadly speakign, stratified, and accumulated as layers obeying the law of superposition." ;
+  rdfs:label "Stratigraphic unit "@en ;
+  rdfs:subClassOf gsog:Geologic_Unit ;
+.
+gsgu:Allostratigraphic_Unit
+  rdfs:subClassOf gsog:Stratigraphic_Unit ;
+.
+gsgu:Artificial_Ground
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty gsoc:hasConstituent ;
-      owl:someValuesFrom gsoc:Time_Instant ;
+      owl:onProperty gsoc:isParticipantIn ;
+      owl:someValuesFrom gspr:Human_Activity ;
     ] ;
 .
-gsog:GSSA
-  rdfs:subClassOf gsoc:Time_Instant ;
+gsgu:Biostratigraphic_Unit
+  rdfs:subClassOf gsog:Stratigraphic_Unit ;
 .
-gsgu:Bedding_Thickness
-  rdfs:subClassOf gsoq:Thickness ;
+gsgu:Deformation_Unit
+  rdfs:subClassOf gsgu:Lithogenetic_Unit ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:isParticipantIn ;
+      owl:someValuesFrom gsog:Deformation ;
+    ] ;
+.
+gsgu:Excavation_Unit
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:isParticipantIn ;
+      owl:someValuesFrom gspr:Excavation ;
+    ] ;
+.
+gsgu:Geomorphologic_Unit
+  rdfs:subClassOf gsog:Non-Stratigraphic_Unit ;
+.
+gsgu:Lithodemic_Unit
+  rdfs:subClassOf gsog:Non-Stratigraphic_Unit ;
+.
+gsgu:Lithologic_Unit
+  rdfs:subClassOf gsog:Rock_Object ;
+.
+gsgu:Magnetostratigraphic_Unit
+  rdfs:subClassOf gsog:Stratigraphic_Unit ;
+.
+gsgu:Pedoderm
+  rdfs:subClassOf gsog:Non-Stratigraphic_Unit ;
+.
+gsgu:Pedostratigraphic_Unit
+  rdfs:subClassOf gsog:Stratigraphic_Unit ;
+.
+gsgu:Sedimentary_Facies
+  rdfs:subClassOf gsog:Stratigraphic_Unit ;
+.
+gsro:Stratigraphic_Part
+  rdfs:subClassOf gsog:Stratigraphic_Unit ;
 .
 <http://loop3d.org/GSO/ontology/2020/1/loop3dmaster>
   a owl:Ontology ;
@@ -89,7 +142,6 @@ gsgu:Bedding_Thickness
   owl:imports gsgm:ontology ;
   owl:imports gslth:ontology ;
   owl:imports gsar:ontology ;
-  owl:imports gsps:ontology ;
   owl:imports gsmin:ontology ;
   owl:imports gsuom:ontology ;
 .
