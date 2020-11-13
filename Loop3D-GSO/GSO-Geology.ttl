@@ -40,9 +40,6 @@ gsoc:Glass
       owl:onProperty gsoc:isConstituentOf ;
     ] ;
 .
-gsoc:time_interval_in
-  rdfs:range gsoc:Perdurant ;
-.
 :Additive_Process
   a owl:Class ;
   rdfs:comment "process that introduces new matter into the model space"@en ;
@@ -60,11 +57,11 @@ gsoc:time_interval_in
           a owl:Class ;
           owl:complementOf :Age_Rank ;
         ] ;
-      owl:onProperty gsoc:time_interval_in ;
+      owl:onProperty gsoc:timeIntervalIn ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty gsoc:time_interval_in ;
+      owl:onProperty gsoc:timeIntervalIn ;
       owl:someValuesFrom :Epoch ;
     ] ;
 .
@@ -73,7 +70,7 @@ gsoc:time_interval_in
   rdfs:comment "Specification of the strength of observed alteration. Can be used on Geologic_Unit or Rock_Material"@en ;
   rdfs:isDefinedBy "GeoSciML v4"@en ;
   rdfs:label "Alteration degree"@en ;
-  rdfs:subClassOf gsoc:Quality ;
+  rdfs:subClassOf gsoc:Determinable_Quality ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom [
@@ -135,7 +132,7 @@ gsoc:time_interval_in
   rdfs:comment "A body of rocks that includes all rocks, layered or unlayered, formed during a specific interval of geologic time, and only those rocks formed during that time span. Chronostratigraphic units are bounded by synchronous horizons. The rank and relative magnitude of the units in the chronostratigraphic hierarchy are a function of the length of the time interval that their rocks subtend, rather than of their physical thickness. (http://www.stratigraphy.org/upload/bak/chron.htm)"@en ;
   rdfs:comment "dct:source--  Salvador, A., 1994, International Stratigraphic Guide, Second Edition"@en ;
   rdfs:label "Chronostratigraphic unit"@en ;
-  rdfs:subClassOf :Geologic_Unit ;
+  rdfs:subClassOf :Stratigraphic_Unit ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom :Chronostratigraphic_Unit ;
@@ -170,35 +167,6 @@ gsoc:time_interval_in
   rdfs:comment "A sedimentary fabric in which a framework of rock fragments in contact with each other forms the body of a clastic rock, typically with finer-grained matrix or cement in the intersticies between fragments"@en ;
   rdfs:label "Clast supported "@en ;
   rdfs:subClassOf :Sedimentary_Fabric ;
-.
-:Complex
-  a owl:Class ;
-  rdfs:comment "A lithostratigraphic unit composed of diverse types of any class or classes or rocks (sedimentary, igneous, metamorphic) and characterized by irregularly mixed lithology or by highly complicated structural relations. https://stratigraphy.org/guide/litho ."@en ;
-  rdfs:label "Complex"@en ;
-  rdfs:subClassOf :Lithostratigraphic_Unit ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom [
-          a owl:Class ;
-          owl:unionOf (
-              :Facies
-              :Lithosome
-            ) ;
-        ] ;
-      owl:onProperty gsoc:hasPart ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom [
-          a owl:Class ;
-          owl:unionOf (
-              :Formation
-              :Group
-              :Supergroup
-            ) ;
-        ] ;
-      owl:onProperty gsoc:isPartOf ;
-    ] ;
 .
 :Contact
   a owl:Class ;
@@ -289,7 +257,7 @@ Contact(x) <--> exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RB
           a owl:Class ;
           owl:complementOf :Supereon ;
         ] ;
-      owl:onProperty gsoc:time_interval_contains ;
+      owl:onProperty gsoc:timeIntervalContains ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
@@ -306,7 +274,7 @@ Contact(x) <--> exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RB
                 ) ;
             ] ;
         ] ;
-      owl:onProperty gsoc:time_interval_in ;
+      owl:onProperty gsoc:timeIntervalIn ;
     ] ;
 .
 :Eonothem
@@ -335,7 +303,7 @@ Contact(x) <--> exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RB
                 ) ;
             ] ;
         ] ;
-      owl:onProperty gsoc:time_interval_in ;
+      owl:onProperty gsoc:timeIntervalIn ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
@@ -353,11 +321,11 @@ Contact(x) <--> exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RB
                 ) ;
             ] ;
         ] ;
-      owl:onProperty gsoc:time_interval_contains ;
+      owl:onProperty gsoc:timeIntervalContains ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty gsoc:time_interval_in ;
+      owl:onProperty gsoc:timeIntervalIn ;
       owl:someValuesFrom [
           a owl:Class ;
           owl:unionOf (
@@ -384,7 +352,7 @@ Contact(x) <--> exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RB
                 ) ;
             ] ;
         ] ;
-      owl:onProperty gsoc:time_interval_contains ;
+      owl:onProperty gsoc:timeIntervalContains ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
@@ -401,11 +369,11 @@ Contact(x) <--> exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RB
                 ) ;
             ] ;
         ] ;
-      owl:onProperty gsoc:time_interval_in ;
+      owl:onProperty gsoc:timeIntervalIn ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty gsoc:time_interval_in ;
+      owl:onProperty gsoc:timeIntervalIn ;
       owl:someValuesFrom :Eon ;
     ] ;
 .
@@ -423,7 +391,7 @@ Contact(x) <--> exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RB
   rdfs:comment "Represents a particular body of rock that is a lateral variant of a lithostratigraphic unit, or a variant of a lithodemic unit. Contrast with lithosome in being a particular, connected body of rock, as opposed to a kind of rock body that is repeated in many places in a unit."@en ;
   rdfs:comment "dct:source--  CGI rockbodypart vocabulary 2016-11-21 "@en ;
   rdfs:label "Facies"@en ;
-  rdfs:subClassOf :Rock_Object ;
+  rdfs:subClassOf :Geologic_Unit ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty gsoc:hasMaterialConstituent ;
@@ -453,7 +421,7 @@ Contact(x) <--> exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RB
   a owl:Class ;
   rdfs:comment "Quality that specifies the relative movement between two sides of a fault.  Component qualities include movement sense, separation sense, slip, movement magnitude, movement vector."@en ;
   rdfs:label "Fault displacement"@en ;
-  rdfs:subClassOf gsoc:Quality ;
+  rdfs:subClassOf gsoc:Determinable_Quality ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom [
@@ -470,7 +438,7 @@ Contact(x) <--> exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RB
   a owl:Class ;
   rdfs:comment "a vector (magnitude and orientation) specifying the distance between the intersection of a surface on opposite sides of a displacment surface. In 3-D is the projection of a vector normal to the displaced surface into the displacment surface, but might also be specified as offset of the intersection of displacement surface and marker surface in some other profile view (e.g. horizontal/map view, or a cross section)"@en ;
   rdfs:label "Separation"@en ;
-  rdfs:subClassOf gsoc:Quality ;
+  rdfs:subClassOf gsoc:Determinable_Quality ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom :Fault_Displacement ;
@@ -481,7 +449,7 @@ Contact(x) <--> exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RB
   a owl:Class ;
   rdfs:comment "a vector (magnitude and orientation) that links a peircing point on opposite sides of a displacement surface."@en ;
   rdfs:label "Slip"@en ;
-  rdfs:subClassOf gsoc:Quality ;
+  rdfs:subClassOf gsoc:Determinable_Quality ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom :Fault_Displacement ;
@@ -501,7 +469,7 @@ Contact(x) <--> exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RB
   rdfs:comment "Subclasses are defined based on concave/convex geometry of fold relative to earth surface, and relationship to younging direction in folded strata if known."@en ;
   rdfs:label "Fold"@en ;
   rdfs:seeAlso <http://linked.data.gov.au/def/geofeatures/Fold> ;
-  rdfs:subClassOf gsoc:Morphologic_Feature ;
+  rdfs:subClassOf gsoc:Aspatial_Morphologic_Feature ;
   rdfs:subClassOf :Geologic_Structure ;
   rdfs:subClassOf [
       a owl:Restriction ;
@@ -568,6 +536,12 @@ Contact(x) <--> exists y,z [host(y,x) ^ host(z,x) ^ touches (y,z) ^ RBS (y) ^ RB
   rdfs:comment "A Geologic Time Date defined by the International Stratigraphic Commission, based on fiat assertion of a time coordinate."@en ;
   rdfs:comment "add SHACL rule that GSSA may not have property Simple_Uncertainty"@en ;
   rdfs:label "Global Standard Stratigraphic Age (GSSA)"@en ;
+  rdfs:subClassOf gsoc:Time_Instant ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom gsoc:Assertion ;
+      owl:onProperty gsoc:determinedBy ;
+    ] ;
 .
 :GSSP
   a owl:Class ;
@@ -652,6 +626,11 @@ Probably should specify a Temporal Reference System used to assign coordinate va
   rdfs:comment "Need SHACL rule that gsoc:Simple_Uncertainty and Statistical_Calculation are recommended"@en ;
   rdfs:label "Geologic Time Date"@en ;
   rdfs:subClassOf gsoc:Time_Instant ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom :Stratigraphic_Point ;
+      owl:onProperty gsoc:determinedBy ;
+    ] ;
 .
 :Geologic_Time_Interval
   a owl:Class ;
@@ -776,13 +755,7 @@ Probably should specify a Temporal Reference System used to assign coordinate va
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty gsoc:hasPart ;
-      owl:someValuesFrom [
-          a owl:Class ;
-          owl:unionOf (
-              :Complex
-              :Formation
-            ) ;
-        ] ;
+      owl:someValuesFrom :Formation ;
     ] ;
 .
 :Inclusion
@@ -823,7 +796,7 @@ Probably should specify a Temporal Reference System used to assign coordinate va
   rdfs:comment """dct:source--  Hobbs BE, Means WD, & Williams PF. (1976). An outline of structural geology. John Wiley & sons, p.73.
  Twiss RJ and Moores EM. (2007). Structural Geology, 2nd Edition, WH Freeman and Co., p.497; Wikipedia https://en.wikipedia.org/wiki/Fabric_(geology); Neuendorf et al., 2005, AGI Glossary of Geology; Sander, 1930."""@en ;
   rdfs:label "Fabric "@en ;
-  rdfs:subClassOf gsoc:Material_Feature ;
+  rdfs:subClassOf gsoc:Aspatial_Morphologic_Feature ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty gsoc:hostedBy ;
@@ -845,7 +818,7 @@ Probably should specify a Temporal Reference System used to assign coordinate va
   rdfs:comment "Geologic unit defined on the basis of observable and distinctive lithologic properties or combination of lithologic properties and stratigraphic relationships. Denotes a particular body of rock."@en ;
   rdfs:comment "dct:source--  Salvador, A., 1994, International Stratigraphic Guide, Second Edition"@en ;
   rdfs:label "Lithostratigraphic Unit"@en ;
-  rdfs:subClassOf :Geologic_Unit ;
+  rdfs:subClassOf :Stratigraphic_Unit ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom :Lithostratigraphic_Unit ;
@@ -980,7 +953,7 @@ Probably should specify a Temporal Reference System used to assign coordinate va
                 ) ;
             ] ;
         ] ;
-      owl:onProperty gsoc:time_interval_contains ;
+      owl:onProperty gsoc:timeIntervalContains ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
@@ -996,11 +969,11 @@ Probably should specify a Temporal Reference System used to assign coordinate va
                 ) ;
             ] ;
         ] ;
-      owl:onProperty gsoc:time_interval_in ;
+      owl:onProperty gsoc:timeIntervalIn ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty gsoc:time_interval_in ;
+      owl:onProperty gsoc:timeIntervalIn ;
       owl:someValuesFrom :Era ;
     ] ;
 .
@@ -1012,6 +985,7 @@ Probably should specify a Temporal Reference System used to assign coordinate va
 .
 :Rock_Body_Bottom
   a owl:Class ;
+  rdfs:comment "Constraint: rock body must be a stratigraphic unit for which 'top' and 'bottom' are meaningful."@en ;
   rdfs:comment """Rock Body Bottom (RBB):
 The bottom surface of a rock body.
 RBT (x) <--> RBD (x) ^ exists z forall y [isPartOf (y,z) ^ hasHost (z,x) -> above (y,x) v isPartOf (y,x)]"""@en ;
@@ -1024,7 +998,12 @@ RBT (x) <--> RBD (x) ^ exists z forall y [isPartOf (y,z) ^ hasHost (z,x) -> abov
 RBD (x) <--> SF (x) ^ exists y [RB (y) ^ hosts (y,x)] 
 The exterior-facing material of a rock body.  A rock body boundary can have a thickness physical property"""@en ;
   rdfs:label "Rock Body Boundary"@en ;
-  rdfs:subClassOf gsoc:Physical_Boundary ;
+  rdfs:subClassOf gsoc:Material_Boundary ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom :Rock_Body ;
+      owl:onProperty gsoc:isPartOf ;
+    ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom :Rock_Body_Boundary ;
@@ -1033,6 +1012,11 @@ The exterior-facing material of a rock body.  A rock body boundary can have a th
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty gsoc:hostedBy ;
+      owl:someValuesFrom :Rock_Body ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:isPartOf ;
       owl:someValuesFrom :Rock_Body ;
     ] ;
 .
@@ -1049,6 +1033,7 @@ The exterior-facing material of a rock body.  A rock body boundary can have a th
 .
 :Rock_Body_Top
   a owl:Class ;
+  rdfs:comment "Constraint: rock body must be a stratigraphic unit for which 'top' and 'bottom' are meaningful."@en ;
   rdfs:comment """Rock Body Top (RBT):
 The top surface of a rock body.
 RBT (x) <--> RBD (x) ^ exists z forall y [(isPartOf (y,z) ^ hasHost (z,x)) -> (below (y,x) v isPartOf (y,x))]"""@en ;
@@ -1201,7 +1186,7 @@ RBT (x) <--> RBD (x) ^ exists z forall y [(isPartOf (y,z) ^ hasHost (z,x)) -> (b
 .
 :Stratigraphic_Section
   a owl:Class ;
-  rdfs:comment "A rock object that represents a continuous strip of rock material that includes a sequence of stratified layers."@en ;
+  rdfs:comment "A rock object that represents a continuous strip of rock material that includes (samples) a sequence of stratified layers."@en ;
   rdfs:label "Stratigraphic Section"@en ;
   rdfs:subClassOf :Rock_Object ;
 .
@@ -1234,7 +1219,7 @@ RBT (x) <--> RBD (x) ^ exists z forall y [(isPartOf (y,z) ^ hasHost (z,x)) -> (b
                 ) ;
             ] ;
         ] ;
-      owl:onProperty gsoc:time_interval_in ;
+      owl:onProperty gsoc:timeIntervalIn ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
@@ -1251,11 +1236,11 @@ RBT (x) <--> RBD (x) ^ exists z forall y [(isPartOf (y,z) ^ hasHost (z,x)) -> (b
                 ) ;
             ] ;
         ] ;
-      owl:onProperty gsoc:time_interval_contains ;
+      owl:onProperty gsoc:timeIntervalContains ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty gsoc:time_interval_in ;
+      owl:onProperty gsoc:timeIntervalIn ;
       owl:someValuesFrom :Period ;
     ] ;
 .
@@ -1285,11 +1270,11 @@ RBT (x) <--> RBD (x) ^ exists z forall y [(isPartOf (y,z) ^ hasHost (z,x)) -> (b
           a owl:Class ;
           owl:complementOf :Supereon ;
         ] ;
-      owl:onProperty gsoc:time_interval_contains ;
+      owl:onProperty gsoc:timeIntervalContains ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty gsoc:time_interval_contains ;
+      owl:onProperty gsoc:timeIntervalContains ;
       owl:someValuesFrom :Eon ;
     ] ;
 .
@@ -1302,7 +1287,6 @@ RBT (x) <--> RBD (x) ^ exists z forall y [(isPartOf (y,z) ^ hasHost (z,x)) -> (b
       owl:someValuesFrom [
           a owl:Class ;
           owl:unionOf (
-              :Complex
               :Formation
               :Group
             ) ;
@@ -1490,7 +1474,7 @@ RBT (x) <--> RBD (x) ^ exists z forall y [(isPartOf (y,z) ^ hasHost (z,x)) -> (b
   a owl:ObjectProperty ;
   rdfs:comment "Source TimeInterval ends at the beginning of the target TimeInterval; there is no intervening time; inverse of age_met_by"@en ;
   rdfs:label "next time interval"@en ;
-  rdfs:subPropertyOf gsoc:time_meets ;
+  rdfs:subPropertyOf gsoc:timeMeets ;
 .
 :ontology
   a owl:Ontology ;
@@ -1536,33 +1520,33 @@ RBT (x) <--> RBD (x) ^ exists z forall y [(isPartOf (y,z) ^ hasHost (z,x)) -> (b
   a owl:ObjectProperty ;
   rdfs:comment "Source TimeInterval starts at the end of the target TimeInterval; there is no intervening time; inverse of meets"@en ;
   rdfs:label "previous time interval"@en ;
-  rdfs:subPropertyOf gsoc:time_met_by ;
+  rdfs:subPropertyOf gsoc:timeMetBy ;
 .
-:time_instant_finishes
+:timeInstantFinishes
   a owl:ObjectProperty ;
   rdfs:comment "assign a younger age boundary as a time instant for a time interval"@en ;
   rdfs:label "younger bounding time position"@en ;
   rdfs:range gsoc:Time_Instant ;
-  rdfs:subPropertyOf gsoc:time_finishes ;
+  rdfs:subPropertyOf gsoc:timeFinishes ;
+.
+:timeIntervalFinishes
+  a owl:ObjectProperty ;
+  rdfs:comment "assign a younger age boundary for a time interval as a time interval, e.g. Jurassic thru Cretaceous, younger age is Cretaceous."@en ;
+  rdfs:label "younger bounding time interval"@en ;
+  rdfs:subPropertyOf gsoc:timeFinishes ;
 .
 :time_instant_starts
   a owl:ObjectProperty ;
   rdfs:comment "assign an older age boundary as a time instant for a time interval"@en ;
   rdfs:label "older bounding time position"@en ;
   rdfs:range gsoc:Time_Instant ;
-  rdfs:subPropertyOf gsoc:time_starts ;
-.
-:time_interval_finishes
-  a owl:ObjectProperty ;
-  rdfs:comment "assign a younger age boundary for a time interval as a time interval, e.g. Jurassic thru Cretaceous, younger age is Cretaceous."@en ;
-  rdfs:label "younger bounding time interval"@en ;
-  rdfs:subPropertyOf gsoc:time_finishes ;
+  rdfs:subPropertyOf gsoc:timeStarts ;
 .
 :time_interval_starts
   a owl:ObjectProperty ;
   rdfs:comment "assign an older age boundary for a time interval as an interval, e.g. Jurassic thru Cretaceous, older age is Jurassic."@en ;
   rdfs:label "older bounding time interval"@en ;
-  rdfs:subPropertyOf gsoc:time_starts ;
+  rdfs:subPropertyOf gsoc:timeStarts ;
 .
 :underlies
   a owl:ObjectProperty ;
