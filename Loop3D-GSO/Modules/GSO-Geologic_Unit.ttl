@@ -8,6 +8,7 @@
 @prefix gsoc: <http://loop3d.org/GSO/ontology/2020/1/common/> .
 @prefix gsog: <http://loop3d.org/GSO/ontology/2020/1/geologicfeature/> .
 @prefix gsoq: <http://loop3d.org/GSO/ontology/2020/1/geologicquality/> .
+@prefix gsro: <http://loop3d.org/GSO/ontology/2020/1/geologicunit/rockobject/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -19,14 +20,13 @@ gsgu:Allostratigraphic_Unit
   rdfs:comment "Geologic unit defined by bounding surfaces. Not necessarily stratified. Donovon (2004, IUGS abstract Florence) makes good case for use of a noncommittal term for the bounding surface. While there may be no agreement that a given stratal boundary is a discontinuity, there is consensus that all the identified boundaries are stratal surfaces. Includes: 1. Unconformity bounded units (Salvador 1994), defined by bounding stratigraphic discontinuities ('significant unconformities', unconformity is defined as surface of erosion in Salvador 1994). 2. Sequence stratigraphic unit, an allostratigraphic unit that is used to interpret the depositional origin of sedimentary strata and assumes, though this is not always stated, an implicit connection to base level change. It does this by establishing how the sequence of strata accumulated in order in the sedimentary section over a subdividing framework of surfaces."@en ;
   rdfs:comment "dct:source--  This vocabulary, Salvador, 1994, Donovon 2004 IUGS abstract."@en ;
   rdfs:label "allostratigraphic unit"@en ;
-  rdfs:subClassOf gsog:Geologic_Unit ;
 .
 gsgu:Alteration_Unit
   a owl:Class ;
   rdfs:comment "Geologic unit defined by alteration process. Use gsoc:isParticipantIn [a gspr:Metasomatism ;	gsoc:hasParticipant a gsog:Rock_Body ; [gsoc:hasRole [a gsoc:Protolith ] ] ] relationship to link altered rock to protolith. Participant could be part of a Geologic_Unit, or a Rock_Body hasConstituent lithology."@en ;
   rdfs:comment "dct:source--  CGI geologicunittype SKOS vocabulary 2012-11-24"@en ;
   rdfs:label "alteration unit"@en ;
-  rdfs:subClassOf gsog:Geologic_Unit ;
+  rdfs:subClassOf gsgu:Lithogenetic_Unit ;
 .
 gsgu:Artificial_Ground
   a owl:Class ;
@@ -40,7 +40,7 @@ gsgu:Bedding_Pattern
   rdfs:comment "Term(s) specifying patterns of bedding thickness or relationships between bedding packages. (eg; thinning upward, thickening upward). A disposition."@en ;
   rdfs:isDefinedBy "GeoSciML v4"@en ;
   rdfs:label "Bedding pattern"@en ;
-  rdfs:subClassOf gsoc:Quality ;
+  rdfs:subClassOf gsoc:Determinable_Quality ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom [
@@ -49,7 +49,6 @@ gsgu:Bedding_Pattern
               gsog:Geologic_Unit
               gsog:Facies
               gsog:Lithosome
-              <http://loop3d.org/GSO/ontology/2020/1/geologicunit/rockobject/Stratigraphic_Part>
             ) ;
         ] ;
       owl:onProperty gsoc:isQualityOf ;
@@ -65,7 +64,7 @@ gsgu:Bedding_Style
   rdfs:comment "Term(s) specifying the style of bedding in a stratified geologic unit, e.g. lenticular, irregular, planar, vague, massive"@en ;
   rdfs:isDefinedBy "GeoSciML v4"@en ;
   rdfs:label "Bedding style"@en ;
-  rdfs:subClassOf gsoc:Quality ;
+  rdfs:subClassOf gsoc:Determinable_Quality ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom [
@@ -74,7 +73,6 @@ gsgu:Bedding_Style
               gsog:Geologic_Unit
               gsog:Facies
               gsog:Lithosome
-              <http://loop3d.org/GSO/ontology/2020/1/geologicunit/rockobject/Stratigraphic_Part>
             ) ;
         ] ;
       owl:onProperty gsoc:isQualityOf ;
@@ -89,13 +87,13 @@ gsgu:Bedding_Thickness
   a owl:Class ;
   rdfs:comment "Quality to specify thickness of bedding; can either be term or a numeric_Value. subclass of gsoq:Thickness"@en ;
   rdfs:label "Bedding Thickness "@en ;
+  rdfs:subClassOf gsoq:Thickness ;
 .
 gsgu:Biostratigraphic_Unit
   a owl:Class ;
   rdfs:comment "Geologic unit defined based on fossil content. Five kinds of biozones are recognized by the revised NACSN (Lenz et al., 2000, Note 64, a recommended complete replacement of Articles 48 through 54 of the North American Stratigraphic Code (NACSN, 1983) accepted for publication 2000.): range biozone, interval biozone, lineage biozone, assemblage biozone, and abundance biozone. These represent different approaches to defining and recognizing biozones."@en ;
   rdfs:comment "dct:source--  Lenz et al., 2000, Note 64 (see AAPG Bulletin, v. 89, no. 11, November 2005), North American Stratigraphic Code, 1983"@en ;
   rdfs:label "biostratigraphic unit"@en ;
-  rdfs:subClassOf gsog:Geologic_Unit ;
 .
 gsgu:Complex
   a owl:Class ;
@@ -122,14 +120,13 @@ gsgu:Exposure
   a owl:Class ;
   rdfs:comment "how material is exposed at Earth surface, e.g. poorly exposed, well exposed."@en ;
   rdfs:label "Exposure"@en ;
-  rdfs:subClassOf gsoc:Quality ;
+  rdfs:subClassOf gsoc:Determinable_Quality ;
 .
 gsgu:Geomorphologic_Unit
   a owl:Class ;
   rdfs:comment "Geologic unit defined by surface landform, e.g. hummocky moraine"@en ;
   rdfs:comment "dct:source--  CGI geologicunittype SKOS vocabulary 2012-11-24"@en ;
   rdfs:label "geomorphologic unit"@en ;
-  rdfs:subClassOf gsog:Geologic_Unit ;
 .
 gsgu:Geophysical_Unit
   a owl:Class ;
@@ -168,7 +165,7 @@ gsgu:Landform_Disposition
   rdfs:comment "Describes the nature of outcrops formed by a Rock Body. Examples: bouldery, cliff-forming, ledge-forming, slope-forming. Assign free text string value for now, controlled vocabulary is the goal."@en ;
   rdfs:isDefinedBy "GeoSciML v4"@en ;
   rdfs:label "Outcrop character"@en ;
-  rdfs:subClassOf gsoc:Quality ;
+  rdfs:subClassOf gsoc:Determinable_Quality ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom [
@@ -177,6 +174,7 @@ gsgu:Landform_Disposition
               gsog:Geologic_Unit
               gsog:Facies
               gsog:Lithosome
+              gsog:Stratigraphic_Section
               gsog:Rock_Material
             ) ;
         ] ;
@@ -201,7 +199,6 @@ gsgu:Lithodemic_Unit
   rdfs:comment "a defined body of predominantly intrusive, highly deformed, and (or) highly metamorphosed rock, distinguished and delimited on the basis of rock characteristics (NACSN, 2005)"@en ;
   rdfs:comment "dct:source--  NACSN-North American Commission on Stratigraphic Nomenclature, 2005, The American Association of Petroleum Geologists Bulletin, V. 89, No. 11, p. 1547-1591 . https://ngmdb.usgs.gov/Info/NACSN/Code2/code2.html#Article31Remarksa"@en ;
   rdfs:label "lithodemic unit"@en ;
-  rdfs:subClassOf gsog:Geologic_Unit ;
 .
 gsgu:Lithogenetic_Unit
   a owl:Class ;
@@ -212,10 +209,9 @@ gsgu:Lithogenetic_Unit
 .
 gsgu:Lithologic_Unit
   a owl:Class ;
-  rdfs:comment "Geologic unit defined by lithology independent of relationships to other units. Denotes a 'kind' of rock body characterized by lithology, e.g. basaltic rocks. Does not necessarily represent a single genetically related or connected package of material."@en ;
+  rdfs:comment "A rock body defined by lithology independent of relationships to other units. Denotes a 'kind' of rock body characterized by lithology, e.g. basaltic rocks. Does not necessarily represent a single genetically related or connected package of material."@en ;
   rdfs:comment "dct:source--  CGI geologicunittype SKOS vocabulary 2012-11-24"@en ;
   rdfs:label "lithologic unit"@en ;
-  rdfs:subClassOf gsog:Geologic_Unit ;
 .
 gsgu:Magnetostratigraphic_Unit
   a owl:Class ;
@@ -236,14 +232,12 @@ gsgu:Pedoderm
   rdfs:comment "Geologic unit defined based on soil development and character. Pedoderm is not a surface classification unit because soil classification requires knowledge of the soil profile, which always extends some distance beneath the surface."@en ;
   rdfs:comment "dct:source--  CGI geologicunittype SKOS vocabulary 2012-11-24"@en ;
   rdfs:label "pedoderm"@en ;
-  rdfs:subClassOf gsog:Geologic_Unit ;
 .
 gsgu:Pedostratigraphic_Unit
   a owl:Class ;
   rdfs:comment "Geologic unit that represents a single pedologic horizon in a sequence of strata (consolidated or non-consolidated). The presence of an overlying geologic unit is required, but locally the soil horizon may be at the Earth surface (in which case is may be coincident with a Pedoderm). See discussion at https://www.seegrid.csiro.au/twiki/bin/view/CGIModel/PedostratigraphicUnit"@en ;
   rdfs:comment "dct:source--  North American Commission on Stratigraphic Nomenclature, 1983, Morrison, 1995, INQUA/ISSS newsletter, Nov. 1995http://fadr.msu.ru/inqua/nl-archive/nl-8-11/howcan.html, ISSN 0256-2340."@en ;
   rdfs:label "pedostratigraphic unit"@en ;
-  rdfs:subClassOf gsog:Geologic_Unit ;
 .
 gsgu:Pluton
   a owl:Class ;
