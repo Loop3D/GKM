@@ -22,7 +22,6 @@
 
 <http://loop3d.org/GSO/ontology/2020/1/foldexample>
   a owl:Ontology ;
-
   owl:imports <http://loop3d.org/GSO/ontology/2020/1/loop3dmaster> ;
   owl:versionIRI <http://loop3d.org/GSO/ontology/2020/1/foldexample> ;
 .
@@ -35,17 +34,23 @@ exfold:Fold_1
           a gsoq:Line_Orientation ;
           gsoc:hasQuality [
               a gsoq:Azimuth ;
-              gsoc:hasDataValue "330"^^xsd:decimal ;
-              gsoc:hasUOM [
-                  a gsuom:degree ;
-                ] ;
+			  gsoc:hasQuality [
+				  a gsoc:Numeric_Value ; 
+				  gsoc:hasDataValue "330"^^xsd:decimal ;
+				  gsoc:hasUOM [
+					  a gsuom:degree ;
+					] ;
+				];
             ] ;
           gsoc:hasQuality [
               a gsoq:Plunge ;
-              gsoc:hasDataValue "33"^^xsd:decimal ;
-              gsoc:hasUOM [
-                  a gsuom:degree ;
-                ] ;
+			  gsoc:hasQuality [
+				  a gsoc:Numeric_Value ; 
+				  gsoc:hasDataValue "33"^^xsd:decimal ;
+				  gsoc:hasUOM [
+					  a gsuom:degree ;
+					] ;
+				];
             ] ;
         ] ;
       gsoc:hosts exfold:HingeSurface_1 ;
@@ -53,11 +58,12 @@ exfold:Fold_1
     ] ;
   gsoc:hasQuality [
       a gssf:Fold_Amplitude ;
-      gsoc:hasDataValue "10"^^xsd:decimal ;
-      gsoc:hasUOM [
-          a gsuom:meter ;
-        ] ;
+	  gsoc:hasQuality [
+		a gsoc:Numeric_Value ; 
+		gsoc:hasDataValue "10"^^xsd:decimal ;
+		gsoc:hasUOM [ a gsuom:meter ] ;
     ] ;
+  ];
   rdfs:comment "test fold properties"@en ;
   rdfs:label "is test fold"@en ;
 .
@@ -65,23 +71,32 @@ exfold:HingeSurface_1
   a gssf:Fold_Hinge_Surface ;
   gsoc:hasQuality [
 	a gsoq:Plane_Orientation ;
-	gsoc:hasValue fold:Steeply_Inclined
+	gsoc:hasQuality [
+        a gsoq:Dip ;
+		gsoc:hasValue gsoq:Steeply_Inclined
 	];
+  ];
   gsoc:hasQuality [
-      a gsoq:Plane_Orientation_dip_dipdir ;
+      a gsoq:Plane_Orientation ;
+	  gsoc:hasReferenceSystem gsoc:Plane_Dip_Dip_Direction ; 
       gsoc:hasQuality [
           a gsoq:Azimuth ;
-          gsoc:hasDataValue "310"^^xsd:decimal ;
-          gsoc:hasUOM [
-              a gsuom:degree ;
+		  gsoc:hasQuality [
+			  a gsoc:Numeric_Value ; 
+			  gsoc:hasDataValue "310"^^xsd:decimal ;
+			  gsoc:hasUOM [
+				  a gsuom:degree ;
             ] ;
+			];
         ] ;
       gsoc:hasQuality [
-          a gsoq:Dip ;
-          gsoc:hasDataValue "78"^^xsd:decimal ;
-          gsoc:hasUOM [
-              a gsuom:degree ;
-            ] ;
+          a gsoq:Dip [
+			  a gsoc:Numeric_Value ;
+			  gsoc:hasDataValue "78"^^xsd:decimal ;
+			  gsoc:hasUOM [
+				  a gsuom:degree ;
+				] 
+			]
         ] ;
     ] ;
 .
