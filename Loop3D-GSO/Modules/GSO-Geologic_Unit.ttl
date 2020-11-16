@@ -1,7 +1,5 @@
 # baseURI: http://loop3d.org/GSO/ontology/2020/1/geologicunit/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/common/ontology
-# imports: http://loop3d.org/GSO/ontology/2020/1/metamorphicfacies/ontology
-# imports: http://loop3d.org/GSO/ontology/2020/1/metamorphicgrade/ontology
 
 @prefix : <http://loop3d.org/GSO/ontology/2020/1/geologicunit/ontology#> .
 @prefix gsgu: <http://loop3d.org/GSO/ontology/2020/1/geologicunit/> .
@@ -14,6 +12,7 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
 
 gsgu:Allostratigraphic_Unit
   a owl:Class ;
@@ -43,18 +42,6 @@ gsgu:Bedding_Pattern
   rdfs:subClassOf gsoc:Determinable_Quality ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:allValuesFrom [
-          a owl:Class ;
-          owl:unionOf (
-              gsog:Geologic_Unit
-              gsog:Facies
-              gsog:Lithosome
-            ) ;
-        ] ;
-      owl:onProperty gsoc:isQualityOf ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
       owl:onProperty gsoc:hasDataValue ;
       owl:someValuesFrom xsd:string ;
     ] ;
@@ -67,18 +54,6 @@ gsgu:Bedding_Style
   rdfs:subClassOf gsoc:Determinable_Quality ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:allValuesFrom [
-          a owl:Class ;
-          owl:unionOf (
-              gsog:Geologic_Unit
-              gsog:Facies
-              gsog:Lithosome
-            ) ;
-        ] ;
-      owl:onProperty gsoc:isQualityOf ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
       owl:onProperty gsoc:hasDataValue ;
       owl:someValuesFrom xsd:string ;
     ] ;
@@ -87,7 +62,6 @@ gsgu:Bedding_Thickness
   a owl:Class ;
   rdfs:comment "Quality to specify thickness of bedding; can either be term or a numeric_Value. subclass of gsoq:Thickness"@en ;
   rdfs:label "Bedding Thickness "@en ;
-  rdfs:subClassOf gsoq:Thickness ;
 .
 gsgu:Biostratigraphic_Unit
   a owl:Class ;
@@ -133,13 +107,11 @@ gsgu:Geophysical_Unit
   rdfs:comment "Geologic unit defined by its geophysical characteristics. Denotes that the properties used to define the unit are measured by intrumental techniques, not directly observable by humans, e.g. density, magnetic susceptibility, magnetization, electrical conductivity."@en ;
   rdfs:comment "dct:source--  CGI geologicunittype SKOS vocabulary 2012-11-24"@en ;
   rdfs:label "geophysical unit"@en ;
-  rdfs:subClassOf gsog:Geologic_Unit ;
 .
 gsgu:Igneous_Facies
   a owl:Class ;
   rdfs:comment "a lithologic facies within an igneous rock body. Sometimes called 'phase', e.g. porphyritic facies, fine-grained facies."@en ;
   rdfs:label "Igneous Facies "@en ;
-  rdfs:subClassOf gsog:Facies ;
 .
 gsgu:Igneous_Swarm
   a owl:Class ;
@@ -154,11 +126,6 @@ gsgu:Intrusion
   rdfs:comment "dct:Source -- based on Gillespie, M R, Stephenson, D, and Millward, D. 2008. BGS classification of lithodemic units: Proposals for classifying units of intrusive rock. British Geological Survey Research Report, RR/08/05. 31pp."@en ;
   rdfs:label "Intrusion "@en ;
   rdfs:subClassOf gsgu:Lithodemic_Unit ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom gsog:Facies ;
-      owl:onProperty gsoc:hasPart ;
-    ] ;
 .
 gsgu:Landform_Disposition
   a owl:Class ;
@@ -166,20 +133,7 @@ gsgu:Landform_Disposition
   rdfs:isDefinedBy "GeoSciML v4"@en ;
   rdfs:label "Outcrop character"@en ;
   rdfs:subClassOf gsoc:Determinable_Quality ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom [
-          a owl:Class ;
-          owl:unionOf (
-              gsog:Geologic_Unit
-              gsog:Facies
-              gsog:Lithosome
-              gsog:Stratigraphic_Section
-              gsog:Rock_Material
-            ) ;
-        ] ;
-      owl:onProperty gsoc:isQualityOf ;
-    ] ;
+
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty gsoc:hasDataValue ;
@@ -246,24 +200,13 @@ gsgu:Pluton
   rdfs:comment "dct:Source -- based on Gillespie, M R, Stephenson, D, and Millward, D. 2008. BGS classification of lithodemic units: Proposals for classifying units of intrusive rock. British Geological Survey Research Report, RR/08/05. 31pp."@en ;
   rdfs:label "Pluton "@en ;
   rdfs:subClassOf gsgu:Intrusion ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom [
-          a owl:Class ;
-          owl:unionOf (
-              gsgu:Intrusion
-              gsog:Facies
-            ) ;
-        ] ;
-      owl:onProperty gsoc:hasPart ;
-    ] ;
 .
+
 gsgu:Polarity_Chronostratigraphic_Unit
   a owl:Class ;
   rdfs:comment "Geologic unit defined by primary magnetic-polarity record imposed whien the rock was deposited or crystallized during a specific interval of geologic time. Kind of chronostratigraphic unit and kind of geophysical unit."@en ;
   rdfs:comment "dct:source--  North American Commission on Stratigraphic Nomenclature, 1983"@en ;
   rdfs:label "polarity chronostratigraphic unit"@en ;
-  rdfs:subClassOf gsog:Chronostratigraphic_Unit ;
   rdfs:subClassOf gsgu:Geophysical_Unit ;
 .
 gsgu:Rock_Body_Shape
@@ -272,11 +215,6 @@ gsgu:Rock_Body_Shape
   rdfs:isDefinedBy "based on GeoSciML v4"@en ;
   rdfs:label "Body morphology"@en ;
   rdfs:subClassOf gsoc:Shape ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom gsog:Rock_Body ;
-      owl:onProperty gsoc:isQualityOf ;
-    ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty gsoc:hasDataValue ;
@@ -332,6 +270,4 @@ gsgu:ontology
   rdfs:comment "dct:modified-- 2020-01-30"@en ;
   rdfs:label "Geologic Unit"@en ;
   owl:imports gsoc:ontology ;
-  owl:imports <http://loop3d.org/GSO/ontology/2020/1/metamorphicfacies/ontology> ;
-  owl:imports <http://loop3d.org/GSO/ontology/2020/1/metamorphicgrade/ontology> ;
 .

@@ -1,5 +1,4 @@
 # baseURI: http://loop3d.org/GSO/ontology/2020/1/lithology/ontology
-# imports: http://loop3d.org/GSO/ontology/2020/1/geologicfeature/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/lithology/consolidationdegree/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/lithology/granularmaterial/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/lithology/particleaspectratio/ontology
@@ -28,15 +27,7 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-gsog:Granular_Material
-  a owl:Class ;
-  rdfs:comment "Granular material properties are bound in the Rock_Material module"@en ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty gsoc:hasQuality ;
-      owl:someValuesFrom gslth:Grain_Size ;
-    ] ;
-.
+
 gslth:Acidic_Igneous_Material
   a owl:Class ;
   rdfs:comment "Igneous material with more than 63 percent SiO2."@en ;
@@ -549,11 +540,6 @@ gslth:Consolidation_Degree
   rdfs:isDefinedBy "GeoSciML v4"@en ;
   rdfs:label "Consolidation degree"@en ;
   rdfs:subClassOf gsoc:Determinable_Quality ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty gsoc:isQualityOf ;
-      owl:someValuesFrom gsog:Rock_Material ;
-    ] ;
 .
 gslth:Crystalline_Carbonate
   a owl:Class ;
@@ -992,17 +978,6 @@ gslth:Grain_Size
   rdfs:comment "generaly property for specification of grain size; sub-properties have value spaces for different size specification types."@en ;
   rdfs:label "Grain Size property "@en ;
   rdfs:subClassOf gsoc:Determinable_Quality ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom [
-          a owl:Class ;
-          owl:unionOf (
-              gsog:Granular_Material
-              gsog:Rock_Material
-            ) ;
-        ] ;
-      owl:onProperty gsoc:isQualityOf ;
-    ] ;
 .
 gslth:Grainstone
   a owl:Class ;
@@ -1550,17 +1525,6 @@ gslth:Particle_Sorting
       a owl:Restriction ;
       owl:allValuesFrom xsd:string ;
       owl:onProperty gsoc:hasDataValue ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom [
-          a owl:Class ;
-          owl:unionOf (
-              gsog:Granular_Material
-              gsog:Rock_Material
-            ) ;
-        ] ;
-      owl:onProperty gsoc:isQualityOf ;
     ] ;
 .
 gslth:Peat
@@ -2224,12 +2188,11 @@ gslth:ontology
   a owl:Ontology ;
   rdfs:comment "Rock type categories modified from CGI SimpleLithology; properties based on GeoSciML v3.2 conceptual model. Scope includes gso Rock_Material and gso Granular Material. GSO granular material is analogous to GeoSciMLv3.2 compound material particle geometry description.  "@en ;
   rdfs:label "GSO Rock Material ontology."@en ;
-  owl:imports gsog:ontology ;
   owl:imports cnsd:ontology ;
   owl:imports gsgm:ontology ;
   owl:imports gsar:ontology ;
   owl:imports gsptr:ontology ;
-  owl:imports <http://loop3d.org/GSO/ontology/2020/1/lithology/particleroundness/ontology> ;
+  owl:imports gsps:ontology ;
   owl:imports gsmf:ontology ;
   owl:imports gsmg:ontology ;
 .
