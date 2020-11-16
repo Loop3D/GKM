@@ -707,6 +707,16 @@ gsoc:Place_Feature
   rdfs:label "Place Feature "@en ;
   rdfs:subClassOf gsoc:Immaterial_Feature ;
 .
+gsoc:Plane_Azimuth_Dip_RHR
+  a gsoc:Reference_System ;
+  rdfs:comment "A spatial reference system for describing orientation of surfaces relative to the Earth. Azimuth measured in degrees measured clockwise (eastward) from true North, with the downward dipping direction on the right when facing in the azimuth direction. Dip (inclination) is relative to local horizontal."@en ;
+  rdfs:label "Azimuth and Dip (RHR) "@en ;
+.
+gsoc:Plane_Dip_Dip_Direction
+  a gsoc:Spatial_Reference_System ;
+  rdfs:comment "A spatial reference system for describing orientation of surfaces relative to the Earth. Dip (inclination) is relative to local horizontal, and Dip Direction is Azimuth measured in degrees measured clockwise (eastward) from true North."@en ;
+  rdfs:label "Dip and Dip Direction "@en ;
+.
 gsoc:Plasma
   a owl:Class ;
   rdfs:subClassOf gsoc:Fluid ;
@@ -754,6 +764,34 @@ gsoc:Process_Feature
       owl:someValuesFrom gsoc:Process ;
     ] ;
 .
+gsoc:Process_Input
+  a owl:Class ;
+  rdfs:comment "" ;
+  rdfs:label "Process Input "@en ;
+  rdfs:subClassOf gsoc:Process_Role ;
+.
+gsoc:Process_Output
+  a owl:Class ;
+  rdfs:comment "" ;
+  rdfs:label "Process Output "@en ;
+  rdfs:subClassOf gsoc:Process_Role ;
+.
+gsoc:Process_Role
+  a owl:Class ;
+  rdfs:comment "" ;
+  rdfs:label "Process Role "@en ;
+  rdfs:subClassOf gsoc:Role ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom gsoc:Endurant ;
+      owl:onProperty gsoc:hasRolePlayer ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom gsoc:Process ;
+      owl:onProperty gsoc:hasRoleObject ;
+    ] ;
+.
 gsoc:Proportion
   a owl:Class ;
   rdfs:comment "A property value used to express the fraction of a whole that is composed of some part. Numeric values will range from 0 to 1 (0 to 100%); might also have categorical determinates like 'dominant', 'subordinate', 'minor', 'rare', 'absent'."@en ;
@@ -768,7 +806,6 @@ gsoc:Proportion
 gsoc:Quality
   a owl:Class ;
   rdfs:comment "A concept that specifies some aspect that inheres in instances of some Particular.  Note that the value of the determiningEvent property on Quality is used to specify metadata about how a property value is assigned. Synonym: Property"@en ;
-  rdfs:comment "Need SHACL rule that only one of 'hasDataValue' or 'hasValue' should be instantiated."@en ;
   rdfs:label "Quality"@en ;
   rdfs:subClassOf gsoc:Inherant ;
   rdfs:subClassOf [
@@ -778,9 +815,9 @@ gsoc:Quality
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
+      owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
       owl:onClass gsoc:Reference_System ;
       owl:onProperty gsoc:hasReferenceSystem ;
-      owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
@@ -997,7 +1034,7 @@ gsoc:Spatial_Quality
 .
 gsoc:Spatial_Reference_System
   a owl:Class ;
-  rdfs:comment "" ;
+  rdfs:comment "A set of conventions for describing orientations or locations in space."@en ;
   rdfs:label "Spatial Reference System "@en ;
   rdfs:subClassOf gsoc:Reference_System ;
 .
@@ -1091,11 +1128,6 @@ gsoc:Temporal_Boundary
   rdfs:comment "examples: start of Jan.  host = Jan; constituent = start datetime of every Jan"@en ;
   rdfs:label "Temporal Boundary "@en ;
   rdfs:subClassOf gsoc:Time_Instant_Feature ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty gsoc:hasConstituent ;
-      owl:someValuesFrom gsoc:Time_Instant ;
-    ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty gsoc:hostedBy ;
@@ -1382,7 +1414,7 @@ gsoc:Unit_of_Measure
 .
 gsoc:Variable_Distribution
   a owl:Class ;
-  rdfs:comment "Quality is not present in all instances of the host particular "@en ;
+  rdfs:comment "Quality is not present to the same degree in all instances of the host particular"@en ;
   rdfs:label "variable distribution"@en ;
   rdfs:subClassOf gsoc:Distribution ;
 .
