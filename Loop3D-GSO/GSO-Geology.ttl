@@ -20,6 +20,8 @@ gsoc:Element
           a owl:Class ;
           owl:unionOf (
               gsog:Granular_Material
+              gsoc:Glass
+              gsoc:Material_Object
               gsog:Mineral
               gsog:Rock_Material
             ) ;
@@ -36,6 +38,7 @@ gsoc:Glass
           owl:unionOf (
               gsog:Granular_Material
               gsog:Rock_Material
+              gsoc:Material_Object
             ) ;
         ] ;
       owl:onProperty gsoc:isConstituentOf ;
@@ -763,7 +766,13 @@ gsog:Granular_Material
   rdfs:subClassOf gsoc:Amount_Of_Matter ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:allValuesFrom gsog:Rock_Material ;
+      owl:allValuesFrom [
+          a owl:Class ;
+          owl:unionOf (
+              gsog:Rock_Material
+              gsoc:Material_Object
+            ) ;
+        ] ;
       owl:onProperty gsoc:isConstituentOf ;
     ] ;
   rdfs:subClassOf [
@@ -798,14 +807,14 @@ gsog:Inclusion
   rdfs:comment "A body of material present as masses with generally sharp boundaries enclosed within a matrix of some other material."@en ;
   rdfs:comment "dct:source--  CGI rockbodypart vocabulary 2016-11-21 "@en ;
   rdfs:label "Inclusion"@en ;
-  rdfs:subClassOf gsog:Rock_Body_Role ;
+  rdfs:subClassOf gsog:Rock_Object_Role ;
 .
 gsog:Intrusive_Sheet
   a owl:Class ;
   rdfs:comment "A tabular or sheet-like part of a rock body, genetic origin includes Intrusion_Process. Includes dikes, sills, and hydrothermal veins."@en ;
   rdfs:comment "dct:source--  CGI GTWG vocabualry"@en ;
   rdfs:label "Intrusive sheet"@en ;
-  rdfs:subClassOf gsog:Rock_Body_Role ;
+  rdfs:subClassOf gsog:Rock_Object_Role ;
 .
 gsog:Joint
   a owl:Class ;
@@ -883,7 +892,7 @@ gsog:Main_Body
   a owl:Class ;
   rdfs:comment "Role played by rock body part or constituent that forms most of the unit, and is host to parts in other roles."@en ;
   rdfs:label "Main body role"@en ;
-  rdfs:subClassOf gsog:Rock_Body_Role ;
+  rdfs:subClassOf gsog:Rock_Object_Role ;
 .
 gsog:Matrix
   a owl:Class ;
@@ -943,7 +952,8 @@ gsog:Mineral
           a owl:Class ;
           owl:unionOf (
               gsog:Granular_Material
-              gsog:Rock_Body
+              gsog:Rock_Material
+              gsoc:Material_Object
             ) ;
         ] ;
       owl:onProperty gsoc:isConstituentOf ;
@@ -1002,7 +1012,7 @@ gsog:Pendant
   rdfs:comment "a mass of country rock that is entirely surrounded by an igneous intrusion such as a batholith or other pluton. "@en ;
   rdfs:comment "dct:source--  Base on Neuendorf et al 2005"@en ;
   rdfs:label "Pendant "@en ;
-  rdfs:subClassOf gsog:Rock_Body_Role ;
+  rdfs:subClassOf gsog:Rock_Object_Role ;
 .
 gsog:Period
   a owl:Class ;
@@ -1102,17 +1112,6 @@ The exterior-facing material of a rock body.  A rock body boundary can have a th
       owl:someValuesFrom gsog:Rock_Body ;
     ] ;
 .
-gsog:Rock_Body_Role
-  a owl:Class ;
-  rdfs:comment "Roles that relate rock body parts"@en ;
-  rdfs:label "Rock Body Role"@en ;
-  rdfs:subClassOf gsoc:Role ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty gsoc:hasRolePlayer ;
-      owl:someValuesFrom gsog:Rock_Body ;
-    ] ;
-.
 gsog:Rock_Body_Top
   a owl:Class ;
   rdfs:comment "Constraint: rock body must be a stratigraphic unit for which 'top' and 'bottom' are meaningful."@en ;
@@ -1154,7 +1153,7 @@ gsog:Rock_Material
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:maxQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
-      owl:onClass gsog:Rock_Body_Role ;
+      owl:onClass gsog:Rock_Object_Role ;
       owl:onProperty gsoc:hasRole ;
     ] ;
   rdfs:subClassOf [
@@ -1204,10 +1203,21 @@ gsog:Rock_Object
       owl:someValuesFrom gsoc:Amount_Of_Matter ;
     ] ;
 .
+gsog:Rock_Object_Role
+  a owl:Class ;
+  rdfs:comment "Roles that relate rock body parts"@en ;
+  rdfs:label "Rock Body Role"@en ;
+  rdfs:subClassOf gsoc:Role ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasRolePlayer ;
+      owl:someValuesFrom gsog:Rock_Body ;
+    ] ;
+.
 gsog:Rock_Sample
   a owl:Class ;
   rdfs:label "Rock Material Specimen"@en ;
-  rdfs:subClassOf gsog:Rock_Body_Role ;
+  rdfs:subClassOf gsog:Rock_Object_Role ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty gsoc:isSampleOf ;
@@ -1438,6 +1448,8 @@ gsog:crosscuts
           gsog:Rock_Body
         ) ;
     ] ;
+  rdfs:subPropertyOf gsoc:spatiallyIntersects ;
+  rdfs:subPropertyOf gsoc:timeYoungerThan ;
   rdfs:subPropertyOf gsog:isGeologicallyRelatedTo ;
   owl:inverseOf gsog:isCrosscutBy ;
 .
@@ -1465,7 +1477,7 @@ gsog:intrudes
   a owl:ObjectProperty ;
   rdfs:comment "subject rock body intrudes object rock body. Implies that subject rock body is igneous rock, and that object rock body is older than subject rock body"@en ;
   rdfs:label "intrudes"@en ;
-  rdfs:subPropertyOf gsog:isGeologicallyRelatedTo ;
+  rdfs:subPropertyOf gsog:crosscuts ;
 .
 gsog:isConcordant
   a owl:ObjectProperty ;
@@ -1477,6 +1489,8 @@ gsog:isCrosscutBy
   a owl:ObjectProperty ;
   rdfs:comment "relationship in with the object Rock_Body or Physical_Feature exhibits field relations demonstrating that it is younger that the subject Rock_Body or Physical_Feature"@en ;
   rdfs:label "is cross-cut or truncated by"@en ;
+  rdfs:subPropertyOf gsoc:spatiallyIntersects ;
+  rdfs:subPropertyOf gsoc:timeOlderThan ;
   rdfs:subPropertyOf gsog:isGeologicallyRelatedTo ;
 .
 gsog:isGeologicallyRelatedTo
@@ -1502,12 +1516,13 @@ gsog:isOverprintedby
           gsog:Lineation
         ) ;
     ] ;
+  rdfs:subPropertyOf gsoc:timeOlderThan ;
   rdfs:subPropertyOf gsog:isGeologicallyRelatedTo ;
   owl:inverseOf gsog:overprints ;
 .
 gsog:litparlitintrudes
   a owl:ObjectProperty ;
-  rdfs:comment "Intruded rock is penetrated by numerous sheets of intruded igneous rock, usually granitic. {@en}  lit par lit -- type of contact?" ;
+  rdfs:comment "Intruded rock is penetrated by numerous sheets of intruded igneous rock, usually granitic. lit par lit -- type of contact?"@en ;
   rdfs:label "lit-par-lit intrudes"@en ;
   rdfs:subPropertyOf gsog:intrudes ;
 .
@@ -1528,7 +1543,7 @@ gsog:overlies
   rdfs:domain gsog:Rock_Body ;
   rdfs:label "overlies "@en ;
   rdfs:range gsog:Rock_Body ;
-  rdfs:subPropertyOf gsoc:isSpatiallyRelatedTo ;
+  rdfs:subPropertyOf gsoc:spatiallyTouch ;
 .
 gsog:overprints
   a owl:ObjectProperty ;
@@ -1548,6 +1563,7 @@ gsog:overprints
           gsog:Rock_Body
         ) ;
     ] ;
+  rdfs:subPropertyOf gsoc:timeYoungerThan ;
   rdfs:subPropertyOf gsog:isGeologicallyRelatedTo ;
 .
 gsog:previousTimeInterval
@@ -1588,7 +1604,7 @@ gsog:underlies
   rdfs:domain gsog:Rock_Body ;
   rdfs:label "underlies "@en ;
   rdfs:range gsog:Rock_Body ;
-  rdfs:subPropertyOf gsoc:isSpatiallyRelatedTo ;
+  rdfs:subPropertyOf gsoc:spatiallyTouch ;
 .
 gspr:Ductile_Flow
   a owl:Class ;
