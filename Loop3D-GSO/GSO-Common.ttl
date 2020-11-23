@@ -9,6 +9,15 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
+
+gsoc:timeOverlappedBy
+  a owl:ObjectProperty ;
+  rdfs:comment "Target event starts after source event, and target event ends after source event ends."@en ;
+  rdfs:comment "dct:source -- https://en.wikipedia.org/wiki/Allen%27s_interval_algebra" ;
+  rdfs:label "time Overlapped By"@en ;
+  rdfs:subPropertyOf gsoc:isTemporallyRelatedTo ;
+.
+
 gsoc:Amount_Of_Matter
   a owl:Class ;
   rdfs:comment "The amount of matter type can be subdivided into [a volume] of (1) material (rock material), or (2) state of a material (solid, fluid), to enable designation of lumps of rock or lumps of fluid."@en ;
@@ -1830,12 +1839,6 @@ gsoc:ontology
   rdfs:comment "ontology of shared objectProperties and high level classes used to define geologic features"@en ;
   rdfs:label "Shared elements for geoscience ontology"@en ;
 .
-gsoc:overlaps
-  a owl:ObjectProperty ;
-  rdfs:comment "The subject and object spatial regions have some but not all points in common, they have the same dimension, and the intersection of the interiors of the two geometries has the same dimension as the geometries themselves"@en ;
-  rdfs:label "Spatially overlaps" ;
-  rdfs:subPropertyOf gsoc:isSpatiallyRelatedTo ;
-.
 gsoc:partialEnvelope
   a owl:ObjectProperty ;
   rdfs:comment "Proposed for 'wraps around'" ;
@@ -1851,6 +1854,12 @@ gsoc:sDependsOn
 gsoc:satisfies
   rdfs:comment "" ;
   rdfs:label "satisfies" ;
+.
+gsoc:spatialOverlaps
+  a owl:ObjectProperty ;
+  rdfs:comment "The subject and object spatial regions have some but not all points in common, they have the same dimension, and the intersection of the interiors of the two geometries has the same dimension as the geometries themselves"@en ;
+  rdfs:label "Spatially overlaps" ;
+  rdfs:subPropertyOf gsoc:isSpatiallyRelatedTo ;
 .
 gsoc:spatiallyDisjoint
   a owl:ObjectProperty ;
@@ -1902,7 +1911,7 @@ gsoc:timeDuring
 .
 gsoc:timeEquivalentTo
   a owl:ObjectProperty ;
-  rdfs:comment "A is equivalent to B if they represent expressions of the same event. Same as Allen A Equals B."@en ;
+  rdfs:comment "A is equivalent to B if they represent expressions of the same Time_Region. Same as Allen A Equals B."@en ;
   rdfs:comment "One of six binary relations between geologic events defined by Burns (1975)"@en ;
   rdfs:domain gsoc:Perdurant ;
   rdfs:label "age equivalent"@en ;
@@ -1920,7 +1929,7 @@ gsoc:timeFinishedBy
 .
 gsoc:timeFinishes
   a owl:ObjectProperty ;
-  rdfs:comment "assign a younger age boundary for a Time Region (instant or interval). Target TimeRegion starts before source TimeRegion, and source and target TimeRegion end at the same instant. Allen Relation"@en ;
+  rdfs:comment "Target TimeRegion starts before source TimeRegion, and source and target TimeRegion end at the same instant. Allen Relation. Use to assign a younger age boundary for a Time Region (instant or interval)."@en ;
   rdfs:label "age finishes"@en ;
   rdfs:subPropertyOf gsoc:timeIntervalIn ;
   rdfs:subPropertyOf gsoc:timeNotOlderThan ;
@@ -2005,7 +2014,7 @@ gsoc:timeStartedBy
 .
 gsoc:timeStarts
   a owl:ObjectProperty ;
-  rdfs:comment "assign an older age boundary for a time interval, as a Time Region. Source and target TimeRegions start at same instant, target TimeRegion ends after source TimeRegion; Allen Relation"@en ;
+  rdfs:comment "Source and target TimeRegions start at same instant, target TimeRegion ends after source TimeRegion; Allen Relation. Assign an older age boundary for a time interval."@en ;
   rdfs:label "age starts"@en ;
   rdfs:subPropertyOf gsoc:timeIntervalIn ;
 .
