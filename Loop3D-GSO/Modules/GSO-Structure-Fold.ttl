@@ -1,6 +1,5 @@
 # baseURI: http://loop3d.org/GSO/ontology/2020/1/geologicstructure/fold/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/common/ontology
-# imports: http://loop3d.org/GSO/ontology/2020/1/geologicfeature/ontology
 
 @prefix : <http://loop3d.org/GSO/ontology/2020/1/geologicstructure/fold/> .
 @prefix gsoc: <http://loop3d.org/GSO/ontology/2020/1/common/> .
@@ -12,6 +11,21 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
+:Upright_Inclination
+  a owl:Class ;
+  rdfs:comment "Surface dips between 80 and 90 degrees, used to describe orientation of fold hinge surface or axial surface;  use equivalent term 'Vertical inclination' for other geologic surfaces."@en ;
+  rdfs:comment "dct:source -- Fleuty (1964) Folds classification." ;
+  rdfs:label "Upright inclination"@en ;
+  rdfs:subClassOf gsoq:Plane_Orientation ;
+.
+
+:Recumbent
+  a owl:Class ;
+  rdfs:comment "Surface dips between 0 and 10 degrees; typically used to describe orientation of fold hing surface or axial surface, use equivalent term 'Horizontal inclination' for other geologic surfaces."@en ;
+  rdfs:comment "dct:source -- Fleuty (1964) Folds classification." ;
+  rdfs:label "Recumbent "@en ;
+  rdfs:subClassOf gsoq:Plane_Orientation ;
+.
 
 :Anticline
   a owl:Class ;
@@ -38,7 +52,7 @@
   a owl:Class ;
   rdfs:comment "the length of half the distance from the crest of a fold to the adjacent troughs. "@en ;
   rdfs:label "Fold Amplitude"@en ;
-  rdfs:subClassOf gsoc:Quality ;
+  rdfs:subClassOf gsoc:Determinable_Quality ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom gsog:Fold ;
@@ -105,7 +119,7 @@
   rdfs:comment "dct:source -- Neuendorf et al., 2005" ;
   rdfs:isDefinedBy "GeoSciML v4"@en ;
   rdfs:label "Fold limb shape"@en ;
-  rdfs:subClassOf gsoc:Quality ;
+  rdfs:subClassOf gsoc:Determinable_Quality ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom gsog:Fold ;
@@ -145,7 +159,7 @@
   rdfs:comment "linear distance between inflection points in a single fold (GeoSciML v3.2)"@en ;
   rdfs:isDefinedBy "GeoSciML v3.2"@en ;
   rdfs:label "Fold span"@en ;
-  rdfs:subClassOf gsoc:Quality ;
+  rdfs:subClassOf gsoc:Determinable_Quality ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom gsog:Fold ;
@@ -167,7 +181,7 @@
   rdfs:comment "Concordance or discordance of bisecting surface and axial surface, or ratio of length of limbs. Folded surface may have asymmetry defined by limb length ratio if inflection points are defined. Definition based on bisecting surface/axial surface angle depends on having multiple surfaces defined such that the axial surface may be identified. (symmetric, assymetric)"@en ;
   rdfs:isDefinedBy "GeoSciML v4"@en ;
   rdfs:label "Fold symmetry"@en ;
-  rdfs:subClassOf gsoc:Quality ;
+  rdfs:subClassOf gsoc:Determinable_Quality ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom gsog:Fold ;
@@ -189,7 +203,7 @@
   a owl:Class ;
   rdfs:comment "The distance between adjacent crest or trough of  a single fold, or the average distance between adjacent crests or troughs in a fold system. "@en ;
   rdfs:label "Fold wavelength"@en ;
-  rdfs:subClassOf gsoc:Quality ;
+  rdfs:subClassOf gsoc:Determinable_Quality ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom [
@@ -217,26 +231,13 @@
       owl:someValuesFrom gsoc:Unit_of_Measure ;
     ] ;
 .
-:Gently_Inclined
-  a owl:Class ;
-  rdfs:comment "Surface dips between 10 and 30 degrees; typically used to describe orientation of fold hinge surface or axial surface, but could be applied to any geologic surface."@en ;
-  rdfs:comment "dct:source -- Fleuty (1964) Folds classification." ;
-  rdfs:label "Gently Inclinded "@en ;
-  rdfs:subClassOf :Inclined ;
-.
-:Gently_Plunging_Line
-  a owl:Class ;
-  rdfs:comment "dct:source -- Fleuty (1964) Folds classification." ;
-  rdfs:comment "line plunges between 10 and 30 degrees."@en ;
-  rdfs:label "Gently plunging line"@en ;
-  rdfs:subClassOf :Plunging_Line ;
-.
+
 :Hinge_Line_Curvature
   a owl:Class ;
   rdfs:comment "Variation in orientation of fold hinge along trend of fold, distinguish sheath from cylindrical folds. Specify with terminology eg sheath, dome, basin, cylindrical."@en ;
   rdfs:isDefinedBy "GeoSciML v4"@en ;
   rdfs:label "Fold hinge line curvature"@en ;
-  rdfs:subClassOf gsoc:Quality ;
+  rdfs:subClassOf gsoc:Determinable_Quality ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom gsog:Fold ;
@@ -255,45 +256,19 @@
       owl:onProperty gsoc:isQualityOf ;
     ] ;
 .
-:Horizontal_Line
-  a owl:Class ;
-  rdfs:comment "dct:source -- Fleuty (1964) Folds classification." ;
-  rdfs:comment "line plunges between 0 and 10 degrees."@en ;
-  rdfs:label "Horizontal line "@en ;
-  rdfs:subClassOf gsoq:Line_Orientation ;
-.
-:Inclined
-  a owl:Class ;
-  rdfs:comment "Surface dips between 10 and 80 degrees; typically used to describe orientation of fold hing surface or axial surface, but could be applied to any geologic surface."@en ;
-  rdfs:comment "dct:source -- Fleuty (1964) Folds classification." ;
-  rdfs:label "Inclinded "@en ;
-  rdfs:subClassOf gsoq:Plane_Orientation ;
-.
+
 :Is_Periodic
   a owl:Class ;
   rdfs:comment "boolean value, true if wavelength of folds in a fold system is approximately the same"@en ;
   rdfs:label "Folds are periodic"@en ;
-  rdfs:subClassOf gsoc:Quality ;
+  rdfs:subClassOf gsoc:Determinable_Quality ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom :Fold_System ;
       owl:onProperty gsoc:isQualityOf ;
     ] ;
 .
-:Moderately_Inclined
-  a owl:Class ;
-  rdfs:comment "Surface dips between 30 and 60 degrees; typically used to describe orientation of fold hing surface or axial surface, but could be applied to any geologic surface."@en ;
-  rdfs:comment "dct:source -- Fleuty (1964) Folds classification." ;
-  rdfs:label "Moderately Inclinded "@en ;
-  rdfs:subClassOf :Inclined ;
-.
-:Moderately_Plunging_Line
-  a owl:Class ;
-  rdfs:comment "dct:source -- Fleuty (1964) Folds classification." ;
-  rdfs:comment "line plunges between 30 and 60 degrees."@en ;
-  rdfs:label "Moderately plunging line"@en ;
-  rdfs:subClassOf :Plunging_Line ;
-.
+
 :Monocline
   a owl:Class ;
   rdfs:comment "dct:source -- https://en.wikipedia.org/wiki/Monocline" ;
@@ -308,26 +283,14 @@
   rdfs:label "Neutral Fold "@en ;
   rdfs:subClassOf gsog:Fold ;
 .
-:Plunging_Line
-  a owl:Class ;
-  rdfs:comment "dct:source -- Fleuty (1964) Folds classification." ;
-  rdfs:comment "line plunges between 10 and 80 degrees."@en ;
-  rdfs:label "Plunging line "@en ;
-  rdfs:subClassOf gsoq:Line_Orientation ;
-.
+
 :Ptygmatic_Fold
   a owl:Class ;
   rdfs:comment "Chaotic and highly sinuous fold typically in an isolated layer within a more homogeneous rock body. Typical of sedimentary slump folding and veins or dikes in medium to high-grade metamorphic rocks"@en ;
   rdfs:label "Ptygmatic Fold "@en ;
   rdfs:subClassOf gsog:Fold ;
 .
-:Recumbent
-  a owl:Class ;
-  rdfs:comment "Surface dips between 0 and 10 degrees; typically used to describe orientation of fold hing surface or axial surface, but could be applied to any geologic surface."@en ;
-  rdfs:comment "dct:source -- Fleuty (1964) Folds classification." ;
-  rdfs:label "Recumbent "@en ;
-  rdfs:subClassOf gsoq:Plane_Orientation ;
-.
+
 :Recumbent_Fold
   a owl:Class ;
   rdfs:comment "A fold that has an essentially horizontal axial plane."@en ;
@@ -335,20 +298,7 @@
   rdfs:label "Recumbent Fold "@en ;
   rdfs:subClassOf :Neutral_Fold ;
 .
-:Steeply_Inclined
-  a owl:Class ;
-  rdfs:comment "Surface dips between 60 and 80 degrees; typically used to describe orientation of fold hing surface or axial surface, but could be applied to any geologic surface."@en ;
-  rdfs:comment "dct:source -- Fleuty (1964) Folds classification." ;
-  rdfs:label "Steeply Inclinded "@en ;
-  rdfs:subClassOf :Inclined ;
-.
-:Steeply_Plunging_Line
-  a owl:Class ;
-  rdfs:comment "dct:source -- Fleuty (1964) Folds classification." ;
-  rdfs:comment "line plunges between 60 and 80 degrees."@en ;
-  rdfs:label "Steeply plunging line"@en ;
-  rdfs:subClassOf :Plunging_Line ;
-.
+
 :Syncline
   a owl:Class ;
   rdfs:comment "A fold of which the core contains the stratigraphically younger rocks"@en ;
@@ -363,13 +313,7 @@
   rdfs:label "Synform"@en ;
   rdfs:subClassOf gsog:Fold ;
 .
-:Upright
-  a owl:Class ;
-  rdfs:comment "Surface dips between 80 and 90 degrees; typically used to describe orientation of fold hing surface or axial surface, but could be applied to any geologic surface."@en ;
-  rdfs:comment "dct:source -- Fleuty (1964) Folds classification." ;
-  rdfs:label "Upright "@en ;
-  rdfs:subClassOf gsoq:Plane_Orientation ;
-.
+
 :Vertical_Fold
   a owl:Class ;
   rdfs:comment "A fold for which the fold axis is vertical and axial surface is upright."@en ;
@@ -377,16 +321,9 @@
   rdfs:label "Vertical Fold "@en ;
   rdfs:subClassOf :Neutral_Fold ;
 .
-:Vertical_Line
-  a owl:Class ;
-  rdfs:comment "dct:source -- Fleuty (1964) Folds classification." ;
-  rdfs:comment "line plunges between 80 and 90 degrees."@en ;
-  rdfs:label "Vertical line"@en ;
-  rdfs:subClassOf gsoq:Line_Orientation ;
-.
+
 :ontology
   a owl:Ontology ;
   rdfs:comment "extension module for properties related to folds"@en ;
   owl:imports gsoc:ontology ;
-  owl:imports gsog:ontology ;
 .

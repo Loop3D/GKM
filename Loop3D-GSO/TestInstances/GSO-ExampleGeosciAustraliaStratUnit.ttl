@@ -1,0 +1,113 @@
+@prefix gsgf: <http://loop3d.org/GSO/ontology/2020/1/geologicfeature/> .
+@prefix gisc: <http://resource.geosciml.org/classifier/ics/ischart/> .
+@prefix gsoc: <http://loop3d.org/GSO/ontology/2020/1/common/> .
+@prefix gspr: <http://loop3d.org/GSO/ontology/2020/1/geologicprocess/> .
+@prefix lunit: <http://loop3d.org/GSO/ontology/2020/1/uom/> .
+@prefix pida: <http://pid.geoscience.gov.au/feature/asc/gsml/geologicalunit/> .
+@prefix gstime: <http://loop3d.org/GSO/ontology/2020/1/ischart/>
+@prefix qudt: <http://qudt.org/schema/qudt/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+pida:10505 a gsgf:Group ;
+	rdfs:label "Liverpool Range Volcanics"@en;
+	rdfs:description "Basalt, dolerite, polymictic conglomerate, quartzose sandstone, shale bole, gravel, siltstone, carbonaceous claystone."@en;
+	gsoc:determinedBy [
+		a gsoc:Observation;
+		rdfs:description "synthesis from multiple sources"@en
+	];
+	gsoc:indirectTemporalOccupies [
+	# Group is subclass of Lithostratigraphic_Unit, is subclass Endurant, can only indirectly occupy a Time_Region
+			a gsoc:Time_Interval;
+			#Bartonian and Rupelian are instances of a subclass of Time_Region
+			gsoc:timeFinishedBy gstime:Bartonian;
+			gsoc:timeStartedBy gstime:Rupelian
+			# could put the more precise time instant numeric values here, but if the actual genetic event type is known, its more informative to use the isParticipantIn/Geologic_Event, especially for metamorphic rocks! 
+		];
+    gsoc:isParticipantIn [ 
+		a gsgf:Geologic_Event ;
+		gsoc:hasConstituent [ a gspr:Eruption ] ;
+# Event is a perdurant; perdurant can directly occupy a Time_Region
+# specify age of unit by identifying the kind of event is a more geologically precise approach
+		gsoc:directTemporalOccupies [
+			a gsoc:Time_Interval;
+			gsoc:timeStartedBy 
+				[ a gsoc:Time_Instant ;
+				gsoc:hasQuality [
+					a gsoc:Time_Instant_Location;
+					gsoc:determinedBy [
+						a gsoc:Observation;
+						rdfs:description "this numeric value is the result of some geochronology exercise; this might be a URI for a more complete provenance record for the observation result"@en
+					];
+					gsoc:hasQuality [
+						a gsoc:Time_Numeric_Value ;
+						qudt:units lunit:ma ;
+						qudt:value "32.3"^^xsd:float;
+						gsoc:hasDataValue "32.3"^^xsd:decimal;
+						gsoc:hasUOM [ a gsuom:ma]
+					] 
+				]
+			];
+			gsoc:timeFinishedBy 
+				[ a gsoc:Time_Instant ;
+				gsoc:hasQuality [
+					a gsoc:Time_Instant_Location;
+					gsoc:hasQuality [
+						a gsoc:Time_Numeric_Value ;
+						qudt:units lunit:ma ;
+						qudt:value "40.0"^^xsd:float;
+						gsoc:hasDataValue "40.0"^^xsd:decimal;
+						gsoc:hasUOM [ a gsuom:ma]
+					] 
+				]
+			]
+		] ;
+		gsoc:timeOverlappedBy gisc:Rupelian, gisc:Oligocene ;
+		gsoc:timeOverlaps gisc:Bartonian, gisc:Eocene 
+	] .
+
+pida:10056 a gsgf:Formation ;
+	rdfs:label "Lake Holmes Coal Measures"@en;
+	rdfs:description "Lacustrine red brown and green sand, silt and clay with minor gravel, calcrete and gypsum"@en ;
+	gsoc:determinedBy [
+		a gsoc:Observation;
+		rdfs:description "synthesis from multiple sources"@en
+		];
+		
+    gsoc:isParticipantIn [ 
+		a gsgf:Geologic_Event ;
+		gsoc:hasConstituent [ a gspr:Eruption ] ;
+# See notes on Liverpool Range Volcanics
+		gsoc:directTemporalOccupies [
+			a gsoc:Time_Interval;
+			gsoc:timeFinishedBy 
+				[ a gsoc:Time_Instant ;
+				gsoc:hasQuality [
+					a gsoc:Time_Instant_Location;
+					gsoc:hasQuality [
+						a gsoc:Time_Numeric_Value ;
+						qudt:units lunit:ma ;
+						qudt:value "27.23"^^xsd:float;
+						gsoc:hasDataValue "27.23"^^xsd:decimal;
+						gsoc:hasUOM [ a gsuom:ma]
+					] 
+				]
+			];
+			gsoc:timeStartedBy 
+				[ a gsoc:Time_Instant ;
+				gsoc:hasQuality [
+					a gsoc:Time_Instant_Location;
+					gsoc:hasQuality [
+						a gsoc:Time_Numeric_Value ;
+						qudt:units lunit:ma ;
+						qudt:value "29.888"^^xsd:float;
+						gsoc:hasDataValue "29.888"^^xsd:decimal;
+						gsoc:hasUOM [ a gsuom:ma]
+					] 
+				]
+			]
+		] ;
+# temporal relations of the event interval
+	gsoc:timeOverlaps gisc:Rupelian ;
+	gsoc:timeOverlappedBy gisc:Chattian 
+	gsoc:timeDuring gisc:Oligocene 
+	] .

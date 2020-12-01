@@ -15,10 +15,7 @@
 # imports: http://loop3d.org/GSO/ontology/2020/1/geologicunit/rockbodyrole/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/geologicunit/rockobject/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/ischart/ontology
-# imports: http://loop3d.org/GSO/ontology/2020/1/lithology/granularmaterial/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/lithology/ontology
-# imports: http://loop3d.org/GSO/ontology/2020/1/lithology/particleaspectratio/ontology
-# imports: http://loop3d.org/GSO/ontology/2020/1/lithology/particleroundness/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/mineral/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/uom/ontology
 
@@ -54,18 +51,211 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-gsoc:Temporal_Boundary
+gsoc:WKT_Value
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty gsoc:hasConstituent ;
-      owl:someValuesFrom gsoc:Time_Instant ;
+      owl:allValuesFrom xsd:string ;
+      owl:onProperty gsoc:hasDataValue ;
     ] ;
 .
-gsog:GSSA
-  rdfs:subClassOf gsoc:Time_Instant ;
+gsog:Granular_Material
+  a owl:Class ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:hasQuality ;
+      owl:someValuesFrom gslth:Grain_Size ;
+    ] ;
+.
+gsog:Protolith
+  a owl:Class ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom gsog:Rock_Body ;
+      owl:onProperty gsoc:hasRolePlayer ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom gspr:Metamorphic_Process ;
+      owl:onProperty gsoc:hasRoleObject ;
+    ] ;
+.
+gsgu:Allostratigraphic_Unit
+  rdfs:subClassOf gsog:Stratigraphic_Unit ;
+.
+gsgu:Artificial_Ground
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:isParticipantIn ;
+      owl:someValuesFrom gspr:Human_Activity ;
+    ] ;
+.
+gsgu:Bedding_Pattern
+  a owl:Class ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom [
+          a owl:Class ;
+          owl:unionOf (
+              gsog:Geologic_Unit
+              gsog:Facies
+              gsog:Lithosome
+            ) ;
+        ] ;
+      owl:onProperty gsoc:isQualityOf ;
+    ] ;
+.
+gsgu:Bedding_Style
+  a owl:Class ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom [
+          a owl:Class ;
+          owl:unionOf (
+              gsog:Geologic_Unit
+              gsog:Facies
+              gsog:Lithosome
+            ) ;
+        ] ;
+      owl:onProperty gsoc:isQualityOf ;
+    ] ;
 .
 gsgu:Bedding_Thickness
+  a owl:Class ;
   rdfs:subClassOf gsoq:Thickness ;
+.
+gsgu:Biostratigraphic_Unit
+  rdfs:subClassOf gsog:Stratigraphic_Unit ;
+.
+gsgu:Deformation_Unit
+  rdfs:subClassOf gsgu:Lithogenetic_Unit ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:isParticipantIn ;
+      owl:someValuesFrom gsog:Deformation ;
+    ] ;
+.
+gsgu:Excavation_Unit
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:isParticipantIn ;
+      owl:someValuesFrom gspr:Excavation ;
+    ] ;
+.
+gsgu:Geomorphologic_Unit
+  rdfs:subClassOf gsog:Nonstratigraphic_Unit ;
+.
+gsgu:Geophysical_Unit
+  a owl:Class ;
+  rdfs:subClassOf gsog:Geologic_Unit ;
+.
+gsgu:Igneous_Facies
+  a owl:Class ;
+  rdfs:subClassOf gsog:Facies ;
+.
+gsgu:Intrusion
+  a owl:Class ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom gsog:Facies ;
+      owl:onProperty gsoc:hasPart ;
+    ] ;
+.
+gsgu:Landform_Disposition
+  a owl:Class ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom [
+          a owl:Class ;
+          owl:unionOf (
+              gsog:Geologic_Unit
+              gsog:Facies
+              gsog:Lithosome
+              gsog:Stratigraphic_Section
+              gsog:Rock_Material
+            ) ;
+        ] ;
+      owl:onProperty gsoc:isQualityOf ;
+    ] ;
+.
+gsgu:Lithodemic_Unit
+  rdfs:subClassOf gsog:Nonstratigraphic_Unit ;
+.
+gsgu:Lithologic_Unit
+  rdfs:subClassOf gsog:Rock_Object ;
+.
+gsgu:Magnetostratigraphic_Unit
+  rdfs:subClassOf gsog:Stratigraphic_Unit ;
+.
+gsgu:Pedoderm
+  rdfs:subClassOf gsog:Nonstratigraphic_Unit ;
+.
+gsgu:Pedostratigraphic_Unit
+  rdfs:subClassOf gsog:Stratigraphic_Unit ;
+.
+gsgu:Pluton
+  a owl:Class ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom [
+          a owl:Class ;
+          owl:unionOf (
+              gsgu:Intrusion
+              gsog:Facies
+            ) ;
+        ] ;
+      owl:onProperty gsoc:hasPart ;
+    ] ;
+.
+gsgu:Polarity_Chronostratigraphic_Unit
+  a owl:Class ;
+  rdfs:subClassOf gsog:Chronostratigraphic_Unit ;
+.
+gsgu:Rock_Body_Shape
+  a owl:Class ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom gsog:Rock_Body ;
+      owl:onProperty gsoc:isQualityOf ;
+    ] ;
+.
+gsgu:Sedimentary_Facies
+  rdfs:subClassOf gsog:Stratigraphic_Unit ;
+.
+gslth:Consolidation_Degree
+  a owl:Class ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onProperty gsoc:isQualityOf ;
+      owl:someValuesFrom gsog:Rock_Material ;
+    ] ;
+.
+gslth:Grain_Size
+  a owl:Class ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom [
+          a owl:Class ;
+          owl:unionOf (
+              gsog:Granular_Material
+              gsog:Rock_Material
+            ) ;
+        ] ;
+      owl:onProperty gsoc:isQualityOf ;
+    ] ;
+.
+gslth:Particle_Sorting
+  a owl:Class ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom [
+          a owl:Class ;
+          owl:unionOf (
+              gsog:Granular_Material
+              gsog:Rock_Material
+            ) ;
+        ] ;
+      owl:onProperty gsoc:isQualityOf ;
+    ] ;
 .
 <http://loop3d.org/GSO/ontology/2020/1/loop3dmaster>
   a owl:Ontology ;
@@ -86,54 +276,7 @@ gsgu:Bedding_Thickness
   owl:imports gsrbr:ontology ;
   owl:imports gsro:ontology ;
   owl:imports gstime:ontology ;
-  owl:imports gsgm:ontology ;
   owl:imports gslth:ontology ;
-  owl:imports gsar:ontology ;
-  owl:imports gsps:ontology ;
   owl:imports gsmin:ontology ;
   owl:imports gsuom:ontology ;
-.
-:Process_Input
-  a owl:Class ;
-  rdfs:comment "" ;
-  rdfs:label "Process Input "@en ;
-  rdfs:subClassOf :Process_Role ;
-.
-:Process_Output
-  a owl:Class ;
-  rdfs:comment "" ;
-  rdfs:label "Process Output "@en ;
-  rdfs:subClassOf :Process_Role ;
-.
-:Process_Role
-  a owl:Class ;
-  rdfs:comment "" ;
-  rdfs:label "Process Role "@en ;
-  rdfs:subClassOf gsoc:Role ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom gsoc:Endurant ;
-      owl:onProperty gsoc:hasRolePlayer ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom gsoc:Process ;
-      owl:onProperty gsoc:hasRoleObject ;
-    ] ;
-.
-:Protolith
-  a owl:Class ;
-  rdfs:comment "" ;
-  rdfs:label "Protolith "@en ;
-  rdfs:subClassOf :Process_Input ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom gsog:Rock_Body ;
-      owl:onProperty gsoc:hasRolePlayer ;
-    ] ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom gspr:Metamorphic_Process ;
-      owl:onProperty gsoc:hasRoleObject ;
-    ] ;
 .

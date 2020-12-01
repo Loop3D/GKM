@@ -18,14 +18,14 @@ gsoq:Azimuth
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty gsoc:hasQuality ;
-      owl:someValuesFrom gsoc:Measured_Value ;
+      owl:someValuesFrom gsoc:Measure_Value ;
     ] ;
 .
 gsoq:Density
   a owl:Class ;
   rdfs:comment "The mass per unit volume of an Amount of Matter"@en ;
   rdfs:label "Density "@en ;
-  rdfs:subClassOf gsoc:Quality ;
+  rdfs:subClassOf gsoc:Determinable_Quality ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom gsoc:Amount_Of_Matter ;
@@ -36,7 +36,7 @@ gsoq:Diameter
   a owl:Class ;
   rdfs:comment "The (approximate) average length of line segments that pass through the center of an object and whose endpoints lie on the outside boundary of the object. Use to characterize the size of a broadly spheroidal object like a pluton or a rock sample."@en ;
   rdfs:label "Diameter "@en ;
-  rdfs:subClassOf gsoc:Quality ;
+  rdfs:subClassOf gsoc:Determinable_Quality ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty gsoc:hasValue ;
@@ -51,7 +51,7 @@ gsoq:Dip
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty gsoc:hasQuality ;
-      owl:someValuesFrom gsoc:Measured_Value ;
+      owl:someValuesFrom gsoc:Measure_Value ;
     ] ;
 .
 gsoq:Dominant_Constituent
@@ -64,8 +64,42 @@ gsoq:Dominant_Constituent
 gsoq:Facing
   a owl:Class ;
   rdfs:comment "property to specify if a surface is directed, i.e. has a top and bottom. Values: {upright, overturned, unknown}"@en ;
-  rdfs:label "facing direction"@en ;
+  rdfs:label "Facing direction"@en ;
   rdfs:subClassOf gsoq:Orientation ;
+.
+gsoq:Gently_Inclined
+  a owl:Class ;
+  rdfs:comment "Surface dips between 10 and 30 degrees; typically used to describe orientation of fold hinge surface or axial surface, but could be applied to any geologic surface."@en ;
+  rdfs:comment "dct:source -- Fleuty (1964) Folds classification." ;
+  rdfs:label "Gently Inclinded "@en ;
+  rdfs:subClassOf gsoq:Inclined ;
+.
+gsoq:Gently_Plunging_Line
+  a owl:Class ;
+  rdfs:comment "dct:source -- Fleuty (1964) Folds classification." ;
+  rdfs:comment "line plunges between 10 and 30 degrees."@en ;
+  rdfs:label "Gently plunging line"@en ;
+  rdfs:subClassOf gsoq:Plunging_Line ;
+.
+gsoq:Horizonatal_Inclination
+  a owl:Class ;
+  rdfs:comment "Surface dips between 0 and 10 degrees. Equivalent term 'recumbent' used to describe orientation of fold hing surface or axial surface"@en ;
+  rdfs:label "Horizontal inclination "@en ;
+  rdfs:subClassOf gsoq:Dip ;
+.
+gsoq:Horizontal_Line
+  a owl:Class ;
+  rdfs:comment "dct:source -- Fleuty (1964) Folds classification." ;
+  rdfs:comment "line plunges between 0 and 10 degrees."@en ;
+  rdfs:label "Horizontal line "@en ;
+  rdfs:subClassOf gsoq:Plunge ;
+.
+gsoq:Inclined
+  a owl:Class ;
+  rdfs:comment "Surface dips between 10 and 80 degrees; typically used to describe orientation of fold hinge surface or axial surface, but could be applied to any geologic surface."@en ;
+  rdfs:comment "dct:source -- Fleuty (1964) Folds classification." ;
+  rdfs:label "Inclined"@en ;
+  rdfs:subClassOf gsoq:Dip ;
 .
 gsoq:Line_Orientation
   a owl:Class ;
@@ -94,7 +128,7 @@ gsoq:Magnetic_Susceptibility
   rdfs:comment "a measure of how much a material will become magnetized in an applied magnetic field. It is the ratio of magnetization M (magnetic moment per unit volume) to the applied magnetizing field intensity H. This allows a simple classification, into two categories, of most materials' responses to an applied magnetic field: an alignment with the magnetic field, χ > 0, called paramagnetism, or an alignment against the field, χ < 0, called diamagnetism."@en ;
   rdfs:comment "dct:source -- https://en.wikipedia.org/wiki/Magnetic_susceptibility" ;
   rdfs:label "Magnetic susceptibility "@en ;
-  rdfs:subClassOf gsoc:Quality ;
+  rdfs:subClassOf gsoc:Determinable_Quality ;
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:allValuesFrom gsoc:Amount_Of_Matter ;
@@ -107,7 +141,7 @@ gsoq:Metamorphic_Facies
   rdfs:comment "applies to Rock_Material or Geologic_Unit"@en ;
   rdfs:isDefinedBy "GeoSciML v4"@en ;
   rdfs:label "Metamorphic facies"@en ;
-  rdfs:subClassOf gsoc:Quality ;
+  rdfs:subClassOf gsoc:Determinable_Quality ;
 .
 gsoq:Metamorphic_Grade
   a owl:Class ;
@@ -115,7 +149,7 @@ gsoq:Metamorphic_Grade
   rdfs:comment "applies to Earth_Material or Geologic_Unit"@en ;
   rdfs:isDefinedBy "GeoSciML v4"@en ;
   rdfs:label "Metamorphic grade"@en ;
-  rdfs:subClassOf gsoc:Quality ;
+  rdfs:subClassOf gsoc:Determinable_Quality ;
 .
 gsoq:Minor_Constituent
   a owl:Class ;
@@ -124,11 +158,25 @@ gsoq:Minor_Constituent
   rdfs:label "Minor Constituent"@en ;
   rdfs:subClassOf gsoq:Present ;
 .
+gsoq:Moderately_Inclined
+  a owl:Class ;
+  rdfs:comment "Surface dips between 30 and 60 degrees; typically used to describe orientation of fold hing surface or axial surface, but could be applied to any geologic surface."@en ;
+  rdfs:comment "dct:source -- Fleuty (1964) Folds classification." ;
+  rdfs:label "Moderately Inclinded "@en ;
+  rdfs:subClassOf gsoq:Inclined ;
+.
+gsoq:Moderately_Plunging_Line
+  a owl:Class ;
+  rdfs:comment "dct:source -- Fleuty (1964) Folds classification." ;
+  rdfs:comment "line plunges between 30 and 60 degrees."@en ;
+  rdfs:label "Moderately plunging line"@en ;
+  rdfs:subClassOf gsoq:Plunging_Line ;
+.
 gsoq:Orientation
   a owl:Class ;
   rdfs:comment "quality used to specify the disposition of a line or plane in space"@en ;
   rdfs:label "Orientation"@en ;
-  rdfs:subClassOf gsoc:Quality ;
+  rdfs:subClassOf gsoc:Determinable_Quality ;
 .
 gsoq:Overturned
   a owl:Class ;
@@ -142,7 +190,7 @@ gsoq:Peak_Pressure
   rdfs:comment "peak metamorphic pressure"@en ;
   rdfs:isDefinedBy "GeoSciML v3"@en ;
   rdfs:label "Peak pressure"@en ;
-  rdfs:subClassOf gsoc:Quality ;
+  rdfs:subClassOf gsoc:Determinable_Quality ;
 .
 gsoq:Peak_Temperature
   a owl:Class ;
@@ -150,57 +198,13 @@ gsoq:Peak_Temperature
   rdfs:comment "peak metamorphic temperature"@en ;
   rdfs:isDefinedBy "GeoSciML v3"@en ;
   rdfs:label "Peak temperature"@en ;
-  rdfs:subClassOf gsoc:Quality ;
+  rdfs:subClassOf gsoc:Determinable_Quality ;
 .
 gsoq:Plane_Orientation
   a owl:Class ;
   rdfs:comment "Quality to specify the orientation of a surface in a geogaphic reference system"@en ;
   rdfs:label "Plane orientation "@en ;
   rdfs:subClassOf gsoq:Orientation ;
-.
-gsoq:Plane_Orientation_dip_dipdir
-  a owl:Class ;
-  rdfs:comment "specification of the orientation of a plane in space, using a dip (inclination of line of maximum inclination contained in the plane, measured positive downward in degrees from local horizontal) and the azimuth normal to the strike in the dip direction"@en ;
-  rdfs:label "Plane orientation (dip and dip direction)"@en ;
-  rdfs:subClassOf gsoq:Plane_Orientation ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom [
-          a owl:Class ;
-          owl:unionOf [
-              a rdf:List ;
-              rdf:first gsoq:Azimuth ;
-              rdf:rest [
-                  a rdf:List ;
-                  rdf:first gsoq:Dip ;
-                  rdf:rest [
-                      a rdf:List ;
-                      rdf:first gsoq:Facing ;
-                      rdf:rest () ;
-                    ] ;
-                ] ;
-            ] ;
-        ] ;
-      owl:onProperty gsoc:hasQuality ;
-    ] ;
-.
-gsoq:Plane_Orientation_strike_dip
-  a owl:Class ;
-  rdfs:comment "A plane orientation reported with the Azimuth value in the direction of strike such that the dip is to the right when facing in the azimuth direction."@en ;
-  rdfs:label "Plane orientation (strike and dip)"@en ;
-  rdfs:subClassOf gsoq:Plane_Orientation ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom [
-          a owl:Class ;
-          owl:unionOf (
-              gsoq:Azimuth
-              gsoq:Dip
-              gsoq:Facing
-            ) ;
-        ] ;
-      owl:onProperty gsoc:hasQuality ;
-    ] ;
 .
 gsoq:Plunge
   a owl:Class ;
@@ -210,8 +214,15 @@ gsoq:Plunge
   rdfs:subClassOf [
       a owl:Restriction ;
       owl:onProperty gsoc:hasQuality ;
-      owl:someValuesFrom gsoc:Measured_Value ;
+      owl:someValuesFrom gsoc:Measure_Value ;
     ] ;
+.
+gsoq:Plunging_Line
+  a owl:Class ;
+  rdfs:comment "dct:source -- Fleuty (1964) Folds classification." ;
+  rdfs:comment "line plunges between 10 and 80 degrees."@en ;
+  rdfs:label "Plunging line "@en ;
+  rdfs:subClassOf gsoq:Plunge ;
 .
 gsoq:Present
   a owl:Class ;
@@ -227,6 +238,20 @@ gsoq:Rare_Constituent
   rdfs:label "Rare constituent "@en ;
   rdfs:subClassOf gsoq:Present ;
 .
+gsoq:Steeply_Inclined
+  a owl:Class ;
+  rdfs:comment "Surface dips between 60 and 80 degrees; typically used to describe orientation of fold hing surface or axial surface, but could be applied to any geologic surface."@en ;
+  rdfs:comment "dct:source -- Fleuty (1964) Folds classification." ;
+  rdfs:label "Steeply Inclinded "@en ;
+  rdfs:subClassOf gsoq:Inclined ;
+.
+gsoq:Steeply_Plunging_Line
+  a owl:Class ;
+  rdfs:comment "dct:source -- Fleuty (1964) Folds classification." ;
+  rdfs:comment "line plunges between 60 and 80 degrees."@en ;
+  rdfs:label "Steeply plunging line"@en ;
+  rdfs:subClassOf gsoq:Plunging_Line ;
+.
 gsoq:Subordinate_Constituent
   a owl:Class ;
   rdfs:comment "Constituent is less abundant than dominant constituent, but present in sufficient abundance to be an obvious constituent"@en ;
@@ -238,7 +263,7 @@ gsoq:Thickness
   a owl:Class ;
   rdfs:comment "Quality of a tabular or sheet like body that is its linear dimension normal to its long dimensions. Could be quantified numerically or categorically (e.g. thin, thick, very thick)"@en ;
   rdfs:label "Thickness"@en ;
-  rdfs:subClassOf gsoc:Quality ;
+  rdfs:subClassOf gsoc:Determinable_Quality ;
 .
 gsoq:Unknown_Facing
   a owl:Class ;
@@ -246,11 +271,25 @@ gsoq:Unknown_Facing
   rdfs:label "Unknown Facing Direction"@en ;
   rdfs:subClassOf gsoq:Facing ;
 .
-gsoq:Upright
+gsoq:Upright_Facing
   a owl:Class ;
+  rdfs:comment "dct:source -- Fleuty (1964) Folds classification." ;
   rdfs:comment "top of surface is away from center of earth."@en ;
-  rdfs:label "Upright Facing"@en ;
+  rdfs:label "Upright facing"@en ;
   rdfs:subClassOf gsoq:Facing ;
+.
+gsoq:Vertical_Inclination
+  a owl:Class ;
+  rdfs:comment "Surface dips between 80 and 90 degrees. Equivalent term 'upright' is used to describe orientation of fold hing surface or axial surface"@en ;
+  rdfs:label "Vertical inclination "@en ;
+  rdfs:subClassOf gsoq:Dip ;
+.
+gsoq:Vertical_Line
+  a owl:Class ;
+  rdfs:comment "dct:source -- Fleuty (1964) Folds classification." ;
+  rdfs:comment "line plunges between 80 and 90 degrees."@en ;
+  rdfs:label "Vertical line"@en ;
+  rdfs:subClassOf gsoq:Plunge ;
 .
 gsoq:ontology
   a owl:Ontology ;

@@ -20,18 +20,22 @@
 evn1:Cretaceous90Ma
   a gsoc:Time_Instant ;
   gsoc:hasQuality [
-	  a gsoc:Time_Instant_Location ;
-	  gsoc:hasValue [
-		  a gsoc:Time_Numeric_Value ;
-		  gsoc:hasQuality [
-			  a gsoc:Simple_Uncertainty ;
-			  gsoc:hasDataValue "8"^^xsd:decimal ;
-			  gsoc:hasUOM [ a gsuom:ma ] ;
-			] ;
-		  gsoc:hasUOM [ a gsuom:ma ] ;
-		  gsog:hasDataValue "90"^^xsd:decimal ;
-		] 
-	];
+      a gsoc:Time_Instant_Location ;
+      gsoc:hasValue [
+          a gsoc:Time_Numeric_Value ;
+          gsoc:hasQuality [
+              a gsoc:Simple_Uncertainty ;
+              gsoc:hasDataValue "8"^^xsd:decimal ;
+              gsoc:hasUOM [
+                  a gsuom:ma ;
+                ] ;
+            ] ;
+          gsoc:hasUOM [
+              a gsuom:ma ;
+            ] ;
+          gsog:hasDataValue "90"^^xsd:decimal ;
+        ] ;
+    ] ;
   rdfs:label "90 Ma"@en ;
 .
 evn1:Cretaceous_dike_intrusion
@@ -40,7 +44,7 @@ evn1:Cretaceous_dike_intrusion
   gsoc:hasConstituent [
       a gspr:Intrusion_Process ;
     ] ;
-  gsoc:time_younger_than evn1:Kg_Intrusion ;
+  gsoc:timeYoungerThan evn1:Kg_Intrusion ;
   gsog:hasSetting [
       a gsen:Upper_Continental_Crust_Setting ;
     ] ;
@@ -66,7 +70,7 @@ evn1:HsGenesis
       a gspr:Deposition ;
       rdfs:label "process of sedimentary deposition"@en ;
     ] ;
-  gsoc:time_younger_than evn1:MsGenesis ;
+  gsoc:timeYoungerThan evn1:MsGenesis ;
   gsog:hasSetting [
       a gsen:Alluvial_Fan_Setting ;
     ] ;
@@ -80,7 +84,7 @@ evn1:JsGenesis
   gsoc:hasConstituent [
       a gspr:Deposition ;
     ] ;
-  gsoc:time_younger_than evn1:Pre_Jurassic_Erosion ;
+  gsoc:timeYoungerThan evn1:Pre_Jurassic_Erosion ;
   gsog:hasSetting [
       a gsen:Coastal_Plain_Setting ;
     ] ;
@@ -95,18 +99,17 @@ evn1:JsGenesis
 .
 evn1:Kg_Intrusion
   a gsog:Geologic_Event ;
-
   gsoc:directTemporalOccupies [
       a gsoc:Time_Instant ;
-	  gsoc:hasQuality [
-      a gsoc:Time_Instant_Location ;
-      gsoc:hasValue evn1:Date110Ma ;
-    ]
-  ]	;
+      gsoc:hasQuality [
+          a gsoc:Time_Instant_Location ;
+          gsoc:hasValue evn1:Date110Ma ;
+        ] ;
+    ] ;
   gsoc:hasConstituent [
       a gspr:Intrusion_Process ;
     ] ;
-  gsoc:time_younger_than evn1:JsGenesis ;
+  gsoc:timeYoungerThan evn1:JsGenesis ;
   gsog:hasSetting [
       a gsen:Middle_Continental_Crust_Setting ;
     ] ;
@@ -118,7 +121,7 @@ evn1:MsGenesis
   gsoc:hasConstituent [
       a gspr:Deposition ;
     ] ;
-  gsoc:time_younger_than evn1:Cretaceous_dike_intrusion ;
+  gsoc:timeYoungerThan evn1:Cretaceous_dike_intrusion ;
   gsog:hasSetting [
       a gsen:Lacustrine_Setting ;
     ] ;
@@ -133,8 +136,8 @@ evn1:Pre_Jurassic_Erosion
   a gsog:Geologic_Event ;
   gsoc:directTemporalOccupies [
       a gsoc:Time_Interval ;
-      gsoc:Time_Interval_finishes gstime:Triassic2017 ;
-      gsoc:Time_Interval_starts gstime:Silurian2017 ;
+      gsoc:timeFinishedBy gstime:Triassic2017 ;
+      gsoc:timeStartedBy gstime:Silurian2017 ;
     ] ;
   gsoc:hasConstituent [
       a gspr:Erosion ;
@@ -144,8 +147,8 @@ evn1:Pre_Jurassic_Erosion
 .
 evn1:Pre_Miocene_Erosion
   a gsog:Geologic_Event ;
-  gsoc:time_older_than evn1:MsGenesis ;
-  gsoc:time_younger_than evn1:Cretaceous_dike_intrusion ;
+  gsoc:timeOlderThan evn1:MsGenesis ;
+  gsoc:timeYoungerThan evn1:Cretaceous_dike_intrusion ;
   rdfs:comment "Erosional unroofing of Kg and Js "@en ;
   rdfs:label "Pre Miocene Erosion "@en ;
 .

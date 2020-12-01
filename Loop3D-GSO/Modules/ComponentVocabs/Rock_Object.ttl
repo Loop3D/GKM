@@ -10,14 +10,6 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-gsro:Crystal
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom owl:Nothing ;
-      owl:onProperty gsoc:hasPart ;
-    ] ;
-.
-
 gsro:Bed_Lithosome
   a owl:Class ;
   rdfs:comment "Lithosome in lithostratigraphic unit that occurs as individual beds interleaved with other constituents on the outcrop (m) scale or larger."@en ;
@@ -27,7 +19,7 @@ gsro:Bed_Lithosome
 .
 gsro:Bedding_Package
   a owl:Class ;
-  rdfs:comment "A sub-map scale sequence of strata, e.g. bouma sequence, fining-upward sequence, interbedded sandstone and mudstone... "@en ;
+  rdfs:comment "A sub-map scale sequence of strata, e.g. bouma sequence, fining-upward sequence, interbedded sandstone and mudstone...  Repeated multiple times in a stratigraphic unit."@en ;
   rdfs:label "Bedding Package "@en ;
   rdfs:subClassOf gsog:Lithosome ;
 .
@@ -47,6 +39,11 @@ gsro:Crystal
       a owl:Restriction ;
       owl:allValuesFrom gsog:Mineral ;
       owl:onProperty gsoc:hasConstituent ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom owl:Nothing ;
+      owl:onProperty gsoc:hasPart ;
     ] ;
 .
 gsro:Cyclic_Bedding_Package
@@ -103,8 +100,9 @@ gsro:Stratigraphic_Part
   rdfs:comment "A geologic unit part that occupies a particular stratigraphic position within a geologic unit. Part is a particular body of rock, but is not designated with one of the formal lithostratigraphic or lithdemic rank terms."@en ;
   rdfs:comment "dct:source--  based on CGI rockbodypart vocabulary 2016-11-21; hierarchy position modified in GSO."@en ;
   rdfs:label "stratigraphic part"@en ;
-  rdfs:subClassOf gsog:Lithostratigraphic_Unit ;
+  rdfs:subClassOf gsog:Stratigraphic_Unit ;
 .
+
 gsro:Syngenetic_Nodule
   a owl:Class ;
   rdfs:comment "Particle formed by chemical precipitation at sediment-water interface, lacking layered structure that characterizes coated grains. Includes glauconite grains, manganese nodules, phosphate grains. Manganese nodule--\\An irregular, black to brown, friable"@en ;
