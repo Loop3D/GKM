@@ -9,25 +9,6 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-gsoc:Situation
-  rdfs:comment "A notional location in space or time defined by a set of circumstances that constitute a context. In this ontology the situations of interest are geologic settings."@en ;
-.
-gsoc:hasValue
-  rdfs:range gsoc:Quality_Value ;
-.
-gsoc:isValueOf
-  rdfs:domain gsoc:Quality_Value ;
-.
-
-
-gsoc:timeOverlappedBy
-  a owl:ObjectProperty ;
-  rdfs:comment "Target event starts after source event, and target event ends after source event ends."@en ;
-  rdfs:comment "dct:source -- https://en.wikipedia.org/wiki/Allen%27s_interval_algebra" ;
-  rdfs:label "time Overlapped By"@en ;
-  rdfs:subPropertyOf gsoc:isTemporallyRelatedTo ;
-.
-
 gsoc:Amount_Of_Matter
   a owl:Class ;
   rdfs:comment "The amount of matter type can be subdivided into [a volume] of (1) material (rock material), or (2) state of a material (solid, fluid), to enable designation of lumps of rock or lumps of fluid."@en ;
@@ -254,7 +235,7 @@ gsoc:Feature
     ] ;
   rdfs:subClassOf [
       a owl:Restriction ;
-      owl:onProperty gsoc:hasPart ;
+      owl:onProperty gsoc:hasEssentialPart ;
       owl:someValuesFrom gsoc:Particular ;
     ] ;
   rdfs:subClassOf [
@@ -1558,19 +1539,18 @@ gsoc:hasDependent
   rdfs:subPropertyOf gsoc:isFundamentallyRelatedTo ;
   owl:inverseOf gsoc:dependsOn ;
 .
-gsoc:hasEnd
-  a owl:ObjectProperty ;
-  rdfs:comment "" ;
-  rdfs:label "has End "@en ;
-  rdfs:range gsoc:Time_Instant ;
-  rdfs:subPropertyOf gsoc:hasTemporalPart ;
-.
 gsoc:hasEndValue
   a rdf:Property ;
   rdfs:comment "property that assigns the upper bound quantifier to a Quality value range"@en ;
   rdfs:label "has end value "@en ;
   rdfs:range gsoc:Measure_Value ;
   rdfs:subPropertyOf gsoc:hasValue ;
+.
+gsoc:hasEssentialPart
+  a owl:ObjectProperty ;
+  rdfs:comment "The whole is dependent on this part"@en ;
+  rdfs:label "has Essential Part "@en ;
+  rdfs:subPropertyOf gsoc:hasPart ;
 .
 gsoc:hasHistory
   a owl:ObjectProperty ;
@@ -1660,26 +1640,12 @@ gsoc:hasSpatialProperty
   a owl:ObjectProperty ;
   rdfs:label "has spatial property"@en ;
 .
-gsoc:hasStart
-  a owl:ObjectProperty ;
-  rdfs:comment "" ;
-  rdfs:label "has Start "@en ;
-  rdfs:range gsoc:Time_Instant ;
-  rdfs:subPropertyOf gsoc:hasTemporalPart ;
-.
 gsoc:hasStartValue
   a rdf:Property ;
   rdfs:comment "property that assigns the lower bound quantifier to a Quality value range"@en ;
   rdfs:label "has start value "@en ;
   rdfs:range gsoc:Measure_Value ;
   rdfs:subPropertyOf gsoc:hasValue ;
-.
-gsoc:hasTemporalPart
-  a owl:ObjectProperty ;
-  rdfs:domain gsoc:Time_Region ;
-  rdfs:label "has Temporal Part "@en ;
-  rdfs:range gsoc:Time_Region ;
-  rdfs:subPropertyOf gsoc:hasPart ;
 .
 gsoc:hasUOM
   a owl:ObjectProperty ;
@@ -2004,6 +1970,13 @@ gsoc:timeOlderThan
   rdfs:label "older than"@en ;
   rdfs:subPropertyOf gsoc:timeDisjoint ;
   owl:inverseOf gsoc:timeYoungerThan ;
+.
+gsoc:timeOverlappedBy
+  a owl:ObjectProperty ;
+  rdfs:comment "Target event starts after source event, and target event ends after source event ends."@en ;
+  rdfs:comment "dct:source -- https://en.wikipedia.org/wiki/Allen%27s_interval_algebra" ;
+  rdfs:label "time Overlapped By"@en ;
+  rdfs:subPropertyOf gsoc:isTemporallyRelatedTo ;
 .
 gsoc:timeOverlaps
   a owl:ObjectProperty ;
