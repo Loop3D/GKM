@@ -1,12 +1,10 @@
-﻿# baseURI: http://loop3d.org/GSO/ontology/2020/1/geologicprocess/ontology
-# imports: http://loop3d.org/GSO/ontology/2020/1/common/ontology
-# imports: http://loop3d.org/GSO/ontology/2020/1/geology/ontology
+# baseURI: http://loop3d.org/GSO/ontology/2020/1/geologicprocess/ontology
 
 @prefix : <http://loop3d.org/GSO/ontology/2020/1/geologicprocess/> .
-@prefix gspr: <http://loop3d.org/GSO/ontology/2020/1/geologicprocess/> .
 @prefix gsoc: <http://loop3d.org/GSO/ontology/2020/1/common/> .
-@prefix gsog: <http://loop3d.org/GSO/ontology/2020/1/geology/> .
-
+@prefix gsog: <http://loop3d.org/GSO/ontology/2020/1/geologicfeature/> .
+@prefix gsoq: <http://loop3d.org/GSO/ontology/2020/1/geologicquality/> .
+@prefix gspr: <http://loop3d.org/GSO/ontology/2020/1/geologicprocess/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -21,10 +19,6 @@ gspr:Accretion
   rdfs:subClassOf gsog:Additive_Process ;
   rdfs:subClassOf gspr:Tectonic_Process ;
 .
-gspr:Ductile_Flow
-  rdf:type owl:Class ;
-  rdfs:subClassOf gsog:Deformation ;
-.
 gspr:Biological_Evolution
   a owl:Class ;
   rdfs:label "Evolution"@en ;
@@ -35,7 +29,7 @@ gspr:Biological_Precipitation
   rdfs:comment "The deposition of minerals from solution by the agency of organisms"@en ;
   rdfs:comment "dct:source--  this vocabulary"@en ;
   rdfs:label "biological precipitation"@en ;
-  rdfs:subClassOf gspr:Deposition ;
+  rdfs:subClassOf gspr:Sedimentary_Deposition ;
 .
 gspr:Biological_Process
   a owl:Class ;
@@ -68,8 +62,8 @@ gspr:Chemical_Precipitation
   rdfs:comment "The deposition of mineral matter by precipitation from solution or as a result of chemical reactions. May be sedimentary or hydrothermal."@en ;
   rdfs:comment "dct:source--  Neuendorf, K.K.E, Mehl, J.P. & Jackson, J.A. (eds), 2005. Glossary of geology, 5th Edition. American Geological Institute, Alexandria, 779 p."@en ;
   rdfs:label "chemical precipitation"@en ;
-  rdfs:subClassOf gspr:Deposition ;
   rdfs:subClassOf gspr:Metamorphic_Process ;
+  rdfs:subClassOf gspr:Sedimentary_Deposition ;
 .
 gspr:Chemical_Weathering
   a owl:Class ;
@@ -122,20 +116,17 @@ gspr:Deformation_Twinning
   rdfs:label "deformation twinning"@en ;
   rdfs:subClassOf gsog:Transformation ;
 .
-gspr:Deposition
-  a owl:Class ;
-  rdfs:comment "Accumulation of material, the constructive process of accumulation of sedimentary particles, chemical precipitation of mineral matter from solution, or the accumulation of organic material on the death of plants and animals."@en ;
-  rdfs:comment "dct:source--  Neuendorf, K.K.E, Mehl, J.P. & Jackson, J.A. (eds), 2005. Glossary of geology, 5th Edition. American Geological Institute, Alexandria, 779 p."@en ;
-  rdfs:label "deposition"@en ;
-  rdfs:subClassOf gsog:Additive_Process ;
-  rdfs:subClassOf gspr:Rock_Forming_Process ;
-  rdfs:subClassOf gspr:Sedimentary_Process ;
-.
 gspr:Deposition_Hiatus
   a owl:Class ;
   rdfs:comment "process in which a depositional surface does not accumulate sediment. Use to indicate paraconformable boundaries."@en ;
   rdfs:label "Deposition Hiatus "@en ;
   rdfs:subClassOf gspr:Sedimentary_Process ;
+.
+gspr:Deposition_Process
+  a owl:Class ;
+  rdfs:comment "Process of material accumulation on the Earth Surface"@en ;
+  rdfs:label "Deposition "@en ;
+  rdfs:subClassOf owl:Thing ;
 .
 gspr:Diagenetic_Process
   a owl:Class ;
@@ -397,7 +388,7 @@ gspr:Mechanical_Deposition
   rdfs:comment "Process by which material that is being transported as particles by moving air, water, ice, or other fluid comes to rest and accumulates."@en ;
   rdfs:comment "dct:source--  NADM SLTTs 2004"@en ;
   rdfs:label "mechanical deposition"@en ;
-  rdfs:subClassOf gspr:Deposition ;
+  rdfs:subClassOf gspr:Sedimentary_Deposition ;
 .
 gspr:Melting
   a owl:Class ;
@@ -450,7 +441,7 @@ gspr:Organic_Accumulation
   a owl:Class ;
   rdfs:comment "Sediment accumulation of biologically produced organic material, as in bog, coal swamps."@en ;
   rdfs:label "organic accumulation"@en ;
-  rdfs:subClassOf gspr:Deposition ;
+  rdfs:subClassOf gspr:Sedimentary_Deposition ;
 .
 gspr:Oxidation
   a owl:Class ;
@@ -533,6 +524,15 @@ gspr:Sea_Level_Fluctuation
   rdfs:comment "process of alteration of global sea levels due to changes in either the volume of water in the world's oceans or net changes in the volume of the oceanic basins."@en ;
   rdfs:label "Sea Level Fluctuation"@en ;
   rdfs:subClassOf gsog:Geologic_Process ;
+.
+gspr:Sedimentary_Deposition
+  a owl:Class ;
+  rdfs:comment "Accumulation of material, the constructive process of accumulation of sedimentary particles, chemical precipitation of mineral matter from solution, or the accumulation of organic material on the death of plants and animals."@en ;
+  rdfs:comment "dct:source--  Neuendorf, K.K.E, Mehl, J.P. & Jackson, J.A. (eds), 2005. Glossary of geology, 5th Edition. American Geological Institute, Alexandria, 779 p."@en ;
+  rdfs:label "deposition"@en ;
+  rdfs:subClassOf gspr:Deposition_Process ;
+  rdfs:subClassOf gspr:Rock_Forming_Process ;
+  rdfs:subClassOf gspr:Sedimentary_Process ;
 .
 gspr:Sedimentary_Process
   a owl:Class ;
@@ -630,6 +630,12 @@ gspr:Turbidity_Current_Deposition
   rdfs:label "turbidity current deposition"@en ;
   rdfs:subClassOf gspr:Mechanical_Deposition ;
 .
+gspr:Volcanic_Deposition
+  a owl:Class ;
+  rdfs:comment "Process of material accumulation on the Earth Surface related to volcanic activity"@en ;
+  rdfs:label "Volcanic Deposition "@en ;
+  rdfs:subClassOf gspr:Deposition_Process ;
+.
 gspr:Vulcanian_Eruption
   a owl:Class ;
   rdfs:comment "Eruption characterized by the explosive ejection of fragments of new lava, commonly incandescent when they leave the vent but either solid or too viscous to assume any appreciable degree of rounding during their flight through the air. With these there are often breadcrust bombs or blocks, and generally large proportions of ash"@en ;
@@ -665,5 +671,5 @@ gspr:ontology
   rdfs:comment "dct:creator--  CGI Geoscience Terminology Working Group, OWL adaptation by Stephen Richard for Loop3D project"@en ;
   rdfs:comment "dct:date--  2016-06-15"@en ;
   rdfs:comment "dct:modified-- 2019-12-04"@en ;
-  rdfs:label "Geologic Process"@en ;
+  rdfs:label "Geologic processes"@en ;
 .

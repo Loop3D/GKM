@@ -27,9 +27,6 @@
 
 ejs:JsFormation
   a gsog:Formation ;
-  gsoc:indirectTemporalOccupies gstime:LowerJurassic ;
-  rdfs:label "Lower Jurassic Age sedimentary rocks"@en ;
-
   gsoc:hasPart ejs:JsFormation-lower ;
   gsoc:hasPart ejs:JsFormation-upper ;
   gsoc:hasPart ejs:baseJs-6 ;
@@ -43,23 +40,25 @@ ejs:JsFormation
     ] ;
   gsoc:hasQuality [
       a gsgu:Bedding_Thickness ;
-	  gsoc:hasQuality [
-		gsoc:Quality_Range [
-			gsoc:hasStartValue [
-				a gsoc:Measure_Value;
-				gsoc:hasDataValue "Thin bedded"@en 
-				];
-			gsoc:hasEndValue [
-				a gsoc:Measure_Value;
-				gsoc:hasDataValue "Medium Bedded"@en
-				] ;
-		];
-      rdfs:label "thin to medium bedded"@en ;
-    ] 
-	];
+      gsoc:hasQuality [
+          gsoc:Quality_Range [
+              gsoc:hasEndValue [
+                  a gsoc:Measure_Value ;
+                  gsoc:hasDataValue "Medium Bedded"@en ;
+                ] ;
+              gsoc:hasStartValue [
+                  a gsoc:Measure_Value ;
+                  gsoc:hasDataValue "Thin bedded"@en ;
+                ] ;
+            ] ;
+          rdfs:label "thin to medium bedded"@en ;
+        ] ;
+    ] ;
+  gsoc:indirectTemporalOccupies gstime:LowerJurassic ;
   rdfs:comment "Several surfaces are not elucidated as parts in this example, but are referenced in the Contact instances below. These surfaces would participate in intrusion and also ?contact metamorphism? processes"@en ;
   rdfs:comment "clasts of Cb Quartzite are abundant in the lower part of the unit. The lower part is a fining-upward sequence from conglomeratic sandstone to fine-grained sandstone. There is a marker bed that is a tuff in the upper part of the lower clastic interval. Upper part is massive limestone with abundant ammonites"@en ;
   rdfs:label "Js Formation"@en ;
+  rdfs:label "Lower Jurassic Age sedimentary rocks"@en ;
 .
 ejs:JsFormation-lower
   a gsro:Stratigraphic_Part ;
@@ -96,7 +95,7 @@ ejs:JsFormationMarker-6_4
   gsoc:hasPart [
       a gsog:Rock_Body_Bottom ;
       gsoc:isParticipantIn [
-          a gspr:Deposition ;
+          a gspr:Sedimentary_Deposition ;
         ] ;
     ] ;
   gsoc:hasPart [
@@ -114,21 +113,21 @@ ejs:baseJs-6
 ejs:baseJs-6_1
   a gsog:Rock_Body_Bottom ;
   gsoc:isParticipantIn [
-      a gspr:Deposition ;
+      a gspr:Sedimentary_Deposition ;
     ] ;
   rdfs:comment "Js on Ss surface"@en ;
 .
 ejs:baseJs-6_2
   a gsog:Rock_Body_Bottom ;
   gsoc:isParticipantIn [
-      a gspr:Deposition ;
+      a gspr:Sedimentary_Deposition ;
     ] ;
   rdfs:comment "Js on Os surface"@en ;
 .
 ejs:baseJs-6_3
   a gsog:Rock_Body_Bottom ;
   gsoc:isParticipantIn [
-      a gspr:Deposition ;
+      a gspr:Sedimentary_Deposition ;
     ] ;
   rdfs:comment "Js on Xm surface"@en ;
 .
@@ -174,7 +173,7 @@ ejs:stratPart_2
   gsoc:hasPart [
       a gsog:Rock_Body_Bottom ;
       gsoc:isParticipantIn [
-          a gspr:Deposition ;
+          a gspr:Sedimentary_Deposition ;
         ] ;
     ] ;
   gsog:overlies ejs:stratPart_1 ;
@@ -189,12 +188,11 @@ ejs:stratPart_3
   gsoc:hasPart [
       a gsog:Rock_Body_Bottom ;
       gsoc:isParticipantIn [
-          a gspr:Deposition ;
+          a gspr:Sedimentary_Deposition ;
         ] ;
     ] ;
   gsog:overlies ejs:stratPart_2 ;
 .
-
 <http://loop3d.org/GSO/ontology/2020/1/ex-formationJs/ontology>
   a owl:Ontology ;
   rdfs:comment "Stephen M. Richard 2019-05-02"@en ;
