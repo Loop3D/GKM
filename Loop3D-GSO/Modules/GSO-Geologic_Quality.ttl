@@ -1,0 +1,343 @@
+# baseURI: http://loop3d.org/GSO/ontology/2020/1/geologicquality/ontology
+# imports: http://loop3d.org/GSO/ontology/2020/1/common/ontology
+# imports: http://loop3d.org/GSO/ontology/2020/1/geology/ontology
+# imports: http://loop3d.org/GSO/ontology/2020/1/quality/ontology
+
+@prefix : <http://loop3d.org/GSO/ontology/2020/1/geologicquality/> .
+@prefix gsgq: <http://loop3d.org/GSO/ontology/2020/1/geologicquality/> .
+@prefix gsoc: <http://loop3d.org/GSO/ontology/2020/1/common/> .
+@prefix gsog: <http://loop3d.org/GSO/ontology/2020/1/geology/> .
+@prefix gsoq: <http://loop3d.org/GSO/ontology/2020/1/quality/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+gsgq:Alteration_Degree
+  rdf:type owl:Class ;
+  rdfs:comment "Specification of the strength of observed alteration. Can be used on Geologic_Unit or Rock_Material"@en ;
+  rdfs:isDefinedBy "GeoSciML v4"@en ;
+  rdfs:label "Alteration degree"@en ;
+  rdfs:subClassOf gsoc:Physical_Quality ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:allValuesFrom gsog:Rock_Body ;
+      owl:onProperty gsoc:isQualityOf ;
+    ] ;
+.
+gsgq:Azimuth
+  rdf:type owl:Class ;
+  rdfs:comment "Bearing of a horizontal line relative to north. Use for specifying the orientation of planar or linear features."@en ;
+  rdfs:label "Azimuth"@en ;
+  rdfs:subClassOf gsoq:Orientation ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:hasValue ;
+      owl:someValuesFrom gsoc:Quality_Value ;
+    ] ;
+.
+gsgq:Bedding_Pattern
+  rdf:type owl:Class ;
+  rdfs:subClassOf gsoc:Physical_Quality ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:allValuesFrom gsog:Rock_Body ;
+      owl:onProperty gsoc:isQualityOf ;
+    ] ;
+.
+gsgq:Bedding_Style
+  rdf:type owl:Class ;
+  rdfs:subClassOf gsoc:Physical_Quality ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:allValuesFrom gsog:Rock_Body ;
+      owl:onProperty gsoc:isQualityOf ;
+    ] ;
+.
+gsgq:Bedding_Thickness
+  rdf:type owl:Class ;
+  rdfs:subClassOf gsoq:Thickness ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:allValuesFrom gsog:Rock_Body ;
+      owl:onProperty gsoc:isQualityOf ;
+    ] ;
+.
+gsgq:Consolidation_Degree
+  rdf:type owl:Class ;
+  rdfs:comment "A property that specifies the degree to which an aggregation of EarthMaterial particles is a distinct solid material. Consolidation and induration are related concepts specified by this property. They define a continuum from unconsolidated material to very hard rock. Induration is the degree to which a consolidated material is made hard, operationally determined by how difficult it is to break a piece of the material. Consolidated materials may have varying degrees of induration (NADMSC, 2004)"@en ;
+  rdfs:isDefinedBy "GeoSciML v4"@en ;
+  rdfs:label "Consolidation degree"@en ;
+  rdfs:subClassOf gsoc:Physical_Quality ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:isQualityOf ;
+      owl:someValuesFrom gsog:Rock_Material ;
+    ] ;
+.
+gsgq:Dip
+  rdf:type owl:Class ;
+  rdfs:comment "the maximum angle between a horizontal surface and a planar feature"@en ;
+  rdfs:label "Dip"@en ;
+  rdfs:subClassOf gsoq:Orientation ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:hasQuality ;
+      owl:someValuesFrom gsoc:Measure_Value ;
+    ] ;
+.
+gsgq:Dip_Value
+  rdf:type owl:Class ;
+  rdfs:subClassOf gsoq:Orientation_Value ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:allValuesFrom gsgq:Dip ;
+      owl:onProperty gsoc:isValueOf ;
+    ] ;
+.
+gsgq:Facing
+  rdf:type owl:Class ;
+  rdfs:comment "property to specify if a surface is directed, i.e. has a top and bottom. Values: {upright, overturned, unknown}"@en ;
+  rdfs:label "Facing direction"@en ;
+  rdfs:subClassOf gsoq:Orientation ;
+.
+gsgq:Facing_Value
+  rdf:type owl:Class ;
+  rdfs:subClassOf gsoq:Orientation_Value ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:allValuesFrom gsgq:Facing ;
+      owl:onProperty gsoc:isValueOf ;
+    ] ;
+.
+gsgq:Gently_Inclined
+  rdf:type owl:Class ;
+  rdfs:comment "Surface dips between 10 and 30 degrees; typically used to describe orientation of fold hinge surface or axial surface, but could be applied to any geologic surface."@en ;
+  rdfs:comment "dct:source -- Fleuty (1964) Folds classification." ;
+  rdfs:label "Gently Inclinded "@en ;
+  rdfs:subClassOf gsgq:Inclined ;
+.
+gsgq:Gently_Plunging_Line
+  rdf:type owl:Class ;
+  rdfs:comment "dct:source -- Fleuty (1964) Folds classification." ;
+  rdfs:comment "line plunges between 10 and 30 degrees."@en ;
+  rdfs:label "Gently plunging line"@en ;
+  rdfs:subClassOf gsgq:Plunging_Line ;
+.
+gsgq:High_Metamorphic_Grade
+  rdf:type owl:Class ;
+  rdfs:comment "Protolith structures almost always obliterated, evidence of partial melting common. Includes rocks metamorphosed in high-temperature amphibolite, pyroxene hornfels, and medium to high-temperature eclogite facies. Mineral assemblages according to Fry (1984) Table 10-1: ultramafic-olivine, anthophyllite, cummingtonite, enstatite, mafic-hornblende, (diopside, garnet), calc-aluminous basic-plagioclase, pelite, semi-pelite -- K-feldspar, biotite, quartz, Al-minerals (garnet), migmatite."@en ;
+  rdfs:comment "dct:source--  Smulikowski et al, 2003; Fry, 1984"@en ;
+  rdfs:label "high metamorphic grade"@en ;
+  rdfs:subClassOf gsgq:Metamorphosed ;
+.
+gsgq:Horizonatal_Inclination
+  rdf:type owl:Class ;
+  rdfs:comment "Surface dips between 0 and 10 degrees. Equivalent term 'recumbent' used to describe orientation of fold hing surface or axial surface"@en ;
+  rdfs:label "Horizontal inclination "@en ;
+  rdfs:subClassOf gsgq:Dip_Value ;
+.
+gsgq:Horizontal_Line
+  rdf:type owl:Class ;
+  rdfs:comment "dct:source -- Fleuty (1964) Folds classification." ;
+  rdfs:comment "line plunges between 0 and 10 degrees."@en ;
+  rdfs:label "Horizontal line "@en ;
+  rdfs:subClassOf gsgq:Plunge_Value ;
+.
+gsgq:Inclined
+  rdf:type owl:Class ;
+  rdfs:comment "Surface dips between 10 and 80 degrees; typically used to describe orientation of fold hinge surface or axial surface, but could be applied to any geologic surface."@en ;
+  rdfs:comment "dct:source -- Fleuty (1964) Folds classification." ;
+  rdfs:label "Inclined"@en ;
+  rdfs:subClassOf gsgq:Dip_Value ;
+.
+gsgq:Line_Orientation
+  rdf:type owl:Class ;
+  rdfs:comment "specification of the orientation of a line in space, using a trend (bearing of horizontal projection of line relative to geographic north) and plunge (inclination of line measured positive downward in degrees from local horizontal).  TBD:  add 'isdirected property to indicate if the line is directed (e.g. sense of shear), values should be Boolean,"@en ;
+  rdfs:label "Line orientation"@en ;
+  rdfs:subClassOf gsoq:Orientation ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:allValuesFrom [
+          rdf:type owl:Class ;
+          owl:unionOf [
+              rdf:type rdf:List ;
+              rdf:first gsgq:Azimuth ;
+              rdf:rest [
+                  rdf:type rdf:List ;
+                  rdf:first gsgq:Plunge ;
+                  rdf:rest () ;
+                ] ;
+            ] ;
+        ] ;
+      owl:onProperty gsoc:hasQuality ;
+    ] ;
+.
+gsgq:Low_Metamorphic_Grade
+  rdf:type owl:Class ;
+  rdfs:comment "Metamorphic effects clearly visible, protolith structures typically still observable, includes rocks metamorphosed in greenschisthigh-temperature blueschist, very low temperature eclogite facies. Mineral assemblages according to Fry (1984) Table 10-1: ultramafic-serpentine (talc, magnesite),  mafic-chlorite, actinolite (garnet), calc-aluminous basic-albite, epidote, pelite, semi-pelite -- white mica, chlorite, quartz, biotite (garnet, Al-minerals)."@en ;
+  rdfs:comment "dct:source--  Smulikowski et al, 2003; Fry, 1984"@en ;
+  rdfs:label "low metamorphic grade"@en ;
+  rdfs:subClassOf gsgq:Metamorphosed ;
+.
+gsgq:Magnetic_Susceptibility
+  rdf:type owl:Class ;
+  rdfs:comment "a measure of how much a material will become magnetized in an applied magnetic field. It is the ratio of magnetization M (magnetic moment per unit volume) to the applied magnetizing field intensity H. This allows a simple classification, into two categories, of most materials' responses to an applied magnetic field: an alignment with the magnetic field, χ > 0, called paramagnetism, or an alignment against the field, χ < 0, called diamagnetism."@en ;
+  rdfs:comment "dct:source -- https://en.wikipedia.org/wiki/Magnetic_susceptibility" ;
+  rdfs:label "Magnetic susceptibility "@en ;
+  rdfs:subClassOf gsoc:Physical_Quality ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:allValuesFrom gsoc:Amount_Of_Matter ;
+      owl:onProperty gsoc:isQualityOf ;
+    ] ;
+.
+gsgq:Medium_Metamorphic_Grade
+  rdf:type owl:Class ;
+  rdfs:comment "Protolith structure typically obliterated. Includes rocks metamorphosed in high-temperature epidote-amphibolite, low-temperature amphibolite, and low temperature eclogite facies. Mineral assemblages according to Fry (1984) Table 10-1: ultramafic-olivine, talc (magnesite, anthophyllite), mafic-hornblende, (diopside, garnet), calc-aluminous basic-plagioclase, pelite, semi-pelite -- white mica, biotite, quartz (garnet, Al-minerals)."@en ;
+  rdfs:comment "dct:source--  Smulikowski et al, 2003; Fry, 1984"@en ;
+  rdfs:label "medium metamorphic grade"@en ;
+  rdfs:subClassOf gsgq:Metamorphosed ;
+.
+gsgq:Metamorphic_Grade
+  rdf:type owl:Class ;
+  rdfs:comment "A term to indicate the intensity or rank of metamorphism applied to an EarthMaterial (eg: high metamorphic grade, low metamorphic grade). Indicates in a general way the P-T environment in which the metamorphism took place. Determination of metamorphic grade is based on mineral assemblages (ie, facies) present in a rock that are interpreted to have crystallized in equilibrium during a particular metamorphic event."@en ;
+  rdfs:comment "applies to Earth_Material or Geologic_Unit"@en ;
+  rdfs:isDefinedBy "GeoSciML v4"@en ;
+  rdfs:label "Metamorphic grade"@en ;
+  rdfs:subClassOf gsoc:Physical_Quality ;
+.
+gsgq:Metamorphosed
+  rdf:type owl:Class ;
+  rdfs:comment "Rock is metamorphosed, may have any value for metamorphic grade except 'not metamorphosed'."@en ;
+  rdfs:comment "dct:source--  CGI metamorphicgrade SKOS vocabulary 2016-11-22"@en ;
+  rdfs:label "metamorphosed grade not specified"@en ;
+  rdfs:subClassOf gsoc:Named_Value ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:allValuesFrom gsgq:Metamorphic_Grade ;
+      owl:onProperty gsoc:isValueOf ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onClass gsgq:Metamorphic_Grade ;
+      owl:onProperty gsoc:isValueOf ;
+      owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+    ] ;
+.
+gsgq:Moderately_Inclined
+  rdf:type owl:Class ;
+  rdfs:comment "Surface dips between 30 and 60 degrees; typically used to describe orientation of fold hing surface or axial surface, but could be applied to any geologic surface."@en ;
+  rdfs:comment "dct:source -- Fleuty (1964) Folds classification." ;
+  rdfs:label "Moderately Inclinded "@en ;
+  rdfs:subClassOf gsgq:Inclined ;
+.
+gsgq:Moderately_Plunging_Line
+  rdf:type owl:Class ;
+  rdfs:comment "dct:source -- Fleuty (1964) Folds classification." ;
+  rdfs:comment "line plunges between 30 and 60 degrees."@en ;
+  rdfs:label "Moderately plunging line"@en ;
+  rdfs:subClassOf gsgq:Plunging_Line ;
+.
+gsgq:Overturned
+  rdf:type owl:Class ;
+  rdfs:comment "top of surface is facing downward, toward Earth interior."@en ;
+  rdfs:label "Overturned facing"@en ;
+  rdfs:subClassOf gsgq:Facing_Value ;
+.
+gsgq:Plane_Orientation
+  rdf:type owl:Class ;
+  rdfs:comment "Quality to specify the orientation of a surface in a geogaphic reference system"@en ;
+  rdfs:label "Plane orientation "@en ;
+  rdfs:subClassOf gsoq:Orientation ;
+.
+gsgq:Plunge
+  rdf:type owl:Class ;
+  rdfs:comment "Numeric value should be between +90 and -90.   Negative values only valid if the linear feature is directed."@en ;
+  rdfs:label "Plunge"@en ;
+  rdfs:subClassOf gsoq:Orientation ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:hasQuality ;
+      owl:someValuesFrom gsoc:Measure_Value ;
+    ] ;
+.
+gsgq:Plunge_Value
+  rdf:type owl:Class ;
+  rdfs:subClassOf gsoq:Orientation_Value ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:allValuesFrom gsgq:Plunge ;
+      owl:onProperty gsoc:isValueOf ;
+    ] ;
+.
+gsgq:Plunging_Line
+  rdf:type owl:Class ;
+  rdfs:comment "dct:source -- Fleuty (1964) Folds classification." ;
+  rdfs:comment "line plunges between 10 and 80 degrees."@en ;
+  rdfs:label "Plunging line "@en ;
+  rdfs:subClassOf gsgq:Plunge_Value ;
+.
+gsgq:Steeply_Inclined
+  rdf:type owl:Class ;
+  rdfs:comment "Surface dips between 60 and 80 degrees; typically used to describe orientation of fold hing surface or axial surface, but could be applied to any geologic surface."@en ;
+  rdfs:comment "dct:source -- Fleuty (1964) Folds classification." ;
+  rdfs:label "Steeply Inclinded "@en ;
+  rdfs:subClassOf gsgq:Inclined ;
+.
+gsgq:Steeply_Plunging_Line
+  rdf:type owl:Class ;
+  rdfs:comment "dct:source -- Fleuty (1964) Folds classification." ;
+  rdfs:comment "line plunges between 60 and 80 degrees."@en ;
+  rdfs:label "Steeply plunging line"@en ;
+  rdfs:subClassOf gsgq:Plunging_Line ;
+.
+gsgq:Unknown_Facing
+  rdf:type owl:Class ;
+  rdfs:comment "Facing direction is unknown {@en}	"@en ;
+  rdfs:label "Unknown Facing Direction"@en ;
+  rdfs:subClassOf gsgq:Facing_Value ;
+.
+gsgq:Upright_Facing
+  rdf:type owl:Class ;
+  rdfs:comment "dct:source -- Fleuty (1964) Folds classification." ;
+  rdfs:comment "top of surface is away from center of earth."@en ;
+  rdfs:label "Upright facing"@en ;
+  rdfs:subClassOf gsgq:Facing_Value ;
+.
+gsgq:Vertical_Inclination
+  rdf:type owl:Class ;
+  rdfs:comment "Surface dips between 80 and 90 degrees. Equivalent term 'upright' is used to describe orientation of fold hing surface or axial surface"@en ;
+  rdfs:label "Vertical inclination "@en ;
+  rdfs:subClassOf gsgq:Dip_Value ;
+.
+gsgq:Vertical_Line
+  rdf:type owl:Class ;
+  rdfs:comment "dct:source -- Fleuty (1964) Folds classification." ;
+  rdfs:comment "line plunges between 80 and 90 degrees."@en ;
+  rdfs:label "Vertical line"@en ;
+  rdfs:subClassOf gsgq:Plunge_Value ;
+.
+gsgq:Very_High_Metamorphic_Grade
+  rdf:type owl:Class ;
+  rdfs:comment "Protolith structures almost always obliterated. Includes rocks metamorphosed in granulite (or sanidinite), and high-temperature eclogite facies. Mineral assemblages according to Fry (1984) Table 10-1: ultramafic-olivine, enstatite, mafic-hypersthene, diopside (hornblende), calc-aluminous basic-plagioclase, pelite, semi-pelite -- hypersthene + Al-minerals (K-feldspar, quartz), or sapphirine."@en ;
+  rdfs:comment "dct:source--  Smulikowski et al, 2003; Fry, 1984"@en ;
+  rdfs:label "very high metamorphic grade"@en ;
+  rdfs:subClassOf gsgq:Metamorphosed ;
+.
+gsgq:Very_Low_Metamorphic_Grade
+  rdf:type owl:Class ;
+  rdfs:comment "Rock very slightly metamorphosed, protolith structure ubiquitous, mineral assemblage of zeolite facies, subgreenschist facies, or low temperature part of blueschist facies. Mineral assemblages according to Fry (1984) Table 10-1: ultramafic-serpentine (quartz, magnesite), mafic-clay, chlorite, relict igneous minerals, calc-aluminous basic-zeolite, pumpellite, epidote, albite, pelite, semi-pelite -- clays, chlorite, sericite, quartz."@en ;
+  rdfs:comment "dct:source--  Smulikowski et al, 2003; Fry, 1984"@en ;
+  rdfs:label "very low metamorphic grade"@en ;
+  rdfs:subClassOf gsgq:Metamorphosed ;
+.
+gsgq:ontology
+  rdf:type owl:Ontology ;
+  rdfs:comment "Vocabulary of physical qualities used in multiple GSO modules."@en ;
+  rdfs:label "Geologic quality"@en ;
+  owl:imports gsoc:ontology ;
+  owl:imports gsog:ontology ;
+  owl:imports gsoq:ontology ;
+.

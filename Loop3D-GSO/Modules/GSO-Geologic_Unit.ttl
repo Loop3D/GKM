@@ -1,239 +1,834 @@
-# baseURI: http://loop3d.org/GSO/ontology/2020/1/geologicunit/ontology
+﻿# baseURI: http://loop3d.org/GSO/ontology/2020/1/geologicunit/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/common/ontology
+# imports: http://loop3d.org/GSO/ontology/2020/1/geologicfeature/ontology
+# imports: http://loop3d.org/GSO/ontology/2020/1/geologicprocess/ontology
+# imports: http://loop3d.org/GSO/ontology/2020/1/geologictime/ontology
+# imports: http://loop3d.org/GSO/ontology/2020/1/geology/ontology
 
 @prefix : <http://loop3d.org/GSO/ontology/2020/1/geologicunit/ontology#> .
+@prefix gsgf: <http://loop3d.org/GSO/ontology/2020/1/geologicfeature/> .
 @prefix gsgu: <http://loop3d.org/GSO/ontology/2020/1/geologicunit/> .
 @prefix gsoc: <http://loop3d.org/GSO/ontology/2020/1/common/> .
-@prefix gsog: <http://loop3d.org/GSO/ontology/2020/1/geologicfeature/> .
-@prefix gsoq: <http://loop3d.org/GSO/ontology/2020/1/geologicquality/> .
-@prefix gsro: <http://loop3d.org/GSO/ontology/2020/1/geologicunit/rockobject/> .
+@prefix gsog: <http://loop3d.org/GSO/ontology/2020/1/geology/> .
+@prefix gspr: <http://loop3d.org/GSO/ontology/2020/1/geologicprocess/> .
+@prefix gst: <http://loop3d.org/GSO/ontology/2020/1/geologictime/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
+gsgf:Stratigraphic_Section
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:staticHostedBy ;
+      owl:someValuesFrom gsgu:Stratigraphic_Unit ;
+    ] ;
+.
 gsgu:Allostratigraphic_Unit
-  a owl:Class ;
+  rdf:type owl:Class ;
   rdfs:comment "Geologic unit defined by bounding surfaces. Not necessarily stratified. Donovon (2004, IUGS abstract Florence) makes good case for use of a noncommittal term for the bounding surface. While there may be no agreement that a given stratal boundary is a discontinuity, there is consensus that all the identified boundaries are stratal surfaces. Includes: 1. Unconformity bounded units (Salvador 1994), defined by bounding stratigraphic discontinuities ('significant unconformities', unconformity is defined as surface of erosion in Salvador 1994). 2. Sequence stratigraphic unit, an allostratigraphic unit that is used to interpret the depositional origin of sedimentary strata and assumes, though this is not always stated, an implicit connection to base level change. It does this by establishing how the sequence of strata accumulated in order in the sedimentary section over a subdividing framework of surfaces."@en ;
   rdfs:comment "dct:source--  This vocabulary, Salvador, 1994, Donovon 2004 IUGS abstract."@en ;
   rdfs:label "allostratigraphic unit"@en ;
+  rdfs:subClassOf gsgu:Stratigraphic_Unit ;
 .
 gsgu:Alteration_Unit
-  a owl:Class ;
-  rdfs:comment "Geologic unit defined by alteration process. Use gsoc:isParticipantIn [a gspr:Metasomatism ;	gsoc:hasParticipant a gsog:Rock_Body ; [gsoc:hasRole [a gsoc:Protolith ] ] ] relationship to link altered rock to protolith. Participant could be part of a Geologic_Unit, or a Rock_Body hasConstituent lithology."@en ;
+  rdf:type owl:Class ;
+  rdfs:comment "Geologic unit defined by alteration process."@en ;
   rdfs:comment "dct:source--  CGI geologicunittype SKOS vocabulary 2012-11-24"@en ;
   rdfs:label "alteration unit"@en ;
   rdfs:subClassOf gsgu:Lithogenetic_Unit ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:externallyGenDependsOn ;
+      owl:someValuesFrom gspr:Metamorphic_Process ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:isOutputOf ;
+      owl:someValuesFrom gspr:Metamorphic_Process ;
+    ] ;
+  owl:equivalentClass [
+      rdf:type owl:Class ;
+      owl:intersectionOf (
+          gsgu:Lithogenetic_Unit
+          [
+            rdf:type owl:Restriction ;
+            owl:onProperty gsoc:externallySpecDependsOn ;
+            owl:someValuesFrom gspr:Metamorphic_Process ;
+          ]
+          [
+            rdf:type owl:Restriction ;
+            owl:onProperty gsoc:isOutputOf ;
+            owl:someValuesFrom gspr:Metamorphic_Process ;
+          ]
+        ) ;
+    ] ;
+.
+gsgu:Amphibolite_Metamorphic_Facies
+  rdf:type owl:Class ;
+  rdfs:comment "Metamorphic facies characterized in rocks of basaltic composition by hornblende-plagioclase (plagioclase more calcic than An17)."@en ;
+  rdfs:comment "dct:source--  Smulikowski et al. 2003; Fettes and Desmons, 2007"@en ;
+  rdfs:label "amphibolite metamorphic facies"@en ;
+  rdfs:subClassOf gsgu:Metamorphic_Facies ;
 .
 gsgu:Artificial_Ground
-  a owl:Class ;
+  rdf:type owl:Class ;
   rdfs:comment "Geologic unit defined by genesis involving direct human action to deposit or modify material."@en ;
   rdfs:comment "dct:source--  CGI geologicunittype SKOS vocabulary 2012-11-24"@en ;
   rdfs:label "artificial ground"@en ;
   rdfs:subClassOf gsgu:Lithogenetic_Unit ;
-.
-gsgu:Bedding_Pattern
-  a owl:Class ;
-  rdfs:comment "Term(s) specifying patterns of bedding thickness or relationships between bedding packages. (eg; thinning upward, thickening upward). A disposition."@en ;
-  rdfs:isDefinedBy "GeoSciML v4"@en ;
-  rdfs:label "Bedding pattern"@en ;
-  rdfs:subClassOf gsoc:Determinable_Quality ;
   rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty gsoc:hasDataValue ;
-      owl:someValuesFrom xsd:string ;
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:externallyGenDependsOn ;
+      owl:someValuesFrom gspr:Human_Activity ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:isOutputOf ;
+      owl:someValuesFrom gspr:Human_Activity ;
+    ] ;
+  owl:equivalentClass [
+      rdf:type owl:Class ;
+      owl:intersectionOf (
+          gsgu:Lithogenetic_Unit
+          [
+            rdf:type owl:Restriction ;
+            owl:onProperty gsoc:externallyGenDependsOn ;
+            owl:someValuesFrom gspr:Human_Activity ;
+          ]
+          [
+            rdf:type owl:Restriction ;
+            owl:onProperty gsoc:isOutputOf ;
+            owl:someValuesFrom gspr:Human_Activity ;
+          ]
+        ) ;
     ] ;
 .
-gsgu:Bedding_Style
-  a owl:Class ;
-  rdfs:comment "Term(s) specifying the style of bedding in a stratified geologic unit, e.g. lenticular, irregular, planar, vague, massive"@en ;
-  rdfs:isDefinedBy "GeoSciML v4"@en ;
-  rdfs:label "Bedding style"@en ;
-  rdfs:subClassOf gsoc:Determinable_Quality ;
+gsgu:Bed
+  rdf:type owl:Class ;
+  rdfs:subClassOf gsgu:Lithostratigraphic_Unit ;
   rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty gsoc:hasDataValue ;
-      owl:someValuesFrom xsd:string ;
+      rdf:type owl:Restriction ;
+      owl:allValuesFrom [
+          rdf:type owl:Class ;
+          owl:unionOf (
+              gsgu:Formation
+              gsgu:Member
+            ) ;
+        ] ;
+      owl:onProperty gsoc:isPartOf ;
     ] ;
-.
-gsgu:Bedding_Thickness
-  a owl:Class ;
-  rdfs:comment "Quality to specify thickness of bedding; can either be term or a numeric_Value. subclass of gsoq:Thickness"@en ;
-  rdfs:label "Bedding Thickness "@en ;
 .
 gsgu:Biostratigraphic_Unit
-  a owl:Class ;
+  rdf:type owl:Class ;
   rdfs:comment "Geologic unit defined based on fossil content. Five kinds of biozones are recognized by the revised NACSN (Lenz et al., 2000, Note 64, a recommended complete replacement of Articles 48 through 54 of the North American Stratigraphic Code (NACSN, 1983) accepted for publication 2000.): range biozone, interval biozone, lineage biozone, assemblage biozone, and abundance biozone. These represent different approaches to defining and recognizing biozones."@en ;
   rdfs:comment "dct:source--  Lenz et al., 2000, Note 64 (see AAPG Bulletin, v. 89, no. 11, November 2005), North American Stratigraphic Code, 1983"@en ;
   rdfs:label "biostratigraphic unit"@en ;
+  rdfs:subClassOf gsgu:Stratigraphic_Unit ;
+.
+gsgu:Chronostratigraphic_Unit
+  rdf:type owl:Class ;
+  rdfs:comment "A body of rocks that includes all rocks, layered or unlayered, formed during a specific interval of geologic time, and only those rocks formed during that time span. Chronostratigraphic units are bounded by synchronous horizons. The rank and relative magnitude of the units in the chronostratigraphic hierarchy are a function of the length of the time interval that their rocks subtend, rather than of their physical thickness. (http://www.stratigraphy.org/upload/bak/chron.htm)"@en ;
+  rdfs:comment "dct:source--  Salvador, A., 1994, International Stratigraphic Guide, Second Edition"@en ;
+  rdfs:label "Chronostratigraphic unit"@en ;
+  rdfs:subClassOf gsgu:Stratigraphic_Unit ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:allValuesFrom gsgu:Chronostratigraphic_Unit ;
+      owl:onProperty gsoc:hasPart ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:hosts ;
+      owl:someValuesFrom gsog:Geologic_Time_Interval ;
+    ] ;
 .
 gsgu:Complex
-  a owl:Class ;
+  rdf:type owl:Class ;
   rdfs:comment "An assemblage or mixture of rocks of two or more genetic classes, i.e., igneous, sedimentary, or metamorphic, with or without highly complicated structure, may be named a complex. The term \"complex\" takes the place of the lithic or rank term (for example, Boil Mountain Complex, Franciscan Complex) and, although unranked, commonly is comparable to suite or supersuite and is named in the same manner.  Identification of an assemblage of diverse rocks as a complex is useful where the mapping of each separate lithic component is impractical at ordinary mapping scales.  The term may be retained if subsequent, detailed mapping distinguishes some or all of the component lithodemes or lithostratigraphic units."@en ;
   rdfs:comment "dct:source--  NACSN-North American Commission on Stratigraphic Nomenclature, 2005, The American Association of Petroleum Geologists Bulletin, V. 89, No. 11, p. 1547-1591 . https://ngmdb.usgs.gov/Info/NACSN/Code2/code2.html#Article31Remarksa"@en ;
   rdfs:label "Complex "@en ;
   rdfs:subClassOf gsgu:Lithodemic_Unit ;
 .
 gsgu:Deformation_Unit
-  a owl:Class ;
+  rdf:type owl:Class ;
   rdfs:comment "Lithotectonic unit defined by deformation style or characteristic geologic structure observable in outcrop."@en ;
   rdfs:comment "dct:source--  CGI geologicunittype SKOS vocabulary 2012-11-24"@en ;
   rdfs:label "deformation unit"@en ;
-  rdfs:subClassOf gsgu:Tectonic_Unit ;
+  rdfs:subClassOf gsgu:Lithogenetic_Unit ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:externallyGenDependsOn ;
+      owl:someValuesFrom gsog:Deformation ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:isOutputOf ;
+      owl:someValuesFrom gsog:Deformation ;
+    ] ;
+  owl:equivalentClass [
+      rdf:type owl:Class ;
+      owl:intersectionOf (
+          gsgu:Lithogenetic_Unit
+          [
+            rdf:type owl:Restriction ;
+            owl:onProperty gsoc:externallyGenDependsOn ;
+            owl:someValuesFrom gsog:Deformation ;
+          ]
+          [
+            rdf:type owl:Restriction ;
+            owl:onProperty gsoc:isOutputOf ;
+            owl:someValuesFrom gsog:Deformation ;
+          ]
+        ) ;
+    ] ;
+.
+gsgu:Eclogite_Metamorphic_Facies
+  rdf:type owl:Class ;
+  rdfs:comment "Omphacite-garnet-quartz (no plagioclase, olivine stable with garnet), assemblage for rocks of basaltic composition"@en ;
+  rdfs:comment "dct:source--  Fettes and Desmons, 2007"@en ;
+  rdfs:label "eclogite metamorphic facies"@en ;
+  rdfs:subClassOf gsgu:Metamorphic_Facies ;
+.
+gsgu:Eonothem
+  rdf:type owl:Class ;
+  rdfs:subClassOf gsgu:Chronostratigraphic_Unit ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:hosts ;
+      owl:someValuesFrom gst:Eon ;
+    ] ;
+.
+gsgu:Epidote_Amphibolite_Metamorphic_Facies
+  rdf:type owl:Class ;
+  rdfs:comment "Hornblende-albite-epidote(-chlorite), assemblage for rocks of basaltic composition"@en ;
+  rdfs:comment "dct:source--  Fettes and Desmons, 2007"@en ;
+  rdfs:label "epidote amphibolite metamorphic facies"@en ;
+  rdfs:subClassOf gsgu:Metamorphic_Facies ;
+.
+gsgu:Erathem
+  rdf:type owl:Class ;
+  rdfs:subClassOf gsgu:Chronostratigraphic_Unit ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:hosts ;
+      owl:someValuesFrom gst:Era ;
+    ] ;
 .
 gsgu:Excavation_Unit
-  a owl:Class ;
+  rdf:type owl:Class ;
   rdfs:comment "Geologic unit defined by human-made genesis involving excavation. Not necessarily defined by landform (a hole...), as they could have been subsequently filled/landscaped etc. If the excavation is filled becomes an excavation with artificial ground wholly or partly superimposed on it. This sort of thing can become quite important in urban geology where an excavation can be filled and landscaped."@en ;
   rdfs:comment "dct:source--  CGI geologicunittype SKOS vocabulary 2012-11-24"@en ;
   rdfs:label "excavation unit"@en ;
   rdfs:subClassOf gsgu:Lithogenetic_Unit ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:externallyGenDependsOn ;
+      owl:someValuesFrom gspr:Human_Activity ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:isOutputOf ;
+      owl:someValuesFrom gspr:Excavation ;
+    ] ;
+  owl:equivalentClass [
+      rdf:type owl:Class ;
+      owl:intersectionOf (
+          gsgu:Lithogenetic_Unit
+          [
+            rdf:type owl:Restriction ;
+            owl:onProperty gsoc:isOutputOf ;
+            owl:someValuesFrom gspr:Excavation ;
+          ]
+          [
+            rdf:type owl:Restriction ;
+            owl:onProperty gsoc:externallyGenDependsOn ;
+            owl:someValuesFrom gspr:Human_Activity ;
+          ]
+        ) ;
+    ] ;
 .
 gsgu:Exposure
-  a owl:Class ;
+  rdf:type owl:Class ;
   rdfs:comment "how material is exposed at Earth surface, e.g. poorly exposed, well exposed."@en ;
   rdfs:label "Exposure"@en ;
-  rdfs:subClassOf gsoc:Determinable_Quality ;
+  rdfs:subClassOf gsoc:Physical_Quality ;
 .
-gsgu:Geomorphologic_Unit
-  a owl:Class ;
-  rdfs:comment "Geologic unit defined by surface landform, e.g. hummocky moraine"@en ;
-  rdfs:comment "dct:source--  CGI geologicunittype SKOS vocabulary 2012-11-24"@en ;
-  rdfs:label "geomorphologic unit"@en ;
+gsgu:Facies
+  rdf:type owl:Class ;
+  rdfs:comment "Represents a particular body of rock that is a lateral variant of a lithostratigraphic unit, or a variant of a lithodemic unit. Contrast with lithosome in being a particular, connected body of rock, as opposed to a kind of rock body that is repeated in many places in a unit."@en ;
+  rdfs:comment "dct:source--  CGI rockbodypart vocabulary 2016-11-21 "@en ;
+  rdfs:label "Facies"@en ;
+  rdfs:subClassOf gsgu:Nonstratigraphic_Unit ;
+  rdfs:subClassOf [
+      rdf:type owl:Class ;
+      owl:complementOf [
+          rdf:type owl:Restriction ;
+          owl:onProperty gsoc:externallySpecDependsOn ;
+          owl:someValuesFrom [
+              rdf:type owl:Class ;
+              owl:unionOf (
+                  gsog:Geologic_Process
+                  gsog:Geologic_Event
+                ) ;
+            ] ;
+        ] ;
+    ] ;
+  owl:disjointWith gsgu:Lithogenetic_Unit ;
+  owl:equivalentClass [
+      rdf:type owl:Class ;
+      owl:intersectionOf (
+          gsgu:Nonstratigraphic_Unit
+          [
+            rdf:type owl:Class ;
+            owl:complementOf [
+                rdf:type owl:Restriction ;
+                owl:onProperty gsoc:externallySpecDependsOn ;
+                owl:someValuesFrom [
+                    rdf:type owl:Class ;
+                    owl:unionOf (
+                        gsog:Geologic_Process
+                        gsog:Geologic_Event
+                      ) ;
+                  ] ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+.
+gsgu:Formation
+  rdf:type owl:Class ;
+  rdfs:subClassOf gsgu:Lithostratigraphic_Unit ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:allValuesFrom [
+          rdf:type owl:Class ;
+          owl:unionOf (
+              gsgu:Bed
+              gsgu:Facies
+              gsog:Lithosome
+              gsgu:Member
+            ) ;
+        ] ;
+      owl:onProperty gsoc:hasPart ;
+    ] ;
 .
 gsgu:Geophysical_Unit
-  a owl:Class ;
+  rdf:type owl:Class ;
   rdfs:comment "Geologic unit defined by its geophysical characteristics. Denotes that the properties used to define the unit are measured by intrumental techniques, not directly observable by humans, e.g. density, magnetic susceptibility, magnetization, electrical conductivity."@en ;
   rdfs:comment "dct:source--  CGI geologicunittype SKOS vocabulary 2012-11-24"@en ;
   rdfs:label "geophysical unit"@en ;
+  rdfs:subClassOf gsgu:Nonstratigraphic_Unit ;
+.
+gsgu:Glaucophane_Schist_Facies
+  rdf:type owl:Class ;
+  rdfs:comment "Metamorphic facies characterized in rocks of basaltic composition by glaucophane-epidote (-garnet), glaucophane-lawsonite, or glaucophane-lawsonite-jadeite."@en ;
+  rdfs:comment "dct:source--  Smulikowski et al. 2003; Fettes and Desmons, 2007"@en ;
+  rdfs:label "glaucophane schist facies"@en ;
+  rdfs:subClassOf gsgu:Metamorphic_Facies ;
+.
+gsgu:Granulite_Facies
+  rdf:type owl:Class ;
+  rdfs:comment "Metamorphic facies characterized in rocks of basaltic composition by the mineral assemblage clinopyroxene-orthopyroxene-plagioclase (olivine not stable with plagioclase or with garnet), or especially high-temperature varieties or polymorphs of minerals"@en ;
+  rdfs:comment "dct:source--  Smulikowski et al. 2003; Fettes and Desmons, 2007"@en ;
+  rdfs:label "granulite facies"@en ;
+  rdfs:subClassOf gsgu:Metamorphic_Facies ;
+.
+gsgu:Greenschist_Metamorphic_Facies
+  rdf:type owl:Class ;
+  rdfs:comment "Metamorphic facies characterized in rocks of basaltic composition by actinolite-albite-epidote-chlorite (an epidote group mineral is the diagnostic Ca-Al silicate rather than prehnite or pumpellyite)."@en ;
+  rdfs:comment "dct:source--  Smulikowski et al. 2003; Fettes and Desmons, 2007"@en ;
+  rdfs:label "greenschist metamorphic facies"@en ;
+  rdfs:subClassOf gsgu:Metamorphic_Facies ;
+.
+gsgu:Group
+  rdf:type owl:Class ;
+  rdfs:subClassOf gsgu:Lithostratigraphic_Unit ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:hasPart ;
+      owl:someValuesFrom gsgu:Formation ;
+    ] ;
 .
 gsgu:Igneous_Facies
-  a owl:Class ;
+  rdf:type owl:Class ;
   rdfs:comment "a lithologic facies within an igneous rock body. Sometimes called 'phase', e.g. porphyritic facies, fine-grained facies."@en ;
   rdfs:label "Igneous Facies "@en ;
+  rdfs:subClassOf gsgu:Facies ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:externallyGenDependsOn ;
+      owl:someValuesFrom gspr:Magmatic_Process ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:isOutputOf ;
+      owl:someValuesFrom gspr:Magmatic_Process ;
+    ] ;
+  owl:disjointWith gsgu:Metamorphic_Facies ;
+  owl:disjointWith gsgu:Sedimentary_Facies ;
+  owl:equivalentClass [
+      rdf:type owl:Class ;
+      owl:intersectionOf (
+          gsgu:Facies
+          [
+            rdf:type owl:Restriction ;
+            owl:onProperty gsoc:externallyGenDependsOn ;
+            owl:someValuesFrom gspr:Magmatic_Process ;
+          ]
+          [
+            rdf:type owl:Restriction ;
+            owl:onProperty gsoc:isOutputOf ;
+            owl:someValuesFrom gspr:Magmatic_Process ;
+          ]
+        ) ;
+    ] ;
 .
 gsgu:Igneous_Swarm
-  a owl:Class ;
+  rdf:type owl:Class ;
   rdfs:comment "a group intrusions that are associated spatially,  inferred to be related genetically and typically have similar morphology, e.g. dike, sill, plug.  In the BGS vocabulary, swarm is not defined as a formal type of lithodemic unit, however it is used to group cluster of related intrusion and adopted here."@en ;
   rdfs:comment "dct:Source -- based on Gillespie, M R, Stephenson, D, and Millward, D. 2008. BGS classification of lithodemic units: Proposals for classifying units of intrusive rock. British Geological Survey Research Report, RR/08/05. 31pp."@en ;
   rdfs:label "Igneous Swarm "@en ;
   rdfs:subClassOf gsgu:Lithodemic_Unit ;
 .
 gsgu:Intrusion
-  a owl:Class ;
+  rdf:type owl:Class ;
   rdfs:comment "A body of rock produced by an intrusive process and bounded by observed or inferred intrusive margins; usually used to refer to any unit of rock or magma formed by emplacement of magma and/or pyroclastic material into the subsurface, however units of nonigneous material can also result from an intrusive process, e.g. salt ‘domes’."@en ;
   rdfs:comment "dct:Source -- based on Gillespie, M R, Stephenson, D, and Millward, D. 2008. BGS classification of lithodemic units: Proposals for classifying units of intrusive rock. British Geological Survey Research Report, RR/08/05. 31pp."@en ;
   rdfs:label "Intrusion "@en ;
   rdfs:subClassOf gsgu:Lithodemic_Unit ;
 .
 gsgu:Landform_Disposition
-  a owl:Class ;
+  rdf:type owl:Class ;
   rdfs:comment "Describes the nature of outcrops formed by a Rock Body. Examples: bouldery, cliff-forming, ledge-forming, slope-forming. Assign free text string value for now, controlled vocabulary is the goal."@en ;
   rdfs:isDefinedBy "GeoSciML v4"@en ;
   rdfs:label "Outcrop character"@en ;
-  rdfs:subClassOf gsoc:Determinable_Quality ;
+  rdfs:subClassOf gsoc:Physical_Quality ;
   rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty gsoc:hasDataValue ;
-      owl:someValuesFrom xsd:string ;
+      rdf:type owl:Restriction ;
+      owl:allValuesFrom gsoc:Rock_Body ;
+      owl:onProperty gsoc:isQualityOf ;
     ] ;
 .
 gsgu:Lithodeme
-  a owl:Class ;
+  rdf:type owl:Class ;
   rdfs:comment "A body of intrusive, pervasively deformed, or highly metamorphosed rock, generally non-tabular and lacking primary depositional structures, and characterized by lithic homogeneity. It is mappable at the Earth's surface and traceable in the subsurface. For cartographic and hierarchical purposes, it is comparable to a formation"@en ;
   rdfs:comment "dct:source--  NACSN-North American Commission on Stratigraphic Nomenclature, 2005, The American Association of Petroleum Geologists Bulletin, V. 89, No. 11, p. 1547-1591 . https://ngmdb.usgs.gov/Info/NACSN/Code2/code2.html#Article31Remarksa"@en ;
   rdfs:label "Lithodeme "@en ;
   rdfs:subClassOf gsgu:Lithodemic_Unit ;
 .
 gsgu:Lithodemic_Unit
-  a owl:Class ;
+  rdf:type owl:Class ;
   rdfs:comment "Lithodemic unit is not recognized by the international Stratigraphic code (Salvador, 1994) {@en} The 'Guide for geological nomenclature in Sweden', RA Kumpulainen, 2017 adopts the NACSN 2005 terminology.  The British Geological survey defines a vocabulary of subdivisions of the 'lithodeme' defined by NACSN to reflect common geologic field usage (Gillespie, M R, Stephenson, D, and Millward, D. 2008. BGS classification of lithodemic units: Proposals for classifying units of intrusive rock. British Geological Survey Research Report, RR/08/05. 31pp.).  The BGS terminology is partially adopted here."@en ;
   rdfs:comment "a defined body of predominantly intrusive, highly deformed, and (or) highly metamorphosed rock, distinguished and delimited on the basis of rock characteristics (NACSN, 2005)"@en ;
   rdfs:comment "dct:source--  NACSN-North American Commission on Stratigraphic Nomenclature, 2005, The American Association of Petroleum Geologists Bulletin, V. 89, No. 11, p. 1547-1591 . https://ngmdb.usgs.gov/Info/NACSN/Code2/code2.html#Article31Remarksa"@en ;
   rdfs:label "lithodemic unit"@en ;
+  rdfs:subClassOf gsgu:Stratigraphic_Unit ;
 .
 gsgu:Lithogenetic_Unit
-  a owl:Class ;
-  rdfs:comment "Geologic unit defined by genesis. The genesis is manifested by material properties, but the material is not the defining property. Example-- alluvial deposits, glacial deposits."@en ;
-  rdfs:comment "dct:source--  CGI geologicunittype SKOS vocabulary 2012-11-24"@en ;
-  rdfs:label "lithogenetic unit"@en ;
-  rdfs:subClassOf gsog:Geologic_Unit ;
+  rdf:type owl:Class ;
+  rdfs:comment "Rock object defined by a specific genesis AND surrounding rocks, e.g. Metamorphic Unit, Sedimentary Unit. This differs from a unit such as 'Metamorphic Unit created by Event X', which is not defined by bounding rocks, but only by a specific genesis (Event X) and which is not a Geologic Unit, but is a Situated Rock Object. It also differs from a unit such as 'Metamorphic Rock' (a Generic Rock Object), which includes metamorphic rocks regardless of originating process or event, and without regard to surrounding rocks: i.e. all rocks (possibly in an area) created by any metmorphic event or process"@en ;
+  rdfs:label "Lithogenetic Unit"@en ;
+  rdfs:subClassOf gsgu:Nonstratigraphic_Unit ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:externallySpecDependsOn ;
+      owl:someValuesFrom [
+          rdf:type owl:Class ;
+          owl:unionOf (
+              gsog:Geologic_Process
+              gsog:Geologic_Event
+            ) ;
+        ] ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:isOutputOf ;
+      owl:someValuesFrom [
+          rdf:type owl:Class ;
+          owl:unionOf (
+              gsog:Geologic_Process
+              gsog:Geologic_Event
+            ) ;
+        ] ;
+    ] ;
+  owl:disjointWith gsgu:Facies ;
+  owl:equivalentClass [
+      rdf:type owl:Class ;
+      owl:intersectionOf (
+          gsgu:Nonstratigraphic_Unit
+          [
+            rdf:type owl:Restriction ;
+            owl:onProperty gsoc:externallySpecDependsOn ;
+            owl:someValuesFrom [
+                rdf:type owl:Class ;
+                owl:unionOf (
+                    gsog:Geologic_Process
+                    gsog:Geologic_Event
+                  ) ;
+              ] ;
+          ]
+        ) ;
+    ] ;
 .
 gsgu:Lithologic_Unit
-  a owl:Class ;
+  rdf:type owl:Class ;
   rdfs:comment "A rock body defined by lithology independent of relationships to other units. Denotes a 'kind' of rock body characterized by lithology, e.g. basaltic rocks. Does not necessarily represent a single genetically related or connected package of material."@en ;
   rdfs:comment "dct:source--  CGI geologicunittype SKOS vocabulary 2012-11-24"@en ;
   rdfs:label "Lithologic unit"@en ;
+  rdfs:subClassOf gsgu:Nonstratigraphic_Unit ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:hasConstituent ;
+      owl:someValuesFrom gsog:Rock_Material ;
+    ] ;
+  owl:equivalentClass [
+      rdf:type owl:Class ;
+      owl:intersectionOf (
+          gsgu:Nonstratigraphic_Unit
+          [
+            rdf:type owl:Restriction ;
+            owl:onProperty gsoc:hasConstituent ;
+            owl:someValuesFrom gsog:Rock_Material ;
+          ]
+        ) ;
+    ] ;
+.
+gsgu:Lithostratigraphic_Unit
+  rdf:type owl:Class ;
+  rdfs:comment "Geologic unit defined on the basis of observable and distinctive lithologic properties or combination of lithologic properties and stratigraphic relationships. Denotes a particular body of rock."@en ;
+  rdfs:comment "dct:source--  Salvador, A., 1994, International Stratigraphic Guide, Second Edition"@en ;
+  rdfs:label "Lithostratigraphic Unit"@en ;
+  rdfs:subClassOf gsgu:Stratigraphic_Unit ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:allValuesFrom gsgu:Lithostratigraphic_Unit ;
+      owl:onProperty gsoc:hasPart ;
+    ] ;
 .
 gsgu:Magnetostratigraphic_Unit
-  a owl:Class ;
+  rdf:type owl:Class ;
   rdfs:comment "Geologic unit defined by magnetic characteristics."@en ;
   rdfs:comment "dct:source--  Salvador, A., 1994, International Stratigraphic Guide, Second Edition"@en ;
   rdfs:label "magnetostratigraphic unit"@en ;
-  rdfs:subClassOf gsgu:Geophysical_Unit ;
+  rdfs:subClassOf gsgu:Stratigraphic_Unit ;
+.
+gsgu:Marker_Bed
+  rdf:type owl:Class ;
+  rdfs:comment "Stratigraphic part that is a thin laterally continuous bed within another unit."@en ;
+  rdfs:comment "dct:source--  CGI rockbodypart vocabulary 2016-11-21 "@en ;
+  rdfs:label "marker bed"@en ;
+  rdfs:subClassOf gsgu:Bed ;
 .
 gsgu:Mass_Movement_Unit
-  a owl:Class ;
+  rdf:type owl:Class ;
   rdfs:comment "Geologic unit produced by gravity driven, down-slope displacemnt of material, and characterized by the type of movement giving rise to the deposit, and by how the individual movement types present in the deposit are related in time and space."@en ;
   rdfs:comment "dct:source--  CGI geologicunittype SKOS vocabulary 2012-11-24"@en ;
   rdfs:label "mass movement unit"@en ;
   rdfs:subClassOf gsgu:Lithogenetic_Unit ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:externallyGenDependsOn ;
+      owl:someValuesFrom gspr:Material_Transport ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:isOutputOf ;
+      owl:someValuesFrom gspr:Material_Transport ;
+    ] ;
+  owl:equivalentClass [
+      rdf:type owl:Class ;
+      owl:intersectionOf (
+          gsgu:Lithogenetic_Unit
+          [
+            rdf:type owl:Restriction ;
+            owl:onProperty gsoc:externallyGenDependsOn ;
+            owl:someValuesFrom gspr:Material_Transport ;
+          ]
+          [
+            rdf:type owl:Restriction ;
+            owl:onProperty gsoc:isOutputOf ;
+            owl:someValuesFrom gspr:Material_Transport ;
+          ]
+        ) ;
+    ] ;
 .
-gsgu:Pedoderm
-  a owl:Class ;
-  rdfs:comment "Geologic unit defined based on soil development and character. Pedoderm is not a surface classification unit because soil classification requires knowledge of the soil profile, which always extends some distance beneath the surface."@en ;
-  rdfs:comment "dct:source--  CGI geologicunittype SKOS vocabulary 2012-11-24"@en ;
-  rdfs:label "pedoderm"@en ;
+gsgu:Member
+  rdf:type owl:Class ;
+  rdfs:subClassOf gsgu:Lithostratigraphic_Unit ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:allValuesFrom [
+          rdf:type owl:Class ;
+          owl:unionOf (
+              gsgu:Bed
+              gsgu:Facies
+              gsog:Lithosome
+            ) ;
+        ] ;
+      owl:onProperty gsoc:hasPart ;
+    ] ;
+.
+gsgu:Metamorphic_Facies
+  rdf:type owl:Class ;
+  rdfs:comment "Categories that characterize mineral assemblages indicative of certain metamorphic P-T conditions. Examples include Barrovian metasedimentary zones (eg: biotite facies, kyanite facies) or assemblages developed in rocks of more mafic composition (eg: greenschist facies, amphibolite facies)."@en ;
+  rdfs:comment "applies to Rock_Material or Geologic_Unit"@en ;
+  rdfs:isDefinedBy "GeoSciML v4"@en ;
+  rdfs:label "Metamorphic facies"@en ;
+  rdfs:subClassOf gsgu:Facies ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:externallyGenDependsOn ;
+      owl:someValuesFrom gspr:Metamorphic_Process ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:isOutputOf ;
+      owl:someValuesFrom gspr:Metamorphic_Process ;
+    ] ;
+  owl:disjointWith gsgu:Igneous_Facies ;
+  owl:disjointWith gsgu:Sedimentary_Facies ;
+  owl:equivalentClass [
+      rdf:type owl:Class ;
+      owl:intersectionOf (
+          gsgu:Facies
+          [
+            rdf:type owl:Restriction ;
+            owl:onProperty gsoc:externallyGenDependsOn ;
+            owl:someValuesFrom gspr:Metamorphic_Process ;
+          ]
+          [
+            rdf:type owl:Restriction ;
+            owl:onProperty gsoc:isOutputOf ;
+            owl:someValuesFrom gspr:Metamorphic_Process ;
+          ]
+        ) ;
+    ] ;
+.
+gsgu:Nonstratigraphic_Unit
+  rdf:type owl:Class ;
+  rdfs:subClassOf gsog:Geologic_Unit ;
+  rdfs:subClassOf [
+      rdf:type owl:Class ;
+      owl:complementOf gsgu:Stratigraphic_Unit ;
+    ] ;
+  owl:disjointWith gsgu:Stratigraphic_Unit ;
+  owl:equivalentClass [
+      rdf:type owl:Class ;
+      owl:intersectionOf (
+          gsog:Geologic_Unit
+          [
+            rdf:type owl:Class ;
+            owl:complementOf gsgu:Stratigraphic_Unit ;
+          ]
+        ) ;
+    ] ;
 .
 gsgu:Pedostratigraphic_Unit
-  a owl:Class ;
+  rdf:type owl:Class ;
   rdfs:comment "Geologic unit that represents a single pedologic horizon in a sequence of strata (consolidated or non-consolidated). The presence of an overlying geologic unit is required, but locally the soil horizon may be at the Earth surface (in which case is may be coincident with a Pedoderm). See discussion at https://www.seegrid.csiro.au/twiki/bin/view/CGIModel/PedostratigraphicUnit"@en ;
   rdfs:comment "dct:source--  North American Commission on Stratigraphic Nomenclature, 1983, Morrison, 1995, INQUA/ISSS newsletter, Nov. 1995http://fadr.msu.ru/inqua/nl-archive/nl-8-11/howcan.html, ISSN 0256-2340."@en ;
   rdfs:label "pedostratigraphic unit"@en ;
+  rdfs:subClassOf gsgu:Stratigraphic_Unit ;
 .
 gsgu:Pluton
-  a owl:Class ;
+  rdf:type owl:Class ;
   rdfs:comment "A pluton is any large igneous body that has congealed from magma underground. There are many sorts of pluton – including the lens-like and subhorizontal laccoliths and lopoliths, and the vertical or near-vertical sided stocks and batholiths. All these categories of pluton are defined on their overall apparent shape and relationship to the country rock. A batholith is the largest of the pluton types and by definition cover at least 100 square kilometres. A stock is a small discordant pluton, shaped like a batholith but falling below the necessary 100 square km in extent. (Dr Ted Nield, https://www.geolsoc.org.uk/Education-and-Careers/Ask-a-Geologist/Earth-Materials/Batholiths-and-Plutons "@en ;
   rdfs:comment "a body of intrusive rock, generally with a simple, regular margin, the whole being kilometre-scale or larger and with a cylindrical, lenticular or tabular shape; a pluton might consist of essentially one intrusion, or be a composite  of two or more spatially associated intrusions that are inferred to be related genetically."@en ;
   rdfs:comment "dct:Source -- based on Gillespie, M R, Stephenson, D, and Millward, D. 2008. BGS classification of lithodemic units: Proposals for classifying units of intrusive rock. British Geological Survey Research Report, RR/08/05. 31pp."@en ;
   rdfs:label "Pluton "@en ;
   rdfs:subClassOf gsgu:Intrusion ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:allValuesFrom [
+          rdf:type owl:Class ;
+          owl:unionOf (
+              gsgu:Intrusion
+              gsgu:Facies
+            ) ;
+        ] ;
+      owl:onProperty gsoc:hasPart ;
+    ] ;
 .
 gsgu:Polarity_Chronostratigraphic_Unit
-  a owl:Class ;
+  rdf:type owl:Class ;
   rdfs:comment "Geologic unit defined by primary magnetic-polarity record imposed whien the rock was deposited or crystallized during a specific interval of geologic time. Kind of chronostratigraphic unit and kind of geophysical unit."@en ;
   rdfs:comment "dct:source--  North American Commission on Stratigraphic Nomenclature, 1983"@en ;
   rdfs:label "polarity chronostratigraphic unit"@en ;
-  rdfs:subClassOf gsgu:Geophysical_Unit ;
-.
-gsgu:Rock_Body_Shape
-  a owl:Class ;
-  rdfs:comment "The geometry or form of a Rock Body.  Examples include: dike (dyke), cone, fan, sheet, etc. Morphology is independent of the substance (Rock Material) that composes the Rock Body or process that formed it."@en ;
-  rdfs:isDefinedBy "based on GeoSciML v4"@en ;
-  rdfs:label "Body morphology"@en ;
-  rdfs:subClassOf gsoc:Shape ;
+  rdfs:subClassOf gsgu:Stratigraphic_Unit ;
   rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty gsoc:hasDataValue ;
-      owl:someValuesFrom xsd:string ;
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:hosts ;
+      owl:someValuesFrom gsog:Geologic_Time_Interval ;
     ] ;
 .
+gsgu:Pyroxene_Hornfels_Metamorphic_Facies
+  rdf:type owl:Class ;
+  rdfs:comment "Metamorphic facies characterized in rocks of basaltic composition by clinopyroxene-orthopyroxene-plagioclase (olivine stable with plagioclase)."@en ;
+  rdfs:comment "dct:source--  Smulikowski et al. 2003; Fettes and Desmons, 2007"@en ;
+  rdfs:label "pyroxene hornfels metamorphic facies"@en ;
+  rdfs:subClassOf gsgu:Metamorphic_Facies ;
+.
+gsgu:Sanidinite_Metamorphic_Facies
+  rdf:type owl:Class ;
+  rdfs:comment "dct:source--  Fettes and Desmons, 2007"@en ;
+  rdfs:comment "distinguished from the pyroxene hornfels facies by the occurrence of especially high-temperature varieties and polymorphs of minerals (eg. pigeonite, K-rich labradorite), assemblage for rocks of basaltic composition"@en ;
+  rdfs:label "sanidinite metamorphic facies"@en ;
+  rdfs:subClassOf gsgu:Metamorphic_Facies ;
+.
 gsgu:Sedimentary_Facies
-  a owl:Class ;
+  rdf:type owl:Class ;
   rdfs:comment "a lithologic variant in a sedimentary unit, typically related to spatial variation in the original depositional environment or subsequent diagenetic environment."@en ;
   rdfs:label "Sedimentary Facies "@en ;
-  rdfs:subClassOf gsog:Facies ;
+  rdfs:subClassOf gsgu:Facies ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:externallyGenDependsOn ;
+      owl:someValuesFrom gspr:Sedimentary_Process ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:isOutputOf ;
+      owl:someValuesFrom gspr:Sedimentary_Process ;
+    ] ;
+  owl:disjointWith gsgu:Igneous_Facies ;
+  owl:disjointWith gsgu:Metamorphic_Facies ;
+  owl:equivalentClass [
+      rdf:type owl:Class ;
+      owl:intersectionOf (
+          gsgu:Facies
+          [
+            rdf:type owl:Restriction ;
+            owl:onProperty gsoc:externallyGenDependsOn ;
+            owl:someValuesFrom gspr:Sedimentary_Process ;
+          ]
+          [
+            rdf:type owl:Restriction ;
+            owl:onProperty gsoc:isOutputOf ;
+            owl:someValuesFrom gspr:Sedimentary_Process ;
+          ]
+        ) ;
+    ] ;
+.
+gsgu:Series
+  rdf:type owl:Class ;
+  rdfs:subClassOf gsgu:Chronostratigraphic_Unit ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:hosts ;
+      owl:someValuesFrom gst:Epoch ;
+    ] ;
+.
+gsgu:Stage
+  rdf:type owl:Class ;
+  rdfs:comment "The stage includes all rocks formed during an age. A stage is normally the lowest ranking unit in the chronostratigraphic hierarchy that can be recognized on a global scale. The stage has been called the basic working unit of chronostratigraphy because it is suited in scope and rank to the practical needs and purposes of intraregional chronostratigraphic classification. It is a subdivision of a series."@en ;
+  rdfs:subClassOf gsgu:Chronostratigraphic_Unit ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:hosts ;
+      owl:someValuesFrom gst:Age ;
+    ] ;
+.
+gsgu:Stratigraphic_Part
+  rdf:type owl:Class ;
+  rdfs:comment "A geologic unit that occupies a particular stratigraphic position as part of a stratigraphic unit."@en ;
+  rdfs:comment "dct:source--  based on CGI rockbodypart vocabulary 2016-11-21; hierarchy position modified in GSO."@en ;
+  rdfs:label "stratigraphic part"@en ;
+  rdfs:subClassOf gsoc:Part ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:allValuesFrom gsgu:Stratigraphic_Unit ;
+      owl:onProperty gsoc:hasRoleObject ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:allValuesFrom gsog:Geologic_Unit ;
+      owl:onProperty gsoc:hasRolePlayer ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:hasRoleObject ;
+      owl:someValuesFrom gsgu:Stratigraphic_Unit ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:hasRolePlayer ;
+      owl:someValuesFrom gsog:Geologic_Unit ;
+    ] ;
+.
+gsgu:Stratigraphic_Unit
+  rdf:type owl:Class ;
+  rdfs:comment "A body of material in the Earth whose complete and precise extent is inferred to exist (NADM GeologicUnit, Stratigraphic unit in sense of NACSN or International Stratigraphic Code), or a classifier used to characterize parts of the Earth (e.g. lithologic map unit like 'granitic rock' or 'alluvial deposit', surficial units like 'till' or 'old alluvium'). (GeoSciML v3.2)"@en ;
+  rdfs:comment """A geologic unit and (the amount of) its rock material are co-located, but different entities. They can share properties, e.g. porosity, thickness, density, but also have differences:
+- different persistence conditions: the material can exist without the unit; e.g. a unit can be cease to exist due to natural (seismic) or artificial (explosion) means, but the material can persist
+- different parthood conditions:  
+-- a unit can be part of a stratigraphic lexicon, but its material cannot be part of the lexicon. 
+-- parts of the unit are not parts of the material, e.g. the western arm of formation X is not a part of its sandstone - the sandstone making up the western part of X is a part of the sandstone 
+-- different identity conditions: a unit can have some material added or removed and retain identity, but the material changes identity with the addition or removal of some material"""@en ;
+  rdfs:comment "A spatio-temporally contextualized rock object: is dependent in space and time on immediately adjacent rocks."@en ;
+  rdfs:label "Geologic Unit"@en ;
+  rdfs:subClassOf gsog:Geologic_Unit ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:adjacentlyDependsOn ;
+      owl:someValuesFrom gsog:Rock_Object ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:hasExample ;
+      owl:someValuesFrom gsgf:Stratotype ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:isOutputOf ;
+      owl:someValuesFrom [
+          rdf:type owl:Class ;
+          owl:unionOf (
+              gsog:Geologic_Process
+              gsog:Geologic_Event
+            ) ;
+        ] ;
+    ] ;
+  owl:disjointWith gsgu:Nonstratigraphic_Unit ;
+  owl:equivalentClass [
+      rdf:type owl:Class ;
+      owl:intersectionOf (
+          gsog:Geologic_Unit
+          [
+            rdf:type owl:Restriction ;
+            owl:onProperty gsoc:adjacentlyDependsOn ;
+            owl:someValuesFrom gsog:Rock_Object ;
+          ]
+        ) ;
+    ] ;
+.
+gsgu:Subgreenschist_Metamorphic_Facies
+  rdf:type owl:Class ;
+  rdfs:comment "Metamorphic facies characterized in rocks of basaltic composition by prehnite-pumpellyite, pumpellyite-actinolite, prehnite-actinolite (prehnite and pumpellyite are the diagnostic Ca-Al silicates rather than minerals of the epidote or zeolite groups)."@en ;
+  rdfs:comment "dct:source--  Smulikowski et al. 2003; Fettes and Desmons, 2007"@en ;
+  rdfs:label "subgreenschist metamorphic facies"@en ;
+  rdfs:subClassOf gsgu:Metamorphic_Facies ;
+.
+gsgu:Substage
+  rdf:type owl:Class ;
+  rdfs:subClassOf gsgu:Chronostratigraphic_Unit ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:hosts ;
+      owl:someValuesFrom gst:Age ;
+    ] ;
 .
 gsgu:Suite
-  a owl:Class ;
+  rdf:type owl:Class ;
   rdfs:comment "A geologic unit that comprises two or more associated Lithodemes, Plutons, Intrusions, or Igneous_Swarms of the same class (e.g., plutonic, metamorphic) that are interpreted to be genetically related. For cartographic and hierarchical purposes, suite is comparable to group"@en ;
   rdfs:comment "dct:source--  Based on NACSN-North American Commission on Stratigraphic Nomenclature, 2005, The American Association of Petroleum Geologists Bulletin, V. 89, No. 11, p. 1547-1591 . https://ngmdb.usgs.gov/Info/NACSN/Code2/code2.html#Article31Remarksa"@en ;
   rdfs:label "Suite"@en ;
   rdfs:subClassOf gsgu:Lithodemic_Unit ;
   rdfs:subClassOf [
-      a owl:Restriction ;
+      rdf:type owl:Restriction ;
       owl:allValuesFrom [
-          a owl:Class ;
+          rdf:type owl:Class ;
           owl:unionOf (
               gsgu:Igneous_Swarm
               gsgu:Pluton
@@ -244,22 +839,79 @@ gsgu:Suite
       owl:onProperty gsoc:hasPart ;
     ] ;
 .
+gsgu:Supergroup
+  rdf:type owl:Class ;
+  rdfs:subClassOf gsgu:Lithostratigraphic_Unit ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:hasPart ;
+      owl:someValuesFrom [
+          rdf:type owl:Class ;
+          owl:unionOf (
+              gsgu:Formation
+              gsgu:Group
+            ) ;
+        ] ;
+    ] ;
+.
 gsgu:Supersuite
-  a owl:Class ;
+  rdf:type owl:Class ;
   rdfs:comment "A geologic unit that comprises two or more Suites or Complexes having a degree of natural relationship to one another, either in the vertical or the lateral sense. For cartographic and hierarchical purposes, supersuite is similar in rank to supergroup"@en ;
   rdfs:comment "dct:source--  NACSN-North American Commission on Stratigraphic Nomenclature, 2005, The American Association of Petroleum Geologists Bulletin, V. 89, No. 11, p. 1547-1591 . https://ngmdb.usgs.gov/Info/NACSN/Code2/code2.html#Article31Remarksa"@en ;
   rdfs:label "Supersuite "@en ;
   rdfs:subClassOf gsgu:Lithodemic_Unit ;
 .
+gsgu:System
+  rdf:type owl:Class ;
+  rdfs:subClassOf gsgu:Chronostratigraphic_Unit ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:hosts ;
+      owl:someValuesFrom gst:Period ;
+    ] ;
+.
 gsgu:Tectonic_Unit
-  a owl:Class ;
+  rdf:type owl:Class ;
   rdfs:comment "Geologic unit defined defined on basis of structural or deformation features, mutual relations, origin or historical evolution. Contained material may be igneous, sedimentary, or metamorphic."@en ;
   rdfs:comment "dct:source--  Neuendorf, K.K.E., Mehl Jr., J.P. & Jackson, J.A., 2011: Glossary of Geology, 5th ed., revised. Alexandria, VA, American Geological Institute, 800 pp."@en ;
   rdfs:label "lithotectonic unit"@en ;
-  rdfs:subClassOf gsog:Geologic_Unit ;
+  rdfs:subClassOf gsgu:Lithogenetic_Unit ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:externallyGenDependsOn ;
+      owl:someValuesFrom gspr:Tectonic_Process ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:isOutputOf ;
+      owl:someValuesFrom gspr:Tectonic_Process ;
+    ] ;
+  owl:equivalentClass [
+      rdf:type owl:Class ;
+      owl:intersectionOf (
+          gsgu:Lithogenetic_Unit
+          [
+            rdf:type owl:Restriction ;
+            owl:onProperty gsoc:isOutputOf ;
+            owl:someValuesFrom gspr:Tectonic_Process ;
+          ]
+          [
+            rdf:type owl:Restriction ;
+            owl:onProperty gsoc:externallyGenDependsOn ;
+            owl:someValuesFrom gspr:Tectonic_Process ;
+          ]
+        ) ;
+    ] ;
+.
+gsgu:Zeolite_Metamorphic_Facies
+  rdf:type owl:Class ;
+  rdfs:comment "Metamorphic facies characterized in rocks of basaltic composition by zeolite minerals such as laumontite and heulandites (in place of other Ca-Al silicates such as prehnite, pumpellyite and epidote)."@en ;
+  rdfs:comment "dct:source--  Smulikowski et al. 2003; Fettes and Desmons, 2007"@en ;
+  rdfs:label "zeolite metamorphic facies"@en ;
+  rdfs:subClassOf gsgu:Metamorphic_Facies ;
 .
 gsgu:ontology
-  a owl:Ontology ;
+  rdf:type owl:Ontology ;
   rdfs:comment "This file based on the CGI Geologic Unit type vocabulary. Compilation and review in MS Excel spreadsheet, converted to MS Excel for SKOS generation using GSML_SKOS_fromXLS_2016.02.xslt."@en ;
   rdfs:comment "This ontology specifies concepts for description of Geologic Unit, as defined by the IUGS Commission for Geoscience Information (CGI) Geoscience Terminology Working Group. These classes and properties extend the base GSO-Geology ontology for more detailed descriptions. Unit types are differentiated based on their defining lithological, stratigraphic, or other physical properties."@en ;
   rdfs:comment "dct:creator--  CGI Geoscience Terminology Working Group, OWL conversion by Stephen Richard"@en ;
@@ -267,4 +919,8 @@ gsgu:ontology
   rdfs:comment "dct:modified-- 2020-01-30"@en ;
   rdfs:label "Geologic Unit"@en ;
   owl:imports gsoc:ontology ;
+  owl:imports gsgf:ontology ;
+  owl:imports gspr:ontology ;
+  owl:imports gst:ontology ;
+  owl:imports gsog:ontology ;
 .

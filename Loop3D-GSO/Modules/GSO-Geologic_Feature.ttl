@@ -1,0 +1,240 @@
+# baseURI: http://loop3d.org/GSO/ontology/2020/1/geologicfeature/ontology
+# imports: http://loop3d.org/GSO/ontology/2020/1/common/ontology
+# imports: http://loop3d.org/GSO/ontology/2020/1/geology/ontology
+
+@prefix : <http://loop3d.org/GSO/ontology/2020/1/geologicfeature/> .
+@prefix gsgf: <http://loop3d.org/GSO/ontology/2020/1/geologicfeature/> .
+@prefix gsoc: <http://loop3d.org/GSO/ontology/2020/1/common/> .
+@prefix gsog: <http://loop3d.org/GSO/ontology/2020/1/geology/> .
+
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+gsgf:Amygdule
+  rdf:type owl:Class ;
+  rdfs:comment "Cavity filled with secondary minerals, denotes that cavities are filled vesicles, thus restricted to volcanic rock. Have to model as a cavity/with material.  Rock hosts cavity"@en ;
+  rdfs:comment "dct:source--  based on Neuendorf et al 2005"@en ;
+  rdfs:label "amygdule"@en ;
+  rdfs:subClassOf gsgf:Vesicle ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:contains ;
+      owl:someValuesFrom gsog:Mineral ;
+    ] ;
+.
+gsgf:Bed_Lithosome
+  rdf:type owl:Class ;
+  rdfs:comment "Lithosome in lithostratigraphic unit that occurs as individual beds interleaved with other constituents on the outcrop (m) scale or larger."@en ;
+  rdfs:comment "dct:source--  CGI rockbodypart vocabulary 2016-11-21 "@en ;
+  rdfs:label "bed lithosome"@en ;
+  rdfs:subClassOf gsgf:Lithosome ;
+.
+gsgf:Bedding_Package
+  rdf:type owl:Class ;
+  rdfs:comment "A sub-map scale sequence of strata, e.g. bouma sequence, fining-upward sequence, interbedded sandstone and mudstone...  Repeated multiple times in a stratigraphic unit."@en ;
+  rdfs:label "Bedding Package "@en ;
+  rdfs:subClassOf gsgf:Lithosome ;
+.
+gsgf:Boundary_Stratotype
+  rdf:type owl:Class ;
+  rdfs:comment "A stratigraphic section that contains a designated point in a stratigraphic sequence of essentially continuous deposition, preferably marine, chosen for its correlation potential. http://www.stratigraphy.org/upload/bak/chron.htm"@en ;
+  rdfs:label "Boundary Stratotype"@en ;
+  rdfs:subClassOf gsoc:Example ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:allValuesFrom gsgf:Stratigraphic_Section ;
+      owl:onProperty gsoc:hasRolePlayer ;
+    ] ;
+.
+gsgf:Cyclic_Bedding_Package
+  rdf:type owl:Class ;
+  rdfs:comment "Lithosome characterized by an internal sequence of units, which is repeated in a stacked sequence, e.g. fining-upward sequence, thickening upward sequence, bouma sequence."@en ;
+  rdfs:comment "dct:source--  CGI rockbodypart vocabulary 2016-11-21 "@en ;
+  rdfs:label "cyclic bedding package"@en ;
+  rdfs:subClassOf gsgf:Bedding_Package ;
+.
+gsgf:Drill_Hole
+  rdf:type owl:Class ;
+  rdfs:comment "Drill hole."@en ;
+  rdfs:label "drill hole"@en ;
+  rdfs:subClassOf gsoc:Hole ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:hostedBy ;
+      owl:someValuesFrom gsog:Rock_Body ;
+    ] ;
+.
+gsgf:Fenestra
+  rdf:type owl:Class ;
+  rdfs:comment "Primary or penecontemporaneous gap or cavity in the framework of a sedimentary rock, larger than grain-supported intersticies. May be open space or have partial to complete fill with secondary cement or introduced sediment."@en ;
+  rdfs:comment "dct:source--  based on Neuendorf et al 2005"@en ;
+  rdfs:label "fenestra"@en ;
+  rdfs:subClassOf gsgf:Vug ;
+.
+gsgf:Irregular_Lithosome
+  rdf:type owl:Class ;
+  rdfs:comment "Lithosome in a mixed/heterogeneous lithodemic unit that occurs in irregular bodies within unit"@en ;
+  rdfs:comment "dct:source--  CGI rockbodypart vocabulary 2016-11-21 "@en ;
+  rdfs:label "irregular lithosome"@en ;
+  rdfs:subClassOf gsgf:Lithosome ;
+.
+gsgf:Layer_Lithosome
+  rdf:type owl:Class ;
+  rdfs:comment "Lithosome in igneous or metamorphic geologic unit that occurs as layers alternating with other constituents."@en ;
+  rdfs:comment "dct:source--  CGI rockbodypart vocabulary 2016-11-21 "@en ;
+  rdfs:label "layer lithosome"@en ;
+  rdfs:subClassOf gsgf:Lithosome ;
+.
+gsgf:Lenticular_Lithosome
+  rdf:type owl:Class ;
+  rdfs:comment "Lithosome occurs as discrete lense-shaped bodies, not connected with other bodies."@en ;
+  rdfs:comment "dct:source--  CGI rockbodypart vocabulary 2016-11-21 "@en ;
+  rdfs:label "lenticular lithosome"@en ;
+  rdfs:subClassOf gsgf:Lithosome ;
+.
+gsgf:Lithophysae
+  rdf:type owl:Class ;
+  rdfs:comment "Bubble-like cavity with concentric shells of finely crystalline minerals, open space remains in core of structure. Radiating fibrous structure may be present in secondary mineral fill. Typically in silicic volcanic rock."@en ;
+  rdfs:comment "dct:source--  Neuendorf et al 2005"@en ;
+  rdfs:label "lithophysae"@en ;
+  rdfs:subClassOf gsoc:Hole ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:hostedBy ;
+      owl:someValuesFrom gsog:Rock_Body ;
+    ] ;
+.
+gsgf:Lithosome
+  rdf:type owl:Class ;
+  rdfs:comment "A kind of rock body that has multiple occurrences in a single geologic unit. A mass of rock of uniform character, characterized by geometry, composition, and internal structure. (http://inspire.ec.europa.eu/codelist/CompositionPartRoleValue/lithosome)"@en ;
+  rdfs:comment "Generally denotes rock mass that is the product of a particular rock forming process or related sequence of processes in the containing unit. Example--bouma sequence, point bar sequence. A particular lithosome may be characterized by the presence of blocks, but blocks are not treated as kinds of lithosome because the internal character of the blocks is determined by a separate genetic sequence from the described unit."@en ;
+  rdfs:comment "In the AGI glossary (Neuendorf et al 2005) and usage found on the World Wide Web, lithosome typically denotes relatively uniform and distinctive bodies of sediment that intertongue with one another. (e.g. https://geoinfo.nmt.edu/resources/water/amp/brochures/Koning_lithS_lithA_PP_presentation.pdf; http://www.kgs.ku.edu/Publications/Bulletins/169/Dott/).   This vocabulary generalizes the concept defined in Neuendorf et al 2005 to include bodies of igneous or metamorphic rock as well as sedimentary rock. NADM SLTTs (2004) used the term 'lithotope' with similar meaning for sedimentary rocks."@en ;
+  rdfs:comment "Lithosome is considered a kind of Integral feature, where the host is a geologic unit, and the focal is the defining lithologic characteristics of the lithosome."@en ;
+  rdfs:comment "dct:source--  CGI rockbodypart vocabulary 2016-11-21 "@en ;
+  rdfs:label "Lithosome "@en ;
+  rdfs:subClassOf gsoc:Material_Feature ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:allValuesFrom gsog:Rock_Object ;
+      owl:onProperty gsoc:hostedBy ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:hasEssentialPart ;
+      owl:someValuesFrom gsog:Rock_Object ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:hostedBy ;
+      owl:someValuesFrom gsog:Rock_Object ;
+    ] ;
+.
+gsgf:Miarolitic_Cavity
+  rdf:type owl:Class ;
+  rdfs:comment "An irregular cavity in a phaneritic igneous rock into which small crystals of the rock-forming minerals protrude."@en ;
+  rdfs:comment "dct:source--  Neuendorf et al 2005"@en ;
+  rdfs:label "miarolitic cavity"@en ;
+  rdfs:subClassOf gsgf:Vug ;
+.
+
+gsgf:Outcrop
+  rdf:type owl:Class ;
+  rdfs:comment "A boundary between a rock body and the Earth's atmosphere or a water body."@en ;
+  rdfs:label "Outcrop"@en ;
+  rdfs:subClassOf gsog:Rock_Body_Boundary ;
+.
+gsgf:Pore_Space
+  rdf:type owl:Class ;
+  rdfs:comment "Open space between particles in a granular aggregate."@en ;
+  rdfs:comment "dct:source--  Neuendorf et al 2005, CGI GTWG vocabulary"@en ;
+  rdfs:label "pore space"@en ;
+  rdfs:subClassOf gsoc:Physical_Gap ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:hostedBy ;
+      owl:someValuesFrom gsog:Rock_Body ;
+    ] ;
+.
+gsgf:Rock_Body_Bottom
+  rdf:type owl:Class ;
+  rdfs:comment "Constraint: rock body must be a stratigraphic unit for which 'top' and 'bottom' are meaningful."@en ;
+  rdfs:label "Rock Body Bottom"@en ;
+  rdfs:subClassOf gsog:Rock_Body_Boundary ;
+.
+gsgf:Rock_Body_Section
+  rdf:type owl:Class ;
+  rdfs:comment "A rock object that represents a continuous strip of rock material that includes (has parts) a sequence of stratified layers."@en ;
+  rdfs:label "Rock Body Section"@en ;
+  rdfs:subClassOf gsog:Rock_Body_Boundary ;
+.
+gsgf:Rock_Body_Top
+  rdf:type owl:Class ;
+  rdfs:comment "Constraint: rock body must be a stratigraphic unit for which 'top' and 'bottom' are meaningful."@en ;
+  rdfs:label "Rock Body Top"@en ;
+  rdfs:subClassOf gsog:Rock_Body_Boundary ;
+.
+gsgf:Stratigraphic_Section
+  rdf:type owl:Class ;
+  rdfs:comment "A rock object that represents a continuous strip of rock material that includes (samples) a sequence of stratified layers."@en ;
+  rdfs:label "Stratigraphic Section"@en ;
+  rdfs:subClassOf gsgf:Rock_Body_Section ;
+.
+gsgf:Stratotype
+  rdf:type owl:Class ;
+  rdfs:comment "a specific interval or point in a specific sequence of rock stata that constitues the reference standard  defining a stratigrphic unit or boundary"@en ;
+  rdfs:comment "rdfs:source -- based on Salvador 1994 (International Stratigraphic Guide: Int. Union Geo. Sciences and Geol. Soc. Am.), p.26, as repored in Neuendorf et al., 2005."@en ;
+  rdfs:label "Stratotype"@en ;
+  rdfs:subClassOf gsoc:Example ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:allValuesFrom gsgf:Stratigraphic_Section ;
+      owl:onProperty gsoc:hasRolePlayer ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:isExampleOf ;
+      owl:someValuesFrom <http://loop3d.org/GSO/ontology/2020/1/geologicunit/Stratigraphic_Unit> ;
+    ] ;
+.
+gsgf:Vein_Dike_Lithosome
+  rdf:type owl:Class ;
+  rdfs:comment "Lithosome occurs as intrusive, sheet-like bodies within the unit as an essential part of the unit."@en ;
+  rdfs:comment "dct:source--  CGI rockbodypart vocabulary 2016-11-21 "@en ;
+  rdfs:label "vein or dike lithosome"@en ;
+  rdfs:subClassOf gsgf:Lithosome ;
+.
+gsgf:Vesicle
+  rdf:type owl:Class ;
+  rdfs:comment "Cavity in volcanic rock formed by trapped gas. Use amygdule if filled with secondary mineral."@en ;
+  rdfs:comment "dct:source--  Neuendorf et al 2005"@en ;
+  rdfs:label "vesicle"@en ;
+  rdfs:subClassOf gsoc:Hole ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:hostedBy ;
+      owl:someValuesFrom gsog:Rock_Body ;
+    ] ;
+.
+gsgf:Vug
+  rdf:type owl:Class ;
+  rdfs:comment "Irregular cavity in rock, generic term with no connotation of origin of cavity. May be lined with crystals of different mineral compostion to the host rock"@en ;
+  rdfs:comment "dct:source--  Neuendorf et al 2005"@en ;
+  rdfs:label "vug"@en ;
+  rdfs:subClassOf gsoc:Hole ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:hostedBy ;
+      owl:someValuesFrom gsog:Rock_Body ;
+    ] ;
+.
+gsgf:ontology
+  rdf:type owl:Ontology ;
+  rdfs:comment "Geological features that are not structures"@en ;
+  rdfs:label "Geologic Feature"@en ;
+  owl:imports gsoc:ontology ;
+  owl:imports gsog:ontology ;
+.
+

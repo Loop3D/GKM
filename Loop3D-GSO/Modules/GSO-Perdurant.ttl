@@ -1,0 +1,104 @@
+﻿# baseURI: http://loop3d.org/GSO/ontology/2020/1/perdurant/ontology
+# imports: http://loop3d.org/GSO/ontology/2020/1/common/ontology
+
+@prefix : <http://loop3d.org/GSO/ontology/2020/1/perdurant/> .
+@prefix gspd: <http://loop3d.org/GSO/ontology/2020/1/perdurant/> .
+@prefix gsoc: <http://loop3d.org/GSO/ontology/2020/1/common/> .
+
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+gspd:Determining_Event
+  rdf:type owl:Class ;
+  rdfs:comment "An event responsible for the origing of some particular.  For qualities, an observation, calculation, or inference event used to determine the value of one or more qualities. The suggested hook here is to use PROV and or SOSA vocabulary to populate Determining_Event subclasses."@en ;
+  rdfs:label "Determining Event "@en ;
+  rdfs:subClassOf gsoc:Event ;
+.
+gspd:Assertion
+  rdf:type owl:Class ;
+  rdfs:comment "Determination by agreeement or convention. No evidence required, but there should be an identified authority making the assertion." ;
+  rdfs:label "Assertion "@en ;
+  rdfs:subClassOf gspd:Determining_Event ;
+.
+
+gspd:Observation
+  rdf:type owl:Class ;
+  rdfs:comment "An event that results in the direct determination of the value of some property; typically will haveConstituent relation so a Measurement_Activity that describes the observation process."@en ;
+  rdfs:label "Observation "@en ;
+  rdfs:subClassOf gspd:Determining_Event ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:hasConstituent ;
+      owl:someValuesFrom gspd:Observation_Process ;
+    ] ;
+.
+gspd:Observation_Process
+  rdf:type owl:Class ;
+  rdfs:comment "A process by which the value of some property or quality of an entity is determined.  Conceptually a subclass of prov:Activity."@en ;
+  rdfs:label "Observation_Process"@en ;
+  rdfs:subClassOf gsoc:Process ;
+.
+
+gspd:Inference
+  rdf:type owl:Class ;
+  rdfs:comment "An indirect determination of the value of some property based on logical reasoning from other data "@en ;
+  rdfs:label "Inference "@en ;
+  rdfs:subClassOf gspd:Determining_Event ;
+.
+gspd:Calculation
+  rdf:type owl:Class ;
+  rdfs:comment "A determination of the value of some property using analytical methods and other data input "@en ;
+  rdfs:label "Calculation "@en ;
+  rdfs:subClassOf gspd:Determining_Event ;
+.
+gspd:Statistical_Calculation
+  rdf:type owl:Class ;
+  rdfs:comment "Determination of statistics associated with a measured value, e.g. minimum, maximum, mean, mode, standard deviation."@en ;
+  rdfs:label "Statistical Calculation"@en ;
+  rdfs:subClassOf gspd:Calculation ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:hasQuality ;
+      owl:someValuesFrom gsoc:Unit_Of_Measure ;
+    ] ;
+.
+gspd:First_Standard_Deviation_Calculation
+  rdf:type owl:Class ;
+  rdfs:comment "report a standard deviation value for a value range "@en ;
+  rdfs:label "First Standard Deviation Calculation"@en ;
+  rdfs:subClassOf gspd:Statistical_Calculation ;
+.
+gspd:Maximum_Value_Calculation
+  rdf:type owl:Class ;
+  rdfs:comment "report a maximum value for a value range"@en ;
+  rdfs:label "Maximum Value Calculation"@en ;
+  rdfs:subClassOf gspd:Statistical_Calculation ;
+.
+gspd:Mean_Value_Calculation
+  rdf:type owl:Class ;
+  rdfs:comment "report a mean value for a value range"@en ;
+  rdfs:label "Mean Value Calculation"@en ;
+  rdfs:subClassOf gspd:Statistical_Calculation ;
+.
+gspd:First_Standard_Deviation_Calculation
+  rdf:type owl:Class ;
+  rdfs:comment "report a standard deviation value for a value range "@en ;
+  rdfs:label "First Standard Deviation Calculation"@en ;
+  rdfs:subClassOf gspd:Statistical_Calculation ;
+.
+gspd:Minimum_Value_Calculation
+  rdf:type owl:Class ;
+  rdfs:comment "report a minimum value for a value range"@en ;
+  rdfs:label "Minimum Value Calculation"@en ;
+  rdfs:subClassOf gspd:Statistical_Calculation ;
+.
+
+gspd:ontology
+  rdf:type owl:Ontology ;
+  rdfs:label "Perdurant"@en ;
+  owl:imports gsoc:ontology ;
+.
+

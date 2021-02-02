@@ -1,0 +1,83 @@
+# baseURI: http://loop3d.org/GSO/ontology/2020/1/rockobject/ontology
+# imports: http://loop3d.org/GSO/ontology/2020/1/common/ontology
+# imports: http://loop3d.org/GSO/ontology/2020/1/geologicunit/ontology
+# imports: http://loop3d.org/GSO/ontology/2020/1/geology/ontology
+
+@prefix : <http://loop3d.org/GSO/ontology/2020/1/rockobject/> .
+@prefix gsgu: <http://loop3d.org/GSO/ontology/2020/1/geologicunit/> .
+@prefix gsoc: <http://loop3d.org/GSO/ontology/2020/1/common/> .
+@prefix gsog: <http://loop3d.org/GSO/ontology/2020/1/geology/> .
+@prefix gsro: <http://loop3d.org/GSO/ontology/2020/1/rockobject/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+gsro:Concretion
+  rdf:type owl:Class ;
+  rdfs:comment "A hard, compact mass or aggregate of mineral matter, normally subspherical but commonly oblate, disc-shaped or irregular. Formed from precipitation from solution about a nucleus or centre."@en ;
+  rdfs:comment "dct:source--  Neuendorf et al. 2005"@en ;
+  rdfs:label "Concretion"@en ;
+  rdfs:subClassOf gsog:Specific_Rock_Object ;
+.
+gsro:Core
+  rdf:type owl:Class ;
+  rdfs:comment "A planet's core, e.g. the Earth's core. Is a geologic object, because it is constituted by a mixture of geologic solid and fluid material. "@en ;
+  rdfs:label "Core"@en ;
+  rdfs:subClassOf gsog:Geologic_Object ;
+.
+gsro:Crust
+  rdf:type owl:Class ;
+  rdfs:comment "A planet's crust, e.g. the Earth's crust. Is a rock object as it is constituted only by solid geologic material. Surprisingly, is a stratigraphic unit, because dependent spatially and temporally on the upper mantle rock object. This means it cannot be moved (e.g. to another planet) and retain identity, and it must always be younger and over the upper mantle."@en ;
+  rdfs:label "Crust"@en ;
+  rdfs:subClassOf gsog:Geologic_Object ;
+.
+gsro:Crystal
+  rdf:type owl:Class ;
+  rdfs:comment "An object composed of a single mineral species, with a characteristic geometrical shape, bounded by flat faces with specific, characteristic orientations reflecting a consistent, highly ordered internal arrangement of constituent atoms."@en ;
+  rdfs:label "Crystal"@en ;
+  rdfs:subClassOf gsog:Specific_Rock_Object ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:allValuesFrom owl:Nothing ;
+      owl:onProperty gsoc:hasPart ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:allValuesFrom [
+          rdf:type owl:Class ;
+          owl:intersectionOf (
+              gsog:Rock_Material
+              [
+                rdf:type owl:Restriction ;
+                owl:allValuesFrom gsog:Mineral ;
+                owl:onProperty gsoc:hasConstituent ;
+              ]
+            ) ;
+        ] ;
+      owl:onProperty gsoc:hasConstituent ;
+    ] ;
+.
+gsro:Fossil_Object
+  rdf:type owl:Class ;
+  rdfs:comment "NOTE--this class is intended to represent individual fossil objects. If some kind of material fossils are granular constituents in a sedimentary rock, they should be represented using 'Biogenic_Granular_Material, with sub classes for different kinds of fossils, e.g. in crinoid grainstone, radiolarian chert, diatomite."@en ;
+  rdfs:label "Fossil object"@en ;
+  rdfs:subClassOf gsog:Specific_Rock_Object ;
+.
+gsro:Mantle
+  rdf:type owl:Class ;
+  rdfs:comment "A planet's mantle, e.g. the Earth's mantle. Is a geologic object, because it is constituted by a mixture of geologic solid and fluid material. "@en ;
+  rdfs:label "Mantle"@en ;
+  rdfs:subClassOf gsog:Geologic_Object ;
+.
+gsro:ontology
+  rdf:type owl:Ontology ;
+  rdfs:comment "This file contains Rock Object vocabulary. Based on the CGI Geologic Unit Part role vocabulary, as defined by the IUGS Commission for Geoscience Information (CGI) Geoscience Terminology Working Group. Refactored to separate objects (Rock_Object.ttl) and roles more consistently."@en ;
+  rdfs:comment "dct:creator--  CGI Geoscience Terminology Working Group, Stephen M Richard"@en ;
+  rdfs:comment "dct:date--  2020-08-04"@en ;
+  rdfs:label "Rock Object"@en ;
+  owl:imports gsoc:ontology ;
+  owl:imports gsgu:ontology ;
+  owl:imports gsog:ontology ;
+.
