@@ -1,6 +1,7 @@
 ﻿# baseURI: http://loop3d.org/GSO/ontology/2020/1/geologicrelation/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/common/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/geology/ontology
+# imports: http://loop3d.org/GSO/ontology/2020/1/geologicstructure/ontology
 
 @prefix : <http://loop3d.org/GSO/ontology/2020/1/geologicrelation/> .
 @prefix gsrl: <http://loop3d.org/GSO/ontology/2020/1/geologicrelation/> .
@@ -18,10 +19,10 @@ gsrl:underlies
   rdf:type owl:ObjectProperty ;
   rdfs:comment "Relationship between rock bodies in which subject body is below and in contact with the object body in geographic refernce system (the object might or might not be younger than the subject). Generally applied to stratified rock bodies"@en ;
   rdfs:domain gsog:Rock_Body ;
-  rdfs:label "underlies "@en ;
+  rdfs:label "underlies"@en ;
   rdfs:range gsog:Rock_Body ;
   rdfs:subPropertyOf gsoc:spatiallyTouch ;
-  rdfs:subPropertyOf gsrl:isGeologicallyRelatedTo ;
+  rdfs:subPropertyOf gsog:isGeologicallyRelatedTo ;
 .
 
 gsrl:stratUnderlies
@@ -30,7 +31,7 @@ gsrl:stratUnderlies
   rdfs:domain gsog:Rock_Body ;
   rdfs:label "underlies "@en ;
   rdfs:range gsog:Rock_Body ;
-  rdfs:subPropertyOf gsoc:underlies ;
+  rdfs:subPropertyOf gsrl:underlies ;
   rdfs:subPropertyOf gsoc:timeOlderThan ;
 .
 
@@ -41,7 +42,7 @@ gsrl:overlies
   rdfs:label "overlies "@en ;
   rdfs:range gsog:Rock_Body ;
   rdfs:subPropertyOf gsoc:spatiallyTouch ;
-  rdfs:subPropertyOf gsrl:isGeologicallyRelatedTo ;
+  rdfs:subPropertyOf gsog:isGeologicallyRelatedTo ;
   owl:inverseOf gsrl:underlies ;
 .
 
@@ -51,7 +52,7 @@ gsrl:stratOverlies
   rdfs:domain gsog:Rock_Body ;
   rdfs:label "overlies "@en ;
   rdfs:range gsog:Rock_Body ;
-  rdfs:subPropertyOf gsoc:overlies ;
+  rdfs:subPropertyOf gsrl:overlies ;
   rdfs:subPropertyOf gsoc:timeYoungerThan ;
   owl:inverseOf gsrl:stratUnderlies ;
 .
@@ -62,8 +63,8 @@ gsrl:overprints
   rdfs:domain [
       rdf:type owl:Class ;
       owl:unionOf (
-          gsog:Foliation
-          gsog:Lineation
+          gsos:Foliation
+          gsos:Lineation
         ) ;
     ] ;
   rdfs:label "overprints"@en ;
@@ -75,7 +76,7 @@ gsrl:overprints
         ) ;
     ] ;
   rdfs:subPropertyOf gsoc:timeYoungerThan ;
-  rdfs:subPropertyOf gsrl:isGeologicallyRelatedTo ;
+  rdfs:subPropertyOf gsog:isGeologicallyRelatedTo ;
 .
 
 gsrl:overprintedBy
@@ -92,12 +93,12 @@ gsrl:overprintedBy
   rdfs:range [
       rdf:type owl:Class ;
       owl:unionOf (
-          gsog:Foliation
-          gsog:Lineation
+          gsos:Foliation
+          gsos:Lineation
         ) ;
     ] ;
   rdfs:subPropertyOf gsoc:timeOlderThan ;
-  rdfs:subPropertyOf gsrl:isGeologicallyRelatedTo ;
+  rdfs:subPropertyOf gsog:isGeologicallyRelatedTo ;
   owl:inverseOf gsrl:overprints ;
 .
 
@@ -121,7 +122,7 @@ gsrl:crosscuts
     ] ;
   rdfs:subPropertyOf gsoc:spatiallyIntersects ;
   rdfs:subPropertyOf gsoc:timeYoungerThan ;
-  rdfs:subPropertyOf gsrl:isGeologicallyRelatedTo ;
+  rdfs:subPropertyOf gsog:isGeologicallyRelatedTo ;
 .
 
 gsog:crosscutBy
@@ -130,7 +131,7 @@ gsog:crosscutBy
   rdfs:label "is cross-cut or truncated by"@en ;
   rdfs:subPropertyOf gsoc:spatiallyIntersects ;
   rdfs:subPropertyOf gsoc:timeOlderThan ;
-  rdfs:subPropertyOf gsrl:isGeologicallyRelatedTo ;
+  rdfs:subPropertyOf gsog:isGeologicallyRelatedTo ;
   owl:inverseOf gsrl:crosscuts ;
 .
 
@@ -139,6 +140,7 @@ gsrl:intrudes
   rdfs:comment "subject rock body intrudes object rock body. Implies that subject rock body is igneous rock, and that object rock body is older than subject rock body"@en ;
   rdfs:label "intrudes"@en ;
   rdfs:subPropertyOf gsrl:crosscuts ;
+  owl:inverseOf gsrl:intrudedBy ;
 .
 
 gsrl:intrudedBy
@@ -153,7 +155,7 @@ gsrl:litparlitintrudes
   rdf:type owl:ObjectProperty ;
   rdfs:comment "Intruded rock is penetrated by numerous sheets of intruded igneous rock, usually granitic. "@en ;
   rdfs:label "lit-par-lit intrudes"@en ;
-  rdfs:subPropertyOf gsog:intrudes ;
+  rdfs:subPropertyOf gsrl:intrudes ;
 .
 
 gsrl:isConcordantTo
@@ -161,7 +163,7 @@ gsrl:isConcordantTo
   rdfs:comment "relationship between a foliation and some other planar feature (fault, contact, Ductile Shear zone, another foliation) in which the foliation orientation is broadly parallel to the planar feature."@en ;
   rdfs:label "is concordant"@en ;
   rdfs:domain gsos:Foliation ;
-  rdfs:subPropertyOf gsrl:isGeologicallyRelatedTo ;
+  rdfs:subPropertyOf gsog:isGeologicallyRelatedTo ;
 .
 
 gsrl:ontology

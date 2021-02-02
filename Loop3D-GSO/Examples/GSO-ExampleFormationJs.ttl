@@ -1,0 +1,203 @@
+# baseURI: http://loop3d.org/GSO/ontology/2020/1/ex-formationJs/ontology
+# imports: http://loop3d.org/GSO/ontology/2020/1/loop3dmaster
+
+@prefix con: <http://loop3d.org/GSO/ontology/2020/1/ex-complexcontact#> .
+@prefix ejs: <http://loop3d.org/GSO/ontology/2020/1/ex-formationJs#> .
+@prefix gsen: <http://loop3d.org/GSO/ontology/2020/1/eventenvironment/> .
+@prefix gsgm: <http://loop3d.org/GSO/ontology/2020/1/lithology/granularmaterial/> .
+@prefix gsgu: <http://loop3d.org/GSO/ontology/2020/1/geologicunit/> .
+@prefix gslth: <http://loop3d.org/GSO/ontology/2020/1/lithology/> .
+@prefix gsmf: <http://loop3d.org/GSO/ontology/2020/1/metamorphicfacies/> .
+@prefix gsmin: <http://loop3d.org/GSO/ontology/2020/1/mineral/> .
+@prefix gsoc: <http://loop3d.org/GSO/ontology/2020/1/common/> .
+@prefix gsog: <http://loop3d.org/GSO/ontology/2020/1/geologicfeature/> .
+@prefix gsoq: <http://loop3d.org/GSO/ontology/2020/1/geologicquality/> .
+@prefix gspr: <http://loop3d.org/GSO/ontology/2020/1/geologicprocess/> .
+@prefix gsptr: <http://loop3d.org/GSO/ontology/2020/1/lithology/particlerole/> .
+@prefix gsrbr: <http://loop3d.org/GSO/ontology/2020/1/geologicunit/rockbodyrole/> .
+@prefix gsro: <http://loop3d.org/GSO/ontology/2020/1/geologicunit/rockobject/> .
+@prefix gstime: <http://loop3d.org/GSO/ontology/2020/1/ischart/> .
+@prefix gsuom: <http://loop3d.org/GSO/ontology/2020/1/uom/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix turtle: <http://www.semanticweb.org/owl/owlapi/turtle#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+ejs:JsFormation
+  a gsog:Formation ;
+  gsoc:indirectTemporalOccupies gstime:LowerJurassic ;
+  rdfs:label "Lower Jurassic Age sedimentary rocks"@en ;
+
+  gsoc:hasPart ejs:JsFormation-lower ;
+  gsoc:hasPart ejs:JsFormation-upper ;
+  gsoc:hasPart ejs:baseJs-6 ;
+  gsoc:hasPart ejs:topJs-2 ;
+  gsoc:hasQuality [
+      a gsoq:Metamorphic_Facies ;
+      gsoc:hasValue [
+          a gsmf:No_Metamorphic_Minerals ;
+        ] ;
+      rdfs:label "not metamorphosed"@en ;
+    ] ;
+  gsoc:hasQuality [
+      a gsgu:Bedding_Thickness ;
+      gsoc:Value [
+		gsoc:Quality_Range [
+			gsoc:hasStartValue [
+				a gsoc:Measure_Value;
+				gsoc:hasDataValue "Thin bedded"@en 
+				];
+			gsoc:hasEndValue [
+				a gsoc:Measure_Value;
+				gsoc:hasDataValue "Medium Bedded"@en
+				] ;
+		];
+      rdfs:label "thin to medium bedded"@en ;
+    ] 
+	];
+  rdfs:comment "Several surfaces are not elucidated as parts in this example, but are referenced in the Contact instances below. These surfaces would participate in intrusion and also ?contact metamorphism? processes"@en ;
+  rdfs:comment "clasts of Cb Quartzite are abundant in the lower part of the unit. The lower part is a fining-upward sequence from conglomeratic sandstone to fine-grained sandstone. There is a marker bed that is a tuff in the upper part of the lower clastic interval. Upper part is massive limestone with abundant ammonites"@en ;
+  rdfs:label "Js Formation"@en ;
+.
+ejs:JsFormation-lower
+  a gsro:Stratigraphic_Part ;
+  gsoc:hasPart ejs:JsFormationMarker-6_4 ;
+  gsoc:hasPart ejs:baseJs-6 ;
+  gsoc:hasPart ejs:stratPart_1 ;
+  gsoc:hasPart ejs:stratPart_2 ;
+  gsoc:hasPart ejs:stratPart_3 ;
+  gsog:underlies ejs:JsFormation-upper ;
+  rdfs:comment "underlies, overlies, within are subproperty of relatedTo"@en ;
+.
+ejs:JsFormation-upper
+  a gsro:Stratigraphic_Part ;
+  gsoc:hasConstituent [
+      a gslth:Limestone ;
+      gsoc:hasConstituent [
+          a gsgm:Material_Fossil_Particle_Material ;
+          gsoc:hasRole gsptr:Floating_Clast ;
+          gsoc:isDerivedFrom <https://en.wikipedia.org/wiki/Ammonitida> ;
+        ] ;
+      gsoc:hasConstituent [
+          a gsgm:Micrite ;
+          gsoc:hasConstituent [
+              a gsmin:calcite ;
+            ] ;
+          gsoc:hasRole gsptr:Sedimentary_Matrix ;
+        ] ;
+    ] ;
+  rdfs:comment "massive limestone with abundant ammonites in a micrite matrix" ;
+.
+ejs:JsFormationMarker-6_4
+  a gsro:Marker_Bed ;
+  gsoc:hasConstituent <http://uri.org/Ballyloghlin_tuff> ;
+  gsoc:hasPart [
+      a gsog:Rock_Body_Bottom ;
+      gsoc:isParticipantIn [
+          a gspr:Deposition ;
+        ] ;
+    ] ;
+  gsoc:hasPart [
+      a gsog:Rock_Body_Top ;
+    ] ;
+  gsog:within ejs:stratPart_3 ;
+  rdfs:comment "Bed is viewed as a degenerate volume, considered a surface that has a hasConstiuent property, and hasPart that represents contacts of the bed"@en ;
+.
+ejs:baseJs-6
+  a gsog:Rock_Body_Bottom ;
+  gsoc:hasPart ejs:baseJs-6_1 ;
+  gsoc:hasPart ejs:baseJs-6_2 ;
+  gsoc:hasPart ejs:baseJs-6_3 ;
+.
+ejs:baseJs-6_1
+  a gsog:Rock_Body_Bottom ;
+  gsoc:isParticipantIn [
+      a gspr:Deposition ;
+    ] ;
+  rdfs:comment "Js on Ss surface"@en ;
+.
+ejs:baseJs-6_2
+  a gsog:Rock_Body_Bottom ;
+  gsoc:isParticipantIn [
+      a gspr:Deposition ;
+    ] ;
+  rdfs:comment "Js on Os surface"@en ;
+.
+ejs:baseJs-6_3
+  a gsog:Rock_Body_Bottom ;
+  gsoc:isParticipantIn [
+      a gspr:Deposition ;
+    ] ;
+  rdfs:comment "Js on Xm surface"@en ;
+.
+ejs:contactJs-stratPart_1-stratPart_2
+  a gsog:Gradational_Contact_Zone ;
+  gsoc:hasQuality [
+      a gsoq:Thickness ;
+      gsoc:hasDataValue "10"^^xsd:decimal ;
+      gsoc:hasUOM [
+          a gsuom:meter ;
+        ] ;
+    ] ;
+  gsog:hasHost ejs:stratPart_1 ;
+  gsog:hasHost ejs:stratPart_2 ;
+  rdfs:label "internal gradational contact "@en ;
+.
+ejs:contactJs-stratPart_2-stratPart_3
+  a gsog:Gradational_Contact_Zone ;
+  gsoc:hasQuality [
+      a gsoq:Thickness ;
+      gsoc:hasDataValue "4"^^xsd:decimal ;
+      gsoc:hasUOM [
+          a gsuom:meter ;
+        ] ;
+    ] ;
+  gsog:hasHost ejs:stratPart_2 ;
+  gsog:hasHost ejs:stratPart_3 ;
+  rdfs:label "internal gradational contact "@en ;
+.
+ejs:stratPart_1
+  a gsro:Stratigraphic_Part ;
+  gsoc:hasConstituent gslth:Arenite ;
+  gsoc:hasConstituent gslth:Clastic_Conglomerate ;
+  gsoc:hasPart ejs:baseJs-6 ;
+  gsog:underlies ejs:stratPart_2 ;
+  rdfs:comment "need to capture gradational fining upward relationship"@en ;
+.
+ejs:stratPart_2
+  a gsro:Stratigraphic_Part ;
+  gsoc:hasConstituent [
+      a gslth:Clastic_Sandstone ;
+    ] ;
+  gsoc:hasPart [
+      a gsog:Rock_Body_Bottom ;
+      gsoc:isParticipantIn [
+          a gspr:Deposition ;
+        ] ;
+    ] ;
+  gsog:overlies ejs:stratPart_1 ;
+  gsog:underlies ejs:stratPart_3 ;
+.
+ejs:stratPart_3
+  a gsro:Stratigraphic_Part ;
+  gsoc:hasConstituent [
+      a gslth:Clastic_Sandstone ;
+      rdfs:label "fine-Grained sandstone"@en ;
+    ] ;
+  gsoc:hasPart [
+      a gsog:Rock_Body_Bottom ;
+      gsoc:isParticipantIn [
+          a gspr:Deposition ;
+        ] ;
+    ] ;
+  gsog:overlies ejs:stratPart_2 ;
+.
+
+<http://loop3d.org/GSO/ontology/2020/1/ex-formationJs/ontology>
+  a owl:Ontology ;
+  rdfs:comment "Stephen M. Richard 2019-05-02"@en ;
+  rdfs:comment "details of description of Js unit in GeologyScenarioForTesting.pptx"@en ;
+  owl:imports <http://loop3d.org/GSO/ontology/2020/1/loop3dmaster> ;
+.

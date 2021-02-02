@@ -1,299 +1,240 @@
-# baseURI: http://loop3d.org/GSO/ontology/2020/1/geologicquality/ontology
+# baseURI: http://loop3d.org/GSO/ontology/2020/1/quality/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/common/ontology
 
+@prefix : <http://loop3d.org/GSO/ontology/2020/1/quality/> .
 @prefix gsoc: <http://loop3d.org/GSO/ontology/2020/1/common/> .
-@prefix gsog: <http://loop3d.org/GSO/ontology/2020/1/geologicfeature/> .
-@prefix gsoq: <http://loop3d.org/GSO/ontology/2020/1/geologicquality/> .
+@prefix gsoq: <http://loop3d.org/GSO/ontology/2020/1/quality/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-gsoq:Azimuth
-  a owl:Class ;
-  rdfs:comment "Bearing of a horizontal line relative to north. Use for specifying the orientation of planar or linear features."@en ;
-  rdfs:label "Azimuth"@en ;
-  rdfs:subClassOf gsoq:Orientation ;
+gsoq:Colour
+  rdf:type owl:Class ;
+  rdfs:comment "upper level class that represents any conceptual space for quantifying colour, e.g. RGB, Munsell, CMYK, US NBS Color (NBS Special Pub 440)"@en ;
+  rdfs:label "Colour"@en ;
+  rdfs:subClassOf gsoc:Physical_Quality ;
   rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty gsoc:hasQuality ;
-      owl:someValuesFrom gsoc:Measure_Value ;
+      rdf:type owl:Restriction ;
+      owl:allValuesFrom gsoc:Material_Endurant ;
+      owl:onProperty gsoc:isQualityOf ;
     ] ;
 .
 gsoq:Density
-  a owl:Class ;
+  rdf:type owl:Class ;
   rdfs:comment "The mass per unit volume of an Amount of Matter"@en ;
   rdfs:label "Density "@en ;
-  rdfs:subClassOf gsoc:Determinable_Quality ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom gsoc:Amount_Of_Matter ;
-      owl:onProperty gsoc:isQualityOf ;
-    ] ;
+  rdfs:subClassOf gsoc:Physical_Quality ;
 .
 gsoq:Diameter
-  a owl:Class ;
+  rdf:type owl:Class ;
   rdfs:comment "The (approximate) average length of line segments that pass through the center of an object and whose endpoints lie on the outside boundary of the object. Use to characterize the size of a broadly spheroidal object like a pluton or a rock sample."@en ;
   rdfs:label "Diameter "@en ;
-  rdfs:subClassOf gsoc:Determinable_Quality ;
+  rdfs:subClassOf gsoc:Physical_Quality ;
+.
+gsoq:Distance
+  rdf:type owl:Class ;
+  rdfs:comment "A measure of distance between locations"@en ;
+  rdfs:label "Distance"@en ;
+  rdfs:subClassOf gsoc:Physical_Quality ;
+.
+gsoq:Displacement
+  rdf:type owl:Class ;
+  rdfs:comment "A measure of change of location"@en ;
+  rdfs:label "Displacement"@en ;
+  rdfs:subClassOf gsoc:Physical_Quality ;
+.
+gsoq:Disseminated
+  rdf:type owl:Class ;
+  rdfs:comment "Quality is scattered relatively uniformly through the quality carrier."@en ;
+  rdfs:label "Disseminated "@en ;
+  rdfs:subClassOf gsoq:Distribution_Value ;
+.
+gsoq:Distribution
+  rdf:type owl:Class ;
+  rdfs:comment "spcification of how much of the quality carrier displays the quality. Use to indicate variability of development of the quality "@en ;
+  rdfs:label "Quality distribution"@en ;
+  rdfs:subClassOf gsoc:Nonphysical_Quality ;
   rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty gsoc:hasValue ;
-      owl:someValuesFrom gsoc:Numeric_Value ;
-    ] ;
-.
-gsoq:Dip
-  a owl:Class ;
-  rdfs:comment "the maximum angle between a horizontal surface and a planar feature"@en ;
-  rdfs:label "Dip"@en ;
-  rdfs:subClassOf gsoq:Orientation ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty gsoc:hasQuality ;
-      owl:someValuesFrom gsoc:Measure_Value ;
-    ] ;
-.
-gsoq:Dominant_Constituent
-  a owl:Class ;
-  rdfs:comment "Constituent is one of the most abundant."@en ;
-  rdfs:comment "Example-- in a typical granite, Quartz, plagioclase, and K-feldspar are the dominant constituents."@en ;
-  rdfs:label "Dominant Constituent"@en ;
-  rdfs:subClassOf gsoq:Present ;
-.
-gsoq:Facing
-  a owl:Class ;
-  rdfs:comment "property to specify if a surface is directed, i.e. has a top and bottom. Values: {upright, overturned, unknown}"@en ;
-  rdfs:label "Facing direction"@en ;
-  rdfs:subClassOf gsoq:Orientation ;
-.
-gsoq:Gently_Inclined
-  a owl:Class ;
-  rdfs:comment "Surface dips between 10 and 30 degrees; typically used to describe orientation of fold hinge surface or axial surface, but could be applied to any geologic surface."@en ;
-  rdfs:comment "dct:source -- Fleuty (1964) Folds classification." ;
-  rdfs:label "Gently Inclinded "@en ;
-  rdfs:subClassOf gsoq:Inclined ;
-.
-gsoq:Gently_Plunging_Line
-  a owl:Class ;
-  rdfs:comment "dct:source -- Fleuty (1964) Folds classification." ;
-  rdfs:comment "line plunges between 10 and 30 degrees."@en ;
-  rdfs:label "Gently plunging line"@en ;
-  rdfs:subClassOf gsoq:Plunging_Line ;
-.
-gsoq:Horizonatal_Inclination
-  a owl:Class ;
-  rdfs:comment "Surface dips between 0 and 10 degrees. Equivalent term 'recumbent' used to describe orientation of fold hing surface or axial surface"@en ;
-  rdfs:label "Horizontal inclination "@en ;
-  rdfs:subClassOf gsoq:Dip ;
-.
-gsoq:Horizontal_Line
-  a owl:Class ;
-  rdfs:comment "dct:source -- Fleuty (1964) Folds classification." ;
-  rdfs:comment "line plunges between 0 and 10 degrees."@en ;
-  rdfs:label "Horizontal line "@en ;
-  rdfs:subClassOf gsoq:Plunge ;
-.
-gsoq:Inclined
-  a owl:Class ;
-  rdfs:comment "Surface dips between 10 and 80 degrees; typically used to describe orientation of fold hinge surface or axial surface, but could be applied to any geologic surface."@en ;
-  rdfs:comment "dct:source -- Fleuty (1964) Folds classification." ;
-  rdfs:label "Inclined"@en ;
-  rdfs:subClassOf gsoq:Dip ;
-.
-gsoq:Line_Orientation
-  a owl:Class ;
-  rdfs:comment "specification of the orientation of a line in space, using a trend (bearing of horizontal projection of line relative to geographic north) and plunge (inclination of line measured positive downward in degrees from local horizontal).  TBD:  add 'isdirected property to indicate if the line is directed (e.g. sense of shear), values should be Boolean,"@en ;
-  rdfs:label "Line orientation"@en ;
-  rdfs:subClassOf gsoq:Orientation ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom [
-          a owl:Class ;
-          owl:unionOf [
-              a rdf:List ;
-              rdf:first gsoq:Azimuth ;
-              rdf:rest [
-                  a rdf:List ;
-                  rdf:first gsoq:Plunge ;
-                  rdf:rest () ;
-                ] ;
-            ] ;
-        ] ;
-      owl:onProperty gsoc:hasQuality ;
-    ] ;
-.
-gsoq:Magnetic_Susceptibility
-  a owl:Class ;
-  rdfs:comment "a measure of how much a material will become magnetized in an applied magnetic field. It is the ratio of magnetization M (magnetic moment per unit volume) to the applied magnetizing field intensity H. This allows a simple classification, into two categories, of most materials' responses to an applied magnetic field: an alignment with the magnetic field, χ > 0, called paramagnetism, or an alignment against the field, χ < 0, called diamagnetism."@en ;
-  rdfs:comment "dct:source -- https://en.wikipedia.org/wiki/Magnetic_susceptibility" ;
-  rdfs:label "Magnetic susceptibility "@en ;
-  rdfs:subClassOf gsoc:Determinable_Quality ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:allValuesFrom gsoc:Amount_Of_Matter ;
+      rdf:type owl:Restriction ;
+      owl:allValuesFrom gsoc:Quality ;
       owl:onProperty gsoc:isQualityOf ;
     ] ;
 .
-gsoq:Metamorphic_Facies
-  a owl:Class ;
-  rdfs:comment "Categories that characterize mineral assemblages indicative of certain metamorphic P-T conditions. Examples include Barrovian metasedimentary zones (eg: biotite facies, kyanite facies) or assemblages developed in rocks of more mafic composition (eg: greenschist facies, amphibolite facies)."@en ;
-  rdfs:comment "applies to Rock_Material or Geologic_Unit"@en ;
-  rdfs:isDefinedBy "GeoSciML v4"@en ;
-  rdfs:label "Metamorphic facies"@en ;
-  rdfs:subClassOf gsoc:Determinable_Quality ;
+gsoq:Distribution_Value
+  rdf:type owl:Class ;
+  rdfs:comment "spcification of how much of the quality carrier displays the quality. Use to indicate variability of development of the quality "@en ;
+  rdfs:label "Distribution Value"@en ;
+  rdfs:subClassOf gsoc:Named_Value ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:allValuesFrom gsoq:Distribution ;
+      owl:onProperty gsoc:isValueOf ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onClass gsoq:Distribution ;
+      owl:onProperty gsoc:isValueOf ;
+      owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+    ] ;
 .
-gsoq:Metamorphic_Grade
-  a owl:Class ;
-  rdfs:comment "A term to indicate the intensity or rank of metamorphism applied to an EarthMaterial (eg: high metamorphic grade, low metamorphic grade). Indicates in a general way the P-T environment in which the metamorphism took place. Determination of metamorphic grade is based on mineral assemblages (ie, facies) present in a rock that are interpreted to have crystallized in equilibrium during a particular metamorphic event."@en ;
-  rdfs:comment "applies to Earth_Material or Geologic_Unit"@en ;
-  rdfs:isDefinedBy "GeoSciML v4"@en ;
-  rdfs:label "Metamorphic grade"@en ;
-  rdfs:subClassOf gsoc:Determinable_Quality ;
+gsoq:Intensity
+  rdf:type owl:Class ;
+  rdfs:comment "Intensity of quality "@en ;
+  rdfs:label "Intensity Value"@en ;
+  rdfs:subClassOf gsoc:Nonphysical_Quality ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:allValuesFrom gsoc:Quality ;
+      owl:onProperty gsoc:isQualityOf ;
+    ] ;
 .
-gsoq:Minor_Constituent
-  a owl:Class ;
+gsoq:Intensity_Value
+  rdf:type owl:Class ;
+  rdfs:comment "Value of Intensity quality "@en ;
+  rdfs:label "Value of Intensity quality "@en ;
+  rdfs:subClassOf gsoc:Named_Value ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:allValuesFrom gsoq:Intensity ;
+      owl:onProperty gsoc:isValueOf ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onClass gsoq:Intensity ;
+      owl:onProperty gsoc:isValueOf ;
+      owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+    ] ;
+.
+gsoq:Layered_Distribution
+  rdf:type owl:Class ;
+  rdfs:comment "quality is exhibited in sheet like zones, e.g. along veins or fractures."@en ;
+  rdfs:label "Layered distribution "@en ;
+  rdfs:subClassOf gsoq:Distribution_Value ;
+.
+gsoq:Minor_Proportion
+  rdf:type owl:Class ;
   rdfs:comment "Constituent is ubiquitous but not abundant"@en ;
   rdfs:comment "Example -- in some granites, hornblende is a minor constituent."@en ;
   rdfs:label "Minor Constituent"@en ;
-  rdfs:subClassOf gsoq:Present ;
+  rdfs:subClassOf gsoc:Proportion_Value ;
 .
-gsoq:Moderately_Inclined
-  a owl:Class ;
-  rdfs:comment "Surface dips between 30 and 60 degrees; typically used to describe orientation of fold hing surface or axial surface, but could be applied to any geologic surface."@en ;
-  rdfs:comment "dct:source -- Fleuty (1964) Folds classification." ;
-  rdfs:label "Moderately Inclinded "@en ;
-  rdfs:subClassOf gsoq:Inclined ;
-.
-gsoq:Moderately_Plunging_Line
-  a owl:Class ;
-  rdfs:comment "dct:source -- Fleuty (1964) Folds classification." ;
-  rdfs:comment "line plunges between 30 and 60 degrees."@en ;
-  rdfs:label "Moderately plunging line"@en ;
-  rdfs:subClassOf gsoq:Plunging_Line ;
+gsoq:Moderate_Intensity
+  rdf:type owl:Class ;
+  rdfs:comment "Quality is present and can be discerned by any observer"@en ;
+  rdfs:label "moderate development" ;
+  rdfs:subClassOf gsoq:Intensity_Value ;
 .
 gsoq:Orientation
-  a owl:Class ;
+  rdf:type owl:Class ;
   rdfs:comment "quality used to specify the disposition of a line or plane in space"@en ;
   rdfs:label "Orientation"@en ;
-  rdfs:subClassOf gsoc:Determinable_Quality ;
+  rdfs:subClassOf gsoc:Physical_Quality ;
 .
-gsoq:Overturned
-  a owl:Class ;
-  rdfs:comment "top of surface is facing downward, toward Earth interior."@en ;
-  rdfs:label "Overturned facing"@en ;
-  rdfs:subClassOf gsoq:Facing ;
+gsoq:Orientation_Value
+  rdf:type owl:Class ;
+  rdfs:subClassOf gsoc:Named_Value ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:allValuesFrom gsoq:Orientation ;
+      owl:onProperty gsoc:isValueOf ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onClass gsoq:Orientation ;
+      owl:onProperty gsoc:isValueOf ;
+      owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+    ] ;
 .
-gsoq:Peak_Pressure
-  a owl:Class ;
+gsoq:Patchy_Distribution
+  rdf:type owl:Class ;
+  rdfs:comment "Quality is exhibited in local concentrations separated by regions without the quality. Typically used to describe alteration distribution."@en ;
+  rdfs:isDefinedBy "GeoSciML v4"@en ;
+  rdfs:label "Patchy distribution"@en ;
+  rdfs:subClassOf gsoq:Distribution_Value ;
+.
+gsoq:Pressure
+  rdf:type owl:Class ;
   rdfs:comment "applies to Earth_Material or Geologic_Unit"@en ;
   rdfs:comment "peak metamorphic pressure"@en ;
   rdfs:isDefinedBy "GeoSciML v3"@en ;
-  rdfs:label "Peak pressure"@en ;
-  rdfs:subClassOf gsoc:Determinable_Quality ;
+  rdfs:label "Pressure"@en ;
+  rdfs:subClassOf gsoc:Physical_Quality ;
 .
-gsoq:Peak_Temperature
-  a owl:Class ;
-  rdfs:comment "applies to Earth_Material or Geologic_Unit"@en ;
-  rdfs:comment "peak metamorphic temperature"@en ;
-  rdfs:isDefinedBy "GeoSciML v3"@en ;
-  rdfs:label "Peak temperature"@en ;
-  rdfs:subClassOf gsoc:Determinable_Quality ;
-.
-gsoq:Plane_Orientation
-  a owl:Class ;
-  rdfs:comment "Quality to specify the orientation of a surface in a geogaphic reference system"@en ;
-  rdfs:label "Plane orientation "@en ;
-  rdfs:subClassOf gsoq:Orientation ;
-.
-gsoq:Plunge
-  a owl:Class ;
-  rdfs:comment "Numeric value should be between +90 and -90.   Negative values only valid if the linear feature is directed."@en ;
-  rdfs:label "Plunge"@en ;
-  rdfs:subClassOf gsoq:Orientation ;
-  rdfs:subClassOf [
-      a owl:Restriction ;
-      owl:onProperty gsoc:hasQuality ;
-      owl:someValuesFrom gsoc:Measure_Value ;
-    ] ;
-.
-gsoq:Plunging_Line
-  a owl:Class ;
-  rdfs:comment "dct:source -- Fleuty (1964) Folds classification." ;
-  rdfs:comment "line plunges between 10 and 80 degrees."@en ;
-  rdfs:label "Plunging line "@en ;
-  rdfs:subClassOf gsoq:Plunge ;
-.
-gsoq:Present
-  a owl:Class ;
-  rdfs:comment "A constituent is present, but in an unknown proportion."@en ;
-  rdfs:comment "This quality and its sub classes are used to express proportions when quantitiative measured values are not available."@en ;
-  rdfs:label "Present"@en ;
-  rdfs:subClassOf gsoc:Proportion ;
-.
-gsoq:Rare_Constituent
-  a owl:Class ;
+gsoq:Rare_Proportion
+  rdf:type owl:Class ;
   rdfs:comment "Constituent is present but uncommon and rarely observed."@en ;
   rdfs:comment "Example-- in a typical granite, zircon and apatite are rare constituents"@en ;
   rdfs:label "Rare constituent "@en ;
-  rdfs:subClassOf gsoq:Present ;
+  rdfs:subClassOf gsoc:Proportion_Value ;
 .
-gsoq:Steeply_Inclined
-  a owl:Class ;
-  rdfs:comment "Surface dips between 60 and 80 degrees; typically used to describe orientation of fold hing surface or axial surface, but could be applied to any geologic surface."@en ;
-  rdfs:comment "dct:source -- Fleuty (1964) Folds classification." ;
-  rdfs:label "Steeply Inclinded "@en ;
-  rdfs:subClassOf gsoq:Inclined ;
+gsoq:Sparse_Distribution
+  rdf:type owl:Class ;
+  rdfs:comment "Quality is occasionally present in instances of the host particular "@en ;
+  rdfs:label "sparse distribution" ;
+  rdfs:subClassOf gsoq:Distribution_Value ;
 .
-gsoq:Steeply_Plunging_Line
-  a owl:Class ;
-  rdfs:comment "dct:source -- Fleuty (1964) Folds classification." ;
-  rdfs:comment "line plunges between 60 and 80 degrees."@en ;
-  rdfs:label "Steeply plunging line"@en ;
-  rdfs:subClassOf gsoq:Plunging_Line ;
+gsoq:Strong_Intensity
+  rdf:type owl:Class ;
+  rdfs:comment "Quality is present and is dominate feature of the quality host." ;
+  rdfs:label "strong development" ;
+  rdfs:subClassOf gsoq:Intensity_Value ;
 .
-gsoq:Subordinate_Constituent
-  a owl:Class ;
+gsoq:Subordinate_Proportion
+  rdf:type owl:Class ;
   rdfs:comment "Constituent is less abundant than dominant constituent, but present in sufficient abundance to be an obvious constituent"@en ;
   rdfs:comment "Example--in a typical granite, biotite is a subordinate constituent."@en ;
   rdfs:label "Subordinate Constituent"@en ;
-  rdfs:subClassOf gsoq:Present ;
+  rdfs:subClassOf gsoc:Proportion_Value ;
+.
+gsoq:Temperature
+  rdf:type owl:Class ;
+  rdfs:comment "Temperature"@en ;
+  rdfs:comment "applies to Earth_Material or Geologic_Unit"@en ;
+  rdfs:isDefinedBy "GeoSciML v3"@en ;
+  rdfs:label "Peak temperature"@en ;
+  rdfs:subClassOf gsoc:Physical_Quality ;
 .
 gsoq:Thickness
-  a owl:Class ;
+  rdf:type owl:Class ;
   rdfs:comment "Quality of a tabular or sheet like body that is its linear dimension normal to its long dimensions. Could be quantified numerically or categorically (e.g. thin, thick, very thick)"@en ;
   rdfs:label "Thickness"@en ;
-  rdfs:subClassOf gsoc:Determinable_Quality ;
+  rdfs:subClassOf gsoc:Physical_Quality ;
 .
-gsoq:Unknown_Facing
-  a owl:Class ;
-  rdfs:comment "Facing direction is unknown {@en}	"@en ;
-  rdfs:label "Unknown Facing Direction"@en ;
-  rdfs:subClassOf gsoq:Facing ;
+gsoq:Ubiquitous_Distribution
+  rdf:type owl:Class ;
+  rdfs:comment "Quality is everywhere present in the host."@en ;
+  rdfs:label "ubiquitous distribution"@en ;
+  rdfs:subClassOf gsoq:Distribution_Value ;
 .
-gsoq:Upright_Facing
-  a owl:Class ;
-  rdfs:comment "dct:source -- Fleuty (1964) Folds classification." ;
-  rdfs:comment "top of surface is away from center of earth."@en ;
-  rdfs:label "Upright facing"@en ;
-  rdfs:subClassOf gsoq:Facing ;
+gsoq:Variable_Distribution
+  rdf:type owl:Class ;
+  rdfs:comment "Quality is not present to the same degree in all instances of the host particular"@en ;
+  rdfs:label "variable distribution"@en ;
+  rdfs:subClassOf gsoq:Distribution_Value ;
 .
-gsoq:Vertical_Inclination
-  a owl:Class ;
-  rdfs:comment "Surface dips between 80 and 90 degrees. Equivalent term 'upright' is used to describe orientation of fold hing surface or axial surface"@en ;
-  rdfs:label "Vertical inclination "@en ;
-  rdfs:subClassOf gsoq:Dip ;
+gsoq:Variable_Intensity
+  rdf:type owl:Class ;
+  rdfs:comment "Intensity varies spatially "@en ;
+  rdfs:label "Variable intensity "@en ;
+  rdfs:subClassOf gsoq:Intensity_Value ;
 .
-gsoq:Vertical_Line
-  a owl:Class ;
-  rdfs:comment "dct:source -- Fleuty (1964) Folds classification." ;
-  rdfs:comment "line plunges between 80 and 90 degrees."@en ;
-  rdfs:label "Vertical line"@en ;
-  rdfs:subClassOf gsoq:Plunge ;
+gsoq:Volume
+  rdf:type owl:Class ;
+  rdfs:comment "Volume of something occupying space"@en ;
+  rdfs:label "Volume"@en ;
+  rdfs:subClassOf gsoc:Physical_Quality ;
+.
+gsoq:Weak_Intensity
+  rdf:type owl:Class ;
+  rdfs:comment "Quality is present but difficult to discern "@en ;
+  rdfs:label "weak development"@en ;
+  rdfs:subClassOf gsoq:Intensity_Value ;
 .
 gsoq:ontology
-  a owl:Ontology ;
-  rdfs:comment "Vocabulary of geologic physical properties used in multiple GSO modules."@en ;
+  rdf:type owl:Ontology ;
+  rdfs:comment "Vocabulary of physical qualities used in multiple GSO modules."@en ;
   rdfs:label "Physical qualities"@en ;
   owl:imports gsoc:ontology ;
 .
