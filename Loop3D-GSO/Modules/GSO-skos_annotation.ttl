@@ -1,0 +1,93 @@
+# baseURI: http://loop3d.org/GSO/2004/02/skos/annotation/ontology
+
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://loop3d.org/GSO/2004/02/skos/annotation/ontology>
+  rdf:type owl:Ontology ;
+  dcterms:contributor "Dave Beckett" ;
+  dcterms:contributor "Nikki Rogers" ;
+  dcterms:contributor "Participants in W3C's Semantic Web Deployment Working Group." ;
+  dcterms:creator "Alistair Miles" ;
+  dcterms:creator "Sean Bechhofer" ;
+  dcterms:description "An RDF vocabulary for providing annotation to document other rdf resources; for the LOOP3D project."@en ;
+  dcterms:title "SKOS Annotation Vocabulary"@en ;
+  rdfs:label "SKOS Annotation RDF vocabulary" ;
+  rdfs:seeAlso <http://www.w3.org/TR/skos-reference/> ;
+  owl:versionInfo "edited by Stephen Richard to only include skos annotation properties" ;
+.
+skos:altLabel
+  rdf:type rdf:Property ;
+  rdf:type owl:AnnotationProperty ;
+  rdfs:comment "The range of skos:altLabel is the class of RDF plain literals."@en ;
+  rdfs:comment "skos:prefLabel, skos:altLabel and skos:hiddenLabel are pairwise disjoint properties."@en ;
+  rdfs:isDefinedBy <http://www.w3.org/2004/02/skos/core> ;
+  rdfs:label "alternative label"@en ;
+  rdfs:subPropertyOf rdfs:label ;
+  skos:definition "An alternative lexical label for a resource."@en ;
+  skos:example "Acronyms, abbreviations, spelling variants, and irregular plural/singular forms may be included among the alternative labels for a concept. Mis-spelled terms are normally included as hidden labels (see skos:hiddenLabel)."@en ;
+.
+skos:changeNote
+  rdf:type rdf:Property ;
+  rdf:type owl:AnnotationProperty ;
+  rdfs:isDefinedBy <http://www.w3.org/2004/02/skos/core> ;
+  rdfs:label "change note"@en ;
+  rdfs:subPropertyOf skos:note ;
+  skos:definition "A note about a modification to a concept."@en ;
+.
+skos:definition
+  rdf:type rdf:Property ;
+  rdf:type owl:AnnotationProperty ;
+  rdfs:isDefinedBy <http://www.w3.org/2004/02/skos/core> ;
+  rdfs:label "definition"@en ;
+  rdfs:subPropertyOf skos:note ;
+  skos:definition "A statement or formal explanation of the meaning of a concept."@en ;
+.
+skos:editorialNote
+  rdf:type rdf:Property ;
+  rdf:type owl:AnnotationProperty ;
+  rdfs:isDefinedBy <http://www.w3.org/2004/02/skos/core> ;
+  rdfs:label "editorial note"@en ;
+  rdfs:subPropertyOf skos:note ;
+  skos:definition "A note for an editor, translator or maintainer of the vocabulary."@en ;
+.
+skos:historyNote
+  rdf:type rdf:Property ;
+  rdf:type owl:AnnotationProperty ;
+  rdfs:isDefinedBy <http://www.w3.org/2004/02/skos/core> ;
+  rdfs:label "history note"@en ;
+  rdfs:subPropertyOf skos:note ;
+  skos:definition "A note about the past state/use/meaning of a concept."@en ;
+.
+skos:note
+  rdf:type rdf:Property ;
+  rdf:type owl:AnnotationProperty ;
+  rdfs:isDefinedBy <http://www.w3.org/2004/02/skos/core> ;
+  rdfs:label "note"@en ;
+  skos:definition "A general note, for any purpose."@en ;
+  skos:scopeNote "This property may be used directly, or as a super-property for more specific note types."@en ;
+.
+skos:prefLabel
+  rdf:type rdf:Property ;
+  rdf:type owl:AnnotationProperty ;
+  rdfs:comment "A resource has no more than one value of skos:prefLabel per language tag."@en ;
+  rdfs:comment "The range of skos:prefLabel is the class of RDF plain literals."@en ;
+  rdfs:comment """skos:prefLabel, skos:altLabel and skos:hiddenLabel are pairwise
+      disjoint properties."""@en ;
+  rdfs:isDefinedBy <http://www.w3.org/2004/02/skos/core> ;
+  rdfs:label "preferred label"@en ;
+  rdfs:subPropertyOf rdfs:label ;
+  skos:definition "The preferred lexical label for a resource, in a given language."@en ;
+.
+skos:scopeNote
+  rdf:type rdf:Property ;
+  rdf:type owl:AnnotationProperty ;
+  rdfs:isDefinedBy <http://www.w3.org/2004/02/skos/core> ;
+  rdfs:label "scope note"@en ;
+  rdfs:subPropertyOf skos:note ;
+  skos:definition "A note that helps to clarify the meaning and/or the use of a concept."@en ;
+.
