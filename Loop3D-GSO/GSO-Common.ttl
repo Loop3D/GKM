@@ -2512,6 +2512,22 @@ gsoc:Unit_Of_Measure
       owl:allValuesFrom gsoc:Measure_Value ;
       owl:onProperty gsoc:isQualityOf ;
     ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:allValuesFrom gsoc:Unit_Of_Measure_Value ;
+      owl:onProperty gsoc:hasValue ;
+    ] ;
+.
+gsoc:Unit_Of_Measure_Value
+  rdf:type owl:Class ;
+  rdfs:comment "" ;
+  rdfs:label "Unit of Measure Value "@en ;
+  rdfs:subClassOf gsoc:Named_Value ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:allValuesFrom gsoc:Unit_Of_Measure ;
+      owl:onProperty gsoc:isValueOf ;
+    ] ;
 .
 gsoc:WKT_Value
   rdf:type owl:Class ;
@@ -2792,7 +2808,7 @@ gsoc:hasPersistentPart
   rdf:type owl:TransitiveProperty ;
   rdfs:comment "The essential part must be present at all times the whole is present, but the part can be exchanged. Persistent parthood varies by type of whole: for endurant wholes, the endurant part must be present at all times the whole is present, but can live before and after the whole; for perdurant wholes, the part must be present at some past or present time the whole is present (for it to be a persisstent part it must have already happened within the timeline of the whole, and once happended it forever remains a part, so persists); for situations, the part must be present at all times the whole is present and must be equal in duration to the whole (because the duration of the whole is the aggregate of the lifetime of its parts, so a persistent part must be the longest part and determine the duration of the whole). These variations are  not represented currently in GSO, though could be as subproperties of hasPersistentPart, or as rules."@en ;
   rdfs:subPropertyOf gsoc:hasEssentialPart ;
-  rdfs:subPropertyOf gsoc:timeInclude ;
+  rdfs:subPropertyOf gsoc:timeIncludes ;
   owl:inverseOf gsoc:isPersistentPartOf ;
 .
 gsoc:hasQuality
@@ -3330,22 +3346,22 @@ gsoc:timeFinishes
   rdfs:subPropertyOf gsoc:timeIncludedBy ;
   rdfs:subPropertyOf gsoc:timeIntersects ;
 .
-gsoc:timeInclude
-  rdf:type owl:ObjectProperty ;
-  rdf:type owl:SymmetricProperty ;
-  rdfs:subPropertyOf gsoc:isTemporallyRelatedTo ;
-.
 gsoc:timeIncludedBy
   rdf:type owl:ObjectProperty ;
   rdf:type owl:TransitiveProperty ;
-  rdfs:subPropertyOf gsoc:timeInclude ;
+  rdfs:subPropertyOf gsoc:timeInclusion ;
   owl:inverseOf gsoc:timeIncludes ;
 .
 gsoc:timeIncludes
   rdf:type owl:ObjectProperty ;
   rdf:type owl:TransitiveProperty ;
-  rdfs:subPropertyOf gsoc:timeInclude ;
+  rdfs:subPropertyOf gsoc:timeInclusion ;
   owl:inverseOf gsoc:timeIncludedBy ;
+.
+gsoc:timeInclusion
+  rdf:type owl:ObjectProperty ;
+  rdf:type owl:SymmetricProperty ;
+  rdfs:subPropertyOf gsoc:isTemporallyRelatedTo ;
 .
 gsoc:timeIncomparableTo
   rdf:type owl:ObjectProperty ;
