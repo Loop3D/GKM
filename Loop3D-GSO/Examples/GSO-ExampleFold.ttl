@@ -7,13 +7,13 @@
 @prefix exfold: <http://loop3d.org/GSO/ontology/2020/1/foldexample#> .
 @prefix fold: <http://loop3d.org/GSO/ontology/2020/1/geologicstructure/fold/> .
 @prefix gsen: <http://loop3d.org/GSO/ontology/2020/1/eventenvironment/> .
+@prefix gsfd: <http://loop3d.org/GSO/ontology/2020/1/geologicfold/> .
+@prefix gsgq: <http://loop3d.org/GSO/ontology/2020/1/geologicquality/> .
 @prefix gsoc: <http://loop3d.org/GSO/ontology/2020/1/common/> .
 @prefix gsog: <http://loop3d.org/GSO/ontology/2020/1/geologicfeature/> .
 @prefix gsoq: <http://loop3d.org/GSO/ontology/2020/1/geologicquality/> .
 @prefix gspr: <http://loop3d.org/GSO/ontology/2020/1/geologicprocess/> .
-@prefix gssf: <http://loop3d.org/GSO/ontology/2020/1/geologicstructure/fold/> .
 @prefix gstime: <http://loop3d.org/GSO/ontology/2020/1/ischart/> .
-@prefix gsuom: <http://loop3d.org/GSO/ontology/2020/1/uom/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -27,15 +27,15 @@
   owl:versionIRI <http://loop3d.org/GSO/ontology/2020/1/foldexample> ;
 .
 exfold:Fold_1
-  a gssf:Antiform ;
+  a gsfd:Antiform ;
   gsoc:hasPart exfold:HingeSurface_1 ;
   gsoc:hasPart [
-      a gssf:Fold_Hinge ;
+      a gsfd:Fold_Hinge ;
       gsoc:hasQuality [
-          a gsoq:Line_Orientation ;
+          a gsgq:Line_Orientation ;
           gsoc:hasQuality [
-              a gsoq:Azimuth ;
-			  gsoc:hasQuality [
+              a gsgq:Azimuth ;
+			  gsoc:hasValue [
 				  a gsoc:Numeric_Value ; 
 				  gsoc:hasDataValue "330"^^xsd:decimal ;
 				  gsoc:hasUOM [
@@ -44,8 +44,8 @@ exfold:Fold_1
 				];
             ] ;
           gsoc:hasQuality [
-              a gsoq:Plunge ;
-			  gsoc:hasQuality [
+              a gsgq:Plunge ;
+			  gsoc:hasValue [
 				  a gsoc:Numeric_Value ; 
 				  gsoc:hasDataValue "33"^^xsd:decimal ;
 				  gsoc:hasUOM [
@@ -58,8 +58,8 @@ exfold:Fold_1
       rdfs:label "Fold hinge: 33 to 330"@en ;
     ] ;
   gsoc:hasQuality [
-      a gssf:Fold_Amplitude ;
-	  gsoc:hasQuality [
+      a gsfd:Fold_Amplitude ;
+	  gsoc:hasValue [
 		a gsoc:Numeric_Value ; 
 		gsoc:hasDataValue "10"^^xsd:decimal ;
 		gsoc:hasUOM [ a unit:M ] ;
@@ -69,19 +69,23 @@ exfold:Fold_1
   rdfs:label "is test fold"@en ;
 .
 exfold:HingeSurface_1
-  a gssf:Fold_Hinge_Surface ;
+  a gsfd:Fold_Hinge_Surface ;
   gsoc:hasQuality [
-	a gsoq:Plane_Orientation ;
+	a gsgq:Plane_Orientation ;
+	rdfs:label "qualitative statement of dip";
 	gsoc:hasQuality [
-        a gsoq:Dip ;
-		gsoc:hasValue gsoq:Steeply_Inclined
+        a gsgq:Dip ;
+		gsoc:hasValue [ a gsoq:Steeply_Inclined ]
 	];
   ];
   gsoc:hasQuality [
-      a gsoq:Plane_Orientation ;
-	  gsoc:hasReferenceSystem gsoc:Plane_Dip_Dip_Direction ; 
+      a gsgq:Plane_Orientation ;
+	  gsoc:hasValue [
+		a gsoq:Orientation_Value;
+		gsoc:hasReferenceSystem [ a gsoc:Plane_Dip_Dip_Direction ] 
+		]; 
       gsoc:hasQuality [
-          a gsoq:Azimuth ;
+          a gsgq:Azimuth ;
 		  gsoc:hasValue [
 			  a gsoc:Numeric_Value ; 
 			  gsoc:hasDataValue "310"^^xsd:decimal ;
@@ -91,7 +95,7 @@ exfold:HingeSurface_1
 			];
         ] ;
       gsoc:hasQuality [
-          a gsoq:Dip ;
+          a gsgq:Dip ;
 		  gsoc:hasValue [
 			  a gsoc:Numeric_Value ;
 			  gsoc:hasDataValue "78"^^xsd:decimal ;

@@ -34,7 +34,14 @@ gsgq:Azimuth
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
       owl:onProperty gsoc:hasValue ;
-      owl:someValuesFrom gsoc:Quality_Value ;
+      owl:someValuesFrom [
+          rdf:type owl:Class ;
+          owl:unionOf (
+              gsoc:Numeric_Value
+              gsoc:Named_Value
+              gsoc:Range_Value
+            ) ;
+        ] ;
     ] ;
 .
 gsgq:Bedding_Pattern
@@ -84,7 +91,14 @@ gsgq:Dip
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
       owl:onProperty gsoc:hasQuality ;
-      owl:someValuesFrom gsoc:Measure_Value ;
+      owl:someValuesFrom [
+          rdf:type owl:Class ;
+          owl:unionOf (
+              gsoc:Numeric_Value
+              gsoc:Named_Value
+              gsoc:Range_Value
+            ) ;
+        ] ;
     ] ;
 .
 gsgq:Dip_Value
@@ -240,6 +254,24 @@ gsgq:Moderately_Plunging_Line
   rdfs:label "Moderately plunging line"@en ;
   rdfs:subClassOf gsgq:Plunging_Line ;
 .
+gsgq:Not_Metamorphosed
+  rdf:type owl:Class ;
+  rdfs:comment "Rock is not metamorphose'."@en ;
+  rdfs:comment "dct:source--  CGI metamorphicgrade SKOS vocabulary 2016-11-22"@en ;
+  rdfs:label "not metamorphosed"@en ;
+  rdfs:subClassOf gsoc:Named_Value ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:allValuesFrom gsgq:Metamorphic_Grade ;
+      owl:onProperty gsoc:isValueOf ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onClass gsgq:Metamorphic_Grade ;
+      owl:onProperty gsoc:isValueOf ;
+      owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+    ] ;
+.
 gsgq:Overturned
   rdf:type owl:Class ;
   rdfs:comment "top of surface is facing downward, toward Earth interior."@en ;
@@ -260,7 +292,14 @@ gsgq:Plunge
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
       owl:onProperty gsoc:hasQuality ;
-      owl:someValuesFrom gsoc:Measure_Value ;
+      owl:someValuesFrom [
+          rdf:type owl:Class ;
+          owl:unionOf (
+              gsoc:Numeric_Value
+              gsoc:Named_Value
+              gsoc:Range_Value
+            ) ;
+        ] ;
     ] ;
 .
 gsgq:Plunge_Value

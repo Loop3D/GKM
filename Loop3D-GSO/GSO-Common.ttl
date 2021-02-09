@@ -103,6 +103,12 @@ gsoc:Chunk_Of_Matter
     ] ;
   owl:disjointWith gsoc:Heap_Of_Matter ;
 .
+gsoc:Constituent
+  rdf:type owl:Class ;
+  rdfs:comment "A part that is a constituent relation to a whole"@en ;
+  rdfs:label "Constituent"@en ;
+  rdfs:subClassOf gsoc:Part ;
+.
 gsoc:Dominant_Proportion
   rdf:type owl:Class ;
   rdfs:comment "Constituent is one of the most abundant."@en ;
@@ -733,7 +739,7 @@ gsoc:Measure_Value
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
       owl:onProperty gsoc:hasUOM ;
-      owl:someValuesFrom gsoc:Unit_Of_Measure ;
+      owl:someValuesFrom gsoc:Unit_Of_Measure_Value ;
     ] ;
   owl:disjointWith gsoc:Named_Value ;
   owl:disjointWith gsoc:Range_Value ;
@@ -749,6 +755,13 @@ gsoc:Measure_Value
           ]
         ) ;
     ] ;
+.
+gsoc:Minor_Proportion
+  rdf:type owl:Class ;
+  rdfs:comment "Constituent is ubiquitous but not abundant"@en ;
+  rdfs:comment "Example -- in some granites, hornblende is a minor constituent."@en ;
+  rdfs:label "Minor Constituent"@en ;
+  rdfs:subClassOf gsoc:Proportion_Value ;
 .
 gsoc:Named_Value
   rdf:type owl:Class ;
@@ -1610,6 +1623,13 @@ gsoc:Range_Value
         ) ;
     ] ;
 .
+gsoc:Rare_Proportion
+  rdf:type owl:Class ;
+  rdfs:comment "Constituent is present but uncommon and rarely observed."@en ;
+  rdfs:comment "Example-- in a typical granite, zircon and apatite are rare constituents"@en ;
+  rdfs:label "Rare constituent "@en ;
+  rdfs:subClassOf gsoc:Proportion_Value ;
+.
 gsoc:Reference_System
   rdf:type owl:Class ;
   rdfs:comment "Notional endurant that establishes a frame of reference for a quality value. Although typically mathematical,  it is not necessarily abstract, because some reference systems are dependent on non-abstract endurants located in space or time; e.g. a spatial coordinate system for the earth (tied to the Earth's ellipsoid), or a temporal coordinate system tied to the Earth's moon or sun (i.e. lunar or solar calendar)"@en ;
@@ -2118,6 +2138,13 @@ gsoc:State_Of_Matter_Value
       owl:onProperty gsoc:isValueOf ;
       owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
     ] ;
+.
+gsoc:Subordinate_Proportion
+  rdf:type owl:Class ;
+  rdfs:comment "Constituent is less abundant than dominant constituent, but present in sufficient abundance to be an obvious constituent"@en ;
+  rdfs:comment "Example--in a typical granite, biotite is a subordinate constituent."@en ;
+  rdfs:label "Subordinate Constituent"@en ;
+  rdfs:subClassOf gsoc:Proportion_Value ;
 .
 gsoc:Temporal_Boundary
   rdf:type owl:Class ;
@@ -2858,6 +2885,13 @@ gsoc:hasSetting
   rdfs:subPropertyOf gsoc:isEssentialPartOf ;
   owl:inverseOf gsoc:isSettingFor ;
 .
+gsoc:hasSpatialValue
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment "relation between a non-abstact particular and a spatial location value" ;
+  rdfs:label "spatial location value "@en ;
+  rdfs:range gsoc:Spatial_Value ;
+  rdfs:subPropertyOf gsoc:location ;
+.
 gsoc:hasStartValue
   rdf:type owl:ObjectProperty ;
   rdfs:comment "property that assigns the lower bound quantifier to a Quality value range"@en ;
@@ -2882,7 +2916,7 @@ gsoc:hasUOM
   rdf:type owl:ObjectProperty ;
   rdfs:comment "top level property for assigning property values; subtype for associating values with measurement units "@en ;
   rdfs:domain gsoc:Measure_Value ;
-  rdfs:range gsoc:Unit_Of_Measure ;
+  rdfs:range gsoc:Unit_Of_Measure_Value ;
   rdfs:subPropertyOf gsoc:hasQuality ;
 .
 gsoc:hasValue
@@ -3071,6 +3105,24 @@ gsoc:isValueOf
   rdfs:subPropertyOf gsoc:isPersistentPartOf ;
   owl:inverseOf gsoc:hasValue ;
 .
+gsoc:location
+  rdf:type owl:ObjectProperty ;
+  rdf:type owl:SymmetricProperty ;
+  rdfs:comment "relation between a non-abstact particular and a spatial or temporal location value"@en ;
+  rdfs:domain [
+      rdf:type owl:Class ;
+      owl:complementOf gsoc:Abstract_Endurant ;
+    ] ;
+  rdfs:label "location "@en ;
+  rdfs:range [
+      rdf:type owl:Class ;
+      owl:unionOf (
+          gsoc:Temporal_Value
+          gsoc:Spatial_Value
+        ) ;
+    ] ;
+  rdfs:subPropertyOf gsoc:constantlyGenDependsOn ;
+.
 gsoc:materiallyDependsOn
   rdf:type owl:ObjectProperty ;
   rdfs:comment "materially depends on - loss or change in the dependee will cause an unaviodable material change in the dependent"@en ;
@@ -3197,7 +3249,7 @@ gsoc:occupiesTimeDirectly
 gsoc:occupiesTimeIndirectly
   rdf:type owl:FunctionalProperty ;
   rdf:type owl:ObjectProperty ;
-  rdfs:comment "Occupies space only by virtue of being ontologically dependent on a perdurant, or having perdurant parts, but not being a perdurant.  Valid domains include endurants, situations, features."@en ;
+  rdfs:comment "Occupies a temporal region only by virtue of being ontologically dependent on a perdurant, or having perdurant parts, but not being a perdurant.  Valid domains include endurants, situations, features."@en ;
   rdfs:domain [
       rdf:type owl:Class ;
       owl:complementOf gsoc:Perdurant ;
