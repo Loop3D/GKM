@@ -1,29 +1,19 @@
-﻿# baseURI: http://loop3d.org/GSO/ontology/2020/1/geologicrole/ontology
+# baseURI: http://loop3d.org/GSO/ontology/2020/1/geologicrole/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/common/ontology
-# imports: http://loop3d.org/GSO/ontology/2020/1/geology/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/geologicprocess/ontology
-
+# imports: http://loop3d.org/GSO/ontology/2020/1/geology/ontology
 
 @prefix : <http://loop3d.org/GSO/ontology/2020/1/geologicrole/> .
-@prefix gsor: <http://loop3d.org/GSO/ontology/2020/1/geologicrole/> .
 @prefix gsoc: <http://loop3d.org/GSO/ontology/2020/1/common/> .
 @prefix gsog: <http://loop3d.org/GSO/ontology/2020/1/geology/> .
+@prefix gsor: <http://loop3d.org/GSO/ontology/2020/1/geologicrole/> .
 @prefix gspr: <http://loop3d.org/GSO/ontology/2020/1/geologicprocess/> .
-
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix dct: <http://purl.org/dc/terms/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-gsor:Orb
-  rdf:type owl:Class ;
-  rdfs:comment "A circular-shaped rock body within another rock body."@en ;
-  rdfs:comment "Igneous constituent typically mafic, equant rounded spheroid with concentric mineralogic banding."@en ;
-  rdfs:comment "dct:source--  CGI GTWG vocabulary"@en ;
-  rdfs:label "Orb"@en ;
-  rdfs:subClassOf gsoc:Part ;
-.
 gsor:Accessory_Crystals
   rdf:type owl:Class ;
   rdfs:comment "Granular material role for constituent that forms less than about 5 percent of a Rock Material"@en ;
@@ -33,7 +23,7 @@ gsor:Accessory_Crystals
 gsor:Block
   rdf:type owl:Class ;
   rdfs:comment "Geologic unit part is one or more masses with generally sharp boundaries and block-like geometry within a matrix of some other material emplaced by processes at the earth's surface--e.g. volcanic eruption or mass wasting. Use for objects that are larger that what would be considered a clast, e.g. greater than about 10 m shortest dimension, typically large enough and sparse enough to be considered individual objects."@en ;
-  rdfs:comment "dct:source--  CGI rockbodypart vocabulary 2016-11-21 "@en ;
+  dct:source  "CGI rockbodypart vocabulary 2016-11-21 "@en ;
   rdfs:label "blocks"@en ;
   rdfs:subClassOf gsor:Inclusion ;
 .
@@ -84,7 +74,7 @@ gsor:Crystal_Role
 gsor:Enclave
   rdf:type owl:Class ;
   rdfs:comment "General term for a polymineralic aggregate enclosed in a granitoid. Use when origin of inclusion as xenolith or a separate igneous phase is unclear."@en ;
-  rdfs:comment "dct:source--  Cobbing, 2000, Barbarin, 1991"@en ;
+  dct:source  "Cobbing, 2000, Barbarin, 1991"@en ;
   rdfs:label "enclave"@en ;
   rdfs:subClassOf gsor:Inclusion ;
 .
@@ -109,7 +99,7 @@ gsor:Framework_Crystals
 gsor:Geologic_Unit_Matrix
   rdf:type owl:Class ;
   rdfs:comment "Part of a geologic unit that is generally interstitial to other constituents, e.g. in a mass wasting deposit, melange, tuff breccia."@en ;
-  rdfs:comment "dct:source--  modified from CGI rockbodypart vocabulary 2016-11-21"@en ;
+  dct:source  "modified from CGI rockbodypart vocabulary 2016-11-21"@en ;
   rdfs:label "geologic unit matrix"@en ;
   rdfs:subClassOf gsor:Matrix ;
 .
@@ -123,28 +113,28 @@ gsor:Holoblast
   rdf:type owl:Class ;
   rdfs:comment "A crystalline grain in a metamorphic rock that is newly and completely formed during metamorphism"@en ;
   rdfs:comment "Might be a framework or accessory constituent"@en ;
-  rdfs:comment "dct:source--  Neuendorf et al., 2005"@en ;
+  dct:source  "Neuendorf et al., 2005"@en ;
   rdfs:label "holoblast"@en ;
   rdfs:subClassOf gsor:Crystal_Role ;
 .
 gsor:Hydrothermal_Vein
   rdf:type owl:Class ;
   rdfs:comment "A tabular or sheet-like part of a compound material formed by hydrothermal (or other metasomatic) mineral filling a fracture, may be associated with replacement of the host rock adjacent to the body"@en ;
-  rdfs:comment "dct:source--  Neuendorf et al 2005, CGI GTWG vocabulary"@en ;
+  dct:source  "Neuendorf et al 2005, CGI GTWG vocabulary"@en ;
   rdfs:label "hydrothermal vein"@en ;
   rdfs:subClassOf gsor:Intrusive_Sheet ;
 .
 gsor:Igneous_Vein
   rdf:type owl:Class ;
   rdfs:comment "A tabular or sheet like part of a compound material formed by the intrusion of magma. Syn dike"@en ;
-  rdfs:comment "dct:source--  CGI GTWG vocabulary"@en ;
+  dct:source  "CGI GTWG vocabulary"@en ;
   rdfs:label "igneous vein"@en ;
   rdfs:subClassOf gsor:Intrusive_Sheet ;
 .
 gsor:Inclusion
   rdf:type owl:Class ;
   rdfs:comment "A body of material present as masses with generally sharp boundaries enclosed within a matrix of some other material."@en ;
-  rdfs:comment "dct:source--  CGI rockbodypart vocabulary 2016-11-21 "@en ;
+  dct:source  "CGI rockbodypart vocabulary 2016-11-21 "@en ;
   rdfs:label "Inclusion"@en ;
   rdfs:subClassOf gsoc:Role ;
   rdfs:subClassOf [
@@ -167,7 +157,7 @@ gsor:Inclusion
 gsor:Intrusive_Sheet
   rdf:type owl:Class ;
   rdfs:comment "A tabular or sheet-like part of a rock body, genetic origin includes Intrusion_Process. Includes dikes, sills, and hydrothermal veins."@en ;
-  rdfs:comment "dct:source--  CGI GTWG vocabualry"@en ;
+  dct:source  "CGI GTWG vocabualry"@en ;
   rdfs:label "Intrusive sheet"@en ;
   rdfs:subClassOf gsoc:Part ;
   rdfs:subClassOf [
@@ -216,7 +206,7 @@ gsor:Matrix
 gsor:Nodule
   rdf:type owl:Class ;
   rdfs:comment "An irregularly rounded mass of a mineral or mineral aggregate normally having a warty or knobby surface and no internal structure, usually with a contrasting composition from the enclosing sediment or rock matrix in which it is embedded, and that can be separated as a discrete mass from the host material."@en ;
-  rdfs:comment "dct:source--  Neuendorf et al., 2005"@en ;
+  dct:source  "Neuendorf et al., 2005"@en ;
   rdfs:label "Nodule"@en ;
   rdfs:subClassOf gsoc:Part ;
   rdfs:subClassOf [
@@ -229,6 +219,14 @@ gsor:Nodule
       owl:onProperty gsoc:hasRolePlayer ;
       owl:someValuesFrom gsog:Rock_Body ;
     ] ;
+.
+gsor:Orb
+  rdf:type owl:Class ;
+  rdfs:comment "A circular-shaped rock body within another rock body."@en ;
+  rdfs:comment "Igneous constituent typically mafic, equant rounded spheroid with concentric mineralogic banding."@en ;
+  dct:source  "CGI GTWG vocabulary"@en ;
+  rdfs:label "Orb"@en ;
+  rdfs:subClassOf gsoc:Part ;
 .
 gsor:Overgrowth
   rdf:type owl:Class ;
@@ -256,14 +254,14 @@ gsor:Paleoblast
   rdf:type owl:Class ;
   rdfs:comment "A crystal or remnant of a crystal that is older than other mineral grains in the rock, especially in metamorphic rocks"@en ;
   rdfs:comment "Might be a framework or accessory constituent"@en ;
-  rdfs:comment "dct:source--  Neuendorf et al. 2005"@en ;
+  dct:source  "Neuendorf et al. 2005"@en ;
   rdfs:label "paleoblast"@en ;
   rdfs:subClassOf gsor:Crystal_Role ;
 .
 gsor:Paramorph
   rdf:type owl:Class ;
   rdfs:comment "A pseudomorph with the same composition as the original crystal (eg: calcite after aragonite)"@en ;
-  rdfs:comment "dct:source--  Neuendorf et al., 2005"@en ;
+  dct:source  "Neuendorf et al., 2005"@en ;
   rdfs:label "paramorph"@en ;
   rdfs:subClassOf gsor:Pseudomorph ;
 .
@@ -271,7 +269,7 @@ gsor:Pendant
   rdf:type owl:Class ;
   rdfs:comment "A block of wall rock material in an igneous intrusion. Pendants become xenoliths as the dimension becomes smaller than about 10 m in their longest dimension. Although term pendant has connotation of being suspended or supported from above, this is rarely demonstrable in geologic situations, and the concept here does not require connection to the wall of the containing intrusion."@en ;
   rdfs:comment "a mass of country rock that is entirely surrounded by an igneous intrusion such as a batholith or other pluton. "@en ;
-  rdfs:comment "dct:source--  Base on Neuendorf et al 2005"@en ;
+  dct:source  "Base on Neuendorf et al 2005"@en ;
   rdfs:label "Pendant "@en ;
   rdfs:subClassOf gsoc:Part ;
   rdfs:subClassOf [
@@ -294,20 +292,20 @@ gsor:Phenocryst
 gsor:Porphyroblast
   rdf:type owl:Class ;
   rdfs:comment "a large mineral crystal in a metamorphic rock which has grown within the finer grained matrix. Porphyroblasts are commonly euhedral crystals, but can also be partly to completely irregular in shape"@en ;
-  rdfs:comment "dct:source -- https://en.wikipedia.org/wiki/Porphyroblast" ;
+  dct:source  "https://en.wikipedia.org/wiki/Porphyroblast" ;
   rdfs:label "Porphyroblast "@en ;
   rdfs:subClassOf gsor:Holoblast ;
 .
 gsor:Porphyroclast
   rdf:type owl:Class ;
   rdfs:comment "A clast or mineral fragment in a metamorphic rock, surrounded by a groundmass of finer grained crystals. Porphyroclasts are fragments of the original rock before dynamic recrystallisation or cataclasis produced the groundmass. This means they are older than the groundmass."@en ;
-  rdfs:comment "dct:source -- Passchier C.W. & Trouw R.A.J. (2005). Microtectonics. Springer Science & Business Media. pp. 132�141. ISBN 9783540293590.; https://en.wikipedia.org/wiki/Porphyroclast" ;
+  dct:source  "Passchier C.W. & Trouw R.A.J. (2005). Microtectonics. Springer Science & Business Media. pp. 132�141. ISBN 9783540293590.; https://en.wikipedia.org/wiki/Porphyroclast" ;
   rdfs:label "Porphyroclast "@en ;
   rdfs:subClassOf gsor:Paleoblast ;
 .
 gsor:Protolith
   rdf:type owl:Class ;
-  rdfs:comment "" ;
+  rdfs:comment "Role that relates a rock object to an altered, metasomatized, or metamorphic rock object produced from that rock. Non-metamorphosed rock object is role player, metamorphic product is the role object. Read X is protolith for Y."@en ;
   rdfs:label "Protolith "@en ;
   rdfs:subClassOf gsoc:Role ;
   rdfs:subClassOf [
@@ -324,7 +322,7 @@ gsor:Protolith
 gsor:Pseudomorph
   rdf:type owl:Class ;
   rdfs:comment "Constituent particle that has the outward form of a mineral species or particle type, but the original minerals composing the particle have been altered or replaced by different minerals, a secondary mineral whose outward crystal form has been inherited from the orignal mineral it has replaced"@en ;
-  rdfs:comment "dct:source--  Neuendorf et al. 2005, Spry 1969, Fettes and Desmons, 2007"@en ;
+  dct:source  "Neuendorf et al. 2005, Spry 1969, Fettes and Desmons, 2007"@en ;
   rdfs:label "pseudomorph"@en ;
   rdfs:subClassOf gsoc:Role ;
   rdfs:subClassOf [
@@ -341,7 +339,7 @@ gsor:Pseudomorph
 gsor:Raft
   rdf:type owl:Class ;
   rdfs:comment "A pendant of pre-intrusive country rock in an intrusive igneous matrix that has large horizontal extent relative to its thickness"@en ;
-  rdfs:comment "dct:source--  CGI rockbodypart vocabulary 2016-11-21 "@en ;
+  dct:source  "CGI rockbodypart vocabulary 2016-11-21 "@en ;
   rdfs:label "Raft"@en ;
   rdfs:subClassOf gsor:Pendant ;
 .
@@ -363,7 +361,7 @@ gsor:Rock_Sample
 gsor:Roof_pendant
   rdf:type owl:Class ;
   rdfs:comment "A pendant that is demonstrably derived from the upper boundary of an igneous body."@en ;
-  rdfs:comment "dct:source--  Neuendorf et al 2005"@en ;
+  dct:source  "Neuendorf et al 2005"@en ;
   rdfs:label "Roof pendant"@en ;
   rdfs:subClassOf gsor:Pendant ;
 .
@@ -371,7 +369,7 @@ gsor:Schlieren
   rdf:type owl:Class ;
   rdfs:comment "a tabular body, generally a few cm to a few metres long, within a plutonic rock, having different mineral proportions and colour to the surrounding rock"@en ;
   rdfs:comment "could be considered a primary structure or  a role ..."@en ;
-  rdfs:comment "dct:source--  GGIPAC"@en ;
+  dct:source  "GGIPAC"@en ;
   rdfs:label "Schlieren"@en ;
   rdfs:subClassOf gsoc:Part ;
   rdfs:subClassOf [
@@ -388,7 +386,7 @@ gsor:Schlieren
 gsor:Screen
   rdf:type owl:Class ;
   rdfs:comment "A pendant that is a vertical sheet like body in an intrusive igneous rock body."@en ;
-  rdfs:comment "dct:source--  CGI rockbodypart vocabulary 2016-11-21 "@en ;
+  dct:source  "CGI rockbodypart vocabulary 2016-11-21 "@en ;
   rdfs:label "Screen"@en ;
   rdfs:subClassOf gsor:Pendant ;
 .
@@ -401,14 +399,14 @@ gsor:Sedimentary_Matrix
 gsor:Syngenetic_Nodule
   rdf:type owl:Class ;
   rdfs:comment "Particle formed by chemical precipitation at sediment-water interface, lacking layered structure that characterizes coated grains. Includes glauconite grains, manganese nodules, phosphate grains. Manganese nodule--\\An irregular, black to brown, friable"@en ;
-  rdfs:comment "dct:source--  NADM SLTTs 2004, Jackson 1997"@en ;
+  dct:source  "NADM SLTTs 2004, Jackson 1997"@en ;
   rdfs:label "syngenetic nodule"@en ;
   rdfs:subClassOf gsor:Nodule ;
 .
 gsor:Tectonic_block
   rdf:type owl:Class ;
   rdfs:comment "Discrete masses with faulted boundaries, emplaced into the host unit by tectonic processes inside the earth, e.g. blocks in tectonic melange"@en ;
-  rdfs:comment "dct:source--  CGI rockbodypart vocabulary 2016-11-21 "@en ;
+  dct:source  "CGI rockbodypart vocabulary 2016-11-21 "@en ;
   rdfs:label "tectonic block"@en ;
   rdfs:subClassOf gsor:Block ;
 .
@@ -416,14 +414,14 @@ gsor:Xenocryst
   rdf:type owl:Class ;
   rdfs:comment "A xenocryst in general can not play a framework role in a Rock Material"@en ;
   rdfs:comment "Granular material consisting of crystals that resemble phenocrysts in an igneous rock, but that are foreign to the rock in which they occur - not formed by crystallization of the magma that formed the igneous rock."@en ;
-  rdfs:comment "dct:source--  Neuendorf et al., 2005"@en ;
+  dct:source  "Neuendorf et al., 2005"@en ;
   rdfs:label "xenocryst"@en ;
   rdfs:subClassOf gsor:Crystal_Role ;
 .
 gsor:Xenolith
   rdf:type owl:Class ;
   rdfs:comment "Inclusion of pre-intrusive country rock in intrusive igneous matrix, cm to about 10 meter diameter in longest dimension. Use term pendant for larger blocks or for lithologically heterogeneous blocks."@en ;
-  rdfs:comment "dct:source--  Neuendorf et al. 2005, Cobbing, 2000, This vocabulary"@en ;
+  dct:source  "Neuendorf et al. 2005, Cobbing, 2000, This vocabulary"@en ;
   rdfs:label "Xenolith"@en ;
   rdfs:subClassOf gsor:Inclusion ;
 .

@@ -5,6 +5,7 @@
 # imports: http://loop3d.org/GSO/ontology/2020/1/quality/ontology
 
 @prefix : <http://loop3d.org/GSO/ontology/2020/1/geologicfold/> .
+@prefix dct: <http://purl.org/dc/terms/> .
 @prefix gsfd: <http://loop3d.org/GSO/ontology/2020/1/geologicfold/> .
 @prefix gsgq: <http://loop3d.org/GSO/ontology/2020/1/geologicquality/> .
 @prefix gsoc: <http://loop3d.org/GSO/ontology/2020/1/common/> .
@@ -13,27 +14,26 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 gsfd:Anticline
   rdf:type owl:Class ;
+  dct:source "https://inspire.ec.europa.eu/codelist/FoldProfileTypeValue/anticline" ;
   rdfs:comment "A fold whose core contains the stratigraphically older rocks"@en ;
-  rdfs:comment "dct:source -- https://inspire.ec.europa.eu/codelist/FoldProfileTypeValue/anticline" ;
   rdfs:label "Anticline "@en ;
   rdfs:subClassOf gsfd:Fold ;
 .
 gsfd:Antiform
   rdf:type owl:Class ;
+  dct:source "https://inspire.ec.europa.eu/codelist/FoldProfileTypeValue/antiform" ;
   rdfs:comment "A convex-upward, concave downward fold."@en ;
-  rdfs:comment "dct:source -- https://inspire.ec.europa.eu/codelist/FoldProfileTypeValue/antiform" ;
   rdfs:label "Antiform"@en ;
   rdfs:subClassOf gsfd:Fold ;
 .
 gsfd:Chevron_Fold
   rdf:type owl:Class ;
+  dct:source "http://www.geologyin.com/2015/02/types-of-folds-with-photos.html" ;
   rdfs:comment "A fold with straight limbs and sharp hinges. Well developed, these folds develop repeated set of v-shaped beds.  Inter-limb angles are generally 60 degrees or less. Chevron folding preferentially occurs in well bedded units where  bedding regularly alternates between contrasting competences."@en ;
-  rdfs:comment "dct:source -- http://www.geologyin.com/2015/02/types-of-folds-with-photos.html" ;
   rdfs:label "Chevron Fold "@en ;
   rdfs:subClassOf gsfd:Fold ;
 .
@@ -48,16 +48,6 @@ gsfd:Fold
   rdfs:subClassOf gsog:Geologic_Structure ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
-      owl:onProperty gsoc:hasPersistentPart ;
-      owl:someValuesFrom gsoc:Shape_Value ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:onProperty gsoc:hostedBy ;
-      owl:someValuesFrom gsog:Rock_Body ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
       owl:onClass gsfd:Fold_Axial_Surface ;
       owl:onProperty gsoc:crosses ;
       owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
@@ -69,8 +59,18 @@ gsfd:Fold
     ] ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
+      owl:onProperty gsoc:hasPersistentPart ;
+      owl:someValuesFrom gsoc:Shape_Value ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
       owl:onProperty gsoc:hasStaticPart ;
       owl:someValuesFrom gsfd:Fold_Limb ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:hostedBy ;
+      owl:someValuesFrom gsog:Rock_Body ;
     ] ;
 .
 gsfd:Fold_Amplitude
@@ -92,6 +92,11 @@ gsfd:Fold_Axial_Surface
   rdfs:subClassOf gsoc:Low_Dimension_Feature ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
+      owl:onProperty gsoc:hasEssentialPart ;
+      owl:someValuesFrom gsoc:Spatial_Region_2D ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
       owl:onProperty gsoc:hasQuality ;
       owl:someValuesFrom gsoq:Orientation ;
     ] ;
@@ -99,11 +104,6 @@ gsfd:Fold_Axial_Surface
       rdf:type owl:Restriction ;
       owl:onProperty gsoc:hostedBy ;
       owl:someValuesFrom gsfd:Fold ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:onProperty gsoc:hasEssentialPart ;
-      owl:someValuesFrom gsoc:Spatial_Region_2D ;
     ] ;
 .
 gsfd:Fold_Hinge
@@ -113,13 +113,13 @@ gsfd:Fold_Hinge
   rdfs:subClassOf gsoc:Low_Dimension_Feature ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
-      owl:onProperty gsoc:hostedBy ;
-      owl:someValuesFrom gsfd:Fold ;
+      owl:onProperty gsoc:hasEssentialPart ;
+      owl:someValuesFrom gsoc:Spatial_Region_1D ;
     ] ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
-      owl:onProperty gsoc:hasEssentialPart ;
-      owl:someValuesFrom gsoc:Spatial_Region_1D ;
+      owl:onProperty gsoc:hostedBy ;
+      owl:someValuesFrom gsfd:Fold ;
     ] ;
 .
 gsfd:Fold_Hinge_Surface
@@ -141,8 +141,8 @@ gsfd:Fold_Hinge_Surface
 .
 gsfd:Fold_InterLimb_Angle
   rdf:type owl:Class ;
+  dct:source "Neuendorf et al., 2005" ;
   rdfs:comment "The angle between adjacent limbs of a fold, normally determined by drawing tangents to the fold limbs at the inflection points."@en ;
-  rdfs:comment "dct:source -- Neuendorf et al., 2005" ;
   rdfs:isDefinedBy "GeoSciML v4"@en ;
   rdfs:label "Fold limb shape"@en ;
   rdfs:subClassOf gsoc:Physical_Quality ;
@@ -294,15 +294,15 @@ gsfd:Is_Periodic
 .
 gsfd:Monocline
   rdf:type owl:Class ;
-  rdfs:comment "dct:source -- https://en.wikipedia.org/wiki/Monocline" ;
+  dct:source "https://en.wikipedia.org/wiki/Monocline" ;
   rdfs:comment "step-like fold in rock strata consisting of a zone of steeper dip within an otherwise horizontal or gently-dipping sequence."@en ;
   rdfs:label "Monocline "@en ;
   rdfs:subClassOf gsfd:Fold ;
 .
 gsfd:Neutral_Fold
   rdf:type owl:Class ;
+  dct:source "https://www.encyclopedia.com/science/dictionaries-thesauruses-pictures-and-press-releases/neutral-fold" ;
   rdfs:comment "A fold which closes laterally and is therefore neither antiformal nor synformal.  "@en ;
-  rdfs:comment "dct:source -- https://www.encyclopedia.com/science/dictionaries-thesauruses-pictures-and-press-releases/neutral-fold" ;
   rdfs:label "Neutral Fold "@en ;
   rdfs:subClassOf gsfd:Fold ;
 .
@@ -314,49 +314,49 @@ gsfd:Ptygmatic_Fold
 .
 gsfd:Recumbent
   rdf:type owl:Class ;
+  dct:source "Fleuty (1964) Folds classification." ;
   rdfs:comment "Surface dips between 0 and 10 degrees; typically used to describe orientation of fold hing surface or axial surface, use equivalent term 'Horizontal inclination' for other geologic surfaces."@en ;
-  rdfs:comment "dct:source -- Fleuty (1964) Folds classification." ;
   rdfs:label "Recumbent "@en ;
   rdfs:subClassOf gsgq:Plane_Orientation ;
 .
 gsfd:Recumbent_Fold
   rdf:type owl:Class ;
+  dct:source "Fleuty (1964) Folds classification." ;
   rdfs:comment "A fold that has an essentially horizontal axial plane."@en ;
-  rdfs:comment "dct:source -- Fleuty (1964) Folds classification." ;
   rdfs:label "Recumbent Fold "@en ;
   rdfs:subClassOf gsfd:Neutral_Fold ;
 .
 gsfd:Syncline
   rdf:type owl:Class ;
+  dct:source "https://inspire.ec.europa.eu/codelist/FoldProfileTypeValue/syncline" ;
   rdfs:comment "A fold of which the core contains the stratigraphically younger rocks"@en ;
-  rdfs:comment "dct:source -- https://inspire.ec.europa.eu/codelist/FoldProfileTypeValue/syncline" ;
   rdfs:label "Syncline "@en ;
   rdfs:subClassOf gsfd:Fold ;
 .
 gsfd:Synform
   rdf:type owl:Class ;
+  dct:source "based on https://inspire.ec.europa.eu/codelist/FoldProfileTypeValue/antiform" ;
   rdfs:comment "A convex-downward, concave upward fold."@en ;
-  rdfs:comment "dct:source -- based on https://inspire.ec.europa.eu/codelist/FoldProfileTypeValue/antiform" ;
   rdfs:label "Synform"@en ;
   rdfs:subClassOf gsfd:Fold ;
 .
 gsfd:Upright_Inclination
   rdf:type owl:Class ;
+  dct:source "Fleuty (1964) Folds classification." ;
   rdfs:comment "Surface dips between 80 and 90 degrees, used to describe orientation of fold hinge surface or axial surface;  use equivalent term 'Vertical inclination' for other geologic surfaces."@en ;
-  rdfs:comment "dct:source -- Fleuty (1964) Folds classification." ;
   rdfs:label "Upright Inclination"@en ;
   rdfs:subClassOf gsgq:Plane_Orientation ;
 .
 gsfd:Vertical_Fold
   rdf:type owl:Class ;
+  dct:source "Fleuty (1964) Folds classification." ;
   rdfs:comment "A fold for which the fold axis is vertical and axial surface is upright."@en ;
-  rdfs:comment "dct:source -- Fleuty (1964) Folds classification." ;
   rdfs:label "Vertical Fold "@en ;
   rdfs:subClassOf gsfd:Neutral_Fold ;
 .
 gsfd:ontology
   rdf:type owl:Ontology ;
-  rdfs:comment "extension module for properties related to folds"@en ;
+  rdfs:comment "extension module for properties related to folds. Depencencies:  GSO-Common, GSO-Geology, GSO-Geologic_Quality, GSO-Quality"@en ;
   rdfs:label "Fold"@en ;
   owl:imports gsoc:ontology ;
   owl:imports gsgq:ontology ;

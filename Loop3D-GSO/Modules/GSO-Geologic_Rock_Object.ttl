@@ -11,13 +11,13 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix dct: <http://purl.org/dc/terms/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 gsro:Concretion
   rdf:type owl:Class ;
   rdfs:comment "A hard, compact mass or aggregate of mineral matter, normally subspherical but commonly oblate, disc-shaped or irregular. Formed from precipitation from solution about a nucleus or centre."@en ;
-  rdfs:comment "dct:source--  Neuendorf et al. 2005"@en ;
+  dct:source  "Neuendorf et al. 2005"@en ;
   rdfs:label "Concretion"@en ;
   rdfs:subClassOf gsog:Specific_Rock_Object ;
 .
@@ -40,22 +40,7 @@ gsro:Crystal
   rdfs:subClassOf gsog:Specific_Rock_Object ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
-      owl:allValuesFrom owl:Nothing ;
-      owl:onProperty gsoc:hasPart ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom [
-          rdf:type owl:Class ;
-          owl:intersectionOf (
-              gsog:Rock_Material
-              [
-                rdf:type owl:Restriction ;
-                owl:allValuesFrom gsog:Mineral ;
-                owl:onProperty gsoc:hasConstituent ;
-              ]
-            ) ;
-        ] ;
+      owl:allValuesFrom gsog:Mineral ;
       owl:onProperty gsoc:hasConstituent ;
     ] ;
 .

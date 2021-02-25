@@ -2,13 +2,13 @@
 # imports: http://loop3d.org/GSO/ontology/2020/1/common/ontology
 
 @prefix : <http://loop3d.org/GSO/ontology/2020/1/geology/> .
+@prefix dct: <http://purl.org/dc/terms/> .
 @prefix gsoc: <http://loop3d.org/GSO/ontology/2020/1/common/> .
 @prefix gsog: <http://loop3d.org/GSO/ontology/2020/1/geology/> .
 @prefix gspd: <http://loop3d.org/GSO/ontology/2020/1/perdurant/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 gsoc:Element
@@ -102,33 +102,7 @@ gsog:GSSA
       owl:onProperty gsoc:isEssentialPartOf ;
       owl:someValuesFrom gsog:Geologic_Time_Boundary ;
     ] ;
-  owl:disjointWith gsog:GSSP ;
-.
-gsog:GSSP
-  rdf:type owl:Class ;
-  rdfs:comment "Hosted by a contact (low-dimension feature),  by an event that caused the contact, by a stratigraphic point, and by a stratigraphic section containing the point."@en ;
-  rdfs:subClassOf gsog:Geologic_Time_Date ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:onProperty gsoc:determinedBy ;
-      owl:someValuesFrom gsoc:Low_Dimension_Feature ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:onProperty gsoc:isEssentialPartOf ;
-      owl:someValuesFrom gsog:Geologic_Time_Boundary ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:onProperty gsoc:staticHostedBy ;
-      owl:someValuesFrom gsoc:Low_Dimension_Feature ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:onProperty gsoc:staticHostedBy ;
-      owl:someValuesFrom gsog:Geologic_Event ;
-    ] ;
-  owl:disjointWith gsog:GSSA ;
+  owl:disjointWith gsog:Geologic_Time_Point ;
 .
 gsog:Generic_Geologic_Time_Unit
   rdf:type owl:Class ;
@@ -367,7 +341,7 @@ gsog:Geologic_Time_Boundary
 .
 gsog:Geologic_Time_Date
   rdf:type owl:Class ;
-  rdfs:comment "A temporal coordinate value, located either by a point position (with uncertainty) on a time line, specified by a numeric coordinate (generally MYPB, but definitions of 'present' vary). Can be a GeochronologicBoundary if it is associated with a location in a particular stratigraphic section, or a GSSA if the numeric time coordinate is arbitrarily assigned.  Probably should specify a Temporal Reference System used to assign coordinate values."@en ;
+  rdfs:comment "A temporal coordinate value, located either by a point position (with uncertainty) on a time line, specified by a numeric coordinate (generally MYPB, but definitions of 'present' vary). Can be a GSSA if the numeric time coordinate is arbitrarily assigned.  Probably should specify a Temporal Reference System used to assign coordinate values."@en ;
   rdfs:comment "Need SHACL rule that gsoc:Simple_Uncertainty and Statistical_Calculation are recommended"@en ;
   rdfs:label "Geologic Time Date"@en ;
   rdfs:subClassOf gsoc:Time_Instant_Feature ;
@@ -479,6 +453,27 @@ gsog:Geologic_Time_Interval
           ]
         ) ;
     ] ;
+.
+gsog:Geologic_Time_Point
+  rdf:type owl:Class ;
+  rdfs:comment "Hosted by a contact (low-dimension feature),  by an event that caused the contact, by a stratigraphic point, and by a stratigraphic section containing the point."@en ;
+  rdfs:subClassOf gsog:Geologic_Time_Date ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:determinedBy ;
+      owl:someValuesFrom gsoc:Low_Dimension_Feature ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:isEssentialPartOf ;
+      owl:someValuesFrom gsog:Geologic_Time_Boundary ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:staticHostedBy ;
+      owl:someValuesFrom gsoc:Low_Dimension_Feature ;
+    ] ;
+  owl:disjointWith gsog:GSSA ;
 .
 gsog:Geologic_Time_Scale
   rdf:type owl:Class ;
@@ -666,9 +661,8 @@ gsog:Rock_Body_Boundary
 .
 gsog:Rock_Grain_Material
   rdf:type owl:Class ;
-  rdfs:comment "A rock body constituent consisting of particles that share a set of characteristics, e.g. genesis, particle size (distribution), mineralogy, shape.  For example. the sand that is a constituent in a sandstone, or the feldspar phenocrysts that are a constituent in a granite."@en ;
-  rdfs:comment "Particle is defined as a \\General term, used without restriction as to shape composition or internal structure, for a separable or distinct unit in a [compound material].\\ (Neuendorf et al, 2005).  Note that the term particle has no size denotation as used here."@en ;
-  rdfs:comment "example top level subclasses are included in the Base Geology module (gsog: namespace) (these are not complete), differentiated based on genesis for the most part. Detailed subclasses are defined by in the granular material vocabulary and are imported in the Rock_Material module."@en ;
+  rdfs:comment "A Rock_Material constituent consisting of particles that share a set of characteristics, e.g. genesis, particle size (distribution), mineralogy, shape.  For example. the quartz sand that is a constituent in a sandstone, or the feldspar phenocrysts that are a constituent in a granite."@en ;
+  rdfs:comment "Particle is defined as a 'General term, used without restriction as to shape composition or internal structure, for a separable or distinct unit in a [Rock_Material]'. (Neuendorf et al, 2005).  Note that the term particle has no size denotation as used here."@en ;
   rdfs:label "Rock Grain Material"@en ;
   rdfs:subClassOf gsog:Solid_Geologic_Material ;
   rdfs:subClassOf [
@@ -712,9 +706,9 @@ gsog:Rock_Grain_Material
 .
 gsog:Rock_Material
   rdf:type owl:Class ;
+  dct:source "NADM C1 2004"@en ;
   rdfs:comment "A material consisting of an aggregation of particles composed of mineral, glass, or other rock material. General concept for any rock, sediment, or other solid constituent of the Earth.  This is 'top' of the lithology category hierarchy with standard rock names, and should be used to indicate 'any rock or unconsolidated material'."@en ;
   rdfs:comment "Rock_material properties a bound in the Rock_Material module"@en ;
-  rdfs:comment "dct:source--  NADM C1 2004"@en ;
   rdfs:label "Rock Material"@en ;
   rdfs:subClassOf gsog:Solid_Geologic_Material ;
   rdfs:subClassOf [
@@ -896,13 +890,7 @@ gsog:Specific_Rock_Object
     ] ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
-      owl:onClass [
-          rdf:type owl:Class ;
-          owl:intersectionOf (
-              gsog:Solid_Geologic_Material
-              gsoc:Chunk_Of_Matter
-            ) ;
-        ] ;
+      owl:onClass gsog:Solid_Geologic_Material ;
       owl:onProperty gsoc:constantlySpecDependsOn ;
       owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
     ] ;
@@ -924,13 +912,7 @@ gsog:Specific_Rock_Object
           gsog:Rock_Object
           [
             rdf:type owl:Restriction ;
-            owl:onClass [
-                rdf:type owl:Class ;
-                owl:intersectionOf (
-                    gsog:Solid_Geologic_Material
-                    gsoc:Chunk_Of_Matter
-                  ) ;
-              ] ;
+            owl:onClass gsog:Solid_Geologic_Material ;
             owl:onProperty gsoc:constantlySpecDependsOn ;
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
           ]
