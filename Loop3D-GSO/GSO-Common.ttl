@@ -1,33 +1,11 @@
 # baseURI: http://loop3d.org/GSO/ontology/2020/1/common/ontology
 
 @prefix : <http://loop3d.org/GSO/ontology/2020/1/common/> .
+@prefix dct: <http://purl.org/dc/terms/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix dct: <http://purl.org/dc/terms/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-
-
-:isProducedFrom
-  rdf:type owl:ObjectProperty ;
-  rdfs:comment "" ;
-  rdfs:label "produced from "@en ;
-  rdfs:subPropertyOf :production ;
-.
-:isProductionInput
-  rdf:type owl:ObjectProperty ;
-  rdfs:comment "" ;
-  rdfs:label "production input "@en ;
-  rdfs:subPropertyOf :production ;
-.
-:production
-  rdf:type owl:ObjectProperty ;
-  rdfs:comment "" ;
-  rdfs:label "Production "@en ;
-  rdfs:subPropertyOf :isFundamentallyRelatedTo ;
-.
-
-
 
 :Abstract_Endurant
   rdf:type owl:Class ;
@@ -702,24 +680,19 @@
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
       owl:onProperty :occupiesSpaceDirectly ;
-      owl:someValuesFrom :Spatial_Region ;
+      owl:someValuesFrom :Spatial_Region_3D ;
     ] ;
   owl:disjointWith :Spatial_Region ;
   owl:equivalentClass [
       rdf:type owl:Class ;
-      owl:intersectionOf [
-          rdf:type rdf:List ;
-          rdf:first :Physical_Endurant ;
-          rdf:rest [
-              rdf:type rdf:List ;
-              rdf:first [
-                  rdf:type owl:Restriction ;
-                  owl:onProperty :occupiesSpaceDirectly ;
-                  owl:someValuesFrom :Spatial_Region ;
-                ] ;
-              rdf:rest () ;
-            ] ;
-        ] ;
+      owl:intersectionOf (
+          :Physical_Endurant
+          [
+            rdf:type owl:Restriction ;
+            owl:onProperty :occupiesSpaceDirectly ;
+            owl:someValuesFrom :Spatial_Region_3D ;
+          ]
+        ) ;
     ] ;
 .
 :Material_Feature
@@ -903,6 +876,11 @@
       owl:allValuesFrom :Nonphysical_Endurant ;
       owl:onProperty :hasPart ;
     ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:allValuesFrom :Nonphysical_Quality ;
+      owl:onProperty :hasQuality ;
+    ] ;
   owl:disjointWith :Physical_Endurant ;
   owl:equivalentClass [
       rdf:type owl:Class ;
@@ -991,7 +969,6 @@
       owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
     ] ;
   owl:disjointWith :Physical_Quality ;
-  owl:disjointWith :Situational_Quality ;
   owl:disjointWith :Temporal_Quality ;
   owl:equivalentClass [
       rdf:type owl:Class ;
@@ -1020,7 +997,6 @@
       owl:someValuesFrom :Nonphysical_Quality ;
     ] ;
   owl:disjointWith :Physical_Reference_System ;
-  owl:disjointWith :Situational_Reference_System ;
   owl:disjointWith :Temporal_Reference_System ;
   owl:equivalentClass [
       rdf:type owl:Class ;
@@ -1400,6 +1376,11 @@
     ] ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
+      owl:allValuesFrom :Physical_Quality ;
+      owl:onProperty :hasQuality ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
       owl:onProperty :constantlySpecDependsOn ;
       owl:someValuesFrom :Physical_Quality ;
     ] ;
@@ -1515,7 +1496,6 @@
       owl:onProperty :isQualityOf ;
       owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
     ] ;
-  owl:disjointWith :Situational_Quality ;
   owl:disjointWith :Temporal_Quality ;
   owl:equivalentClass [
       rdf:type owl:Class ;
@@ -1545,7 +1525,6 @@
       owl:onProperty :isReferenceSystemFor ;
       owl:someValuesFrom :Temporal_Quality ;
     ] ;
-  owl:disjointWith :Situational_Reference_System ;
   owl:disjointWith :Temporal_Reference_System ;
   owl:equivalentClass [
       rdf:type owl:Class ;
@@ -2152,59 +2131,6 @@
         ] ;
     ] ;
 .
-:Situational_Quality
-  rdf:type owl:Class ;
-  rdfs:subClassOf :Quality ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:onProperty :isQualityOf ;
-      owl:someValuesFrom :Situation ;
-    ] ;
-  owl:disjointWith :Temporal_Quality ;
-  owl:equivalentClass [
-      rdf:type owl:Class ;
-      owl:intersectionOf [
-          rdf:type rdf:List ;
-          rdf:first :Quality ;
-          rdf:rest [
-              rdf:type rdf:List ;
-              rdf:first [
-                  rdf:type owl:Restriction ;
-                  owl:onClass :Situation ;
-                  owl:onProperty :isQualityOf ;
-                  owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                ] ;
-              rdf:rest () ;
-            ] ;
-        ] ;
-    ] ;
-.
-:Situational_Reference_System
-  rdf:type owl:Class ;
-  rdfs:subClassOf :Reference_System ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:onProperty :isReferenceSystemFor ;
-      owl:someValuesFrom :Situational_Quality ;
-    ] ;
-  owl:disjointWith :Temporal_Reference_System ;
-  owl:equivalentClass [
-      rdf:type owl:Class ;
-      owl:intersectionOf [
-          rdf:type rdf:List ;
-          rdf:first :Reference_System ;
-          rdf:rest [
-              rdf:type rdf:List ;
-              rdf:first [
-                  rdf:type owl:Restriction ;
-                  owl:onProperty :isReferenceSystemFor ;
-                  owl:someValuesFrom :Situational_Quality ;
-                ] ;
-              rdf:rest () ;
-            ] ;
-        ] ;
-    ] ;
-.
 :Solid
   rdf:type owl:Class ;
   rdfs:subClassOf :State_Of_Matter_Value ;
@@ -2570,8 +2496,9 @@
   rdfs:subClassOf :Quality ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
+      owl:onClass :Perdurant ;
       owl:onProperty :isQualityOf ;
-      owl:someValuesFrom :Perdurant ;
+      owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
     ] ;
   owl:equivalentClass [
       rdf:type owl:Class ;
@@ -2980,37 +2907,37 @@
 .
 :containedBy
   rdf:type owl:ObjectProperty ;
+  dct:source "https://en.wikipedia.org/wiki/DE-9IM, from Clementini and others(1993, 1994) based on the seminal works of Egenhofer and others (1990, 1991)"@en ;
   rdfs:comment "The interior and boundary of the subject spatial region intesect only the interior of the object spatial region. Subject region is in the interior of the object region."@en ;
-  dct:source  "https://en.wikipedia.org/wiki/DE-9IM, from Clementini and others(1993, 1994) based on the seminal works of Egenhofer and others (1990, 1991)"@en ;
   rdfs:comment "skos:altLabel--  within"@en ;
   rdfs:subPropertyOf :isSpatiallyRelatedTo ;
   owl:inverseOf :contains ;
 .
 :contains
   rdf:type owl:ObjectProperty ;
+  dct:source "https://en.wikipedia.org/wiki/DE-9IM, from Clementini and others(1993, 1994) based on the seminal works of Egenhofer and others (1990, 1991)" ;
   rdfs:comment "Only the interior of the subject region intersects the interior or the boundary of the object region;  the boundaries do not intersect."@en ;
-  dct:source  "https://en.wikipedia.org/wiki/DE-9IM, from Clementini and others(1993, 1994) based on the seminal works of Egenhofer and others (1990, 1991)" ;
   rdfs:comment "object region lies in subject region, and the interiors intersect. Another definition: \"subject region contains object region  iff no points of object region lie in the exterior of subject region, and at least one point of the interior of object region lies in the interior of subject region\"."@en ;
   rdfs:subPropertyOf :isSpatiallyRelatedTo ;
 .
 :coveredBy
   rdf:type owl:ObjectProperty ;
-  dct:source  "https://en.wikipedia.org/wiki/DE-9IM, from Clementini and others(1993, 1994) based on the seminal works of Egenhofer and others (1990, 1991)" ;
+  dct:source "https://en.wikipedia.org/wiki/DE-9IM, from Clementini and others(1993, 1994) based on the seminal works of Egenhofer and others (1990, 1991)" ;
   rdfs:comment "the boundary of the subject intesects the interior or the boundary of the object region, and the interior of the subject intersects only the interior of the object region.  Every point of the subject region is a point in the interior or the boundary of the object region."@en ;
   rdfs:subPropertyOf :isSpatiallyRelatedTo ;
   owl:inverseOf :covers ;
 .
 :covers
   rdf:type owl:ObjectProperty ;
+  dct:source "https://en.wikipedia.org/wiki/DE-9IM, from Clementini and others(1993, 1994) based on the seminal works of Egenhofer and others (1990, 1991)" ;
   rdfs:comment "At least one point of object region lies in subject region,  and no point of object region lies in the exterior of subject region, or every point of object region is a point of (the interior or boundary of) subject region."@en ;
   rdfs:comment "The interior of the subject region intersects the interior or the boundary of the object region, and the boundary of the subject region intersects the boundary of the object region."@en ;
-  dct:source  "https://en.wikipedia.org/wiki/DE-9IM, from Clementini and others(1993, 1994) based on the seminal works of Egenhofer and others (1990, 1991)" ;
   rdfs:subPropertyOf :isSpatiallyRelatedTo ;
 .
 :crosses
   rdf:type owl:ObjectProperty ;
+  dct:source "https://en.wikipedia.org/wiki/DE-9IM, from Clementini and others(1993, 1994) based on the seminal works of Egenhofer and others (1990, 1991)" ;
   rdfs:comment "The subject and object spatial regions have some but not all interior points in common, and the dimension of the intersection is less than that of at least one of them."@en ;
-  dct:source  "https://en.wikipedia.org/wiki/DE-9IM, from Clementini and others(1993, 1994) based on the seminal works of Egenhofer and others (1990, 1991)" ;
   rdfs:subPropertyOf :isSpatiallyRelatedTo ;
 .
 :dependance
@@ -3082,19 +3009,9 @@
   rdfs:comment "generic  dependence" ;
   rdfs:subPropertyOf :dependsOn ;
 .
-:hasAge
-  rdf:type owl:FunctionalProperty ;
-  rdf:type owl:ObjectProperty ;
-  rdfs:comment "The age of a non-abstract thing: is the current duration of the time interval occupied by its life process."@en ;
-  rdfs:domain [
-      rdf:type owl:Class ;
-      owl:complementOf :Abstract_Endurant ;
-    ] ;
-  rdfs:range :Duration ;
-  rdfs:subPropertyOf :isFundamentallyRelatedTo ;
-.
 :hasAnnotation
   rdf:type owl:AnnotationProperty ;
+  rdfs:subPropertyOf :isRelatedTo ;
 .
 :hasConstituent
   rdf:type owl:ObjectProperty ;
@@ -3105,7 +3022,9 @@
   owl:inverseOf :isConstituentOf ;
 .
 :hasDataValue
+  rdf:type owl:AsymmetricProperty ;
   rdf:type owl:DatatypeProperty ;
+  rdf:type owl:IrreflexiveProperty ;
   rdfs:comment "value could be a number or string or other simple data type-- xsd:SimpleType"@en ;
   rdfs:domain :Measure_Value ;
   rdfs:range xsd:anySimpleType ;
@@ -3144,6 +3063,7 @@
   rdfs:comment "The whole is dependent on this part"@en ;
   rdfs:subPropertyOf :genericallyDependsOn ;
   rdfs:subPropertyOf :hasPart ;
+  owl:propertyDisjointWith :externallyGenDependsOn ;
 .
 :hasExample
   rdf:type owl:ObjectProperty ;
@@ -3217,12 +3137,14 @@
   owl:inverseOf :isQualityOf ;
 .
 :hasReferenceSystem
+  rdf:type owl:AsymmetricProperty ;
   rdf:type owl:ObjectProperty ;
   rdfs:comment "relation that associates a reference system with a quality"@en ;
   rdfs:domain :Quality_Value ;
   rdfs:range :Reference_System ;
   rdfs:subPropertyOf :reference ;
   owl:inverseOf :isReferenceSystemFor ;
+  owl:propertyDisjointWith :isReferenceSystemFor ;
 .
 :hasRole
   rdf:type owl:ObjectProperty ;
@@ -3352,6 +3274,7 @@
 .
 :isFundamentallyRelatedTo
   rdf:type rdf:Property ;
+  rdf:type owl:SymmetricProperty ;
   rdfs:comment "relationships between Endurant, Perdurants, or Physical_Settings"@en ;
   rdfs:subPropertyOf :isRelatedTo ;
 .
@@ -3392,6 +3315,22 @@
   rdf:type owl:TransitiveProperty ;
   rdfs:subPropertyOf :isEssentialPartOf ;
 .
+:isProducedFrom
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment "" ;
+  rdfs:label "produced from "@en ;
+  rdfs:subPropertyOf :production ;
+  owl:inverseOf :isProductionInput ;
+  owl:propertyDisjointWith :isProductionInput ;
+.
+:isProductionInput
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment "" ;
+  rdfs:label "production input "@en ;
+  rdfs:subPropertyOf :production ;
+  owl:inverseOf :isProducedFrom ;
+  owl:propertyDisjointWith :isProducedFrom ;
+.
 :isQualityOf
   rdf:type owl:ObjectProperty ;
   rdfs:comment "OWL ObjectProperty that binds a Property to some other Particular in which that property inheres."@en ;
@@ -3400,11 +3339,14 @@
   rdfs:subPropertyOf :inheresIn ;
 .
 :isReferenceSystemFor
+  rdf:type owl:AsymmetricProperty ;
   rdf:type owl:ObjectProperty ;
   rdfs:comment "relation linking a referene system to a quality, invers of hasReferenceSystem" ;
   rdfs:domain :Reference_System ;
   rdfs:range :Quality_Value ;
   rdfs:subPropertyOf :reference ;
+  owl:inverseOf :hasReferenceSystem ;
+  owl:propertyDisjointWith :hasReferenceSystem ;
 .
 :isRelatedTo
   rdf:type rdf:Property ;
@@ -3429,6 +3371,7 @@
 .
 :isSpatiallyRelatedTo
   rdf:type owl:ObjectProperty ;
+  rdf:type owl:SymmetricProperty ;
   rdfs:domain [
       rdf:type owl:Class ;
       owl:complementOf :Notional_Endurant ;
@@ -3445,6 +3388,7 @@
 .
 :isTemporallyRelatedTo
   rdf:type owl:ObjectProperty ;
+  rdf:type owl:SymmetricProperty ;
   rdfs:comment "Temporal relationships occurr between things that directly or indirectly occupy temporal regions - the relation is actually between the regions beiong occupied, but the domain and range are the occupying entities"@en ;
   rdfs:domain [
       rdf:type owl:Class ;
@@ -3667,7 +3611,16 @@
   rdfs:range :Time_Interval ;
   rdfs:subPropertyOf :timeMetBy ;
 .
+:production
+  rdf:type owl:IrreflexiveProperty ;
+  rdf:type owl:ObjectProperty ;
+  rdf:type owl:SymmetricProperty ;
+  rdfs:comment "" ;
+  rdfs:label "Production "@en ;
+  rdfs:subPropertyOf :isFundamentallyRelatedTo ;
+.
 :reference
+  rdf:type owl:IrreflexiveProperty ;
   rdf:type owl:ObjectProperty ;
   rdf:type owl:SymmetricProperty ;
   rdfs:subPropertyOf :isFundamentallyRelatedTo ;
@@ -3701,15 +3654,15 @@
 :spatiallyEquals
   rdf:type owl:ObjectProperty ;
   rdf:type owl:SymmetricProperty ;
+  dct:source "https://en.wikipedia.org/wiki/DE-9IM, from Clementini and others(1993, 1994) based on the seminal works of Egenhofer and others (1990, 1991)" ;
   rdfs:comment "a and b are topologically equal. Two geometries are topologically equal if their interiors intersect and no part of the interior or boundary of one geometry intersects the exterior of the other"@en ;
-  dct:source  "https://en.wikipedia.org/wiki/DE-9IM, from Clementini and others(1993, 1994) based on the seminal works of Egenhofer and others (1990, 1991)" ;
   rdfs:comment "the boundary of the subject intersects only the boundary of the object spatial region, and the interior of the subject intersects only the interior of the obect spatial region."@en ;
   rdfs:subPropertyOf :isSpatiallyRelatedTo ;
 .
 :spatiallyTouches
   rdf:type owl:ObjectProperty ;
   rdf:type owl:SymmetricProperty ;
-  dct:source  "https://en.wikipedia.org/wiki/DE-9IM, from Clementini and others(1993, 1994) based on the seminal works of Egenhofer and others (1990, 1991)" ;
+  dct:source "https://en.wikipedia.org/wiki/DE-9IM, from Clementini and others(1993, 1994) based on the seminal works of Egenhofer and others (1990, 1991)" ;
   rdfs:comment "skos:altLabel--  spatially meet"@en ;
   rdfs:comment "subject and object regions have at least one point in common, but their interiors do not intersect."@en ;
   rdfs:comment "the boundary  and only the boundary of the subect intersects the boundary of the object spatial region"@en ;
@@ -3849,8 +3802,8 @@
 .
 :timeOverlappedBy
   rdf:type owl:ObjectProperty ;
+  dct:source "https://en.wikipedia.org/wiki/Allen%27s_interval_algebra" ;
   rdfs:comment "Target event starts after source event, and target event ends after source event ends."@en ;
-  dct:source  "https://en.wikipedia.org/wiki/Allen%27s_interval_algebra" ;
   rdfs:subPropertyOf :timeIntersects ;
   rdfs:subPropertyOf :timeYoungerThan ;
   owl:inverseOf :timeOverlaps ;

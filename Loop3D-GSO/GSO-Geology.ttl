@@ -1,4 +1,4 @@
-# baseURI: http://loop3d.org/GSO/ontology/2020/1/geology/ontology
+﻿# baseURI: http://loop3d.org/GSO/ontology/2020/1/geology/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/common/ontology
 
 @prefix : <http://loop3d.org/GSO/ontology/2020/1/geology/> .
@@ -256,11 +256,15 @@ gsog:Geologic_Object
       rdf:type owl:Restriction ;
       owl:onProperty gsoc:externallyGenDependsOn ;
       owl:someValuesFrom [
-          rdf:type owl:Class ;
-          owl:unionOf (
-              gsog:Geologic_Process
-              gsog:Geologic_Event
-            ) ;
+          rdf:type owl:Restriction ;
+          owl:onProperty gsoc:isOutputOf ;
+          owl:someValuesFrom [
+              rdf:type owl:Class ;
+              owl:unionOf (
+                  gsog:Geologic_Process
+                  gsog:Geologic_Event
+                ) ;
+            ] ;
         ] ;
     ] ;
   rdfs:subClassOf [
@@ -322,7 +326,6 @@ gsog:Geologic_Structure
 gsog:Geologic_Time_Boundary
   rdf:type owl:Class ;
   rdfs:comment "A temporal feature that is the boundary between two Geologic time Intervals. Is generically dependent on a date - e.g. the end of the Anthropocene is the current moment, which changes with each moment."@en ;
-  rdfs:label "Geochronologic Boundary"@en ;
   rdfs:label "Geologic Time Boundary"@en ;
   rdfs:subClassOf gsoc:Temporal_Boundary ;
   rdfs:subClassOf gsog:Geologic_Time_Feature ;

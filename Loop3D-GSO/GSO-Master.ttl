@@ -1,10 +1,7 @@
+@base <http://loop3d.org/GSO/ontology/2020/1/master/ontology> .
+
 @prefix : <http://loop3d.org/GSO/ontology/2020/1/master/> .
-@prefix dct: <http://purl.org/dc/terms/> .
-@prefix gst: <http://loop3d.org/GSO/ontology/2020/1/geologictime/> .
-@prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix xml: <http://www.w3.org/XML/1998/namespace> .
-@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix gsmaster: <http://loop3d.org/GSO/ontology/2020/1/master/> .
 @prefix gscn: <http://loop3d.org/GSO/ontology/2020/1/geologiccontact/> .
 @prefix gsel: <http://loop3d.org/GSO/ontology/2020/1/element/> .
 @prefix gsen: <http://loop3d.org/GSO/ontology/2020/1/geologicsetting/> .
@@ -16,6 +13,7 @@
 @prefix gsgm: <http://loop3d.org/GSO/ontology/2020/1/granularmaterial/> .
 @prefix gsgq: <http://loop3d.org/GSO/ontology/2020/1/geologicquality/> .
 @prefix gsgu: <http://loop3d.org/GSO/ontology/2020/1/geologicunit/> .
+@prefix gsmin: <http://loop3d.org/GSO/ontology/2020/1/mineral/> .
 @prefix gsoc: <http://loop3d.org/GSO/ontology/2020/1/common/> .
 @prefix gsog: <http://loop3d.org/GSO/ontology/2020/1/geology/> .
 @prefix gsoh: <http://loop3d.org/GSO/ontology/2020/1/hydrology/> .
@@ -29,45 +27,53 @@
 @prefix gsrm: <http://loop3d.org/GSO/ontology/2020/1/rockmaterial/> .
 @prefix gsro: <http://loop3d.org/GSO/ontology/2020/1/rockobject/> .
 @prefix gsrs: <http://loop3d.org/GSO/ontology/2020/1/geologicreferencesystem/> .
+@prefix gst: <http://loop3d.org/GSO/ontology/2020/1/geologictime/> .
+@prefix gstime: <http://loop3d.org/GSO/ontology/2020/1/ischart/> .
+@prefix sks: <http://loop3d.org/GSO/2004/02/skos/annotation/> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+@prefix uom:  <http://loop3d.org/GSO/2021/2/qudt/voc/> .
+
+@prefix turtle: <http://www.semanticweb.org/owl/owlapi/turtle#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
-@prefix unit: <http://qudt.org/vocab/unit/> .
-@prefix gsmin: <http://loop3d.org/GSO/ontology/2020/1/mineral/> .
-@prefix gstime: <http://loop3d.org/GSO/ontology/2020/1/ischart/> .
-@prefix turtle: <http://www.semanticweb.org/owl/owlapi/turtle#> .
-@prefix gsmaster: <http://loop3d.org/GSO/ontology/2020/1/master/> .
-@base <http://loop3d.org/GSO/ontology/2020/1/master/ontology> .
 
-<http://loop3d.org/GSO/ontology/2020/1/master/ontology> rdf:type owl:Ontology ;
-                                                         owl:imports <http://loop3d.org/GSO/2004/02/skos/annotation/ontology> ,
-                                                                     <http://loop3d.org/GSO/2021/2/qudt/voc/ontology> ,
-                                                                     gsoc:ontology ,
-                                                                     gsel:ontology ,
-                                                                     gscn:ontology ,
-                                                                     gsev:ontology ,
-                                                                     gsfa:ontology ,
-                                                                     gsgf:ontology ,
-                                                                     gsfd:ontology ,
-                                                                     gsfo:ontology ,
-                                                                     gsol:ontology ,
-                                                                     gspr:ontology ,
-                                                                     gsgq:ontology ,
-                                                                     gsrs:ontology ,
-                                                                     gsrl:ontology ,
-                                                                     gsor:ontology ,
-                                                                     gsen:ontology ,
-                                                                     gsos:ontology ,
-                                                                     gst:ontology ,
-                                                                     gsgu:ontology ,
-                                                                     gsgm:ontology ,
-                                                                     gsoh:ontology ,
-                                                                     gstime:ontology ,
-                                                                     gsmin:ontology ,
-                                                                     gspd:ontology ,
-                                                                     gsoq:ontology ,
-                                                                     gsrm:ontology ,
-                                                                     gsro:ontology ;
-                                                         rdfs:comment "This is a shell to load all GSO files."@en ;
-                                                         rdfs:label "GSO Master"@en .
+gsmaster:ontology
+  rdf:type owl:Ontology ;
+  rdfs:comment "This is a shell to load all GSO files."@en ;
+  rdfs:label "GSO Master"@en ;
+  owl:imports gsoc:ontology ;
+  owl:imports gsel:ontology ;
+  owl:imports gscn:ontology ;
+  owl:imports gsev:ontology ;
+  owl:imports gsfa:ontology ;
+  owl:imports gsgf:ontology ;
+  owl:imports gsfd:ontology ;
+  owl:imports gsfo:ontology ;
+  owl:imports gsol:ontology ;
+  owl:imports gspr:ontology ;
+  owl:imports gsgq:ontology ;
+  owl:imports gsrs:ontology ;
+  owl:imports gsrl:ontology ;
+  owl:imports gsor:ontology ;
+  owl:imports gsen:ontology ;
+  owl:imports gsos:ontology ;
+  owl:imports gst:ontology ;
+  owl:imports gsgu:ontology ;
+  owl:imports gsog:ontology ;
+  owl:imports gsgm:ontology ;
+  owl:imports gsoh:ontology ;
+  owl:imports gstime:ontology ;
+  owl:imports gsmin:ontology ;
+  owl:imports gspd:ontology ;
+  owl:imports gsoq:ontology ;
+  owl:imports gsrm:ontology ;
+  owl:imports gsro:ontology ;
+  owl:imports sks:ontology ;
+  owl:imports uom:ontology ;
+.
 
-###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
+
