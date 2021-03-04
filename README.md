@@ -1,7 +1,9 @@
 # Geoscience Knowledge manager
 
 This repository contains public work items related to development of the ontology and knowledge base for the Loop 3D geology project.
+
 Ontology developed by Boyan M. Brodaric and Stephen M. Richard.
+
 License  [CC-BY](https://creativecommons.org/licenses/by/4.0/)
 
 
@@ -21,6 +23,7 @@ License  [CC-BY](https://creativecommons.org/licenses/by/4.0/)
 
 #### Sub directories:
 **Modules**  Contains 28 module ontologies implementing aspects of geoscience building on framework in Common and Geology.
+
 **Examples**  Contains a collection of instance documents (the .ttl files) demonstrating representation of various geologic scenarios.  This collection is likely to grow and change over time.
 #### other files 
  - **GeologyScenarioForTesting.pptx** (and .pdf) invented cross section that is used for various example documents
