@@ -12,7 +12,7 @@ Please add issues or comments on the ontology in the issue tracker.
 
 
 ## File:
- - **GSO_OFR_01Mar2021.docx**  Draft GSC Open File report describing the ontolgoy
+ - **GSO_OFR_01Mar2021.docx**  Draft GSC Open File report describing the ontology
  - **TimeIntervalRelation.pdf**  Diagram to help clarify Allen temporal relations between intervals and instants.
 
 
