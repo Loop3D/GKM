@@ -752,14 +752,6 @@
   rdfs:label "Material Object"@en ;
   rdfs:subClassOf :Material_Endurant ;
   rdfs:subClassOf [
-      rdf:type owl:Class ;
-      owl:complementOf [
-          rdf:type owl:Restriction ;
-          owl:onProperty :isConstituentOf ;
-          owl:someValuesFrom :Amount_Of_Matter ;
-        ] ;
-    ] ;
-  rdfs:subClassOf [
       rdf:type owl:Restriction ;
       owl:allValuesFrom :Amount_Of_Matter ;
       owl:onProperty :hasConstituent ;
@@ -769,24 +761,20 @@
       owl:onProperty :hasConstituent ;
       owl:someValuesFrom :Amount_Of_Matter ;
     ] ;
+  owl:disjointWith :Amount_Of_Matter ;
   owl:equivalentClass [
       rdf:type owl:Class ;
-      owl:intersectionOf [
-          rdf:type rdf:List ;
-          rdf:first [
-              rdf:type owl:Class ;
-              owl:complementOf :Amount_Of_Matter ;
-            ] ;
-          rdf:rest [
-              rdf:type rdf:List ;
-              rdf:first [
-                  rdf:type owl:Restriction ;
-                  owl:onProperty :hasConstituent ;
-                  owl:someValuesFrom :Amount_Of_Matter ;
-                ] ;
-              rdf:rest () ;
-            ] ;
-        ] ;
+      owl:intersectionOf (
+          :Material_Endurant
+          [
+            rdf:type owl:Class ;
+            owl:complementOf [
+                rdf:type owl:Restriction ;
+                owl:onProperty :hasQuality ;
+                owl:someValuesFrom :State_Of_Matter ;
+              ] ;
+          ]
+        ) ;
     ] ;
 .
 :Measure_Value
@@ -2380,8 +2368,9 @@
   rdfs:subClassOf :Physical_Quality ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
+      owl:onClass :Amount_Of_Matter ;
       owl:onProperty :isQualityOf ;
-      owl:someValuesFrom :Amount_Of_Matter ;
+      owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
     ] ;
 .
 :State_Of_Matter_Value
