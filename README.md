@@ -4,8 +4,6 @@ This repository contains public work items related to development of the ontolog
 
 Ontology developed by Boyan M. Brodaric and Stephen M. Richard.
 
-License  [CC-BY](https://creativecommons.org/licenses/by/4.0/)
-
 The wiki for this repository contains notes from team meetings. 
 
 Please add issues or comments on the ontology in the issue tracker.
