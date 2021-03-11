@@ -1,8 +1,6 @@
 # baseURI: http://loop3d.org/GSO/ontology/2020/1/geologicsetting/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/common/ontology
-# imports: http://loop3d.org/GSO/ontology/2020/1/geologicprocess/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/geology/ontology
-# imports: http://loop3d.org/GSO/ontology/2020/1/rockobject/ontology
 
 @prefix : <http://loop3d.org/GSO/ontology/2020/1/geologicsetting/> .
 @prefix dct: <http://purl.org/dc/terms/> .
@@ -15,6 +13,8 @@
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
 
 gsen:Abandoned_Channel_Setting
   rdf:type owl:Class ;
@@ -333,6 +333,11 @@ gsen:Continental_Shelf_Setting
       owl:someValuesFrom gsen:Marine_Setting ;
     ] ;
 .
+
+gsro:Crust 
+  rdf:type owl:Class .
+  
+ 
 gsen:Crustal_Setting
   rdf:type owl:Class ;
   rdfs:comment "The outermost layer or shell of the Earth, defined according to various criteria, including seismic velocity, density and composition, that part of the Earth above the Mohorovicic discontinuity, made up of the sial and the sima."@en ;
@@ -1304,6 +1309,10 @@ gsen:Swamp_Or_Marsh_Setting
   rdfs:label "swamp or marsh setting"@en ;
   rdfs:subClassOf gsen:Wetland_Setting ;
 .
+
+gspr:Tectonic_Process 
+  rdf:type owl:Class.
+  
 gsen:Tectonic_Setting
   rdf:type owl:Class ;
   rdfs:comment "Setting defined by relationships to tectonic plates on or in the Earth."@en ;
@@ -1466,12 +1475,42 @@ gsen:Wetland_Setting
 .
 gsen:ontology
   rdf:type owl:Ontology ;
-  rdfs:comment "This ontology contains terms and definitions based on the 2016 SKOS-RDF version of the IUGS Commission for Geoscience Information (CGI) Geoscience Terminology Working Group Event Environment vocabulary to describe the physical setting within which a GeologicEvent takes place. GeologicEnvironment is construed broadly to include physical settings on the Earth surface specified by climate, tectonics, physiography or geography, and settings in the Earth’s interior specified by pressure, temperature, chemical environment, or tectonics. Environments are places. Designed for use in the eventEnvironment property in GeoSciML GeologicEvent features."@en ;
-  rdfs:comment "dct:creator--  CGI Geoscience Terminology Working Group"@en ;
-  rdfs:comment "dct:date--  2016-06-15"@en ;
-  rdfs:label "Setting"@en ;
+  rdfs:comment "This ontology contains terms and definitions based on the 2016 SKOS-RDF version of the IUGS Commission for Geoscience Information (CGI) Geoscience Terminology Working Group Event Environment vocabulary to describe the physical setting within which a GeologicEvent takes place. GeologicEnvironment is construed broadly to include physical settings on the Earth surface specified by climate, tectonics, physiography or geography, and settings in the Earth’s interior specified by pressure, temperature, chemical environment, or tectonics. Environments are places. Originally implemented for use in the eventEnvironment property in GeoSciML GeologicEvent features, adapted here to align with this ontology."@en ;
+  dct:creator  "CGI Geoscience Terminology Working Group"@en ;
+  rdfs:label "Geoscience Ontology, Setting"@en ;
   owl:imports gsoc:ontology ;
-  owl:imports gspr:ontology ;
   owl:imports gsog:ontology ;
-  owl:imports gsro:ontology ;
+  skos:definition "Shared elements for geoscience ontology"@en ;
+  skos:prefLabel "Geoscience Ontology, Setting"@en ;
+  dct:created "2016-06-15"^^xsd:date ;
+  dct:creator gsoc:brodaric ;
+  dct:creator <https://orcid.org/0000-0001-6041-5302> ;
+  dct:license <https://creativecommons.org/licenses/by/4.0/legalcode> ;
+  dct:modified "2021-03-10"^^xsd:date ;
+  dct:publisher "Loop3D project;  https://loop3d.org/" ;
+  dct:publisher "Natural Resources Canada, Geological Survey of Canada" ;
+.
+dct:created
+  rdf:type owl:AnnotationProperty ;
+.
+dct:creator
+  rdf:type owl:AnnotationProperty ;
+.
+dct:description
+  rdf:type owl:AnnotationProperty ;
+.
+dct:license
+  rdf:type owl:AnnotationProperty ;
+.
+dct:modified
+  rdf:type owl:AnnotationProperty ;
+.
+dct:publisher
+  rdf:type owl:AnnotationProperty ;
+.
+<https://orcid.org/0000-0001-6041-5302>
+  rdf:type owl:NamedIndividual ;
+  rdf:type <https://schema.org/Person> ;
+  rdfs:comment "e-mail: mailto:smrTucson@gmail.com " ;
+  rdfs:label "Dr. Stephen M. Richard" ;
 .

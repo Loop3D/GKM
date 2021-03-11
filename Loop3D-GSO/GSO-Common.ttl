@@ -5,6 +5,7 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 :Abstract_Endurant
@@ -1369,11 +1370,6 @@
     ] ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
-      owl:onProperty :constantlySpecDependsOn ;
-      owl:someValuesFrom :Physical_Quality ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
       owl:onProperty :occupiesTimeIndirectly ;
       owl:someValuesFrom :Time_Region ;
     ] ;
@@ -1406,19 +1402,14 @@
     ] ;
   owl:equivalentClass [
       rdf:type owl:Class ;
-      owl:intersectionOf [
-          rdf:type rdf:List ;
-          rdf:first :Endurant ;
-          rdf:rest [
-              rdf:type rdf:List ;
-              rdf:first [
-                  rdf:type owl:Restriction ;
-                  owl:onProperty :constantlySpecDependsOn ;
-                  owl:someValuesFrom :Physical_Quality ;
-                ] ;
-              rdf:rest () ;
-            ] ;
-        ] ;
+      owl:intersectionOf (
+          :Endurant
+          [
+            rdf:type owl:Restriction ;
+            owl:allValuesFrom :Physical_Quality ;
+            owl:onProperty :hasQuality ;
+          ]
+        ) ;
     ] ;
 .
 :Physical_Feature
@@ -2882,6 +2873,12 @@
   rdfs:subPropertyOf :spatio-temporallyDependsOn ;
   rdfs:subPropertyOf :timeIntersects ;
 .
+:brodaric
+  rdf:type owl:NamedIndividual ;
+  rdf:type <https://schema.org/Person> ;
+  rdfs:comment "affiliation:  Natural Resources Canada, Geological Survey of Canada" ;
+  rdfs:label "Dr. Boyan M. Brodaric" ;
+.
 :constantlyGenDependsOn
   rdf:type owl:ObjectProperty ;
   rdf:type owl:TransitiveProperty ;
@@ -3579,9 +3576,17 @@
 .
 :ontology
   rdf:type owl:Ontology ;
-  rdfs:comment "Unary predicates are represented by classes, binary predicates by object properties"@en ;
-  rdfs:comment "ontology of shared objectProperties and high level classes used to define geologic features"@en ;
-  rdfs:label "Shared elements for geoscience ontology"@en ;
+  dct:created "2020-01-30"^^xsd:date ;
+  dct:creator :brodaric ;
+  dct:creator <https://orcid.org/0000-0001-6041-5302> ;
+  dct:license <https://creativecommons.org/licenses/by/4.0/legalcode> ;
+  dct:modified "2021-03-10"^^xsd:date ;
+  dct:publisher "Loop3D project;  https://loop3d.org/" ;
+  dct:publisher "Natural Resources Canada, Geological Survey of Canada" ;
+  rdfs:comment "Unary predicates are represented by classes, binary predicates by object properties.  This ontology defines shared objectProperties and high level classes used to define geologic features"@en ;
+  rdfs:label "Geoscience Ontology, Common"@en ;
+  skos:definition "Shared elements for geoscience ontology"@en ;
+  skos:prefLabel "Geoscience Ontology, Common"@en ;
 .
 :parthood
   rdf:type owl:ObjectProperty ;
@@ -3833,6 +3838,24 @@
   rdfs:comment "Event A is younger than event B if A has occurred after  B.  Same as Allen A After B.  (Burns, 1975; Mathematical Geology, Vol. 7, No. 4)"@en ;
   rdfs:subPropertyOf :isTemporallyRelatedTo ;
 .
+dct:created
+  rdf:type owl:AnnotationProperty ;
+.
+dct:creator
+  rdf:type owl:AnnotationProperty ;
+.
+dct:description
+  rdf:type owl:AnnotationProperty ;
+.
+dct:license
+  rdf:type owl:AnnotationProperty ;
+.
+dct:modified
+  rdf:type owl:AnnotationProperty ;
+.
+dct:publisher
+  rdf:type owl:AnnotationProperty ;
+.
 rdfs:comment
   rdfs:subPropertyOf :hasAnnotation ;
 .
@@ -3850,6 +3873,12 @@ xsd:date
 .
 owl:versionInfo
   rdfs:subPropertyOf :hasAnnotation ;
+.
+<https://orcid.org/0000-0001-6041-5302>
+  rdf:type owl:NamedIndividual ;
+  rdf:type <https://schema.org/Person> ;
+  rdfs:comment "e-mail: mailto:smrTucson@gmail.com " ;
+  rdfs:label "Dr. Stephen M. Richard" ;
 .
 [
   rdf:type owl:AllDisjointProperties ;

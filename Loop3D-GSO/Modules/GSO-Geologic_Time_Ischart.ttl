@@ -13,6 +13,7 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix unit: <http://qudt.org/vocab/unit/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
@@ -27,9 +28,9 @@ gstime:Aalenian2004
   gsoc:timeFinishedBy gstime:BaseBajocian2004 ;
   gsoc:timeStartedBy gstime:BaseMiddleJurassic2004 ;
   gsoc:timeStarts gstime:MiddleJurassic2004 ;
-  rdfs:comment "older bound -175.6 +|-2.0 Ma"@en ;
-  rdfs:comment "younger bound -171.6 +|-3.0 Ma"@en ;
-  rdfs:label "Aalenian Age"@en ;
+  rdfs:comment "older bound -175.6 +|-2.0 Ma" @en ;
+  rdfs:comment "younger bound -171.6 +|-3.0 Ma" @en ;
+  rdfs:label "Aalenian Age" @en ;
 .
 gstime:Aalenian2017
   rdf:type gst:Age ;
@@ -12073,7 +12074,7 @@ gstime:isc2017-02
 gstime:isc2018-07
   rdf:type gsog:Geologic_Time_Scale ;
   rdfs:comment "RDF/OWL representation of the 2018-07 edition of the International Chronostratigraphic Chart from the International Commission on Stratigraphy. Encoded using OWL implementation from GSO. Adapted from Cox&Richard OWL GeologicTime ontology"@en ;
-  rdfs:comment "dc:source  Cohen, K.M., Finney, S.C., Gibbard, P.L. & Fan, J.-X. (2013; updated) The ICS  International  Chronostratigraphic Chart. Episodes 36: 199-204."@en ;
+  rdfs:comment "dc:source  Cohen, K.M., Finney, S.C., Gibbard, P.L. & Fan, J.-X. (2013; updated) The ICS  International  Chronostratigraphic Chart. Episodes 36: 199-204." @en ;
   rdfs:comment "dc:source  International  Chronostratigraphic Chart 2018"@en ;
   rdfs:label "International Chronostratigraphic Chart (2018-07)"@en ;
 .
@@ -12085,15 +12086,48 @@ gstime:isc2018-08
 .
 gstime:isc2020-01
   rdf:type gsog:Geologic_Time_Scale ;
-  rdfs:comment "RDF/OWL representation of the 2020-01 edition of the International Chronostratigraphic Chart from the International Commission on Stratigraphy. Encoded using OWL implementation from GSO. Adapted from Cox&Richard OWL GeologicTime ontology"@en ;
+  rdfs:comment "RDF/OWL representation of the 2020-01 edition of the International Chronostratigraphic Chart from the International Commission on Stratigraphy. Encoded using OWL implementation from GSO. Adapted from Cox&Richard OWL GeologicTime ontology" @en ;
   rdfs:comment "dc:source  International  Chronostratigraphic Chart 2020"@en ;
-  rdfs:label "International Chronostratigraphic Chart (2020)"@en ;
+  rdfs:label "International Chronostratigraphic Chart (2020)" @en ;
 .
 gstime:ontology
   rdf:type owl:Ontology ;
-  rdfs:comment "This ontology defines time intervals using the timescale implementation in the LOOP3D geology.ttl module. Adapted for Loop3D geoscience ontology by SMR 2019-11-15"@en ;
-  rdfs:label "Geologic Timescale Elements from the International Chronostratigraphic Chart 2017"@en ;
+  rdfs:comment "This ontology defines time intervals for specific time scale instance, ics 2020, ics2017 and ics2004, using the timescale implementation in the LOOP3D geology.ttl module. Adapted for Loop3D geoscience ontology by SMR 2019-11-15" @en ;
+  rdfs:label "Geologic Timescale Elements For  International Chronostratigraphic Chart 2004,2017, 2020" @en ;
   owl:imports <http://loop3d.org/GSO/2021/2/qudt/voc/ontology> ;
   owl:imports gst:ontology ;
   owl:imports gsog:ontology ;
+    skos:definition "Shared elements for geoscience ontology"@en ;
+  skos:prefLabel "Geoscience Ontology, Geologic Timescale Elements"@en ;
+  dct:created "2019-11-15"^^xsd:date ;
+  dct:creator gsoc:brodaric ;
+  dct:creator <https://orcid.org/0000-0001-6041-5302> ;
+  dct:license <https://creativecommons.org/licenses/by/4.0/legalcode> ;
+  dct:modified "2021-03-10"^^xsd:date ;
+  dct:publisher "Loop3D project;  https://loop3d.org/" ;
+  dct:publisher "Natural Resources Canada, Geological Survey of Canada" ;
+.
+dct:created
+  rdf:type owl:AnnotationProperty ;
+.
+dct:creator
+  rdf:type owl:AnnotationProperty ;
+.
+dct:description
+  rdf:type owl:AnnotationProperty ;
+.
+dct:license
+  rdf:type owl:AnnotationProperty ;
+.
+dct:modified
+  rdf:type owl:AnnotationProperty ;
+.
+dct:publisher
+  rdf:type owl:AnnotationProperty ;
+.
+<https://orcid.org/0000-0001-6041-5302>
+  rdf:type owl:NamedIndividual ;
+  rdf:type <https://schema.org/Person> ;
+  rdfs:comment "e-mail: mailto:smrTucson@gmail.com " ;
+  rdfs:label "Dr. Stephen M. Richard" ;
 .

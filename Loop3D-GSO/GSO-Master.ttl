@@ -1,7 +1,36 @@
-@base <http://loop3d.org/GSO/ontology/2020/1/master/ontology> .
+# baseURI: http://loop3d.org/GSO/ontology/2020/1/master/ontology
+# imports: http://loop3d.org/GSO/2004/02/skos/annotation/ontology
+# imports: http://loop3d.org/GSO/2021/2/qudt/voc/ontology
+# imports: http://loop3d.org/GSO/ontology/2020/1/common/ontology
+# imports: http://loop3d.org/GSO/ontology/2020/1/element/ontology
+# imports: http://loop3d.org/GSO/ontology/2020/1/geologiccontact/ontology
+# imports: http://loop3d.org/GSO/ontology/2020/1/geologicevent/ontology
+# imports: http://loop3d.org/GSO/ontology/2020/1/geologicfault/ontology
+# imports: http://loop3d.org/GSO/ontology/2020/1/geologicfeature/ontology
+# imports: http://loop3d.org/GSO/ontology/2020/1/geologicfold/ontology
+# imports: http://loop3d.org/GSO/ontology/2020/1/geologicfoliation/ontology
+# imports: http://loop3d.org/GSO/ontology/2020/1/geologiclineation/ontology
+# imports: http://loop3d.org/GSO/ontology/2020/1/geologicprocess/ontology
+# imports: http://loop3d.org/GSO/ontology/2020/1/geologicquality/ontology
+# imports: http://loop3d.org/GSO/ontology/2020/1/geologicreferencesystem/ontology
+# imports: http://loop3d.org/GSO/ontology/2020/1/geologicrelation/ontology
+# imports: http://loop3d.org/GSO/ontology/2020/1/geologicrole/ontology
+# imports: http://loop3d.org/GSO/ontology/2020/1/geologicsetting/ontology
+# imports: http://loop3d.org/GSO/ontology/2020/1/geologicstructure/ontology
+# imports: http://loop3d.org/GSO/ontology/2020/1/geologictime/ontology
+# imports: http://loop3d.org/GSO/ontology/2020/1/geologicunit/ontology
+# imports: http://loop3d.org/GSO/ontology/2020/1/geology/ontology
+# imports: http://loop3d.org/GSO/ontology/2020/1/granularmaterial/ontology
+# imports: http://loop3d.org/GSO/ontology/2020/1/hydrology/ontology
+# imports: http://loop3d.org/GSO/ontology/2020/1/ischart/ontology
+# imports: http://loop3d.org/GSO/ontology/2020/1/mineral/ontology
+# imports: http://loop3d.org/GSO/ontology/2020/1/perdurant/ontology
+# imports: http://loop3d.org/GSO/ontology/2020/1/quality/ontology
+# imports: http://loop3d.org/GSO/ontology/2020/1/rockmaterial/ontology
+# imports: http://loop3d.org/GSO/ontology/2020/1/rockobject/ontology
 
 @prefix : <http://loop3d.org/GSO/ontology/2020/1/master/> .
-@prefix gsmaster: <http://loop3d.org/GSO/ontology/2020/1/master/> .
+@prefix dct: <http://purl.org/dc/terms/> .
 @prefix gscn: <http://loop3d.org/GSO/ontology/2020/1/geologiccontact/> .
 @prefix gsel: <http://loop3d.org/GSO/ontology/2020/1/element/> .
 @prefix gsen: <http://loop3d.org/GSO/ontology/2020/1/geologicsetting/> .
@@ -13,6 +42,7 @@
 @prefix gsgm: <http://loop3d.org/GSO/ontology/2020/1/granularmaterial/> .
 @prefix gsgq: <http://loop3d.org/GSO/ontology/2020/1/geologicquality/> .
 @prefix gsgu: <http://loop3d.org/GSO/ontology/2020/1/geologicunit/> .
+@prefix gsmaster: <http://loop3d.org/GSO/ontology/2020/1/master/> .
 @prefix gsmin: <http://loop3d.org/GSO/ontology/2020/1/mineral/> .
 @prefix gsoc: <http://loop3d.org/GSO/ontology/2020/1/common/> .
 @prefix gsog: <http://loop3d.org/GSO/ontology/2020/1/geology/> .
@@ -29,22 +59,31 @@
 @prefix gsrs: <http://loop3d.org/GSO/ontology/2020/1/geologicreferencesystem/> .
 @prefix gst: <http://loop3d.org/GSO/ontology/2020/1/geologictime/> .
 @prefix gstime: <http://loop3d.org/GSO/ontology/2020/1/ischart/> .
-@prefix sks: <http://loop3d.org/GSO/2004/02/skos/annotation/> .
-@prefix unit: <http://qudt.org/vocab/unit/> .
-@prefix uom:  <http://loop3d.org/GSO/2021/2/qudt/voc/> .
-
-@prefix turtle: <http://www.semanticweb.org/owl/owlapi/turtle#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sdo: <https://schema.org/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sks: <http://loop3d.org/GSO/2004/02/skos/annotation/> .
+@prefix turtle: <http://www.semanticweb.org/owl/owlapi/turtle#> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+@prefix uom: <http://loop3d.org/GSO/2021/2/qudt/voc/> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 
 gsmaster:ontology
   rdf:type owl:Ontology ;
+  dct:created "2020-01-30"^^xsd:date ;
+  dct:creator gsoc:brodaric ;
+  dct:creator <https://orcid.org/0000-0001-6041-5302> ;
+  dct:license <https://creativecommons.org/licenses/by/4.0/legalcode> ;
+  dct:modified "2021-03-10"^^xsd:date ;
+  dct:publisher "Loop3D project;  https://loop3d.org/" ;
+  dct:publisher "Natural Resources Canada, Geological Survey of Canada" ;
   rdfs:comment "This is a shell to load all GSO files."@en ;
-  rdfs:label "GSO Master"@en ;
+  rdfs:label "Geoscience Ontology, Master"@en ;
+  owl:imports sks:ontology ;
+  owl:imports uom:ontology ;
   owl:imports gsoc:ontology ;
   owl:imports gsel:ontology ;
   owl:imports gscn:ontology ;
@@ -72,8 +111,30 @@ gsmaster:ontology
   owl:imports gsoq:ontology ;
   owl:imports gsrm:ontology ;
   owl:imports gsro:ontology ;
-  owl:imports sks:ontology ;
-  owl:imports uom:ontology ;
+  skos:definition "Ontology that imports all components for a geoscience knowledge representation model"@en ;
+  skos:prefLabel "Geoscience Ontology, Master"@en ;
 .
-
-
+dct:created
+  rdf:type owl:AnnotationProperty ;
+.
+dct:creator
+  rdf:type owl:AnnotationProperty ;
+.
+dct:description
+  rdf:type owl:AnnotationProperty ;
+.
+dct:license
+  rdf:type owl:AnnotationProperty ;
+.
+dct:modified
+  rdf:type owl:AnnotationProperty ;
+.
+dct:publisher
+  rdf:type owl:AnnotationProperty ;
+.
+<https://orcid.org/0000-0001-6041-5302>
+  rdf:type owl:NamedIndividual ;
+  rdf:type sdo:Person ;
+  rdfs:comment "e-mail: mailto:smrTucson@gmail.com " ;
+  rdfs:label "Dr. Stephen M. Richard" ;
+.

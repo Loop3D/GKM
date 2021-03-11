@@ -14,11 +14,11 @@
 @prefix gsgq: <http://loop3d.org/GSO/ontology/2020/1/geologicquality/> .
 @prefix gspr: <http://loop3d.org/GSO/ontology/2020/1/geologicprocess/> .
 @prefix gsos: <http://loop3d.org/GSO/ontology/2020/1/geologicstructure/> .
-
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix dct: <http://purl.org/dc/terms/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 gsfa:Detachment_Fault
@@ -49,6 +49,11 @@ gsfa:Dip_Slip
   rdfs:label "dip slip"@en ;
   rdfs:subClassOf gsfa:Fault_Slip ;
 .
+
+gspr:Ductile_Flow
+#defined in a different ontology
+  rdf:type owl:Class .
+  
 gsfa:Ductile_Shear_Zone
   rdf:type owl:Class ;
   rdfs:comment "a broadly planar zone of shear displacement within which deformation has occurred without loss of material continuity"@en ;
@@ -77,6 +82,11 @@ gsfa:Extraction_Fault
   rdfs:label "extraction fault"@en ;
   rdfs:subClassOf gsfa:Fault ;
 .
+
+gsos:Fracture
+  rdfs:subClassOf gsog:Geologic_Structure ;
+  rdf:type owl:Class.
+
 gsfa:Fault
   rdf:type owl:Class ;
   rdfs:comment "A discrete surface, or zone of discrete surfaces, with some thickness, separating two rock masses across which one mass has slid past the other and characterized by brittle deformation."@en ;
@@ -434,18 +444,47 @@ gsfa:normal_sinistral
 .
 gsfa:ontology
   rdf:type owl:Ontology ;
-  rdfs:comment "This file contains the 2016 SKOS-RDF version of the CGI Fault Type, Fault Movement Sense and Fault Movement Type vocabulary. Compilation and review in MS Excel spreadsheet, converted to MS Excel for SKOS generation using SKOS_for_GA_from_XLS_2016.03.xslt"@en ;
-  rdfs:comment "This ontology includes extensions for describing faults in more detail. (ie, a summary of movement type and orientation) as defined by the IUGS Commission for Geoscience Information (CGI) Geoscience Terminology Working Group. Although the terms in this vocabulary are in common usage with definitions in standard texts or glossaries like Neuendorf et al. (2005), the definitions here attempt to establish unambiguous criteria to distinguish the categories, and are thus listed with this vocabulary as the source."@en ;
-  rdfs:comment "dct:creator--  CGI Geoscience Terminology Working Group; OWL conversion by Stephen Richard for Loop3D project"@en ;
-  rdfs:comment "dct:date--  2016-10-19"@en ;
-  rdfs:comment "dct:modified-- 2020-01-29"@en ;
-  rdfs:label "Fault"@en ;
+  rdfs:comment "This ontology includes extensions for describing faults in more detail. (ie, a summary of movement type and orientation) as defined by the IUGS Commission for Geoscience Information (CGI) Geoscience Terminology Working Group. Although the terms in this vocabulary are in common usage with definitions in standard texts or glossaries like Neuendorf et al. (2005), the definitions here attempt to establish unambiguous criteria to distinguish the categories, and are thus listed with this vocabulary as the source. Adapted from CGI vocabulary for this ontology"@en ;
+  dct:creator "CGI Geoscience Terminology Working Group; OWL conversion by Stephen Richard for Loop3D project"@en ;
+  dct:modified "2020-01-29"^^xsd:date ;
+  rdfs:label "Geoscience Ontology, Faults"@en ;
   owl:imports gsoc:ontology ;
-  owl:imports gspr:ontology ;
   owl:imports gsgq:ontology ;
   owl:imports gsog:ontology ;
   owl:imports gsoq:ontology ;
-  owl:imports gsos:ontology ;
+  skos:definition "Shared elements for geoscience ontology"@en ;
+  skos:prefLabel "Geoscience Ontology, Faults"@en ;
+  dct:created "2016-10-19"^^xsd:date ;
+  dct:creator gsoc:brodaric ;
+  dct:creator <https://orcid.org/0000-0001-6041-5302> ;
+  dct:license <https://creativecommons.org/licenses/by/4.0/legalcode> ;
+  dct:modified "2021-03-10"^^xsd:date ;
+  dct:publisher "Loop3D project;  https://loop3d.org/" ;
+  dct:publisher "Natural Resources Canada, Geological Survey of Canada" ;
+.
+dct:created
+  rdf:type owl:AnnotationProperty ;
+.
+dct:creator
+  rdf:type owl:AnnotationProperty ;
+.
+dct:description
+  rdf:type owl:AnnotationProperty ;
+.
+dct:license
+  rdf:type owl:AnnotationProperty ;
+.
+dct:modified
+  rdf:type owl:AnnotationProperty ;
+.
+dct:publisher
+  rdf:type owl:AnnotationProperty ;
+.
+<https://orcid.org/0000-0001-6041-5302>
+  rdf:type owl:NamedIndividual ;
+  rdf:type <https://schema.org/Person> ;
+  rdfs:comment "e-mail: mailto:smrTucson@gmail.com " ;
+  rdfs:label "Dr. Stephen M. Richard" ;
 .
 gsfa:reverse
   rdf:type owl:Class ;

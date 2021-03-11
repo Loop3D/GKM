@@ -3,6 +3,7 @@
 # imports: http://loop3d.org/GSO/ontology/2020/1/geology/ontology
 
 @prefix : <http://loop3d.org/GSO/ontology/2020/1/geologicfeature/> .
+@prefix gscn: <http://loop3d.org/GSO/ontology/2020/1/geologiccontact/> .
 @prefix gsgf: <http://loop3d.org/GSO/ontology/2020/1/geologicfeature/> .
 @prefix gsoc: <http://loop3d.org/GSO/ontology/2020/1/common/> .
 @prefix gsog: <http://loop3d.org/GSO/ontology/2020/1/geology/> .
@@ -10,8 +11,22 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# defined in other ontology
+gscn:Contact  
+  rdf:type owl:Class.
+
+gsgf:Boundary_Stratotype
+  rdf:type owl:Class ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:isExampleOf ;
+      owl:someValuesFrom gscn:Contact ;
+    ] ;
+.
 
 gsgf:Amygdule
   rdf:type owl:Class ;
@@ -28,7 +43,7 @@ gsgf:Amygdule
 gsgf:Bed_Lithosome
   rdf:type owl:Class ;
   rdfs:comment "Lithosome in lithostratigraphic unit that occurs as individual beds interleaved with other constituents on the outcrop (m) scale or larger."@en ;
-  dct:source  "CGI rockbodypart vocabulary 2016-11-21 "@en ;
+  dct:source  "CGI rockbodypart vocabulary 2016-11-21" @en ;
   rdfs:label "bed lithosome"@en ;
   rdfs:subClassOf gsgf:Lithosome ;
 .
@@ -185,7 +200,7 @@ gsgf:Stratigraphic_Section
 gsgf:Stratotype
   rdf:type owl:Class ;
   rdfs:comment "a specific interval or point in a specific sequence of rock stata that constitues the reference standard  defining a stratigrphic unit or boundary"@en ;
-  rdfs:comment "rdfs:source -- based on Salvador 1994 (International Stratigraphic Guide: Int. Union Geo. Sciences and Geol. Soc. Am.), p.26, as repored in Neuendorf et al., 2005."@en ;
+  dct:source "based on Salvador 1994 (International Stratigraphic Guide: Int. Union Geo. Sciences and Geol. Soc. Am.), p.26, as repored in Neuendorf et al., 2005."@en ;
   rdfs:label "Stratotype"@en ;
   rdfs:subClassOf gsoc:Example ;
   rdfs:subClassOf [
@@ -196,7 +211,7 @@ gsgf:Stratotype
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
       owl:onProperty gsoc:isExampleOf ;
-      owl:someValuesFrom <http://loop3d.org/GSO/ontology/2020/1/geologicunit/Stratigraphic_Unit> ;
+      owl:someValuesFrom gsgu:Stratigraphic_Unit ;
     ] ;
 .
 gsgf:Vein_Dike_Lithosome
@@ -232,9 +247,42 @@ gsgf:Vug
 .
 gsgf:ontology
   rdf:type owl:Ontology ;
-  rdfs:comment "Geological features that are not structures"@en ;
-  rdfs:label "Geologic Feature"@en ;
+  rdfs:comment "Ontology to define geological features that are not structures"@en ;
+  rdfs:label "Geoscience Ontology, Geologic Features"@en ;
   owl:imports gsoc:ontology ;
   owl:imports gsog:ontology ;
+  skos:definition "Ontology to define geological features that are not structures"@en ;
+  skos:prefLabel "Geoscience Ontology, Geologic Features"@en ;
+  dct:created "2020-01-30"^^xsd:date ;
+  dct:creator gsoc:brodaric ;
+  dct:creator <https://orcid.org/0000-0001-6041-5302> ;
+  dct:license <https://creativecommons.org/licenses/by/4.0/legalcode> ;
+  dct:modified "2021-03-10"^^xsd:date ;
+  dct:publisher "Loop3D project;  https://loop3d.org/" ;
+  dct:publisher "Natural Resources Canada, Geological Survey of Canada" ;
+.
+dct:created
+  rdf:type owl:AnnotationProperty ;
+.
+dct:creator
+  rdf:type owl:AnnotationProperty ;
+.
+dct:description
+  rdf:type owl:AnnotationProperty ;
+.
+dct:license
+  rdf:type owl:AnnotationProperty ;
+.
+dct:modified
+  rdf:type owl:AnnotationProperty ;
+.
+dct:publisher
+  rdf:type owl:AnnotationProperty ;
+.
+<https://orcid.org/0000-0001-6041-5302>
+  rdf:type owl:NamedIndividual ;
+  rdf:type <https://schema.org/Person> ;
+  rdfs:comment "e-mail: mailto:smrTucson@gmail.com " ;
+  rdfs:label "Dr. Stephen M. Richard" ;
 .
 
