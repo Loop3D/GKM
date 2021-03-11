@@ -6,11 +6,12 @@
 @prefix gisc: <http://resource.geosciml.org/classifier/ics/ischart/> .
 @prefix gsgu: <http://loop3d.org/GSO/ontology/2020/1/geologicunit/> .
 @prefix gsoc: <http://loop3d.org/GSO/ontology/2020/1/common/> .
+@prefix gsog: <http://loop3d.org/GSO/ontology/2020/1/geology/> .
 @prefix gspd: <http://loop3d.org/GSO/ontology/2020/1/perdurant/> .
 @prefix gspr: <http://loop3d.org/GSO/ontology/2020/1/geologicprocess/> .
 @prefix lunit: <http://loop3d.org/GSO/ontology/2020/1/uom/> .
 @prefix pida: <http://pid.geoscience.gov.au/feature/asc/gsml/geologicalunit/> .
-@prefix gstime: <http://loop3d.org/GSO/ontology/2020/1/ischart/>
+@prefix gstime: <http://loop3d.org/GSO/ontology/2020/1/ischart/> .
 @prefix qudt: <http://qudt.org/schema/qudt/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix unit: <http://qudt.org/vocab/unit/> .
@@ -42,8 +43,8 @@ pida:10505 a gsgu:Group ;
 			# could put the more precise time instant numeric values here, but if the actual genetic event type is known, its more informative to use the isParticipantIn/Geologic_Event, especially for metamorphic rocks! 
 		];
     gsoc:isParticipantIn [ 
-		a gsgf:Geologic_Event ;
-		gsoc:hasConstituent [ a gspr:Eruption ] ;
+		a gsog:Geologic_Event ;
+		gsoc:hasConstituent [ a gspr:Eruption_Process ] ;
 # Event is a perdurant; perdurant can directly occupy a Time_Region
 # specify age of unit by identifying the kind of event is a more geologically precise approach
 		gsoc:occupiesTimeDirectly [
@@ -88,8 +89,8 @@ pida:10056 a gsgu:Formation ;
 		];
 		
     gsoc:isParticipantIn [ 
-		a gsgf:Geologic_Event ;
-		gsoc:hasConstituent [ a gspr:Eruption ] ;
+		a gsog:Geologic_Event ;
+		gsoc:hasConstituent [ a gspr:Eruption_Process ] ;
 # See notes on Liverpool Range Volcanics
 		gsoc:occupiesTimeDirectly [
 			a gsoc:Time_Interval;

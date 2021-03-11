@@ -3,29 +3,30 @@
 
 @prefix : <http://loop3d.org/GSO/ontology/2020/1/ex-plutontojiza#> .
 @prefix dct: <http://purl.org/dc/terms/> .
-@prefix cnsd: <http://loop3d.org/GSO/ontology/2020/1/lithology/consolidationdegree/> .
-@prefix gscn: <http://loop3d.org/GSO/ontology/2020/1/geologicstructure/contact/> .
+@prefix gscn: <http://loop3d.org/GSO/ontology/2020/1/geologiccontact/> .
 @prefix gsel: <http://loop3d.org/GSO/ontology/2020/1/element/> .
-@prefix gsen: <http://loop3d.org/GSO/ontology/2020/1/eventenvironment/> .
+@prefix gsen: <http://loop3d.org/GSO/ontology/2020/1/geologicsetting/> .
 @prefix gsgf: <http://loop3d.org/GSO/ontology/2020/1/geologicfeature/> .
-@prefix gsgm: <http://loop3d.org/GSO/ontology/2020/1/lithology/granularmaterial/> .
+@prefix gsgm: <http://loop3d.org/GSO/ontology/2020/1/granularmaterial/> .
 @prefix gsgq: <http://loop3d.org/GSO/ontology/2020/1/geologicquality/> .
 @prefix gsgu: <http://loop3d.org/GSO/ontology/2020/1/geologicunit/> .
 @prefix gsmg: <http://loop3d.org/GSO/ontology/2020/1/metamorphicgrade/> .
 @prefix gsmin: <http://loop3d.org/GSO/ontology/2020/1/mineral/> .
 @prefix gsoc: <http://loop3d.org/GSO/ontology/2020/1/common/> .
-@prefix gsog: <http://loop3d.org/GSO/ontology/2020/1/geologicfeature/> .
+@prefix gsog: <http://loop3d.org/GSO/ontology/2020/1/geology/> .
 @prefix gsoq: <http://loop3d.org/GSO/ontology/2020/1/quality/> .
 @prefix gsor: <http://loop3d.org/GSO/ontology/2020/1/geologicrole/> .
+@prefix gsos: <http://loop3d.org/GSO/ontology/2020/1/geologicstructure/> .
 @prefix gspd: <http://loop3d.org/GSO/ontology/2020/1/perdurant/> .
 @prefix gspr: <http://loop3d.org/GSO/ontology/2020/1/geologicprocess/> .
 @prefix gsps: <http://loop3d.org/GSO/ontology/2020/1/lithology/particleroundness/> .
-@prefix gsrm: <http://loop3d.org/GSO/ontology/2020/1/lithology/> .
+@prefix gsrl: <http://loop3d.org/GSO/ontology/2020/1/geologicrelation/> .
+@prefix gsrm: <http://loop3d.org/GSO/ontology/2020/1/rockmaterial/> .
 @prefix gstime: <http://loop3d.org/GSO/ontology/2020/1/ischart/> .
-
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix toj: <http://loop3d.org/GSO/ontology/2020/1/ex-plutontojiza#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix unit: <http://qudt.org/vocab/unit/> .
@@ -134,8 +135,8 @@ toj:latojizaCambrianContact
   a owl:NamedIndividual ;
   gsoc:hostedBy toj:cambrianBoundaryLaTojiza_2 ;
   gsoc:hostedBy toj:latojizaBoundaryCambrian_2 ;
-  gsog:hasOlderHost toj:cambrianformation ;
-  gsog:hasYoungerHost toj:latojizapluton ;
+  gsoc:hasOlderHost toj:cambrianformation ;
+  gsoc:hasYoungerHost toj:latojizapluton ;
   rdfs:comment "Contact between Cambrian Formation and La Tojiza Pluton. Contact has 4 segments"@en ;
 .
 toj:latojizaOrdovicianContact
@@ -143,8 +144,8 @@ toj:latojizaOrdovicianContact
   a owl:NamedIndividual ;
   gsoc:hostedBy toj:latojizaBoundaryOrdovician_3 ;
   gsoc:hostedBy toj:ordovicianBoundaryLaTojiza_3 ;
-  gsog:hasOlderHost toj:ordovicianformation ;
-  gsog:hasYoungerHost toj:latojizapluton ;
+  gsoc:hasOlderHost toj:ordovicianformation ;
+  gsoc:hasYoungerHost toj:latojizapluton ;
   rdfs:comment "Contact between Ordovician Formation and La Tojiza Pluton. Contact has one segment"@en ;
 .
 toj:latojizaVillalbaContact
@@ -152,8 +153,8 @@ toj:latojizaVillalbaContact
   a owl:NamedIndividual ;
   gsoc:hostedBy toj:latojizaBoundaryVillalba_1 ;
   gsoc:hostedBy toj:villalbaBoundaryLaTojiza_1 ;
-  gsog:hasOlderHost toj:villalbaseries ;
-  gsog:hasYoungerHost toj:latojizapluton ;
+  gsoc:hasOlderHost toj:villalbaseries ;
+  gsoc:hasYoungerHost toj:latojizapluton ;
   rdfs:comment "Contact between Villalba Series and La Tojiza Pluton. Contact has 2 segments"@en ;
 .
 toj:latojizacrystallization
@@ -165,7 +166,7 @@ toj:latojizacrystallization
       dct:source  "DOI: 10.1144/jgs.157.3.565" ;
     ] ;
   gsoc:hasQuality [
-      a gsoc:Simple_Uncertainty ;
+      a gsoc:Uncertainty ;
       gsoc:hasDataValue "2"^^xsd:decimal ;
       gsoc:hasUOM [
           a unit:MegaYR ;
@@ -251,9 +252,9 @@ toj:latojizafinegrained
               a gsmin:quartz ;
             ] ;
           gsoc:hasQuality [
-              a gsrm:Grain_Roundness ;
+              a gsgm:Grain_Roundness ;
               gsoc:hasValue [
-                  a gsps:rounded ;
+                  a gsgm:rounded ;
                 ] ;
             ] ;
           gsoc:hasRole [
@@ -292,7 +293,7 @@ toj:latojizafinegrained
             ] ;
         ] ;
       gsoc:hasQuality [
-          a gsrm:Particle_Sorting ;
+          a gsgm:Particle_Sorting ;
           gsoc:hasDataValue "Equigranular" ;
           rdfs:label "equigranular texture"@en ;
         ] ;
@@ -373,9 +374,9 @@ toj:latojizamain
               a gsmin:quartz ;
             ] ;
           gsoc:hasQuality [
-              a gsrm:Grain_Roundness ;
+              a gsgm:Grain_Roundness ;
               gsoc:hasValue [
-                  a gsps:rounded ;
+                  a gsgm:rounded ;
                 ] ;
             ] ;
           gsoc:hasRole [
@@ -392,16 +393,16 @@ toj:latojizamain
             ] ;
         ] ;
       gsoc:hasQuality [
-          a gsrm:Grain_Roundness ;
+          a gsgm:Grain_Roundness ;
           gsoc:hasValue [
-              a gsps:anhedral ;
+              a gsgm:anhedral ;
             ] ;
           rdfs:label "anhedral grains"@en ;
         ] ;
       gsoc:hasQuality [
-          a gsrm:Grain_Roundness ;
+          a gsgm:Grain_Roundness ;
           gsoc:hasValue [
-              a gsps:subhedral ;
+              a gsgm:subhedral ;
             ] ;
           rdfs:label "subhedral grains"@en ;
         ] ;
@@ -429,7 +430,7 @@ toj:latojizamain
           rdfs:label "Medium to coarse-grained" ;
         ] ;
       gsoc:hasQuality [
-          a gsrm:Particle_Sorting ;
+          a gsgm:Particle_Sorting ;
           gsoc:hasDataValue "Equigranular" ;
           rdfs:label "equigranular texture"@en ;
         ] ;
@@ -439,7 +440,7 @@ toj:latojizamain
 toj:latojizapendants
   a gsgu:Lithologic_Unit ;
   gsoc:hasConstituent [ a gsrm:Schist ] ;
-  gsoc:hasRole [ a gsog:Pendant ] ;
+  gsoc:hasRole [ a gsor:Pendant ] ;
   rdfs:comment "Large xenoliths and roof pendants of country rocks occur mainly in the central part of the intrusion" ;
 .
 toj:latojizapluton
@@ -453,11 +454,11 @@ toj:latojizapluton
   gsoc:hasPart toj:latojizapendants ;
   gsoc:hasPart toj:latojizaporphyritic ;
   gsoc:hosts [
-      a gsog:Crystallographic_Preferred_Orientation ;
+      a gsos:Crystallographic_Preferred_Orientation_Fabric ;
       gsoc:hasQuality [
-          a gsoc:Intensity ;
+          a gsoq:Intensity ;
           gsoc:hasValue [
-              a gsoc:Weak_Intensity ;
+              a gsoq:Weak_Intensity ;
             ] ;
         ] ;
       rdfs:comment "considered to have developed exclusively in the magmatic state"@en ;
@@ -474,10 +475,10 @@ toj:latojizapluton
           gsoc:hasValue toj:latojizacrystallization ;
         ] ;
     ] ;
-  gsog:intrudes toj:cambrianformation ;
-  gsog:intrudes toj:ordovicianformation ;
-  gsog:intrudes toj:sancipriangranitoid ;
-  gsog:intrudes toj:villalbaseries ;
+  gsrl:intrudes toj:cambrianformation ;
+  gsrl:intrudes toj:ordovicianformation ;
+  gsrl:intrudes toj:sancipriangranitoid ;
+  gsrl:intrudes toj:villalbaseries ;
   rdfs:comment "medium- to coarse-grained granite, consists of quartz, K-feldspar, plagioclase and biotite. Apatite, ilmenite, zircon, muscovite and, locally, garnet are accessory minerals. The amount of muscovite and garnet increases, and grain size decreases, towards the eastern and southern pluton borders.  but most samples are equigranular. Both textural types contain rounded grains of quartz visible to the naked eye, pointing to the lack of solid-state deformation. Large xenoliths and roofpendants of country rocks occur mainly in the central part of the intrusion and enclaves of basic igneous rocks in its eastern part."@en ;
   rdfs:label "La Tojiza Pluton"@en ;
 .
@@ -627,9 +628,9 @@ toj:latojizaporphyritic
               a gsmin:quartz ;
             ] ;
           gsoc:hasQuality [
-              a gsrm:Grain_Roundness ;
+              a gsgm:Grain_Roundness ;
               gsoc:hasValue [
-                  a gsps:rounded ;
+                  a gsgm:rounded ;
                 ] ;
             ] ;
           gsoc:hasQuality [
@@ -700,7 +701,7 @@ toj:latojizaporphyritic
           rdfs:label "K-feldspar phenocrysts" ;
         ] ;
       gsoc:hasQuality [
-          a gsrm:Particle_Sorting ;
+          a gsgm:Particle_Sorting ;
           gsoc:hasDataValue "Porphyritic" ;
           rdfs:label "porphyritic texture"@en ;
         ] ;
@@ -844,8 +845,8 @@ toj:villalbaseries
           a gsoc:Time_Interval_Location ;
           gsoc:hasValue [
               a gsoc:Temporal_Range ;
-              gsog:hasEndValue toj:intrusionintineo ;
-              gsog:hasStartValue toj:villalbadetritalzircon ;
+              gsoc:hasEndValue toj:intrusionintineo ;
+              gsoc:hasStartValue toj:villalbadetritalzircon ;
             ] ;
           rdfs:label "Neoproterozoic, approximately 700-600 Ma"@en ;
         ] ;
