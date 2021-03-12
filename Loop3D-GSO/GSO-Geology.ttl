@@ -1,4 +1,4 @@
-# baseURI: http://loop3d.org/GSO/ontology/2020/1/geology/ontology
+﻿# baseURI: http://loop3d.org/GSO/ontology/2020/1/geology/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/common/ontology
 
 @prefix : <http://loop3d.org/GSO/ontology/2020/1/geology/> .
@@ -13,31 +13,11 @@
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-# restriction on class from an imported ontology
 gsoc:Element
   owl:disjointWith gsog:Mineral ;
   owl:disjointWith gsog:Rock_Grain_Material ;
   owl:disjointWith gsog:Rock_Material ;
 .
- 
-# defined in other ontology
-gscn:Stratigraphic_Point
-  rdf:type owl:Class .
-
-gsog:Geologic_Time_Point
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:onProperty gsoc:determinedBy ;
-      owl:someValuesFrom gscn:Stratigraphic_Point ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:onProperty gsoc:staticHostedBy ;
-      owl:someValuesFrom gscn:Stratigraphic_Point ;
-    ] ;
-.
-
-
 gsog:Additive_Process
   rdf:type owl:Class ;
   rdfs:comment "A geologic process that adds material to some geologic material or object."@en ;
@@ -981,11 +961,6 @@ gsog:isGeologicallyRelatedTo
 .
 gsog:ontology
   rdf:type owl:Ontology ;
-  rdfs:comment "Base geologic feature classes, constraints, and relationships"@en ;
-  owl:imports gsoc:ontology ;
-  rdfs:label "Geoscience Ontology, Geology"@en ;
-  skos:prefLabel "Geoscience Ontology, Geology"@en ;
-  skos:definition "Base geologic feature classes, constraints, and relationships"@en ;
   dct:created "2020-01-30"^^xsd:date ;
   dct:creator gsoc:brodaric ;
   dct:creator <https://orcid.org/0000-0001-6041-5302> ;
@@ -993,6 +968,11 @@ gsog:ontology
   dct:modified "2021-03-10"^^xsd:date ;
   dct:publisher "Loop3D project;  https://loop3d.org/" ;
   dct:publisher "Natural Resources Canada, Geological Survey of Canada" ;
+  rdfs:comment "Base geologic classes, constraints, and relationships"@en ;
+  rdfs:label "Geoscience Ontology, Geology"@en ;
+  owl:imports gsoc:ontology ;
+  skos:definition "Base geologic classes, constraints, and relationships"@en ;
+  skos:prefLabel "Geoscience Ontology, Geology"@en ;
 .
 dct:created
   rdf:type owl:AnnotationProperty ;
@@ -1011,10 +991,4 @@ dct:modified
 .
 dct:publisher
   rdf:type owl:AnnotationProperty ;
-.
-<https://orcid.org/0000-0001-6041-5302>
-  rdf:type owl:NamedIndividual ;
-  rdf:type <https://schema.org/Person> ;
-  rdfs:comment "e-mail: mailto:smrTucson@gmail.com " ;
-  rdfs:label "Dr. Stephen M. Richard" ;
 .

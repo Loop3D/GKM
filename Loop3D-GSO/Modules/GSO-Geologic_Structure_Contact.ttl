@@ -17,14 +17,14 @@
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-gscn:GSSP
+gsgf:Boundary_Stratotype
+  rdf:type owl:Class ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
-      owl:onProperty gsoc:staticHostedBy ;
-      owl:someValuesFrom gsog:Geologic_Event ;
+      owl:onProperty gsoc:isExampleOf ;
+      owl:someValuesFrom gscn:Contact ;
     ] ;
 .
-
 gscn:Alteration_Facies_Contact
   rdf:type owl:Class ;
   dct:source "CGI contacttype SKOS vocabulary 2012-11-24"@en ;
@@ -120,6 +120,11 @@ gscn:GSSP
   rdfs:comment "GSSP is dependent on some particular geologic event that is manifested globally in the stratigraphic record." ;
   rdfs:label "GSSP "@en ;
   rdfs:subClassOf gscn:Stratigraphic_Point ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:staticHostedBy ;
+      owl:someValuesFrom gsog:Geologic_Event ;
+    ] ;
 .
 gscn:Geologic_Province_Contact
   rdf:type owl:Class ;
@@ -295,9 +300,6 @@ gscn:Seismic_Contact
   rdfs:subClassOf gscn:Geophysical_Contact ;
 .
 
-gsgf:Stratigraphic_Section
-  rdf:type owl:Class.
-
 gscn:Stratigraphic_Point
   rdf:type owl:Class ;
   rdfs:comment "A spatially restricted part of a Contact feature, typically located by a point location. "@en ;
@@ -356,6 +358,7 @@ gscn:ontology
   owl:imports gsoc:ontology ;
   owl:imports gsog:ontology ;
   owl:imports gsoq:ontology ;
+  owl:imports gsgf:ontology ;
   skos:definition "Definition of geologic contact types"@en ;
   skos:prefLabel "Geoscience Ontology, Contact"@en ;
   dct:created "2012-11-24"^^xsd:date ;
@@ -365,30 +368,6 @@ gscn:ontology
   dct:modified "2021-03-10"^^xsd:date ;
   dct:publisher "Loop3D project;  https://loop3d.org/" ;
   dct:publisher "Natural Resources Canada, Geological Survey of Canada" ;
-.
-dct:created
-  rdf:type owl:AnnotationProperty ;
-.
-dct:creator
-  rdf:type owl:AnnotationProperty ;
-.
-dct:description
-  rdf:type owl:AnnotationProperty ;
-.
-dct:license
-  rdf:type owl:AnnotationProperty ;
-.
-dct:modified
-  rdf:type owl:AnnotationProperty ;
-.
-dct:publisher
-  rdf:type owl:AnnotationProperty ;
-.
-<https://orcid.org/0000-0001-6041-5302>
-  rdf:type owl:NamedIndividual ;
-  rdf:type <https://schema.org/Person> ;
-  rdfs:comment "e-mail: mailto:smrTucson@gmail.com " ;
-  rdfs:label "Dr. Stephen M. Richard" ;
 .
 
 gsog:Geologic_Time_Point

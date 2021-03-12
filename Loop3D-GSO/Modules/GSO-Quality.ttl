@@ -2,12 +2,12 @@
 # imports: http://loop3d.org/GSO/ontology/2020/1/common/ontology
 
 @prefix : <http://loop3d.org/GSO/ontology/2020/1/quality/> .
+@prefix dct: <http://purl.org/dc/terms/> .
 @prefix gsoc: <http://loop3d.org/GSO/ontology/2020/1/common/> .
 @prefix gsoq: <http://loop3d.org/GSO/ontology/2020/1/quality/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix dct: <http://purl.org/dc/terms/> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
@@ -34,12 +34,6 @@ gsoq:Diameter
   rdfs:label "Diameter "@en ;
   rdfs:subClassOf gsoc:Physical_Quality ;
 .
-gsoq:Distance
-  rdf:type owl:Class ;
-  rdfs:comment "A measure of distance between locations"@en ;
-  rdfs:label "Distance"@en ;
-  rdfs:subClassOf gsoc:Physical_Quality ;
-.
 gsoq:Displacement
   rdf:type owl:Class ;
   rdfs:comment "A measure of change of location"@en ;
@@ -51,6 +45,12 @@ gsoq:Disseminated
   rdfs:comment "Quality is scattered relatively uniformly through the quality carrier."@en ;
   rdfs:label "Disseminated "@en ;
   rdfs:subClassOf gsoq:Distribution_Value ;
+.
+gsoq:Distance
+  rdf:type owl:Class ;
+  rdfs:comment "A measure of distance between locations"@en ;
+  rdfs:label "Distance"@en ;
+  rdfs:subClassOf gsoc:Physical_Quality ;
 .
 gsoq:Distribution
   rdf:type owl:Class ;
@@ -114,7 +114,6 @@ gsoq:Layered_Distribution
   rdfs:label "Layered distribution "@en ;
   rdfs:subClassOf gsoq:Distribution_Value ;
 .
-
 gsoq:Moderate_Intensity
   rdf:type owl:Class ;
   rdfs:comment "Quality is present and can be discerned by any observer"@en ;
@@ -157,7 +156,6 @@ gsoq:Pressure
   rdfs:label "Pressure"@en ;
   rdfs:subClassOf gsoc:Physical_Quality ;
 .
-
 gsoq:Sparse_Distribution
   rdf:type owl:Class ;
   rdfs:comment "Quality is occasionally present in instances of the host particular "@en ;
@@ -170,7 +168,6 @@ gsoq:Strong_Intensity
   rdfs:label "strong development" ;
   rdfs:subClassOf gsoq:Intensity_Value ;
 .
-
 gsoq:Temperature
   rdf:type owl:Class ;
   rdfs:comment "Temperature"@en ;
@@ -217,11 +214,6 @@ gsoq:Weak_Intensity
 .
 gsoq:ontology
   rdf:type owl:Ontology ;
-  rdfs:comment "Vocabulary of physical qualities used in multiple GSO modules."@en ;
-  rdfs:label "Geoscience Ontology, Physical Qualities"@en ;
-  owl:imports gsoc:ontology ;
-    skos:definition "Defines qualities (properties) that are used to build descriptions of other types"@en ;
-  skos:prefLabel "Geoscience Ontology, Physical Qualities"@en ;
   dct:created "2020-01-30"^^xsd:date ;
   dct:creator gsoc:brodaric ;
   dct:creator <https://orcid.org/0000-0001-6041-5302> ;
@@ -229,28 +221,9 @@ gsoq:ontology
   dct:modified "2021-03-10"^^xsd:date ;
   dct:publisher "Loop3D project;  https://loop3d.org/" ;
   dct:publisher "Natural Resources Canada, Geological Survey of Canada" ;
-.
-dct:created
-  rdf:type owl:AnnotationProperty ;
-.
-dct:creator
-  rdf:type owl:AnnotationProperty ;
-.
-dct:description
-  rdf:type owl:AnnotationProperty ;
-.
-dct:license
-  rdf:type owl:AnnotationProperty ;
-.
-dct:modified
-  rdf:type owl:AnnotationProperty ;
-.
-dct:publisher
-  rdf:type owl:AnnotationProperty ;
-.
-<https://orcid.org/0000-0001-6041-5302>
-  rdf:type owl:NamedIndividual ;
-  rdf:type <https://schema.org/Person> ;
-  rdfs:comment "e-mail: mailto:smrTucson@gmail.com " ;
-  rdfs:label "Dr. Stephen M. Richard" ;
+  rdfs:comment "Vocabulary of physical qualities used in multiple GSO modules."@en ;
+  rdfs:label "Geoscience Ontology, Physical Qualities"@en ;
+  owl:imports gsoc:ontology ;
+  skos:definition "Defines qualities (e.g. mass, colour, thickness) that are used to build descriptions of other types"@en ;
+  skos:prefLabel "Geoscience Ontology, Physical Qualities"@en ;
 .
