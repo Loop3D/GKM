@@ -10,8 +10,8 @@ Please add issues or comments on the ontology in the issue tracker.
 
 
 ## File:
- - **GSO_OFR_01Mar2021.docx**  Draft GSC Open File report describing the ontology
- - **TimeIntervalRelation.pdf**  Diagram to help clarify Allen temporal relations between intervals and instants.
+ - **GSO_v1.0_OFR_2021.pdf**  Draft GSC Open File report describing the ontology
+ - **TimeIntervalRelations.pdf**  Diagram to help clarify Allen temporal relations between intervals and instants.
 
 
 ## Directory:
@@ -23,7 +23,7 @@ Please add issues or comments on the ontology in the issue tracker.
  - **GSO-Master.ttl**  OWL file that imports all modules to assemble entire GSO ontology
 
 #### Sub directories:
-**Modules**  Contains module ontologies implementing aspects of geoscience building on frameworks in Common and Geology.
+**Modules**  Contains module ontologies building on frameworks in Common and Geology.
 
 **Examples**  Contains a collection of instance documents (the .ttl files) demonstrating representation of various geologic scenarios.  This collection is likely to grow and change over time.
 

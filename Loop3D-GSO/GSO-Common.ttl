@@ -228,8 +228,15 @@
     ] ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
+      owl:onClass :Time_Region ;
       owl:onProperty :genericallyDependsOn ;
-      owl:someValuesFrom :Time_Region ;
+      owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onClass :Time_Region ;
+      owl:onProperty :occupiesTimeDirectly ;
+      owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
     ] ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
@@ -240,11 +247,6 @@
       rdf:type owl:Restriction ;
       owl:onProperty :hasParticipant ;
       owl:someValuesFrom :Endurant ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:onProperty :occupiesTimeDirectly ;
-      owl:someValuesFrom :Time_Region ;
     ] ;
   owl:disjointWith :Process ;
   owl:disjointWith :Time_Region ;
@@ -1095,6 +1097,11 @@
       owl:allValuesFrom :Spatial_Region ;
       owl:onProperty :occupiesSpaceIndirectly ;
     ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:allValuesFrom :Temporal_Quality ;
+      owl:onProperty :hasQuality ;
+    ] ;
   owl:equivalentClass [
       rdf:type owl:Class ;
       owl:intersectionOf (
@@ -1105,8 +1112,9 @@
                 :Time_Region
                 [
                   rdf:type owl:Restriction ;
+                  owl:onClass :Time_Region ;
                   owl:onProperty :occupiesTimeDirectly ;
-                  owl:someValuesFrom :Time_Region ;
+                  owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
                 ]
               ) ;
           ]
@@ -1353,18 +1361,20 @@
     ] ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
+      owl:onClass :Time_Region ;
       owl:onProperty :genericallyDependsOn ;
-      owl:someValuesFrom :Time_Region ;
+      owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onClass :Time_Region ;
+      owl:onProperty :occupiesTimeDirectly ;
+      owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
     ] ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
       owl:onProperty :hasParticipant ;
       owl:someValuesFrom :Endurant ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:onProperty :occupiesTimeDirectly ;
-      owl:someValuesFrom :Time_Region ;
     ] ;
   owl:disjointWith :Time_Region ;
   owl:equivalentClass [
@@ -2388,6 +2398,18 @@
         ] ;
       owl:onProperty :timeOccupiedDirectlyBy ;
     ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onClass :Temporal_Location ;
+      owl:onProperty :hasQuality ;
+      owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onClass :Temporal_Location ;
+      owl:onProperty :specificallyDependsOn ;
+      owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+    ] ;
   owl:equivalentClass [
       rdf:type owl:Class ;
       owl:intersectionOf (
@@ -3062,6 +3084,7 @@
     ] ;
   rdfs:range :Spatial_Region ;
   rdfs:subPropertyOf :occupies ;
+  rdfs:subPropertyOf :spatiallyEquals ;
   owl:inverseOf :spaceOccupiedBy ;
 .
 :occupiesSpaceDirectly
@@ -3101,6 +3124,7 @@
     ] ;
   rdfs:range :Time_Region ;
   rdfs:subPropertyOf :occupies ;
+  rdfs:subPropertyOf :timeEquivalentTo ;
   owl:inverseOf :timeOccupiedBy ;
 .
 :occupiesTimeDirectly
