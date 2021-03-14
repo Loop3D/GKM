@@ -18,13 +18,15 @@ Please add issues or comments on the ontology in the issue tracker.
 **Loop3D-GSO** contains the ontology files and associated documentation
 
 ### Files: 
- - **GSO-Common.ttl**  OWL file with high level framework ontology
+ - **GSO-Common.ttl**  OWL file with general framework ontology
  - **GSO-Geology.ttl**  OWL file with framework for geoscience
- - **GSO-Master.ttl**  OWL file, ontology that imports all modules to assemble entire GSO ontology
+ - **GSO-Master.ttl**  OWL file that imports all modules to assemble entire GSO ontology
+
 #### Sub directories:
-**Modules**  Contains 28 module ontologies implementing aspects of geoscience building on framework in Common and Geology.
+**Modules**  Contains module ontologies implementing aspects of geoscience building on frameworks in Common and Geology.
 
 **Examples**  Contains a collection of instance documents (the .ttl files) demonstrating representation of various geologic scenarios.  This collection is likely to grow and change over time.
+
 #### other files 
  - **GeologyScenarioForTesting.pptx** (and .pdf) invented cross section that is used for various example documents
  - **EasternRinconMountainsXSec.png** schematic cross section of Eastern Rincon Mountains, Arizona, used for various example documents

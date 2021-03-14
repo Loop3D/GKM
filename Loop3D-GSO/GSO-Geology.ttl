@@ -1,4 +1,4 @@
-﻿# baseURI: http://loop3d.org/GSO/ontology/2020/1/geology/ontology
+# baseURI: http://loop3d.org/GSO/ontology/2020/1/geology/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/common/ontology
 
 @prefix : <http://loop3d.org/GSO/ontology/2020/1/geology/> .
@@ -90,7 +90,7 @@ gsog:Fluid_Geologic_Material
 .
 gsog:GSSA
   rdf:type owl:Class ;
-  rdfs:comment "Global Standard Stratigraphic Age: a geological time date defined by the International Stratigraphic Commission, based on assertion of a time point and loosely affiliated with some rock body related to e.g. an age date or a field observation."@en ;
+  rdfs:comment "Global Standard Stratigraphic Age: a geological time date defined by the International Stratigraphic Commission, based on assertion of a time point and loosely (weakly) affiliated with some rock body related to e.g. age date(s) or a field observation(s)."@en ;
   rdfs:comment "add SHACL rule that GSSA may not have property Simple_Uncertainty"@en ;
   rdfs:label "GSSA"@en ;
   rdfs:subClassOf gsog:Geologic_Time_Date ;
@@ -168,7 +168,7 @@ gsog:Geologic_Event
 .
 gsog:Geologic_Material
   rdf:type owl:Class ;
-  rdfs:comment "An amount of matter primarily (dominantly) having parts created by geologic processes. Can include minor parts that are not of geologic origin, such as organic material"@en ;
+  rdfs:comment "An amount of matter primarily (dominantly) having parts created by geologic processes. Can include minor parts that are not of geologic origin, such as organic material, and can be solid, fluid, or a mix."@en ;
   rdfs:subClassOf gsoc:Amount_Of_Matter ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
@@ -246,7 +246,7 @@ gsog:Geologic_Material
 .
 gsog:Geologic_Object
   rdf:type owl:Class ;
-  rdfs:comment "A material object constituted by some geological material. Is generically dependent on some process or event - it cannot exist without some geologic processes or events. Not necessarily a product of a single or multiple geologic processes or events: the sum of the processes creating the parts does not necessarily make the whole, as some additional process might be required to bind them into a whole."@en ;
+  rdfs:comment "A material object constituted by some geological material. Is generically dependent on some geologic process or event, for which the object is an output - it cannot exist without being output by the geologic processes or events."@en ;
   rdfs:label "Geologic Object"@en ;
   rdfs:subClassOf gsoc:Material_Object ;
   rdfs:subClassOf [
@@ -327,7 +327,7 @@ gsog:Geologic_Structure
 .
 gsog:Geologic_Time_Boundary
   rdf:type owl:Class ;
-  rdfs:comment "A temporal feature that is the boundary between two Geologic time Intervals. Is generically dependent on a date - e.g. the end of the Anthropocene is the current moment, which changes with each moment."@en ;
+  rdfs:comment "A temporal feature that is the boundary between two Geologic time Intervals. Is generically dependent on a date, so can possibly change or could possibly have been a different date - e.g. the end of the Anthropocene is the current moment, which changes with each moment, and the start of the Anthropocene could have been a different time if Erath history was different."@en ;
   rdfs:label "Geologic Time Boundary"@en ;
   rdfs:subClassOf gsoc:Temporal_Boundary ;
   rdfs:subClassOf gsog:Geologic_Time_Feature ;
@@ -347,7 +347,6 @@ gsog:Geologic_Time_Boundary
 gsog:Geologic_Time_Date
   rdf:type owl:Class ;
   rdfs:comment "A temporal coordinate value, located either by a point position (with uncertainty) on a time line, specified by a numeric coordinate (generally MYPB, but definitions of 'present' vary). Can be a GSSA if the numeric time coordinate is arbitrarily assigned.  Probably should specify a Temporal Reference System used to assign coordinate values."@en ;
-  rdfs:comment "Need SHACL rule that gsoc:Simple_Uncertainty and Statistical_Calculation are recommended"@en ;
   rdfs:label "Geologic Time Date"@en ;
   rdfs:subClassOf gsoc:Time_Instant_Feature ;
   rdfs:subClassOf gsog:Geologic_Time_Feature ;
@@ -393,6 +392,7 @@ gsog:Geologic_Time_Date
 .
 gsog:Geologic_Time_Feature
   rdf:type owl:Class ;
+  rdfs:comment "Any geological temporal feature, including a geologic date, time interval, or time boundary. All geologic time features are dependent one some rock body, strongly or weakly."@en ;
   rdfs:subClassOf gsoc:Temporal_Feature ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
@@ -461,7 +461,7 @@ gsog:Geologic_Time_Interval
 .
 gsog:Geologic_Time_Point
   rdf:type owl:Class ;
-  rdfs:comment "Hosted by a contact (low-dimension feature),  by an event that caused the contact, by a stratigraphic point, and by a stratigraphic section containing the point."@en ;
+  rdfs:comment "Hosted by a contact (low-dimension feature), which itself is hosted by an event that caused the contact, by a stratigraphic point, and by a stratigraphic section containing the point."@en ;
   rdfs:subClassOf gsog:Geologic_Time_Date ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
@@ -482,7 +482,7 @@ gsog:Geologic_Time_Point
 .
 gsog:Geologic_Time_Scale
   rdf:type owl:Class ;
-  rdfs:comment "A time scale is a geologic time inteval in GSO - it is a rock-dependent span of time that is internally divided into other rock-dependent spans of time following a certain topology (after Simon & Cox, 2010). Rock-dependence implies it is intrinsically tied to a specific rock object (e.g. the Earth's rock mass) and internal subdivision implies it is a collection of other geologic time intervals. Moreoever, any change to the membership of the collection results in a different time scale - this implies geologic time intervals cannot be essential parts of a time scale without being static parts (see Brodaric et al, 2019 for types of parts). Time scales are also not part of other time scales, nor specific or generic geologic time intervals - this is primarily to maintain internal temporal topology, though this constraint could be relaxed if use-cases warrant. Aligned generally with (Cox and Richard, 2010)."@en ;
+  rdfs:comment "A time scale is a geologic time inteval in GSO - it is a rock-dependent span of time that is internally divided into other rock-dependent spans of time following a certain topology (after Simon & Cox, 2010). Rock-dependence implies it is intrinsically tied to a specific rock object (e.g. the Earth's rock mass) and internal subdivision implies it is a collection of other geologic time intervals. Moreoever, any change to the parts of the collection results in a different time scale - this implies geologic time intervals cannot be essential parts of a time scale without being static parts (see Brodaric et al, 2019 for types of parts). Time scales are also not part of other time scales, nor part of specific or generic geologic time intervals. This is primarily to maintain internal temporal topology, though this constraint could be relaxed if use-cases warrant. Aligned generally with (Cox and Richard, 2010)."@en ;
   rdfs:label "Geologic Time Scale"@en ;
   rdfs:subClassOf gsog:Geologic_Time_Interval ;
   rdfs:subClassOf [
@@ -519,6 +519,7 @@ gsog:Geologic_Time_Scale
 .
 gsog:Geologic_Unit
   rdf:type owl:Class ;
+  rdfs:comment "A rock object that is contextual or possibly fragmented into several distinct pieces (i.e. not self-connected). Contextual here means the object cannot moved to another location without losing identity: such moving would imply a different origin process and different surrounding rocks."@en ;
   rdfs:subClassOf gsog:Rock_Object ;
   rdfs:subClassOf [
       rdf:type owl:Class ;
@@ -579,7 +580,7 @@ gsog:Mineral
 .
 gsog:Mineraloid
   rdf:type owl:Class ;
-  rdfs:comment "amorphous product of rapid cooling of melted material. Includes natural glasses in Earth and extraterrestrial material, as well as anthromophomorphic manufactured material"@en ;
+  rdfs:comment "Amorphous product of rapid cooling of melted material. Includes natural glasses in Earth and extraterrestrial material, as well as anthromophomorphic manufactured material."@en ;
   rdfs:label "Mineraloid"@en ;
   rdfs:subClassOf gsog:Solid_Geologic_Material ;
   rdfs:subClassOf [
@@ -620,7 +621,7 @@ gsog:Mineraloid
 .
 gsog:Rock_Body
   rdf:type owl:Class ;
-  rdfs:comment "An endurant constituent by Geologic Material or that is such a material"@en ;
+  rdfs:comment "A material endurant constituent by solid geologic material or that is such a material"@en ;
   rdfs:label "Rock Body"@en ;
   rdfs:subClassOf gsoc:Material_Endurant ;
   rdfs:subClassOf [
@@ -712,7 +713,7 @@ gsog:Rock_Grain_Material
 gsog:Rock_Material
   rdf:type owl:Class ;
   dct:source "NADM C1 2004"@en ;
-  rdfs:comment "A material consisting of an aggregation of particles composed of mineral, glass, or other rock material. General concept for any rock, sediment, or other solid constituent of the Earth.  This is 'top' of the lithology category hierarchy with standard rock names, and should be used to indicate 'any rock or unconsolidated material'."@en ;
+  rdfs:comment "A material consisting of an aggregation of particles composed of mineral, glass, or other rock material. General concept for any rock, sediment, or other solid constituent of the Earth.  This is the 'top' of the lithology category hierarchy with standard rock names, and should be used to indicate 'any rock or unconsolidated material'."@en ;
   rdfs:comment "Rock_material properties a bound in the Rock_Material module"@en ;
   rdfs:label "Rock Material"@en ;
   rdfs:subClassOf gsog:Solid_Geologic_Material ;
@@ -750,6 +751,7 @@ gsog:Rock_Material
 .
 gsog:Rock_Object
   rdf:type owl:Class ;
+  rdfs:comment "A geologic object constitited only by some solid geologic material."@en ;
   rdfs:subClassOf gsog:Geologic_Object ;
   rdfs:subClassOf gsog:Rock_Body ;
   rdfs:subClassOf [
@@ -781,8 +783,10 @@ gsog:Rock_Object
 .
 gsog:Solid_Geologic_Material
   rdf:type owl:Class ;
+  rdfs:comment "Geological material primarily constituted by solids."@en ;
   rdfs:subClassOf gsoc:Solid_Matter ;
   rdfs:subClassOf gsog:Geologic_Material ;
+  rdfs:subClassOf gsog:Rock_Body ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
       owl:onProperty gsoc:hasPart ;
@@ -839,7 +843,7 @@ gsog:Solid_Geologic_Material
 .
 gsog:Specific_Geologic_Time_Unit
   rdf:type owl:Class ;
-  rdfs:comment "A time interval defined by specifying geologic time boundaries. E.g. Jurassic 2017 (but not Jurassic). Geologic in the sense that the interval is either referenced to some particular rock body, or its boundaries (started_by, finished_by) are referenced to stratigraphic points."@en ;
+  rdfs:comment "A time interval defined by specifying geologic time boundaries. E.g. Jurassic 2017 (but not Jurassic). Geologic in the sense that the interval is either referenced to some particular rock body, or its boundaries (started_by, finished_by) are referenced to (hosted by) stratigraphic points, which are dependent on some rock body (e.g. a stratigraphic section)."@en ;
   rdfs:label "Geologic Time Interval"@en ;
   rdfs:subClassOf gsog:Geologic_Time_Interval ;
   rdfs:subClassOf [
@@ -883,7 +887,7 @@ gsog:Specific_Geologic_Time_Unit
 .
 gsog:Specific_Rock_Object
   rdf:type owl:Class ;
-  rdfs:comment "These are rock objects that retain identity if moved (i.e. non-situated) and depend on a single unified material e.g. Crystal, Fossil (rock material). They are not chunks of matter, but are constituted by such chunks"@en ;
+  rdfs:comment "These are rock objects that retain identity if moved (i.e. non-contextual) and depend on a single (self-connected) unified material e.g. Boulder, Crystal, Fossil (rock material)."@en ;
   rdfs:subClassOf gsog:Rock_Object ;
   rdfs:subClassOf [
       rdf:type owl:Class ;
@@ -954,6 +958,13 @@ gsog:Transformation
       owl:onProperty gsoc:hasOutput ;
     ] ;
 .
+gsog:boyan_brodaric
+  rdf:type owl:NamedIndividual ;
+  rdfs:comment "affiliation:  Natural Resources Canada, Geological Survey of Canada" ;
+  rdfs:comment "e-mail: mailto:boyan.brodaric@canada.ca " ;
+  rdfs:comment "orchid-id: https://orcid.org/0000-0002-7987-3810" ;
+  rdfs:label "Dr. Boyan Brodaric" ;
+.
 gsog:isGeologicallyRelatedTo
   rdf:type owl:ObjectProperty ;
   rdfs:label "geologically related to"@en ;
@@ -962,8 +973,8 @@ gsog:isGeologicallyRelatedTo
 gsog:ontology
   rdf:type owl:Ontology ;
   dct:created "2020-01-30"^^xsd:date ;
-  dct:creator gsoc:brodaric ;
-  dct:creator <https://orcid.org/0000-0001-6041-5302> ;
+  dct:creator gsoc:boyan_brodaric ;
+  dct:creator gsoc:stephen_richard ;
   dct:license <https://creativecommons.org/licenses/by/4.0/legalcode> ;
   dct:modified "2021-03-10"^^xsd:date ;
   dct:publisher "Loop3D project;  https://loop3d.org/" ;
@@ -974,21 +985,9 @@ gsog:ontology
   skos:definition "Base geologic classes, constraints, and relationships"@en ;
   skos:prefLabel "Geoscience Ontology, Geology"@en ;
 .
-dct:created
-  rdf:type owl:AnnotationProperty ;
-.
-dct:creator
-  rdf:type owl:AnnotationProperty ;
-.
-dct:description
-  rdf:type owl:AnnotationProperty ;
-.
-dct:license
-  rdf:type owl:AnnotationProperty ;
-.
-dct:modified
-  rdf:type owl:AnnotationProperty ;
-.
-dct:publisher
-  rdf:type owl:AnnotationProperty ;
+gsog:stephen_richard
+  rdf:type owl:NamedIndividual ;
+  rdfs:comment "e-mail: mailto:smrTucson@gmail.com " ;
+  rdfs:comment "orchid-id: https://orcid.org/0000-0001-6041-5302" ;
+  rdfs:label "Dr. Stephen M. Richard" ;
 .

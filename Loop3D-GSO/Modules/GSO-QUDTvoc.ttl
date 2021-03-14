@@ -1,184 +1,154 @@
-﻿@prefix : <http://loop3d.org/GSO/2021/2/qudt/voc/ontology#> .
+# baseURI: http://loop3d.org/GSO/2021/2/qudt/voc/ontology
+# imports: http://loop3d.org/GSO/2004/02/skos/annotation/ontology
+# imports: http://loop3d.org/GSO/ontology/2020/1/common/ontology
+
+@prefix : <http://loop3d.org/GSO/2021/2/qudt/voc/ontology#> .
 @prefix dct: <http://purl.org/dc/terms/> .
+@prefix gsoc: <http://loop3d.org/GSO/ontology/2020/1/common/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix qudt: <http://qudt.org/schema/qudt/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix sdo: <https://schema.org/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix sks: <http://loop3d.org/GSO/2004/02/skos/annotation/> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix gsoc: <http://loop3d.org/GSO/ontology/2020/1/common/> .
-@prefix qudt: <http://qudt.org/schema/qudt/> .
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
-@prefix unit: <http://qudt.org/vocab/unit/> .
-@base <http://loop3d.org/GSO/2021/2/qudt/voc/ontology> .
 
-<http://loop3d.org/GSO/2021/2/qudt/voc/ontology> rdf:type owl:Ontology ;
-                                                  owl:imports gsoc:ontology ;
-												  owl:imports sks:ontology ;
-                                                  dct:created "2020-12-04"^^xsd:date ;
-                                                  dct:creator <https://orcid.org/0000-0001-6041-5302> ,
-                                                              <https://orcid.org/0000-0002-8742-7730> ;
-                                                  dct:modified "2021-02-03"^^xsd:date ;
-                                                  dct:publisher <http://loop3d.org/> ;
-												  dct:license <https://creativecommons.org/licenses/by/4.0/legalcode> ;
-                                                  skos:definition "A vocabulary of Units from the QUDT ontology used by the Loop3D ontology. Does not import axioms unrelated to property definition of subclass hiearchy"@en ;
-                                                  skos:prefLabel "Loop3D Profile of QUDT units of measure"@en .
-
-#################################################################
-#    Annotation properties
-#################################################################
-
-###  http://purl.org/dc/terms/created
-dct:created rdf:type owl:AnnotationProperty .
-
-
-###  http://purl.org/dc/terms/creator
-dct:creator rdf:type owl:AnnotationProperty .
-
-
-###  http://purl.org/dc/terms/description
-dct:description rdf:type owl:AnnotationProperty .
-
-
-###  http://purl.org/dc/terms/modified
-dct:modified rdf:type owl:AnnotationProperty .
-
-
-###  http://purl.org/dc/terms/publisher
-dct:publisher rdf:type owl:AnnotationProperty .
-
-
-###  http://purl.org/dc/terms/relation
-dct:relation rdf:type owl:AnnotationProperty .
-
-
-###  http://purl.org/dc/terms/uri
-dct:uri rdf:type owl:AnnotationProperty .
-
-
-###  http://www.w3.org/2004/02/skos/core#altLabel
-skos:altLabel rdf:type owl:AnnotationProperty .
-
-
-###  http://www.w3.org/2004/02/skos/core#definition
-skos:definition rdf:type owl:AnnotationProperty .
-
-
-###  http://www.w3.org/2004/02/skos/core#prefLabel
-skos:prefLabel rdf:type owl:AnnotationProperty .
-
-
-#################################################################
-#    Classes
-#################################################################
-
-###  http://qudt.org/vocab/unit/DEG
-unit:DEG rdf:type owl:Class ;
-         rdfs:subClassOf gsoc:Unit_Of_Measure_Value ;
-         rdfs:isDefinedBy <http://qudt.org/2.1/vocab/unit> ;
-         skos:altLabel "DEG" ,
-                       "deg" ;
-         skos:definition "A degree (in full, a degree of arc, arc degree, or arcdegree), usually denoted by \\(^\\circ\\) (the degree symbol), is a measurement of plane angle, representing 1/360 of a full rotation; one degree is equivalent to  \\(2\\pi /360 rad\\), \\(0.017453 rad\\). It is not an SI unit, as the SI unit for angles is radian, but is an accepted SI unit."@en ;
-         skos:prefLabel "Degree"@en .
-
-
-###  http://qudt.org/vocab/unit/GM-PER-CentiM3
-unit:GM-PER-CentiM3 rdf:type owl:Class ;
-                    rdfs:subClassOf gsoc:Unit_Of_Measure_Value ;
-                    rdfs:isDefinedBy <http://qudt.org/2.1/vocab/unit> ;
-                    skos:altLabel "gram per cubic centimeter"@en-us ;
-                    skos:definition "0,001-fold of the SI base unit kilogram divided by the 0.000 001-fold of the power of the SI base unit metre with the exponent 3. Abbreviation g.cm-3"@en ;
-                    skos:prefLabel "gram per cubic centimetre"@en .
-
-
-###  http://qudt.org/vocab/unit/KiloGM-PER-M3
-unit:KiloGM-PER-M3 rdf:type owl:Class ;
-                   rdfs:subClassOf gsoc:Unit_Of_Measure_Value ;
-                   rdfs:isDefinedBy <http://qudt.org/2.1/vocab/unit> ;
-                   skos:altLabel "kilogram per cubic meter"@en-us ;
-                   skos:definition "Kilogram per cubic metre is an SI derived unit of density, defined by mass in kilograms divided by volume in cubic metres. The official SI symbolic abbreviation is \\(kg \\cdot m^{-3}\\), or equivalently either \\(kg/m^3\\)."@en ;
-                   skos:prefLabel "kilogram per cubic metre"@en .
-
-
-###  http://qudt.org/vocab/unit/M
-unit:M rdf:type owl:Class ;
-       rdfs:subClassOf gsoc:Unit_Of_Measure_Value ;
-       rdfs:isDefinedBy <http://qudt.org/2.1/vocab/unit> ;
-       skos:altLabel "M" ,
-                     "m" ;
-       skos:definition "The metric and SI base unit of distance.  The 17th General Conference on Weights and Measures in 1983 defined the meter as that distance that makes the speed of light in a vacuum equal to exactly 299 792 458 meters per second. The speed of light in a vacuum, \\(c\\), is one of the fundamental constants of nature. The meter is equal to approximately 1.093 613 3 yards, 3.280 840 feet, or 39.370 079 inches."@en ;
-       skos:prefLabel "Meter"@en-us ,
-                      "Metre"@en .
-
-
-###  http://qudt.org/vocab/unit/MegaYR
-unit:MegaYR rdf:type owl:Class ;
-            rdfs:subClassOf gsoc:Unit_Of_Measure_Value ;
-            rdfs:comment "a unit of time equal to one million, or 1 E6 yr., measured from 1950 as 'present'"@en ;
-            rdfs:isDefinedBy <http://qudt.org/2.1/vocab/unit> ;
-            skos:altLabel "Ma" ,
-                          "Mega Year"@en ,
-                          "Myr" ,
-                          "ma" ;
-            skos:definition "1,000,000-fold of the derived unit year."@en ;
-            skos:prefLabel "Million Years"@en .
-
-
-###  http://qudt.org/vocab/unit/MilliM
-unit:MilliM rdf:type owl:Class ;
-            rdfs:subClassOf gsoc:Unit_Of_Measure_Value ;
-            rdfs:isDefinedBy <http://qudt.org/2.1/vocab/unit> ;
-            skos:altLabel "MM" ,
-                          "mm" ;
-            skos:definition "The millimetre (International spelling as used by the International Bureau of Weights and Measures) or millimeter (American spelling) (SI unit symbol mm) is a unit of length in the metric system, equal to one thousandth of a metre, which is the SI base unit of length. It is equal to 1000 micrometres or 1000000 nanometres. A millimetre is equal to exactly 5/127 (approximately 0.039370) of an inch."@en ;
-            skos:prefLabel "Millimeter"@en-us ,
-                           "millimetre"@en .
-
-
-###  http://qudt.org/vocab/unit/PERCENT
-unit:PERCENT rdf:type owl:Class ;
-             rdfs:subClassOf gsoc:Unit_Of_Measure_Value ;
-             rdfs:comment "fraction of a whole, expressed as a fraction of 100, a unitless ratio value"@en ;
-             rdfs:isDefinedBy <http://qudt.org/2.1/vocab/unit> ;
-             skos:altLabel "%" ;
-             skos:definition "\"Percent\" is a unit for  'Dimensionless Ratio' expressed as \\(\\%\\)."@en ;
-             skos:prefLabel "Percent"@en .
-
-
-###  http://qudt.org/vocab/unit/SUSCEPTIBILITY_MAG
-unit:SUSCEPTIBILITY_MAG rdf:type owl:Class ;
-                        rdfs:subClassOf gsoc:Unit_Of_Measure_Value ;
-                        rdfs:isDefinedBy <http://qudt.org/2.1/vocab/unit> ;
-                        skos:altLabel "chi" ;
-                        skos:definition "Magnetic susceptibility is a dimensionless proportionality constant that indicates the degree of magnetization of a material in response to an applied magnetic field.  Here M = chi * H. Where M is the magnetization of the material (the magnetic dipole moment per unit volume), measured in amperes per meter, and H is the magnetic field strength, also measured in amperes per meter. Chi is therefore a dimensionless quantity."@en ;
-                        skos:prefLabel "Magnetic Susceptibility"@en .
-
-
-
-
-#################################################################
-#    Individuals
-#################################################################
-
-###  https://surroundaustralia.com
-<https://surroundaustralia.com> rdf:type owl:NamedIndividual ;
-                                dct:description "SURROUND Australia Pty Ltd is a small Australian technology company focussed on the Semantic Web."@en ;
-                                dct:uri <https://surroundaustralia.com> ;
-                                rdfs:label "SURROUND Australia Pty Ltd" .
-
-
-###  https://orcid.org/0000-0001-6041-5302
-<https://orcid.org/0000-0001-6041-5302> rdf:type owl:NamedIndividual ;
-                                        rdfs:comment "e-mail: mailto:smrTucson@gmail.com " ;
-                                        rdfs:label "Stephen M. Richard" .
-
-
-###  https://orcid.org/0000-0002-8742-7730
-<https://orcid.org/0000-0002-8742-7730> rdf:type owl:NamedIndividual ;
-                                        dct:relation <https://surroundaustralia.com> ;
-                                        rdfs:comment "e-mail: mailto:nicholas.car@surroundaustralia.com .  Job Title: Data Systems Architect" ;
-                                        rdfs:label "Dr. Nicholas J. Car" .
-
-
-###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
+<http://loop3d.org/GSO/2021/2/qudt/voc/ontology>
+  rdf:type owl:Ontology ;
+  dct:created "2020-12-04"^^xsd:date ;
+  dct:creator <https://orcid.org/0000-0001-6041-5302> ;
+  dct:creator <https://orcid.org/0000-0002-8742-7730> ;
+  dct:license <https://creativecommons.org/licenses/by/4.0/legalcode> ;
+  dct:modified "2021-02-03"^^xsd:date ;
+  dct:publisher <http://loop3d.org/> ;
+  owl:imports sks:ontology ;
+  owl:imports gsoc:ontology ;
+  skos:definition "A vocabulary of Units from the QUDT ontology used by the Loop3D ontology. Does not import axioms unrelated to property definition of subclass hiearchy"@en ;
+  skos:prefLabel "Loop3D Profile of QUDT units of measure"@en ;
+.
+dct:created
+  rdf:type owl:AnnotationProperty ;
+.
+dct:creator
+  rdf:type owl:AnnotationProperty ;
+.
+dct:description
+  rdf:type owl:AnnotationProperty ;
+.
+dct:modified
+  rdf:type owl:AnnotationProperty ;
+.
+dct:publisher
+  rdf:type owl:AnnotationProperty ;
+.
+dct:relation
+  rdf:type owl:AnnotationProperty ;
+  rdfs:subPropertyOf gsoc:hasAnnotation ;
+.
+dct:uri
+  rdf:type owl:AnnotationProperty ;
+  rdfs:subPropertyOf gsoc:hasAnnotation ;
+.
+unit:DEG
+  rdf:type owl:Class ;
+  rdfs:isDefinedBy <http://qudt.org/2.1/vocab/unit> ;
+  rdfs:subClassOf gsoc:Unit_Of_Measure_Value ;
+  skos:altLabel "DEG" ;
+  skos:altLabel "deg" ;
+  skos:definition "A degree (in full, a degree of arc, arc degree, or arcdegree), usually denoted by \\(^\\circ\\) (the degree symbol), is a measurement of plane angle, representing 1/360 of a full rotation; one degree is equivalent to  \\(2\\pi /360 rad\\), \\(0.017453 rad\\). It is not an SI unit, as the SI unit for angles is radian, but is an accepted SI unit."@en ;
+  skos:prefLabel "Degree"@en ;
+.
+unit:GM-PER-CentiM3
+  rdf:type owl:Class ;
+  rdfs:isDefinedBy <http://qudt.org/2.1/vocab/unit> ;
+  rdfs:subClassOf gsoc:Unit_Of_Measure_Value ;
+  skos:altLabel "gram per cubic centimeter"@en-us ;
+  skos:definition "0,001-fold of the SI base unit kilogram divided by the 0.000 001-fold of the power of the SI base unit metre with the exponent 3. Abbreviation g.cm-3"@en ;
+  skos:prefLabel "gram per cubic centimetre"@en ;
+.
+unit:KiloGM-PER-M3
+  rdf:type owl:Class ;
+  rdfs:isDefinedBy <http://qudt.org/2.1/vocab/unit> ;
+  rdfs:subClassOf gsoc:Unit_Of_Measure_Value ;
+  skos:altLabel "kilogram per cubic meter"@en-us ;
+  skos:definition "Kilogram per cubic metre is an SI derived unit of density, defined by mass in kilograms divided by volume in cubic metres. The official SI symbolic abbreviation is \\(kg \\cdot m^{-3}\\), or equivalently either \\(kg/m^3\\)."@en ;
+  skos:prefLabel "kilogram per cubic metre"@en ;
+.
+unit:M
+  rdf:type owl:Class ;
+  rdfs:isDefinedBy <http://qudt.org/2.1/vocab/unit> ;
+  rdfs:subClassOf gsoc:Unit_Of_Measure_Value ;
+  skos:altLabel "M" ;
+  skos:altLabel "m" ;
+  skos:definition "The metric and SI base unit of distance.  The 17th General Conference on Weights and Measures in 1983 defined the meter as that distance that makes the speed of light in a vacuum equal to exactly 299 792 458 meters per second. The speed of light in a vacuum, \\(c\\), is one of the fundamental constants of nature. The meter is equal to approximately 1.093 613 3 yards, 3.280 840 feet, or 39.370 079 inches."@en ;
+  skos:prefLabel "Meter"@en-us ;
+  skos:prefLabel "Metre"@en ;
+.
+unit:MegaYR
+  rdf:type owl:Class ;
+  rdfs:comment "a unit of time equal to one million, or 1 E6 yr., measured from 1950 as 'present'"@en ;
+  rdfs:isDefinedBy <http://qudt.org/2.1/vocab/unit> ;
+  rdfs:subClassOf gsoc:Unit_Of_Measure_Value ;
+  skos:altLabel "Ma" ;
+  skos:altLabel "Mega Year"@en ;
+  skos:altLabel "Myr" ;
+  skos:altLabel "ma" ;
+  skos:definition "1,000,000-fold of the derived unit year."@en ;
+  skos:prefLabel "Million Years"@en ;
+.
+unit:MilliM
+  rdf:type owl:Class ;
+  rdfs:isDefinedBy <http://qudt.org/2.1/vocab/unit> ;
+  rdfs:subClassOf gsoc:Unit_Of_Measure_Value ;
+  skos:altLabel "MM" ;
+  skos:altLabel "mm" ;
+  skos:definition "The millimetre (International spelling as used by the International Bureau of Weights and Measures) or millimeter (American spelling) (SI unit symbol mm) is a unit of length in the metric system, equal to one thousandth of a metre, which is the SI base unit of length. It is equal to 1000 micrometres or 1000000 nanometres. A millimetre is equal to exactly 5/127 (approximately 0.039370) of an inch."@en ;
+  skos:prefLabel "Millimeter"@en-us ;
+  skos:prefLabel "millimetre"@en ;
+.
+unit:PERCENT
+  rdf:type owl:Class ;
+  rdfs:comment "fraction of a whole, expressed as a fraction of 100, a unitless ratio value"@en ;
+  rdfs:isDefinedBy <http://qudt.org/2.1/vocab/unit> ;
+  rdfs:subClassOf gsoc:Unit_Of_Measure_Value ;
+  skos:altLabel "%" ;
+  skos:definition "\"Percent\" is a unit for  'Dimensionless Ratio' expressed as \\(\\%\\)."@en ;
+  skos:prefLabel "Percent"@en ;
+.
+unit:SUSCEPTIBILITY_MAG
+  rdf:type owl:Class ;
+  rdfs:isDefinedBy <http://qudt.org/2.1/vocab/unit> ;
+  rdfs:subClassOf gsoc:Unit_Of_Measure_Value ;
+  skos:altLabel "chi" ;
+  skos:definition "Magnetic susceptibility is a dimensionless proportionality constant that indicates the degree of magnetization of a material in response to an applied magnetic field.  Here M = chi * H. Where M is the magnetization of the material (the magnetic dipole moment per unit volume), measured in amperes per meter, and H is the magnetic field strength, also measured in amperes per meter. Chi is therefore a dimensionless quantity."@en ;
+  skos:prefLabel "Magnetic Susceptibility"@en ;
+.
+skos:altLabel
+  rdf:type owl:AnnotationProperty ;
+.
+skos:definition
+  rdf:type owl:AnnotationProperty ;
+.
+skos:prefLabel
+  rdf:type owl:AnnotationProperty ;
+.
+<https://orcid.org/0000-0001-6041-5302>
+  rdf:type owl:NamedIndividual ;
+  rdfs:comment "e-mail: mailto:smrTucson@gmail.com " ;
+  rdfs:label "Stephen M. Richard" ;
+.
+<https://orcid.org/0000-0002-8742-7730>
+  rdf:type owl:NamedIndividual ;
+  dct:relation <https://surroundaustralia.com> ;
+  rdfs:comment "e-mail: mailto:nicholas.car@surroundaustralia.com .  Job Title: Data Systems Architect" ;
+  rdfs:label "Dr. Nicholas J. Car" ;
+.
+<https://surroundaustralia.com>
+  rdf:type owl:NamedIndividual ;
+  dct:description "SURROUND Australia Pty Ltd is a small Australian technology company focussed on the Semantic Web."@en ;
+  dct:uri <https://surroundaustralia.com> ;
+  rdfs:label "SURROUND Australia Pty Ltd" ;
+.
