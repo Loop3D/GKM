@@ -1,296 +1,98 @@
-# baseURI: http://loop3d.org/GSO/ontology/2020/1/faultexample2/ontology
-# imports: http://loop3d.org/GSO/ontology/2020/1/geologicsetting/ontology
-# imports: http://loop3d.org/GSO/ontology/2020/1/geology/ontology
+# baseURI: http://loop3d.org/GSO/ontology/2020/1/ex-faults/ontology
 # imports: http://loop3d.org/GSO/ontology/2020/1/master/ontology
+# imports: http://loop3d.org/GSO/ontology/2020/1/ex-history/ontology
 
-@prefix : <http://loop3d.org/GSO/ontology/2020/1/faultexample2#> .
-@prefix fau2: <http://loop3d.org/GSO/ontology/2020/1/faultexample2#> .
+@prefix : <http://loop3d.org/GSO/ontology/2020/1/ex-faults#> .
+@prefix ehy: <http://loop3d.org/GSO/ontology/2020/1/ex-history#> .
+@prefix fau2: <http://loop3d.org/GSO/ontology/2020/1/ex-faults#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix gscn: <http://loop3d.org/GSO/ontology/2020/1/geologiccontact/> .
+@prefix gsel: <http://loop3d.org/GSO/ontology/2020/1/element/> .
 @prefix gsen: <http://loop3d.org/GSO/ontology/2020/1/geologicsetting/> .
+@prefix gsev: <http://loop3d.org/GSO/ontology/2020/1/geologicevent/> .
+@prefix gsfa: <http://loop3d.org/GSO/ontology/2020/1/geologicfault/> .
+@prefix gsfd: <http://loop3d.org/GSO/ontology/2020/1/geologicfold/> .
+@prefix gsfo: <http://loop3d.org/GSO/ontology/2020/1/geologicfoliation/> .
+@prefix gsgf: <http://loop3d.org/GSO/ontology/2020/1/geologicfeature/> .
+@prefix gsgm: <http://loop3d.org/GSO/ontology/2020/1/granularmaterial/> .
+@prefix gsgq: <http://loop3d.org/GSO/ontology/2020/1/geologicquality/> .
+@prefix gsgu: <http://loop3d.org/GSO/ontology/2020/1/geologicunit/> .
+@prefix gsmaster: <http://loop3d.org/GSO/ontology/2020/1/master/> .
+@prefix gsmin: <http://loop3d.org/GSO/ontology/2020/1/mineral/> .
 @prefix gsoc: <http://loop3d.org/GSO/ontology/2020/1/common/> .
 @prefix gsog: <http://loop3d.org/GSO/ontology/2020/1/geology/> .
+@prefix gsoh: <http://loop3d.org/GSO/ontology/2020/1/hydrology/> .
+@prefix gsol: <http://loop3d.org/GSO/ontology/2020/1/geologiclineation/> .
 @prefix gsoq: <http://loop3d.org/GSO/ontology/2020/1/quality/> .
+@prefix gsor: <http://loop3d.org/GSO/ontology/2020/1/geologicrole/> .
+@prefix gsos: <http://loop3d.org/GSO/ontology/2020/1/geologicstructure/> .
 @prefix gspd: <http://loop3d.org/GSO/ontology/2020/1/perdurant/> .
 @prefix gspr: <http://loop3d.org/GSO/ontology/2020/1/geologicprocess/> .
+@prefix gsrl: <http://loop3d.org/GSO/ontology/2020/1/geologicrelation/> .
+@prefix gsrm: <http://loop3d.org/GSO/ontology/2020/1/rockmaterial/> .
+@prefix gsro: <http://loop3d.org/GSO/ontology/2020/1/rockobject/> .
+@prefix gsrs: <http://loop3d.org/GSO/ontology/2020/1/geologicreferencesystem/> .
+@prefix gst: <http://loop3d.org/GSO/ontology/2020/1/geologictime/> .
 @prefix gstime: <http://loop3d.org/GSO/ontology/2020/1/ischart/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sdo: <https://schema.org/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sks: <http://loop3d.org/GSO/2004/02/skos/annotation/> .
+@prefix turtle: <http://www.semanticweb.org/owl/owlapi/turtle#> .
 @prefix unit: <http://qudt.org/vocab/unit/> .
+@prefix uom: <http://loop3d.org/GSO/2021/2/qudt/voc/> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-fau2:Basement_Cover_Shear_Event
-  rdf:type gsog:Geologic_Event ;
-  gsoc:hasConstituent [
-      rdf:type gspr:Ductile_Flow ;
-      rdfs:label "Shear along basement-cover contact"@en ;
-    ] ;
-  gsoc:isPartOf fau2:Laramide_Ductile_deformation ;
-  gsoc:occupiesTimeDirectly fau2:LaramideDuctileBasementInterval ;
-  gsoc:hasSetting [
-      rdf:type gsen:Hinterland_Setting ;
-      rdf:type gsen:Middle_Continental_Crust_Setting ;
-    ] ;
-  rdfs:comment "Strain localization at the boundary between Proterozoic crytalline rock and overlying Paleozoic sediments, apparently coeval with intrusion of two-mica granitoid (Wilderness Suite)"@en ;
-  rdfs:label "Late Laramide Shear along basement-cover contact"@en ;
+
+fau2:F1_fault
+  a gsfa:Thrust_Fault ;
+  gsoc:isParticipantIn ehy:Laramide_Thrust_Faulting ;
+  rdfs:label "F1 Thrust fault"@en ;
 .
-fau2:Basin_Fill_Tilting_Event
-  rdf:type gsog:Geologic_Event ;
-  gsoc:hasConstituent [
-      rdf:type gspr:Faulting ;
-      rdfs:label "Normal faults bounding fault blocks"@en ;
-    ] ;
-  gsoc:occupiesTimeDirectly fau2:TertiaryExtensionBasinFillInterval ;
-  gsoc:hasSetting [
-      rdf:type gsen:Extended_Terrane_Setting ;
-    ] ;
-  rdfs:comment "Array of normal faults with tilting of blocks between faults, along with syn-deformation deposition in the basins formed."@en ;
-  rdfs:label "Oligocene-Miocene faulting and tilting"@en ;
+
+fau2:BasePantano
+	a  gsgf:Rock_Body_Bottom ;
+	rdfs:label "base of Pantano formation" ;
+	gsoc:isParticipantIn ehy:EarlyMioceneSedimentation;
+	gsrl:crosscuts fau2:F1_fault
 .
-fau2:EarlyProterozoic1780-1690
-  rdf:type gsoc:Time_Interval ;
-  gsoc:hasQuality [
-      rdf:type gsoc:Time_Interval_Location ;
-      gsoc:hasQuality [
-          rdf:type gsoc:Duration ;
-          gsoc:hasQuality [
-              rdf:type gsoc:Uncertainty ;
-              gsoc:hasDataValue "30"^^xsd:decimal ;
-              gsoc:hasUOM [
-                  rdf:type unit:MegaYR ;
-                ] ;
-            ] ;
-          gsoc:hasValue [
-              rdf:type gsoc:Numeric_Value ;
-              gsoc:hasDataValue "90"^^xsd:decimal ;
-              gsoc:hasUOM [
-                  rdf:type unit:MegaYR ;
-                ] ;
-            ] ;
-        ] ;
-      gsoc:hasValue [
-          rdf:type gsoc:Temporal_Range ;
-          gsoc:hasEndValue [
-              rdf:type gsoc:Time_Numeric_Value ;
-              gsoc:hasDataValue "1690"^^xsd:decimal ;
-              gsoc:hasQuality [
-                  rdf:type gsoc:Uncertainty ;
-                  gsoc:hasDataValue "18"^^xsd:decimal ;
-                  gsoc:hasUOM [
-                      rdf:type unit:MegaYR ;
-                    ] ;
-                ] ;
-              gsoc:hasUOM [
-                  rdf:type unit:MegaYR ;
-                ] ;
-            ] ;
-          gsoc:hasStartValue [
-              rdf:type gsoc:Time_Numeric_Value ;
-              gsoc:hasDataValue "1780"^^xsd:decimal ;
-              gsoc:hasQuality [
-                  rdf:type gsoc:Uncertainty ;
-                  gsoc:hasDataValue "12"^^xsd:decimal ;
-                  gsoc:hasUOM [
-                      rdf:type unit:MegaYR ;
-                    ] ;
-                ] ;
-              gsoc:hasUOM [
-                  rdf:type unit:MegaYR ;
-                ] ;
-            ] ;
-        ] ;
-    ] ;
-  rdfs:label "Early Proterozoic 1780-1690 Ma"@en ;
+fau2:F2_shearzone
+  a gsfa:Ductile_Shear_Zone ;
+  gsoc:isParticipantIn ehy:Laramide_Ductile_deformation ;
+  rdfs:label "F2 Ductile shear zone"@en ;
 .
-fau2:LaramideDuctileBasementInterval
-  rdf:type gsoc:Time_Interval ;
-  gsoc:hasQuality [
-      rdf:type gsoc:Time_Interval_Location ;
-      gsoc:hasValue [
-          rdf:type gsoc:Temporal_Range ;
-          gsoc:hasEndValue [
-              rdf:type gsoc:Time_Numeric_Value ;
-              gsoc:hasDataValue "45"^^xsd:decimal ;
-              gsoc:hasQuality [
-                  rdf:type gsoc:Uncertainty ;
-                  gsoc:hasDataValue 1.0 ;
-                  gsoc:hasUOM [
-                      rdf:type unit:MegaYR ;
-                    ] ;
-                ] ;
-              gsoc:hasUOM [
-                  rdf:type unit:MegaYR ;
-                ] ;
-            ] ;
-          gsoc:hasStartValue [
-              rdf:type gsoc:Time_Numeric_Value ;
-              gsoc:determinedBy [
-                  rdf:type gspd:Observation ;
-                  rdfs:comment "youngest deformed intrusion, U-Pb zircon (Gehrels et al, 2015)" ;
-                ] ;
-              gsoc:hasDataValue "61"^^xsd:decimal ;
-              gsoc:hasQuality [
-                  rdf:type gsoc:Uncertainty ;
-                  gsoc:hasDataValue 0.04 ;
-                  gsoc:hasUOM [
-                      rdf:type unit:MegaYR ;
-                    ] ;
-                ] ;
-              gsoc:hasUOM [
-                  rdf:type unit:MegaYR ;
-                ] ;
-            ] ;
-        ] ;
-    ] ;
-  rdfs:label "Laramide 61-45 Ma"@en ;
+fau2:F3_detachmentfault
+  a gsfa:Detachment_Fault ;
+  gsoc:isParticipantIn ehy:Detachment_Faulting ;
+  rdfs:label "F3 San Pedro Detachment Fault"@en ;
+  gsrl:crosscuts fau2:F2_shearzone;
+  gsrl:crosscuts fau2:BasePantano ;
+  gsrl:crosscuts fau2:F1_fault
 .
-fau2:LaramideFaultingInterval
-  rdf:type gsoc:Time_Interval ;
-  gsoc:timeFinishedBy gstime:Danian2017 ;
-  gsoc:timeStartedBy gstime:Campanian2017 ;
-  rdfs:label "Early Laramide"@en ;
+fau2:F5_fault
+  a gsfa:High_Angle_Normal_Fault ;
+  gsoc:isParticipantIn ehy:LateMioceneBasinFormation ;
+  rdfs:label "Happy Valley Fault"@en ;
+  gsrl:crosscuts fau2:F2_shearzone;
+  gsrl:crosscuts fau2:F3_detachmentfault ;
+  gsrl:crosscuts fau2:F1_fault
 .
-fau2:Laramide_Ductile_deformation
-  rdf:type gsog:Geologic_Event ;
-  gsoc:hasConstituent [
-      rdf:type gspr:Ductile_Flow ;
-      rdfs:label "Mid-crustal remobilization"@en ;
-    ] ;
-  gsoc:occupiesTimeDirectly fau2:LaramideDuctileBasementInterval ;
-  gsoc:hasSetting [
-      rdf:type gsen:Hinterland_Setting ;
-      rdf:type gsen:Middle_Continental_Crust_Setting ;
-    ] ;
-  rdfs:label "Late Laramide ductile flow in basement"@en ;
+fau2:PantanoFormation
+  a gsgu:Formation ;
+  gsoc:occupiesTimeIndirectly ehy:TertiaryExtensionBasinFillInterval ;
+  rdfs:label "Pantano Formation" @en ;
+  rdfs:description "Middle Tertiary clastic sedimentary rocks depostied during crustal extension. Bedding dip decreases upsection due to tilting during deposition"@en ;
+    gsoc:hasPart fau2:BasePantano ;
 .
-fau2:MesozoicDepositionInterval
-  rdf:type gsoc:Time_Interval ;
-  gsoc:timeFinishedBy gstime:Campanian2017 ;
-  gsoc:timeStartedBy gstime:MiddleTriassic2017 ;
-  rdfs:label "Middle Triassic to Campanian"@en ;
-.
-fau2:MesozoicFaultingInterval
-  rdf:type gsoc:Time_Interval ;
-  gsoc:timeFinishedBy gstime:LateJurassic ;
-  gsoc:timeStartedBy gstime:MiddleTriassic2017 ;
-  rdfs:label "Middle Triassic to LateJurassic"@en ;
-.
-fau2:Mesozoic_Basin_Formation
-  rdf:type gsog:Geologic_Event ;
-  gsoc:hasConstituent [
-      rdf:type gspr:Faulting ;
-      rdfs:label "Intra or back arc basin formation"@en ;
-    ] ;
-  gsoc:occupiesTimeDirectly fau2:MesozoicFaultingInterval ;
-  gsoc:hasSetting [
-      rdf:type gsen:Back_Arc_Setting ;
-      rdf:type gsen:Extended_Terrane_Setting ;
-    ] ;
-  rdfs:label "Mesozoic basin formation faulting"@en ;
-.
-fau2:Mesozoic_Sediment_Deposition
-  rdf:type gsog:Geologic_Event ;
-  gsoc:hasConstituent [
-      rdf:type gspr:Deposition ;
-      rdfs:label "Intra and back arc sediment accumulation"@en ;
-    ] ;
-  gsoc:occupiesTimeDirectly fau2:MesozoicDepositionInterval ;
-  gsoc:hasSetting [
-      rdf:type gsen:Alluvial_Fan_Setting ;
-      rdf:type gsen:Alluvial_Plain_Setting ;
-      rdf:type gsen:Floodplain_Setting ;
-    ] ;
-  rdfs:label "Mesozoic basin sediment deposition"@en ;
-.
-fau2:PaleozoicDepositionInterval
-  rdf:type gsoc:Time_Interval ;
-  gsoc:timeFinishedBy gstime:Permian2017 ;
-  gsoc:timeStartedBy gstime:Cambrian2017 ;
-  rdfs:label "Paleozoic"@en ;
-.
-fau2:Paleozoic_Sediment_Deposition
-  rdf:type gsog:Geologic_Event ;
-  gsoc:hasConstituent [
-      rdf:type gspr:Deposition ;
-      rdfs:label "Passive margin sediment accumulation"@en ;
-    ] ;
-  gsoc:occupiesTimeDirectly fau2:PaleozoicDepositionInterval ;
-  gsoc:hasSetting gsen:Passive_Continental_Margin_Setting ;
-  rdfs:label "Paleozoic passive margin sediment deposition"@en ;
-.
-fau2:Proterozoic_igneous_intrusion
-  rdf:type gsog:Geologic_Event ;
-  gsoc:hasConstituent [
-      rdf:type gspr:Intrusion_Process ;
-    ] ;
-  gsoc:occupiesTimeDirectly fau2:EarlyProterozoic1780-1690 ;
-  gsoc:hasSetting [
-      rdf:type gsen:Planet_Interior_Setting ;
-    ] ;
-  gsoc:hasSetting [
-      rdf:type gsen:Middle_Continental_Crust_Setting ;
-    ] ;
-  rdfs:label "Early Proterozoic granitoid intrusion"@en ;
-.
-fau2:TertiaryExtensionBasinFillInterval
-  rdf:type gsoc:Time_Interval ;
-  gsoc:timeFinishedBy gstime:Burdigalian2017 ;
-  gsoc:timeStartedBy gstime:Chattian2017 ;
-  rdfs:label "Mid-Tertiary extensional basin formation interval"@en ;
-.
-fau2:WildernessGraniteIntrusionInterval
-  rdf:type gsog:Time_Interval ;
-  gsoc:hasQuality [
-      rdf:type gsoc:Time_Interval_Location ;
-      gsoc:hasValue [
-          rdf:type gsoc:Temporal_Range ;
-          gsoc:hasEndValue [
-              rdf:type gsoc:Time_Numeric_Value ;
-              gsoc:hasDataValue "42"^^xsd:decimal ;
-              gsoc:hasQuality [
-                  rdf:type gsoc:Uncertainty ;
-                  gsoc:hasDataValue 1.7 ;
-                  gsoc:hasUOM [
-                      rdf:type unit:MegaYR ;
-                    ] ;
-                ] ;
-              gsoc:hasUOM [
-                  rdf:type unit:MegaYR ;
-                ] ;
-            ] ;
-          gsoc:hasStartValue [
-              rdf:type gsoc:Time_Numeric_Value ;
-              gsoc:hasDataValue "55"^^xsd:decimal ;
-              gsoc:hasQuality [
-                  rdf:type gsoc:Uncertainty ;
-                  gsoc:hasDataValue 0.3 ;
-                  gsoc:hasUOM [
-                      rdf:type unit:MegaYR ;
-                    ] ;
-                ] ;
-              gsoc:hasUOM [
-                  rdf:type unit:MegaYR ;
-                ] ;
-            ] ;
-        ] ;
-    ] ;
-  rdfs:label "Laramide 55-42 Ma"@en ;
-.
-fau2:Wilderness_Granite_Intrusion_Event
-  rdf:type gsog:Geologic_Event ;
-  gsoc:hasConstituent [
-      rdf:type gspr:Intrusion_Process ;
-      rdfs:label "granitoid intrusion"@en ;
-    ] ;
-  gsoc:isPartOf fau2:Laramide_Ductile_deformation ;
-  gsoc:occupiesTimeDirectly fau2:WildernessGraniteIntrusionInterval ;
-  gsoc:hasSetting [
-      rdf:type gsen:Hinterland_Setting ;
-      rdf:type gsen:Middle_Continental_Crust_Setting ;
-    ] ;
-  rdfs:label "Two-mica granite intrusion"@en ;
-.
-<http://loop3d.org/GSO/ontology/2020/1/faultexample2/ontology>
+
+
+<http://loop3d.org/GSO/ontology/2020/1/ex-faults/ontology>
   rdf:type owl:Ontology ;
-  owl:imports <http://loop3d.org/GSO/ontology/2020/1/master/ontology> ;
-  owl:versionIRI <http://loop3d.org/GSO/ontology/2020/1/faultexample2> ;
+  owl:imports <http://loop3d.org/GSO/ontology/2020/1/master/ontology>, <http://loop3d.org/GSO/ontology/2020/1/ex-history/ontology> ;
+  owl:versionIRI <http://loop3d.org/GSO/ontology/2020/1/ex-faults> ;
+  rdfs:comment "Based on geology shown in EasternRinconMountainsXSec.png figure in the Loop3D-GSO.TestInstances directory"@en ;
+  rdfs:label "Example description of cross cutting faults"@en ;
 .
