@@ -33,20 +33,12 @@
 
 ejs:JsFormation
   a gsgu:Formation ;
-  gsoc:occupiesTimeIndirectly gst:LowerJurassicEpoch ;
+  gsoc:occupiesTimeIndirectly gstime:LowerJurassic2017 ;
   rdfs:label "Lower Jurassic Age sedimentary rocks"@en ;
-
   gsoc:hasPart ejs:JsFormation-lower ;
   gsoc:hasPart ejs:JsFormation-upper ;
   gsoc:hasPart ejs:baseJs-6 ;
   gsoc:hasPart ejs:topJs-2 ;
-  gsoc:hasQuality [
-      a gsgq:Metamorphic_Grade ;
-      gsoc:hasValue [
-          a gsgq:Not_Metamorphosed ;
-        ] ;
-      rdfs:label "not metamorphosed"@en ;
-    ] ;
   gsoc:hasQuality [
       a gsgq:Bedding_Thickness ;
 	  rdfs:label "thin to medium bedded"@en ;
@@ -62,6 +54,14 @@ ejs:JsFormation
 			] ;
 	  ]
     ];
+  gsoc:hasQuality [
+     a gsgq:Metamorphic_Grade ;
+     gsoc:hasValue [
+         a gsgq:Not_Metamorphosed ;
+       ] ;
+     rdfs:label "not metamorphosed"@en ;
+    ] ;
+
   rdfs:comment "Several surfaces are not elucidated as parts in this example, but are referenced in the Contact instances below. These surfaces would participate in intrusion and also ?contact metamorphism? processes"@en ;
   rdfs:comment "clasts of Cb Quartzite are abundant in the lower part of the unit. The lower part is a fining-upward sequence from conglomeratic sandstone to fine-grained sandstone. There is a marker bed that is a tuff in the upper part of the lower clastic interval. Upper part is massive limestone with abundant ammonites"@en ;
   rdfs:label "Js Formation"@en ;
@@ -145,10 +145,13 @@ ejs:contactJs-stratPart_1-stratPart_2
   a gscn:Gradational_Contact_Zone ;
   gsoc:hasQuality [
       a gsoq:Thickness ;
-      gsoc:hasDataValue "10"^^xsd:decimal ;
-      gsoc:hasUOM [
+	  gsoc:hasValue [ 
+		a gsoc:Numeric_Value ;
+		gsoc:hasDataValue "10"^^xsd:decimal ;
+		gsoc:hasUOM [
           a unit:M ;
         ] ;
+		]
     ] ;
   gsoc:hostedBy ejs:stratPart_1 ;
   gsoc:hostedBy ejs:stratPart_2 ;
@@ -158,10 +161,13 @@ ejs:contactJs-stratPart_2-stratPart_3
   a gscn:Gradational_Contact_Zone ;
   gsoc:hasQuality [
       a gsoq:Thickness ;
-      gsoc:hasDataValue "4"^^xsd:decimal ;
-      gsoc:hasUOM [
+	  gsoc:hasValue [
+		a gsoc:Numeric_Value ;
+		gsoc:hasDataValue "4"^^xsd:decimal ;
+		gsoc:hasUOM [
           a unit:M ;
         ] ;
+		];
     ] ;
   gsoc:hostedBy ejs:stratPart_2 ;
   gsoc:hostedBy ejs:stratPart_3 ;
