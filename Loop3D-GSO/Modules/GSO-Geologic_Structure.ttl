@@ -5,6 +5,7 @@
 # imports: http://loop3d.org/GSO/ontology/2020/1/quality/ontology
 
 @prefix : <http://loop3d.org/GSO/ontology/2020/1/geologicstructure/> .
+@prefix dct: <http://purl.org/dc/terms/> .
 @prefix gsgq: <http://loop3d.org/GSO/ontology/2020/1/geologicquality/> .
 @prefix gsoc: <http://loop3d.org/GSO/ontology/2020/1/common/> .
 @prefix gsog: <http://loop3d.org/GSO/ontology/2020/1/geology/> .
@@ -13,10 +14,8 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix dct: <http://purl.org/dc/terms/> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-
 
 gsos:Bedding
   rdf:type owl:Class ;
@@ -75,9 +74,9 @@ gsos:Crystallographic_Preferred_Orientation_Fabric
 .
 gsos:Fabric
   rdf:type owl:Class ;
+  dct:source "Hobbs BE, Means WD, & Williams PF. (1976). An outline of structural geology. John Wiley & sons, p.73. ;  Twiss RJ and Moores EM. (2007). Structural Geology, 2nd Edition, WH Freeman and Co., p.497; Wikipedia https://en.wikipedia.org/wiki/Fabric_(geology); Neuendorf et al., 2005, AGI Glossary of Geology; Sander, 1930."@en ;
   rdfs:comment "A pattern in a rock body. Emerges from the relation between parts (including constituents) of the rock."@en ;
   rdfs:comment "The spatial and geometric configuration of all the elements that make it up. Describes the shape and characteristics of individual parts of a rock and the manner in which the parts are distributed and oriented. In sedimentary rocks, the fabric developed depends on the depositional environment and can provide information on current directions at the time of deposition. In structural geology, fabrics may provide information on both the orientation and magnitude of the strains that have affected a particular piece of deformed rock."@en ;
-  dct:source """Hobbs BE, Means WD, & Williams PF. (1976). An outline of structural geology. John Wiley & sons, p.73. ;  Twiss RJ and Moores EM. (2007). Structural Geology, 2nd Edition, WH Freeman and Co., p.497; Wikipedia https://en.wikipedia.org/wiki/Fabric_(geology); Neuendorf et al., 2005, AGI Glossary of Geology; Sander, 1930."""@en ;
   rdfs:label "Fabric "@en ;
   rdfs:subClassOf gsoc:Pattern_Feature ;
   rdfs:subClassOf gsog:Geologic_Structure ;
@@ -89,8 +88,8 @@ gsos:Fabric
 .
 gsos:Foliation
   rdf:type owl:Class ;
+  dct:source "Jackson 1997"@en ;
   rdfs:comment "Fabric defined by the planar arrangement of textural or structural features (fabric elements)."@en ;
-  dct:source  "Jackson 1997"@en ;
   rdfs:label "Foliation"@en ;
   rdfs:subClassOf gsos:Fabric ;
   rdfs:subClassOf [
@@ -109,11 +108,6 @@ gsos:Fracture
   rdfs:subClassOf gsog:Geologic_Structure ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
-      owl:onProperty gsoc:isParticipantIn ;
-      owl:someValuesFrom gsog:Deformation ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
       owl:allValuesFrom gsog:Rock_Body ;
       owl:onProperty gsoc:hostedBy ;
     ] ;
@@ -122,6 +116,11 @@ gsos:Fracture
       owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
       owl:onClass gsog:Rock_Body ;
       owl:onProperty gsoc:hostedBy ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:isParticipantIn ;
+      owl:someValuesFrom gsog:Deformation ;
     ] ;
 .
 gsos:Graded_Bedding
@@ -145,8 +144,8 @@ gsos:Joint
 .
 gsos:Lineation
   rdf:type owl:Class ;
+  dct:source "Neuendorf et al 2005, CGI lineationtype SKOS vocabulary 2016-11-21"@en ;
   rdfs:comment "Nongenetic term for a penetrative linear structure."@en ;
-  dct:source  "Neuendorf et al 2005, CGI lineationtype SKOS vocabulary 2016-11-21"@en ;
   rdfs:label "Lineation"@en ;
   rdfs:subClassOf gsos:Fabric ;
   rdfs:subClassOf [
@@ -186,34 +185,35 @@ gsos:Sedimentary_Structure
   rdfs:label "Sedimentary Structure  "@en ;
   rdfs:subClassOf gsog:Geologic_Structure ;
 .
+gsos:boyan_brodaric
+  rdf:type owl:NamedIndividual ;
+  rdfs:comment "affiliation:  Natural Resources Canada, Geological Survey of Canada" ;
+  rdfs:comment "e-mail: mailto:boyan.brodaric@canada.ca " ;
+  rdfs:comment "orchid-id: https://orcid.org/0000-0002-7987-3810" ;
+  rdfs:label "Dr. Boyan Brodaric" ;
+.
 gsos:ontology
   rdf:type owl:Ontology ;
+  dct:created "2021-03-26"^^xsd:date ;
+  dct:creator gsos:boyan_brodaric ;
+  dct:creator gsos:stephen_richard ;
+  dct:license <https://creativecommons.org/licenses/by/4.0/legalcode> ;
+  dct:modified "2021-03-26"^^xsd:date ;
+  dct:publisher "ARC Loop3D project;  https://loop3d.org/" ;
+  dct:publisher "Geological Survey of Canada, Natural Resources Canada, Government of Canada" ;
+  dct:rights "Copyright (c) 2021 Government of Canada" ;
   rdfs:comment "Geological structures"@en ;
   rdfs:label "Geoscience Ontology, Geological Structure"@en ;
   owl:imports gsoc:ontology ;
   owl:imports gsgq:ontology ;
   owl:imports gsog:ontology ;
   owl:imports gsoq:ontology ;
-  skos:definition "Define basic geologic structures for Geoscience Ontology; more specific structure types are in associated structure modules for faults, folds, fabrics."@en ;
+  skos:definition "Basic geologic structures for Geoscience Ontology; more specific structure types are in associated structure modules for faults, folds, fabrics."@en ;
   skos:prefLabel "Geoscience Ontology, Geological Structure"@en ;
-  dct:created "2020-01-30"^^xsd:date ;
-  dct:creator gsoc:boyan_brodaric ;
-  dct:creator gsoc:stephen_richard ;
-  dct:license <https://creativecommons.org/licenses/by/4.0/legalcode> ;
-  dct:modified "2021-03-10"^^xsd:date ;
-  dct:publisher "Loop3D project;  https://loop3d.org/" ;
-  dct:publisher "Natural Resources Canada, Geological Survey of Canada" ;
 .
-:stephen_richard
+gsos:stephen_richard
   rdf:type owl:NamedIndividual ;
   rdfs:comment "e-mail: mailto:smrTucson@gmail.com " ;
   rdfs:comment "orchid-id: https://orcid.org/0000-0001-6041-5302" ;
   rdfs:label "Dr. Stephen M. Richard" ;
-.
-:boyan_brodaric
-  rdf:type owl:NamedIndividual ;
-  rdfs:comment "affiliation:  Natural Resources Canada, Geological Survey of Canada" ;
-  rdfs:comment "e-mail: mailto:boyan.brodaric@canada.ca " ;
-  rdfs:comment "orchid-id: https://orcid.org/0000-0002-7987-3810" ;
-  rdfs:label "Dr. Boyan Brodaric" ;
 .

@@ -2,12 +2,12 @@
 # imports: http://loop3d.org/GSO/ontology/2020/1/common/ontology
 
 @prefix : <http://loop3d.org/GSO/ontology/2020/1/hydrology/> .
+@prefix dct: <http://purl.org/dc/terms/> .
 @prefix gsoc: <http://loop3d.org/GSO/ontology/2020/1/common/> .
 @prefix gsoh: <http://loop3d.org/GSO/ontology/2020/1/hydrology/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix dct: <http://purl.org/dc/terms/> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
@@ -18,9 +18,9 @@ gsoh:Hydrologic_Event
 .
 gsoh:Hydrologic_Process
   rdf:type owl:Class ;
+  rdfs:comment "Process that has a water entity as an output.  Water entities include things such as rivers, lakes, ocean, clouds, aquifers as well as various qualities like river stage, mean sea level."@en ;
   rdfs:label "Hydrologic Process"@en ;
   rdfs:subClassOf gsoc:Process ;
-  rdfs:comment "Process that has a water entity as an output.  Water entities include things such as rivers, lakes, ocean, clouds, aquifers as well as various qualities like river stage, mean sea level."@en ;
 .
 gsoh:Sea_Level_Fluctuation
   rdf:type owl:Class ;
@@ -28,32 +28,32 @@ gsoh:Sea_Level_Fluctuation
   rdfs:label "Sea Level Fluctuation"@en ;
   rdfs:subClassOf gsoh:Hydrologic_Process ;
 .
-gsoh:ontology
-  rdf:type owl:Ontology ;
-  rdfs:comment "Hydrology ontology"@en ;
-  rdfs:label "Geoscience Ontology, Hydrology "@en ;
-  owl:imports gsoc:ontology ;
-    skos:definition "Shell for hydrogeology module in Geoscience Ontology"@en ;
-  skos:prefLabel "Geoscience Ontology, Geoscience Ontology, "@en ;
-  dct:created "2020-01-30"^^xsd:date ;
-  dct:creator gsoc:boyan_brodaric ;
-  dct:creator gsoc:stephen_richard ;
-  dct:license <https://creativecommons.org/licenses/by/4.0/legalcode> ;
-  dct:modified "2021-03-10"^^xsd:date ;
-  dct:publisher "Loop3D project;  https://loop3d.org/" ;
-  dct:publisher "Natural Resources Canada, Geological Survey of Canada" ;
-.
-:stephen_richard
-  rdf:type owl:NamedIndividual ;
-  rdfs:comment "e-mail: mailto:smrTucson@gmail.com " ;
-  rdfs:comment "orchid-id: https://orcid.org/0000-0001-6041-5302" ;
-  rdfs:label "Dr. Stephen M. Richard" ;
-.
-:boyan_brodaric
+gsoh:boyan_brodaric
   rdf:type owl:NamedIndividual ;
   rdfs:comment "affiliation:  Natural Resources Canada, Geological Survey of Canada" ;
   rdfs:comment "e-mail: mailto:boyan.brodaric@canada.ca " ;
   rdfs:comment "orchid-id: https://orcid.org/0000-0002-7987-3810" ;
   rdfs:label "Dr. Boyan Brodaric" ;
 .
-
+gsoh:ontology
+  rdf:type owl:Ontology ;
+  dct:created "2021-03-26"^^xsd:date ;
+  dct:creator gsoh:boyan_brodaric ;
+  dct:creator gsoh:stephen_richard ;
+  dct:license <https://creativecommons.org/licenses/by/4.0/legalcode> ;
+  dct:modified "2021-03-26"^^xsd:date ;
+  dct:publisher "ARC Loop3D project;  https://loop3d.org/" ;
+  dct:publisher "Geological Survey of Canada, Natural Resources Canada, Government of Canada" ;
+  dct:rights "Copyright (c) 2021 Government of Canada" ;
+  rdfs:comment "Hydrology ontology"@en ;
+  rdfs:label "Geoscience Ontology, Hydrology "@en ;
+  owl:imports gsoc:ontology ;
+  skos:definition "Hydrogeology module in Geoscience Ontology"@en ;
+  skos:prefLabel "Geoscience Ontology, Geoscience Ontology, "@en ;
+.
+gsoh:stephen_richard
+  rdf:type owl:NamedIndividual ;
+  rdfs:comment "e-mail: mailto:smrTucson@gmail.com " ;
+  rdfs:comment "orchid-id: https://orcid.org/0000-0001-6041-5302" ;
+  rdfs:label "Dr. Stephen M. Richard" ;
+.

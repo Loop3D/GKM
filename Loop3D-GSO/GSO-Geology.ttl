@@ -246,23 +246,19 @@ gsog:Geologic_Object
     ] ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
-      owl:onProperty gsoc:externallyGenDependsOn ;
-      owl:someValuesFrom [
-          rdf:type owl:Restriction ;
-          owl:onProperty gsoc:isOutputOf ;
-          owl:someValuesFrom [
-              rdf:type owl:Class ;
-              owl:unionOf (
-                  gsog:Geologic_Process
-                  gsog:Geologic_Event
-                ) ;
-            ] ;
-        ] ;
+      owl:onProperty gsoc:hasConstituent ;
+      owl:someValuesFrom gsog:Geologic_Material ;
     ] ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
-      owl:onProperty gsoc:hasConstituent ;
-      owl:someValuesFrom gsog:Geologic_Material ;
+      owl:onProperty gsoc:isOutputOf ;
+      owl:someValuesFrom [
+          rdf:type owl:Class ;
+          owl:unionOf (
+              gsog:Geologic_Process
+              gsog:Geologic_Event
+            ) ;
+        ] ;
     ] ;
   owl:disjointWith gsog:Geologic_Material ;
   owl:equivalentClass [
@@ -878,12 +874,6 @@ gsog:Specific_Rock_Object
     ] ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
-      owl:onClass gsog:Solid_Geologic_Material ;
-      owl:onProperty gsoc:constantlySpecDependsOn ;
-      owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
       owl:onProperty gsoc:isOutputOf ;
       owl:someValuesFrom [
           rdf:type owl:Class ;
@@ -894,26 +884,6 @@ gsog:Specific_Rock_Object
         ] ;
     ] ;
   owl:disjointWith gsog:Geologic_Unit ;
-  owl:equivalentClass [
-      rdf:type owl:Class ;
-      owl:intersectionOf (
-          gsog:Rock_Object
-          [
-            rdf:type owl:Restriction ;
-            owl:onClass gsog:Solid_Geologic_Material ;
-            owl:onProperty gsoc:constantlySpecDependsOn ;
-            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-          ]
-          [
-            rdf:type owl:Class ;
-            owl:complementOf [
-                rdf:type owl:Restriction ;
-                owl:onProperty gsoc:spatio-temporallyDependsOn ;
-                owl:someValuesFrom gsog:Rock_Object ;
-              ] ;
-          ]
-        ) ;
-    ] ;
 .
 gsog:Subtractive_Process
   rdf:type owl:Class ;
@@ -951,18 +921,19 @@ gsog:isGeologicallyRelatedTo
 .
 gsog:ontology
   rdf:type owl:Ontology ;
-  dct:created "2020-01-30"^^xsd:date ;
-  dct:creator gsoc:boyan_brodaric ;
-  dct:creator gsoc:stephen_richard ;
+  dct:created "2020-03-26"^^xsd:date ;
+  dct:creator gsog:boyan_brodaric ;
+  dct:creator gsog:stephen_richard ;
   dct:license <https://creativecommons.org/licenses/by/4.0/legalcode> ;
-  dct:modified "2021-03-10"^^xsd:date ;
-  dct:publisher "Loop3D project;  https://loop3d.org/" ;
-  dct:publisher "Natural Resources Canada, Geological Survey of Canada" ;
-  rdfs:comment "Base geologic classes, constraints, and relationships"@en ;
+  dct:modified "2021-03-26"^^xsd:date ;
+  dct:publisher "ARC Loop3D project;  https://loop3d.org/" ;
+  dct:publisher "Geological Survey of Canada, Natural Resources Canada, Government of Canada" ;
+  dct:rights "Copyright (c) 2021 Government of Canada" ;
+  rdfs:comment "Base geologic types and relations"@en ;
   rdfs:label "Geoscience Ontology, Geology"@en ;
   owl:imports gsoc:ontology ;
   owl:imports gspd:ontology ;
-  skos:definition "Base geologic classes, constraints, and relationships"@en ;
+  skos:definition "Base geologic types and relations"@en ;
   skos:prefLabel "Geoscience Ontology, Geology"@en ;
 .
 gsog:stephen_richard

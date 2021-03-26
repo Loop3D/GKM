@@ -17,14 +17,6 @@
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-gsgf:Boundary_Stratotype
-  rdf:type owl:Class ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:onProperty gsoc:isExampleOf ;
-      owl:someValuesFrom gscn:Contact ;
-    ] ;
-.
 gscn:Alteration_Facies_Contact
   rdf:type owl:Class ;
   dct:source "CGI contacttype SKOS vocabulary 2012-11-24"@en ;
@@ -299,7 +291,6 @@ gscn:Seismic_Contact
   rdfs:label "seismic contact"@en ;
   rdfs:subClassOf gscn:Geophysical_Contact ;
 .
-
 gscn:Stratigraphic_Point
   rdf:type owl:Class ;
   rdfs:comment "A spatially restricted part of a Contact feature, typically located by a point location. "@en ;
@@ -327,7 +318,6 @@ gscn:Stratigraphic_Point
       owl:someValuesFrom gsgf:Stratigraphic_Section ;
     ] ;
 .
-
 gscn:Unconformable_Contact
   rdf:type owl:Class ;
   dct:source "Neuendorf, K.K.E, Mehl, J.P. & Jackson, J.A. (eds), 2005. Glossary of geology, 5th Edition. American Geological Institute, Alexandria, 779 p."@en ;
@@ -349,40 +339,48 @@ gscn:Weathering_Contact
   rdfs:label "weathering contact"@en ;
   rdfs:subClassOf gscn:Lithogenetic_Contact ;
 .
-gscn:ontology
-  rdf:type owl:Ontology ;
-  rdfs:comment "This vocabulary specifies Contact Type concepts, as defined by the IUGS Commission for Geoscience Information (CGI) Geoscience Terminology Working Group. Originally designed for use in the contactType property in GeoSciML Contact elements, adopt here as subClasses of gscn:Contact to harmonize with this ontology."@en ;
-  dct:creator "CGI Concept Definition Task Group, Stephen Richard OWL adoption for Loop3D project"@en ;
-  dct:modified "2020-01-29"^^xsd:date ;
-  rdfs:label "Geoscience Ontology, Contact"@en ;
-  owl:imports gsoc:ontology ;
-  owl:imports gsog:ontology ;
-  owl:imports gsoq:ontology ;
-  owl:imports gsgf:ontology ;
-  skos:definition "Definition of geologic contact types"@en ;
-  skos:prefLabel "Geoscience Ontology, Contact"@en ;
-  dct:created "2012-11-24"^^xsd:date ;
-  dct:creator gsoc:boyan_brodaric ;
-  dct:creator gsoc:stephen_richard ;
-  dct:license <https://creativecommons.org/licenses/by/4.0/legalcode> ;
-  dct:modified "2021-03-10"^^xsd:date ;
-  dct:publisher "Loop3D project;  https://loop3d.org/" ;
-  dct:publisher "Natural Resources Canada, Geological Survey of Canada" ;
-.
-:stephen_richard
-  rdf:type owl:NamedIndividual ;
-  rdfs:comment "e-mail: mailto:smrTucson@gmail.com " ;
-  rdfs:comment "orchid-id: https://orcid.org/0000-0001-6041-5302" ;
-  rdfs:label "Dr. Stephen M. Richard" ;
-.
-:boyan_brodaric
+gscn:boyan_brodaric
   rdf:type owl:NamedIndividual ;
   rdfs:comment "affiliation:  Natural Resources Canada, Geological Survey of Canada" ;
   rdfs:comment "e-mail: mailto:boyan.brodaric@canada.ca " ;
   rdfs:comment "orchid-id: https://orcid.org/0000-0002-7987-3810" ;
   rdfs:label "Dr. Boyan Brodaric" ;
 .
-
+gscn:ontology
+  rdf:type owl:Ontology ;
+  dct:created "2021-03-26"^^xsd:date ;
+  dct:creator gscn:boyan_brodaric ;
+  dct:creator gscn:stephen_richard ;
+  dct:creator "CGI Concept Definition Task Group, Stephen Richard OWL adoption for Loop3D project"@en ;
+  dct:license <https://creativecommons.org/licenses/by/4.0/legalcode> ;
+  dct:modified "2020-01-29"^^xsd:date ;
+  dct:modified "2021-03-26"^^xsd:date ;
+  dct:publisher "ARC Loop3D project;  https://loop3d.org/" ;
+  dct:publisher "Geological Survey of Canada, Natural Resources Canada, Government of Canada" ;
+  dct:rights "Copyright (c) 2021 Government of Canada" ;
+  rdfs:comment "This vocabulary specifies Contact Type types, primarily taken from the IUGS Commission for Geoscience Information (CGI) Geoscience Terminology Working Group. Originally designed for use in the contactType property in GeoSciML Contact elements, adopt here as subClasses of gscn:Contact to harmonize with this ontology."@en ;
+  rdfs:label "Geoscience Ontology, Contact"@en ;
+  owl:imports gsoc:ontology ;
+  owl:imports gsgf:ontology ;
+  owl:imports gsog:ontology ;
+  owl:imports gsoq:ontology ;
+  skos:definition "Geologic contact types"@en ;
+  skos:prefLabel "Geoscience Ontology, Contact"@en ;
+.
+gscn:stephen_richard
+  rdf:type owl:NamedIndividual ;
+  rdfs:comment "e-mail: mailto:smrTucson@gmail.com " ;
+  rdfs:comment "orchid-id: https://orcid.org/0000-0001-6041-5302" ;
+  rdfs:label "Dr. Stephen M. Richard" ;
+.
+gsgf:Boundary_Stratotype
+  rdf:type owl:Class ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:isExampleOf ;
+      owl:someValuesFrom gscn:Contact ;
+    ] ;
+.
 gsog:Geologic_Time_Point
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
