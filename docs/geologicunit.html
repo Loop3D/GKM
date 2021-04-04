@@ -1,0 +1,2089 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Geoscience Ontology, Geologic Unit</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    
+    <style>
+        #pylode {
+            position: fixed;
+            top: 130px;
+            left: -60px;
+            font-size: small;
+            transform: rotate(-90deg);
+            color: grey;
+        }
+        #pylode a {
+            font-size: 2em;
+            font-weight: bold;
+            text-decoration: none;
+            color: #005A9C;
+        }
+        #pylode a:hover {
+            color: #333;
+        }
+
+        .cardinality {
+            font-style: italic;
+            color: #aa00aa;
+        }
+
+        dt {
+            font-weight: bold;
+            padding: 5px 0 5px 0;
+        }
+
+        ul.hlist {
+            list-style-type: none;
+            border: 1px solid navy;
+            padding:5px;
+            background-color: #F4FFFF;
+        }
+
+        ul.hierarchy {
+            border: 1px solid navy;
+            padding: 5px 25px 5px 25px;
+            background-color: #F4FFFF;
+        }
+
+
+        ul.hlist li {
+            display: inline;
+            margin-right: 10px;
+        }
+
+        .entity {
+            border: 1px solid navy;
+            margin:5px 0 5px 0;
+            padding: 5px;
+        }
+
+        .entity th {
+            width: 150px;
+            vertical-align: top;
+        }
+
+        .entity th,
+        .entity td {
+            padding-bottom: 20px;
+        }
+
+        .entity table th {
+            text-align: left;
+        }
+
+        section#overview img {
+            max-width: 1000px;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            text-align: left
+        }
+        h1, h2, h3 {
+            color: #005A9C; background: white
+        }
+        h1 {
+            font: 170% sans-serif;
+            line-height: 110%;
+        }
+        h2 {
+            font: 140% sans-serif;
+            margin-top:40px;
+        }
+        h3 {
+            font: 120% sans-serif;
+            margin-top: 3px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid navy;
+        }
+        h4 { font: bold 100% sans-serif }
+        h5 { font: italic 100% sans-serif }
+        h6 { font: small-caps 100% sans-serif }
+
+
+        body {
+            padding: 2em 70px 2em 70px;
+            margin: 0;
+            font-family: sans-serif;
+            color: black;
+            background: white;
+            background-position: top left;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            text-align: justify;
+        }
+
+        section {
+            max-width: 1500px;
+        }
+
+        .figure {
+            margin-bottom: 20px;
+        }
+
+        :link { color: #00C; background: transparent }
+        :visited { color: #609; background: transparent }
+        a:active { color: #C00; background: transparent }
+
+        .sup-c,
+        .sup-op,
+        .sup-fp,
+        .sup-dp,
+        .sup-ap,
+        .sup-p,
+        .sup-ni,
+        .sup-cp,
+        .sup-cl {
+            cursor:help;
+            margin-left: 3px;
+        }
+
+        .sup-c {
+            color:orange;
+        }
+
+        .sup-op {
+            color:navy;
+        }
+
+        .sup-fp {
+            color:lightskyblue;
+        }
+
+        .sup-dp {
+            color:green;
+        }
+
+        .sup-ap {
+            color:darkred;
+        }
+
+        .sup-p {
+            color:black;
+        }
+
+        .sup-ni {
+            color:brown;
+        }
+
+        .sup-cp {
+            color:orange;
+        }
+
+        .sup-cl {
+            color:darkred;
+        }
+
+        code {
+            font-size: large;
+            color: darkred;
+        }
+
+        /* less prominent links for properties */
+        .proplink {
+            color: #336;
+            text-decoration: none;
+        }
+    </style>
+    
+    <script type="application/ld+json">
+      [
+  {
+    "@id": "https://w3id.org/gso/geologicunit/ontology",
+    "@type": [
+      "https://schema.org/DefinedTermSet"
+    ],
+    "https://schema.org/description": [
+      {
+        "@value": "<p>Shared elements for geoscience ontology</p>"
+      }
+    ],
+    "https://schema.org/license": [
+      {
+        "@id": "https://creativecommons.org/licenses/by/4.0/legalcode"
+      }
+    ],
+    "https://schema.org/name": [
+      {
+        "@value": "Geoscience Ontology, Geologic Unit"
+      }
+    ],
+    "https://schema.org/rights": [
+      {
+        "@value": "&copy; &copy; 2021 Government of Canada"
+      }
+    ]
+  }
+]
+    </script>
+</head>
+<body>
+  <div id="pylode">made by <a href="http://github.com/rdflib/pyLODE">
+    <span style="color:#329545;">p</span><span style="color:#f9cb33;">y</span>LODE</a>
+    <span style="font-size:smaller;">2.8.6</span>
+  </div>
+  <h1>Geoscience Ontology, Geologic Unit</h1>
+<section id="metadata">
+    <h2 style="display:none;">Metadata</h2>
+    <dl>
+        <dt>URI</dt>
+        <dd><code>https://w3id.org/gso/geologicunit/ontology</code></dd>
+        <dt><a class="proplink" href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/publisher">Publisher</a>(s)</dt>
+        <dd>
+            ARC Loop3D project;  https://loop3d.org/<br/>
+            Geological Survey of Canada, Natural Resources Canada, Government of Canada<br/>
+        </dd>
+        <dt><a class="proplink" href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/creator">Creator</a>(s)</dt>
+        <dd>
+            
+    <a href="https://w3id.org/gso/common/boyan_brodaric">None</a><br/>
+            
+    <a href="https://w3id.org/gso/common/stephen_richard">None</a><br/>
+        </dd>
+        <dt><a class="proplink" href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/created">Created</a></dt>
+        <dd>2021-03-26</dd>
+        <dt><a class="proplink" href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/modified">Modified</a></dt>
+        <dd>2021-03-26</dd>
+        <dt>Imports</dt>
+        <dd>
+            <a href="https://w3id.org/gso/common/ontology">gsoc:ontology</a><br/>
+            <a href="https://w3id.org/gso/geologicfeature/ontology">gsgf:ontology</a><br/>
+            <a href="https://w3id.org/gso/geologicprocess/ontology">gspr:ontology</a><br/>
+            <a href="https://w3id.org/gso/geologictime/ontology">gst:ontology</a><br/>
+            <a href="https://w3id.org/gso/geology/ontology">gsog:ontology</a><br/>
+        </dd>
+        <dt>License &amp; Rights</dt>
+        <dd>
+            <a href="https://creativecommons.org/licenses/by/4.0/legalcode">https://creativecommons.org/licenses/by/4.0/legalcode</a><br />
+            &copy; &copy; 2021 Government of Canada
+        </dd>
+        <dt>Ontology RDF</dt>
+        <dd><a href="E:\GitHub\Loop3DGKM\Loop3D-GSO\Modules\GSO-Geologic_Unit.ttl">RDF (turtle)</a></dd>
+    </dl>
+    <h2>Description</h2>
+    <div id="description">
+        <p>Shared elements for geoscience ontology</p>
+    </div>
+</section>
+<section id="toc">
+    <h2>Table of Contents</h2>
+    <ol>
+        <li><a href="#classes">Classes</a></li>
+        <li><a href="#namedindividuals">Named Individuals</a></li>
+        <li><a href="#namespaces">Namespaces</a></li>
+        <li><a href="#legend">Legend</a></li>
+    </ol>
+</section>
+<section id="overview">
+    <h2>Overview</h2>
+    <div class="figure">
+        <div style="width:500px; height:50px; background-color: lightgrey; border:solid 2px grey; padding:10px;margin-bottom:5px; text-align:center;">Pictures say 1,000 words</div>
+        <div class="caption"><strong>Figure 1:</strong> Ontology overview</div>
+    </div>
+</section>
+  <section id="classes">
+    <h2>Classes <span style="float:right; font-size:smaller;"><a href="">&uparrow;</a></span></h2>
+    <ul class="hlist">
+        <li><a href="#Bed">Bed</a></li>
+        <li><a href="#Chronostratigraphicunit">Chronostratigraphic unit</a></li>
+        <li><a href="#Complex">Complex </a></li>
+        <li><a href="#Eonothem">Eonothem</a></li>
+        <li><a href="#Erathem">Erathem</a></li>
+        <li><a href="#Exposure">Exposure</a></li>
+        <li><a href="#Facies">Facies</a></li>
+        <li><a href="#Formation">Formation</a></li>
+        <li><a href="#Group">Group</a></li>
+        <li><a href="#IgneousFacies">Igneous Facies </a></li>
+        <li><a href="#IgneousSwarm">Igneous Swarm </a></li>
+        <li><a href="#Interbeddedpart">Interbedded part </a></li>
+        <li><a href="#Intrusion">Intrusion </a></li>
+        <li><a href="#Lithodeme">Lithodeme </a></li>
+        <li><a href="#LithogeneticUnit">Lithogenetic Unit</a></li>
+        <li><a href="#Lithologicunit">Lithologic unit</a></li>
+        <li><a href="#LithostratigraphicUnit">Lithostratigraphic Unit</a></li>
+        <li><a href="#Member">Member</a></li>
+        <li><a href="#Metamorphicfacies">Metamorphic facies</a></li>
+        <li><a href="#Nonstratigraphic_Unit">Nonstratigraphic_Unit</a></li>
+        <li><a href="#NotMetamorphosed">Not Metamorphosed </a></li>
+        <li><a href="#Outcropcharacter">Outcrop character</a></li>
+        <li><a href="#Pluton">Pluton </a></li>
+        <li><a href="#SedimentaryFacies">Sedimentary Facies </a></li>
+        <li><a href="#Series">Series</a></li>
+        <li><a href="#Stage">Stage</a></li>
+        <li><a href="#StratigraphicUnit">Stratigraphic Unit</a></li>
+        <li><a href="#Substage">Substage</a></li>
+        <li><a href="#Suite">Suite</a></li>
+        <li><a href="#Supergroup">Supergroup</a></li>
+        <li><a href="#Supersuite">Supersuite </a></li>
+        <li><a href="#System">System</a></li>
+        <li><a href="#allostratigraphicunit">allostratigraphic unit</a></li>
+        <li><a href="#alterationunit">alteration unit</a></li>
+        <li><a href="#amphibolitemetamorphicfacies">amphibolite metamorphic facies</a></li>
+        <li><a href="#artificialground">artificial ground</a></li>
+        <li><a href="#biostratigraphicunit">biostratigraphic unit</a></li>
+        <li><a href="#deformationunit">deformation unit</a></li>
+        <li><a href="#eclogitemetamorphicfacies">eclogite metamorphic facies</a></li>
+        <li><a href="#epidoteamphibolitemetamorphicfacies">epidote amphibolite metamorphic facies</a></li>
+        <li><a href="#excavationunit">excavation unit</a></li>
+        <li><a href="#geophysicalunit">geophysical unit</a></li>
+        <li><a href="#glaucophaneschistfacies">glaucophane schist facies</a></li>
+        <li><a href="#granulitefacies">granulite facies</a></li>
+        <li><a href="#greenschistmetamorphicfacies">greenschist metamorphic facies</a></li>
+        <li><a href="#lithodemicunit">lithodemic unit</a></li>
+        <li><a href="#lithotectonicunit">lithotectonic unit</a></li>
+        <li><a href="#magnetostratigraphicunit">magnetostratigraphic unit</a></li>
+        <li><a href="#markerbed">marker bed</a></li>
+        <li><a href="#massmovementunit">mass movement unit</a></li>
+        <li><a href="#pedostratigraphicunit">pedostratigraphic unit</a></li>
+        <li><a href="#polaritychronostratigraphicunit">polarity chronostratigraphic unit</a></li>
+        <li><a href="#pyroxenehornfelsmetamorphicfacies">pyroxene hornfels metamorphic facies</a></li>
+        <li><a href="#sanidinitemetamorphicfacies">sanidinite metamorphic facies</a></li>
+        <li><a href="#stratigraphicpart">stratigraphic part</a></li>
+        <li><a href="#subgreenschistmetamorphicfacies">subgreenschist metamorphic facies</a></li>
+        <li><a href="#zeolitemetamorphicfacies">zeolite metamorphic facies</a></li>
+    </ul>
+    <div class="entity class" id="allostratigraphicunit">
+        <h3>allostratigraphic unit<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicunit/Allostratigraphic_Unit</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    This vocabulary, Salvador, 1994, Donovon 2004 IUGS abstract.
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Geologic unit defined by bounding surfaces. Not necessarily stratified. Donovon (2004, IUGS abstract Florence) makes good case for use of a noncommittal term for the bounding surface. While there may be no agreement that a given stratal boundary is a discontinuity, there is consensus that all the identified boundaries are stratal surfaces. Includes: 1. Unconformity bounded units (Salvador 1994), defined by bounding stratigraphic discontinuities ('significant unconformities', unconformity is defined as surface of erosion in Salvador 1994). 2. Sequence stratigraphic unit, an allostratigraphic unit that is used to interpret the depositional origin of sedimentary strata and assumes, though this is not always stated, an implicit connection to base level change. It does this by establishing how the sequence of strata accumulated in order in the sedimentary section over a subdividing framework of surfaces.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicunit/Stratigraphic_Unit">gsgu:Stratigraphic_Unit</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="alterationunit">
+        <h3>alteration unit<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicunit/Alteration_Unit</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    CGI geologicunittype SKOS vocabulary 2012-11-24
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Geologic unit defined by alteration process.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicunit/Lithogenetic_Unit">gsgu:Lithogenetic_Unit</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/isOutputOf">gsoc:isOutputOf</a> <span class="cardinality">some</span> <a href="https://w3id.org/gso/geologicprocess/Metamorphic_Process">gspr:Metamorphic_Process</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/common/externallyGenDependsOn">gsoc:externallyGenDependsOn</a> <span class="cardinality">some</span> <a href="https://w3id.org/gso/geologicprocess/Metamorphic_Process">gspr:Metamorphic_Process</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="amphibolitemetamorphicfacies">
+        <h3>amphibolite metamorphic facies<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicunit/Amphibolite_Metamorphic_Facies</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    Smulikowski et al. 2003; Fettes and Desmons, 2007
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Metamorphic facies characterized in rocks of basaltic composition by hornblende-plagioclase (plagioclase more calcic than An17).</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicunit/Metamorphic_Facies">gsgu:Metamorphic_Facies</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="artificialground">
+        <h3>artificial ground<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicunit/Artificial_Ground</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    CGI geologicunittype SKOS vocabulary 2012-11-24
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Geologic unit defined by genesis involving direct human action to deposit or modify material.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicunit/Lithogenetic_Unit">gsgu:Lithogenetic_Unit</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/externallyGenDependsOn">gsoc:externallyGenDependsOn</a> <span class="cardinality">some</span> <a href="https://w3id.org/gso/geologicprocess/Human_Activity">gspr:Human_Activity</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/common/isOutputOf">gsoc:isOutputOf</a> <span class="cardinality">some</span> <a href="https://w3id.org/gso/geologicprocess/Human_Activity">gspr:Human_Activity</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Bed">
+        <h3>Bed<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicunit/Bed</code></td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicunit/Lithostratigraphic_Unit">gsgu:Lithostratigraphic_Unit</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/isPartOf">gsoc:isPartOf</a> <span class="cardinality">only</span> (<a href="https://w3id.org/gso/geologicunit/Formation">gsgu:Formation</a><sup class="sup-c" title="class">c</sup> or <a href="https://w3id.org/gso/geologicunit/Member">gsgu:Member</a><sup class="sup-c" title="class">c</sup>)<br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Sub-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicunit/Marker_Bed">gsgu:Marker_Bed</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="biostratigraphicunit">
+        <h3>biostratigraphic unit<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicunit/Biostratigraphic_Unit</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    Lenz et al., 2000, Note 64 (see AAPG Bulletin, v. 89, no. 11, November 2005), North American Stratigraphic Code, 1983
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Geologic unit defined based on fossil content. Five kinds of biozones are recognized by the revised NACSN (Lenz et al., 2000, Note 64, a recommended complete replacement of Articles 48 through 54 of the North American Stratigraphic Code (NACSN, 1983) accepted for publication 2000.): range biozone, interval biozone, lineage biozone, assemblage biozone, and abundance biozone. These represent different approaches to defining and recognizing biozones.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicunit/Stratigraphic_Unit">gsgu:Stratigraphic_Unit</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Chronostratigraphicunit">
+        <h3>Chronostratigraphic unit<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicunit/Chronostratigraphic_Unit</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    Salvador, A., 1994, International Stratigraphic Guide, Second Edition
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>A body of rocks that includes all rocks, layered or unlayered, formed during a specific interval of geologic time, and only those rocks formed during that time span. Chronostratigraphic units are bounded by synchronous horizons. The rank and relative magnitude of the units in the chronostratigraphic hierarchy are a function of the length of the time interval that their rocks subtend, rather than of their physical thickness. (http://www.stratigraphy.org/upload/bak/chron.htm)</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicunit/Stratigraphic_Unit">gsgu:Stratigraphic_Unit</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/hasPart">gsoc:hasPart</a> <span class="cardinality">only</span> <a href="https://w3id.org/gso/geologicunit/Chronostratigraphic_Unit">gsgu:Chronostratigraphic_Unit</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/common/hosts">gsoc:hosts</a> <span class="cardinality">some</span> <a href="https://w3id.org/gso/geology/Geologic_Time_Interval">gsog:Geologic_Time_Interval</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Sub-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicunit/System">gsgu:System</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicunit/Stage">gsgu:Stage</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicunit/Substage">gsgu:Substage</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicunit/Series">gsgu:Series</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicunit/Erathem">gsgu:Erathem</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicunit/Eonothem">gsgu:Eonothem</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Complex">
+        <h3>Complex <sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicunit/Complex</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    NACSN-North American Commission on Stratigraphic Nomenclature, 2005, The American Association of Petroleum Geologists Bulletin, V. 89, No. 11, p. 1547-1591 . https://ngmdb.usgs.gov/Info/NACSN/Code2/code2.html#Article31Remarksa
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>An assemblage or mixture of rocks of two or more genetic classes, i.e., igneous, sedimentary, or metamorphic, with or without highly complicated structure, may be named a complex. The term "complex" takes the place of the lithic or rank term (for example, Boil Mountain Complex, Franciscan Complex) and, although unranked, commonly is comparable to suite or supersuite and is named in the same manner.  Identification of an assemblage of diverse rocks as a complex is useful where the mapping of each separate lithic component is impractical at ordinary mapping scales.  The term may be retained if subsequent, detailed mapping distinguishes some or all of the component lithodemes or lithostratigraphic units.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicunit/Lithodemic_Unit">gsgu:Lithodemic_Unit</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="deformationunit">
+        <h3>deformation unit<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicunit/Deformation_Unit</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    CGI geologicunittype SKOS vocabulary 2012-11-24
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Lithotectonic unit defined by deformation style or characteristic geologic structure observable in outcrop.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicunit/Lithogenetic_Unit">gsgu:Lithogenetic_Unit</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/isOutputOf">gsoc:isOutputOf</a> <span class="cardinality">some</span> <a href="https://w3id.org/gso/geology/Deformation">gsog:Deformation</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/common/externallyGenDependsOn">gsoc:externallyGenDependsOn</a> <span class="cardinality">some</span> <a href="https://w3id.org/gso/geology/Deformation">gsog:Deformation</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="eclogitemetamorphicfacies">
+        <h3>eclogite metamorphic facies<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicunit/Eclogite_Metamorphic_Facies</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    Fettes and Desmons, 2007
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Omphacite-garnet-quartz (no plagioclase, olivine stable with garnet), assemblage for rocks of basaltic composition</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicunit/Metamorphic_Facies">gsgu:Metamorphic_Facies</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Eonothem">
+        <h3>Eonothem<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicunit/Eonothem</code></td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicunit/Chronostratigraphic_Unit">gsgu:Chronostratigraphic_Unit</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/hosts">gsoc:hosts</a> <span class="cardinality">some</span> <a href="https://w3id.org/gso/geologictime/Eon">gst:Eon</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="epidoteamphibolitemetamorphicfacies">
+        <h3>epidote amphibolite metamorphic facies<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicunit/Epidote_Amphibolite_Metamorphic_Facies</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    Fettes and Desmons, 2007
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Hornblende-albite-epidote(-chlorite), assemblage for rocks of basaltic composition</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicunit/Metamorphic_Facies">gsgu:Metamorphic_Facies</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Erathem">
+        <h3>Erathem<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicunit/Erathem</code></td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicunit/Chronostratigraphic_Unit">gsgu:Chronostratigraphic_Unit</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/hosts">gsoc:hosts</a> <span class="cardinality">some</span> <a href="https://w3id.org/gso/geologictime/Era">gst:Era</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="excavationunit">
+        <h3>excavation unit<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicunit/Excavation_Unit</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    CGI geologicunittype SKOS vocabulary 2012-11-24
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Geologic unit defined by human-made genesis involving excavation. Not necessarily defined by landform (a hole...), as they could have been subsequently filled/landscaped etc. If the excavation is filled becomes an excavation with artificial ground wholly or partly superimposed on it. This sort of thing can become quite important in urban geology where an excavation can be filled and landscaped.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicunit/Lithogenetic_Unit">gsgu:Lithogenetic_Unit</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/externallyGenDependsOn">gsoc:externallyGenDependsOn</a> <span class="cardinality">some</span> <a href="https://w3id.org/gso/geologicprocess/Human_Activity">gspr:Human_Activity</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/common/isOutputOf">gsoc:isOutputOf</a> <span class="cardinality">some</span> <a href="https://w3id.org/gso/geologicprocess/Excavation">gspr:Excavation</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Exposure">
+        <h3>Exposure<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicunit/Exposure</code></td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>how material is exposed at Earth surface, e.g. poorly exposed, well exposed.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/Physical_Quality">gsoc:Physical_Quality</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Facies">
+        <h3>Facies<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicunit/Facies</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    CGI rockbodypart vocabulary 2016-11-21 
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Represents a particular body of rock that is a lateral variant of a lithostratigraphic unit, or a variant of a lithodemic unit. Contrast with lithosome in being a particular, connected body of rock, as opposed to a kind of rock body that is repeated in many places in a unit.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    ()<br/>
+                    <a href="https://w3id.org/gso/geologicunit/Nonstratigraphic_Unit">gsgu:Nonstratigraphic_Unit</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Sub-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicunit/Metamorphic_Facies">gsgu:Metamorphic_Facies</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicunit/Sedimentary_Facies">gsgu:Sedimentary_Facies</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicunit/Igneous_Facies">gsgu:Igneous_Facies</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Formation">
+        <h3>Formation<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicunit/Formation</code></td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicunit/Lithostratigraphic_Unit">gsgu:Lithostratigraphic_Unit</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/hasPart">gsoc:hasPart</a> <span class="cardinality">only</span> (<a href="https://w3id.org/gso/geologicunit/Bed">gsgu:Bed</a><sup class="sup-c" title="class">c</sup> or <a href="https://w3id.org/gso/geologicunit/Facies">gsgu:Facies</a><sup class="sup-c" title="class">c</sup> or <a href="https://w3id.org/gso/geologicfeature/Lithosome">gsgf:Lithosome</a><sup class="sup-c" title="class">c</sup> or <a href="https://w3id.org/gso/geologicunit/Member">gsgu:Member</a><sup class="sup-c" title="class">c</sup>)<br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="geophysicalunit">
+        <h3>geophysical unit<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicunit/Geophysical_Unit</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    CGI geologicunittype SKOS vocabulary 2012-11-24
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Geologic unit defined by its geophysical characteristics. Denotes that the properties used to define the unit are measured by intrumental techniques, not directly observable by humans, e.g. density, magnetic susceptibility, magnetization, electrical conductivity.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicunit/Nonstratigraphic_Unit">gsgu:Nonstratigraphic_Unit</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="glaucophaneschistfacies">
+        <h3>glaucophane schist facies<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicunit/Glaucophane_Schist_Facies</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    Smulikowski et al. 2003; Fettes and Desmons, 2007
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Metamorphic facies characterized in rocks of basaltic composition by glaucophane-epidote (-garnet), glaucophane-lawsonite, or glaucophane-lawsonite-jadeite.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicunit/Metamorphic_Facies">gsgu:Metamorphic_Facies</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="granulitefacies">
+        <h3>granulite facies<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicunit/Granulite_Facies</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    Smulikowski et al. 2003; Fettes and Desmons, 2007
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Metamorphic facies characterized in rocks of basaltic composition by the mineral assemblage clinopyroxene-orthopyroxene-plagioclase (olivine not stable with plagioclase or with garnet), or especially high-temperature varieties or polymorphs of minerals</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicunit/Metamorphic_Facies">gsgu:Metamorphic_Facies</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="greenschistmetamorphicfacies">
+        <h3>greenschist metamorphic facies<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicunit/Greenschist_Metamorphic_Facies</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    Smulikowski et al. 2003; Fettes and Desmons, 2007
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Metamorphic facies characterized in rocks of basaltic composition by actinolite-albite-epidote-chlorite (an epidote group mineral is the diagnostic Ca-Al silicate rather than prehnite or pumpellyite).</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicunit/Metamorphic_Facies">gsgu:Metamorphic_Facies</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Group">
+        <h3>Group<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicunit/Group</code></td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicunit/Lithostratigraphic_Unit">gsgu:Lithostratigraphic_Unit</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/hasPart">gsoc:hasPart</a> <span class="cardinality">some</span> <a href="https://w3id.org/gso/geologicunit/Formation">gsgu:Formation</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="IgneousFacies">
+        <h3>Igneous Facies <sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicunit/Igneous_Facies</code></td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>a lithologic facies within an igneous rock body. Sometimes called 'phase', e.g. porphyritic facies, fine-grained facies.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicunit/Facies">gsgu:Facies</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/externallyGenDependsOn">gsoc:externallyGenDependsOn</a> <span class="cardinality">some</span> <a href="https://w3id.org/gso/geologicprocess/Magmatic_Process">gspr:Magmatic_Process</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/common/isOutputOf">gsoc:isOutputOf</a> <span class="cardinality">some</span> <a href="https://w3id.org/gso/geologicprocess/Magmatic_Process">gspr:Magmatic_Process</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="IgneousSwarm">
+        <h3>Igneous Swarm <sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicunit/Igneous_Swarm</code></td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>a group intrusions that are associated spatially,  inferred to be related genetically and typically have similar morphology, e.g. dike, sill, plug.  In the BGS vocabulary, swarm is not defined as a formal type of lithodemic unit, however it is used to group cluster of related intrusion and adopted here.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicunit/Lithodemic_Unit">gsgu:Lithodemic_Unit</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Interbeddedpart">
+        <h3>Interbedded part <sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicunit/Interbedded_Part</code></td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>a part that occurs as beds distributed within a stratigraphic unit.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/Part">gsoc:Part</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Intrusion">
+        <h3>Intrusion <sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicunit/Intrusion</code></td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>dct:Source -- based on Gillespie, M R, Stephenson, D, and Millward, D. 2008. BGS classification of lithodemic units: Proposals for classifying units of intrusive rock. British Geological Survey Research Report, RR/08/05. 31pp.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicunit/Lithodemic_Unit">gsgu:Lithodemic_Unit</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Sub-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicunit/Pluton">gsgu:Pluton</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Outcropcharacter">
+        <h3>Outcrop character<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicunit/Landform_Disposition</code></td>
+            </tr>
+            <tr>
+                <th>Is Defined By</th>
+                <td>
+                    GeoSciML v4
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Describes the nature of outcrops formed by a Rock Body. Examples: bouldery, cliff-forming, ledge-forming, slope-forming. Assign free text string value for now, controlled vocabulary is the goal.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/Physical_Quality">gsoc:Physical_Quality</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/isQualityOf">gsoc:isQualityOf</a> <span class="cardinality">only</span> <a href="https://w3id.org/gso/geology/Rock_Body">gsog:Rock_Body</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Lithodeme">
+        <h3>Lithodeme <sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicunit/Lithodeme</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    NACSN-North American Commission on Stratigraphic Nomenclature, 2005, The American Association of Petroleum Geologists Bulletin, V. 89, No. 11, p. 1547-1591 . https://ngmdb.usgs.gov/Info/NACSN/Code2/code2.html#Article31Remarksa
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>A body of intrusive, pervasively deformed, or highly metamorphosed rock, generally non-tabular and lacking primary depositional structures, and characterized by lithic homogeneity. It is mappable at the Earth's surface and traceable in the subsurface. For cartographic and hierarchical purposes, it is comparable to a formation</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicunit/Lithodemic_Unit">gsgu:Lithodemic_Unit</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="lithodemicunit">
+        <h3>lithodemic unit<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicunit/Lithodemic_Unit</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    NACSN-North American Commission on Stratigraphic Nomenclature, 2005, The American Association of Petroleum Geologists Bulletin, V. 89, No. 11, p. 1547-1591 . https://ngmdb.usgs.gov/Info/NACSN/Code2/code2.html#Article31Remarksa
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>a defined body of predominantly intrusive, highly deformed, and (or) highly metamorphosed rock, distinguished and delimited on the basis of rock characteristics (NACSN, 2005)</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicunit/Stratigraphic_Unit">gsgu:Stratigraphic_Unit</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Sub-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicunit/Supersuite">gsgu:Supersuite</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicunit/Suite">gsgu:Suite</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicunit/Complex">gsgu:Complex</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicunit/Intrusion">gsgu:Intrusion</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicunit/Igneous_Swarm">gsgu:Igneous_Swarm</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicunit/Lithodeme">gsgu:Lithodeme</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="LithogeneticUnit">
+        <h3>Lithogenetic Unit<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicunit/Lithogenetic_Unit</code></td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Rock object defined by a specific genesis AND surrounding rocks, e.g. Metamorphic Unit, Sedimentary Unit. This differs from a unit such as 'Metamorphic Unit created by Event X', which is not defined by bounding rocks, but only by a specific genesis (Event X) and which is not a Geologic Unit, but is a Situated Rock Object. It also differs from a unit such as 'Metamorphic Rock' (a Generic Rock Object), which includes metamorphic rocks regardless of originating process or event, and without regard to surrounding rocks: i.e. all rocks (possibly in an area) created by any metmorphic event or process</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicunit/Nonstratigraphic_Unit">gsgu:Nonstratigraphic_Unit</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/isOutputOf">gsoc:isOutputOf</a> <span class="cardinality">some</span> (<a href="https://w3id.org/gso/geology/Geologic_Process">gsog:Geologic_Process</a><sup class="sup-c" title="class">c</sup> or <a href="https://w3id.org/gso/geology/Geologic_Event">gsog:Geologic_Event</a><sup class="sup-c" title="class">c</sup> or <a href="https://w3id.org/gso/geology/Geologic_Process">gsog:Geologic_Process</a><sup class="sup-c" title="class">c</sup> or <a href="https://w3id.org/gso/geology/Geologic_Event">gsog:Geologic_Event</a><sup class="sup-c" title="class">c</sup>)<br/>
+                    <a href="https://w3id.org/gso/common/externallySpecDependsOn">gsoc:externallySpecDependsOn</a> <span class="cardinality">some</span> (<a href="https://w3id.org/gso/geology/Geologic_Process">gsog:Geologic_Process</a><sup class="sup-c" title="class">c</sup> or <a href="https://w3id.org/gso/geology/Geologic_Event">gsog:Geologic_Event</a><sup class="sup-c" title="class">c</sup> or <a href="https://w3id.org/gso/geology/Geologic_Process">gsog:Geologic_Process</a><sup class="sup-c" title="class">c</sup> or <a href="https://w3id.org/gso/geology/Geologic_Event">gsog:Geologic_Event</a><sup class="sup-c" title="class">c</sup>)<br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Sub-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicunit/Artificial_Ground">gsgu:Artificial_Ground</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicunit/Alteration_Unit">gsgu:Alteration_Unit</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicunit/Excavation_Unit">gsgu:Excavation_Unit</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicunit/Tectonic_Unit">gsgu:Tectonic_Unit</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicunit/Mass_Movement_Unit">gsgu:Mass_Movement_Unit</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicunit/Deformation_Unit">gsgu:Deformation_Unit</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Lithologicunit">
+        <h3>Lithologic unit<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicunit/Lithologic_Unit</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    CGI geologicunittype SKOS vocabulary 2012-11-24
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>A rock body defined by lithology independent of relationships to other units. Denotes a 'kind' of rock body characterized by lithology, e.g. basaltic rocks. Does not necessarily represent a single genetically related or connected package of material.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicunit/Nonstratigraphic_Unit">gsgu:Nonstratigraphic_Unit</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/hasConstituent">gsoc:hasConstituent</a> <span class="cardinality">some</span> <a href="https://w3id.org/gso/geology/Rock_Material">gsog:Rock_Material</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="LithostratigraphicUnit">
+        <h3>Lithostratigraphic Unit<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicunit/Lithostratigraphic_Unit</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    Salvador, A., 1994, International Stratigraphic Guide, Second Edition
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Geologic unit defined on the basis of observable and distinctive lithologic properties or combination of lithologic properties and stratigraphic relationships. Denotes a particular body of rock.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicunit/Stratigraphic_Unit">gsgu:Stratigraphic_Unit</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/hasPart">gsoc:hasPart</a> <span class="cardinality">only</span> <a href="https://w3id.org/gso/geologicunit/Lithostratigraphic_Unit">gsgu:Lithostratigraphic_Unit</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Sub-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicunit/Bed">gsgu:Bed</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicunit/Member">gsgu:Member</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicunit/Group">gsgu:Group</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicunit/Supergroup">gsgu:Supergroup</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicunit/Formation">gsgu:Formation</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="magnetostratigraphicunit">
+        <h3>magnetostratigraphic unit<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicunit/Magnetostratigraphic_Unit</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    Salvador, A., 1994, International Stratigraphic Guide, Second Edition
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Geologic unit defined by magnetic characteristics.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicunit/Stratigraphic_Unit">gsgu:Stratigraphic_Unit</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="markerbed">
+        <h3>marker bed<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicunit/Marker_Bed</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    CGI rockbodypart vocabulary 2016-11-21 
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Stratigraphic part that is a thin laterally continuous bed within another unit.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicunit/Bed">gsgu:Bed</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="massmovementunit">
+        <h3>mass movement unit<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicunit/Mass_Movement_Unit</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    CGI geologicunittype SKOS vocabulary 2012-11-24
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Geologic unit produced by gravity driven, down-slope displacemnt of material, and characterized by the type of movement giving rise to the deposit, and by how the individual movement types present in the deposit are related in time and space.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicunit/Lithogenetic_Unit">gsgu:Lithogenetic_Unit</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/externallyGenDependsOn">gsoc:externallyGenDependsOn</a> <span class="cardinality">some</span> <a href="https://w3id.org/gso/geologicprocess/Material_Transport">gspr:Material_Transport</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/common/isOutputOf">gsoc:isOutputOf</a> <span class="cardinality">some</span> <a href="https://w3id.org/gso/geologicprocess/Material_Transport">gspr:Material_Transport</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Member">
+        <h3>Member<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicunit/Member</code></td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicunit/Lithostratigraphic_Unit">gsgu:Lithostratigraphic_Unit</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/hasPart">gsoc:hasPart</a> <span class="cardinality">only</span> (<a href="https://w3id.org/gso/geologicunit/Bed">gsgu:Bed</a><sup class="sup-c" title="class">c</sup> or <a href="https://w3id.org/gso/geologicunit/Facies">gsgu:Facies</a><sup class="sup-c" title="class">c</sup> or <a href="https://w3id.org/gso/geologicfeature/Lithosome">gsgf:Lithosome</a><sup class="sup-c" title="class">c</sup>)<br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Metamorphicfacies">
+        <h3>Metamorphic facies<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicunit/Metamorphic_Facies</code></td>
+            </tr>
+            <tr>
+                <th>Is Defined By</th>
+                <td>
+                    GeoSciML v4
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Categories that characterize mineral assemblages indicative of certain metamorphic P-T conditions. Examples include Barrovian metasedimentary zones (eg: biotite facies, kyanite facies) or assemblages developed in rocks of more mafic composition (eg: greenschist facies, amphibolite facies).</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicunit/Facies">gsgu:Facies</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/externallyGenDependsOn">gsoc:externallyGenDependsOn</a> <span class="cardinality">some</span> <a href="https://w3id.org/gso/geologicprocess/Metamorphic_Process">gspr:Metamorphic_Process</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/common/isOutputOf">gsoc:isOutputOf</a> <span class="cardinality">some</span> <a href="https://w3id.org/gso/geologicprocess/Metamorphic_Process">gspr:Metamorphic_Process</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Sub-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicunit/No_Metamorphic_Minerals">gsgu:No_Metamorphic_Minerals</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicunit/Eclogite_Metamorphic_Facies">gsgu:Eclogite_Metamorphic_Facies</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicunit/Pyroxene_Hornfels_Metamorphic_Facies">gsgu:Pyroxene_Hornfels_Metamorphic_Facies</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicunit/Subgreenschist_Metamorphic_Facies">gsgu:Subgreenschist_Metamorphic_Facies</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicunit/Greenschist_Metamorphic_Facies">gsgu:Greenschist_Metamorphic_Facies</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicunit/Amphibolite_Metamorphic_Facies">gsgu:Amphibolite_Metamorphic_Facies</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicunit/Granulite_Facies">gsgu:Granulite_Facies</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicunit/Epidote_Amphibolite_Metamorphic_Facies">gsgu:Epidote_Amphibolite_Metamorphic_Facies</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicunit/Sanidinite_Metamorphic_Facies">gsgu:Sanidinite_Metamorphic_Facies</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicunit/Glaucophane_Schist_Facies">gsgu:Glaucophane_Schist_Facies</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicunit/Zeolite_Metamorphic_Facies">gsgu:Zeolite_Metamorphic_Facies</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="NotMetamorphosed">
+        <h3>Not Metamorphosed <sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicunit/No_Metamorphic_Minerals</code></td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>explicit statement that is not metamorphosed</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicunit/Metamorphic_Facies">gsgu:Metamorphic_Facies</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Nonstratigraphic_Unit">
+        <h3>Nonstratigraphic_Unit<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicunit/Nonstratigraphic_Unit</code></td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>A geologic uint that is not stratigrpahic, that is not existentially dependent on its surrounding rocks.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    ()<br/>
+                    <a href="https://w3id.org/gso/geology/Geologic_Unit">gsog:Geologic_Unit</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Sub-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicunit/Geophysical_Unit">gsgu:Geophysical_Unit</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicunit/Lithologic_Unit">gsgu:Lithologic_Unit</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicunit/Lithogenetic_Unit">gsgu:Lithogenetic_Unit</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicunit/Facies">gsgu:Facies</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="pedostratigraphicunit">
+        <h3>pedostratigraphic unit<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicunit/Pedostratigraphic_Unit</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    North American Commission on Stratigraphic Nomenclature, 1983, Morrison, 1995, INQUA/ISSS newsletter, Nov. 1995http://fadr.msu.ru/inqua/nl-archive/nl-8-11/howcan.html, ISSN 0256-2340.
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Geologic unit that represents a single pedologic horizon in a sequence of strata (consolidated or non-consolidated). The presence of an overlying geologic unit is required, but locally the soil horizon may be at the Earth surface (in which case is may be coincident with a Pedoderm). See discussion at https://www.seegrid.csiro.au/twiki/bin/view/CGIModel/PedostratigraphicUnit</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicunit/Stratigraphic_Unit">gsgu:Stratigraphic_Unit</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Pluton">
+        <h3>Pluton <sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicunit/Pluton</code></td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>dct:Source -- based on Gillespie, M R, Stephenson, D, and Millward, D. 2008. BGS classification of lithodemic units: Proposals for classifying units of intrusive rock. British Geological Survey Research Report, RR/08/05. 31pp.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicunit/Intrusion">gsgu:Intrusion</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/hasPart">gsoc:hasPart</a> <span class="cardinality">only</span> (<a href="https://w3id.org/gso/geologicunit/Intrusion">gsgu:Intrusion</a><sup class="sup-c" title="class">c</sup> or <a href="https://w3id.org/gso/geologicunit/Facies">gsgu:Facies</a><sup class="sup-c" title="class">c</sup>)<br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="polaritychronostratigraphicunit">
+        <h3>polarity chronostratigraphic unit<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicunit/Polarity_Chronostratigraphic_Unit</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    North American Commission on Stratigraphic Nomenclature, 1983
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Geologic unit defined by primary magnetic-polarity record imposed whien the rock was deposited or crystallized during a specific interval of geologic time. Kind of chronostratigraphic unit and kind of geophysical unit.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicunit/Stratigraphic_Unit">gsgu:Stratigraphic_Unit</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/hosts">gsoc:hosts</a> <span class="cardinality">some</span> <a href="https://w3id.org/gso/geology/Geologic_Time_Interval">gsog:Geologic_Time_Interval</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="pyroxenehornfelsmetamorphicfacies">
+        <h3>pyroxene hornfels metamorphic facies<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicunit/Pyroxene_Hornfels_Metamorphic_Facies</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    Smulikowski et al. 2003; Fettes and Desmons, 2007
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Metamorphic facies characterized in rocks of basaltic composition by clinopyroxene-orthopyroxene-plagioclase (olivine stable with plagioclase).</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicunit/Metamorphic_Facies">gsgu:Metamorphic_Facies</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="sanidinitemetamorphicfacies">
+        <h3>sanidinite metamorphic facies<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicunit/Sanidinite_Metamorphic_Facies</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    Fettes and Desmons, 2007
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>distinguished from the pyroxene hornfels facies by the occurrence of especially high-temperature varieties and polymorphs of minerals (eg. pigeonite, K-rich labradorite), assemblage for rocks of basaltic composition</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicunit/Metamorphic_Facies">gsgu:Metamorphic_Facies</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="SedimentaryFacies">
+        <h3>Sedimentary Facies <sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicunit/Sedimentary_Facies</code></td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>a lithologic variant in a sedimentary unit, typically related to spatial variation in the original depositional environment or subsequent diagenetic environment.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicunit/Facies">gsgu:Facies</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/externallyGenDependsOn">gsoc:externallyGenDependsOn</a> <span class="cardinality">some</span> <a href="https://w3id.org/gso/geologicprocess/Sedimentary_Process">gspr:Sedimentary_Process</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/common/isOutputOf">gsoc:isOutputOf</a> <span class="cardinality">some</span> <a href="https://w3id.org/gso/geologicprocess/Sedimentary_Process">gspr:Sedimentary_Process</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Series">
+        <h3>Series<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicunit/Series</code></td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicunit/Chronostratigraphic_Unit">gsgu:Chronostratigraphic_Unit</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/hosts">gsoc:hosts</a> <span class="cardinality">some</span> <a href="https://w3id.org/gso/geologictime/Epoch">gst:Epoch</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Stage">
+        <h3>Stage<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicunit/Stage</code></td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>The stage includes all rocks formed during an age. A stage is normally the lowest ranking unit in the chronostratigraphic hierarchy that can be recognized on a global scale. The stage has been called the basic working unit of chronostratigraphy because it is suited in scope and rank to the practical needs and purposes of intraregional chronostratigraphic classification. It is a subdivision of a series.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicunit/Chronostratigraphic_Unit">gsgu:Chronostratigraphic_Unit</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/hosts">gsoc:hosts</a> <span class="cardinality">some</span> <a href="https://w3id.org/gso/geologictime/Age">gst:Age</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="stratigraphicpart">
+        <h3>stratigraphic part<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicunit/Stratigraphic_Part</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    based on CGI rockbodypart vocabulary 2016-11-21; hierarchy position modified in GSO.
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>A geologic unit that occupies a particular stratigraphic position as part of a stratigraphic unit.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/Part">gsoc:Part</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/hasRoleObject">gsoc:hasRoleObject</a> <span class="cardinality">some</span> <a href="https://w3id.org/gso/geologicunit/Stratigraphic_Unit">gsgu:Stratigraphic_Unit</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/common/hasRoleObject">gsoc:hasRoleObject</a> <span class="cardinality">only</span> <a href="https://w3id.org/gso/geologicunit/Stratigraphic_Unit">gsgu:Stratigraphic_Unit</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/common/hasRolePlayer">gsoc:hasRolePlayer</a> <span class="cardinality">some</span> <a href="https://w3id.org/gso/geology/Geologic_Unit">gsog:Geologic_Unit</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/common/hasRolePlayer">gsoc:hasRolePlayer</a> <span class="cardinality">only</span> <a href="https://w3id.org/gso/geology/Geologic_Unit">gsog:Geologic_Unit</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="StratigraphicUnit">
+        <h3>Stratigraphic Unit<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicunit/Stratigraphic_Unit</code></td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>A body of material in the Earth whose complete and precise extent is inferred to exist (NADM GeologicUnit, Stratigraphic unit in sense of NACSN or International Stratigraphic Code), or a classifier used to characterize parts of the Earth (e.g. lithologic map unit like 'granitic rock' or 'alluvial deposit', surficial units like 'till' or 'old alluvium'). (GeoSciML v3.2)</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geology/Geologic_Unit">gsog:Geologic_Unit</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/adjacentlyDependsOn">gsoc:adjacentlyDependsOn</a> <span class="cardinality">some</span> <a href="https://w3id.org/gso/geology/Rock_Object">gsog:Rock_Object</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/common/hasExample">gsoc:hasExample</a> <span class="cardinality">some</span> <a href="https://w3id.org/gso/geologicfeature/Stratotype">gsgf:Stratotype</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/common/isOutputOf">gsoc:isOutputOf</a> <span class="cardinality">some</span> (<a href="https://w3id.org/gso/geology/Geologic_Process">gsog:Geologic_Process</a><sup class="sup-c" title="class">c</sup> or <a href="https://w3id.org/gso/geology/Geologic_Event">gsog:Geologic_Event</a><sup class="sup-c" title="class">c</sup>)<br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Sub-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicunit/Polarity_Chronostratigraphic_Unit">gsgu:Polarity_Chronostratigraphic_Unit</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicunit/Lithostratigraphic_Unit">gsgu:Lithostratigraphic_Unit</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicunit/Chronostratigraphic_Unit">gsgu:Chronostratigraphic_Unit</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicunit/Lithodemic_Unit">gsgu:Lithodemic_Unit</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicunit/Allostratigraphic_Unit">gsgu:Allostratigraphic_Unit</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicunit/Biostratigraphic_Unit">gsgu:Biostratigraphic_Unit</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicunit/Pedostratigraphic_Unit">gsgu:Pedostratigraphic_Unit</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicunit/Magnetostratigraphic_Unit">gsgu:Magnetostratigraphic_Unit</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="subgreenschistmetamorphicfacies">
+        <h3>subgreenschist metamorphic facies<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicunit/Subgreenschist_Metamorphic_Facies</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    Smulikowski et al. 2003; Fettes and Desmons, 2007
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Metamorphic facies characterized in rocks of basaltic composition by prehnite-pumpellyite, pumpellyite-actinolite, prehnite-actinolite (prehnite and pumpellyite are the diagnostic Ca-Al silicates rather than minerals of the epidote or zeolite groups).</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicunit/Metamorphic_Facies">gsgu:Metamorphic_Facies</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Substage">
+        <h3>Substage<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicunit/Substage</code></td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicunit/Chronostratigraphic_Unit">gsgu:Chronostratigraphic_Unit</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/hosts">gsoc:hosts</a> <span class="cardinality">some</span> <a href="https://w3id.org/gso/geologictime/Age">gst:Age</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Suite">
+        <h3>Suite<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicunit/Suite</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    Based on NACSN-North American Commission on Stratigraphic Nomenclature, 2005, The American Association of Petroleum Geologists Bulletin, V. 89, No. 11, p. 1547-1591 . https://ngmdb.usgs.gov/Info/NACSN/Code2/code2.html#Article31Remarksa
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>A geologic unit that comprises two or more associated Lithodemes, Plutons, Intrusions, or Igneous_Swarms of the same class (e.g., plutonic, metamorphic) that are interpreted to be genetically related. For cartographic and hierarchical purposes, suite is comparable to group</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicunit/Lithodemic_Unit">gsgu:Lithodemic_Unit</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/hasPart">gsoc:hasPart</a> <span class="cardinality">only</span> (<a href="https://w3id.org/gso/geologicunit/Igneous_Swarm">gsgu:Igneous_Swarm</a><sup class="sup-c" title="class">c</sup> or <a href="https://w3id.org/gso/geologicunit/Pluton">gsgu:Pluton</a><sup class="sup-c" title="class">c</sup> or <a href="https://w3id.org/gso/geologicunit/Intrusion">gsgu:Intrusion</a><sup class="sup-c" title="class">c</sup> or <a href="https://w3id.org/gso/geologicunit/Lithodeme">gsgu:Lithodeme</a><sup class="sup-c" title="class">c</sup>)<br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Supergroup">
+        <h3>Supergroup<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicunit/Supergroup</code></td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicunit/Lithostratigraphic_Unit">gsgu:Lithostratigraphic_Unit</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/hasPart">gsoc:hasPart</a> <span class="cardinality">some</span> (<a href="https://w3id.org/gso/geologicunit/Formation">gsgu:Formation</a><sup class="sup-c" title="class">c</sup> or <a href="https://w3id.org/gso/geologicunit/Group">gsgu:Group</a><sup class="sup-c" title="class">c</sup>)<br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Supersuite">
+        <h3>Supersuite <sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicunit/Supersuite</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    NACSN-North American Commission on Stratigraphic Nomenclature, 2005, The American Association of Petroleum Geologists Bulletin, V. 89, No. 11, p. 1547-1591 . https://ngmdb.usgs.gov/Info/NACSN/Code2/code2.html#Article31Remarksa
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>A geologic unit that comprises two or more Suites or Complexes having a degree of natural relationship to one another, either in the vertical or the lateral sense. For cartographic and hierarchical purposes, supersuite is similar in rank to supergroup</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicunit/Lithodemic_Unit">gsgu:Lithodemic_Unit</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="System">
+        <h3>System<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicunit/System</code></td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicunit/Chronostratigraphic_Unit">gsgu:Chronostratigraphic_Unit</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/hosts">gsoc:hosts</a> <span class="cardinality">some</span> <a href="https://w3id.org/gso/geologictime/Period">gst:Period</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="lithotectonicunit">
+        <h3>lithotectonic unit<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicunit/Tectonic_Unit</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    Neuendorf, K.K.E., Mehl Jr., J.P. & Jackson, J.A., 2011: Glossary of Geology, 5th ed., revised. Alexandria, VA, American Geological Institute, 800 pp.
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Geologic unit defined defined on basis of structural or deformation features, mutual relations, origin or historical evolution. Contained material may be igneous, sedimentary, or metamorphic.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicunit/Lithogenetic_Unit">gsgu:Lithogenetic_Unit</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/isOutputOf">gsoc:isOutputOf</a> <span class="cardinality">some</span> <a href="https://w3id.org/gso/geologicprocess/Tectonic_Process">gspr:Tectonic_Process</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/common/externallyGenDependsOn">gsoc:externallyGenDependsOn</a> <span class="cardinality">some</span> <a href="https://w3id.org/gso/geologicprocess/Tectonic_Process">gspr:Tectonic_Process</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="zeolitemetamorphicfacies">
+        <h3>zeolite metamorphic facies<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicunit/Zeolite_Metamorphic_Facies</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    Smulikowski et al. 2003; Fettes and Desmons, 2007
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Metamorphic facies characterized in rocks of basaltic composition by zeolite minerals such as laumontite and heulandites (in place of other Ca-Al silicates such as prehnite, pumpellyite and epidote).</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicunit/Metamorphic_Facies">gsgu:Metamorphic_Facies</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+</section>
+  
+  <section id="namedindividuals">
+    <h2>Named Individuals <span style="float:right; font-size:smaller;"><a href="">&uparrow;</a></span></h2>
+    <ul class="hlist">
+        <li><a href="#Dr.BoyanBrodaric">Dr. Boyan Brodaric</a></li>
+        <li><a href="#Dr.StephenM.Richard">Dr. Stephen M. Richard</a></li>
+    </ul>
+    <div class="entity named_individual" id="Dr.BoyanBrodaric">
+        <h3>Dr. Boyan Brodaric<sup title="named individual" class="sup-ni">ni</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td>
+                  <code>
+                      https://w3id.org/gso/common/boyan_brodaric
+                  
+                  </code>
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    affiliation:  Natural Resources Canada, Geological Survey of Canada
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity named_individual" id="Dr.StephenM.Richard">
+        <h3>Dr. Stephen M. Richard<sup title="named individual" class="sup-ni">ni</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td>
+                  <code>
+                      https://w3id.org/gso/common/stephen_richard
+                  
+                  </code>
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    e-mail: mailto:smrTucson@gmail.com 
+                </td>
+            </tr>
+        </table>
+    </div>
+</section>
+  
+  <section id="namespaces">
+    <h2>Namespaces <span style="float:right; font-size:smaller;"><a href="">&uparrow;</a></span></h2>
+    <dl>
+        <dt>:</dt>
+        <dd><code>https://w3id.org/gso/geologicunit/ontology#</code></dd>
+        <dt>dct</dt>
+        <dd><code>http://purl.org/dc/terms/</code></dd>
+        <dt>gsgf</dt>
+        <dd><code>https://w3id.org/gso/geologicfeature/</code></dd>
+        <dt>gsgu</dt>
+        <dd><code>https://w3id.org/gso/geologicunit/</code></dd>
+        <dt>gsoc</dt>
+        <dd><code>https://w3id.org/gso/common/</code></dd>
+        <dt>gsog</dt>
+        <dd><code>https://w3id.org/gso/geology/</code></dd>
+        <dt>gspr</dt>
+        <dd><code>https://w3id.org/gso/geologicprocess/</code></dd>
+        <dt>gst</dt>
+        <dd><code>https://w3id.org/gso/geologictime/</code></dd>
+        <dt>owl</dt>
+        <dd><code>http://www.w3.org/2002/07/owl#</code></dd>
+        <dt>prov</dt>
+        <dd><code>http://www.w3.org/ns/prov#</code></dd>
+        <dt>rdf</dt>
+        <dd><code>http://www.w3.org/1999/02/22-rdf-syntax-ns#</code></dd>
+        <dt>rdfs</dt>
+        <dd><code>http://www.w3.org/2000/01/rdf-schema#</code></dd>
+        <dt>sdo</dt>
+        <dd><code>https://schema.org/</code></dd>
+        <dt>skos</dt>
+        <dd><code>http://www.w3.org/2004/02/skos/core#</code></dd>
+        <dt>xsd</dt>
+        <dd><code>http://www.w3.org/2001/XMLSchema#</code></dd>
+    </dl>
+</section>
+  <section id="legend">
+      <h2>Legend</h2>
+      <table class="entity">
+          <tr><td><sup class="sup-c" title="Classes">c</sup></td><td>Classes</td></tr>
+          <tr><td><sup class="sup-op" title="Object Properties">op</sup></td><td>Object Properties</td></tr>
+          <tr><td><sup class="sup-fp" title="Functional Properties">fp</sup></td><td>Functional Properties</td></tr>
+          <tr><td><sup class="sup-dp" title="Data Properties">dp</sup></td><td>Data Properties</td></tr>
+          <tr><td><sup class="sup-ap" title="Annotation Properties">dp</sup></td><td>Annotation Properties</td></tr>
+          <tr><td><sup class="sup-p" title="Properties">p</sup></td><td>Properties</td></tr>
+          <tr><td><sup class="sup-ni" title="Named Individuals">ni</sup></td><td>Named Individuals</td></tr>
+      </table>
+  </section>
+</body>
+</html>

@@ -1,0 +1,1452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Geoscience Ontology, Geologic Qualities</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    
+    <style>
+        #pylode {
+            position: fixed;
+            top: 130px;
+            left: -60px;
+            font-size: small;
+            transform: rotate(-90deg);
+            color: grey;
+        }
+        #pylode a {
+            font-size: 2em;
+            font-weight: bold;
+            text-decoration: none;
+            color: #005A9C;
+        }
+        #pylode a:hover {
+            color: #333;
+        }
+
+        .cardinality {
+            font-style: italic;
+            color: #aa00aa;
+        }
+
+        dt {
+            font-weight: bold;
+            padding: 5px 0 5px 0;
+        }
+
+        ul.hlist {
+            list-style-type: none;
+            border: 1px solid navy;
+            padding:5px;
+            background-color: #F4FFFF;
+        }
+
+        ul.hierarchy {
+            border: 1px solid navy;
+            padding: 5px 25px 5px 25px;
+            background-color: #F4FFFF;
+        }
+
+
+        ul.hlist li {
+            display: inline;
+            margin-right: 10px;
+        }
+
+        .entity {
+            border: 1px solid navy;
+            margin:5px 0 5px 0;
+            padding: 5px;
+        }
+
+        .entity th {
+            width: 150px;
+            vertical-align: top;
+        }
+
+        .entity th,
+        .entity td {
+            padding-bottom: 20px;
+        }
+
+        .entity table th {
+            text-align: left;
+        }
+
+        section#overview img {
+            max-width: 1000px;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            text-align: left
+        }
+        h1, h2, h3 {
+            color: #005A9C; background: white
+        }
+        h1 {
+            font: 170% sans-serif;
+            line-height: 110%;
+        }
+        h2 {
+            font: 140% sans-serif;
+            margin-top:40px;
+        }
+        h3 {
+            font: 120% sans-serif;
+            margin-top: 3px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid navy;
+        }
+        h4 { font: bold 100% sans-serif }
+        h5 { font: italic 100% sans-serif }
+        h6 { font: small-caps 100% sans-serif }
+
+
+        body {
+            padding: 2em 70px 2em 70px;
+            margin: 0;
+            font-family: sans-serif;
+            color: black;
+            background: white;
+            background-position: top left;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            text-align: justify;
+        }
+
+        section {
+            max-width: 1500px;
+        }
+
+        .figure {
+            margin-bottom: 20px;
+        }
+
+        :link { color: #00C; background: transparent }
+        :visited { color: #609; background: transparent }
+        a:active { color: #C00; background: transparent }
+
+        .sup-c,
+        .sup-op,
+        .sup-fp,
+        .sup-dp,
+        .sup-ap,
+        .sup-p,
+        .sup-ni,
+        .sup-cp,
+        .sup-cl {
+            cursor:help;
+            margin-left: 3px;
+        }
+
+        .sup-c {
+            color:orange;
+        }
+
+        .sup-op {
+            color:navy;
+        }
+
+        .sup-fp {
+            color:lightskyblue;
+        }
+
+        .sup-dp {
+            color:green;
+        }
+
+        .sup-ap {
+            color:darkred;
+        }
+
+        .sup-p {
+            color:black;
+        }
+
+        .sup-ni {
+            color:brown;
+        }
+
+        .sup-cp {
+            color:orange;
+        }
+
+        .sup-cl {
+            color:darkred;
+        }
+
+        code {
+            font-size: large;
+            color: darkred;
+        }
+
+        /* less prominent links for properties */
+        .proplink {
+            color: #336;
+            text-decoration: none;
+        }
+    </style>
+    
+    <script type="application/ld+json">
+      [
+  {
+    "@id": "https://w3id.org/gso/geologicquality/ontology",
+    "@type": [
+      "https://schema.org/DefinedTermSet"
+    ],
+    "https://schema.org/description": [
+      {
+        "@value": "<p>Physical qualities used in multiple GSO modules.</p>"
+      }
+    ],
+    "https://schema.org/license": [
+      {
+        "@id": "https://creativecommons.org/licenses/by/4.0/legalcode"
+      }
+    ],
+    "https://schema.org/name": [
+      {
+        "@value": "Geoscience Ontology, Geologic Qualities"
+      }
+    ],
+    "https://schema.org/rights": [
+      {
+        "@value": "&copy; &copy; 2021 Government of Canada"
+      }
+    ]
+  }
+]
+    </script>
+</head>
+<body>
+  <div id="pylode">made by <a href="http://github.com/rdflib/pyLODE">
+    <span style="color:#329545;">p</span><span style="color:#f9cb33;">y</span>LODE</a>
+    <span style="font-size:smaller;">2.8.6</span>
+  </div>
+  <h1>Geoscience Ontology, Geologic Qualities</h1>
+<section id="metadata">
+    <h2 style="display:none;">Metadata</h2>
+    <dl>
+        <dt>URI</dt>
+        <dd><code>https://w3id.org/gso/geologicquality/ontology</code></dd>
+        <dt><a class="proplink" href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/publisher">Publisher</a>(s)</dt>
+        <dd>
+            ARC Loop3D project;  https://loop3d.org/<br/>
+            Geological Survey of Canada, Natural Resources Canada, Government of Canada<br/>
+        </dd>
+        <dt><a class="proplink" href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/creator">Creator</a>(s)</dt>
+        <dd>
+            
+    <a href="https://w3id.org/gso/common/boyan_brodaric">None</a><br/>
+            
+    <a href="https://w3id.org/gso/common/stephen_richard">None</a><br/>
+        </dd>
+        <dt><a class="proplink" href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/created">Created</a></dt>
+        <dd>2021-03-26</dd>
+        <dt><a class="proplink" href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/modified">Modified</a></dt>
+        <dd>2021-03-26</dd>
+        <dt>Imports</dt>
+        <dd>
+            <a href="https://w3id.org/gso/common/ontology">gsoc:ontology</a><br/>
+            <a href="https://w3id.org/gso/geology/ontology">gsog:ontology</a><br/>
+            <a href="https://w3id.org/gso/quality/ontology">gsoq:ontology</a><br/>
+        </dd>
+        <dt>License &amp; Rights</dt>
+        <dd>
+            <a href="https://creativecommons.org/licenses/by/4.0/legalcode">https://creativecommons.org/licenses/by/4.0/legalcode</a><br />
+            &copy; &copy; 2021 Government of Canada
+        </dd>
+        <dt>Ontology RDF</dt>
+        <dd><a href="E:\GitHub\Loop3DGKM\Loop3D-GSO\Modules\GSO-Geologic_Quality.ttl">RDF (turtle)</a></dd>
+    </dl>
+    <h2>Description</h2>
+    <div id="description">
+        <p>Physical qualities used in multiple GSO modules.</p>
+    </div>
+</section>
+<section id="toc">
+    <h2>Table of Contents</h2>
+    <ol>
+        <li><a href="#classes">Classes</a></li>
+        <li><a href="#namedindividuals">Named Individuals</a></li>
+        <li><a href="#namespaces">Namespaces</a></li>
+        <li><a href="#legend">Legend</a></li>
+    </ol>
+</section>
+<section id="overview">
+    <h2>Overview</h2>
+    <div class="figure">
+        <div style="width:500px; height:50px; background-color: lightgrey; border:solid 2px grey; padding:10px;margin-bottom:5px; text-align:center;">Pictures say 1,000 words</div>
+        <div class="caption"><strong>Figure 1:</strong> Ontology overview</div>
+    </div>
+</section>
+  <section id="classes">
+    <h2>Classes <span style="float:right; font-size:smaller;"><a href="">&uparrow;</a></span></h2>
+    <ul class="hlist">
+        <li><a href="#Alterationdegree">Alteration degree</a></li>
+        <li><a href="#Azimuth">Azimuth</a></li>
+        <li><a href="#Bedding_Pattern">Bedding_Pattern</a></li>
+        <li><a href="#Bedding_Style">Bedding_Style</a></li>
+        <li><a href="#Bedding_Thickness">Bedding_Thickness</a></li>
+        <li><a href="#Consolidationdegree">Consolidation degree</a></li>
+        <li><a href="#Dip">Dip</a></li>
+        <li><a href="#Dip_Value">Dip_Value</a></li>
+        <li><a href="#Facingdirection">Facing direction</a></li>
+        <li><a href="#Facing_Value">Facing_Value</a></li>
+        <li><a href="#GentlyInclinded">Gently Inclinded </a></li>
+        <li><a href="#Gentlyplungingline">Gently plunging line</a></li>
+        <li><a href="#Horizontalinclination">Horizontal inclination </a></li>
+        <li><a href="#Horizontalline">Horizontal line </a></li>
+        <li><a href="#Inclined">Inclined</a></li>
+        <li><a href="#Lineorientation">Line orientation</a></li>
+        <li><a href="#Magneticsusceptibility">Magnetic susceptibility </a></li>
+        <li><a href="#Metamorphicgrade">Metamorphic grade</a></li>
+        <li><a href="#ModeratelyInclinded">Moderately Inclinded </a></li>
+        <li><a href="#Moderatelyplungingline">Moderately plunging line</a></li>
+        <li><a href="#Overturnedfacing">Overturned facing</a></li>
+        <li><a href="#Planeorientation">Plane orientation </a></li>
+        <li><a href="#Plunge">Plunge</a></li>
+        <li><a href="#Plunge_Value">Plunge_Value</a></li>
+        <li><a href="#Plungingline">Plunging line </a></li>
+        <li><a href="#SteeplyInclinded">Steeply Inclinded </a></li>
+        <li><a href="#Steeplyplungingline">Steeply plunging line</a></li>
+        <li><a href="#UnknownFacingDirection">Unknown Facing Direction</a></li>
+        <li><a href="#Uprightfacing">Upright facing</a></li>
+        <li><a href="#Verticalinclination">Vertical inclination </a></li>
+        <li><a href="#Verticalline">Vertical line</a></li>
+        <li><a href="#highmetamorphicgrade">high metamorphic grade</a></li>
+        <li><a href="#lowmetamorphicgrade">low metamorphic grade</a></li>
+        <li><a href="#mediummetamorphicgrade">medium metamorphic grade</a></li>
+        <li><a href="#metamorphosedgradenotspecified">metamorphosed grade not specified</a></li>
+        <li><a href="#notmetamorphosed">not metamorphosed</a></li>
+        <li><a href="#veryhighmetamorphicgrade">very high metamorphic grade</a></li>
+        <li><a href="#verylowmetamorphicgrade">very low metamorphic grade</a></li>
+    </ul>
+    <div class="entity class" id="Alterationdegree">
+        <h3>Alteration degree<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicquality/Alteration_Degree</code></td>
+            </tr>
+            <tr>
+                <th>Is Defined By</th>
+                <td>
+                    GeoSciML v4
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Specification of the strength of observed alteration. Can be used on Geologic_Unit or Rock_Material</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/Physical_Quality">gsoc:Physical_Quality</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/isQualityOf">gsoc:isQualityOf</a> <span class="cardinality">only</span> <a href="https://w3id.org/gso/geology/Rock_Body">gsog:Rock_Body</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Azimuth">
+        <h3>Azimuth<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicquality/Azimuth</code></td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Bearing of a horizontal line relative to north. Use for specifying the orientation of planar or linear features.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/quality/Orientation">gsoq:Orientation</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/hasValue">gsoc:hasValue</a> <span class="cardinality">some</span> (<a href="https://w3id.org/gso/common/Numeric_Value">gsoc:Numeric_Value</a><sup class="sup-c" title="class">c</sup> or <a href="https://w3id.org/gso/common/Named_Value">gsoc:Named_Value</a><sup class="sup-c" title="class">c</sup> or <a href="https://w3id.org/gso/common/Range_Value">gsoc:Range_Value</a><sup class="sup-c" title="class">c</sup>)<br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Bedding_Pattern">
+        <h3>Bedding_Pattern<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicquality/Bedding_Pattern</code></td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/Physical_Quality">gsoc:Physical_Quality</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/isQualityOf">gsoc:isQualityOf</a> <span class="cardinality">only</span> <a href="https://w3id.org/gso/geology/Rock_Body">gsog:Rock_Body</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Bedding_Style">
+        <h3>Bedding_Style<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicquality/Bedding_Style</code></td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/Physical_Quality">gsoc:Physical_Quality</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/isQualityOf">gsoc:isQualityOf</a> <span class="cardinality">only</span> <a href="https://w3id.org/gso/geology/Rock_Body">gsog:Rock_Body</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Bedding_Thickness">
+        <h3>Bedding_Thickness<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicquality/Bedding_Thickness</code></td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/quality/Thickness">gsoq:Thickness</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/isQualityOf">gsoc:isQualityOf</a> <span class="cardinality">only</span> <a href="https://w3id.org/gso/geology/Rock_Body">gsog:Rock_Body</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Consolidationdegree">
+        <h3>Consolidation degree<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicquality/Consolidation_Degree</code></td>
+            </tr>
+            <tr>
+                <th>Is Defined By</th>
+                <td>
+                    GeoSciML v4
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>A property that specifies the degree to which an aggregation of EarthMaterial particles is a distinct solid material. Consolidation and induration are related concepts specified by this property. They define a continuum from unconsolidated material to very hard rock. Induration is the degree to which a consolidated material is made hard, operationally determined by how difficult it is to break a piece of the material. Consolidated materials may have varying degrees of induration (NADMSC, 2004)</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/Physical_Quality">gsoc:Physical_Quality</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/isQualityOf">gsoc:isQualityOf</a> <span class="cardinality">only</span> <a href="https://w3id.org/gso/geology/Rock_Material">gsog:Rock_Material</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Dip">
+        <h3>Dip<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicquality/Dip</code></td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>the maximum angle between a horizontal surface and a planar feature</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/quality/Orientation">gsoq:Orientation</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/hasQuality">gsoc:hasQuality</a> <span class="cardinality">some</span> (<a href="https://w3id.org/gso/common/Numeric_Value">gsoc:Numeric_Value</a><sup class="sup-c" title="class">c</sup> or <a href="https://w3id.org/gso/common/Named_Value">gsoc:Named_Value</a><sup class="sup-c" title="class">c</sup> or <a href="https://w3id.org/gso/common/Range_Value">gsoc:Range_Value</a><sup class="sup-c" title="class">c</sup>)<br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Dip_Value">
+        <h3>Dip_Value<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicquality/Dip_Value</code></td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/quality/Orientation_Value">gsoq:Orientation_Value</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/isValueOf">gsoc:isValueOf</a> <span class="cardinality">only</span> <a href="https://w3id.org/gso/geologicquality/Dip">gsgq:Dip</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Sub-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicquality/Horizonatal_Inclination">gsgq:Horizonatal_Inclination</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicquality/Vertical_Inclination">gsgq:Vertical_Inclination</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicquality/Inclined">gsgq:Inclined</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Facingdirection">
+        <h3>Facing direction<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicquality/Facing</code></td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>property to specify if a surface is directed, i.e. has a top and bottom. Values: {upright, overturned, unknown}</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/quality/Orientation">gsoq:Orientation</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Facing_Value">
+        <h3>Facing_Value<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicquality/Facing_Value</code></td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/quality/Orientation_Value">gsoq:Orientation_Value</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/isValueOf">gsoc:isValueOf</a> <span class="cardinality">only</span> <a href="https://w3id.org/gso/geologicquality/Facing">gsgq:Facing</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Sub-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicquality/Unknown_Facing">gsgq:Unknown_Facing</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicquality/Overturned">gsgq:Overturned</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicquality/Upright_Facing">gsgq:Upright_Facing</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="GentlyInclinded">
+        <h3>Gently Inclinded <sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicquality/Gently_Inclined</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    Fleuty (1964) Folds classification.
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Surface dips between 10 and 30 degrees; typically used to describe orientation of fold hinge surface or axial surface, but could be applied to any geologic surface.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicquality/Inclined">gsgq:Inclined</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Gentlyplungingline">
+        <h3>Gently plunging line<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicquality/Gently_Plunging_Line</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    Fleuty (1964) Folds classification.
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>line plunges between 10 and 30 degrees.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicquality/Plunging_Line">gsgq:Plunging_Line</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="highmetamorphicgrade">
+        <h3>high metamorphic grade<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicquality/High_Metamorphic_Grade</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    Smulikowski et al, 2003; Fry, 1984
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Protolith structures almost always obliterated, evidence of partial melting common. Includes rocks metamorphosed in high-temperature amphibolite, pyroxene hornfels, and medium to high-temperature eclogite facies. Mineral assemblages according to Fry (1984) Table 10-1: ultramafic-olivine, anthophyllite, cummingtonite, enstatite, mafic-hornblende, (diopside, garnet), calc-aluminous basic-plagioclase, pelite, semi-pelite -- K-feldspar, biotite, quartz, Al-minerals (garnet), migmatite.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicquality/Metamorphosed">gsgq:Metamorphosed</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Horizontalinclination">
+        <h3>Horizontal inclination <sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicquality/Horizonatal_Inclination</code></td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Surface dips between 0 and 10 degrees. Equivalent term 'recumbent' used to describe orientation of fold hing surface or axial surface</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicquality/Dip_Value">gsgq:Dip_Value</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Horizontalline">
+        <h3>Horizontal line <sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicquality/Horizontal_Line</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    Fleuty (1964) Folds classification.
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>line plunges between 0 and 10 degrees.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicquality/Plunge_Value">gsgq:Plunge_Value</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Inclined">
+        <h3>Inclined<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicquality/Inclined</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    Fleuty (1964) Folds classification.
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Surface dips between 10 and 80 degrees; typically used to describe orientation of fold hinge surface or axial surface, but could be applied to any geologic surface.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicquality/Dip_Value">gsgq:Dip_Value</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Sub-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicquality/Gently_Inclined">gsgq:Gently_Inclined</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicquality/Steeply_Inclined">gsgq:Steeply_Inclined</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicquality/Moderately_Inclined">gsgq:Moderately_Inclined</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Lineorientation">
+        <h3>Line orientation<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicquality/Line_Orientation</code></td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>specification of the orientation of a line in space, using a trend (bearing of horizontal projection of line relative to geographic north) and plunge (inclination of line measured positive downward in degrees from local horizontal).  TBD:  add 'isdirected property to indicate if the line is directed (e.g. sense of shear), values should be Boolean,</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/quality/Orientation">gsoq:Orientation</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/hasQuality">gsoc:hasQuality</a> <span class="cardinality">only</span> (<a href="https://w3id.org/gso/geologicquality/Azimuth">gsgq:Azimuth</a><sup class="sup-c" title="class">c</sup> or <a href="https://w3id.org/gso/geologicquality/Plunge">gsgq:Plunge</a><sup class="sup-c" title="class">c</sup>)<br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="lowmetamorphicgrade">
+        <h3>low metamorphic grade<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicquality/Low_Metamorphic_Grade</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    Smulikowski et al, 2003; Fry, 1984
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Metamorphic effects clearly visible, protolith structures typically still observable, includes rocks metamorphosed in greenschisthigh-temperature blueschist, very low temperature eclogite facies. Mineral assemblages according to Fry (1984) Table 10-1: ultramafic-serpentine (talc, magnesite),  mafic-chlorite, actinolite (garnet), calc-aluminous basic-albite, epidote, pelite, semi-pelite -- white mica, chlorite, quartz, biotite (garnet, Al-minerals).</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicquality/Metamorphosed">gsgq:Metamorphosed</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Magneticsusceptibility">
+        <h3>Magnetic susceptibility <sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicquality/Magnetic_Susceptibility</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    <a href="https://en.wikipedia.org/wiki/Magnetic_susceptibility">https://en.wikipedia.org/wiki/Magnetic_susceptibility</a>
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>a measure of how much a material will become magnetized in an applied magnetic field. It is the ratio of magnetization M (magnetic moment per unit volume) to the applied magnetizing field intensity H. This allows a simple classification, into two categories, of most materials' responses to an applied magnetic field: an alignment with the magnetic field, χ &gt; 0, called paramagnetism, or an alignment against the field, χ &lt; 0, called diamagnetism.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/Physical_Quality">gsoc:Physical_Quality</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/isQualityOf">gsoc:isQualityOf</a> <span class="cardinality">only</span> <a href="https://w3id.org/gso/common/Amount_Of_Matter">gsoc:Amount_Of_Matter</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="mediummetamorphicgrade">
+        <h3>medium metamorphic grade<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicquality/Medium_Metamorphic_Grade</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    Smulikowski et al, 2003; Fry, 1984
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Protolith structure typically obliterated. Includes rocks metamorphosed in high-temperature epidote-amphibolite, low-temperature amphibolite, and low temperature eclogite facies. Mineral assemblages according to Fry (1984) Table 10-1: ultramafic-olivine, talc (magnesite, anthophyllite), mafic-hornblende, (diopside, garnet), calc-aluminous basic-plagioclase, pelite, semi-pelite -- white mica, biotite, quartz (garnet, Al-minerals).</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicquality/Metamorphosed">gsgq:Metamorphosed</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Metamorphicgrade">
+        <h3>Metamorphic grade<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicquality/Metamorphic_Grade</code></td>
+            </tr>
+            <tr>
+                <th>Is Defined By</th>
+                <td>
+                    GeoSciML v4
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>A term to indicate the intensity or rank of metamorphism applied to an EarthMaterial (eg: high metamorphic grade, low metamorphic grade). Indicates in a general way the P-T environment in which the metamorphism took place. Determination of metamorphic grade is based on mineral assemblages (ie, facies) present in a rock that are interpreted to have crystallized in equilibrium during a particular metamorphic event.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/Physical_Quality">gsoc:Physical_Quality</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="metamorphosedgradenotspecified">
+        <h3>metamorphosed grade not specified<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicquality/Metamorphosed</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    CGI metamorphicgrade SKOS vocabulary 2016-11-22
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Rock is metamorphosed, may have any value for metamorphic grade except 'not metamorphosed'.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/Named_Value">gsoc:Named_Value</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/isValueOf">gsoc:isValueOf</a> <span class="cardinality">exactly</span> 1 <a href="https://w3id.org/gso/geologicquality/Metamorphic_Grade">gsgq:Metamorphic_Grade</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/common/isValueOf">gsoc:isValueOf</a> <span class="cardinality">only</span> <a href="https://w3id.org/gso/geologicquality/Metamorphic_Grade">gsgq:Metamorphic_Grade</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Sub-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicquality/Low_Metamorphic_Grade">gsgq:Low_Metamorphic_Grade</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicquality/Medium_Metamorphic_Grade">gsgq:Medium_Metamorphic_Grade</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicquality/High_Metamorphic_Grade">gsgq:High_Metamorphic_Grade</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicquality/Very_Low_Metamorphic_Grade">gsgq:Very_Low_Metamorphic_Grade</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicquality/Very_High_Metamorphic_Grade">gsgq:Very_High_Metamorphic_Grade</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="ModeratelyInclinded">
+        <h3>Moderately Inclinded <sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicquality/Moderately_Inclined</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    Fleuty (1964) Folds classification.
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Surface dips between 30 and 60 degrees; typically used to describe orientation of fold hing surface or axial surface, but could be applied to any geologic surface.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicquality/Inclined">gsgq:Inclined</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Moderatelyplungingline">
+        <h3>Moderately plunging line<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicquality/Moderately_Plunging_Line</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    Fleuty (1964) Folds classification.
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>line plunges between 30 and 60 degrees.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicquality/Plunging_Line">gsgq:Plunging_Line</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="notmetamorphosed">
+        <h3>not metamorphosed<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicquality/Not_Metamorphosed</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    CGI metamorphicgrade SKOS vocabulary 2016-11-22
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Rock is not metamorphose'.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/Named_Value">gsoc:Named_Value</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/isValueOf">gsoc:isValueOf</a> <span class="cardinality">exactly</span> 1 <a href="https://w3id.org/gso/geologicquality/Metamorphic_Grade">gsgq:Metamorphic_Grade</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/common/isValueOf">gsoc:isValueOf</a> <span class="cardinality">only</span> <a href="https://w3id.org/gso/geologicquality/Metamorphic_Grade">gsgq:Metamorphic_Grade</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Overturnedfacing">
+        <h3>Overturned facing<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicquality/Overturned</code></td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>top of surface is facing downward, toward Earth interior.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicquality/Facing_Value">gsgq:Facing_Value</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Planeorientation">
+        <h3>Plane orientation <sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicquality/Plane_Orientation</code></td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Quality to specify the orientation of a surface in a geogaphic reference system</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/quality/Orientation">gsoq:Orientation</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Plunge">
+        <h3>Plunge<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicquality/Plunge</code></td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Numeric value should be between +90 and -90.   Negative values only valid if the linear feature is directed.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/quality/Orientation">gsoq:Orientation</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/hasQuality">gsoc:hasQuality</a> <span class="cardinality">some</span> (<a href="https://w3id.org/gso/common/Numeric_Value">gsoc:Numeric_Value</a><sup class="sup-c" title="class">c</sup> or <a href="https://w3id.org/gso/common/Named_Value">gsoc:Named_Value</a><sup class="sup-c" title="class">c</sup> or <a href="https://w3id.org/gso/common/Range_Value">gsoc:Range_Value</a><sup class="sup-c" title="class">c</sup>)<br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Plunge_Value">
+        <h3>Plunge_Value<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicquality/Plunge_Value</code></td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/quality/Orientation_Value">gsoq:Orientation_Value</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/isValueOf">gsoc:isValueOf</a> <span class="cardinality">only</span> <a href="https://w3id.org/gso/geologicquality/Plunge">gsgq:Plunge</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Sub-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicquality/Horizontal_Line">gsgq:Horizontal_Line</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicquality/Plunging_Line">gsgq:Plunging_Line</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicquality/Vertical_Line">gsgq:Vertical_Line</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Plungingline">
+        <h3>Plunging line <sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicquality/Plunging_Line</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    Fleuty (1964) Folds classification.
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>line plunges between 10 and 80 degrees.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicquality/Plunge_Value">gsgq:Plunge_Value</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Sub-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicquality/Gently_Plunging_Line">gsgq:Gently_Plunging_Line</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicquality/Steeply_Plunging_Line">gsgq:Steeply_Plunging_Line</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicquality/Moderately_Plunging_Line">gsgq:Moderately_Plunging_Line</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="SteeplyInclinded">
+        <h3>Steeply Inclinded <sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicquality/Steeply_Inclined</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    Fleuty (1964) Folds classification.
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Surface dips between 60 and 80 degrees; typically used to describe orientation of fold hing surface or axial surface, but could be applied to any geologic surface.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicquality/Inclined">gsgq:Inclined</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Steeplyplungingline">
+        <h3>Steeply plunging line<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicquality/Steeply_Plunging_Line</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    Fleuty (1964) Folds classification.
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>line plunges between 60 and 80 degrees.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicquality/Plunging_Line">gsgq:Plunging_Line</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="UnknownFacingDirection">
+        <h3>Unknown Facing Direction<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicquality/Unknown_Facing</code></td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Facing direction is unknown {@en}   </p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicquality/Facing_Value">gsgq:Facing_Value</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Uprightfacing">
+        <h3>Upright facing<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicquality/Upright_Facing</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    Fleuty (1964) Folds classification.
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>top of surface is away from center of earth.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicquality/Facing_Value">gsgq:Facing_Value</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Verticalinclination">
+        <h3>Vertical inclination <sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicquality/Vertical_Inclination</code></td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Surface dips between 80 and 90 degrees. Equivalent term 'upright' is used to describe orientation of fold hing surface or axial surface</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicquality/Dip_Value">gsgq:Dip_Value</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Verticalline">
+        <h3>Vertical line<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicquality/Vertical_Line</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    Fleuty (1964) Folds classification.
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>line plunges between 80 and 90 degrees.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicquality/Plunge_Value">gsgq:Plunge_Value</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="veryhighmetamorphicgrade">
+        <h3>very high metamorphic grade<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicquality/Very_High_Metamorphic_Grade</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    Smulikowski et al, 2003; Fry, 1984
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Protolith structures almost always obliterated. Includes rocks metamorphosed in granulite (or sanidinite), and high-temperature eclogite facies. Mineral assemblages according to Fry (1984) Table 10-1: ultramafic-olivine, enstatite, mafic-hypersthene, diopside (hornblende), calc-aluminous basic-plagioclase, pelite, semi-pelite -- hypersthene + Al-minerals (K-feldspar, quartz), or sapphirine.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicquality/Metamorphosed">gsgq:Metamorphosed</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="verylowmetamorphicgrade">
+        <h3>very low metamorphic grade<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicquality/Very_Low_Metamorphic_Grade</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    Smulikowski et al, 2003; Fry, 1984
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Rock very slightly metamorphosed, protolith structure ubiquitous, mineral assemblage of zeolite facies, subgreenschist facies, or low temperature part of blueschist facies. Mineral assemblages according to Fry (1984) Table 10-1: ultramafic-serpentine (quartz, magnesite), mafic-clay, chlorite, relict igneous minerals, calc-aluminous basic-zeolite, pumpellite, epidote, albite, pelite, semi-pelite -- clays, chlorite, sericite, quartz.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicquality/Metamorphosed">gsgq:Metamorphosed</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+</section>
+  
+  <section id="namedindividuals">
+    <h2>Named Individuals <span style="float:right; font-size:smaller;"><a href="">&uparrow;</a></span></h2>
+    <ul class="hlist">
+        <li><a href="#Dr.BoyanBrodaric">Dr. Boyan Brodaric</a></li>
+        <li><a href="#Dr.StephenM.Richard">Dr. Stephen M. Richard</a></li>
+    </ul>
+    <div class="entity named_individual" id="Dr.BoyanBrodaric">
+        <h3>Dr. Boyan Brodaric<sup title="named individual" class="sup-ni">ni</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td>
+                  <code>
+                      https://w3id.org/gso/common/boyan_brodaric
+                  
+                  </code>
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    affiliation:  Natural Resources Canada, Geological Survey of Canada
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity named_individual" id="Dr.StephenM.Richard">
+        <h3>Dr. Stephen M. Richard<sup title="named individual" class="sup-ni">ni</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td>
+                  <code>
+                      https://w3id.org/gso/common/stephen_richard
+                  
+                  </code>
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    e-mail: mailto:smrTucson@gmail.com 
+                </td>
+            </tr>
+        </table>
+    </div>
+</section>
+  
+  <section id="namespaces">
+    <h2>Namespaces <span style="float:right; font-size:smaller;"><a href="">&uparrow;</a></span></h2>
+    <dl>
+        <dt>dct</dt>
+        <dd><code>http://purl.org/dc/terms/</code></dd>
+        <dt>gsgq</dt>
+        <dd><code>https://w3id.org/gso/geologicquality/</code></dd>
+        <dt>gsoc</dt>
+        <dd><code>https://w3id.org/gso/common/</code></dd>
+        <dt>gsog</dt>
+        <dd><code>https://w3id.org/gso/geology/</code></dd>
+        <dt>gsoq</dt>
+        <dd><code>https://w3id.org/gso/quality/</code></dd>
+        <dt>owl</dt>
+        <dd><code>http://www.w3.org/2002/07/owl#</code></dd>
+        <dt>prov</dt>
+        <dd><code>http://www.w3.org/ns/prov#</code></dd>
+        <dt>rdf</dt>
+        <dd><code>http://www.w3.org/1999/02/22-rdf-syntax-ns#</code></dd>
+        <dt>rdfs</dt>
+        <dd><code>http://www.w3.org/2000/01/rdf-schema#</code></dd>
+        <dt>sdo</dt>
+        <dd><code>https://schema.org/</code></dd>
+        <dt>skos</dt>
+        <dd><code>http://www.w3.org/2004/02/skos/core#</code></dd>
+        <dt>xsd</dt>
+        <dd><code>http://www.w3.org/2001/XMLSchema#</code></dd>
+    </dl>
+</section>
+  <section id="legend">
+      <h2>Legend</h2>
+      <table class="entity">
+          <tr><td><sup class="sup-c" title="Classes">c</sup></td><td>Classes</td></tr>
+          <tr><td><sup class="sup-op" title="Object Properties">op</sup></td><td>Object Properties</td></tr>
+          <tr><td><sup class="sup-fp" title="Functional Properties">fp</sup></td><td>Functional Properties</td></tr>
+          <tr><td><sup class="sup-dp" title="Data Properties">dp</sup></td><td>Data Properties</td></tr>
+          <tr><td><sup class="sup-ap" title="Annotation Properties">dp</sup></td><td>Annotation Properties</td></tr>
+          <tr><td><sup class="sup-p" title="Properties">p</sup></td><td>Properties</td></tr>
+          <tr><td><sup class="sup-ni" title="Named Individuals">ni</sup></td><td>Named Individuals</td></tr>
+      </table>
+  </section>
+</body>
+</html>

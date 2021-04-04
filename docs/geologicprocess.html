@@ -1,0 +1,2983 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Geoscience Ontology, Geologic Processes</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    
+    <style>
+        #pylode {
+            position: fixed;
+            top: 130px;
+            left: -60px;
+            font-size: small;
+            transform: rotate(-90deg);
+            color: grey;
+        }
+        #pylode a {
+            font-size: 2em;
+            font-weight: bold;
+            text-decoration: none;
+            color: #005A9C;
+        }
+        #pylode a:hover {
+            color: #333;
+        }
+
+        .cardinality {
+            font-style: italic;
+            color: #aa00aa;
+        }
+
+        dt {
+            font-weight: bold;
+            padding: 5px 0 5px 0;
+        }
+
+        ul.hlist {
+            list-style-type: none;
+            border: 1px solid navy;
+            padding:5px;
+            background-color: #F4FFFF;
+        }
+
+        ul.hierarchy {
+            border: 1px solid navy;
+            padding: 5px 25px 5px 25px;
+            background-color: #F4FFFF;
+        }
+
+
+        ul.hlist li {
+            display: inline;
+            margin-right: 10px;
+        }
+
+        .entity {
+            border: 1px solid navy;
+            margin:5px 0 5px 0;
+            padding: 5px;
+        }
+
+        .entity th {
+            width: 150px;
+            vertical-align: top;
+        }
+
+        .entity th,
+        .entity td {
+            padding-bottom: 20px;
+        }
+
+        .entity table th {
+            text-align: left;
+        }
+
+        section#overview img {
+            max-width: 1000px;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            text-align: left
+        }
+        h1, h2, h3 {
+            color: #005A9C; background: white
+        }
+        h1 {
+            font: 170% sans-serif;
+            line-height: 110%;
+        }
+        h2 {
+            font: 140% sans-serif;
+            margin-top:40px;
+        }
+        h3 {
+            font: 120% sans-serif;
+            margin-top: 3px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid navy;
+        }
+        h4 { font: bold 100% sans-serif }
+        h5 { font: italic 100% sans-serif }
+        h6 { font: small-caps 100% sans-serif }
+
+
+        body {
+            padding: 2em 70px 2em 70px;
+            margin: 0;
+            font-family: sans-serif;
+            color: black;
+            background: white;
+            background-position: top left;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            text-align: justify;
+        }
+
+        section {
+            max-width: 1500px;
+        }
+
+        .figure {
+            margin-bottom: 20px;
+        }
+
+        :link { color: #00C; background: transparent }
+        :visited { color: #609; background: transparent }
+        a:active { color: #C00; background: transparent }
+
+        .sup-c,
+        .sup-op,
+        .sup-fp,
+        .sup-dp,
+        .sup-ap,
+        .sup-p,
+        .sup-ni,
+        .sup-cp,
+        .sup-cl {
+            cursor:help;
+            margin-left: 3px;
+        }
+
+        .sup-c {
+            color:orange;
+        }
+
+        .sup-op {
+            color:navy;
+        }
+
+        .sup-fp {
+            color:lightskyblue;
+        }
+
+        .sup-dp {
+            color:green;
+        }
+
+        .sup-ap {
+            color:darkred;
+        }
+
+        .sup-p {
+            color:black;
+        }
+
+        .sup-ni {
+            color:brown;
+        }
+
+        .sup-cp {
+            color:orange;
+        }
+
+        .sup-cl {
+            color:darkred;
+        }
+
+        code {
+            font-size: large;
+            color: darkred;
+        }
+
+        /* less prominent links for properties */
+        .proplink {
+            color: #336;
+            text-decoration: none;
+        }
+    </style>
+    
+    <script type="application/ld+json">
+      [
+  {
+    "@id": "https://w3id.org/gso/geologicprocess/ontology",
+    "@type": [
+      "https://schema.org/DefinedTermSet"
+    ],
+    "https://schema.org/description": [
+      {
+        "@value": "<p>Taken primarily from the 2016 SKOS-RDF version of the CGI Event Process vocabulary. This scheme specifies types used to describe the geological processes that are associated with geological events, as defined by the IUGS Commission for Geoscience Information (CGI) Geoscience Terminology Working Group.</p>"
+      }
+    ],
+    "https://schema.org/license": [
+      {
+        "@id": "https://creativecommons.org/licenses/by/4.0/legalcode"
+      }
+    ],
+    "https://schema.org/name": [
+      {
+        "@value": "Geoscience Ontology, Geologic Processes"
+      }
+    ],
+    "https://schema.org/rights": [
+      {
+        "@value": "&copy; &copy; 2021 Government of Canada"
+      }
+    ]
+  }
+]
+    </script>
+</head>
+<body>
+  <div id="pylode">made by <a href="http://github.com/rdflib/pyLODE">
+    <span style="color:#329545;">p</span><span style="color:#f9cb33;">y</span>LODE</a>
+    <span style="font-size:smaller;">2.8.6</span>
+  </div>
+  <h1>Geoscience Ontology, Geologic Processes</h1>
+<section id="metadata">
+    <h2 style="display:none;">Metadata</h2>
+    <dl>
+        <dt>URI</dt>
+        <dd><code>https://w3id.org/gso/geologicprocess/ontology</code></dd>
+        <dt><a class="proplink" href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/publisher">Publisher</a>(s)</dt>
+        <dd>
+            ARC Loop3D project;  https://loop3d.org/<br/>
+            Geological Survey of Canada, Natural Resources Canada, Government of Canada<br/>
+        </dd>
+        <dt><a class="proplink" href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/creator">Creator</a>(s)</dt>
+        <dd>
+            
+    <a href="https://w3id.org/gso/common/boyan_brodaric">None</a><br/>
+            
+    <a href="https://w3id.org/gso/common/stephen_richard">None</a><br/>
+            CGI Geoscience Terminology Working Group, OWL adaptation by Stephen Richard for Loop3D project<br/>
+        </dd>
+        <dt><a class="proplink" href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/created">Created</a></dt>
+        <dd>2021-03-26</dd>
+        <dt><a class="proplink" href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/modified">Modified</a></dt>
+        <dd>2021-03-26</dd>
+        <dt>Imports</dt>
+        <dd>
+            <a href="https://w3id.org/gso/common/ontology">gsoc:ontology</a><br/>
+            <a href="https://w3id.org/gso/geology/ontology">gsog:ontology</a><br/>
+        </dd>
+        <dt>License &amp; Rights</dt>
+        <dd>
+            <a href="https://creativecommons.org/licenses/by/4.0/legalcode">https://creativecommons.org/licenses/by/4.0/legalcode</a><br />
+            &copy; &copy; 2021 Government of Canada
+        </dd>
+        <dt>Ontology RDF</dt>
+        <dd><a href="E:\GitHub\Loop3DGKM\Loop3D-GSO\Modules\GSO-Geologic_Process.ttl">RDF (turtle)</a></dd>
+    </dl>
+    <h2>Description</h2>
+    <div id="description">
+        <p>Taken primarily from the 2016 SKOS-RDF version of the CGI Event Process vocabulary. This scheme specifies types used to describe the geological processes that are associated with geological events, as defined by the IUGS Commission for Geoscience Information (CGI) Geoscience Terminology Working Group.</p>
+    </div>
+</section>
+<section id="toc">
+    <h2>Table of Contents</h2>
+    <ol>
+        <li><a href="#classes">Classes</a></li>
+        <li><a href="#namedindividuals">Named Individuals</a></li>
+        <li><a href="#namespaces">Namespaces</a></li>
+        <li><a href="#legend">Legend</a></li>
+    </ol>
+</section>
+<section id="overview">
+    <h2>Overview</h2>
+    <div class="figure">
+        <div style="width:500px; height:50px; background-color: lightgrey; border:solid 2px grey; padding:10px;margin-bottom:5px; text-align:center;">Pictures say 1,000 words</div>
+        <div class="caption"><strong>Figure 1:</strong> Ontology overview</div>
+    </div>
+</section>
+  <section id="classes">
+    <h2>Classes <span style="float:right; font-size:smaller;"><a href="">&uparrow;</a></span></h2>
+    <ul class="hlist">
+        <li><a href="#BiologicalProcess">Biological Process</a></li>
+        <li><a href="#DeepWaterOxygenDepletion">Deep Water Oxygen Depletion</a></li>
+        <li><a href="#DepositionHiatus">Deposition Hiatus </a></li>
+        <li><a href="#DuctileFlattening">Ductile Flattening</a></li>
+        <li><a href="#DuctileSimpleShear">Ductile Simple Shear</a></li>
+        <li><a href="#Evolution">Evolution</a></li>
+        <li><a href="#Flexuralslipfolding@en}">Flexural slip folding @en}</a></li>
+        <li><a href="#Geodynamoprocess">Geodynamo process</a></li>
+        <li><a href="#GeomagneticProcess">Geomagnetic Process</a></li>
+        <li><a href="#HumanActivity">Human Activity</a></li>
+        <li><a href="#Humanmaterialdeposition">Human material deposition </a></li>
+        <li><a href="#LavaFlow">Lava Flow </a></li>
+        <li><a href="#MagmaticProcess">Magmatic Process</a></li>
+        <li><a href="#MaterialTransportAndDeposition">Material Transport And Deposition</a></li>
+        <li><a href="#MetamorphicProcess">Metamorphic Process</a></li>
+        <li><a href="#Metasomatismorhydrothermalprocess">Metasomatism or hydrothermal process</a></li>
+        <li><a href="#Mountainbuilding">Mountain building</a></li>
+        <li><a href="#Pyrometamorphism">Pyrometamorphism </a></li>
+        <li><a href="#Rockformingprocess">Rock forming process </a></li>
+        <li><a href="#SedimentaryProcess">Sedimentary Process</a></li>
+        <li><a href="#TectonicProcess">Tectonic Process</a></li>
+        <li><a href="#accretion">accretion</a></li>
+        <li><a href="#biologicalprecipitation">biological precipitation</a></li>
+        <li><a href="#biologicalweathering">biological weathering</a></li>
+        <li><a href="#cataclasticdeformation">cataclastic deformation</a></li>
+        <li><a href="#chemicalprecipitation">chemical precipitation</a></li>
+        <li><a href="#chemicalweathering">chemical weathering</a></li>
+        <li><a href="#contactmetamorphism">contact metamorphism</a></li>
+        <li><a href="#continentalbreakup">continental breakup</a></li>
+        <li><a href="#continentalcollision">continental collision</a></li>
+        <li><a href="#debrisflowdeposition">debris flow deposition</a></li>
+        <li><a href="#deformationtwinning">deformation twinning</a></li>
+        <li><a href="#deposition">deposition</a></li>
+        <li><a href="#depositionfrommovingfluid">deposition from moving fluid</a></li>
+        <li><a href="#diageneticprocess">diagenetic process</a></li>
+        <li><a href="#diffusioncreep">diffusion creep</a></li>
+        <li><a href="#dislocationmetamorphism">dislocation metamorphism</a></li>
+        <li><a href="#dissolution">dissolution</a></li>
+        <li><a href="#dissolutioncreep">dissolution creep</a></li>
+        <li><a href="#ductileflow">ductile flow</a></li>
+        <li><a href="#effusiveeruption">effusive eruption</a></li>
+        <li><a href="#erosion">erosion</a></li>
+        <li><a href="#eruption">eruption</a></li>
+        <li><a href="#excavation">excavation</a></li>
+        <li><a href="#extinction">extinction</a></li>
+        <li><a href="#faulting">faulting</a></li>
+        <li><a href="#folding">folding</a></li>
+        <li><a href="#fracturing">fracturing</a></li>
+        <li><a href="#frostshattering">frost shattering</a></li>
+        <li><a href="#grading">grading</a></li>
+        <li><a href="#haloclasty">haloclasty</a></li>
+        <li><a href="#hawaiianeruption">hawaiian eruption</a></li>
+        <li><a href="#hydration">hydration</a></li>
+        <li><a href="#hydrolysis">hydrolysis</a></li>
+        <li><a href="#iceerosion">ice erosion</a></li>
+        <li><a href="#impactprocess">impact process</a></li>
+        <li><a href="#intrusion">intrusion</a></li>
+        <li><a href="#magmaticcrystallisation">magmatic crystallisation</a></li>
+        <li><a href="#masswasting">mass wasting</a></li>
+        <li><a href="#masswastingdeposition">mass wasting deposition</a></li>
+        <li><a href="#mechanicaldeposition">mechanical deposition</a></li>
+        <li><a href="#melting">melting</a></li>
+        <li><a href="#microfracturing">microfracturing</a></li>
+        <li><a href="#obduction">obduction</a></li>
+        <li><a href="#organicaccumulation">organic accumulation</a></li>
+        <li><a href="#oxidation">oxidation</a></li>
+        <li><a href="#partialmelting">partial melting</a></li>
+        <li><a href="#physicalweathering">physical weathering</a></li>
+        <li><a href="#plinianeruption">plinian eruption</a></li>
+        <li><a href="#polarwander">polar wander</a></li>
+        <li><a href="#pressurereleaseweathering">pressure release weathering</a></li>
+        <li><a href="#pyroclasticeruption">pyroclastic eruption</a></li>
+        <li><a href="#regionalmetamorphicgenesis">regional metamorphic genesis</a></li>
+        <li><a href="#rifting">rifting</a></li>
+        <li><a href="#shearing">shearing</a></li>
+        <li><a href="#speciation">speciation</a></li>
+        <li><a href="#spreading">spreading</a></li>
+        <li><a href="#strombolianeruption">strombolian eruption</a></li>
+        <li><a href="#subaerialextrusion">subaerial extrusion</a></li>
+        <li><a href="#subaqueousextrusion">subaqueous extrusion</a></li>
+        <li><a href="#subduction">subduction</a></li>
+        <li><a href="#thermalshockweathering">thermal shock weathering</a></li>
+        <li><a href="#transformfaulting">transform faulting</a></li>
+        <li><a href="#turbiditycurrentdeposition">turbidity current deposition</a></li>
+        <li><a href="#vulcanianeruption">vulcanian eruption</a></li>
+        <li><a href="#watererosion">water erosion</a></li>
+        <li><a href="#weathering">weathering</a></li>
+        <li><a href="#winderosion">wind erosion</a></li>
+    </ul>
+    <div class="entity class" id="accretion">
+        <h3>accretion<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Accretion</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    Neuendorf, K.K.E, Mehl, J.P. & Jackson, J.A. (eds), 2005. Glossary of geology, 5th Edition. American Geological Institute, Alexandria, 779 p.
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>The addition of material to a continent. Typically involves convergent or transform motion.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicprocess/Tectonic_Process">gspr:Tectonic_Process</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geology/Additive_Process">gsog:Additive_Process</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Evolution">
+        <h3>Evolution<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Biological_Evolution</code></td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicprocess/Biological_Process">gspr:Biological_Process</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="biologicalprecipitation">
+        <h3>biological precipitation<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Biological_Precipitation</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    this vocabulary
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>The deposition of minerals from solution by the agency of organisms</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicprocess/Deposition">gspr:Deposition</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="BiologicalProcess">
+        <h3>Biological Process<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Biological_Process</code></td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/Process">gsoc:Process</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Sub-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicprocess/Biological_Evolution">gspr:Biological_Evolution</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicprocess/Speciation">gspr:Speciation</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicprocess/Extinction">gspr:Extinction</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="biologicalweathering">
+        <h3>biological weathering<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Biological_Weathering</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    Neuendorf, K.K.E, Mehl, J.P. & Jackson, J.A. (eds), 2005. Glossary of geology, 5th Edition. American Geological Institute, Alexandria, 779 p.
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>breakdown of rocks by biological agents, e.g. the penetrating and expanding force of roots, the presence of moss and lichen causing humic acids to be retained in contact with rock, and the work of animals (worms, moles, rabbits) in modifying surface soil</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicprocess/Weathering">gspr:Weathering</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="impactprocess">
+        <h3>impact process<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Bolide_Impact</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    Smulikowski et al, 2003
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Metamorphism resulting from the passage of a shock wave through a body of material, typically the result of impact of a planetary body (impactor) on a planetary surface (target)</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geology/Deformation">gsog:Deformation</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="cataclasticdeformation">
+        <h3>cataclastic deformation<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Cataclastic_Deformation</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    based on Neuendorf et al 2005
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Brittle deformation processes, i.e. the formation and growth of fractures and frictional sliding along fracture surfaces.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geology/Deformation">gsog:Deformation</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="chemicalprecipitation">
+        <h3>chemical precipitation<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Chemical_Precipitation</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    Neuendorf, K.K.E, Mehl, J.P. & Jackson, J.A. (eds), 2005. Glossary of geology, 5th Edition. American Geological Institute, Alexandria, 779 p.
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>The deposition of mineral matter by precipitation from solution or as a result of chemical reactions. May be sedimentary or hydrothermal.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicprocess/Metamorphic_Process">gspr:Metamorphic_Process</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicprocess/Deposition">gspr:Deposition</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="chemicalweathering">
+        <h3>chemical weathering<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Chemical_Weathering</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    Neuendorf, K.K.E, Mehl, J.P. & Jackson, J.A. (eds), 2005. Glossary of geology, 5th Edition. American Geological Institute, Alexandria, 779 p.
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>The process of weathering by which chemical reactions (hydrolysishydration, oxidation, carbonation, ion exchange, and solution) transform rocks and minerals into new chemical combinations that are stable under conditions prevailing at or near the Earth's surface, e.g. the alteration of orthoclase to kaolinite.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicprocess/Weathering">gspr:Weathering</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Sub-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicprocess/Hydrolysis">gspr:Hydrolysis</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicprocess/Dissolution">gspr:Dissolution</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicprocess/Hydration">gspr:Hydration</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicprocess/Oxidation">gspr:Oxidation</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="contactmetamorphism">
+        <h3>contact metamorphism<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Contact_Metamorphism</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    Neuendorf, K.K.E, Mehl, J.P. & Jackson, J.A. (eds), 2005. Glossary of geology, 5th Edition. American Geological Institute, Alexandria, 779 p.
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Metamorphism taking place in rocks at or near their contact with a genetically related body of igneous rock</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicprocess/Metamorphic_Process">gspr:Metamorphic_Process</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="continentalbreakup">
+        <h3>continental breakup<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Continental_Breakup</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    this vocabulary
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Fragmentation of a continental plate into two or more smaller plates, may involve rifting or strike slip faulting.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geology/Deformation">gsog:Deformation</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicprocess/Tectonic_Process">gspr:Tectonic_Process</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Sub-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicprocess/Rifting">gspr:Rifting</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="continentalcollision">
+        <h3>continental collision<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Continental_Collision</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    this vocabulary
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>The amalgamation of two continental plates or blocks along a convergent margin.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geology/Deformation">gsog:Deformation</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicprocess/Tectonic_Process">gspr:Tectonic_Process</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geology/Additive_Process">gsog:Additive_Process</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="debrisflowdeposition">
+        <h3>debris flow deposition<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Debris_Flow_Deposition</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    Postma 1986 Geology v. 14 p291-294
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Laminar high-concentration, generally cohesionless deposition process. Flow types included liquefied flow, fluidized flow, grain flow, traction carpet or modified grain flow.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicprocess/Mechanical_Deposition">gspr:Mechanical_Deposition</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="DeepWaterOxygenDepletion">
+        <h3>Deep Water Oxygen Depletion<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Deep_Water_Oxygen_Depletion</code></td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geology/Subtractive_Process">gsog:Subtractive_Process</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="deformationtwinning">
+        <h3>deformation twinning<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Deformation_Twinning</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    Neuendorf, K.K.E, Mehl, J.P. & Jackson, J.A. (eds), 2005. Glossary of geology, 5th Edition. American Geological Institute, Alexandria, 779 p.
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Deformation of a crystal by gliding to produce crystallographic twinning.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geology/Transformation">gsog:Transformation</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="deposition">
+        <h3>deposition<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Deposition</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    Neuendorf, K.K.E, Mehl, J.P. & Jackson, J.A. (eds), 2005. Glossary of geology, 5th Edition. American Geological Institute, Alexandria, 779 p.
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Accumulation of material, the constructive process of accumulation of sedimentary particles, chemical precipitation of mineral matter from solution, or the accumulation of organic material on the death of plants and animals.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicprocess/Sedimentary_Process">gspr:Sedimentary_Process</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geology/Additive_Process">gsog:Additive_Process</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicprocess/Rock_Forming_Process">gspr:Rock_Forming_Process</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Sub-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicprocess/Mechanical_Deposition">gspr:Mechanical_Deposition</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicprocess/Organic_Accumulation">gspr:Organic_Accumulation</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicprocess/Chemical_Precipitation">gspr:Chemical_Precipitation</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicprocess/Biological_Precipitation">gspr:Biological_Precipitation</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="DepositionHiatus">
+        <h3>Deposition Hiatus <sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Deposition_Hiatus</code></td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Pause in a process of sediment accumulation. Use to indicate paraconformable boundaries.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/Pause">gsoc:Pause</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/hostedBy">gsoc:hostedBy</a> <span class="cardinality">exactly</span> 1 <a href="https://w3id.org/gso/geologicprocess/Deposition">gspr:Deposition</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="diageneticprocess">
+        <h3>diagenetic process<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Diagenetic_Process</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    Neuendorf, K.K.E, Mehl, J.P. & Jackson, J.A. (eds), 2005. Glossary of geology, 5th Edition. American Geological Institute, Alexandria, 779 p.
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Any chemical, physical, or biological process that affects a sedimentary EarthMaterial after initial deposition, and during or after lithification, exclusive of weathering and metamorphism. [adapt. Jackson, 1997] Example processes include compaction, cementation, authigenesis, replacement, leachinghydration, and bacterial action. Includes processes that are normal in the surficial or outer part of the earth’s crust [Jackson, 1997]. Changes in a deeply buried sedimentary rock may be continuous from diagenesis into recrystallization to form a metamorphic rock. Robertson [1999] defines the boundary between diagenesis and metamorphism in sedimentary rocks as follows: \the boundary between diagenesis and metamorphism is somewhat arbitrary and strongly dependent on the rock types involved. For example changes take place in organic materials at lower temperatures than in rocks dominated by silicate minerals. In mudrocks, a white mica (illite) crystallinity value of less than 0.42D.2U obtained by X-ray diffraction analysis, is used to define the onset of metamorphism (Kisch, 1991). In this scheme, the first appearance of glaucophane, lawsonite, paragonite, prehnite, pumpellyite or stilpnomelane is taken to indicate the lower limit of metamorphism (Frey and Kisch, 1987, Bucher and Frey, 1994, Frey and Robinson, 1998). Most workers agree that such mineral growth starts at 150 ± 50° C in silicate rocks. Many rock types may show no change in mineralogy under these conditions and hence the recognition of the onset of metamorphism will vary with bulk composition.\</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geology/Transformation">gsog:Transformation</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicprocess/Sedimentary_Process">gspr:Sedimentary_Process</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicprocess/Rock_Forming_Process">gspr:Rock_Forming_Process</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="diffusioncreep">
+        <h3>diffusion creep<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Diffusion_Creep</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    Neuendorf, K.K.E, Mehl, J.P. & Jackson, J.A. (eds), 2005. Glossary of geology, 5th Edition. American Geological Institute, Alexandria, 779 p.
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Grain-scale, ductile deformation accomplished by the motion of atoms through crystals, along grain boundaries, and through pore fluids.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geology/Transformation">gsog:Transformation</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="dislocationmetamorphism">
+        <h3>dislocation metamorphism<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Dislocation_Metamorphism</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    Neuendorf, K.K.E, Mehl, J.P. & Jackson, J.A. (eds), 2005. Glossary of geology, 5th Edition. American Geological Institute, Alexandria, 779 p.
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Metamorphism concentrated along narrow belts of shearing or crushing without an appreciable rise in temperature</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicprocess/Metamorphic_Process">gspr:Metamorphic_Process</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="dissolution">
+        <h3>dissolution<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Dissolution</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    Neuendorf, K.K.E, Mehl, J.P. & Jackson, J.A. (eds), 2005. Glossary of geology, 5th Edition. American Geological Institute, Alexandria, 779 p.
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>The process of dissolving into a homogenous solution, as when an acidic solution dissolves limestone. In karst, refers to the process of dissolving rock to produce landforms, in contrast to solution, the chemical product of dissolution.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicprocess/Chemical_Weathering">gspr:Chemical_Weathering</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geology/Subtractive_Process">gsog:Subtractive_Process</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="dissolutioncreep">
+        <h3>dissolution creep<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Dissolution_Creep</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    Neuendorf, K.K.E, Mehl, J.P. & Jackson, J.A. (eds), 2005. Glossary of geology, 5th Edition. American Geological Institute, Alexandria, 779 p.
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Deformation by dissolution under the effects of differential stress and its transport to a new location by movement of fluid in the rock body.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geology/Transformation">gsog:Transformation</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="DuctileFlattening">
+        <h3>Ductile Flattening<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Ductile_Flattening</code></td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Also known as pure shear; a three-dimensional homogeneous flattening of a body (http://www.geology.sdsu.edu/visualstructure/vss/htm_hlp/pure_s.htm) accomodated by ductile deformation. It is an example of irrotational strain in which body is elongated in one direction while being shortened perpendicularly (https://en.wikipedia.org/wiki/Pure_shear).</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicprocess/Ductile_Flow">gspr:Ductile_Flow</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="ductileflow">
+        <h3>ductile flow<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Ductile_Flow</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    Neuendorf, K.K.E, Mehl, J.P. & Jackson, J.A. (eds), 2005. Glossary of geology, 5th Edition. American Geological Institute, Alexandria, 779 p.
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Deformation without apparent loss of continuity at the scale of observation.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geology/Deformation">gsog:Deformation</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Sub-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicprocess/Ductile_Flattening">gspr:Ductile_Flattening</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicprocess/Ductile_Simple_Shear">gspr:Ductile_Simple_Shear</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="DuctileSimpleShear">
+        <h3>Ductile Simple Shear<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Ductile_Simple_Shear</code></td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Simple shear accomodated by ductile deformation. Simple sheare is a deformation in which parallel planes in a material remain parallel and maintain a constant distance, while translating relative to each other (https://en.wikipedia.org/wiki/Simple_shear).</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicprocess/Ductile_Flow">gspr:Ductile_Flow</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicprocess/Shearing">gspr:Shearing</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="effusiveeruption">
+        <h3>effusive eruption<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Effusive_Eruption</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    Orton, G.J., 1996. Volcanic environments. 485-567 in Readingh.G. (ed.), Sedimentary Environments: Processes, Facies and Stratigraphy, Third Edition. Blackwell Science, Oxford
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Eruptions characterized by low volatile content of the erupting magma relative to ambient pressure</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicprocess/Eruption_Process">gspr:Eruption_Process</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="erosion">
+        <h3>erosion<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Erosion</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    this vocabulary
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>The process of disaggregation of rock and displacement of the resultant particles (sediment) usually by the agents of currents such as, wind, water, or ice by downward or down-slope movement in response to gravity or by living organisms (in the case of bioerosion).</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicprocess/Sedimentary_Process">gspr:Sedimentary_Process</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geology/Subtractive_Process">gsog:Subtractive_Process</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Sub-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicprocess/Wind_Erosion">gspr:Wind_Erosion</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicprocess/Mass_Wasting">gspr:Mass_Wasting</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicprocess/Water_Erosion">gspr:Water_Erosion</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicprocess/Ice_Erosion">gspr:Ice_Erosion</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="eruption">
+        <h3>eruption<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Eruption_Process</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    Neuendorf, K.K.E, Mehl, J.P. & Jackson, J.A. (eds), 2005. Glossary of geology, 5th Edition. American Geological Institute, Alexandria, 779 p.
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>The ejection of volcanic materials (lava, pyroclasts, and volcanic gases) onto the Earth's surface, either from a central vent or from a fissure or group of fissures</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicprocess/Magmatic_Process">gspr:Magmatic_Process</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geology/Additive_Process">gsog:Additive_Process</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicprocess/Rock_Forming_Process">gspr:Rock_Forming_Process</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Sub-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicprocess/Hawaiian_Eruption">gspr:Hawaiian_Eruption</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicprocess/Lava_Flow">gspr:Lava_Flow</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicprocess/Effusive_Eruption">gspr:Effusive_Eruption</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicprocess/Pyroclastic_Eruption">gspr:Pyroclastic_Eruption</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicprocess/Subaerial_Extrusion">gspr:Subaerial_Extrusion</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicprocess/Subaqueous_Extrusion">gspr:Subaqueous_Extrusion</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicprocess/Strombolian_Eruption">gspr:Strombolian_Eruption</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="excavation">
+        <h3>excavation<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Excavation</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    this vocabulary
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>The removal of material by human activity, as in a mining operation</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geology/Subtractive_Process">gsog:Subtractive_Process</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicprocess/Human_Activity">gspr:Human_Activity</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="extinction">
+        <h3>extinction<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Extinction</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    this vocabulary
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Process of disappearance of a species or higher taxon, so that it no longer exists anywhere or in the subsequent fossil record.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicprocess/Biological_Process">gspr:Biological_Process</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="faulting">
+        <h3>faulting<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Faulting</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    Neuendorf, K.K.E, Mehl, J.P. & Jackson, J.A. (eds), 2005. Glossary of geology, 5th Edition. American Geological Institute, Alexandria, 779 p.
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>The process of fracturing, frictional slip, and displacement accumulation that produces a fault</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geology/Deformation">gsog:Deformation</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Sub-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicprocess/Transform_Faulting">gspr:Transform_Faulting</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Flexuralslipfolding@en}">
+        <h3>Flexural slip folding @en}<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Flexural_Slip</code></td>
+            </tr>
+            <tr>
+                <th>Is Defined By</th>
+                <td>
+                    this vocabulary
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>A folding process in which shearing is concentrated as layer boundaries and the folded layers maintain a relatively constant thickness</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicprocess/Folding">gspr:Folding</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="folding">
+        <h3>folding<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Folding</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    this vocabulary
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Deformation in which planar surfaces become regularly curviplanar surfaces with definable limbs (zones of lower curvature) and hinges (zones of higher curvature).</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geology/Deformation">gsog:Deformation</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Sub-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicprocess/Flexural_Slip">gspr:Flexural_Slip</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="fracturing">
+        <h3>fracturing<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Fracturing</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    this vocabulary
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>The formation of a surface of failure resulting from stress</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geology/Deformation">gsog:Deformation</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Sub-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicprocess/Microfracturing">gspr:Microfracturing</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="frostshattering">
+        <h3>frost shattering<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Frost_Shattering</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    Neuendorf, K.K.E, Mehl, J.P. & Jackson, J.A. (eds), 2005. Glossary of geology, 5th Edition. American Geological Institute, Alexandria, 779 p.
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Propagation of fractures due to expansion of freezing water in intergranular spaces and fractures in a rock body. Result is mechanical disintegration spliitting, or breakup of rock.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicprocess/Physical_Weathering">gspr:Physical_Weathering</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Geodynamoprocess">
+        <h3>Geodynamo process<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Geodynamo_Process</code></td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Process that generates electric currents due to the motion of convection currents of molten iron in the Earth's outer core, caused by heat escaping from the core. Process responsible for Earth’s magnetic field.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicprocess/Geomagnetic_Process">gspr:Geomagnetic_Process</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="GeomagneticProcess">
+        <h3>Geomagnetic Process<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Geomagnetic_Process</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    this vocabulary
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>process that results in change in Earth's magnetic field</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/Process">gsoc:Process</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Sub-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicprocess/Geodynamo_Process">gspr:Geodynamo_Process</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicprocess/Polar_Wander">gspr:Polar_Wander</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="grading">
+        <h3>grading<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Grading</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    this vocabulary
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Leveling of earth surface by rearrangement of prexisting material</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicprocess/Human_Activity">gspr:Human_Activity</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geology/Transformation">gsog:Transformation</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="haloclasty">
+        <h3>haloclasty<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Haloclasty</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    Neuendorf, K.K.E, Mehl, J.P. & Jackson, J.A. (eds), 2005. Glossary of geology, 5th Edition. American Geological Institute, Alexandria, 779 p.
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Propagation of fractures in rock due to crytallization of mineral salts (typically sodium chloride) from interstitial water, or volumetrick expansion of salts in capillaries, or hydration pressure of interstitial, trapped salts. Generally results in mechanical disintegration of the rock surface.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicprocess/Physical_Weathering">gspr:Physical_Weathering</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="hawaiianeruption">
+        <h3>hawaiian eruption<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Hawaiian_Eruption</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    Neuendorf, K.K.E, Mehl, J.P. & Jackson, J.A. (eds), 2005. Glossary of geology, 5th Edition. American Geological Institute, Alexandria, 779 p.
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Eruption in which great quantities of extremely fluid basaltic lava are poured out, mainly issuing in lava fountains from fissures on the flanks of a volcano. Explosive phenomena are rare, but much spatter and scoria are piled into cones and mounds along the vents. Characteristic of shield volcanoes</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicprocess/Eruption_Process">gspr:Eruption_Process</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="HumanActivity">
+        <h3>Human Activity<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Human_Activity</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    this vocabulary
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Processes of human modification of the earth to produce geologic features</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/Process">gsoc:Process</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Sub-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicprocess/Excavation">gspr:Excavation</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicprocess/Human_Deposition">gspr:Human_Deposition</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicprocess/Grading">gspr:Grading</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Humanmaterialdeposition">
+        <h3>Human material deposition <sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Human_Deposition</code></td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Human processes of material deposition, e.g. landfill, mining waste heaps, tailings, road-grade fill.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicprocess/Rock_Forming_Process">gspr:Rock_Forming_Process</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicprocess/Mechanical_Deposition">gspr:Mechanical_Deposition</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicprocess/Human_Activity">gspr:Human_Activity</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="hydration">
+        <h3>hydration<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Hydration</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    this vocabulary
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>The process of absorption of water into the crystal structure of a mineral, thereby changing its volume and fracturing and loosening grains</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicprocess/Chemical_Weathering">gspr:Chemical_Weathering</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="hydrolysis">
+        <h3>hydrolysis<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Hydrolysis</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    Neuendorf, K.K.E, Mehl, J.P. & Jackson, J.A. (eds), 2005. Glossary of geology, 5th Edition. American Geological Institute, Alexandria, 779 p.
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>A decomposition reaction involving water. In geology, it commonly indicates reaction between silicate minerals and either pure water or aqueous solution. In such reactionsh</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicprocess/Chemical_Weathering">gspr:Chemical_Weathering</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="iceerosion">
+        <h3>ice erosion<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Ice_Erosion</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    this vocabulary
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Erosion by corrasion or plucking by moving ice.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicprocess/Erosion">gspr:Erosion</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="intrusion">
+        <h3>intrusion<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Intrusion_Process</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    Neuendorf, K.K.E, Mehl, J.P. & Jackson, J.A. (eds), 2005. Glossary of geology, 5th Edition. American Geological Institute, Alexandria, 779 p.
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>The process of emplacement of magma in pre-existing rock</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geology/Additive_Process">gsog:Additive_Process</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="LavaFlow">
+        <h3>Lava Flow <sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Lava_Flow</code></td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>process of melted rock flowing over the Earth's surface and solidifying to form new rock.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicprocess/Eruption_Process">gspr:Eruption_Process</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="magmaticcrystallisation">
+        <h3>magmatic crystallisation<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Magmatic_Cystallisation</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    Neuendorf, K.K.E, Mehl, J.P. & Jackson, J.A. (eds), 2005. Glossary of geology, 5th Edition. American Geological Institute, Alexandria, 779 p.
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>The process by which matter becomes crystalline, from a gaseous, fluid, or dispersed state</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicprocess/Rock_Forming_Process">gspr:Rock_Forming_Process</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicprocess/Magmatic_Process">gspr:Magmatic_Process</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geology/Transformation">gsog:Transformation</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="MagmaticProcess">
+        <h3>Magmatic Process<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Magmatic_Process</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    this vocabulary
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>A process involving melted rock (magma).</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geology/Geologic_Process">gsog:Geologic_Process</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Sub-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicprocess/Melting">gspr:Melting</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicprocess/Eruption_Process">gspr:Eruption_Process</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicprocess/Magmatic_Cystallisation">gspr:Magmatic_Cystallisation</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="masswasting">
+        <h3>mass wasting<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Mass_Wasting</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    Neuendorf, K.K.E, Mehl, J.P. & Jackson, J.A. (eds), 2005. Glossary of geology, 5th Edition. American Geological Institute, Alexandria, 779 p.
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>the dislodgement and downslope transport of soil and rock material under the direct application of gravitational body stresses. In contrast to other erosion processes, the debris removed by mass wasting is not carried within, on, or under another medium. The mass properties of the material being transported depend on the interaction of the soil and rock particles and on the moisture content.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicprocess/Erosion">gspr:Erosion</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="masswastingdeposition">
+        <h3>mass wasting deposition<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Mass_Wasting_Deposition</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    Neuendorf, K.K.E, Mehl, J.P. & Jackson, J.A. (eds), 2005. Glossary of geology, 5th Edition. American Geological Institute, Alexandria, 779 p.
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>A general term for the dislodgement and downslope transport of soil and rock material under the direct application of gravitational body stresses. In contrast to other erosion processes, the debris removed by mass wasting is not carried within, on, or under another medium. The mass properties of the material being transported depend on the interaction of the soil and rock particles and on the moisture content. Mass wasting includes slow displacements, such as creep and solifluction, and rapid movements such as rockfalls, rockslides, and cohesive debris flows (Jackson, 1997, p. 392). Includes both subaerial mass-wasting processes and subaqueous mass-wasting processes.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicprocess/Mechanical_Deposition">gspr:Mechanical_Deposition</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="MaterialTransportAndDeposition">
+        <h3>Material Transport And Deposition<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Material_Transport</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    this vocabulary
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Transport and heaping of material, as in a land fill, mine dump, dredging operations. Can be anthropogenic, or geologic transport process</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/Process">gsoc:Process</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="mechanicaldeposition">
+        <h3>mechanical deposition<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Mechanical_Deposition</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    NADM SLTTs 2004
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Process by which material that is being transported as particles by moving air, water, ice, or other fluid comes to rest and accumulates.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicprocess/Deposition">gspr:Deposition</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Sub-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicprocess/Turbidity_Current_Deposition">gspr:Turbidity_Current_Deposition</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicprocess/Human_Deposition">gspr:Human_Deposition</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicprocess/Traction_Saltation_or_Suspension_Deposition">gspr:Traction_Saltation_or_Suspension_Deposition</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicprocess/Debris_Flow_Deposition">gspr:Debris_Flow_Deposition</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicprocess/Mass_Wasting_Deposition">gspr:Mass_Wasting_Deposition</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="melting">
+        <h3>melting<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Melting</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    this vocabulary
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>change of state from a solid to a liquid</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicprocess/Magmatic_Process">gspr:Magmatic_Process</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geology/Transformation">gsog:Transformation</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geology/Subtractive_Process">gsog:Subtractive_Process</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Sub-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicprocess/Partial_Melting">gspr:Partial_Melting</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="MetamorphicProcess">
+        <h3>Metamorphic Process<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Metamorphic_Process</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    this vocabulary
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Mineralogical, chemical, and structural adjustment of solid rocks to physical and chemical conditions that differ from the conditions under which the rocks in question originated, and are generally been imposed at depth, below the surface zones of weathering and cementation.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geology/Transformation">gsog:Transformation</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Sub-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicprocess/Pyrometamorphism">gspr:Pyrometamorphism</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicprocess/Chemical_Precipitation">gspr:Chemical_Precipitation</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicprocess/Regional_Metamorphism">gspr:Regional_Metamorphism</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicprocess/Dislocation_Metamorphism">gspr:Dislocation_Metamorphism</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicprocess/Contact_Metamorphism">gspr:Contact_Metamorphism</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicprocess/Metasomatism">gspr:Metasomatism</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Metasomatismorhydrothermalprocess">
+        <h3>Metasomatism or hydrothermal process<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Metasomatism</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    Fettes and Desmons, 2007
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Processes causing open-system changes in chemical composition by reaction with an external source, typically involving chemical transport by a fluid medium flowing through the rock. Metasomatism typically involves introduction of chemical constituents into a rock volume. General term for any change in the mineralogical or chemical composition of a rock. Typically related to interaction with hydrous fluids.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicprocess/Metamorphic_Process">gspr:Metamorphic_Process</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="microfracturing">
+        <h3>microfracturing<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Microfracturing</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    Neuendorf, K.K.E, Mehl, J.P. & Jackson, J.A. (eds), 2005. Glossary of geology, 5th Edition. American Geological Institute, Alexandria, 779 p.
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Development of fractures within a single grain or cutting several grains.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicprocess/Fracturing">gspr:Fracturing</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Mountainbuilding">
+        <h3>Mountain building<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Mountain_Building</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    Neuendorf et al., 2005
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>orogenic process or mountain building process.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geology/Deformation">gsog:Deformation</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicprocess/Tectonic_Process">gspr:Tectonic_Process</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="obduction">
+        <h3>obduction<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Obduction</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    Neuendorf et al., 2005, http://en.wikipedia.org/wiki/Obduction, Coleman, R. G., 1971, Plate tectonic emplacement of upper mantle peridotites along continental edge: J.Geophys. Res., v75, p1212-1222.
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>The overthrusting of continental crust by oceanic crust or mantle rocks at a convergent plate boundary.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geology/Deformation">gsog:Deformation</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicprocess/Tectonic_Process">gspr:Tectonic_Process</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="organicaccumulation">
+        <h3>organic accumulation<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Organic_Accumulation</code></td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Sediment accumulation of biologically produced organic material, as in bog, coal swamps.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicprocess/Deposition">gspr:Deposition</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="oxidation">
+        <h3>oxidation<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Oxidation</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    this vocabulary
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Chemical reaction that involve stripping of electrons from cations. Typicall reactions include converting sulfide minerals to oxide minerals, or increasing the oxidation state of cations in existing oxide minerals. The most commonly observed is the oxidation of Fe</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicprocess/Chemical_Weathering">gspr:Chemical_Weathering</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="partialmelting">
+        <h3>partial melting<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Partial_Melting</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    Neuendorf, K.K.E, Mehl, J.P. & Jackson, J.A. (eds), 2005. Glossary of geology, 5th Edition. American Geological Institute, Alexandria, 779 p.
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Process of melting involving only some of the mineral phases in a rock, to produce a mixture of melt and residual particles.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicprocess/Melting">gspr:Melting</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="physicalweathering">
+        <h3>physical weathering<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Physical_Weathering</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    Neuendorf, K.K.E, Mehl, J.P. & Jackson, J.A. (eds), 2005. Glossary of geology, 5th Edition. American Geological Institute, Alexandria, 779 p.
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>The process of weathering by which frost action, salt-crystal growth, absorption of water, and other physical processes break down a rock to fragments, involving no chemical change</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicprocess/Weathering">gspr:Weathering</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Sub-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicprocess/Haloclasty">gspr:Haloclasty</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicprocess/Frost_Shattering">gspr:Frost_Shattering</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicprocess/Pressure_Release_Weathering">gspr:Pressure_Release_Weathering</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicprocess/Thermal_Shock_Weathering">gspr:Thermal_Shock_Weathering</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="plinianeruption">
+        <h3>plinian eruption<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Plinian_Eruption</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    Neuendorf, K.K.E, Mehl, J.P. & Jackson, J.A. (eds), 2005. Glossary of geology, 5th Edition. American Geological Institute, Alexandria, 779 p.
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>An explosive eruption in which a steady, turbulent stream of fragmented magma and magmatic gas is released at a high velocity from a vent. Large volumes of tephra and tall eruption columns are characteristic</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicprocess/Pyroclastic_Eruption">gspr:Pyroclastic_Eruption</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="polarwander">
+        <h3>polar wander<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Polar_Wander</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    this vocabulary
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Process of migration of the axis of the earth's dipole field relative to the rotation axis of the Earth.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geology/Transformation">gsog:Transformation</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicprocess/Geomagnetic_Process">gspr:Geomagnetic_Process</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="pressurereleaseweathering">
+        <h3>pressure release weathering<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Pressure_Release_Weathering</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    Neuendorf, K.K.E, Mehl, J.P. & Jackson, J.A. (eds), 2005. Glossary of geology, 5th Edition. American Geological Institute, Alexandria, 779 p.
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Propagation of fractures near the surface of solid rock due to expansion related to release of confining pressure when deeply buried rock is unroofed. Fractures typically propagate along surfaces close to and subparallel to the surface of the outcrop.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicprocess/Physical_Weathering">gspr:Physical_Weathering</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="pyroclasticeruption">
+        <h3>pyroclastic eruption<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Pyroclastic_Eruption</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    Orton, G.J., 1996. Volcanic environments. 485-567 in Readingh.G. (ed.), Sedimentary Environments: Processes, Facies and Stratigraphy, Third Edition. Blackwell Science, Oxford
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Eruption produced by the generation and rapid expansion of a gas phase that disrupts magma, surrounding wall rock or sediment</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicprocess/Eruption_Process">gspr:Eruption_Process</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Sub-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicprocess/Plinian_Eruption">gspr:Plinian_Eruption</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicprocess/Vulcanian_Eruption">gspr:Vulcanian_Eruption</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Pyrometamorphism">
+        <h3>Pyrometamorphism <sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Pyrometamorphism</code></td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>metamorphism caused by high-temperature near surface events like lightning strikes,  underground coal fires or nuclear reactions.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicprocess/Metamorphic_Process">gspr:Metamorphic_Process</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="regionalmetamorphicgenesis">
+        <h3>regional metamorphic genesis<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Regional_Metamorphism</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    based on Smulikowski et al, 2003
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Metamorphic processes driven by temperature and pressure changes affecting a large rock volume, associated with large-scale tectonic processes.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicprocess/Metamorphic_Process">gspr:Metamorphic_Process</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="rifting">
+        <h3>rifting<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Rifting</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    Neuendorf, K.K.E, Mehl, J.P. & Jackson, J.A. (eds), 2005. Glossary of geology, 5th Edition. American Geological Institute, Alexandria, 779 p.
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Extension of the crust to form one or more long, narrow graben of regional extent.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicprocess/Continental_Breakup">gspr:Continental_Breakup</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Rockformingprocess">
+        <h3>Rock forming process <sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Rock_Forming_Process</code></td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>A process that produces a new igneous or sedimentary rock material. </p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geology/Geologic_Process">gsog:Geologic_Process</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Sub-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicprocess/Human_Deposition">gspr:Human_Deposition</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicprocess/Diagenetic_Process">gspr:Diagenetic_Process</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicprocess/Deposition">gspr:Deposition</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicprocess/Eruption_Process">gspr:Eruption_Process</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicprocess/Magmatic_Cystallisation">gspr:Magmatic_Cystallisation</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="SedimentaryProcess">
+        <h3>Sedimentary Process<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Sedimentary_Process</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    this vocabulary
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>A process that changes the distribution or physical properties of sediment at or near the earth's surface</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geology/Geologic_Process">gsog:Geologic_Process</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Sub-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicprocess/Diagenetic_Process">gspr:Diagenetic_Process</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicprocess/Deposition">gspr:Deposition</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicprocess/Erosion">gspr:Erosion</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="shearing">
+        <h3>shearing<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Shearing</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    Neuendorf, K.K.E, Mehl, J.P. & Jackson, J.A. (eds), 2005. Glossary of geology, 5th Edition. American Geological Institute, Alexandria, 779 p.
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>A deformation in which contiguous parts of a body are displaced relatively to each other in a direction parallel to a surface. The surface may be a discrete fault, or the deformation may be a penetrative strain and the shear surface is a geometric abstraction.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geology/Deformation">gsog:Deformation</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Sub-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicprocess/Ductile_Simple_Shear">gspr:Ductile_Simple_Shear</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="speciation">
+        <h3>speciation<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Speciation</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    this vocabulary
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>process that results inappearance of new species</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicprocess/Biological_Process">gspr:Biological_Process</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="spreading">
+        <h3>spreading<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Spreading</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    Neuendorf, K.K.E, Mehl, J.P. & Jackson, J.A. (eds), 2005. Glossary of geology, 5th Edition. American Geological Institute, Alexandria, 779 p.
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>A process whereby new oceanic crust is formed by upwelling of magma at the center of mid-ocean ridges and by a moving-away of the new material from the site of upwelling at rates of one to ten centimeters per year.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geology/Additive_Process">gsog:Additive_Process</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geology/Deformation">gsog:Deformation</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicprocess/Tectonic_Process">gspr:Tectonic_Process</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="strombolianeruption">
+        <h3>strombolian eruption<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Strombolian_Eruption</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    Neuendorf, K.K.E, Mehl, J.P. & Jackson, J.A. (eds), 2005. Glossary of geology, 5th Edition. American Geological Institute, Alexandria, 779 p.
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Eruption characterized by jetting of clots or \fountains\ of fluid, basaltic lava from a central crater</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicprocess/Eruption_Process">gspr:Eruption_Process</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="subaerialextrusion">
+        <h3>subaerial extrusion<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Subaerial_Extrusion</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    This vocabulary
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Process of magma crystallisation either in the open air or immediately adjacent to the land surface.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicprocess/Eruption_Process">gspr:Eruption_Process</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="subaqueousextrusion">
+        <h3>subaqueous extrusion<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Subaqueous_Extrusion</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    This vocabulary
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Process of magma crystallisation under water or ice.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicprocess/Eruption_Process">gspr:Eruption_Process</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="subduction">
+        <h3>subduction<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Subduction</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    Neuendorf, K.K.E, Mehl, J.P. & Jackson, J.A. (eds), 2005. Glossary of geology, 5th Edition. American Geological Institute, Alexandria, 779 p.
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>The process of one lithospheric plate descending beneath another</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geology/Subtractive_Process">gsog:Subtractive_Process</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geology/Deformation">gsog:Deformation</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicprocess/Tectonic_Process">gspr:Tectonic_Process</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="TectonicProcess">
+        <h3>Tectonic Process<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Tectonic_Process</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    this vocabulary
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Processes related to the interaction between or deformation of rigid plates forming the crust of the Earth.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geology/Geologic_Process">gsog:Geologic_Process</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Sub-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicprocess/Accretion">gspr:Accretion</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicprocess/Obduction">gspr:Obduction</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicprocess/Spreading">gspr:Spreading</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicprocess/Subduction">gspr:Subduction</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicprocess/Continental_Breakup">gspr:Continental_Breakup</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicprocess/Mountain_Building">gspr:Mountain_Building</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicprocess/Continental_Collision">gspr:Continental_Collision</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicprocess/Transform_Faulting">gspr:Transform_Faulting</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="thermalshockweathering">
+        <h3>thermal shock weathering<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Thermal_Shock_Weathering</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    this vocabulary
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Propagation of fractures near the surface of solid rock due to expansion and contraction caused by temperature changes. Fractures typically propagate along surfaces close to and subparallel to the surface of the outcrop.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicprocess/Physical_Weathering">gspr:Physical_Weathering</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="depositionfrommovingfluid">
+        <h3>deposition from moving fluid<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Traction_Saltation_or_Suspension_Deposition</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    this vocabulary
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Deposition of sediment from moving water or air, in which the sediment is transported by entrainment in the moving fluid. Constrast with debris flow or turbidity current deposition in which movement of fluid/sediment mixture is due to incorporation of sediment in fluid.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicprocess/Mechanical_Deposition">gspr:Mechanical_Deposition</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="transformfaulting">
+        <h3>transform faulting<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Transform_Faulting</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    Neuendorf, K.K.E, Mehl, J.P. & Jackson, J.A. (eds), 2005. Glossary of geology, 5th Edition. American Geological Institute, Alexandria, 779 p.
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>A strike-slip fault that links two other faults or two other plate boundaries (e.g. two segments of a mid-ocean ridge). Transform faults often exhibit characteristics that distinguish them from transcurrent faults: (1) For transform faults formed at the same time as the faults they link, slip on the transform fault has equal magnitude at all points along the transform, slip magnitude on the transform fault can exceed the length of the transform fault, and slip does not decrease to zero at the fault termini. (2) For transform faults linking two similar features, e.g. if two mid-ocean ridge segments linked by a transform have equal spreading rates, then the length of the transform does not change as slip accrues on it.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicprocess/Faulting">gspr:Faulting</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicprocess/Tectonic_Process">gspr:Tectonic_Process</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="turbiditycurrentdeposition">
+        <h3>turbidity current deposition<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Turbidity_Current_Deposition</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    Postma 1986 Geology v. 14 p291-294
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Deposition from a turbulent, low concentration sediment-water mixture.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicprocess/Mechanical_Deposition">gspr:Mechanical_Deposition</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="vulcanianeruption">
+        <h3>vulcanian eruption<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Vulcanian_Eruption</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    Neuendorf, K.K.E, Mehl, J.P. & Jackson, J.A. (eds), 2005. Glossary of geology, 5th Edition. American Geological Institute, Alexandria, 779 p.
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Eruption characterized by the explosive ejection of fragments of new lava, commonly incandescent when they leave the vent but either solid or too viscous to assume any appreciable degree of rounding during their flight through the air. With these there are often breadcrust bombs or blocks, and generally large proportions of ash</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicprocess/Pyroclastic_Eruption">gspr:Pyroclastic_Eruption</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="watererosion">
+        <h3>water erosion<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Water_Erosion</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    this vocabulary
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Erosion by clast impact or plucking by moving liquid water</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicprocess/Erosion">gspr:Erosion</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="weathering">
+        <h3>weathering<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Weathering</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    this vocabulary
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>The process or group of processes by which earth materials exposed to atmospheric agents at or near the Earth's surface are changed in color, texture, composition, firmness, or form, with little or no transport of the loosened or altered material. Processes typically include oxidationhydration, and leaching of soluble constituents.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geology/Transformation">gsog:Transformation</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Sub-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicprocess/Physical_Weathering">gspr:Physical_Weathering</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicprocess/Chemical_Weathering">gspr:Chemical_Weathering</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicprocess/Biological_Weathering">gspr:Biological_Weathering</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="winderosion">
+        <h3>wind erosion<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicprocess/Wind_Erosion</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    this vocabulary
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Erosion by clast impact or plucking by moving air (wind)</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicprocess/Erosion">gspr:Erosion</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+</section>
+  
+  <section id="namedindividuals">
+    <h2>Named Individuals <span style="float:right; font-size:smaller;"><a href="">&uparrow;</a></span></h2>
+    <ul class="hlist">
+        <li><a href="#Dr.BoyanBrodaric">Dr. Boyan Brodaric</a></li>
+        <li><a href="#Dr.StephenM.Richard">Dr. Stephen M. Richard</a></li>
+    </ul>
+    <div class="entity named_individual" id="Dr.BoyanBrodaric">
+        <h3>Dr. Boyan Brodaric<sup title="named individual" class="sup-ni">ni</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td>
+                  <code>
+                      https://w3id.org/gso/common/boyan_brodaric
+                  
+                  </code>
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    affiliation:  Natural Resources Canada, Geological Survey of Canada
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity named_individual" id="Dr.StephenM.Richard">
+        <h3>Dr. Stephen M. Richard<sup title="named individual" class="sup-ni">ni</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td>
+                  <code>
+                      https://w3id.org/gso/common/stephen_richard
+                  
+                  </code>
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    e-mail: mailto:smrTucson@gmail.com 
+                </td>
+            </tr>
+        </table>
+    </div>
+</section>
+  
+  <section id="namespaces">
+    <h2>Namespaces <span style="float:right; font-size:smaller;"><a href="">&uparrow;</a></span></h2>
+    <dl>
+        <dt>dct</dt>
+        <dd><code>http://purl.org/dc/terms/</code></dd>
+        <dt>gsoc</dt>
+        <dd><code>https://w3id.org/gso/common/</code></dd>
+        <dt>gsog</dt>
+        <dd><code>https://w3id.org/gso/geology/</code></dd>
+        <dt>gsoh</dt>
+        <dd><code>https://w3id.org/gso/hydrology/</code></dd>
+        <dt>gspr</dt>
+        <dd><code>https://w3id.org/gso/geologicprocess/</code></dd>
+        <dt>owl</dt>
+        <dd><code>http://www.w3.org/2002/07/owl#</code></dd>
+        <dt>prov</dt>
+        <dd><code>http://www.w3.org/ns/prov#</code></dd>
+        <dt>rdf</dt>
+        <dd><code>http://www.w3.org/1999/02/22-rdf-syntax-ns#</code></dd>
+        <dt>rdfs</dt>
+        <dd><code>http://www.w3.org/2000/01/rdf-schema#</code></dd>
+        <dt>sdo</dt>
+        <dd><code>https://schema.org/</code></dd>
+        <dt>skos</dt>
+        <dd><code>http://www.w3.org/2004/02/skos/core#</code></dd>
+        <dt>xsd</dt>
+        <dd><code>http://www.w3.org/2001/XMLSchema#</code></dd>
+    </dl>
+</section>
+  <section id="legend">
+      <h2>Legend</h2>
+      <table class="entity">
+          <tr><td><sup class="sup-c" title="Classes">c</sup></td><td>Classes</td></tr>
+          <tr><td><sup class="sup-op" title="Object Properties">op</sup></td><td>Object Properties</td></tr>
+          <tr><td><sup class="sup-fp" title="Functional Properties">fp</sup></td><td>Functional Properties</td></tr>
+          <tr><td><sup class="sup-dp" title="Data Properties">dp</sup></td><td>Data Properties</td></tr>
+          <tr><td><sup class="sup-ap" title="Annotation Properties">dp</sup></td><td>Annotation Properties</td></tr>
+          <tr><td><sup class="sup-p" title="Properties">p</sup></td><td>Properties</td></tr>
+          <tr><td><sup class="sup-ni" title="Named Individuals">ni</sup></td><td>Named Individuals</td></tr>
+      </table>
+  </section>
+</body>
+</html>

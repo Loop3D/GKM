@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Geoscience Ontology, Fold</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    
+    <style>
+        #pylode {
+            position: fixed;
+            top: 130px;
+            left: -60px;
+            font-size: small;
+            transform: rotate(-90deg);
+            color: grey;
+        }
+        #pylode a {
+            font-size: 2em;
+            font-weight: bold;
+            text-decoration: none;
+            color: #005A9C;
+        }
+        #pylode a:hover {
+            color: #333;
+        }
+
+        .cardinality {
+            font-style: italic;
+            color: #aa00aa;
+        }
+
+        dt {
+            font-weight: bold;
+            padding: 5px 0 5px 0;
+        }
+
+        ul.hlist {
+            list-style-type: none;
+            border: 1px solid navy;
+            padding:5px;
+            background-color: #F4FFFF;
+        }
+
+        ul.hierarchy {
+            border: 1px solid navy;
+            padding: 5px 25px 5px 25px;
+            background-color: #F4FFFF;
+        }
+
+
+        ul.hlist li {
+            display: inline;
+            margin-right: 10px;
+        }
+
+        .entity {
+            border: 1px solid navy;
+            margin:5px 0 5px 0;
+            padding: 5px;
+        }
+
+        .entity th {
+            width: 150px;
+            vertical-align: top;
+        }
+
+        .entity th,
+        .entity td {
+            padding-bottom: 20px;
+        }
+
+        .entity table th {
+            text-align: left;
+        }
+
+        section#overview img {
+            max-width: 1000px;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            text-align: left
+        }
+        h1, h2, h3 {
+            color: #005A9C; background: white
+        }
+        h1 {
+            font: 170% sans-serif;
+            line-height: 110%;
+        }
+        h2 {
+            font: 140% sans-serif;
+            margin-top:40px;
+        }
+        h3 {
+            font: 120% sans-serif;
+            margin-top: 3px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid navy;
+        }
+        h4 { font: bold 100% sans-serif }
+        h5 { font: italic 100% sans-serif }
+        h6 { font: small-caps 100% sans-serif }
+
+
+        body {
+            padding: 2em 70px 2em 70px;
+            margin: 0;
+            font-family: sans-serif;
+            color: black;
+            background: white;
+            background-position: top left;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            text-align: justify;
+        }
+
+        section {
+            max-width: 1500px;
+        }
+
+        .figure {
+            margin-bottom: 20px;
+        }
+
+        :link { color: #00C; background: transparent }
+        :visited { color: #609; background: transparent }
+        a:active { color: #C00; background: transparent }
+
+        .sup-c,
+        .sup-op,
+        .sup-fp,
+        .sup-dp,
+        .sup-ap,
+        .sup-p,
+        .sup-ni,
+        .sup-cp,
+        .sup-cl {
+            cursor:help;
+            margin-left: 3px;
+        }
+
+        .sup-c {
+            color:orange;
+        }
+
+        .sup-op {
+            color:navy;
+        }
+
+        .sup-fp {
+            color:lightskyblue;
+        }
+
+        .sup-dp {
+            color:green;
+        }
+
+        .sup-ap {
+            color:darkred;
+        }
+
+        .sup-p {
+            color:black;
+        }
+
+        .sup-ni {
+            color:brown;
+        }
+
+        .sup-cp {
+            color:orange;
+        }
+
+        .sup-cl {
+            color:darkred;
+        }
+
+        code {
+            font-size: large;
+            color: darkred;
+        }
+
+        /* less prominent links for properties */
+        .proplink {
+            color: #336;
+            text-decoration: none;
+        }
+    </style>
+    
+    <script type="application/ld+json">
+      [
+  {
+    "@id": "https://w3id.org/gso/geologicfold/ontology",
+    "@type": [
+      "https://schema.org/DefinedTermSet"
+    ],
+    "https://schema.org/description": [
+      {
+        "@value": "<p>Fold types and qualities related to folds.</p>"
+      }
+    ],
+    "https://schema.org/license": [
+      {
+        "@id": "https://creativecommons.org/licenses/by/4.0/legalcode"
+      }
+    ],
+    "https://schema.org/name": [
+      {
+        "@value": "Geoscience Ontology, Fold"
+      }
+    ],
+    "https://schema.org/rights": [
+      {
+        "@value": "&copy; &copy; 2021 Government of Canada"
+      }
+    ]
+  }
+]
+    </script>
+</head>
+<body>
+  <div id="pylode">made by <a href="http://github.com/rdflib/pyLODE">
+    <span style="color:#329545;">p</span><span style="color:#f9cb33;">y</span>LODE</a>
+    <span style="font-size:smaller;">2.8.6</span>
+  </div>
+  <h1>Geoscience Ontology, Fold</h1>
+<section id="metadata">
+    <h2 style="display:none;">Metadata</h2>
+    <dl>
+        <dt>URI</dt>
+        <dd><code>https://w3id.org/gso/geologicfold/ontology</code></dd>
+        <dt><a class="proplink" href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/publisher">Publisher</a>(s)</dt>
+        <dd>
+            ARC Loop3D project;  https://loop3d.org/<br/>
+            Geological Survey of Canada, Natural Resources Canada, Government of Canada<br/>
+        </dd>
+        <dt><a class="proplink" href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/creator">Creator</a>(s)</dt>
+        <dd>
+            
+    <a href="https://w3id.org/gso/common/boyan_brodaric">None</a><br/>
+            
+    <a href="https://w3id.org/gso/common/stephen_richard">None</a><br/>
+        </dd>
+        <dt><a class="proplink" href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/created">Created</a></dt>
+        <dd>2021-03-26</dd>
+        <dt><a class="proplink" href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/modified">Modified</a></dt>
+        <dd>2021-03-26</dd>
+        <dt>Imports</dt>
+        <dd>
+            <a href="https://w3id.org/gso/common/ontology">gsoc:ontology</a><br/>
+            <a href="https://w3id.org/gso/geologicquality/ontology">gsgq:ontology</a><br/>
+            <a href="https://w3id.org/gso/geology/ontology">gsog:ontology</a><br/>
+            <a href="https://w3id.org/gso/quality/ontology">gsoq:ontology</a><br/>
+        </dd>
+        <dt>License &amp; Rights</dt>
+        <dd>
+            <a href="https://creativecommons.org/licenses/by/4.0/legalcode">https://creativecommons.org/licenses/by/4.0/legalcode</a><br />
+            &copy; &copy; 2021 Government of Canada
+        </dd>
+        <dt>Ontology RDF</dt>
+        <dd><a href="E:\GitHub\Loop3DGKM\Loop3D-GSO\Modules\GSO-Geologic_Structure_Fold.ttl">RDF (turtle)</a></dd>
+    </dl>
+    <h2>Description</h2>
+    <div id="description">
+        <p>Fold types and qualities related to folds.</p>
+    </div>
+</section>
+<section id="toc">
+    <h2>Table of Contents</h2>
+    <ol>
+        <li><a href="#classes">Classes</a></li>
+        <li><a href="#namedindividuals">Named Individuals</a></li>
+        <li><a href="#namespaces">Namespaces</a></li>
+        <li><a href="#legend">Legend</a></li>
+    </ol>
+</section>
+<section id="overview">
+    <h2>Overview</h2>
+    <div class="figure">
+        <div style="width:500px; height:50px; background-color: lightgrey; border:solid 2px grey; padding:10px;margin-bottom:5px; text-align:center;">Pictures say 1,000 words</div>
+        <div class="caption"><strong>Figure 1:</strong> Ontology overview</div>
+    </div>
+</section>
+  <section id="classes">
+    <h2>Classes <span style="float:right; font-size:smaller;"><a href="">&uparrow;</a></span></h2>
+    <ul class="hlist">
+        <li><a href="#Anticline">Anticline </a></li>
+        <li><a href="#Antiform">Antiform</a></li>
+        <li><a href="#ChevronFold">Chevron Fold </a></li>
+        <li><a href="#Fold">Fold</a></li>
+        <li><a href="#Fold-Hingesurface">Fold - Hinge surface</a></li>
+        <li><a href="#FoldAmplitude">Fold Amplitude</a></li>
+        <li><a href="#FoldHinge">Fold Hinge</a></li>
+        <li><a href="#FoldLimb">Fold Limb</a></li>
+        <li><a href="#FoldSystem">Fold System</a></li>
+        <li><a href="#Foldaxialsurface">Fold axial surface</a></li>
+        <li><a href="#Foldhingelinecurvature">Fold hinge line curvature</a></li>
+        <li><a href="#Foldhingeshape">Fold hinge shape</a></li>
+        <li><a href="#Foldlimbshape">Fold limb shape</a></li>
+        <li><a href="#Fold_Limb_Shape">Fold limb shape</a></li>
+        <li><a href="#Foldspan">Fold span</a></li>
+        <li><a href="#Foldsymmetry">Fold symmetry</a></li>
+        <li><a href="#Foldwavelength">Fold wavelength</a></li>
+        <li><a href="#Foldsareperiodic">Folds are periodic</a></li>
+        <li><a href="#Monocline">Monocline </a></li>
+        <li><a href="#NeutralFold">Neutral Fold </a></li>
+        <li><a href="#PtygmaticFold">Ptygmatic Fold </a></li>
+        <li><a href="#Recumbent">Recumbent </a></li>
+        <li><a href="#RecumbentFold">Recumbent Fold </a></li>
+        <li><a href="#Syncline">Syncline </a></li>
+        <li><a href="#Synform">Synform</a></li>
+        <li><a href="#UprightInclination">Upright Inclination</a></li>
+        <li><a href="#VerticalFold">Vertical Fold </a></li>
+    </ul>
+    <div class="entity class" id="Anticline">
+        <h3>Anticline <sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicfold/Anticline</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    <a href="https://inspire.ec.europa.eu/codelist/FoldProfileTypeValue/anticline">https://inspire.ec.europa.eu/codelist/FoldProfileTypeValue/anticline</a>
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>A fold whose core contains the stratigraphically older rocks</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicfold/Fold">gsfd:Fold</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Antiform">
+        <h3>Antiform<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicfold/Antiform</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    <a href="https://inspire.ec.europa.eu/codelist/FoldProfileTypeValue/antiform">https://inspire.ec.europa.eu/codelist/FoldProfileTypeValue/antiform</a>
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>A convex-upward, concave downward fold.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicfold/Fold">gsfd:Fold</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="ChevronFold">
+        <h3>Chevron Fold <sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicfold/Chevron_Fold</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    <a href="http://www.geologyin.com/2015/02/types-of-folds-with-photos.html">http://www.geologyin.com/2015/02/types-of-folds-with-photos.html</a>
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>A fold with straight limbs and sharp hinges. Well developed, these folds develop repeated set of v-shaped beds.  Inter-limb angles are generally 60 degrees or less. Chevron folding preferentially occurs in well bedded units where  bedding regularly alternates between contrasting competences.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicfold/Fold">gsfd:Fold</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Fold">
+        <h3>Fold<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicfold/Fold</code></td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Subclasses are defined based on concave/convex geometry of fold relative to earth surface, and relationship to younging direction in folded strata if known.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geology/Geologic_Structure">gsog:Geologic_Structure</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/common/Nonphysical_Morphologic_Feature">gsoc:Nonphysical_Morphologic_Feature</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/hasStaticPart">gsoc:hasStaticPart</a> <span class="cardinality">some</span> <a href="https://w3id.org/gso/geologicfold/Fold_Limb">gsfd:Fold_Limb</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/common/hostedBy">gsoc:hostedBy</a> <span class="cardinality">some</span> <a href="https://w3id.org/gso/geology/Rock_Body">gsog:Rock_Body</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/common/hasPersistentPart">gsoc:hasPersistentPart</a> <span class="cardinality">some</span> <a href="https://w3id.org/gso/common/Shape_Value">gsoc:Shape_Value</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/common/contains">gsoc:contains</a> <span class="cardinality">some</span> <a href="https://w3id.org/gso/geologicfold/Fold_Hinge">gsfd:Fold_Hinge</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/common/crosses">gsoc:crosses</a> <span class="cardinality">exactly</span> 1 <a href="https://w3id.org/gso/geologicfold/Fold_Axial_Surface">gsfd:Fold_Axial_Surface</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Sub-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicfold/Antiform">gsfd:Antiform</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicfold/Neutral_Fold">gsfd:Neutral_Fold</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicfold/Ptygmatic_Fold">gsfd:Ptygmatic_Fold</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicfold/Chevron_Fold">gsfd:Chevron_Fold</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicfold/Synform">gsfd:Synform</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicfold/Anticline">gsfd:Anticline</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicfold/Monocline">gsfd:Monocline</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicfold/Syncline">gsfd:Syncline</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="FoldAmplitude">
+        <h3>Fold Amplitude<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicfold/Fold_Amplitude</code></td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>the length of half the distance from the crest of a fold to the adjacent troughs. </p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/Physical_Quality">gsoc:Physical_Quality</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/isQualityOf">gsoc:isQualityOf</a> <span class="cardinality">only</span> <a href="https://w3id.org/gso/geologicfold/Fold">gsfd:Fold</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Foldaxialsurface">
+        <h3>Fold axial surface<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicfold/Fold_Axial_Surface</code></td>
+            </tr>
+            <tr>
+                <th>Is Defined By</th>
+                <td>
+                    Revised from GeoSciML v3.2
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Abstract surface that bisects the limbs of a fold or is the normal to a surface defined by the poles to the folded surface (typically visualized on a stereonet).  The axial surface of a particular fold may be located based on observations of the folded geologic structure, but in general it has no direct physical manifestation. Contrast with hinge surface, which is defined as the surface containing a set of hinge lines in the stack of folded surfaces defining a fold structure.  As a geologic surface, the axial surface has geometric properties, including orientation, which may be specified by observations at one or more locations, or generalized using terminology (upright, inclined, reclined, recumbent, overturned). (revised from GeoSciML 3.2)</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/Low_Dimension_Feature">gsoc:Low_Dimension_Feature</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/hostedBy">gsoc:hostedBy</a> <span class="cardinality">some</span> <a href="https://w3id.org/gso/geologicfold/Fold">gsfd:Fold</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/common/hasEssentialPart">gsoc:hasEssentialPart</a> <span class="cardinality">some</span> <a href="https://w3id.org/gso/common/Spatial_Region_2D">gsoc:Spatial_Region_2D</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/common/hasQuality">gsoc:hasQuality</a> <span class="cardinality">some</span> <a href="https://w3id.org/gso/quality/Orientation">gsoq:Orientation</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="FoldHinge">
+        <h3>Fold Hinge<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicfold/Fold_Hinge</code></td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>the line linking points of maximum curvature on a folded surface (http://www.geosci.usyd.edu.au/users/prey/Teaching/Geos-2123/Folds/Sld22.html). A low-dimensional feature</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/Low_Dimension_Feature">gsoc:Low_Dimension_Feature</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/hostedBy">gsoc:hostedBy</a> <span class="cardinality">some</span> <a href="https://w3id.org/gso/geologicfold/Fold">gsfd:Fold</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/common/hasEssentialPart">gsoc:hasEssentialPart</a> <span class="cardinality">some</span> <a href="https://w3id.org/gso/common/Spatial_Region_1D">gsoc:Spatial_Region_1D</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Fold-Hingesurface">
+        <h3>Fold - Hinge surface<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicfold/Fold_Hinge_Surface</code></td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Surface that contains the hinge lines in a stack of folded layers</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/Low_Dimension_Feature">gsoc:Low_Dimension_Feature</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/hostedBy">gsoc:hostedBy</a> <span class="cardinality">min</span> 2 <a href="https://w3id.org/gso/geologicfold/Fold_Hinge">gsfd:Fold_Hinge</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/common/hasEssentialPart">gsoc:hasEssentialPart</a> <span class="cardinality">some</span> <a href="https://w3id.org/gso/common/Spatial_Region_2D">gsoc:Spatial_Region_2D</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Foldlimbshape">
+        <h3>Fold limb shape<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicfold/Fold_InterLimb_Angle</code></td>
+            </tr>
+            <tr>
+                <th>Is Defined By</th>
+                <td>
+                    GeoSciML v4
+                </td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    Neuendorf et al., 2005
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>The angle between adjacent limbs of a fold, normally determined by drawing tangents to the fold limbs at the inflection points.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/Physical_Quality">gsoc:Physical_Quality</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/isQualityOf">gsoc:isQualityOf</a> <span class="cardinality">only</span> <a href="https://w3id.org/gso/geologicfold/Fold">gsfd:Fold</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="FoldLimb">
+        <h3>Fold Limb<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicfold/Fold_Limb</code></td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>The generally planar region of a fold which lies between two adjacent hinge lines and is confined between the zones of maximum curvature. A role played by some layered rock reated to the adjacent fold hinges.  Not necessarily a feature</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geology/Geologic_Structure">gsog:Geologic_Structure</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/common/Nonphysical_Morphologic_Feature">gsoc:Nonphysical_Morphologic_Feature</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/hasPersistentPart">gsoc:hasPersistentPart</a> <span class="cardinality">some</span> <a href="https://w3id.org/gso/common/Shape_Value">gsoc:Shape_Value</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/common/isPartOf">gsoc:isPartOf</a> <span class="cardinality">only</span> <a href="https://w3id.org/gso/geologicfold/Fold">gsfd:Fold</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/common/staticHostedBy">gsoc:staticHostedBy</a> <span class="cardinality">some</span> <a href="https://w3id.org/gso/geologicfold/Fold">gsfd:Fold</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Fold_Limb_Shape">
+        <h3>Fold limb shape<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicfold/Fold_Limb_Shape</code></td>
+            </tr>
+            <tr>
+                <th>Is Defined By</th>
+                <td>
+                    GeoSciML v4
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Straight vs curved limbs, eg kink, chevron, sinusoidal, box</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/Shape">gsoc:Shape</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/isQualityOf">gsoc:isQualityOf</a> <span class="cardinality">only</span> <a href="https://w3id.org/gso/geologicfold/Fold">gsfd:Fold</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Foldspan">
+        <h3>Fold span<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicfold/Fold_Span</code></td>
+            </tr>
+            <tr>
+                <th>Is Defined By</th>
+                <td>
+                    GeoSciML v3.2
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>linear distance between inflection points in a single fold (GeoSciML v3.2)</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/Physical_Quality">gsoc:Physical_Quality</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/isQualityOf">gsoc:isQualityOf</a> <span class="cardinality">only</span> <a href="https://w3id.org/gso/geologicfold/Fold">gsfd:Fold</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Foldsymmetry">
+        <h3>Fold symmetry<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicfold/Fold_Symmetry</code></td>
+            </tr>
+            <tr>
+                <th>Is Defined By</th>
+                <td>
+                    GeoSciML v4
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Concordance or discordance of bisecting surface and axial surface, or ratio of length of limbs. Folded surface may have asymmetry defined by limb length ratio if inflection points are defined. Definition based on bisecting surface/axial surface angle depends on having multiple surfaces defined such that the axial surface may be identified. (symmetric, assymetric)</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/Physical_Quality">gsoc:Physical_Quality</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/isQualityOf">gsoc:isQualityOf</a> <span class="cardinality">only</span> <a href="https://w3id.org/gso/geologicfold/Fold">gsfd:Fold</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="FoldSystem">
+        <h3>Fold System<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicfold/Fold_System</code></td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>A collection of congruent folds  (axis and axial surface are parallel) produced by the same tectonic event. Sometimes referred to as a "Fold Train". (GeoSciML 4.0.1)</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geology/Geologic_Structure">gsog:Geologic_Structure</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/common/Inherant_Feature">gsoc:Inherant_Feature</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/staticHostedBy">gsoc:staticHostedBy</a> <span class="cardinality">exactly</span> 1 ()<br/>
+                    <a href="https://w3id.org/gso/common/hasEssentialPart">gsoc:hasEssentialPart</a> <span class="cardinality">min</span> 2 <a href="https://w3id.org/gso/geologicfold/Fold">gsfd:Fold</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Foldwavelength">
+        <h3>Fold wavelength<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicfold/Fold_Wavelength</code></td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>The distance between adjacent crest or trough of  a single fold, or the average distance between adjacent crests or troughs in a fold system. </p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/Physical_Quality">gsoc:Physical_Quality</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/isQualityOf">gsoc:isQualityOf</a> <span class="cardinality">only</span> (<a href="https://w3id.org/gso/geologicfold/Fold">gsfd:Fold</a><sup class="sup-c" title="class">c</sup> or <a href="https://w3id.org/gso/geologicfold/Fold_System">gsfd:Fold_System</a><sup class="sup-c" title="class">c</sup>)<br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Foldhingelinecurvature">
+        <h3>Fold hinge line curvature<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicfold/Hinge_Line_Curvature</code></td>
+            </tr>
+            <tr>
+                <th>Is Defined By</th>
+                <td>
+                    GeoSciML v4
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Variation in orientation of fold hinge along trend of fold, distinguish sheath from cylindrical folds. Specify with terminology eg sheath, dome, basin, cylindrical.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/Physical_Quality">gsoc:Physical_Quality</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/isQualityOf">gsoc:isQualityOf</a> <span class="cardinality">only</span> <a href="https://w3id.org/gso/geologicfold/Fold">gsfd:Fold</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Foldhingeshape">
+        <h3>Fold hinge shape<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicfold/Hinge_Shape</code></td>
+            </tr>
+            <tr>
+                <th>Is Defined By</th>
+                <td>
+                    GeoSciML v4
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Rounded vs. angular hinge zones; has to do with the proportion of the wavelength that is considered part of hinge</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/Shape">gsoc:Shape</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/isQualityOf">gsoc:isQualityOf</a> <span class="cardinality">only</span> <a href="https://w3id.org/gso/geologicfold/Fold">gsfd:Fold</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Foldsareperiodic">
+        <h3>Folds are periodic<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicfold/Is_Periodic</code></td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>boolean value, true if wavelength of folds in a fold system is approximately the same</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/Physical_Quality">gsoc:Physical_Quality</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="https://w3id.org/gso/common/isQualityOf">gsoc:isQualityOf</a> <span class="cardinality">only</span> <a href="https://w3id.org/gso/geologicfold/Fold_System">gsfd:Fold_System</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Monocline">
+        <h3>Monocline <sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicfold/Monocline</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    <a href="https://en.wikipedia.org/wiki/Monocline">https://en.wikipedia.org/wiki/Monocline</a>
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>step-like fold in rock strata consisting of a zone of steeper dip within an otherwise horizontal or gently-dipping sequence.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicfold/Fold">gsfd:Fold</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="NeutralFold">
+        <h3>Neutral Fold <sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicfold/Neutral_Fold</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    <a href="https://www.encyclopedia.com/science/dictionaries-thesauruses-pictures-and-press-releases/neutral-fold">https://www.encyclopedia.com/science/dictionaries-thesauruses-pictures-and-press-releases/neutral-fold</a>
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>A fold which closes laterally and is therefore neither antiformal nor synformal.  </p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicfold/Fold">gsfd:Fold</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Sub-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicfold/Vertical_Fold">gsfd:Vertical_Fold</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="https://w3id.org/gso/geologicfold/Recumbent_Fold">gsfd:Recumbent_Fold</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="PtygmaticFold">
+        <h3>Ptygmatic Fold <sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicfold/Ptygmatic_Fold</code></td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Chaotic and highly sinuous fold typically in an isolated layer within a more homogeneous rock body. Typical of sedimentary slump folding and veins or dikes in medium to high-grade metamorphic rocks</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicfold/Fold">gsfd:Fold</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Recumbent">
+        <h3>Recumbent <sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicfold/Recumbent</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    Fleuty (1964) Folds classification.
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Surface dips between 0 and 10 degrees; typically used to describe orientation of fold hing surface or axial surface, use equivalent term 'Horizontal inclination' for other geologic surfaces.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicquality/Plane_Orientation">gsgq:Plane_Orientation</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="RecumbentFold">
+        <h3>Recumbent Fold <sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicfold/Recumbent_Fold</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    Fleuty (1964) Folds classification.
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>A fold that has an essentially horizontal axial plane.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicfold/Neutral_Fold">gsfd:Neutral_Fold</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Syncline">
+        <h3>Syncline <sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicfold/Syncline</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    <a href="https://inspire.ec.europa.eu/codelist/FoldProfileTypeValue/syncline">https://inspire.ec.europa.eu/codelist/FoldProfileTypeValue/syncline</a>
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>A fold of which the core contains the stratigraphically younger rocks</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicfold/Fold">gsfd:Fold</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Synform">
+        <h3>Synform<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicfold/Synform</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    based on https://inspire.ec.europa.eu/codelist/FoldProfileTypeValue/antiform
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>A convex-downward, concave upward fold.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicfold/Fold">gsfd:Fold</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="UprightInclination">
+        <h3>Upright Inclination<sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicfold/Upright_Inclination</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    Fleuty (1964) Folds classification.
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>Surface dips between 80 and 90 degrees, used to describe orientation of fold hinge surface or axial surface;  use equivalent term 'Vertical inclination' for other geologic surfaces.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicquality/Plane_Orientation">gsgq:Plane_Orientation</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="VerticalFold">
+        <h3>Vertical Fold <sup title="class" class="sup-c">c</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://w3id.org/gso/geologicfold/Vertical_Fold</code></td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>
+                    Fleuty (1964) Folds classification.
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <p>A fold for which the fold axis is vertical and axial surface is upright.</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="https://w3id.org/gso/geologicfold/Neutral_Fold">gsfd:Neutral_Fold</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+</section>
+  
+  <section id="namedindividuals">
+    <h2>Named Individuals <span style="float:right; font-size:smaller;"><a href="">&uparrow;</a></span></h2>
+    <ul class="hlist">
+        <li><a href="#Dr.BoyanBrodaric">Dr. Boyan Brodaric</a></li>
+        <li><a href="#Dr.StephenM.Richard">Dr. Stephen M. Richard</a></li>
+    </ul>
+    <div class="entity named_individual" id="Dr.BoyanBrodaric">
+        <h3>Dr. Boyan Brodaric<sup title="named individual" class="sup-ni">ni</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td>
+                  <code>
+                      https://w3id.org/gso/common/boyan_brodaric
+                  
+                  </code>
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    affiliation:  Natural Resources Canada, Geological Survey of Canada
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity named_individual" id="Dr.StephenM.Richard">
+        <h3>Dr. Stephen M. Richard<sup title="named individual" class="sup-ni">ni</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td>
+                  <code>
+                      https://w3id.org/gso/common/stephen_richard
+                  
+                  </code>
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                    e-mail: mailto:smrTucson@gmail.com 
+                </td>
+            </tr>
+        </table>
+    </div>
+</section>
+  
+  <section id="namespaces">
+    <h2>Namespaces <span style="float:right; font-size:smaller;"><a href="">&uparrow;</a></span></h2>
+    <dl>
+        <dt>dct</dt>
+        <dd><code>http://purl.org/dc/terms/</code></dd>
+        <dt>gsfd</dt>
+        <dd><code>https://w3id.org/gso/geologicfold/</code></dd>
+        <dt>gsgq</dt>
+        <dd><code>https://w3id.org/gso/geologicquality/</code></dd>
+        <dt>gsoc</dt>
+        <dd><code>https://w3id.org/gso/common/</code></dd>
+        <dt>gsog</dt>
+        <dd><code>https://w3id.org/gso/geology/</code></dd>
+        <dt>gsoq</dt>
+        <dd><code>https://w3id.org/gso/quality/</code></dd>
+        <dt>owl</dt>
+        <dd><code>http://www.w3.org/2002/07/owl#</code></dd>
+        <dt>prov</dt>
+        <dd><code>http://www.w3.org/ns/prov#</code></dd>
+        <dt>rdf</dt>
+        <dd><code>http://www.w3.org/1999/02/22-rdf-syntax-ns#</code></dd>
+        <dt>rdfs</dt>
+        <dd><code>http://www.w3.org/2000/01/rdf-schema#</code></dd>
+        <dt>sdo</dt>
+        <dd><code>https://schema.org/</code></dd>
+        <dt>skos</dt>
+        <dd><code>http://www.w3.org/2004/02/skos/core#</code></dd>
+        <dt>xsd</dt>
+        <dd><code>http://www.w3.org/2001/XMLSchema#</code></dd>
+    </dl>
+</section>
+  <section id="legend">
+      <h2>Legend</h2>
+      <table class="entity">
+          <tr><td><sup class="sup-c" title="Classes">c</sup></td><td>Classes</td></tr>
+          <tr><td><sup class="sup-op" title="Object Properties">op</sup></td><td>Object Properties</td></tr>
+          <tr><td><sup class="sup-fp" title="Functional Properties">fp</sup></td><td>Functional Properties</td></tr>
+          <tr><td><sup class="sup-dp" title="Data Properties">dp</sup></td><td>Data Properties</td></tr>
+          <tr><td><sup class="sup-ap" title="Annotation Properties">dp</sup></td><td>Annotation Properties</td></tr>
+          <tr><td><sup class="sup-p" title="Properties">p</sup></td><td>Properties</td></tr>
+          <tr><td><sup class="sup-ni" title="Named Individuals">ni</sup></td><td>Named Individuals</td></tr>
+      </table>
+  </section>
+</body>
+</html>
