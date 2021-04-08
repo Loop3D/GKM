@@ -1,4 +1,4 @@
-﻿# baseURI: https://w3id.org/gso/geology/ontology
+# baseURI: https://w3id.org/gso/geology/ontology
 # imports: https://w3id.org/gso/common/ontology
 # imports: https://w3id.org/gso/perdurant/ontology
 
@@ -18,6 +18,19 @@ gsoc:Element
   owl:disjointWith gsog:Mineral ;
   owl:disjointWith gsog:Rock_Grain_Material ;
   owl:disjointWith gsog:Rock_Material ;
+.
+gsoc:boyan_brodaric
+  rdf:type owl:NamedIndividual ;
+  dct:identifier <https://orcid.org/0000-0002-7987-3810> ;
+  rdfs:comment "affiliation:  Natural Resources Canada, Geological Survey of Canada" ;
+  rdfs:comment "e-mail: mailto:boyan.brodaric@canada.ca " ;
+  rdfs:label "Dr. Boyan Brodaric" ;
+.
+gsoc:stephen_richard
+  rdf:type owl:NamedIndividual ;
+  dct:identifier <https://orcid.org/0000-0001-6041-5302> ;
+  rdfs:comment "e-mail: mailto:smrTucson@gmail.com " ;
+  rdfs:label "Dr. Stephen M. Richard" ;
 .
 gsog:Additive_Process
   rdf:type owl:Class ;
@@ -514,13 +527,18 @@ gsog:Geologic_Unit
 .
 gsog:Mineral
   rdf:type owl:Class ;
-  rdfs:comment "\"A mineral is an element or chemical compound that is normally crystalline and that has been formed as a result of geological processes.\" Nickel, Ernest H. (1995), The definition of a mineral,  The Canadian Mineralogist. 33 (3): 689–90. Include mineraloids for GSO purposes"@en ;
+  rdfs:comment "\"A mineral is an element or chemical compound that is normally crystalline and that has been formed as a result of geological processes.\" Nickel, Ernest H. (1995), The definition of a mineral,  The Canadian Mineralogist. 33 (3): 689–90. Include mineraloids for GSO purposes."@en ;
   rdfs:label "Mineral"@en ;
   rdfs:subClassOf gsog:Solid_Geologic_Material ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
       owl:allValuesFrom gsoc:Element ;
       owl:onProperty gsoc:hasConstituent ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:allValuesFrom gsoc:Element ;
+      owl:onProperty gsoc:hasPart ;
     ] ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
@@ -583,6 +601,17 @@ gsog:Mineraloid
             ) ;
         ] ;
       owl:onProperty gsoc:isConstituentOf ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:allValuesFrom [
+          rdf:type owl:Class ;
+          owl:unionOf (
+              gsog:Mineraloid
+              gsoc:Element
+            ) ;
+        ] ;
+      owl:onProperty gsoc:hasPart ;
     ] ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
@@ -677,6 +706,7 @@ gsog:Rock_Grain_Material
               gsoc:Element
               gsog:Mineraloid
               gsog:Mineral
+              gsog:Rock_Material
             ) ;
         ] ;
     ] ;
@@ -907,13 +937,6 @@ gsog:Transformation
       owl:onProperty gsoc:hasOutput ;
     ] ;
 .
-gsoc:boyan_brodaric
-  rdf:type owl:NamedIndividual ;
-  rdfs:comment "affiliation:  Natural Resources Canada, Geological Survey of Canada" ;
-  rdfs:comment "e-mail: mailto:boyan.brodaric@canada.ca " ;
-  dct:identifier <https://orcid.org/0000-0002-7987-3810> ;
-  rdfs:label "Dr. Boyan Brodaric" ;
-.
 gsog:isGeologicallyRelatedTo
   rdf:type owl:ObjectProperty ;
   rdfs:label "geologically related to"@en ;
@@ -935,10 +958,4 @@ gsog:ontology
   owl:imports gspd:ontology ;
   skos:definition "Base geologic types and relations"@en ;
   skos:prefLabel "Geoscience Ontology, Geology"@en ;
-.
-gsoc:stephen_richard
-  rdf:type owl:NamedIndividual ;
-  rdfs:comment "e-mail: mailto:smrTucson@gmail.com " ;
-  dct:identifier <https://orcid.org/0000-0001-6041-5302> ;
-  rdfs:label "Dr. Stephen M. Richard" ;
 .

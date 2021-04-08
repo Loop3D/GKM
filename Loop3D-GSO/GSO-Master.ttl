@@ -1,6 +1,4 @@
 # baseURI: https://w3id.org/gso/master/ontology
-# imports: https://w3id.org/gso/skos/annotation/ontology
-# imports: https://w3id.org/gso/qudt/voc/ontology
 # imports: https://w3id.org/gso/common/ontology
 # imports: https://w3id.org/gso/element/ontology
 # imports: https://w3id.org/gso/geologiccontact/ontology
@@ -26,8 +24,10 @@
 # imports: https://w3id.org/gso/mineral/ontology
 # imports: https://w3id.org/gso/perdurant/ontology
 # imports: https://w3id.org/gso/quality/ontology
+# imports: https://w3id.org/gso/qudt/voc/ontology
 # imports: https://w3id.org/gso/rockmaterial/ontology
 # imports: https://w3id.org/gso/rockobject/ontology
+# imports: https://w3id.org/gso/skos/annotation/ontology
 
 @prefix : <https://w3id.org/gso/master/> .
 @prefix dct: <http://purl.org/dc/terms/> .
@@ -71,20 +71,46 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
+gsoc:boyan_brodaric
+  rdf:type owl:NamedIndividual ;
+  dct:identifier <https://orcid.org/0000-0002-7987-3810> ;
+  rdfs:comment "affiliation:  Natural Resources Canada, Geological Survey of Canada" ;
+  rdfs:comment "e-mail: mailto:boyan.brodaric@canada.ca " ;
+  rdfs:label "Dr. Boyan Brodaric" ;
+.
+gsoc:stephen_richard
+  rdf:type owl:NamedIndividual ;
+  dct:identifier <https://orcid.org/0000-0001-6041-5302> ;
+  rdfs:comment "e-mail: mailto:smrTucson@gmail.com " ;
+  rdfs:label "Dr. Stephen M. Richard" ;
+.
+gsog:Rock_Grain_Material
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:allValuesFrom [
+          rdf:type owl:Class ;
+          owl:unionOf (
+              gsog:Rock_Grain_Material
+              gsog:Mineral
+              gsog:Mineraloid
+              gsoc:Element
+            ) ;
+        ] ;
+      owl:onProperty gsoc:hasPart ;
+    ] ;
+.
 gsmaster:ontology
   rdf:type owl:Ontology ;
   dct:created "2020-03-26"^^xsd:date ;
   dct:creator gsoc:boyan_brodaric ;
   dct:creator gsoc:stephen_richard ;
   dct:license <https://creativecommons.org/licenses/by/4.0/legalcode> ;
-  dct:rights  "Copyright (c) 2021 Government of Canada" ; 
   dct:modified "2021-03-26"^^xsd:date ;
   dct:publisher "ARC Loop3D project;  https://loop3d.org/" ;
   dct:publisher "Geological Survey of Canada, Natural Resources Canada, Government of Canada" ;
+  dct:rights "Copyright (c) 2021 Government of Canada" ;
   rdfs:comment "Shell to load all GSO files, except GSO-Feature."@en ;
   rdfs:label "Geoscience Ontology, Master"@en ;
-  owl:imports sks:ontology ;
-  owl:imports uom:ontology ;
   owl:imports gsoc:ontology ;
   owl:imports gsel:ontology ;
   owl:imports gscn:ontology ;
@@ -110,21 +136,10 @@ gsmaster:ontology
   owl:imports gsmin:ontology ;
   owl:imports gspd:ontology ;
   owl:imports gsoq:ontology ;
+  owl:imports uom:ontology ;
   owl:imports gsrm:ontology ;
   owl:imports gsro:ontology ;
+  owl:imports sks:ontology ;
   skos:definition "Ontology that imports all components for GSO, except for subtyping of features to base classes, e.g. to Endurant, Perdurant, etc."@en ;
   skos:prefLabel "Geoscience Ontology, Master"@en ;
-.
-gsoc:stephen_richard
-  rdf:type owl:NamedIndividual ;
-  rdfs:comment "e-mail: mailto:smrTucson@gmail.com " ;
-  dct:identifier <https://orcid.org/0000-0001-6041-5302> ;
-  rdfs:label "Dr. Stephen M. Richard" ;
-.
-gsoc:boyan_brodaric
-  rdf:type owl:NamedIndividual ;
-  rdfs:comment "affiliation:  Natural Resources Canada, Geological Survey of Canada" ;
-  rdfs:comment "e-mail: mailto:boyan.brodaric@canada.ca " ;
-  dct:identifier <https://orcid.org/0000-0002-7987-3810> ;
-  rdfs:label "Dr. Boyan Brodaric" ;
 .

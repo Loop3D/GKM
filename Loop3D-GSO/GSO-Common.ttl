@@ -9,6 +9,60 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
+dct:created
+  rdf:type owl:AnnotationProperty ;
+  rdfs:subPropertyOf :hasAnnotation ;
+.
+dct:creator
+  rdf:type owl:AnnotationProperty ;
+  rdfs:subPropertyOf :hasAnnotation ;
+.
+dct:description
+  rdf:type owl:AnnotationProperty ;
+  rdfs:subPropertyOf :hasAnnotation ;
+.
+dct:license
+  rdf:type owl:AnnotationProperty ;
+  rdfs:subPropertyOf :hasAnnotation ;
+.
+dct:modified
+  rdf:type owl:AnnotationProperty ;
+  rdfs:subPropertyOf :hasAnnotation ;
+.
+dct:publisher
+  rdf:type owl:AnnotationProperty ;
+  rdfs:subPropertyOf :hasAnnotation ;
+.
+dct:rights
+  rdf:type owl:AnnotationProperty ;
+  rdfs:subPropertyOf :hasAnnotation ;
+.
+dct:source
+  rdf:type owl:AnnotationProperty ;
+  rdfs:subPropertyOf :hasAnnotation ;
+.
+rdfs:comment
+  rdfs:subPropertyOf :hasAnnotation ;
+.
+rdfs:label
+  rdfs:subPropertyOf :hasAnnotation ;
+.
+rdfs:seeAlso
+  rdfs:subPropertyOf :hasAnnotation ;
+.
+xsd:anySimpleType
+  rdf:type rdfs:Datatype ;
+.
+xsd:date
+  rdf:type rdfs:Datatype ;
+.
+owl:versionInfo
+  rdfs:subPropertyOf :hasAnnotation ;
+.
+skos:definition
+  rdf:type owl:AnnotationProperty ;
+  rdfs:subPropertyOf :hasAnnotation ;
+.
 :Abstract_Endurant
   rdf:type owl:Class ;
   rdfs:comment "Abstract endurants do not occupy space nor time - they are aspatial and atemporal, e.g. numbers and other mathematical objects"@en ;
@@ -125,15 +179,15 @@
     ] ;
 .
 :Earth
-  rdf:type :Material_Object ;
   rdf:type owl:NamedIndividual ;
+  rdf:type :Material_Object ;
   rdfs:comment "The Earth"@en ;
 .
 :Element
   rdf:type owl:Class ;
   rdfs:comment "A species of atom having the same number of protons in its atomic nuclei (that is, the same atomic number, or Z). https://en.wikipedia.org/wiki/Chemical_element"@en ;
   rdfs:label "Element"@en ;
-  rdfs:subClassOf :Solid_Matter ;
+  rdfs:subClassOf :Amount_Of_Matter ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
       owl:allValuesFrom :Element ;
@@ -645,6 +699,14 @@
   rdfs:comment "Material Objects things constituted by some amounty of matter, but are not an amount of matter themselves, nor can constitute matter."@en ;
   rdfs:label "Material Object"@en ;
   rdfs:subClassOf :Material_Endurant ;
+  rdfs:subClassOf [
+      rdf:type owl:Class ;
+      owl:complementOf [
+          rdf:type owl:Restriction ;
+          owl:onProperty :isConstituentOf ;
+          owl:someValuesFrom :Particular ;
+        ] ;
+    ] ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
       owl:onProperty :hasConstituent ;
@@ -3429,6 +3491,7 @@
 .
 :timeOlderThan
   rdf:type owl:ObjectProperty ;
+  rdf:type owl:TransitiveProperty ;
   rdfs:comment "Age associated with subject is entirely prior to age associated with object"@en ;
   rdfs:comment "Event A is older than event B if A has occurred prior to B. (Burns, 1975; Mathematical Geology, Vol. 7, No. 4) Equivalent to Allen A Before B."@en ;
   rdfs:subPropertyOf :isTemporallyRelatedTo ;
@@ -3474,61 +3537,8 @@
 .
 :timeYoungerThan
   rdf:type owl:ObjectProperty ;
+  rdf:type owl:TransitiveProperty ;
   rdfs:comment "Age associated with subject is entirely after the age associated with object"@en ;
   rdfs:comment "Event A is younger than event B if A has occurred after  B.  Same as Allen A After B.  (Burns, 1975; Mathematical Geology, Vol. 7, No. 4)"@en ;
   rdfs:subPropertyOf :isTemporallyRelatedTo ;
-.
-dct:created
-  rdf:type owl:AnnotationProperty ;
-  rdfs:subPropertyOf :hasAnnotation ;
-.
-dct:creator
-  rdf:type owl:AnnotationProperty ;
-  rdfs:subPropertyOf :hasAnnotation ;
-.
-dct:description
-  rdf:type owl:AnnotationProperty ;
-  rdfs:subPropertyOf :hasAnnotation ;
-.
-dct:license
-  rdf:type owl:AnnotationProperty ;
-  rdfs:subPropertyOf :hasAnnotation ;
-.
-dct:modified
-  rdf:type owl:AnnotationProperty ;
-  rdfs:subPropertyOf :hasAnnotation ;
-.
-dct:publisher
-  rdf:type owl:AnnotationProperty ;
-  rdfs:subPropertyOf :hasAnnotation ;
-.
-dct:rights
-  rdf:type owl:AnnotationProperty ;
-  rdfs:subPropertyOf :hasAnnotation ;
-.
-dct:source
-  rdf:type owl:AnnotationProperty ;
-  rdfs:subPropertyOf :hasAnnotation ;
-.
-rdfs:comment
-  rdfs:subPropertyOf :hasAnnotation ;
-.
-rdfs:label
-  rdfs:subPropertyOf :hasAnnotation ;
-.
-rdfs:seeAlso
-  rdfs:subPropertyOf :hasAnnotation ;
-.
-xsd:anySimpleType
-  rdf:type rdfs:Datatype ;
-.
-xsd:date
-  rdf:type rdfs:Datatype ;
-.
-owl:versionInfo
-  rdfs:subPropertyOf :hasAnnotation ;
-.
-skos:definition
-  rdf:type owl:AnnotationProperty ;
-  rdfs:subPropertyOf :hasAnnotation ;
 .
