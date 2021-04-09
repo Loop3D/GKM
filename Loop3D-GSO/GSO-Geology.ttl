@@ -537,11 +537,6 @@ gsog:Mineral
     ] ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
-      owl:allValuesFrom gsoc:Element ;
-      owl:onProperty gsoc:hasPart ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
       owl:allValuesFrom [
           rdf:type owl:Class ;
           owl:intersectionOf (
@@ -560,6 +555,17 @@ gsog:Mineral
             ) ;
         ] ;
       owl:onProperty gsoc:isConstituentOf ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:allValuesFrom [
+          rdf:type owl:Class ;
+          owl:unionOf (
+              gsog:Mineral
+              gsoc:Element
+            ) ;
+        ] ;
+      owl:onProperty gsoc:hasPart ;
     ] ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
@@ -699,6 +705,20 @@ gsog:Rock_Grain_Material
     ] ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
+      owl:allValuesFrom [
+          rdf:type owl:Class ;
+          owl:unionOf (
+              gsog:Rock_Grain_Material
+              gsog:Mineral
+              gsog:Mineraloid
+              gsoc:Element
+              gsog:Rock_Material
+            ) ;
+        ] ;
+      owl:onProperty gsoc:hasPart ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
       owl:onProperty gsoc:hasConstituent ;
       owl:someValuesFrom [
           rdf:type owl:Class ;
@@ -706,7 +726,6 @@ gsog:Rock_Grain_Material
               gsoc:Element
               gsog:Mineraloid
               gsog:Mineral
-              gsog:Rock_Material
             ) ;
         ] ;
     ] ;
