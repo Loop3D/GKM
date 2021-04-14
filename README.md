@@ -1,2 +1,0 @@
-# GKM
-Geoscience Knowledge Manager
