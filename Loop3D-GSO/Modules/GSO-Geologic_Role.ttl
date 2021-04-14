@@ -1,4 +1,4 @@
-﻿# baseURI: https://w3id.org/gso/geologicrole/ontology
+# baseURI: https://w3id.org/gso/geologicrole/ontology
 # imports: https://w3id.org/gso/common/ontology
 # imports: https://w3id.org/gso/geologicprocess/ontology
 # imports: https://w3id.org/gso/geology/ontology
@@ -15,6 +15,19 @@
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
+gsoc:boyan_brodaric
+  rdf:type owl:NamedIndividual ;
+  dct:identifier <https://orcid.org/0000-0002-7987-3810> ;
+  rdfs:comment "affiliation:  Natural Resources Canada, Geological Survey of Canada" ;
+  rdfs:comment "e-mail: mailto:boyan.brodaric@canada.ca " ;
+  rdfs:label "Dr. Boyan Brodaric" ;
+.
+gsoc:stephen_richard
+  rdf:type owl:NamedIndividual ;
+  dct:identifier <https://orcid.org/0000-0001-6041-5302> ;
+  rdfs:comment "e-mail: mailto:smrTucson@gmail.com " ;
+  rdfs:label "Dr. Stephen M. Richard" ;
+.
 gsor:Accessory_Crystals
   rdf:type owl:Class ;
   rdfs:comment "Granular material role for constituent that forms less than about 5 percent of a Rock Material"@en ;
@@ -69,7 +82,7 @@ gsor:Crystal_Role
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
       owl:onProperty gsoc:hasRolePlayer ;
-      owl:someValuesFrom gsog:Mineral ;
+      owl:someValuesFrom gsog:Mineral_Material ;
     ] ;
 .
 gsor:Enclave
@@ -238,7 +251,7 @@ gsor:Overgrowth
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
       owl:onProperty gsoc:hasRoleObject ;
-      owl:someValuesFrom gsog:Mineral ;
+      owl:someValuesFrom gsog:Mineral_Material ;
     ] ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
@@ -247,7 +260,7 @@ gsor:Overgrowth
           rdf:type owl:Class ;
           owl:unionOf (
               gsog:Rock_Grain_Material
-              gsog:Mineral
+              gsog:Mineral_Material
             ) ;
         ] ;
     ] ;
@@ -329,12 +342,12 @@ gsor:Pseudomorph
   rdfs:subClassOf gsoc:Role ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
-      owl:allValuesFrom gsog:Mineral ;
+      owl:allValuesFrom gsog:Mineral_Material ;
       owl:onProperty gsoc:hasRoleObject ;
     ] ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
-      owl:allValuesFrom gsog:Mineral ;
+      owl:allValuesFrom gsog:Mineral_Material ;
       owl:onProperty gsoc:hasRolePlayer ;
     ] ;
 .
@@ -427,13 +440,6 @@ gsor:Xenolith
   rdfs:label "Xenolith"@en ;
   rdfs:subClassOf gsor:Inclusion ;
 .
-gsoc:boyan_brodaric
-  rdf:type owl:NamedIndividual ;
-  rdfs:comment "affiliation:  Natural Resources Canada, Geological Survey of Canada" ;
-  rdfs:comment "e-mail: mailto:boyan.brodaric@canada.ca " ;
-  dct:identifier <https://orcid.org/0000-0002-7987-3810> ;
-  rdfs:label "Dr. Boyan Brodaric" ;
-.
 gsor:ontology
   rdf:type owl:Ontology ;
   dct:created "2021-03-26"^^xsd:date ;
@@ -451,10 +457,4 @@ gsor:ontology
   owl:imports gsog:ontology ;
   skos:definition "Roles geologic entities can play in relations"@en ;
   skos:prefLabel "Geoscience Ontology, Geologic Role"@en ;
-.
-gsoc:stephen_richard
-  rdf:type owl:NamedIndividual ;
-  rdfs:comment "e-mail: mailto:smrTucson@gmail.com " ;
-  dct:identifier <https://orcid.org/0000-0001-6041-5302> ;
-  rdfs:label "Dr. Stephen M. Richard" ;
 .

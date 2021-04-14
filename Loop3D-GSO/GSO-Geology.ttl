@@ -15,7 +15,7 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 gsoc:Element
-  owl:disjointWith gsog:Mineral ;
+  owl:disjointWith gsog:Mineral_Material ;
   owl:disjointWith gsog:Rock_Grain_Material ;
   owl:disjointWith gsog:Rock_Material ;
 .
@@ -525,10 +525,10 @@ gsog:Geologic_Unit
         ) ;
     ] ;
 .
-gsog:Mineral
+gsog:Mineral_Material
   rdf:type owl:Class ;
   rdfs:comment "An amount of mineral: denotes a single mineral (a unit cell) or an aggregation of single minerals. All subtypes of Mineral currently denote an aggregation, e.g. Quartz denotes an aggregation of quartz unit cells."@en ;
-  rdfs:comment "\"A mineral is an element or chemical compound that is normally crystalline and that has been formed as a result of geological processes.\" Nickel, Ernest H. (1995), The definition of a mineral,  The Canadian Mineralogist. 33 (3): 68990. Include mineraloids for GSO purposes."@en ;
+  rdfs:comment "\"A mineral is an element or chemical compound that is normally crystalline and that has been formed as a result of geological processes.\" Nickel, Ernest H. (1995), The definition of a mineral,  The Canadian Mineralogist. 33 (3): 689-90."@en ;
   rdfs:label "Mineral"@en ;
   rdfs:subClassOf gsog:Solid_Geologic_Material ;
   rdfs:subClassOf [
@@ -547,9 +547,9 @@ gsog:Mineral
                 owl:complementOf [
                     rdf:type owl:Class ;
                     owl:unionOf (
-                        gsog:Mineral
+                        gsog:Mineral_Material
                         gsoc:Element
-                        gsog:Mineraloid
+                        gsog:Mineraloid_Material
                       ) ;
                   ] ;
               ]
@@ -562,7 +562,7 @@ gsog:Mineral
       owl:allValuesFrom [
           rdf:type owl:Class ;
           owl:unionOf (
-              gsog:Mineral
+              gsog:Mineral_Material
               gsoc:Element
             ) ;
         ] ;
@@ -574,13 +574,13 @@ gsog:Mineral
       owl:someValuesFrom gsoc:Element ;
     ] ;
   owl:disjointWith gsoc:Element ;
-  owl:disjointWith gsog:Mineraloid ;
+  owl:disjointWith gsog:Mineraloid_Material ;
   owl:disjointWith gsog:Rock_Grain_Material ;
   owl:disjointWith gsog:Rock_Material ;
 .
-gsog:Mineraloid
+gsog:Mineraloid_Material
   rdf:type owl:Class ;
-  rdfs:comment "An amount of amorphous product of rapid cooling of melted material. Includes natural glasses in Earth and extraterrestrial material, as well as anthromophomorphic manufactured material."@en ;
+  rdfs:comment "An amount of amorphous material; commonly the product of rapid cooling of melted material. Includes natural glasses in Earth and extraterrestrial material, some biogenic mineral products, and anthromophomorphic manufactured material."@en ;
   rdfs:label "Mineraloid"@en ;
   rdfs:subClassOf gsog:Solid_Geologic_Material ;
   rdfs:subClassOf [
@@ -599,9 +599,9 @@ gsog:Mineraloid
                 owl:complementOf [
                     rdf:type owl:Class ;
                     owl:unionOf (
-                        gsog:Mineral
+                        gsog:Mineral_Material
                         gsoc:Element
-                        gsog:Mineraloid
+                        gsog:Mineraloid_Material
                       ) ;
                   ] ;
               ]
@@ -614,7 +614,7 @@ gsog:Mineraloid
       owl:allValuesFrom [
           rdf:type owl:Class ;
           owl:unionOf (
-              gsog:Mineraloid
+              gsog:Mineraloid_Material
               gsoc:Element
             ) ;
         ] ;
@@ -626,7 +626,7 @@ gsog:Mineraloid
       owl:someValuesFrom gsoc:Element ;
     ] ;
   owl:disjointWith gsoc:Element ;
-  owl:disjointWith gsog:Mineral ;
+  owl:disjointWith gsog:Mineral_Material ;
   owl:disjointWith gsog:Rock_Grain_Material ;
   owl:disjointWith gsog:Rock_Material ;
 .
@@ -695,9 +695,9 @@ gsog:Rock_Grain_Material
                     rdf:type owl:Class ;
                     owl:unionOf (
                         gsog:Rock_Grain_Material
-                        gsog:Mineral
+                        gsog:Mineral_Material
                         gsoc:Element
-                        gsog:Mineraloid
+                        gsog:Mineraloid_Material
                       ) ;
                   ] ;
               ]
@@ -711,8 +711,21 @@ gsog:Rock_Grain_Material
           rdf:type owl:Class ;
           owl:unionOf (
               gsog:Rock_Grain_Material
-              gsog:Mineral
-              gsog:Mineraloid
+              gsog:Mineral_Material
+              gsog:Mineraloid_Material
+              gsoc:Element
+            ) ;
+        ] ;
+      owl:onProperty gsoc:hasPart ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:allValuesFrom [
+          rdf:type owl:Class ;
+          owl:unionOf (
+              gsog:Rock_Grain_Material
+              gsog:Mineral_Material
+              gsog:Mineraloid_Material
               gsoc:Element
               gsog:Rock_Material
             ) ;
@@ -726,19 +739,19 @@ gsog:Rock_Grain_Material
           rdf:type owl:Class ;
           owl:unionOf (
               gsoc:Element
-              gsog:Mineraloid
-              gsog:Mineral
+              gsog:Mineraloid_Material
+              gsog:Mineral_Material
             ) ;
         ] ;
     ] ;
   owl:disjointWith gsoc:Element ;
-  owl:disjointWith gsog:Mineral ;
-  owl:disjointWith gsog:Mineraloid ;
+  owl:disjointWith gsog:Mineral_Material ;
+  owl:disjointWith gsog:Mineraloid_Material ;
   owl:disjointWith gsog:Rock_Material ;
 .
 gsog:Rock_Material
   rdf:type owl:Class ;
-  dct:source "NADM C1 2004"@en ;
+  dct:source "Based on NADM C1 2004 and CGI Simple_Lithology vocabulary"@en ;
   rdfs:comment "An amount of rock material: consisting of an aggregation of grains composed of mineral, glass, or other rock material. General concept for any rock, sediment, or other solid constituent of the Earth.  This is the 'top' of the lithology hierarchy comprised of standard rock names, and should be used to indicate 'any rock or unconsolidated lithic material'."@en ;
   rdfs:label "Rock Material"@en ;
   rdfs:subClassOf gsog:Solid_Geologic_Material ;
@@ -763,15 +776,15 @@ gsog:Rock_Material
           rdf:type owl:Class ;
           owl:unionOf (
               gsoc:Element
-              gsog:Mineraloid
+              gsog:Mineraloid_Material
               gsog:Rock_Grain_Material
-              gsog:Mineral
+              gsog:Mineral_Material
             ) ;
         ] ;
     ] ;
   owl:disjointWith gsoc:Element ;
-  owl:disjointWith gsog:Mineral ;
-  owl:disjointWith gsog:Mineraloid ;
+  owl:disjointWith gsog:Mineral_Material ;
+  owl:disjointWith gsog:Mineraloid_Material ;
   owl:disjointWith gsog:Rock_Grain_Material ;
 .
 gsog:Rock_Object

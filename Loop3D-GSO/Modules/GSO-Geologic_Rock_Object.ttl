@@ -4,6 +4,7 @@
 # imports: https://w3id.org/gso/geology/ontology
 
 @prefix : <https://w3id.org/gso/rockobject/> .
+@prefix dct: <http://purl.org/dc/terms/> .
 @prefix gsgu: <https://w3id.org/gso/geologicunit/> .
 @prefix gsoc: <https://w3id.org/gso/common/> .
 @prefix gsog: <https://w3id.org/gso/geology/> .
@@ -12,13 +13,25 @@
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
-@prefix dct: <http://purl.org/dc/terms/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
+gsoc:boyan_brodaric
+  rdf:type owl:NamedIndividual ;
+  dct:identifier <https://orcid.org/0000-0002-7987-3810> ;
+  rdfs:comment "affiliation:  Natural Resources Canada, Geological Survey of Canada" ;
+  rdfs:comment "e-mail: mailto:boyan.brodaric@canada.ca " ;
+  rdfs:label "Dr. Boyan Brodaric" ;
+.
+gsoc:stephen_richard
+  rdf:type owl:NamedIndividual ;
+  dct:identifier <https://orcid.org/0000-0001-6041-5302> ;
+  rdfs:comment "e-mail: mailto:smrTucson@gmail.com " ;
+  rdfs:label "Dr. Stephen M. Richard" ;
+.
 gsro:Concretion
   rdf:type owl:Class ;
+  dct:source "Neuendorf et al. 2005"@en ;
   rdfs:comment "A hard, compact mass or aggregate of mineral matter, normally subspherical but commonly oblate, disc-shaped or irregular. Formed from precipitation from solution about a nucleus or centre."@en ;
-  dct:source  "Neuendorf et al. 2005"@en ;
   rdfs:label "Concretion"@en ;
   rdfs:subClassOf gsog:Specific_Rock_Object ;
 .
@@ -41,7 +54,7 @@ gsro:Crystal
   rdfs:subClassOf gsog:Specific_Rock_Object ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
-      owl:allValuesFrom gsog:Mineral ;
+      owl:allValuesFrom gsog:Mineral_Material ;
       owl:onProperty gsoc:hasConstituent ;
     ] ;
 .
@@ -59,32 +72,18 @@ gsro:Mantle
 .
 gsro:ontology
   rdf:type owl:Ontology ;
+  dct:created "2021-03-26"^^xsd:date ;
+  dct:creator gsoc:boyan_brodaric ;
+  dct:creator gsoc:stephen_richard ;
+  dct:license <https://creativecommons.org/licenses/by/4.0/legalcode> ;
+  dct:modified "2021-03-26"^^xsd:date ;
+  dct:publisher "ARC Loop3D project;  https://loop3d.org/" ;
+  dct:publisher "Geological Survey of Canada, Natural Resources Canada, Government of Canada" ;
+  dct:rights "Copyright (c) 2021 Government of Canada" ;
   rdfs:label "Geoscience Ontology, Rock Object"@en ;
   owl:imports gsoc:ontology ;
   owl:imports gsgu:ontology ;
   owl:imports gsog:ontology ;
   skos:definition "Kinds of rock objects"@en ;
   skos:prefLabel "Geoscience Ontology, Rock Object"@en ;
-  dct:created "2021-03-26"^^xsd:date ;
-  dct:creator gsoc:stephen_richard ;
-  dct:creator gsoc:boyan_brodaric ;
-  dct:license <https://creativecommons.org/licenses/by/4.0/legalcode> ;
-  dct:rights  "Copyright (c) 2021 Government of Canada" ; 
-  dct:modified "2021-03-26"^^xsd:date ;
-  dct:publisher "ARC Loop3D project;  https://loop3d.org/" ;
-  dct:publisher "Geological Survey of Canada, Natural Resources Canada, Government of Canada" ;
-.
-
-gsoc:stephen_richard
-  rdf:type owl:NamedIndividual ;
-  rdfs:comment "e-mail: mailto:smrTucson@gmail.com " ;
-  dct:identifier <https://orcid.org/0000-0001-6041-5302> ;
-  rdfs:label "Dr. Stephen M. Richard" ;
-.
-gsoc:boyan_brodaric
-  rdf:type owl:NamedIndividual ;
-  rdfs:comment "affiliation:  Natural Resources Canada, Geological Survey of Canada" ;
-  rdfs:comment "e-mail: mailto:boyan.brodaric@canada.ca " ;
-  dct:identifier <https://orcid.org/0000-0002-7987-3810> ;
-  rdfs:label "Dr. Boyan Brodaric" ;
 .
