@@ -2,6 +2,7 @@
 # imports: https://w3id.org/gso/master/ontology
 
 @prefix con: <https://w3id.org/gso/ex-complexcontact#> .
+@prefix dct: <http://purl.org/dc/terms/> .
 @prefix gscn: <https://w3id.org/gso/geologiccontact/> .
 @prefix gsel: <https://w3id.org/gso/element/> .
 @prefix gsen: <https://w3id.org/gso/geologicsetting/> .
@@ -34,11 +35,20 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <https://schema.org/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix turtle: <http://www.semanticweb.org/owl/owlapi/turtle#> .
 @prefix unit: <http://qudt.org/vocab/unit/> .
-@prefix dct: <http://purl.org/dc/terms/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
+gsoc:stephen_richard
+  rdf:type owl:NamedIndividual ;
+  rdf:type schema:Person ;
+  rdfs:comment "e-mail: mailto:smrTucson@gmail.com " ;
+  rdfs:label "Dr. Stephen M. Richard" ;
+  schema:identifier <https://orcid.org/0000-0001-6041-5302> ;
+  schema:name "Dr. Stephen M. Richard" ;
+.
 iwh:BaseBartonGroup
   rdf:type gsog:Rock_Body_Boundary ;
   gsoc:hostedBy iwh:strat-BA ;
@@ -100,11 +110,11 @@ iwh:BaseColwellBay
 .
 iwh:BaseCranmore
   rdf:type gsog:Rock_Body_Boundary ;
+  rdfs:label "Lower boundary of Cranmore member"@en ;
   gsoc:hostedBy iwh:strat-CRMA ;
   gsoc:isParticipantIn [
       rdf:type gspr:Deposition ;
     ] ;
-  rdfs:label "Lower boundary of Cranmore member"@en ;
 .
 iwh:BaseEarnleySand
   rdf:type gsog:Rock_Body_Boundary ;
@@ -359,223 +369,228 @@ iwh:TopWittering
 .
 iwh:contact_ba_on_brb
   rdf:type gscn:Unconformable_Contact ;
+  rdfs:comment "Unconformable"@en ;
+  rdfs:label "Barton Group  overlies Bracklesham"@en ;
   gsoc:hasOlderHost iwh:strat-BRB ;
   gsoc:hasYoungerHost iwh:BaseBartonGroup ;
   gsoc:hasYoungerHost iwh:strat-BA ;
-  rdfs:comment "Unconformable"@en ;
-  rdfs:label "Barton Group  overlies Bracklesham"@en ;
 .
 iwh:contact_bac_on_slsy
   rdf:type gscn:Unconformable_Contact ;
+  rdfs:comment "Unconformable"@en ;
+  rdfs:label "Barton Clay Formation, Barton Group  overlies Selsey Sand"@en ;
   gsoc:hasOlderHost iwh:strat-SLSY ;
   gsoc:hasYoungerHost iwh:BaseBartonGroup ;
   gsoc:hasYoungerHost iwh:strat-BAC ;
-  rdfs:comment "Unconformable"@en ;
-  rdfs:label "Barton Clay Formation, Barton Group  overlies Selsey Sand"@en ;
 .
 iwh:contact_becs_on_chms
   rdf:type gscn:Conformable_Contact ;
+  rdfs:comment "Normal"@en ;
+  rdfs:label "Becton Sand Formation, Barton Group  overlies Chama Sand"@en ;
   gsoc:hasOlderHost iwh:strat-CHMS ;
   gsoc:hasYoungerHost iwh:BaseBectonSand ;
   gsoc:hasYoungerHost iwh:strat-BECS ;
-  rdfs:comment "Normal"@en ;
-  rdfs:label "Becton Sand Formation, Barton Group  overlies Chama Sand"@en ;
 .
 iwh:contact_bel_on_hehi
   rdf:type gscn:Unconformable_Contact ;
+  rdfs:comment "Erosional"@en ;
+  rdfs:label "Bembridge Limestone, Solent Group  overlies Headon Hill"@en ;
   gsoc:hasOlderHost iwh:strat-HEHI ;
   gsoc:hasYoungerHost iwh:BaseBembridgeLimestone ;
   gsoc:hasYoungerHost iwh:strat-BEL ;
-  rdfs:comment "Erosional"@en ;
-  rdfs:label "Bembridge Limestone, Solent Group  overlies Headon Hill"@en ;
 .
 iwh:contact_bmbh_on_bel
   rdf:type gscn:Paraconformable_Contact ;
+  rdfs:comment "Omission surface"@en ;
+  rdfs:label "Bembridge Marls Member of Bouldnor Formation, Solent Group  overlies Bembridge Limestone"@en ;
   gsoc:hasOlderHost iwh:strat-BEL ;
   gsoc:hasYoungerHost iwh:BaseBouldnor ;
   gsoc:hasYoungerHost iwh:strat-BMBG ;
-  rdfs:comment "Omission surface"@en ;
-  rdfs:label "Bembridge Marls Member of Bouldnor Formation, Solent Group  overlies Bembridge Limestone"@en ;
 .
 iwh:contact_boul_on_bel
   rdf:type gscn:Paraconformable_Contact ;
+  rdfs:comment "Omission surface"@en ;
+  rdfs:label "Bouldnor Formation, Solent Group  overlies Bembridge Limestone"@en ;
   gsoc:hasOlderHost iwh:strat-BEL ;
   gsoc:hasYoungerHost iwh:BaseBouldnor ;
   gsoc:hasYoungerHost iwh:strat-BOUL ;
-  rdfs:comment "Omission surface"@en ;
-  rdfs:label "Bouldnor Formation, Solent Group  overlies Bembridge Limestone"@en ;
 .
 iwh:contact_brb_on_tham
   rdf:type gscn:Unconformable_Contact ;
+  rdfs:comment "Erosional"@en ;
+  rdfs:label "Bracklesham Group  overlies Thames"@en ;
   gsoc:hasOlderHost iwh:strat-THAM ;
   gsoc:hasYoungerHost iwh:BaseBrackleshamGroup ;
   gsoc:hasYoungerHost iwh:strat-BRB ;
-  rdfs:comment "Erosional"@en ;
-  rdfs:label "Bracklesham Group  overlies Thames"@en ;
 .
 iwh:contact_chms_on_bac
   rdf:type gscn:Conformable_Contact ;
+  rdfs:comment "Normal"@en ;
+  rdfs:label "Chama Sand Formation, Barton Group  overlies Barton Clay"@en ;
   gsoc:hasOlderHost iwh:strat-BAC ;
   gsoc:hasYoungerHost iwh:BaseChamaSand ;
   gsoc:hasYoungerHost iwh:strat-CHMS ;
-  rdfs:comment "Normal"@en ;
-  rdfs:label "Chama Sand Formation, Barton Group  overlies Barton Clay"@en ;
 .
 iwh:contact_clen_on_colw
   rdf:type gscn:Unconformable_Contact ;
+  rdfs:comment "Erosional"@en ;
+  rdfs:label "Cliff End Member of Headon Hill Formation, Solent Group  overlies Colwell Bay"@en ;
   gsoc:hasOlderHost iwh:strat-CB ;
   gsoc:hasYoungerHost iwh:BaseCliffEnd ;
   gsoc:hasYoungerHost iwh:strat-CLEN ;
-  rdfs:comment "Erosional"@en ;
-  rdfs:label "Cliff End Member of Headon Hill Formation, Solent Group  overlies Colwell Bay"@en ;
 .
 iwh:contact_colw_on_totb
   rdf:type gscn:Paraconformable_Contact ;
+  rdfs:comment "Omission surface"@en ;
+  rdfs:label "Colwell Bay Member of Headon Hill Formation, Solent Group  overlies Totland Bay"@en ;
   gsoc:hasOlderHost iwh:strat-TOTB ;
   gsoc:hasYoungerHost iwh:BaseColwellBay ;
   gsoc:hasYoungerHost iwh:strat-COLW ;
-  rdfs:comment "Omission surface"@en ;
-  rdfs:label "Colwell Bay Member of Headon Hill Formation, Solent Group  overlies Totland Bay"@en ;
 .
 iwh:contact_crma_on_hm
   rdf:type gscn:Conformable_Contact ;
+  rdfs:comment "Normal"@en ;
+  rdfs:label "Cranmore Member of Bouldnor Formation, Solent Group  overlies Hamstead"@en ;
   gsoc:hasOlderHost iwh:strat-HM ;
   gsoc:hasYoungerHost iwh:BaseCranmore ;
   gsoc:hasYoungerHost iwh:strat-CRMA ;
-  rdfs:comment "Normal"@en ;
-  rdfs:label "Cranmore Member of Bouldnor Formation, Solent Group  overlies Hamstead"@en ;
 .
 iwh:contact_ea_on_wtt
   rdf:type gscn:Paraconformable_Contact ;
+  rdfs:comment "Omission surface"@en ;
+  rdfs:label "Earnley Sand Formation, Bracklesham Group  overlies Wittering"@en ;
   gsoc:hasOlderHost iwh:strat-WTT ;
   gsoc:hasYoungerHost iwh:BaseEarnleySand ;
   gsoc:hasYoungerHost iwh:strat-EA ;
-  rdfs:comment "Omission surface"@en ;
-  rdfs:label "Earnley Sand Formation, Bracklesham Group  overlies Wittering"@en ;
 .
 iwh:contact_fish_on_lafm
   rdf:type gscn:Conformable_Contact ;
+  rdfs:comment "Normal"@en ;
+  rdfs:label "Fishbourne Member of Headon Hill Formation, Solent Group  overlies Lacy's Farm Limestone"@en ;
   gsoc:hasOlderHost iwh:strat-LAFM ;
   gsoc:hasYoungerHost iwh:BaseFishbourne ;
   gsoc:hasYoungerHost iwh:strat-FISH ;
-  rdfs:comment "Normal"@en ;
-  rdfs:label "Fishbourne Member of Headon Hill Formation, Solent Group  overlies Lacy's Farm Limestone"@en ;
 .
 iwh:contact_hehi_on_becs
   rdf:type gscn:Conformable_Contact ;
+  rdfs:comment "Normal"@en ;
+  rdfs:label "Headon Hill Formation, Solent Group  overlies Becton Sand"@en ;
   gsoc:hasOlderHost iwh:strat-BECS ;
   gsoc:hasYoungerHost iwh:BaseHeadonHill ;
   gsoc:hasYoungerHost iwh:strat-HEHI ;
-  rdfs:comment "Normal"@en ;
-  rdfs:label "Headon Hill Formation, Solent Group  overlies Becton Sand"@en ;
 .
 iwh:contact_hm_on_bmbg
   rdf:type gscn:Paraconformable_Contact ;
+  rdfs:comment "Omission surface"@en ;
+  rdfs:label "Hamstead Member of Bouldnor Formation, Solent Group  overlies Bembridge Marls"@en ;
   gsoc:hasOlderHost iwh:strat-BMBG ;
   gsoc:hasYoungerHost iwh:BaseHamstead ;
   gsoc:hasYoungerHost iwh:strat-HM ;
-  rdfs:comment "Omission surface"@en ;
-  rdfs:label "Hamstead Member of Bouldnor Formation, Solent Group  overlies Bembridge Marls"@en ;
 .
 iwh:contact_hwh_on_lmbe
   rdf:type gscn:Unconformable_Contact ;
+  rdfs:comment "Erosional"@en ;
+  rdfs:label "Harwich Formation, Thames Group  overlies Lambeth"@en ;
   gsoc:hasOlderHost iwh:strat-RB ;
   gsoc:hasYoungerHost iwh:BaseThamesGroup ;
   gsoc:hasYoungerHost iwh:strat-HWH ;
-  rdfs:comment "Erosional"@en ;
-  rdfs:label "Harwich Formation, Thames Group  overlies Lambeth"@en ;
 .
 iwh:contact_lafm_on_clen
   rdf:type gscn:Conformable_Contact ;
+  rdfs:comment "Normal"@en ;
+  rdfs:label "Lacy's Farm Limestone Member of Headon Hill Formation, Solent Group  overlies Cliff End"@en ;
   gsoc:hasOlderHost iwh:strat-CLEN ;
   gsoc:hasYoungerHost iwh:BaseLacysFarmLimestone ;
   gsoc:hasYoungerHost iwh:strat-LAFM ;
-  rdfs:comment "Normal"@en ;
-  rdfs:label "Lacy's Farm Limestone Member of Headon Hill Formation, Solent Group  overlies Cliff End"@en ;
 .
 iwh:contact_lc_on_hwh
   rdf:type gscn:Conformable_Contact ;
+  rdfs:comment "Normal"@en ;
+  rdfs:label "London Clay Formation, Thames Group  overlies Harwich"@en ;
   gsoc:hasOlderHost iwh:strat-HWH ;
   gsoc:hasYoungerHost iwh:BaseLondonClay ;
   gsoc:hasYoungerHost iwh:strat-LC ;
-  rdfs:comment "Normal"@en ;
-  rdfs:label "London Clay Formation, Thames Group  overlies Harwich"@en ;
 .
 iwh:contact_marf_on_ea
   rdf:type gscn:Unconformable_Contact ;
+  rdfs:comment "Erosional"@en ;
+  rdfs:label "Marsh Farm Formation, Bracklesham Group  overlies Earnley Sand"@en ;
   gsoc:hasOlderHost iwh:strat-EA ;
   gsoc:hasYoungerHost iwh:BaseMarshFarm ;
   gsoc:hasYoungerHost iwh:strat-MARF ;
-  rdfs:comment "Erosional"@en ;
-  rdfs:label "Marsh Farm Formation, Bracklesham Group  overlies Earnley Sand"@en ;
 .
 iwh:contact_osb_on_fish
   rdf:type gscn:Conformable_Contact ;
+  rdfs:comment "Normal"@en ;
+  rdfs:label "Osborne Member of Headon Hill Formation, Solent Group  overlies Fishbourne"@en ;
   gsoc:hasOlderHost iwh:strat-FISH ;
   gsoc:hasYoungerHost iwh:BaseOsborne ;
   gsoc:hasYoungerHost iwh:strat-OSB ;
-  rdfs:comment "Normal"@en ;
-  rdfs:label "Osborne Member of Headon Hill Formation, Solent Group  overlies Fishbourne"@en ;
 .
 iwh:contact_powh_on_lc
   rdf:type gscn:Unconformable_Contact ;
+  rdfs:comment "Erosional"@en ;
+  rdfs:label "Portsmouth Sand and Whitecliff Sand Member of London Clay Formation, Thames Group  overlies London Clay"@en ;
   gsoc:hasOlderHost iwh:strat-LC ;
   gsoc:hasYoungerHost iwh:BasePortsmouthMember ;
   gsoc:hasYoungerHost iwh:strat-POWH ;
-  rdfs:comment "Erosional"@en ;
-  rdfs:label "Portsmouth Sand and Whitecliff Sand Member of London Clay Formation, Thames Group  overlies London Clay"@en ;
 .
 iwh:contact_seab_on_osb
   rdf:type gscn:Conformable_Contact ;
+  rdfs:comment "Normal"@en ;
+  rdfs:label "Seagrove Bay Member of Headon Hill Formation, Solent Group  overlies Osborne"@en ;
   gsoc:hasOlderHost iwh:strat-OSB ;
   gsoc:hasYoungerHost iwh:BaseSeagroveBay ;
   gsoc:hasYoungerHost iwh:strat-SEAB ;
-  rdfs:comment "Normal"@en ;
-  rdfs:label "Seagrove Bay Member of Headon Hill Formation, Solent Group  overlies Osborne"@en ;
 .
 iwh:contact_slsy_on_marf
   rdf:type gscn:Paraconformable_Contact ;
+  rdfs:comment "Omission surface"@en ;
+  rdfs:label "Selsey Sand Formation, Bracklesham Group  overlies Marsh Farm"@en ;
   gsoc:hasOlderHost iwh:strat-MARF ;
   gsoc:hasYoungerHost iwh:BaseSelseySand ;
   gsoc:hasYoungerHost iwh:strat-SLSY ;
-  rdfs:comment "Omission surface"@en ;
-  rdfs:label "Selsey Sand Formation, Bracklesham Group  overlies Marsh Farm"@en ;
 .
 iwh:contact_solt_on_ba
   rdf:type gscn:Conformable_Contact ;
+  rdfs:comment "relational feature"@en ;
+  rdfs:label "Solent Group conformably overlies Barton group "@en ;
   gsoc:hasOlderHost iwh:TopBartonGroup ;
   gsoc:hasOlderHost iwh:strat-BA ;
   gsoc:hasYoungerHost iwh:BaseSolentGroup ;
   gsoc:hasYoungerHost iwh:strat-SOLT ;
-  rdfs:comment "relational feature"@en ;
-  rdfs:label "Solent Group conformably overlies Barton group "@en ;
 .
 iwh:contact_tham_on_lmbe
   rdf:type gscn:Unconformable_Contact ;
+  rdfs:comment "Erosional"@en ;
+  rdfs:label "Thames Group  overlies Lambeth"@en ;
   gsoc:hasOlderHost iwh:strat-LMBE ;
   gsoc:hasYoungerHost iwh:BaseThamesGroup ;
   gsoc:hasYoungerHost iwh:strat-THAM ;
-  rdfs:comment "Erosional"@en ;
-  rdfs:label "Thames Group  overlies Lambeth"@en ;
 .
 iwh:contact_totb_on_becs
   rdf:type gscn:Conformable_Contact ;
+  rdfs:comment "Normal"@en ;
+  rdfs:label "Totland Bay Member of Headon Hill Formation, Solent Group  overlies Becton Sand"@en ;
   gsoc:hasOlderHost iwh:strat-BECS ;
   gsoc:hasYoungerHost iwh:BaseSolentGroup ;
   gsoc:hasYoungerHost iwh:strat-TOTB ;
-  rdfs:comment "Normal"@en ;
-  rdfs:label "Totland Bay Member of Headon Hill Formation, Solent Group  overlies Becton Sand"@en ;
 .
 iwh:contact_wtt_on_lc
   rdf:type gscn:Unconformable_Contact ;
+  rdfs:comment "Erosional"@en ;
+  rdfs:label "Wittering Formation, Bracklesham Group  overlies London Clay"@en ;
   gsoc:hasOlderHost iwh:strat-LC ;
   gsoc:hasYoungerHost iwh:BaseBrackleshamGroup ;
   gsoc:hasYoungerHost iwh:strat-WTT ;
-  rdfs:comment "Erosional"@en ;
-  rdfs:label "Wittering Formation, Bracklesham Group  overlies London Clay"@en ;
 .
 iwh:strat-BA
   rdf:type gsgu:Group ;
+  rdfs:comment "HookerEtAl, 2009, DOI:10.1130/2009.2452(12)"@en ;
+  rdfs:comment "ISBN:9780751837773, ISBN:9780852727720, DOI:10.1144/GOEWP"@en ;
+  rdfs:comment "Inner to mid marine shelf & coastal"@en ;
+  rdfs:comment "Sand; sandy clay"@en ;
+  rdfs:label "Barton Group"@en ;
   gsoc:hasConstituent [
       rdf:type gsrm:Generic_Mudstone ;
       gsoc:hasRole [
@@ -610,19 +625,19 @@ iwh:strat-BA
     ] ;
   gsoc:isParticipantIn [
       rdf:type gspr:Deposition ;
-      gsoc:occupiesTimeDirectly gstime:Bartonian2017 ;
       rdfs:label "Deposition during Bartonian"@en ;
+      gsoc:occupiesTimeDirectly gstime:Bartonian2017 ;
     ] ;
   gsoc:occupiesTimeIndirectly gstime:Bartonian2017 ;
   gsrl:stratOverlies iwh:strat-BRB ;
-  rdfs:comment "HookerEtAl, 2009, DOI:10.1130/2009.2452(12)"@en ;
-  rdfs:comment "ISBN:9780751837773, ISBN:9780852727720, DOI:10.1144/GOEWP"@en ;
-  rdfs:comment "Inner to mid marine shelf & coastal"@en ;
-  rdfs:comment "Sand; sandy clay"@en ;
-  rdfs:label "Barton Group"@en ;
 .
 iwh:strat-BAC
   rdf:type gsgu:Formation ;
+  rdfs:comment "Gale et al, 1999, DOI:10.1144/gsjgs.156.2.0327"@en ;
+  rdfs:comment "ISBN:9780751837773, ISBN:9780852727720, DOI:10.1144/GOEWP"@en ;
+  rdfs:comment "Inner to mid marine shelf"@en ;
+  rdfs:comment "Locally sandy and glauconitic; locally Nummulites-rich"@en ;
+  rdfs:label "Barton Clay Formation, Barton Group"@en ;
   gsoc:hasConstituent [
       rdf:type gsrm:Generic_Mudstone ;
       gsoc:hasRole [
@@ -657,19 +672,19 @@ iwh:strat-BAC
   gsoc:isPartOf iwh:strat-BA ;
   gsoc:isParticipantIn [
       rdf:type gspr:Deposition ;
-      gsoc:occupiesTimeDirectly gstime:Bartonian2017 ;
       rdfs:label "Deposition during Bartonian"@en ;
+      gsoc:occupiesTimeDirectly gstime:Bartonian2017 ;
     ] ;
   gsoc:occupiesTimeIndirectly gstime:Bartonian2017 ;
   gsrl:stratOverlies iwh:strat-SLSY ;
-  rdfs:comment "Gale et al, 1999, DOI:10.1144/gsjgs.156.2.0327"@en ;
-  rdfs:comment "ISBN:9780751837773, ISBN:9780852727720, DOI:10.1144/GOEWP"@en ;
-  rdfs:comment "Inner to mid marine shelf"@en ;
-  rdfs:comment "Locally sandy and glauconitic; locally Nummulites-rich"@en ;
-  rdfs:label "Barton Clay Formation, Barton Group"@en ;
 .
 iwh:strat-BECS
   rdf:type gsgu:Formation ;
+  rdfs:comment "Cross-bedded"@en ;
+  rdfs:comment "Gale et al, 1999, DOI:10.1144/gsjgs.156.2.0327"@en ;
+  rdfs:comment "ISBN:9780751837773, ISBN:9780852727720, DOI:10.1144/GOEWP"@en ;
+  rdfs:comment "Inner marine shelf & coastal"@en ;
+  rdfs:label "Becton Sand Formation, Barton Group"@en ;
   gsoc:hasConstituent [
       rdf:type gsrm:Arenite ;
       gsoc:hasRole [
@@ -726,19 +741,19 @@ iwh:strat-BECS
   gsoc:isPartOf iwh:strat-BA ;
   gsoc:isParticipantIn [
       rdf:type gspr:Deposition ;
-      gsoc:occupiesTimeDirectly gstime:Bartonian2017 ;
       rdfs:label "Deposition during Bartonian"@en ;
+      gsoc:occupiesTimeDirectly gstime:Bartonian2017 ;
     ] ;
   gsoc:occupiesTimeIndirectly gstime:Bartonian2017 ;
   gsrl:stratOverlies iwh:strat-CHMS ;
-  rdfs:comment "Cross-bedded"@en ;
-  rdfs:comment "Gale et al, 1999, DOI:10.1144/gsjgs.156.2.0327"@en ;
-  rdfs:comment "ISBN:9780751837773, ISBN:9780852727720, DOI:10.1144/GOEWP"@en ;
-  rdfs:comment "Inner marine shelf & coastal"@en ;
-  rdfs:label "Becton Sand Formation, Barton Group"@en ;
 .
 iwh:strat-BEL
   rdf:type gsgu:Formation ;
+  rdfs:comment "HookerEtAl, 2009, DOI:10.1130/2009.2452(12)"@en ;
+  rdfs:comment "ISBN:9780751837773, ISBN:9780852727720, DOI:10.1144/GOEWP"@en ;
+  rdfs:comment "Shallow freshwater & subaerial"@en ;
+  rdfs:comment "shelly"@en ;
+  rdfs:label "Bembridge Limestone, Solent Group"@en ;
   gsoc:hasConstituent [
       rdf:type gsrm:Generic_Mudstone ;
       gsoc:hasRole [
@@ -795,19 +810,19 @@ iwh:strat-BEL
   gsoc:isPartOf iwh:strat-SOLT ;
   gsoc:isParticipantIn [
       rdf:type gspr:Deposition ;
-      gsoc:occupiesTimeDirectly gstime:Priabonian2017 ;
       rdfs:label "Deposition during Priabonian"@en ;
+      gsoc:occupiesTimeDirectly gstime:Priabonian2017 ;
     ] ;
   gsoc:occupiesTimeIndirectly gstime:Priabonian2017 ;
   gsrl:stratOverlies iwh:strat-HEHI ;
-  rdfs:comment "HookerEtAl, 2009, DOI:10.1130/2009.2452(12)"@en ;
-  rdfs:comment "ISBN:9780751837773, ISBN:9780852727720, DOI:10.1144/GOEWP"@en ;
-  rdfs:comment "Shallow freshwater & subaerial"@en ;
-  rdfs:comment "shelly"@en ;
-  rdfs:label "Bembridge Limestone, Solent Group"@en ;
 .
 iwh:strat-BMBG
   rdf:type gsgu:Member ;
+  rdfs:comment "HookerEtAl, 2009, DOI:10.1130/2009.2452(12)"@en ;
+  rdfs:comment "ISBN:9780751837773, ISBN:9780852727720, DOI:10.1144/GOEWP"@en ;
+  rdfs:comment "Marginal marine to non-marine"@en ;
+  rdfs:comment "includes sands; shelly"@en ;
+  rdfs:label "Bembridge Marls Member of Bouldnor Formation, Solent Group"@en ;
   gsoc:hasConstituent [
       rdf:type gsrm:Generic_Mudstone ;
       gsoc:hasRole [
@@ -863,19 +878,19 @@ iwh:strat-BMBG
   gsoc:isPartOf iwh:strat-BOUL ;
   gsoc:isParticipantIn [
       rdf:type gspr:Deposition ;
-      gsoc:occupiesTimeDirectly gstime:Priabonian2017 ;
       rdfs:label "Deposition during Priabonian"@en ;
+      gsoc:occupiesTimeDirectly gstime:Priabonian2017 ;
     ] ;
   gsoc:occupiesTimeIndirectly gstime:Priabonian2017 ;
   gsrl:stratOverlies iwh:strat-BEL ;
-  rdfs:comment "HookerEtAl, 2009, DOI:10.1130/2009.2452(12)"@en ;
-  rdfs:comment "ISBN:9780751837773, ISBN:9780852727720, DOI:10.1144/GOEWP"@en ;
-  rdfs:comment "Marginal marine to non-marine"@en ;
-  rdfs:comment "includes sands; shelly"@en ;
-  rdfs:label "Bembridge Marls Member of Bouldnor Formation, Solent Group"@en ;
 .
 iwh:strat-BOUL
   rdf:type gsgu:Formation ;
+  rdfs:comment "Brackish/freshwater with pedogenized clays"@en ;
+  rdfs:comment "HookerEtAl, 2009, DOI: 10.1130/2009.2452(12)"@en ;
+  rdfs:comment "ISBN:9780751837773, ISBN:9780852727720, DOI:10.1144/GOEWP"@en ;
+  rdfs:comment "interbedded clay and silt with organic beds"@en ;
+  rdfs:label "Bouldnor Formation, Solent Group"@en ;
   gsoc:hasConstituent [
       rdf:type gsrm:Generic_Mudstone ;
       gsoc:hasRole [
@@ -919,19 +934,18 @@ iwh:strat-BOUL
   gsoc:isPartOf iwh:strat-SOLT ;
   gsoc:isParticipantIn [
       rdf:type gspr:Deposition ;
-      gsoc:occupiesTimeDirectly gstime:Rupelian2017 ;
       rdfs:label "Deposition during Rupelian"@en ;
+      gsoc:occupiesTimeDirectly gstime:Rupelian2017 ;
     ] ;
   gsoc:occupiesTimeIndirectly gstime:Rupelian2017 ;
   gsrl:stratOverlies iwh:strat-BEL ;
-  rdfs:comment "Brackish/freshwater with pedogenized clays"@en ;
-  rdfs:comment "HookerEtAl, 2009, DOI: 10.1130/2009.2452(12)"@en ;
-  rdfs:comment "ISBN:9780751837773, ISBN:9780852727720, DOI:10.1144/GOEWP"@en ;
-  rdfs:comment "interbedded clay and silt with organic beds"@en ;
-  rdfs:label "Bouldnor Formation, Solent Group"@en ;
 .
 iwh:strat-BRB
   rdf:type gsgu:Group ;
+  rdfs:comment "ISBN:9780751837773, ISBN:9780852727720, DOI:10.1144/GOEWP"@en ;
+  rdfs:comment "Interbedded; includes sandy clays; locally glauconitic & lignitic; locally abundant Nummulites"@en ;
+  rdfs:comment "Marginal marine; near-shore shallow marine; shallow marine shelf"@en ;
+  rdfs:label "Bracklesham Group"@en ;
   gsoc:hasConstituent [
       rdf:type gsrm:Arenite ;
       gsoc:hasRole [
@@ -976,27 +990,28 @@ iwh:strat-BRB
     ] ;
   gsoc:isParticipantIn [
       rdf:type gspr:Deposition ;
+      rdfs:label "Deposition during Ypresian to Lutetian"@en ;
       gsoc:occupiesTimeDirectly [
           rdf:type gsoc:Time_Interval ;
           gsoc:timeFinishedBy gstime:Lutetian2017 ;
           gsoc:timeStartedBy gstime:Ypresian2017 ;
         ] ;
-      rdfs:label "Deposition during Ypresian to Lutetian"@en ;
     ] ;
   gsoc:occupiesTimeIndirectly [
       rdf:type gsoc:Time_Interval ;
+      rdfs:comment "Gale et al, 1999, DOI:10.1144/gsjgs.156.2.0327"@en ;
       gsoc:timeFinishedBy gstime:Lutetian2017 ;
       gsoc:timeStartedBy gstime:Ypresian2017 ;
-      rdfs:comment "Gale et al, 1999, DOI:10.1144/gsjgs.156.2.0327"@en ;
     ] ;
   gsrl:stratOverlies iwh:strat-THAM ;
-  rdfs:comment "ISBN:9780751837773, ISBN:9780852727720, DOI:10.1144/GOEWP"@en ;
-  rdfs:comment "Interbedded; includes sandy clays; locally glauconitic & lignitic; locally abundant Nummulites"@en ;
-  rdfs:comment "Marginal marine; near-shore shallow marine; shallow marine shelf"@en ;
-  rdfs:label "Bracklesham Group"@en ;
 .
 iwh:strat-CHMS
   rdf:type gsgu:Formation ;
+  rdfs:comment "Gale et al, 1999, DOI:10.1144/gsjgs.156.2.0327"@en ;
+  rdfs:comment "ISBN:9780751837773, ISBN:9780852727720, DOI:10.1144/GOEWP"@en ;
+  rdfs:comment "Inner marine shelf & coastal"@en ;
+  rdfs:comment "Intensely bioturbated"@en ;
+  rdfs:label "Chama Sand Formation, Barton Group"@en ;
   gsoc:hasConstituent [
       rdf:type gsrm:Arenite ;
       gsoc:hasRole [
@@ -1031,19 +1046,19 @@ iwh:strat-CHMS
   gsoc:isPartOf iwh:strat-BA ;
   gsoc:isParticipantIn [
       rdf:type gspr:Deposition ;
-      gsoc:occupiesTimeDirectly gstime:Bartonian2017 ;
       rdfs:label "Deposition during Bartonian"@en ;
+      gsoc:occupiesTimeDirectly gstime:Bartonian2017 ;
     ] ;
   gsoc:occupiesTimeIndirectly gstime:Bartonian2017 ;
   gsrl:stratOverlies iwh:strat-BAC ;
-  rdfs:comment "Gale et al, 1999, DOI:10.1144/gsjgs.156.2.0327"@en ;
-  rdfs:comment "ISBN:9780751837773, ISBN:9780852727720, DOI:10.1144/GOEWP"@en ;
-  rdfs:comment "Inner marine shelf & coastal"@en ;
-  rdfs:comment "Intensely bioturbated"@en ;
-  rdfs:label "Chama Sand Formation, Barton Group"@en ;
 .
 iwh:strat-CLEN
   rdf:type gsgu:Member ;
+  rdfs:comment "Freshwater/brackish with pedogenized clays"@en ;
+  rdfs:comment "HookerEtAl, 2009, DOI:10.1130/2009.2452(12)"@en ;
+  rdfs:comment "ISBN:9780751837773, ISBN:9780852727720, DOI:10.1144/GOEWP"@en ;
+  rdfs:comment "Shelly"@en ;
+  rdfs:label "Cliff End Member of Headon Hill Formation, Solent Group"@en ;
   gsoc:hasConstituent [
       rdf:type gsrm:Generic_Mudstone ;
       gsoc:hasRole [
@@ -1087,19 +1102,19 @@ iwh:strat-CLEN
   gsoc:isPartOf iwh:strat-HEHI ;
   gsoc:isParticipantIn [
       rdf:type gspr:Deposition ;
-      gsoc:occupiesTimeDirectly gstime:Priabonian2017 ;
       rdfs:label "Deposition during Priabonian"@en ;
+      gsoc:occupiesTimeDirectly gstime:Priabonian2017 ;
     ] ;
   gsoc:occupiesTimeIndirectly gstime:Priabonian2017 ;
   gsrl:stratOverlies iwh:strat-CB ;
-  rdfs:comment "Freshwater/brackish with pedogenized clays"@en ;
-  rdfs:comment "HookerEtAl, 2009, DOI:10.1130/2009.2452(12)"@en ;
-  rdfs:comment "ISBN:9780751837773, ISBN:9780852727720, DOI:10.1144/GOEWP"@en ;
-  rdfs:comment "Shelly"@en ;
-  rdfs:label "Cliff End Member of Headon Hill Formation, Solent Group"@en ;
 .
 iwh:strat-COLW
   rdf:type gsgu:Member ;
+  rdfs:comment "HookerEtAl, 2009, DOI:10.1130/2009.2452(12)"@en ;
+  rdfs:comment "ISBN:9780751837773, ISBN:9780852727720, DOI:10.1144/GOEWP"@en ;
+  rdfs:comment "Open marine"@en ;
+  rdfs:comment "Shelly"@en ;
+  rdfs:label "Colwell Bay Member of Headon Hill Formation, Solent Group"@en ;
   gsoc:hasConstituent [
       rdf:type gsrm:Arenite ;
       gsoc:hasRole [
@@ -1155,19 +1170,19 @@ iwh:strat-COLW
   gsoc:isPartOf iwh:strat-HEHI ;
   gsoc:isParticipantIn [
       rdf:type gspr:Deposition ;
-      gsoc:occupiesTimeDirectly gstime:Priabonian2017 ;
       rdfs:label "Deposition during Priabonian"@en ;
+      gsoc:occupiesTimeDirectly gstime:Priabonian2017 ;
     ] ;
   gsoc:occupiesTimeIndirectly gstime:Priabonian2017 ;
   gsrl:stratOverlies iwh:strat-TOTB ;
-  rdfs:comment "HookerEtAl, 2009, DOI:10.1130/2009.2452(12)"@en ;
-  rdfs:comment "ISBN:9780751837773, ISBN:9780852727720, DOI:10.1144/GOEWP"@en ;
-  rdfs:comment "Open marine"@en ;
-  rdfs:comment "Shelly"@en ;
-  rdfs:label "Colwell Bay Member of Headon Hill Formation, Solent Group"@en ;
 .
 iwh:strat-CRMA
   rdf:type gsgu:Member ;
+  rdfs:comment "Brackish & shallow marine"@en ;
+  rdfs:comment "HookerEtAl, 2009, DOI:10.1130/2009.2452(12)"@en ;
+  rdfs:comment "ISBN:9780751837773, ISBN:9780852727720, DOI:10.1144/GOEWP"@en ;
+  rdfs:comment "Shelly"@en ;
+  rdfs:label "Cranmore Member of Bouldnor Formation, Solent Group"@en ;
   gsoc:hasConstituent [
       rdf:type gsrm:Generic_Mudstone ;
       gsoc:hasRole [
@@ -1212,19 +1227,19 @@ iwh:strat-CRMA
   gsoc:isPartOf iwh:strat-BOUL ;
   gsoc:isParticipantIn [
       rdf:type gspr:Deposition ;
-      gsoc:occupiesTimeDirectly gstime:Rupelian2017 ;
       rdfs:label "Deposition during Rupelian"@en ;
+      gsoc:occupiesTimeDirectly gstime:Rupelian2017 ;
     ] ;
   gsoc:occupiesTimeIndirectly gstime:Rupelian2017 ;
   gsrl:stratOverlies iwh:strat-HM ;
-  rdfs:comment "Brackish & shallow marine"@en ;
-  rdfs:comment "HookerEtAl, 2009, DOI:10.1130/2009.2452(12)"@en ;
-  rdfs:comment "ISBN:9780751837773, ISBN:9780852727720, DOI:10.1144/GOEWP"@en ;
-  rdfs:comment "Shelly"@en ;
-  rdfs:label "Cranmore Member of Bouldnor Formation, Solent Group"@en ;
 .
 iwh:strat-EA
   rdf:type gsgu:Formation ;
+  rdfs:comment "Gale et al, 1999, DOI:10.1144/gsjgs.156.2.0327"@en ;
+  rdfs:comment "ISBN:9780751837773, ISBN:9780852727720, DOI:10.1144/GOEWP"@en ;
+  rdfs:comment "Inner marine shelf"@en ;
+  rdfs:comment "Very shelly; glauconitic; locally abundant Nummulites"@en ;
+  rdfs:label "Earnley Sand Formation, Bracklesham Group"@en ;
   gsoc:hasConstituent [
       rdf:type gsrm:Arenite ;
       gsoc:hasRole [
@@ -1268,19 +1283,19 @@ iwh:strat-EA
   gsoc:isPartOf iwh:strat-BRB ;
   gsoc:isParticipantIn [
       rdf:type gspr:Deposition ;
-      gsoc:occupiesTimeDirectly gstime:Lutetian2017 ;
       rdfs:label "Deposition during Lutetian"@en ;
+      gsoc:occupiesTimeDirectly gstime:Lutetian2017 ;
     ] ;
   gsoc:occupiesTimeIndirectly gstime:Lutetian2017 ;
   gsrl:stratOverlies iwh:strat-WTT ;
-  rdfs:comment "Gale et al, 1999, DOI:10.1144/gsjgs.156.2.0327"@en ;
-  rdfs:comment "ISBN:9780751837773, ISBN:9780852727720, DOI:10.1144/GOEWP"@en ;
-  rdfs:comment "Inner marine shelf"@en ;
-  rdfs:comment "Very shelly; glauconitic; locally abundant Nummulites"@en ;
-  rdfs:label "Earnley Sand Formation, Bracklesham Group"@en ;
 .
 iwh:strat-FISH
   rdf:type gsgu:Member ;
+  rdfs:comment "Freshwater/brackish with pedogenized clays"@en ;
+  rdfs:comment "HookerEtAl, 2009, DOI:10.1130/2009.2452(12)"@en ;
+  rdfs:comment "ISBN:9780751837773, ISBN:9780852727720, DOI:10.1144/GOEWP"@en ;
+  rdfs:comment "Very shelly"@en ;
+  rdfs:label "Fishbourne Member of Headon Hill Formation, Solent Group"@en ;
   gsoc:hasConstituent [
       rdf:type gsrm:Generic_Mudstone ;
       gsoc:hasRole [
@@ -1324,19 +1339,19 @@ iwh:strat-FISH
   gsoc:isPartOf iwh:strat-HEHI ;
   gsoc:isParticipantIn [
       rdf:type gspr:Deposition ;
-      gsoc:occupiesTimeDirectly gstime:Priabonian2017 ;
       rdfs:label "Deposition during Priabonian"@en ;
+      gsoc:occupiesTimeDirectly gstime:Priabonian2017 ;
     ] ;
   gsoc:occupiesTimeIndirectly gstime:Priabonian2017 ;
   gsrl:stratOverlies iwh:strat-LAFM ;
-  rdfs:comment "Freshwater/brackish with pedogenized clays"@en ;
-  rdfs:comment "HookerEtAl, 2009, DOI:10.1130/2009.2452(12)"@en ;
-  rdfs:comment "ISBN:9780751837773, ISBN:9780852727720, DOI:10.1144/GOEWP"@en ;
-  rdfs:comment "Very shelly"@en ;
-  rdfs:label "Fishbourne Member of Headon Hill Formation, Solent Group"@en ;
 .
 iwh:strat-HEHI
   rdf:type gsgu:Formation ;
+  rdfs:comment "HookerEtAl, 2009, DOI:10.1130/2009.2452(12)"@en ;
+  rdfs:comment "ISBN:9780751837773, ISBN:9780852727720, DOI:10.1144/GOEWP"@en ;
+  rdfs:comment "Interbedded silty clay, clayey sand, rare thin limestone; lignite; shelly"@en ;
+  rdfs:comment "Mainly freshwater (lacustrine/fluvial), locally open marine"@en ;
+  rdfs:label "Headon Hill Formation, Solent Group"@en ;
   gsoc:hasConstituent [
       rdf:type gsrm:Arenite ;
       gsoc:hasRole [
@@ -1394,19 +1409,19 @@ iwh:strat-HEHI
   gsoc:isPartOf iwh:strat-SOLT ;
   gsoc:isParticipantIn [
       rdf:type gspr:Deposition ;
-      gsoc:occupiesTimeDirectly gstime:Priabonian2017 ;
       rdfs:label "Deposition during Priabonian"@en ;
+      gsoc:occupiesTimeDirectly gstime:Priabonian2017 ;
     ] ;
   gsoc:occupiesTimeIndirectly gstime:Priabonian2017 ;
   gsrl:stratOverlies iwh:strat-BECS ;
-  rdfs:comment "HookerEtAl, 2009, DOI:10.1130/2009.2452(12)"@en ;
-  rdfs:comment "ISBN:9780751837773, ISBN:9780852727720, DOI:10.1144/GOEWP"@en ;
-  rdfs:comment "Interbedded silty clay, clayey sand, rare thin limestone; lignite; shelly"@en ;
-  rdfs:comment "Mainly freshwater (lacustrine/fluvial), locally open marine"@en ;
-  rdfs:label "Headon Hill Formation, Solent Group"@en ;
 .
 iwh:strat-HM
   rdf:type gsgu:Member ;
+  rdfs:comment "HookerEtAl, 2009, DOI:10.1130/2009.2452(12)"@en ;
+  rdfs:comment "ISBN:9780751837773, ISBN:9780852727720, DOI:10.1144/GOEWP"@en ;
+  rdfs:comment "Marginal marine to non-marine"@en ;
+  rdfs:comment "Oganic-rich beds; fine-grained sand unit near top"@en ;
+  rdfs:label "Hamstead Member of Bouldnor Formation, Solent Group"@en ;
   gsoc:hasConstituent [
       rdf:type gsrm:Generic_Mudstone ;
       gsoc:hasRole [
@@ -1462,19 +1477,19 @@ iwh:strat-HM
   gsoc:isPartOf iwh:strat-BOUL ;
   gsoc:isParticipantIn [
       rdf:type gspr:Deposition ;
-      gsoc:occupiesTimeDirectly gstime:Rupelian2017 ;
       rdfs:label "Deposition during Rupelian"@en ;
+      gsoc:occupiesTimeDirectly gstime:Rupelian2017 ;
     ] ;
   gsoc:occupiesTimeIndirectly gstime:Rupelian2017 ;
   gsrl:stratOverlies iwh:strat-BMBG ;
-  rdfs:comment "HookerEtAl, 2009, DOI:10.1130/2009.2452(12)"@en ;
-  rdfs:comment "ISBN:9780751837773, ISBN:9780852727720, DOI:10.1144/GOEWP"@en ;
-  rdfs:comment "Marginal marine to non-marine"@en ;
-  rdfs:comment "Oganic-rich beds; fine-grained sand unit near top"@en ;
-  rdfs:label "Hamstead Member of Bouldnor Formation, Solent Group"@en ;
 .
 iwh:strat-HWH
   rdf:type gsgu:Formation ;
+  rdfs:comment "Gale et al, 1999, DOI:10.1144/gsjgs.156.2.0327"@en ;
+  rdfs:comment "ISBN:9780751837773, ISBN:9780852727720, DOI:10.1144/GOEWP"@en ;
+  rdfs:comment "Mid to inner marine shelf"@en ;
+  rdfs:comment "basal pebble bed includes flint; glauconitic"@en ;
+  rdfs:label "Harwich Formation, Thames Group"@en ;
   gsoc:hasConstituent [
       rdf:type gsrm:Arenite ;
       gsoc:hasRole [
@@ -1521,19 +1536,19 @@ iwh:strat-HWH
   gsoc:isPartOf iwh:strat-THAM ;
   gsoc:isParticipantIn [
       rdf:type gspr:Deposition ;
-      gsoc:occupiesTimeDirectly gstime:Ypresian2017 ;
       rdfs:label "Deposition during Ypresian"@en ;
+      gsoc:occupiesTimeDirectly gstime:Ypresian2017 ;
     ] ;
   gsoc:occupiesTimeIndirectly gstime:Ypresian2017 ;
   gsrl:stratOverlies iwh:strat-RB ;
-  rdfs:comment "Gale et al, 1999, DOI:10.1144/gsjgs.156.2.0327"@en ;
-  rdfs:comment "ISBN:9780751837773, ISBN:9780852727720, DOI:10.1144/GOEWP"@en ;
-  rdfs:comment "Mid to inner marine shelf"@en ;
-  rdfs:comment "basal pebble bed includes flint; glauconitic"@en ;
-  rdfs:label "Harwich Formation, Thames Group"@en ;
 .
 iwh:strat-LAFM
   rdf:type gsgu:Member ;
+  rdfs:comment ""@en ;
+  rdfs:comment "Freshwater lacustrine"@en ;
+  rdfs:comment "HookerEtAl, 2009, DOI:10.1130/2009.2452(12)"@en ;
+  rdfs:comment "ISBN:9780751837773, ISBN:9780852727720, DOI:10.1144/GOEWP"@en ;
+  rdfs:label "Lacy's Farm Limestone Member of Headon Hill Formation, Solent Group"@en ;
   gsoc:hasConstituent [
       rdf:type gsrm:Generic_Mudstone ;
       gsoc:hasRole [
@@ -1569,7 +1584,7 @@ iwh:strat-LAFM
           rdf:type gsoc:Range_Value ;
           gsoc:hasEndValue [
               rdf:type gsoc:Numeric_Value ;
-              gsoc:hasDataValue "6.7"^^xsd:decimal ;
+              gsoc:hasDataValue 6.7 ;
               gsoc:hasUOM [
                   rdf:type unit:M ;
                 ] ;
@@ -1589,19 +1604,19 @@ iwh:strat-LAFM
   gsoc:isPartOf iwh:strat-HEHI ;
   gsoc:isParticipantIn [
       rdf:type gspr:Deposition ;
-      gsoc:occupiesTimeDirectly gstime:Priabonian2017 ;
       rdfs:label "Deposition during Priabonian"@en ;
+      gsoc:occupiesTimeDirectly gstime:Priabonian2017 ;
     ] ;
   gsoc:occupiesTimeIndirectly gstime:Priabonian2017 ;
   gsrl:stratOverlies iwh:strat-CLEN ;
-  rdfs:comment ""@en ;
-  rdfs:comment "Freshwater lacustrine"@en ;
-  rdfs:comment "HookerEtAl, 2009, DOI:10.1130/2009.2452(12)"@en ;
-  rdfs:comment "ISBN:9780751837773, ISBN:9780852727720, DOI:10.1144/GOEWP"@en ;
-  rdfs:label "Lacy's Farm Limestone Member of Headon Hill Formation, Solent Group"@en ;
 .
 iwh:strat-LC
   rdf:type gsgu:Formation ;
+  rdfs:comment "Gale et al, 1999, DOI:10.1144/gsjgs.156.2.0327"@en ;
+  rdfs:comment "ISBN:9780751837773, ISBN:9780852727720, DOI:10.1144/GOEWP"@en ;
+  rdfs:comment "Mid to inner marine shelf"@en ;
+  rdfs:comment "cyclic sedimentation with flint pebble beds"@en ;
+  rdfs:label "London Clay Formation, Thames Group"@en ;
   gsoc:hasConstituent [
       rdf:type gsrm:Arenite ;
       gsoc:hasRole [
@@ -1658,19 +1673,19 @@ iwh:strat-LC
   gsoc:isPartOf iwh:strat-THAM ;
   gsoc:isParticipantIn [
       rdf:type gspr:Deposition ;
-      gsoc:occupiesTimeDirectly gstime:Ypresian2017 ;
       rdfs:label "Deposition during Ypresian"@en ;
+      gsoc:occupiesTimeDirectly gstime:Ypresian2017 ;
     ] ;
   gsoc:occupiesTimeIndirectly gstime:Ypresian2017 ;
   gsrl:stratOverlies iwh:strat-HWH ;
-  rdfs:comment "Gale et al, 1999, DOI:10.1144/gsjgs.156.2.0327"@en ;
-  rdfs:comment "ISBN:9780751837773, ISBN:9780852727720, DOI:10.1144/GOEWP"@en ;
-  rdfs:comment "Mid to inner marine shelf"@en ;
-  rdfs:comment "cyclic sedimentation with flint pebble beds"@en ;
-  rdfs:label "London Clay Formation, Thames Group"@en ;
 .
 iwh:strat-MARF
   rdf:type gsgu:Formation ;
+  rdfs:comment "Gale et al, 1999, DOI:10.1144/gsjgs.156.2.0327"@en ;
+  rdfs:comment "ISBN:9780751837773, ISBN:9780852727720, DOI:10.1144/GOEWP"@en ;
+  rdfs:comment "Includes clay & thin lignite beds"@en ;
+  rdfs:comment "Near-shore shallow marine to marginal marine"@en ;
+  rdfs:label "Marsh Farm Formation, Bracklesham Group"@en ;
   gsoc:hasConstituent [
       rdf:type gsrm:Arenite ;
       gsoc:hasRole [
@@ -1727,19 +1742,19 @@ iwh:strat-MARF
   gsoc:isPartOf iwh:strat-BRB ;
   gsoc:isParticipantIn [
       rdf:type gspr:Deposition ;
-      gsoc:occupiesTimeDirectly gstime:Lutetian2017 ;
       rdfs:label "Deposition during Lutetian"@en ;
+      gsoc:occupiesTimeDirectly gstime:Lutetian2017 ;
     ] ;
   gsoc:occupiesTimeIndirectly gstime:Lutetian2017 ;
   gsrl:stratOverlies iwh:strat-EA ;
-  rdfs:comment "Gale et al, 1999, DOI:10.1144/gsjgs.156.2.0327"@en ;
-  rdfs:comment "ISBN:9780751837773, ISBN:9780852727720, DOI:10.1144/GOEWP"@en ;
-  rdfs:comment "Includes clay & thin lignite beds"@en ;
-  rdfs:comment "Near-shore shallow marine to marginal marine"@en ;
-  rdfs:label "Marsh Farm Formation, Bracklesham Group"@en ;
 .
 iwh:strat-OSB
   rdf:type gsgu:Member ;
+  rdfs:comment ""@en ;
+  rdfs:comment "Freshwater/brackish with pedogenized clays"@en ;
+  rdfs:comment "HookerEtAl, 2009, DOI:10.1130/2009.2452(12)"@en ;
+  rdfs:comment "ISBN:9780751837773, ISBN:9780852727720, DOI:10.1144/GOEWP"@en ;
+  rdfs:label "Osborne Member of Headon Hill Formation, Solent Group"@en ;
   gsoc:hasConstituent [
       rdf:type gsrm:Generic_Mudstone ;
       gsoc:hasRole [
@@ -1763,7 +1778,7 @@ iwh:strat-OSB
           rdf:type gsoc:Range_Value ;
           gsoc:hasEndValue [
               rdf:type gsoc:Numeric_Value ;
-              gsoc:hasDataValue "10.7"^^xsd:decimal ;
+              gsoc:hasDataValue 10.7 ;
               gsoc:hasUOM [
                   rdf:type unit:M ;
                 ] ;
@@ -1783,19 +1798,19 @@ iwh:strat-OSB
   gsoc:isPartOf iwh:strat-HEHI ;
   gsoc:isParticipantIn [
       rdf:type gspr:Deposition ;
-      gsoc:occupiesTimeDirectly gstime:Priabonian2017 ;
       rdfs:label "Deposition during Priabonian"@en ;
+      gsoc:occupiesTimeDirectly gstime:Priabonian2017 ;
     ] ;
   gsoc:occupiesTimeIndirectly gstime:Priabonian2017 ;
   gsrl:stratOverlies iwh:strat-FISH ;
-  rdfs:comment ""@en ;
-  rdfs:comment "Freshwater/brackish with pedogenized clays"@en ;
-  rdfs:comment "HookerEtAl, 2009, DOI:10.1130/2009.2452(12)"@en ;
-  rdfs:comment "ISBN:9780751837773, ISBN:9780852727720, DOI:10.1144/GOEWP"@en ;
-  rdfs:label "Osborne Member of Headon Hill Formation, Solent Group"@en ;
 .
 iwh:strat-POWH
   rdf:type gsgu:Member ;
+  rdfs:comment "Channel-fill sand in outer marine shelf"@en ;
+  rdfs:comment "Gale et al, 1999, DOI:10.1144/gsjgs.156.2.0327"@en ;
+  rdfs:comment "ISBN:9780751837773, ISBN:9780852727720, DOI:10.1144/GOEWP"@en ;
+  rdfs:comment "cross-bedded; pebbly horizons"@en ;
+  rdfs:label "Portsmouth Sand and Whitecliff Sand Member of London Clay Formation, Thames Group"@en ;
   gsoc:hasConstituent [
       rdf:type gsrm:Arenite ;
       gsoc:hasRole [
@@ -1829,19 +1844,19 @@ iwh:strat-POWH
   gsoc:isPartOf iwh:strat-LC ;
   gsoc:isParticipantIn [
       rdf:type gspr:Deposition ;
-      gsoc:occupiesTimeDirectly gstime:Ypresian2017 ;
       rdfs:label "Deposition during Ypresian"@en ;
+      gsoc:occupiesTimeDirectly gstime:Ypresian2017 ;
     ] ;
   gsoc:occupiesTimeIndirectly gstime:Ypresian2017 ;
   gsrl:stratOverlies iwh:strat-LC ;
-  rdfs:comment "Channel-fill sand in outer marine shelf"@en ;
-  rdfs:comment "Gale et al, 1999, DOI:10.1144/gsjgs.156.2.0327"@en ;
-  rdfs:comment "ISBN:9780751837773, ISBN:9780852727720, DOI:10.1144/GOEWP"@en ;
-  rdfs:comment "cross-bedded; pebbly horizons"@en ;
-  rdfs:label "Portsmouth Sand and Whitecliff Sand Member of London Clay Formation, Thames Group"@en ;
 .
 iwh:strat-SEAB
   rdf:type gsgu:Member ;
+  rdfs:comment "Fluvial"@en ;
+  rdfs:comment "HookerEtAl, 2009, DOI:10.1130/2009.2452(12)"@en ;
+  rdfs:comment "ISBN:9780751837773, ISBN:9780852727720, DOI:10.1144/GOEWP"@en ;
+  rdfs:comment "Thin siltstone & sandstone beds; lignitic locally"@en ;
+  rdfs:label "Seagrove Bay Member of Headon Hill Formation, Solent Group"@en ;
   gsoc:hasConstituent [
       rdf:type gsrm:Generic_Mudstone ;
       gsoc:hasRole [
@@ -1885,19 +1900,19 @@ iwh:strat-SEAB
   gsoc:isPartOf iwh:strat-HEHI ;
   gsoc:isParticipantIn [
       rdf:type gspr:Deposition ;
-      gsoc:occupiesTimeDirectly gstime:Priabonian2017 ;
       rdfs:label "Deposition during Priabonian"@en ;
+      gsoc:occupiesTimeDirectly gstime:Priabonian2017 ;
     ] ;
   gsoc:occupiesTimeIndirectly gstime:Priabonian2017 ;
   gsrl:stratOverlies iwh:strat-OSB ;
-  rdfs:comment "Fluvial"@en ;
-  rdfs:comment "HookerEtAl, 2009, DOI:10.1130/2009.2452(12)"@en ;
-  rdfs:comment "ISBN:9780751837773, ISBN:9780852727720, DOI:10.1144/GOEWP"@en ;
-  rdfs:comment "Thin siltstone & sandstone beds; lignitic locally"@en ;
-  rdfs:label "Seagrove Bay Member of Headon Hill Formation, Solent Group"@en ;
 .
 iwh:strat-SLSY
   rdf:type gsgu:Formation ;
+  rdfs:comment "Gale et al, 1999, DOI:10.1144/gsjgs.156.2.0327"@en ;
+  rdfs:comment "ISBN:9780751837773, ISBN:9780852727720, DOI:10.1144/GOEWP"@en ;
+  rdfs:comment "Inner marine shelf"@en ;
+  rdfs:comment "interbedded; includes silty clay; glauconitic; locally shelly; locally abundant Nummulites"@en ;
+  rdfs:label "Selsey Sand Formation, Bracklesham Group"@en ;
   gsoc:hasConstituent [
       rdf:type gsrm:Arenite ;
       gsoc:hasRole [
@@ -1953,19 +1968,18 @@ iwh:strat-SLSY
   gsoc:isPartOf iwh:strat-BRB ;
   gsoc:isParticipantIn [
       rdf:type gspr:Deposition ;
-      gsoc:occupiesTimeDirectly gstime:Lutetian2017 ;
       rdfs:label "Deposition during Lutetian"@en ;
+      gsoc:occupiesTimeDirectly gstime:Lutetian2017 ;
     ] ;
   gsoc:occupiesTimeIndirectly gstime:Lutetian2017 ;
   gsrl:stratOverlies iwh:strat-MARF ;
-  rdfs:comment "Gale et al, 1999, DOI:10.1144/gsjgs.156.2.0327"@en ;
-  rdfs:comment "ISBN:9780751837773, ISBN:9780852727720, DOI:10.1144/GOEWP"@en ;
-  rdfs:comment "Inner marine shelf"@en ;
-  rdfs:comment "interbedded; includes silty clay; glauconitic; locally shelly; locally abundant Nummulites"@en ;
-  rdfs:label "Selsey Sand Formation, Bracklesham Group"@en ;
 .
 iwh:strat-SOLT
   rdf:type gsgu:Group ;
+  dct:source "ISBN:9780751837773, ISBN:9780852727720, DOI:10.1144/GOEWP"@en ;
+  rdfs:comment "Interbedded silty clays, calcareous clays and limestone"@en ;
+  rdfs:comment "Predominantly non-marine, freshwater to brackish water, fluvial/terrestrial; locally fully marine"@en ;
+  rdfs:label "Solent Group"@en ;
   gsoc:hasConstituent [
       rdf:type gsrm:Generic_Mudstone ;
       gsoc:hasRole [
@@ -2025,27 +2039,28 @@ iwh:strat-SOLT
     ] ;
   gsoc:isParticipantIn [
       rdf:type gspr:Deposition ;
+      rdfs:label "Deposition across Eocene-Oligocene boundary"@en ;
       gsoc:occupiesTimeDirectly [
           rdf:type gsoc:Time_Interval ;
           gsoc:timeFinishedBy gstime:Priabonian2017 ;
           gsoc:timeStartedBy gstime:Rupelian2017 ;
         ] ;
-      rdfs:label "Deposition across Eocene-Oligocene boundary"@en ;
     ] ;
   gsoc:occupiesTimeIndirectly [
       rdf:type gsoc:Time_Interval ;
+      dct:source "HookerEtAl, 2009, DOI: 10.1130/2009.2452(12)"@en ;
       gsoc:timeFinishedBy gstime:Priabonian2017 ;
       gsoc:timeStartedBy gstime:Rupelian2017 ;
-      dct:source  "HookerEtAl, 2009, DOI: 10.1130/2009.2452(12)"@en ;
     ] ;
   gsrl:stratOverlies iwh:strat-BA ;
-  rdfs:comment "Interbedded silty clays, calcareous clays and limestone"@en ;
-  rdfs:comment "Predominantly non-marine, freshwater to brackish water, fluvial/terrestrial; locally fully marine"@en ;
-  dct:source  "ISBN:9780751837773, ISBN:9780852727720, DOI:10.1144/GOEWP"@en ;
-  rdfs:label "Solent Group"@en ;
 .
 iwh:strat-THAM
   rdf:type gsgu:Group ;
+  rdfs:comment ""@en ;
+  rdfs:comment "Gale et al, 1999, DOI:10.1144/gsjgs.156.2.0327"@en ;
+  rdfs:comment "ISBN:9780751837773, ISBN:9780852727720, DOI:10.1144/GOEWP"@en ;
+  rdfs:comment "Outer marine shelf"@en ;
+  rdfs:label "Thames Group"@en ;
   gsoc:hasConstituent [
       rdf:type gsrm:Arenite ;
       gsoc:hasRole [
@@ -2090,19 +2105,19 @@ iwh:strat-THAM
     ] ;
   gsoc:isParticipantIn [
       rdf:type gspr:Deposition ;
-      gsoc:occupiesTimeDirectly gstime:Ypresian2017 ;
       rdfs:label "Deposition during Ypresian"@en ;
+      gsoc:occupiesTimeDirectly gstime:Ypresian2017 ;
     ] ;
   gsoc:occupiesTimeIndirectly gstime:Ypresian2017 ;
   gsrl:stratOverlies iwh:strat-LMBE ;
-  rdfs:comment ""@en ;
-  rdfs:comment "Gale et al, 1999, DOI:10.1144/gsjgs.156.2.0327"@en ;
-  rdfs:comment "ISBN:9780751837773, ISBN:9780852727720, DOI:10.1144/GOEWP"@en ;
-  rdfs:comment "Outer marine shelf"@en ;
-  rdfs:label "Thames Group"@en ;
 .
 iwh:strat-TOTB
   rdf:type gsgu:Member ;
+  rdfs:comment "Freshwater"@en ;
+  rdfs:comment "HookerEtAl, 2009, DOI:10.1130/2009.2452(12)"@en ;
+  rdfs:comment "ISBN:9780751837773, ISBN:9780852727720, DOI:10.1144/GOEWP"@en ;
+  rdfs:comment "Interbedded succession; shelly"@en ;
+  rdfs:label "Totland Bay Member of Headon Hill Formation, Solent Group"@en ;
   gsoc:hasConstituent [
       rdf:type gsrm:Arenite ;
       gsoc:hasRole [
@@ -2159,19 +2174,19 @@ iwh:strat-TOTB
   gsoc:isPartOf iwh:strat-HEHI ;
   gsoc:isParticipantIn [
       rdf:type gspr:Deposition ;
-      gsoc:occupiesTimeDirectly gstime:Priabonian2017 ;
       rdfs:label "Deposition during Priabonian"@en ;
+      gsoc:occupiesTimeDirectly gstime:Priabonian2017 ;
     ] ;
   gsoc:occupiesTimeIndirectly gstime:Priabonian2017 ;
   gsrl:stratOverlies iwh:strat-BECS ;
-  rdfs:comment "Freshwater"@en ;
-  rdfs:comment "HookerEtAl, 2009, DOI:10.1130/2009.2452(12)"@en ;
-  rdfs:comment "ISBN:9780751837773, ISBN:9780852727720, DOI:10.1144/GOEWP"@en ;
-  rdfs:comment "Interbedded succession; shelly"@en ;
-  rdfs:label "Totland Bay Member of Headon Hill Formation, Solent Group"@en ;
 .
 iwh:strat-WTT
   rdf:type gsgu:Formation ;
+  rdfs:comment "Gale et al, 1999, DOI:10.1144/gsjgs.156.2.0327"@en ;
+  rdfs:comment "Glauconitic; lignitic; includes cross-bedded sands"@en ;
+  rdfs:comment "ISBN:9780751837773, ISBN:9780852727720, DOI:10.1144/GOEWP"@en ;
+  rdfs:comment "Near-shore shallow marine to marginal marine"@en ;
+  rdfs:label "Wittering Formation, Bracklesham Group"@en ;
   gsoc:hasConstituent [
       rdf:type gsrm:Arenite ;
       gsoc:hasRole [
@@ -2243,20 +2258,21 @@ iwh:strat-WTT
   gsoc:isPartOf iwh:strat-BRB ;
   gsoc:isParticipantIn [
       rdf:type gspr:Deposition ;
-      gsoc:occupiesTimeDirectly gstime:Ypresian2017 ;
       rdfs:label "Deposition during Ypresian"@en ;
+      gsoc:occupiesTimeDirectly gstime:Ypresian2017 ;
     ] ;
   gsoc:occupiesTimeIndirectly gstime:Ypresian2017 ;
   gsrl:stratOverlies iwh:strat-LC ;
-  rdfs:comment "Gale et al, 1999, DOI:10.1144/gsjgs.156.2.0327"@en ;
-  rdfs:comment "Glauconitic; lignitic; includes cross-bedded sands"@en ;
-  rdfs:comment "ISBN:9780751837773, ISBN:9780852727720, DOI:10.1144/GOEWP"@en ;
-  rdfs:comment "Near-shore shallow marine to marginal marine"@en ;
-  rdfs:label "Wittering Formation, Bracklesham Group"@en ;
 .
 <https://w3id.org/gso/ex-islewightstrat/ontology>
   rdf:type owl:Ontology ;
-  rdfs:comment ""@en ;
+  dct:creator gsoc:stephen_richard ;
+  dct:license <https://creativecommons.org/licenses/by/4.0/legalcode> ;
+  dct:modified "2021-04-15"^^xsd:date ;
+  dct:publisher "ARC Loop3D project;  https://loop3d.org/" ;
+  dct:publisher "Geological Survey of Canada, Natural Resources Canada,  Government of Canada" ;
+  dct:rights "Copyright (c) 2021 Government of Canada" ;
+  dct:source "data from Rachel Heaven, BGS; compiled from Peter Hopson, 2011, The geological history of the Isle of Wight: an overview of the ‘diamond in Britain’s geological crown’, British Geological Survey" ;
   rdfs:label "Isle of Wight Stratigraphy test, PM1"@en ;
   owl:imports gsmaster:ontology ;
 .

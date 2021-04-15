@@ -1,11 +1,11 @@
 # baseURI: https://w3id.org/gso/ex-faults/ontology
-# imports: https://w3id.org/gso/master/ontology
 # imports: https://w3id.org/gso/ex-history/ontology
+# imports: https://w3id.org/gso/master/ontology
 
 @prefix : <https://w3id.org/gso/ex-faults#> .
+@prefix dct: <http://purl.org/dc/terms/> .
 @prefix ehy: <https://w3id.org/gso/ex-history#> .
 @prefix fau2: <https://w3id.org/gso/ex-faults#> .
-@prefix dct: <http://purl.org/dc/terms/> .
 @prefix gscn: <https://w3id.org/gso/geologiccontact/> .
 @prefix gsel: <https://w3id.org/gso/element/> .
 @prefix gsen: <https://w3id.org/gso/geologicsetting/> .
@@ -37,7 +37,7 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix sdo: <https://schema.org/> .
+@prefix schema: <https://schema.org/> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix sks: <https://w3id.org/gso/skos/annotation/> .
 @prefix turtle: <http://www.semanticweb.org/owl/owlapi/turtle#> .
@@ -46,53 +46,63 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-
-fau2:F1_fault
-  a gsfa:Thrust_Fault ;
-  gsoc:isParticipantIn ehy:Laramide_Thrust_Faulting ;
-  rdfs:label "F1 Thrust fault"@en ;
+gsoc:stephen_richard
+  rdf:type owl:NamedIndividual ;
+  rdf:type schema:Person ;
+  rdfs:comment "e-mail: mailto:smrTucson@gmail.com " ;
+  rdfs:label "Dr. Stephen M. Richard" ;
+  schema:identifier <https://orcid.org/0000-0001-6041-5302> ;
+  schema:name "Dr. Stephen M. Richard" ;
 .
-
 fau2:BasePantano
-	a  gsgf:Rock_Body_Bottom ;
-	rdfs:label "base of Pantano formation" ;
-	gsoc:isParticipantIn ehy:EarlyMioceneSedimentation;
-	gsrl:crosscuts fau2:F1_fault
+  rdf:type gsgf:Rock_Body_Bottom ;
+  rdfs:label "base of Pantano formation" ;
+  gsoc:isParticipantIn ehy:EarlyMioceneSedimentation ;
+  gsrl:crosscuts fau2:F1_fault ;
+.
+fau2:F1_fault
+  rdf:type gsfa:Thrust_Fault ;
+  rdfs:label "F1 Thrust fault"@en ;
+  gsoc:isParticipantIn ehy:Laramide_Thrust_Faulting ;
 .
 fau2:F2_shearzone
-  a gsfa:Ductile_Shear_Zone ;
-  gsoc:isParticipantIn ehy:Laramide_Ductile_deformation ;
+  rdf:type gsfa:Ductile_Shear_Zone ;
   rdfs:label "F2 Ductile shear zone"@en ;
+  gsoc:isParticipantIn ehy:Laramide_Ductile_deformation ;
 .
 fau2:F3_detachmentfault
-  a gsfa:Detachment_Fault ;
-  gsoc:isParticipantIn ehy:Detachment_Faulting ;
+  rdf:type gsfa:Detachment_Fault ;
   rdfs:label "F3 San Pedro Detachment Fault"@en ;
-  gsrl:crosscuts fau2:F2_shearzone;
+  gsoc:isParticipantIn ehy:Detachment_Faulting ;
   gsrl:crosscuts fau2:BasePantano ;
-  gsrl:crosscuts fau2:F1_fault
+  gsrl:crosscuts fau2:F1_fault ;
+  gsrl:crosscuts fau2:F2_shearzone ;
 .
 fau2:F5_fault
-  a gsfa:High_Angle_Normal_Fault ;
-  gsoc:isParticipantIn ehy:LateMioceneBasinFormation ;
+  rdf:type gsfa:High_Angle_Normal_Fault ;
   rdfs:label "Happy Valley Fault"@en ;
-  gsrl:crosscuts fau2:F2_shearzone;
+  gsoc:isParticipantIn ehy:LateMioceneBasinFormation ;
+  gsrl:crosscuts fau2:F1_fault ;
+  gsrl:crosscuts fau2:F2_shearzone ;
   gsrl:crosscuts fau2:F3_detachmentfault ;
-  gsrl:crosscuts fau2:F1_fault
 .
 fau2:PantanoFormation
-  a gsgu:Formation ;
-  gsoc:occupiesTimeIndirectly ehy:TertiaryExtensionBasinFillInterval ;
-  rdfs:label "Pantano Formation"@en ;
+  rdf:type gsgu:Formation ;
   rdfs:description "Middle Tertiary clastic sedimentary rocks depostied during crustal extension. Bedding dip decreases upsection due to tilting during deposition"@en ;
-    gsoc:hasPart fau2:BasePantano ;
+  rdfs:label "Pantano Formation"@en ;
+  gsoc:hasPart fau2:BasePantano ;
+  gsoc:occupiesTimeIndirectly ehy:TertiaryExtensionBasinFillInterval ;
 .
-
-
 <https://w3id.org/gso/ex-faults/ontology>
   rdf:type owl:Ontology ;
-  owl:imports <https://w3id.org/gso/master/ontology>, <https://w3id.org/gso/ex-history/ontology> ;
-  owl:versionIRI <https://w3id.org/gso/ex-faults> ;
-  rdfs:comment "Based on geology shown in EasternRinconMountainsXSec.png figure in the Loop3D-GSO.TestInstances directory"@en ;
+  dct:creator gsoc:stephen_richard ;
+  dct:license <https://creativecommons.org/licenses/by/4.0/legalcode> ;
+  dct:modified "2021-04-15"^^xsd:date ;
+  dct:publisher "ARC Loop3D project;  https://loop3d.org/" ;
+  dct:publisher "Geological Survey of Canada, Natural Resources Canada, Government of Canada" ;
+  dct:rights "Copyright (c) 2021 Government of Canada" ;
+  rdfs:comment "Based on geology shown in [EasternRinconMountainsXSec](https://github.com/Loop3D/GKM/blob/master/Loop3D-GSO/Examples/EasternRinconMountainsXSec.png)figure  in the Loop3D-GSO.Examples directory"@en ;
   rdfs:label "Example description of cross cutting faults"@en ;
+  owl:imports <https://w3id.org/gso/ex-history/ontology> ;
+  owl:imports gsmaster:ontology ;
 .

@@ -3,10 +3,10 @@
 
 @prefix bcs: <https://w3id.org/gso/ex-stratlexicon2-bc#> .
 @prefix con: <https://w3id.org/gso/ex-complexcontact#> .
+@prefix dct: <http://purl.org/dc/terms/> .
 @prefix gsel: <https://w3id.org/gso/element/> .
 @prefix gsen: <https://w3id.org/gso/geologicsetting/> .
 @prefix gsgu: <https://w3id.org/gso/geologicunit/> .
-@prefix gsrm: <https://w3id.org/gso/rockmaterial/> .
 @prefix gsmin: <https://w3id.org/gso/mineral/> .
 @prefix gsoc: <https://w3id.org/gso/common/> .
 @prefix gsog: <https://w3id.org/gso/geology/> .
@@ -14,193 +14,203 @@
 @prefix gspd: <https://w3id.org/gso/perdurant/> .
 @prefix gspr: <https://w3id.org/gso/geologicprocess/> .
 @prefix gsps: <https://w3id.org/gso/lithology/particleroundness/> .
+@prefix gsrm: <https://w3id.org/gso/rockmaterial/> .
 @prefix gstime: <https://w3id.org/gso/ischart/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix ppbc: <https://w3id.org/gso/ex-petrophysics-bc#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <https://schema.org/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix turtle: <http://www.semanticweb.org/owl/owlapi/turtle#> .
-@prefix dct: <http://purl.org/dc/terms/> .
-@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix unit: <http://qudt.org/vocab/unit/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
+gsoc:stephen_richard
+  rdf:type owl:NamedIndividual ;
+  rdf:type schema:Person ;
+  rdfs:comment "e-mail: mailto:smrTucson@gmail.com " ;
+  rdfs:label "Dr. Stephen M. Richard" ;
+  schema:identifier <https://orcid.org/0000-0001-6041-5302> ;
+  schema:name "Dr. Stephen M. Richard" ;
+.
 ppbc:gfsm20measurement
-  a gspd:Observation_Process ;
-  gsoc:hasParticipant <http://www.gfinstruments.cz/index.php?menu=gi&cont=sm_ov> ;
+  rdf:type gspd:Observation_Process ;
   rdfs:label "GF Instruments SM-20 magnetic susceptibility meter"@en ;
+  gsoc:hasParticipant <http://www.gfinstruments.cz/index.php?menu=gi&cont=sm_ov> ;
 .
 ppbc:k9kappameter
-  a gspd:Observation_Process ;
+  rdf:type gspd:Observation_Process ;
   rdfs:label "KT-9 Kappameter magnetic susceptibility meter"@en ;
 .
 ppbc:sapphiresi2b
-  a gspd:Observation_Process ;
+  rdf:type gspd:Observation_Process ;
   rdfs:label "Sapphire SI2B magnetic susceptibility meter"@en ;
 .
 ppbc:weightairoverweightwater
-  a gspd:Observation_Process ;
+  rdf:type gspd:Observation_Process ;
   rdfs:label "Density determination by WEIGHT-IN-AIR/WEIGHT-IN-WATER method"@en ;
 .
 bcs:AkolkolexFormation
-  a gsgu:Formation ;
+  rdf:type gsgu:Formation ;
+  rdfs:label "Akolkolex Formation"@en ;
   gsoc:hasConstituent bcs:AkolkolexFormation-arenite ;
   gsoc:hasConstituent bcs:AkolkolexFormation-quartzite ;
   gsoc:isPartOf bcs:LardeauGroup ;
-  rdfs:label "Akolkolex Formation"@en ;
 .
 bcs:AkolkolexFormation-arenite
-  a gsrm:Arenite ;
-  gsoc:isPartOf bcs:bc-arenite ;
+  rdf:type gsrm:Arenite ;
   rdfs:label "arenite lithology in Akolkolex Formation of Lardeau Group"@en ;
+  gsoc:isPartOf bcs:bc-arenite ;
 .
 bcs:AkolkolexFormation-quartzite
-  a gsrm:Quartzite ;
-  gsoc:isPartOf bcs:bc-quartzite ;
+  rdf:type gsrm:Quartzite ;
   rdfs:label "quartzite lithology in Akolkolex Formation of Lardeau Group"@en ;
+  gsoc:isPartOf bcs:bc-quartzite ;
 .
 bcs:AquaCreekcomplex
-  a gsgu:Suite ;
-  gsoc:hasConstituent bcs:AquaCreekcomplex-dioritic_rock ;
+  rdf:type gsgu:Suite ;
   rdfs:label "Aqua Creek complex"@en ;
+  gsoc:hasConstituent bcs:AquaCreekcomplex-dioritic_rock ;
 .
 bcs:AquaCreekcomplex-dioritic_rock
-  a gsrm:Dioritic_Rock ;
-  gsoc:isPartOf bcs:bc-dioritic_rock ;
+  rdf:type gsrm:Dioritic_Rock ;
   rdfs:label "dioritic_rock lithology in Aqua Creek complex"@en ;
+  gsoc:isPartOf bcs:bc-dioritic_rock ;
 .
 bcs:AshmanFormation
-  a gsgu:Formation ;
+  rdf:type gsgu:Formation ;
+  rdfs:label "Ashman Formation"@en ;
   gsoc:hasConstituent bcs:AshmanFormation-clastic_conglomerate ;
   gsoc:hasConstituent bcs:AshmanFormation-dioritic_rock ;
   gsoc:hasConstituent bcs:AshmanFormation-monzodioritic_rock ;
-  rdfs:label "Ashman Formation"@en ;
 .
 bcs:AshmanFormation-clastic_conglomerate
-  a gsrm:Clastic_Conglomerate ;
-  gsoc:isPartOf bcs:bc-clastic_conglomerate ;
+  rdf:type gsrm:Clastic_Conglomerate ;
   rdfs:label "clastic_conglomerate lithology in Ashman Formation"@en ;
+  gsoc:isPartOf bcs:bc-clastic_conglomerate ;
 .
 bcs:AshmanFormation-dioritic_rock
-  a gsrm:Dioritic_Rock ;
-  gsoc:isPartOf bcs:bc-dioritic_rock ;
+  rdf:type gsrm:Dioritic_Rock ;
   rdfs:label "dioritic_rock lithology in Ashman Formation"@en ;
+  gsoc:isPartOf bcs:bc-dioritic_rock ;
 .
 bcs:AshmanFormation-monzodioritic_rock
-  a gsrm:Monzodioritic_Rock ;
-  gsoc:isPartOf bcs:bc-monzodioritic_rock ;
+  rdf:type gsrm:Monzodioritic_Rock ;
   rdfs:label "monzodioritic_rock lithology in Ashman Formation"@en ;
+  gsoc:isPartOf bcs:bc-monzodioritic_rock ;
 .
 bcs:AsitkaGroup
-  a gsgu:Group ;
+  rdf:type gsgu:Group ;
   rdfs:label "Asitka Group"@en ;
 .
 bcs:BadshotFormation
-  a gsgu:Formation ;
+  rdf:type gsgu:Formation ;
+  rdfs:label "Badshot Formation"@en ;
   gsoc:hasConstituent bcs:BadshotFormation-limestone ;
   gsoc:hasConstituent bcs:BadshotFormation-marble ;
   gsoc:hasConstituent bcs:BadshotFormation-massive_sulphide ;
   gsoc:hasConstituent bcs:BadshotFormation-metasomatic_rock ;
-  rdfs:label "Badshot Formation"@en ;
 .
 bcs:BadshotFormation-limestone
-  a gsrm:Limestone ;
-  gsoc:isPartOf bcs:bc-limestone ;
+  rdf:type gsrm:Limestone ;
   rdfs:label "limestone lithology in Badshot Formation"@en ;
+  gsoc:isPartOf bcs:bc-limestone ;
 .
 bcs:BadshotFormation-marble
-  a gsrm:Marble ;
-  gsoc:isPartOf bcs:bc-marble ;
+  rdf:type gsrm:Marble ;
   rdfs:label "marble lithology in Badshot Formation"@en ;
+  gsoc:isPartOf bcs:bc-marble ;
 .
 bcs:BadshotFormation-massive_sulphide
-  a gsrm:Massive_Sulphide ;
-  gsoc:isPartOf bcs:bc-massive_sulphide ;
+  rdf:type gsrm:Massive_Sulphide ;
   rdfs:label "massive_sulphide lithology in Badshot Formation"@en ;
+  gsoc:isPartOf bcs:bc-massive_sulphide ;
 .
 bcs:BadshotFormation-metasomatic_rock
-  a gsrm:Metasomatic_Rock ;
-  gsoc:isPartOf bcs:bc-metasomatic_rock ;
+  rdf:type gsrm:Metasomatic_Rock ;
   rdfs:label "metasomatic_rock lithology in Badshot Formation"@en ;
+  gsoc:isPartOf bcs:bc-metasomatic_rock ;
 .
 bcs:BanffFormation
-  a gsgu:Formation ;
-  gsoc:hasConstituent bcs:BanffFormation-carbonate_sedimentary_rock ;
+  rdf:type gsgu:Formation ;
   rdfs:label "Banff Formation"@en ;
+  gsoc:hasConstituent bcs:BanffFormation-carbonate_sedimentary_rock ;
 .
 bcs:BanffFormation-carbonate_sedimentary_rock
-  a gsrm:Carbonate_Sedimentary_Rock ;
-  gsoc:isPartOf bcs:bc-carbonate_sedimentary_rock ;
+  rdf:type gsrm:Carbonate_Sedimentary_Rock ;
   rdfs:label "carbonate_sedimentary_rock lithology in Banff Formation"@en ;
+  gsoc:isPartOf bcs:bc-carbonate_sedimentary_rock ;
 .
 bcs:BayonneBatholith
-  a gsgu:Formation ;
-  gsoc:hasConstituent bcs:BayonneBatholith-granodiorite ;
+  rdf:type gsgu:Formation ;
   rdfs:label "Bayonne Batholith"@en ;
+  gsoc:hasConstituent bcs:BayonneBatholith-granodiorite ;
 .
 bcs:BayonneBatholith-granodiorite
-  a gsrm:Granodiorite ;
-  gsoc:isPartOf bcs:bc-granodiorite ;
+  rdf:type gsrm:Granodiorite ;
   rdfs:label "granodiorite lithology in  Bayonne Batholith"@en ;
+  gsoc:isPartOf bcs:bc-granodiorite ;
 .
 bcs:BlairmoreGroup
-  a gsgu:Group ;
+  rdf:type gsgu:Group ;
   rdfs:label "Blairmore Group"@en ;
 .
 bcs:BoerPhs
-  a gsgu:Formation ;
-  gsoc:hasConstituent bcs:BoerPhs-dioritic_rock ;
+  rdf:type gsgu:Formation ;
   rdfs:label "Boer Phs"@en ;
+  gsoc:hasConstituent bcs:BoerPhs-dioritic_rock ;
 .
 bcs:BoerPhs-dioritic_rock
-  a gsrm:Dioritic_Rock ;
-  gsoc:isPartOf bcs:bc-dioritic_rock ;
+  rdf:type gsrm:Dioritic_Rock ;
   rdfs:label "dioritic_rock lithology in Boer Phs"@en ;
+  gsoc:isPartOf bcs:bc-dioritic_rock ;
 .
 bcs:BowserLakeGroup
-  a gsgu:Group ;
-  gsoc:hasConstituent  bcs:BowserLakeGroup-clastic_conglomerate ;
-  gsoc:hasConstituent  bcs:BowserLakeGroup-clastic_sandstone ;
-  gsoc:hasConstituent  bcs:BowserLakeGroup-shale ;
-  gsoc:hasConstituent  bcs:BowserLakeGroup-siltstone ;
+  rdf:type gsgu:Group ;
   rdfs:label "Bowser Lake Group"@en ;
+  gsoc:hasConstituent bcs:BowserLakeGroup-clastic_conglomerate ;
+  gsoc:hasConstituent bcs:BowserLakeGroup-clastic_sandstone ;
+  gsoc:hasConstituent bcs:BowserLakeGroup-shale ;
+  gsoc:hasConstituent bcs:BowserLakeGroup-siltstone ;
 .
 bcs:BowserLakeGroup-clastic_conglomerate
-  a gsrm:Clastic_Conglomerate ;
-  gsoc:isPartOf bcs:bc-clastic_conglomerate ;
+  rdf:type gsrm:Clastic_Conglomerate ;
   rdfs:label "clastic_conglomerate lithology in Bowser Lake Group"@en ;
+  gsoc:isPartOf bcs:bc-clastic_conglomerate ;
 .
 bcs:BowserLakeGroup-clastic_sandstone
-  a gsrm:Clastic_Sandstone ;
-  gsoc:isPartOf bcs:bc-clastic_sandstone ;
+  rdf:type gsrm:Clastic_Sandstone ;
   rdfs:label "clastic_sandstone lithology in Bowser Lake Group"@en ;
+  gsoc:isPartOf bcs:bc-clastic_sandstone ;
 .
 bcs:BowserLakeGroup-clastic_sedimentary_rock
-  a gsrm:Clastic_Sedimentary_Rock ;
-  gsoc:isPartOf bcs:bc-clastic_sedimentary_rock ;
+  rdf:type gsrm:Clastic_Sedimentary_Rock ;
   rdfs:label "clastic_sedimentary_rock lithology in Bowser Lake Group"@en ;
+  gsoc:isPartOf bcs:bc-clastic_sedimentary_rock ;
 .
 bcs:BowserLakeGroup-shale
-  a gsrm:Shale ;
-  gsoc:isPartOf bcs:bc-shale ;
+  rdf:type gsrm:Shale ;
   rdfs:label "shale lithology in Bowser Lake Group"@en ;
+  gsoc:isPartOf bcs:bc-shale ;
 .
 bcs:BowserLakeGroup-siltstone
-  a gsrm:Siltstone ;
-  gsoc:isPartOf bcs:bc-siltstone ;
+  rdf:type gsrm:Siltstone ;
   rdfs:label "siltstone lithology in Bowser Lake Group"@en ;
+  gsoc:isPartOf bcs:bc-siltstone ;
 .
 bcs:BowserLakegroup
-  a gsgu:Group ;
-  gsoc:hasConstituent  bcs:BowserLakeGroup-clastic_sedimentary_rock ;
-     ;
+  rdf:type gsgu:Group ;
   rdfs:label "Bowser Lake group"@en ;
+  gsoc:hasConstituent bcs:BowserLakeGroup-clastic_sedimentary_rock ;
 .
 bcs:BridgeRiverGroup
-  a gsgu:Group ;
+  rdf:type gsgu:Group ;
   rdfs:label "Bridge River Group "@en ;
 .
 bcs:BrooksDioritecomplex
-  a gsgu:Complex ;
+  rdf:type gsgu:Complex ;
+  rdfs:label "Brooks Diorite complex"@en ;
   gsoc:hasConstituent bcs:BrooksDioritecomplex-amphibolite ;
   gsoc:hasConstituent bcs:BrooksDioritecomplex-andesite ;
   gsoc:hasConstituent bcs:BrooksDioritecomplex-dioritic_rock ;
@@ -208,259 +218,259 @@ bcs:BrooksDioritecomplex
   gsoc:hasConstituent bcs:BrooksDioritecomplex-monzodioritic_rock ;
   gsoc:hasConstituent bcs:BrooksDioritecomplex-monzonitic_rock ;
   gsoc:hasConstituent bcs:BrooksDioritecomplex-rhyolitoid ;
-  rdfs:label "Brooks Diorite complex"@en ;
 .
 bcs:BrooksDioritecomplex-amphibolite
-  a gsrm:Amphibolite ;
-  gsoc:isPartOf bcs:bc-amphibolite ;
+  rdf:type gsrm:Amphibolite ;
   rdfs:label "amphibolite lithology in Brooks Diorite complex"@en ;
+  gsoc:isPartOf bcs:bc-amphibolite ;
 .
 bcs:BrooksDioritecomplex-andesite
-  a gsrm:Andesite ;
-  gsoc:isPartOf bcs:bc-andesite ;
+  rdf:type gsrm:Andesite ;
   rdfs:label "andesite lithology in Brooks Diorite complex"@en ;
+  gsoc:isPartOf bcs:bc-andesite ;
 .
 bcs:BrooksDioritecomplex-dioritic_rock
-  a gsrm:Dioritic_Rock ;
-  gsoc:isPartOf bcs:bc-dioritic_rock ;
+  rdf:type gsrm:Dioritic_Rock ;
   rdfs:label "dioritic_rock lithology in Brooks Diorite complex"@en ;
+  gsoc:isPartOf bcs:bc-dioritic_rock ;
 .
 bcs:BrooksDioritecomplex-granitoid
-  a gsrm:Granitoid ;
-  gsoc:isPartOf bcs:bc-granitoid ;
+  rdf:type gsrm:Granitoid ;
   rdfs:label "granitoid lithology in Brooks Diorite complex"@en ;
+  gsoc:isPartOf bcs:bc-granitoid ;
 .
 bcs:BrooksDioritecomplex-monzodioritic_rock
-  a gsrm:Monzodioritic_Rock ;
-  gsoc:isPartOf bcs:bc-monzodioritic_rock ;
+  rdf:type gsrm:Monzodioritic_Rock ;
   rdfs:label "monzodioritic_rock lithology in Brooks Diorite complex"@en ;
+  gsoc:isPartOf bcs:bc-monzodioritic_rock ;
 .
 bcs:BrooksDioritecomplex-monzonitic_rock
-  a gsrm:Monzonitic_Rock ;
-  gsoc:isPartOf bcs:bc-monzonitic_rock ;
+  rdf:type gsrm:Monzonitic_Rock ;
   rdfs:label "monzonitic_rock lithology in Brooks Diorite complex"@en ;
+  gsoc:isPartOf bcs:bc-monzonitic_rock ;
 .
 bcs:BrooksDioritecomplex-rhyolitoid
-  a gsrm:Rhyolitoid ;
-  gsoc:isPartOf bcs:bc-rhyolitoid ;
+  rdf:type gsrm:Rhyolitoid ;
   rdfs:label "rhyolitoid lithology in Brooks Diorite complex"@en ;
+  gsoc:isPartOf bcs:bc-rhyolitoid ;
 .
 bcs:CabinLakePl
-  a gsgu:Formation ;
-  gsoc:hasConstituent bcs:CabinLakePl-monzonitic_rock ;
+  rdf:type gsgu:Formation ;
   rdfs:label "Cabin Lake Pl"@en ;
+  gsoc:hasConstituent bcs:CabinLakePl-monzonitic_rock ;
 .
 bcs:CabinLakePl-monzonitic_rock
-  a gsrm:Monzonitic_Rock ;
-  gsoc:isPartOf bcs:bc-monzonitic_rock ;
+  rdf:type gsrm:Monzonitic_Rock ;
   rdfs:label "monzonitic_rock lithology in Cabin Lake Pl"@en ;
+  gsoc:isPartOf bcs:bc-monzonitic_rock ;
 .
 bcs:CacheCreekGroup
-  a gsgu:Group ;
-  gsoc:hasConstituent  bcs:CacheCreekGroup-metamorphic_rock ;
+  rdf:type gsgu:Group ;
   rdfs:label "Cache Creek Group"@en ;
+  gsoc:hasConstituent bcs:CacheCreekGroup-metamorphic_rock ;
 .
 bcs:CacheCreekGroup-metamorphic_rock
-  a gsrm:Metamorphic_Rock ;
-  gsoc:isPartOf bcs:bc-metamorphic_rock ;
+  rdf:type gsrm:Metamorphic_Rock ;
   rdfs:label "metamorphic_rock lithology in Cache Creek Group"@en ;
+  gsoc:isPartOf bcs:bc-metamorphic_rock ;
 .
 bcs:CaledoniaPhs
-  a gsgu:Suite ;
+  rdf:type gsgu:Suite ;
+  rdfs:label "Caledonia Phs"@en ;
   gsoc:hasConstituent bcs:CaledoniaPhs-basalt ;
   gsoc:hasConstituent bcs:CaledoniaPhs-granitoid ;
   gsoc:hasConstituent bcs:CaledoniaPhs-granodiorite ;
-  rdfs:label "Caledonia Phs"@en ;
 .
 bcs:CaledoniaPhs-basalt
-  a gsrm:Basalt ;
-  gsoc:isPartOf bcs:bc-basalt ;
+  rdf:type gsrm:Basalt ;
   rdfs:label "basalt lithology in Caledonia Phs"@en ;
+  gsoc:isPartOf bcs:bc-basalt ;
 .
 bcs:CaledoniaPhs-granitoid
-  a gsrm:Granitoid ;
-  gsoc:isPartOf bcs:bc-granitoid ;
+  rdf:type gsrm:Granitoid ;
   rdfs:label "granitoid lithology in Caledonia Phs"@en ;
+  gsoc:isPartOf bcs:bc-granitoid ;
 .
 bcs:CaledoniaPhs-granodiorite
-  a gsrm:Granodiorite ;
-  gsoc:isPartOf bcs:bc-granodiorite ;
+  rdf:type gsrm:Granodiorite ;
   rdfs:label "granodiorite lithology in Caledonia Phs"@en ;
+  gsoc:isPartOf bcs:bc-granodiorite ;
 .
 bcs:CaseyPhs
-  a gsgu:Formation ;
-  gsoc:hasConstituent bcs:CaseyPhs-granitoid ;
+  rdf:type gsgu:Formation ;
   rdfs:label "Casey Phs"@en ;
+  gsoc:hasConstituent bcs:CaseyPhs-granitoid ;
 .
 bcs:CaseyPhs-granitoid
-  a gsrm:Granitoid ;
-  gsoc:isPartOf bcs:bc-granitoid ;
+  rdf:type gsrm:Granitoid ;
   rdfs:label "granitoid lithology in Casey Phs"@en ;
+  gsoc:isPartOf bcs:bc-granitoid ;
 .
 bcs:ChelaslieTetachuck
-  a gsgu:Formation ;
-  gsoc:hasConstituent bcs:ChelaslieTetachuck-dioritic_rock ;
+  rdf:type gsgu:Formation ;
   rdfs:label "Chelaslie Tetachuck"@en ;
+  gsoc:hasConstituent bcs:ChelaslieTetachuck-dioritic_rock ;
 .
 bcs:ChelaslieTetachuck-dioritic_rock
-  a gsrm:Dioritic_Rock ;
-  gsoc:isPartOf bcs:bc-dioritic_rock ;
+  rdf:type gsrm:Dioritic_Rock ;
   rdfs:label "dioritic_rock lithology in ChelaslieTetachuck"@en ;
+  gsoc:isPartOf bcs:bc-dioritic_rock ;
 .
 bcs:CheslattaLakeSuite
-  a gsgu:Suite ;
+  rdf:type gsgu:Suite ;
+  rdfs:label "Cheslatta Lake Suite"@en ;
   gsoc:hasConstituent bcs:CheslattaLakeSuite-andesite ;
   gsoc:hasConstituent bcs:CheslattaLakeSuite-basalt ;
-  rdfs:label "Cheslatta Lake Suite"@en ;
 .
 bcs:CheslattaLakeSuite-andesite
-  a gsrm:Andesite ;
-  gsoc:isPartOf bcs:bc-andesite ;
+  rdf:type gsrm:Andesite ;
   rdfs:label "andesite lithology in Cheslatta Lake Suite"@en ;
+  gsoc:isPartOf bcs:bc-andesite ;
 .
 bcs:CheslattaLakeSuite-basalt
-  a gsrm:Basalt ;
-  gsoc:isPartOf bcs:bc-basalt ;
+  rdf:type gsrm:Basalt ;
   rdfs:label "basalt lithology in Cheslatta Lake Suite"@en ;
+  gsoc:isPartOf bcs:bc-basalt ;
 .
 bcs:ChilcotinGroup
-  a gsgu:Group ;
-  gsoc:hasConstituent  bcs:ChilcotinGroup-basalt ;
-  gsoc:hasConstituent  bcs:ChilcotinGroup-dacite ;
-  gsoc:hasConstituent  bcs:ChilcotinGroup-pyroclastic_material ;
+  rdf:type gsgu:Group ;
   rdfs:label "Chilcotin Group"@en ;
+  gsoc:hasConstituent bcs:ChilcotinGroup-basalt ;
+  gsoc:hasConstituent bcs:ChilcotinGroup-dacite ;
+  gsoc:hasConstituent bcs:ChilcotinGroup-pyroclastic_material ;
 .
 bcs:ChilcotinGroup-basalt
-  a gsrm:Basalt ;
-  gsoc:isPartOf bcs:bc-basalt ;
+  rdf:type gsrm:Basalt ;
   rdfs:label "basalt lithology in Chilcotin Group"@en ;
+  gsoc:isPartOf bcs:bc-basalt ;
 .
 bcs:ChilcotinGroup-dacite
-  a gsrm:Dacite ;
-  gsoc:isPartOf bcs:bc-dacite ;
+  rdf:type gsrm:Dacite ;
   rdfs:label "dacite lithology in Chilcotin Group"@en ;
+  gsoc:isPartOf bcs:bc-dacite ;
 .
 bcs:ChilcotinGroup-pyroclastic_material
-  a gsrm:Pyroclastic_Material ;
-  gsoc:isPartOf bcs:bc-pyroclastic_material ;
+  rdf:type gsrm:Pyroclastic_Material ;
   rdfs:label "pyroclastic_material lithology in Chilcotin Group"@en ;
+  gsoc:isPartOf bcs:bc-pyroclastic_material ;
 .
 bcs:Clachnacudainngneiss
-  a gsgu:Formation ;
-  gsoc:hasConstituent bcs:Clachnacudainngneiss-orthogneiss ;
+  rdf:type gsgu:Formation ;
   rdfs:label "Clachnacudainn gneiss"@en ;
+  gsoc:hasConstituent bcs:Clachnacudainngneiss-orthogneiss ;
 .
 bcs:Clachnacudainngneiss-orthogneiss
-  a gsrm:Orthogneiss ;
-  gsoc:isPartOf bcs:bc-orthogneiss ;
+  rdf:type gsrm:Orthogneiss ;
   rdfs:label "orthogneiss lithology in Clachnacudainn gneiss"@en ;
+  gsoc:isPartOf bcs:bc-orthogneiss ;
 .
 bcs:CopleyLakePhs
-  a gsgu:Suite ;
+  rdf:type gsgu:Suite ;
+  rdfs:label "Copley Lake Phs"@en ;
   gsoc:hasConstituent bcs:CopleyLakePhs-andesite ;
   gsoc:hasConstituent bcs:CopleyLakePhs-dacite ;
   gsoc:hasConstituent bcs:CopleyLakePhs-monzonitic_rock ;
   gsoc:hasConstituent bcs:CopleyLakePhs-porphyry ;
-  rdfs:label "Copley Lake Phs"@en ;
 .
 bcs:CopleyLakePhs-andesite
-  a gsrm:Andesite ;
-  gsoc:isPartOf bcs:bc-andesite ;
+  rdf:type gsrm:Andesite ;
   rdfs:label "andesite lithology in Co Pley Lake Phs"@en ;
+  gsoc:isPartOf bcs:bc-andesite ;
 .
 bcs:CopleyLakePhs-dacite
-  a gsrm:Dacite ;
-  gsoc:isPartOf bcs:bc-dacite ;
+  rdf:type gsrm:Dacite ;
   rdfs:label "dacite lithology in Co Pley Lake Phs"@en ;
+  gsoc:isPartOf bcs:bc-dacite ;
 .
 bcs:CopleyLakePhs-monzonitic_rock
-  a gsrm:Monzonitic_Rock ;
-  gsoc:isPartOf bcs:bc-monzonitic_rock ;
+  rdf:type gsrm:Monzonitic_Rock ;
   rdfs:label "monzonitic_rock lithology in Co Pley Lake Phs"@en ;
+  gsoc:isPartOf bcs:bc-monzonitic_rock ;
 .
 bcs:CopleyLakePhs-porphyry
-  a gsrm:Porphyry ;
-  gsoc:isPartOf bcs:bc-porphyry ;
+  rdf:type gsrm:Porphyry ;
   rdfs:label "porphyry lithology in Co Pley Lake Phs"@en ;
+  gsoc:isPartOf bcs:bc-porphyry ;
 .
 bcs:CopleyLimestone
-  a gsgu:Formation ;
-  gsoc:hasConstituent bcs:CopleyLimestone-limestone ;
+  rdf:type gsgu:Formation ;
   rdfs:label "Copley Limestone"@en ;
+  gsoc:hasConstituent bcs:CopleyLimestone-limestone ;
 .
 bcs:CopleyLimestone-limestone
-  a gsrm:Limestone ;
-  gsoc:isPartOf bcs:bc-limestone ;
+  rdf:type gsrm:Limestone ;
   rdfs:label "limestone lithology in Co Pley Limestone"@en ;
+  gsoc:isPartOf bcs:bc-limestone ;
 .
 bcs:DumLakecomplex
-  a gsgu:Suite ;
+  rdf:type gsgu:Suite ;
+  rdfs:label "Dum Lake complex"@en ;
   gsoc:hasConstituent bcs:DumLakecomplex-gabbroic_rock ;
   gsoc:hasConstituent bcs:DumLakecomplex-peridotite ;
-  rdfs:label "Dum Lake complex"@en ;
 .
 bcs:DumLakecomplex-gabbroic_rock
-  a gsrm:Gabbroic_Rock ;
-  gsoc:isPartOf bcs:bc-gabbroic_rock ;
+  rdf:type gsrm:Gabbroic_Rock ;
   rdfs:label "gabbroic_rock lithology in Dum Lake complex"@en ;
+  gsoc:isPartOf bcs:bc-gabbroic_rock ;
 .
 bcs:DumLakecomplex-peridotite
-  a gsrm:Peridotite ;
-  gsoc:isPartOf bcs:bc-peridotite ;
+  rdf:type gsrm:Peridotite ;
   rdfs:label "peridotite lithology in Dum Lake complex"@en ;
+  gsoc:isPartOf bcs:bc-peridotite ;
 .
 bcs:EagleBay
-  a gsgu:Group ;
+  rdf:type gsgu:Group ;
   rdfs:label "Eagle Bay"@en ;
 .
 bcs:EagleBayAdams
-  a gsgu:Formation ;
+  rdf:type gsgu:Formation ;
+  rdfs:label "Eagle Bay Adams"@en ;
   gsoc:hasConstituent bcs:EagleBayAdams-metamorphic_rock ;
   gsoc:hasConstituent bcs:EagleBayAdams-metasomatic_rock ;
   gsoc:hasConstituent bcs:EagleBayAdams-schist ;
   gsoc:isPartOf bcs:EagleBay ;
-  rdfs:label "Eagle Bay Adams"@en ;
 .
 bcs:EagleBayAdams-metamorphic_rock
-  a gsrm:Metamorphic_Rock ;
-  gsoc:isPartOf bcs:bc-metamorphic_rock ;
+  rdf:type gsrm:Metamorphic_Rock ;
   rdfs:label "metamorphic_rock lithology in Eagle BayAdams of Eagle Bay"@en ;
+  gsoc:isPartOf bcs:bc-metamorphic_rock ;
 .
 bcs:EagleBayAdams-metasomatic_rock
-  a gsrm:Metasomatic_Rock ;
-  gsoc:isPartOf bcs:bc-metasomatic_rock ;
+  rdf:type gsrm:Metasomatic_Rock ;
   rdfs:label "metasomatic_rock lithology in Eagle BayAdams of Eagle Bay"@en ;
+  gsoc:isPartOf bcs:bc-metasomatic_rock ;
 .
 bcs:EagleBayAdams-schist
-  a gsrm:Schist ;
-  gsoc:isPartOf bcs:bc-schist ;
+  rdf:type gsrm:Schist ;
   rdfs:label "schist lithology in Eagle BayAdams of Eagle Bay"@en ;
+  gsoc:isPartOf bcs:bc-schist ;
 .
 bcs:EagleBayFeldspar
-  a gsgu:Formation ;
+  rdf:type gsgu:Formation ;
+  rdfs:label "Eagle Bay Feldspar"@en ;
   gsoc:hasConstituent bcs:EagleBayFeldspar-ash_tuff_lapillistone_and_lapilli_tuff ;
   gsoc:hasConstituent bcs:EagleBayFeldspar-rhyolitoid ;
   gsoc:hasConstituent bcs:EagleBayFeldspar-schist ;
   gsoc:isPartOf bcs:EagleBay ;
-  rdfs:label "Eagle Bay Feldspar"@en ;
 .
 bcs:EagleBayFeldspar-ash_tuff_lapillistone_and_lapilli_tuff
-  a gsrm:Ash_Tuff_Lapillistone_And_Lapilli_Tuff ;
-  gsoc:isPartOf bcs:bc-ash_tuff_lapillistone_and_lapilli_tuff ;
+  rdf:type gsrm:Ash_Tuff_Lapillistone_And_Lapilli_Tuff ;
   rdfs:label "ash_tuff_lapillistone_and_lapilli_tuff lithology in Eagle BayFeldspar of Eagle Bay"@en ;
+  gsoc:isPartOf bcs:bc-ash_tuff_lapillistone_and_lapilli_tuff ;
 .
 bcs:EagleBayFeldspar-rhyolitoid
-  a gsrm:Rhyolitoid ;
-  gsoc:isPartOf bcs:bc-rhyolitoid ;
+  rdf:type gsrm:Rhyolitoid ;
   rdfs:label "rhyolitoid lithology in Eagle BayFeldspar of Eagle Bay"@en ;
+  gsoc:isPartOf bcs:bc-rhyolitoid ;
 .
 bcs:EagleBayFeldspar-schist
-  a gsrm:Schist ;
-  gsoc:isPartOf bcs:bc-schist ;
+  rdf:type gsrm:Schist ;
   rdfs:label "schist lithology in Eagle BayFeldspar of Eagle Bay"@en ;
+  gsoc:isPartOf bcs:bc-schist ;
 .
 bcs:EagleBayGreenstone
-  a gsgu:Formation ;
+  rdf:type gsgu:Formation ;
+  rdfs:label "Eagle Bay Greenstone"@en ;
   gsoc:hasConstituent bcs:EagleBayGreenstone-chemical_sedimentary_material ;
   gsoc:hasConstituent bcs:EagleBayGreenstone-chlorite_actinolite_epidote_metamorphic_rock ;
   gsoc:hasConstituent bcs:EagleBayGreenstone-massive_sulphide ;
@@ -468,101 +478,101 @@ bcs:EagleBayGreenstone
   gsoc:hasConstituent bcs:EagleBayGreenstone-metasomatic_rock ;
   gsoc:hasConstituent bcs:EagleBayGreenstone-schist ;
   gsoc:isPartOf bcs:EagleBay ;
-  rdfs:label "Eagle Bay Greenstone"@en ;
 .
 bcs:EagleBayGreenstone-chemical_sedimentary_material
-  a gsrm:Chemical_Sedimentary_Material ;
-  gsoc:isPartOf bcs:bc-chemical_sedimentary_material ;
+  rdf:type gsrm:Chemical_Sedimentary_Material ;
   rdfs:label "chemical_sedimentary_material lithology in Eagle Bay Greenstone of Eagle Bay"@en ;
+  gsoc:isPartOf bcs:bc-chemical_sedimentary_material ;
 .
 bcs:EagleBayGreenstone-chlorite_actinolite_epidote_metamorphic_rock
-  a gsrm:Chlorite_Actinolite_Epidote_Metamorphic_Rock ;
-  gsoc:isPartOf bcs:bc-chlorite_actinolite_epidote_metamorphic_rock ;
+  rdf:type gsrm:Chlorite_Actinolite_Epidote_Metamorphic_Rock ;
   rdfs:label "chlorite_actinolite_epidote_metamorphic_rock lithology in Eagle Bay Greenstone of Eagle Bay"@en ;
+  gsoc:isPartOf bcs:bc-chlorite_actinolite_epidote_metamorphic_rock ;
 .
 bcs:EagleBayGreenstone-massive_sulphide
-  a gsrm:Massive_Sulphide ;
-  gsoc:isPartOf bcs:bc-massive_sulphide ;
+  rdf:type gsrm:Massive_Sulphide ;
   rdfs:label "massive_sulphide lithology in Eagle Bay Greenstone of Eagle Bay"@en ;
+  gsoc:isPartOf bcs:bc-massive_sulphide ;
 .
 bcs:EagleBayGreenstone-metamorphic_rock
-  a gsrm:Metamorphic_Rock ;
-  gsoc:isPartOf bcs:bc-metamorphic_rock ;
+  rdf:type gsrm:Metamorphic_Rock ;
   rdfs:label "metamorphic_rock lithology in Eagle Bay Greenstone of Eagle Bay"@en ;
+  gsoc:isPartOf bcs:bc-metamorphic_rock ;
 .
 bcs:EagleBayGreenstone-metasomatic_rock
-  a gsrm:Metasomatic_Rock ;
-  gsoc:isPartOf bcs:bc-metasomatic_rock ;
+  rdf:type gsrm:Metasomatic_Rock ;
   rdfs:label "metasomatic_rock lithology in Eagle Bay Greenstone of Eagle Bay"@en ;
+  gsoc:isPartOf bcs:bc-metasomatic_rock ;
 .
 bcs:EagleBayGreenstone-schist
-  a gsrm:Schist ;
-  gsoc:isPartOf bcs:bc-schist ;
+  rdf:type gsrm:Schist ;
   rdfs:label "schist lithology in Eagle Bay Greenstone of Eagle Bay"@en ;
+  gsoc:isPartOf bcs:bc-schist ;
 .
 bcs:EagleBayPhyllite
-  a gsgu:Formation ;
+  rdf:type gsgu:Formation ;
+  rdfs:label "Eagle Bay Phyllite"@en ;
   gsoc:hasConstituent bcs:EagleBayPhyllite-metasomatic_rock ;
   gsoc:isPartOf bcs:EagleBay ;
-  rdfs:label "Eagle Bay Phyllite"@en ;
 .
 bcs:EagleBayPhyllite-metasomatic_rock
-  a gsrm:Metasomatic_Rock ;
-  gsoc:isPartOf bcs:bc-metasomatic_rock ;
+  rdf:type gsrm:Metasomatic_Rock ;
   rdfs:label "metasomatic_rock lithology in Eagle BayPhyllite of Eagle Bay"@en ;
+  gsoc:isPartOf bcs:bc-metasomatic_rock ;
 .
 bcs:EagleBayQuartzite
-  a gsgu:Formation ;
+  rdf:type gsgu:Formation ;
+  rdfs:label "Eagle Bay Quartzite"@en ;
   gsoc:hasConstituent bcs:EagleBayQuartzite-massive_sulphide ;
   gsoc:hasConstituent bcs:EagleBayQuartzite-metasomatic_rock ;
   gsoc:isPartOf bcs:EagleBay ;
-  rdfs:label "Eagle Bay Quartzite"@en ;
 .
 bcs:EagleBayQuartzite-massive_sulphide
-  a gsrm:Massive_Sulphide ;
-  gsoc:isPartOf bcs:bc-massive_sulphide ;
+  rdf:type gsrm:Massive_Sulphide ;
   rdfs:label "massive_sulphide lithology in Eagle Bay Quartzite of Eagle Bay"@en ;
+  gsoc:isPartOf bcs:bc-massive_sulphide ;
 .
 bcs:EagleBayQuartzite-metasomatic_rock
-  a gsrm:Metasomatic_Rock ;
-  gsoc:isPartOf bcs:bc-metasomatic_rock ;
+  rdf:type gsrm:Metasomatic_Rock ;
   rdfs:label "metasomatic_rock lithology in Eagle Bay Quartzite of Eagle Bay"@en ;
+  gsoc:isPartOf bcs:bc-metasomatic_rock ;
 .
 bcs:EagleBaySediments
-  a gsgu:Formation ;
+  rdf:type gsgu:Formation ;
+  rdfs:label "Eagle Bay Sediments"@en ;
   gsoc:hasConstituent bcs:EagleBaySediments-massive_sulphide ;
   gsoc:hasConstituent bcs:EagleBaySediments-metasomatic_rock ;
   gsoc:hasConstituent bcs:EagleBaySediments-schist ;
   gsoc:isPartOf bcs:EagleBay ;
-  rdfs:label "Eagle Bay Sediments"@en ;
 .
 bcs:EagleBaySediments-massive_sulphide
-  a gsrm:Massive_Sulphide ;
-  gsoc:isPartOf bcs:bc-massive_sulphide ;
+  rdf:type gsrm:Massive_Sulphide ;
   rdfs:label "massive_sulphide lithology in Eagle Bay sediments of Eagle Bay"@en ;
+  gsoc:isPartOf bcs:bc-massive_sulphide ;
 .
 bcs:EagleBaySediments-metasomatic_rock
-  a gsrm:Metasomatic_Rock ;
-  gsoc:isPartOf bcs:bc-metasomatic_rock ;
+  rdf:type gsrm:Metasomatic_Rock ;
   rdfs:label "metasomatic_rock lithology in Eagle Bay sediments of Eagle Bay"@en ;
+  gsoc:isPartOf bcs:bc-metasomatic_rock ;
 .
 bcs:EagleBaySediments-schist
-  a gsrm:Schist ;
-  gsoc:isPartOf bcs:bc-schist ;
+  rdf:type gsrm:Schist ;
   rdfs:label "schist lithology in Eagle Bay sediments of Eagle Bay"@en ;
+  gsoc:isPartOf bcs:bc-schist ;
 .
 bcs:ElkeFormation
-  a gsgu:Formation ;
-  gsoc:hasConstituent bcs:ElkeFormation-limestone ;
+  rdf:type gsgu:Formation ;
   rdfs:label "Elke Formation"@en ;
+  gsoc:hasConstituent bcs:ElkeFormation-limestone ;
 .
 bcs:ElkeFormation-limestone
-  a gsrm:Limestone ;
-  gsoc:isPartOf bcs:bc-limestone ;
+  rdf:type gsrm:Limestone ;
   rdfs:label "limestone lithology in Elke Formation"@en ;
+  gsoc:isPartOf bcs:bc-limestone ;
 .
 bcs:EndakoFormation
-  a gsgu:Formation ;
+  rdf:type gsgu:Formation ;
+  rdfs:label "Endako Formation"@en ;
   gsoc:hasConstituent bcs:EndakoFormation-andesite ;
   gsoc:hasConstituent bcs:EndakoFormation-ash_tuff_lapillistone_and_lapilli_tuff ;
   gsoc:hasConstituent bcs:EndakoFormation-basalt ;
@@ -574,454 +584,454 @@ bcs:EndakoFormation
   gsoc:hasConstituent bcs:EndakoFormation-pyroclastic_rock ;
   gsoc:hasConstituent bcs:EndakoFormation-rhyolitoid ;
   gsoc:hasConstituent bcs:EndakoFormation-tuffite ;
-  rdfs:label "Endako Formation"@en ;
 .
 bcs:EndakoFormation-andesite
-  a gsrm:Andesite ;
-  gsoc:isPartOf bcs:bc-andesite ;
+  rdf:type gsrm:Andesite ;
   rdfs:label "andesite lithology in Endako Formation"@en ;
+  gsoc:isPartOf bcs:bc-andesite ;
 .
 bcs:EndakoFormation-ash_tuff_lapillistone_and_lapilli_tuff
-  a gsrm:Ash_Tuff_Lapillistone_And_Lapilli_Tuff ;
-  gsoc:isPartOf bcs:bc-ash_tuff_lapillistone_and_lapilli_tuff ;
+  rdf:type gsrm:Ash_Tuff_Lapillistone_And_Lapilli_Tuff ;
   rdfs:label "ash_tuff_lapillistone_and_lapilli_tuff lithology in Endako Formation"@en ;
+  gsoc:isPartOf bcs:bc-ash_tuff_lapillistone_and_lapilli_tuff ;
 .
 bcs:EndakoFormation-basalt
-  a gsrm:Basalt ;
-  gsoc:isPartOf bcs:bc-basalt ;
+  rdf:type gsrm:Basalt ;
   rdfs:label "basalt lithology in Endako Formation"@en ;
+  gsoc:isPartOf bcs:bc-basalt ;
 .
 bcs:EndakoFormation-breccia
-  a gsrm:Breccia ;
-  gsoc:isPartOf bcs:bc-breccia ;
+  rdf:type gsrm:Breccia ;
   rdfs:label "breccia lithology in Endako Formation"@en ;
+  gsoc:isPartOf bcs:bc-breccia ;
 .
 bcs:EndakoFormation-clastic_conglomerate
-  a gsrm:Clastic_Conglomerate ;
-  gsoc:isPartOf bcs:bc-clastic_conglomerate ;
+  rdf:type gsrm:Clastic_Conglomerate ;
   rdfs:label "clastic_conglomerate lithology in Endako Formation"@en ;
+  gsoc:isPartOf bcs:bc-clastic_conglomerate ;
 .
 bcs:EndakoFormation-clastic_sandstone
-  a gsrm:Clastic_Sandstone ;
-  gsoc:isPartOf bcs:bc-clastic_sandstone ;
+  rdf:type gsrm:Clastic_Sandstone ;
   rdfs:label "clastic_sandstone lithology in Endako Formation"@en ;
+  gsoc:isPartOf bcs:bc-clastic_sandstone ;
 .
 bcs:EndakoFormation-dacite
-  a gsrm:Dacite ;
-  gsoc:isPartOf bcs:bc-dacite ;
+  rdf:type gsrm:Dacite ;
   rdfs:label "dacite lithology in Endako Formation"@en ;
+  gsoc:isPartOf bcs:bc-dacite ;
 .
 bcs:EndakoFormation-porphyry
-  a gsrm:Porphyry ;
-  gsoc:isPartOf bcs:bc-porphyry ;
+  rdf:type gsrm:Porphyry ;
   rdfs:label "porphyry lithology in Endako Formation"@en ;
+  gsoc:isPartOf bcs:bc-porphyry ;
 .
 bcs:EndakoFormation-pyroclastic_rock
-  a gsrm:Pyroclastic_Rock ;
-  gsoc:isPartOf bcs:bc-pyroclastic_rock ;
+  rdf:type gsrm:Pyroclastic_Rock ;
   rdfs:label "pyroclastic_rock lithology in Endako Formation"@en ;
+  gsoc:isPartOf bcs:bc-pyroclastic_rock ;
 .
 bcs:EndakoFormation-rhyolitoid
-  a gsrm:Rhyolitoid ;
-  gsoc:isPartOf bcs:bc-rhyolitoid ;
+  rdf:type gsrm:Rhyolitoid ;
   rdfs:label "rhyolitoid lithology in Endako Formation"@en ;
+  gsoc:isPartOf bcs:bc-rhyolitoid ;
 .
 bcs:EndakoFormation-tuffite
-  a gsrm:Tuffite ;
-  gsoc:isPartOf bcs:bc-tuffite ;
+  rdf:type gsrm:Tuffite ;
   rdfs:label "tuffite lithology in Endako Formation"@en ;
+  gsoc:isPartOf bcs:bc-tuffite ;
 .
 bcs:EndakoGroup
-  a gsgu:Group ;
+  rdf:type gsgu:Group ;
   rdfs:label "Endako Group"@en ;
 .
 bcs:EndakoPhs
-  a gsgu:Suite ;
+  rdf:type gsgu:Suite ;
+  rdfs:label "Endako Phs"@en ;
   gsoc:hasConstituent bcs:EndakoPhs-dioritic_rock ;
   gsoc:hasConstituent bcs:EndakoPhs-granitoid ;
   gsoc:hasConstituent bcs:EndakoPhs-monzonitic_rock ;
-  rdfs:label "Endako Phs"@en ;
 .
 bcs:EndakoPhs-dioritic_rock
-  a gsrm:Dioritic_Rock ;
-  gsoc:isPartOf bcs:bc-dioritic_rock ;
+  rdf:type gsrm:Dioritic_Rock ;
   rdfs:label "dioritic_rock lithology in Endako Phs"@en ;
+  gsoc:isPartOf bcs:bc-dioritic_rock ;
 .
 bcs:EndakoPhs-granitoid
-  a gsrm:Granitoid ;
-  gsoc:isPartOf bcs:bc-granitoid ;
+  rdf:type gsrm:Granitoid ;
   rdfs:label "granitoid lithology in Endako Phs"@en ;
+  gsoc:isPartOf bcs:bc-granitoid ;
 .
 bcs:EndakoPhs-monzonitic_rock
-  a gsrm:Monzonitic_Rock ;
-  gsoc:isPartOf bcs:bc-monzonitic_rock ;
+  rdf:type gsrm:Monzonitic_Rock ;
   rdfs:label "monzonitic_rock lithology in Endako Phs"@en ;
+  gsoc:isPartOf bcs:bc-monzonitic_rock ;
 .
 bcs:EntiakoFormation
-  a gsgu:Formation ;
+  rdf:type gsgu:Formation ;
+  rdfs:label "Entiako Formation"@en ;
   gsoc:hasConstituent bcs:EntiakoFormation-arenite ;
   gsoc:isPartOf bcs:HazeltonGroup ;
-  rdfs:label "Entiako Formation"@en ;
 .
 bcs:EntiakoFormation-arenite
-  a gsrm:Arenite ;
-  gsoc:isPartOf bcs:bc-arenite ;
+  rdf:type gsrm:Arenite ;
   rdfs:label "arenite lithology in Entiako Formation of Hazelton Group"@en ;
+  gsoc:isPartOf bcs:bc-arenite ;
 .
 bcs:FennellFormation
-  a gsgu:Formation ;
-  gsoc:hasConstituent bcs:FennellFormation-basalt ;
+  rdf:type gsgu:Formation ;
   rdfs:label "Fennell Formation"@en ;
+  gsoc:hasConstituent bcs:FennellFormation-basalt ;
 .
 bcs:FennellFormation-basalt
-  a gsrm:Basalt ;
-  gsoc:isPartOf bcs:bc-basalt ;
+  rdf:type gsrm:Basalt ;
   rdfs:label "basalt lithology in Fennell Formation"@en ;
+  gsoc:isPartOf bcs:bc-basalt ;
 .
 bcs:FrankLakePl
-  a gsgu:Formation ;
-  gsoc:hasConstituent bcs:FrankLakePl-granodiorite ;
+  rdf:type gsgu:Formation ;
   rdfs:label "Frank Lake Pl"@en ;
+  gsoc:hasConstituent bcs:FrankLakePl-granodiorite ;
 .
 bcs:FrankLakePl-granodiorite
-  a gsrm:Granodiorite ;
-  gsoc:isPartOf bcs:bc-granodiorite ;
+  rdf:type gsrm:Granodiorite ;
   rdfs:label "granodiorite lithology in Frank Lake Pl"@en ;
+  gsoc:isPartOf bcs:bc-granodiorite ;
 .
 bcs:GlenannanPhs
-  a gsgu:Suite ;
+  rdf:type gsgu:Suite ;
+  rdfs:label "Glenannan Phs"@en ;
   gsoc:hasConstituent bcs:GlenannanPhs-dacite ;
   gsoc:hasConstituent bcs:GlenannanPhs-dioritic_rock ;
   gsoc:hasConstituent bcs:GlenannanPhs-granitoid ;
   gsoc:hasConstituent bcs:GlenannanPhs-granodiorite ;
   gsoc:hasConstituent bcs:GlenannanPhs-monzonitic_rock ;
   gsoc:hasConstituent bcs:GlenannanPhs-rhyolitoid ;
-  rdfs:label "Glenannan Phs"@en ;
 .
 bcs:GlenannanPhs-dacite
-  a gsrm:Dacite ;
-  gsoc:isPartOf bcs:bc-dacite ;
+  rdf:type gsrm:Dacite ;
   rdfs:label "dacite lithology in Glenannan Phs"@en ;
+  gsoc:isPartOf bcs:bc-dacite ;
 .
 bcs:GlenannanPhs-dioritic_rock
-  a gsrm:Dioritic_Rock ;
-  gsoc:isPartOf bcs:bc-dioritic_rock ;
+  rdf:type gsrm:Dioritic_Rock ;
   rdfs:label "dioritic_rock lithology in Glenannan Phs"@en ;
+  gsoc:isPartOf bcs:bc-dioritic_rock ;
 .
 bcs:GlenannanPhs-granitoid
-  a gsrm:Granitoid ;
-  gsoc:isPartOf bcs:bc-granitoid ;
+  rdf:type gsrm:Granitoid ;
   rdfs:label "granitoid lithology in Glenannan Phs"@en ;
+  gsoc:isPartOf bcs:bc-granitoid ;
 .
 bcs:GlenannanPhs-granodiorite
-  a gsrm:Granodiorite ;
-  gsoc:isPartOf bcs:bc-granodiorite ;
+  rdf:type gsrm:Granodiorite ;
   rdfs:label "granodiorite lithology in Glenannan Phs"@en ;
+  gsoc:isPartOf bcs:bc-granodiorite ;
 .
 bcs:GlenannanPhs-monzonitic_rock
-  a gsrm:Monzonitic_Rock ;
-  gsoc:isPartOf bcs:bc-monzonitic_rock ;
+  rdf:type gsrm:Monzonitic_Rock ;
   rdfs:label "monzonitic_rock lithology in Glenannan Phs"@en ;
+  gsoc:isPartOf bcs:bc-monzonitic_rock ;
 .
 bcs:GlenannanPhs-rhyolitoid
-  a gsrm:Rhyolitoid ;
-  gsoc:isPartOf bcs:bc-rhyolitoid ;
+  rdf:type gsrm:Rhyolitoid ;
   rdfs:label "rhyolitoid lithology in Glenannan Phs"@en ;
+  gsoc:isPartOf bcs:bc-rhyolitoid ;
 .
 bcs:GoatWall
-  a gsgu:Formation ;
-  gsoc:hasConstituent bcs:GoatWall-clastic_sandstone ;
+  rdf:type gsgu:Formation ;
   rdfs:label "Goat Wall"@en ;
+  gsoc:hasConstituent bcs:GoatWall-clastic_sandstone ;
 .
 bcs:GoatWall-clastic_sandstone
-  a gsrm:Clastic_Sandstone ;
-  gsoc:isPartOf bcs:bc-clastic_sandstone ;
+  rdf:type gsrm:Clastic_Sandstone ;
   rdfs:label "clastic_sandstone lithology in GoatWall"@en ;
+  gsoc:isPartOf bcs:bc-clastic_sandstone ;
 .
 bcs:GoldstreamPluton
-  a gsgu:Pluton ;
+  rdf:type gsgu:Pluton ;
+  rdfs:label "Goldstream Pluton"@en ;
   gsoc:hasConstituent bcs:GoldstreamPluton-granitoid ;
   gsoc:hasConstituent bcs:GoldstreamPluton-metasomatic_rock ;
-  rdfs:label "Goldstream Pluton"@en ;
 .
 bcs:GoldstreamPluton-granitoid
-  a gsrm:Granitoid ;
-  gsoc:isPartOf bcs:bc-granitoid ;
+  rdf:type gsrm:Granitoid ;
   rdfs:label "granitoid lithology in Goldstream Pluton"@en ;
+  gsoc:isPartOf bcs:bc-granitoid ;
 .
 bcs:GoldstreamPluton-metasomatic_rock
-  a gsrm:Metasomatic_Rock ;
-  gsoc:isPartOf bcs:bc-metasomatic_rock ;
+  rdf:type gsrm:Metasomatic_Rock ;
   rdfs:label "metasomatic_rock lithology in Goldstream Pluton"@en ;
+  gsoc:isPartOf bcs:bc-metasomatic_rock ;
 .
 bcs:GooslyVolcanic
-  a gsgu:Formation ;
+  rdf:type gsgu:Formation ;
+  rdfs:label "Goosly Volcanic"@en ;
   gsoc:hasConstituent bcs:GooslyVolcanic-andesite ;
   gsoc:hasConstituent bcs:GooslyVolcanic-basalt ;
-  rdfs:label "Goosly Volcanic"@en ;
 .
 bcs:GooslyVolcanic-andesite
-  a gsrm:Andesite ;
-  gsoc:isPartOf bcs:bc-andesite ;
+  rdf:type gsrm:Andesite ;
   rdfs:label "andesite lithology in Goosly Volcanic"@en ;
+  gsoc:isPartOf bcs:bc-andesite ;
 .
 bcs:GooslyVolcanic-basalt
-  a gsrm:Basalt ;
-  gsoc:isPartOf bcs:bc-basalt ;
+  rdf:type gsrm:Basalt ;
   rdfs:label "basalt lithology in Goosly Volcanic"@en ;
+  gsoc:isPartOf bcs:bc-basalt ;
 .
 bcs:GraniteCreekPl
-  a gsgu:Formation ;
-  gsoc:hasConstituent bcs:GraniteCreekPl-granodiorite ;
+  rdf:type gsgu:Formation ;
   rdfs:label "Granite Creek Pl"@en ;
+  gsoc:hasConstituent bcs:GraniteCreekPl-granodiorite ;
 .
 bcs:GraniteCreekPl-granodiorite
-  a gsrm:Granodiorite ;
-  gsoc:isPartOf bcs:bc-granodiorite ;
+  rdf:type gsrm:Granodiorite ;
   rdfs:label "granodiorite lithology in Granite Creek Pl"@en ;
+  gsoc:isPartOf bcs:bc-granodiorite ;
 .
 bcs:GrinnellFormation
-  a gsgu:Formation ;
-  gsoc:hasConstituent bcs:GrinnellFormation-clastic_sandstone ;
+  rdf:type gsgu:Formation ;
   rdfs:label "Grinnell Formation"@en ;
+  gsoc:hasConstituent bcs:GrinnellFormation-clastic_sandstone ;
 .
 bcs:GrinnellFormation-clastic_sandstone
-  a gsrm:Clastic_Sandstone ;
-  gsoc:isPartOf bcs:bc-clastic_sandstone ;
+  rdf:type gsrm:Clastic_Sandstone ;
   rdfs:label "clastic_sandstone lithology in Grinnell Formation"@en ;
+  gsoc:isPartOf bcs:bc-clastic_sandstone ;
 .
 bcs:GuichonCrBath
-  a gsgu:Pluton ;
-  gsoc:hasConstituent bcs:GuichonCrBath-granodiorite ;
+  rdf:type gsgu:Pluton ;
   rdfs:label "Guichon Cr. Bath"@en ;
+  gsoc:hasConstituent bcs:GuichonCrBath-granodiorite ;
 .
-bcs:GuichonCrBath-granodiorite 
-  a gsrm:Granodiorite ;
-  gsoc:isPartOf bcs:bc-granodiorite ;
+bcs:GuichonCrBath-granodiorite
+  rdf:type gsrm:Granodiorite ;
   rdfs:label "granodiorite lithology in Guichon Creek Batholith"@en ;
+  gsoc:isPartOf bcs:bc-granodiorite ;
 .
 bcs:HamillGroup
-  a gsgu:Group ;
-  gsoc:hasConstituent  bcs:HamillGroup-arenite ;
-  gsoc:hasConstituent  bcs:HamillGroup-chlorite_actinolite_epidote_metamorphic_rock ;
-  gsoc:hasConstituent  bcs:HamillGroup-metasomatic_rock ;
-  gsoc:hasConstituent  bcs:HamillGroup-phyllite ;
-  gsoc:hasConstituent  bcs:HamillGroup-quartzite ;
-  gsoc:hasConstituent  bcs:HamillGroup-schist ;
+  rdf:type gsgu:Group ;
   rdfs:label "Hamill Group"@en ;
+  gsoc:hasConstituent bcs:HamillGroup-arenite ;
+  gsoc:hasConstituent bcs:HamillGroup-chlorite_actinolite_epidote_metamorphic_rock ;
+  gsoc:hasConstituent bcs:HamillGroup-metasomatic_rock ;
+  gsoc:hasConstituent bcs:HamillGroup-phyllite ;
+  gsoc:hasConstituent bcs:HamillGroup-quartzite ;
+  gsoc:hasConstituent bcs:HamillGroup-schist ;
 .
 bcs:HamillGroup-arenite
-  a gsrm:Arenite ;
-  gsoc:isPartOf bcs:bc-arenite ;
+  rdf:type gsrm:Arenite ;
   rdfs:label "arenite lithology in Hamill Group"@en ;
+  gsoc:isPartOf bcs:bc-arenite ;
 .
 bcs:HamillGroup-chlorite_actinolite_epidote_metamorphic_rock
-  a gsrm:Chlorite_Actinolite_Epidote_Metamorphic_Rock ;
-  gsoc:isPartOf bcs:bc-chlorite_actinolite_epidote_metamorphic_rock ;
+  rdf:type gsrm:Chlorite_Actinolite_Epidote_Metamorphic_Rock ;
   rdfs:label "chlorite_actinolite_epidote_metamorphic_rock lithology in Hamill Group"@en ;
+  gsoc:isPartOf bcs:bc-chlorite_actinolite_epidote_metamorphic_rock ;
 .
 bcs:HamillGroup-metasomatic_rock
-  a gsrm:Metasomatic_Rock ;
-  gsoc:isPartOf bcs:bc-metasomatic_rock ;
+  rdf:type gsrm:Metasomatic_Rock ;
   rdfs:label "metasomatic_rock lithology in Hamill Group"@en ;
+  gsoc:isPartOf bcs:bc-metasomatic_rock ;
 .
 bcs:HamillGroup-phyllite
-  a gsrm:Phyllite ;
-  gsoc:isPartOf bcs:bc-phyllite ;
+  rdf:type gsrm:Phyllite ;
   rdfs:label "phyllite lithology in Hamill Group"@en ;
+  gsoc:isPartOf bcs:bc-phyllite ;
 .
 bcs:HamillGroup-quartzite
-  a gsrm:Quartzite ;
-  gsoc:isPartOf bcs:bc-quartzite ;
+  rdf:type gsrm:Quartzite ;
   rdfs:label "quartzite lithology in Hamill Group"@en ;
+  gsoc:isPartOf bcs:bc-quartzite ;
 .
 bcs:HamillGroup-schist
-  a gsrm:Schist ;
-  gsoc:isPartOf bcs:bc-schist ;
+  rdf:type gsrm:Schist ;
   rdfs:label "schist lithology in Hamill Group"@en ;
+  gsoc:isPartOf bcs:bc-schist ;
 .
 bcs:HansonLakePhs
-  a gsgu:Formation ;
-  gsoc:hasConstituent bcs:HansonLakePhs-granodiorite ;
+  rdf:type gsgu:Formation ;
   rdfs:label "Hanson Lake Phs"@en ;
+  gsoc:hasConstituent bcs:HansonLakePhs-granodiorite ;
 .
 bcs:HansonLakePhs-granodiorite
-  a gsrm:Granodiorite ;
-  gsoc:isPartOf bcs:bc-granodiorite ;
+  rdf:type gsrm:Granodiorite ;
   rdfs:label "granodiorite lithology in Hanson Lake Phs"@en ;
+  gsoc:isPartOf bcs:bc-granodiorite ;
 .
 bcs:HarperRanchGroup
-  a gsgu:Group ;
+  rdf:type gsgu:Group ;
   rdfs:label "Harper Ranch Group"@en ;
 .
 bcs:HazeltonGroup
-  a gsgu:Group ;
-  gsoc:hasConstituent  bcs:HazeltonGroup-andesite ;
-  gsoc:hasConstituent  bcs:HazeltonGroup-ash_tuff_lapillistone_and_lapilli_tuff ;
-  gsoc:hasConstituent  bcs:HazeltonGroup-basalt ;
-  gsoc:hasConstituent  bcs:HazeltonGroup-clastic_conglomerate ;
-  gsoc:hasConstituent  bcs:HazeltonGroup-dacite ;
-  gsoc:hasConstituent  bcs:HazeltonGroup-dioritic_rock ;
-  gsoc:hasConstituent  bcs:HazeltonGroup-monzodioritic_rock ;
-  gsoc:hasConstituent  bcs:HazeltonGroup-monzonitic_rock ;
-  gsoc:hasConstituent  bcs:HazeltonGroup-pyroclastic_rock ;
-  gsoc:hasConstituent  bcs:HazeltonGroup-rhyolitoid ;
-  gsoc:hasConstituent  bcs:HazeltonGroup-siltstone ;
-  gsoc:hasConstituent  bcs:HazeltonGroup-tuffite ;
-  gsoc:hasConstituent  bcs:HazeltonGroup-wacke ;
+  rdf:type gsgu:Group ;
   rdfs:label "Hazelton Group"@en ;
+  gsoc:hasConstituent bcs:HazeltonGroup-andesite ;
+  gsoc:hasConstituent bcs:HazeltonGroup-ash_tuff_lapillistone_and_lapilli_tuff ;
+  gsoc:hasConstituent bcs:HazeltonGroup-basalt ;
+  gsoc:hasConstituent bcs:HazeltonGroup-clastic_conglomerate ;
+  gsoc:hasConstituent bcs:HazeltonGroup-dacite ;
+  gsoc:hasConstituent bcs:HazeltonGroup-dioritic_rock ;
+  gsoc:hasConstituent bcs:HazeltonGroup-monzodioritic_rock ;
+  gsoc:hasConstituent bcs:HazeltonGroup-monzonitic_rock ;
+  gsoc:hasConstituent bcs:HazeltonGroup-pyroclastic_rock ;
+  gsoc:hasConstituent bcs:HazeltonGroup-rhyolitoid ;
+  gsoc:hasConstituent bcs:HazeltonGroup-siltstone ;
+  gsoc:hasConstituent bcs:HazeltonGroup-tuffite ;
+  gsoc:hasConstituent bcs:HazeltonGroup-wacke ;
 .
 bcs:HazeltonGroup-andesite
-  a gsrm:Andesite ;
-  gsoc:isPartOf bcs:bc-andesite ;
+  rdf:type gsrm:Andesite ;
   rdfs:label "andesite lithology in Hazelton Group"@en ;
+  gsoc:isPartOf bcs:bc-andesite ;
 .
 bcs:HazeltonGroup-ash_tuff_lapillistone_and_lapilli_tuff
-  a gsrm:Ash_Tuff_Lapillistone_And_Lapilli_Tuff ;
-  gsoc:isPartOf bcs:bc-ash_tuff_lapillistone_and_lapilli_tuff ;
+  rdf:type gsrm:Ash_Tuff_Lapillistone_And_Lapilli_Tuff ;
   rdfs:label "ash_tuff_lapillistone_and_lapilli_tuff lithology in Hazelton Group"@en ;
+  gsoc:isPartOf bcs:bc-ash_tuff_lapillistone_and_lapilli_tuff ;
 .
 bcs:HazeltonGroup-basalt
-  a gsrm:Basalt ;
-  gsoc:isPartOf bcs:bc-basalt ;
+  rdf:type gsrm:Basalt ;
   rdfs:label "basalt lithology in Hazelton Group"@en ;
+  gsoc:isPartOf bcs:bc-basalt ;
 .
 bcs:HazeltonGroup-clastic_conglomerate
-  a gsrm:Clastic_Conglomerate ;
-  gsoc:isPartOf bcs:bc-clastic_conglomerate ;
+  rdf:type gsrm:Clastic_Conglomerate ;
   rdfs:label "clastic_conglomerate lithology in Hazelton Group"@en ;
+  gsoc:isPartOf bcs:bc-clastic_conglomerate ;
 .
 bcs:HazeltonGroup-dacite
-  a gsrm:Dacite ;
-  gsoc:isPartOf bcs:bc-dacite ;
+  rdf:type gsrm:Dacite ;
   rdfs:label "dacite lithology in Hazelton Group"@en ;
+  gsoc:isPartOf bcs:bc-dacite ;
 .
 bcs:HazeltonGroup-dioritic_rock
-  a gsrm:Dioritic_Rock ;
-  gsoc:isPartOf bcs:bc-dioritic_rock ;
+  rdf:type gsrm:Dioritic_Rock ;
   rdfs:label "dioritic_rock lithology in Hazelton Group"@en ;
+  gsoc:isPartOf bcs:bc-dioritic_rock ;
 .
 bcs:HazeltonGroup-monzodioritic_rock
-  a gsrm:Monzodioritic_Rock ;
-  gsoc:isPartOf bcs:bc-monzodioritic_rock ;
+  rdf:type gsrm:Monzodioritic_Rock ;
   rdfs:label "monzodioritic_rock lithology in Hazelton Group"@en ;
+  gsoc:isPartOf bcs:bc-monzodioritic_rock ;
 .
 bcs:HazeltonGroup-monzonitic_rock
-  a gsrm:Monzonitic_Rock ;
-  gsoc:isPartOf bcs:bc-monzonitic_rock ;
+  rdf:type gsrm:Monzonitic_Rock ;
   rdfs:label "monzonitic_rock lithology in Hazelton Group"@en ;
+  gsoc:isPartOf bcs:bc-monzonitic_rock ;
 .
 bcs:HazeltonGroup-pyroclastic_rock
-  a gsrm:Pyroclastic_Rock ;
-  gsoc:isPartOf bcs:bc-pyroclastic_rock ;
+  rdf:type gsrm:Pyroclastic_Rock ;
   rdfs:label "pyroclastic_rock lithology in Hazelton Group"@en ;
+  gsoc:isPartOf bcs:bc-pyroclastic_rock ;
 .
 bcs:HazeltonGroup-rhyolitoid
-  a gsrm:Rhyolitoid ;
-  gsoc:isPartOf bcs:bc-rhyolitoid ;
+  rdf:type gsrm:Rhyolitoid ;
   rdfs:label "rhyolitoid lithology in Hazelton Group"@en ;
+  gsoc:isPartOf bcs:bc-rhyolitoid ;
 .
 bcs:HazeltonGroup-siltstone
-  a gsrm:Siltstone ;
-  gsoc:isPartOf bcs:bc-siltstone ;
+  rdf:type gsrm:Siltstone ;
   rdfs:label "siltstone lithology in Hazelton Group"@en ;
+  gsoc:isPartOf bcs:bc-siltstone ;
 .
 bcs:HazeltonGroup-tuffite
-  a gsrm:Tuffite ;
-  gsoc:isPartOf bcs:bc-tuffite ;
+  rdf:type gsrm:Tuffite ;
   rdfs:label "tuffite lithology in Hazelton Group"@en ;
+  gsoc:isPartOf bcs:bc-tuffite ;
 .
 bcs:HazeltonGroup-wacke
-  a gsrm:Wacke ;
-  gsoc:isPartOf bcs:bc-wacke ;
+  rdf:type gsrm:Wacke ;
   rdfs:label "wacke lithology in Hazelton Group"@en ;
+  gsoc:isPartOf bcs:bc-wacke ;
 .
 bcs:HendrixLakeIntrusivecomplex
-  a gsgu:Suite ;
-  gsoc:hasConstituent bcs:HendrixLakeIntrusivecomplex-dioritic_rock ;
+  rdf:type gsgu:Suite ;
   rdfs:label "Hendrix Lake Intrusive complex"@en ;
+  gsoc:hasConstituent bcs:HendrixLakeIntrusivecomplex-dioritic_rock ;
 .
 bcs:HendrixLakeIntrusivecomplex-dioritic_rock
-  a gsrm:Dioritic_Rock ;
-  gsoc:isPartOf bcs:bc-dioritic_rock ;
+  rdf:type gsrm:Dioritic_Rock ;
   rdfs:label "dioritic_rock lithology in Hendrix Lake Intrusive complex"@en ;
+  gsoc:isPartOf bcs:bc-dioritic_rock ;
 .
 bcs:HolyCrossPl
-  a gsgu:Formation ;
+  rdf:type gsgu:Formation ;
+  rdfs:label "Holy Cross Pl"@en ;
   gsoc:hasConstituent bcs:HolyCrossPl-andesite ;
   gsoc:hasConstituent bcs:HolyCrossPl-dacite ;
   gsoc:hasConstituent bcs:HolyCrossPl-porphyry ;
   gsoc:hasConstituent bcs:HolyCrossPl-rhyolitoid ;
-  rdfs:label "Holy Cross Pl"@en ;
 .
 bcs:HolyCrossPl-andesite
-  a gsrm:Andesite ;
-  gsoc:isPartOf bcs:bc-andesite ;
+  rdf:type gsrm:Andesite ;
   rdfs:label "andesite lithology in HolyCross Pl"@en ;
+  gsoc:isPartOf bcs:bc-andesite ;
 .
 bcs:HolyCrossPl-dacite
-  a gsrm:Dacite ;
-  gsoc:isPartOf bcs:bc-dacite ;
+  rdf:type gsrm:Dacite ;
   rdfs:label "dacite lithology in HolyCross Pl"@en ;
+  gsoc:isPartOf bcs:bc-dacite ;
 .
 bcs:HolyCrossPl-porphyry
-  a gsrm:Porphyry ;
-  gsoc:isPartOf bcs:bc-porphyry ;
+  rdf:type gsrm:Porphyry ;
   rdfs:label "porphyry lithology in HolyCross Pl"@en ;
+  gsoc:isPartOf bcs:bc-porphyry ;
 .
 bcs:HolyCrossPl-rhyolitoid
-  a gsrm:Rhyolitoid ;
-  gsoc:isPartOf bcs:bc-rhyolitoid ;
+  rdf:type gsrm:Rhyolitoid ;
   rdfs:label "rhyolitoid lithology in HolyCross Pl"@en ;
+  gsoc:isPartOf bcs:bc-rhyolitoid ;
 .
 bcs:HorsetheifCreekGroup
-  a gsgu:Group ;
-  gsoc:hasConstituent  bcs:HorsetheifCreekGroup-amphibolite ;
-  gsoc:hasConstituent  bcs:HorsetheifCreekGroup-arenite ;
-  gsoc:hasConstituent  bcs:HorsetheifCreekGroup-metamorphic_rock ;
-  gsoc:hasConstituent  bcs:HorsetheifCreekGroup-metasomatic_rock ;
-  gsoc:hasConstituent  bcs:HorsetheifCreekGroup-phyllite ;
-  gsoc:hasConstituent  bcs:HorsetheifCreekGroup-quartzite ;
-  gsoc:hasConstituent  bcs:HorsetheifCreekGroup-schist ;
+  rdf:type gsgu:Group ;
   rdfs:label "Horsetheif Creek Group"@en ;
+  gsoc:hasConstituent bcs:HorsetheifCreekGroup-amphibolite ;
+  gsoc:hasConstituent bcs:HorsetheifCreekGroup-arenite ;
+  gsoc:hasConstituent bcs:HorsetheifCreekGroup-metamorphic_rock ;
+  gsoc:hasConstituent bcs:HorsetheifCreekGroup-metasomatic_rock ;
+  gsoc:hasConstituent bcs:HorsetheifCreekGroup-phyllite ;
+  gsoc:hasConstituent bcs:HorsetheifCreekGroup-quartzite ;
+  gsoc:hasConstituent bcs:HorsetheifCreekGroup-schist ;
 .
 bcs:HorsetheifCreekGroup-amphibolite
-  a gsrm:Amphibolite ;
-  gsoc:isPartOf bcs:bc-amphibolite ;
+  rdf:type gsrm:Amphibolite ;
   rdfs:label "amphibolite lithology in Horsetheif Creek Group"@en ;
+  gsoc:isPartOf bcs:bc-amphibolite ;
 .
 bcs:HorsetheifCreekGroup-arenite
-  a gsrm:Arenite ;
-  gsoc:isPartOf bcs:bc-arenite ;
+  rdf:type gsrm:Arenite ;
   rdfs:label "arenite lithology in Horsetheif Creek Group"@en ;
+  gsoc:isPartOf bcs:bc-arenite ;
 .
 bcs:HorsetheifCreekGroup-metamorphic_rock
-  a gsrm:Metamorphic_Rock ;
-  gsoc:isPartOf bcs:bc-metamorphic_rock ;
+  rdf:type gsrm:Metamorphic_Rock ;
   rdfs:label "metamorphic_rock lithology in Horsetheif Creek Group"@en ;
+  gsoc:isPartOf bcs:bc-metamorphic_rock ;
 .
 bcs:HorsetheifCreekGroup-metasomatic_rock
-  a gsrm:Metasomatic_Rock ;
-  gsoc:isPartOf bcs:bc-metasomatic_rock ;
+  rdf:type gsrm:Metasomatic_Rock ;
   rdfs:label "metasomatic_rock lithology in Horsetheif Creek Group"@en ;
+  gsoc:isPartOf bcs:bc-metasomatic_rock ;
 .
 bcs:HorsetheifCreekGroup-phyllite
-  a gsrm:Phyllite ;
-  gsoc:isPartOf bcs:bc-phyllite ;
+  rdf:type gsrm:Phyllite ;
   rdfs:label "phyllite lithology in Horsetheif Creek Group"@en ;
+  gsoc:isPartOf bcs:bc-phyllite ;
 .
 bcs:HorsetheifCreekGroup-quartzite
-  a gsrm:Quartzite ;
-  gsoc:isPartOf bcs:bc-quartzite ;
+  rdf:type gsrm:Quartzite ;
   rdfs:label "quartzite lithology in Horsetheif Creek Group"@en ;
+  gsoc:isPartOf bcs:bc-quartzite ;
 .
 bcs:HorsetheifCreekGroup-schist
-  a gsrm:Schist ;
-  gsoc:isPartOf bcs:bc-schist ;
+  rdf:type gsrm:Schist ;
   rdfs:label "schist lithology in Horsetheif Creek Group"@en ;
+  gsoc:isPartOf bcs:bc-schist ;
 .
 bcs:IndexFormation
-  a gsgu:Formation ;
+  rdf:type gsgu:Formation ;
+  rdfs:label "Index Formation"@en ;
   gsoc:hasConstituent bcs:IndexFormation-arenite ;
   gsoc:hasConstituent bcs:IndexFormation-chemical_sedimentary_material ;
   gsoc:hasConstituent bcs:IndexFormation-chlorite_actinolite_epidote_metamorphic_rock ;
@@ -1033,346 +1043,346 @@ bcs:IndexFormation
   gsoc:hasConstituent bcs:IndexFormation-quartzite ;
   gsoc:hasConstituent bcs:IndexFormation-schist ;
   gsoc:isPartOf bcs:LardeauGroup ;
-  rdfs:label "Index Formation"@en ;
 .
 bcs:IndexFormation-arenite
-  a gsrm:Arenite ;
-  gsoc:isPartOf bcs:bc-arenite ;
+  rdf:type gsrm:Arenite ;
   rdfs:label "arenite lithology in Index Formation of Lardeau Group"@en ;
+  gsoc:isPartOf bcs:bc-arenite ;
 .
 bcs:IndexFormation-chemical_sedimentary_material
-  a gsrm:Chemical_Sedimentary_Material ;
-  gsoc:isPartOf bcs:bc-chemical_sedimentary_material ;
+  rdf:type gsrm:Chemical_Sedimentary_Material ;
   rdfs:label "chemical_sedimentary_material lithology in Index Formation of Lardeau Group"@en ;
+  gsoc:isPartOf bcs:bc-chemical_sedimentary_material ;
 .
 bcs:IndexFormation-chlorite_actinolite_epidote_metamorphic_rock
-  a gsrm:Chlorite_Actinolite_Epidote_Metamorphic_Rock ;
-  gsoc:isPartOf bcs:bc-chlorite_actinolite_epidote_metamorphic_rock ;
+  rdf:type gsrm:Chlorite_Actinolite_Epidote_Metamorphic_Rock ;
   rdfs:label "chlorite_actinolite_epidote_metamorphic_rock lithology in Index Formation of Lardeau Group"@en ;
+  gsoc:isPartOf bcs:bc-chlorite_actinolite_epidote_metamorphic_rock ;
 .
 bcs:IndexFormation-limestone
-  a gsrm:Limestone ;
-  gsoc:isPartOf bcs:bc-limestone ;
+  rdf:type gsrm:Limestone ;
   rdfs:label "limestone lithology in Index Formation of Lardeau Group"@en ;
+  gsoc:isPartOf bcs:bc-limestone ;
 .
 bcs:IndexFormation-marble
-  a gsrm:Marble ;
-  gsoc:isPartOf bcs:bc-marble ;
+  rdf:type gsrm:Marble ;
   rdfs:label "marble lithology in Index Formation,  Lardeau Group"@en ;
+  gsoc:isPartOf bcs:bc-marble ;
 .
 bcs:IndexFormation-metamorphic_rock
-  a gsrm:Metamorphic_Rock ;
-  gsoc:isPartOf bcs:bc-metamorphic_rock ;
+  rdf:type gsrm:Metamorphic_Rock ;
   rdfs:label "metamorphic_rock lithology in Index Formation of Lardeau Group"@en ;
+  gsoc:isPartOf bcs:bc-metamorphic_rock ;
 .
 bcs:IndexFormation-metasomatic_rock
-  a gsrm:Metasomatic_Rock ;
-  gsoc:isPartOf bcs:bc-metasomatic_rock ;
+  rdf:type gsrm:Metasomatic_Rock ;
   rdfs:label "metasomatic_rock lithology in Index Formation of Lardeau Group"@en ;
+  gsoc:isPartOf bcs:bc-metasomatic_rock ;
 .
 bcs:IndexFormation-phyllite
-  a gsrm:Phyllite ;
-  gsoc:isPartOf bcs:bc-phyllite ;
+  rdf:type gsrm:Phyllite ;
   rdfs:label "phyllite lithology in Index Formation of Lardeau Group"@en ;
+  gsoc:isPartOf bcs:bc-phyllite ;
 .
 bcs:IndexFormation-quartzite
-  a gsrm:Quartzite ;
-  gsoc:isPartOf bcs:bc-quartzite ;
+  rdf:type gsrm:Quartzite ;
   rdfs:label "quartzite lithology in Index Formation of Lardeau Group"@en ;
+  gsoc:isPartOf bcs:bc-quartzite ;
 .
 bcs:IndexFormation-schist
-  a gsrm:Schist ;
-  gsoc:isPartOf bcs:bc-schist ;
+  rdf:type gsrm:Schist ;
   rdfs:label "schist lithology in Index Formation of Lardeau Group"@en ;
+  gsoc:isPartOf bcs:bc-schist ;
 .
 bcs:InzanaLakeFormation
-  a gsgu:Formation ;
+  rdf:type gsgu:Formation ;
+  rdfs:label "Inzana Lake Formation"@en ;
   gsoc:hasConstituent bcs:InzanaLakeFormation-ash_tuff_lapillistone_and_lapilli_tuff ;
   gsoc:hasConstituent bcs:InzanaLakeFormation-basalt ;
   gsoc:hasConstituent bcs:InzanaLakeFormation-dacite ;
   gsoc:hasConstituent bcs:InzanaLakeFormation-siltstone ;
   gsoc:hasConstituent bcs:InzanaLakeFormation-wacke ;
-  rdfs:label "Inzana Lake Formation"@en ;
 .
 bcs:InzanaLakeFormation-ash_tuff_lapillistone_and_lapilli_tuff
-  a gsrm:Ash_Tuff_Lapillistone_And_Lapilli_Tuff ;
-  gsoc:isPartOf bcs:bc-ash_tuff_lapillistone_and_lapilli_tuff ;
+  rdf:type gsrm:Ash_Tuff_Lapillistone_And_Lapilli_Tuff ;
   rdfs:label "ash_tuff_lapillistone_and_lapilli_tuff lithology in Inzana Lake Formation"@en ;
+  gsoc:isPartOf bcs:bc-ash_tuff_lapillistone_and_lapilli_tuff ;
 .
 bcs:InzanaLakeFormation-basalt
-  a gsrm:Basalt ;
-  gsoc:isPartOf bcs:bc-basalt ;
+  rdf:type gsrm:Basalt ;
   rdfs:label "basalt lithology in Inzana Lake Formation"@en ;
+  gsoc:isPartOf bcs:bc-basalt ;
 .
 bcs:InzanaLakeFormation-dacite
-  a gsrm:Dacite ;
-  gsoc:isPartOf bcs:bc-dacite ;
+  rdf:type gsrm:Dacite ;
   rdfs:label "dacite lithology in Inzana Lake Formation"@en ;
+  gsoc:isPartOf bcs:bc-dacite ;
 .
 bcs:InzanaLakeFormation-siltstone
-  a gsrm:Siltstone ;
-  gsoc:isPartOf bcs:bc-siltstone ;
+  rdf:type gsrm:Siltstone ;
   rdfs:label "siltstone lithology in Inzana Lake Formation"@en ;
+  gsoc:isPartOf bcs:bc-siltstone ;
 .
 bcs:InzanaLakeFormation-wacke
-  a gsrm:Wacke ;
-  gsoc:isPartOf bcs:bc-wacke ;
+  rdf:type gsrm:Wacke ;
   rdfs:label "wacke lithology in Inzana Lake Formation"@en ;
+  gsoc:isPartOf bcs:bc-wacke ;
 .
 bcs:IronLakecomplex
-  a gsgu:Suite ;
+  rdf:type gsgu:Suite ;
+  rdfs:label "Iron Lake complex"@en ;
   gsoc:hasConstituent bcs:IronLakecomplex-dioritic_rock ;
   gsoc:hasConstituent bcs:IronLakecomplex-gabbroic_rock ;
   gsoc:hasConstituent bcs:IronLakecomplex-ultramafic_igneous_rock ;
-  rdfs:label "Iron Lake complex"@en ;
 .
 bcs:IronLakecomplex-dioritic_rock
-  a gsrm:Dioritic_Rock ;
-  gsoc:isPartOf bcs:bc-dioritic_rock ;
+  rdf:type gsrm:Dioritic_Rock ;
   rdfs:label "dioritic_rock lithology in Iron Lake complex"@en ;
+  gsoc:isPartOf bcs:bc-dioritic_rock ;
 .
 bcs:IronLakecomplex-gabbroic_rock
-  a gsrm:Gabbroic_Rock ;
-  gsoc:isPartOf bcs:bc-gabbroic_rock ;
+  rdf:type gsrm:Gabbroic_Rock ;
   rdfs:label "gabbroic_rock lithology in Iron Lake complex"@en ;
+  gsoc:isPartOf bcs:bc-gabbroic_rock ;
 .
 bcs:IronLakecomplex-ultramafic_igneous_rock
-  a gsrm:Ultramafic_Igneous_Rock ;
-  gsoc:isPartOf bcs:bc-ultramafic_igneous_rock ;
+  rdf:type gsrm:Ultramafic_Igneous_Rock ;
   rdfs:label "ultramafic_igneous_rock lithology in Iron Lake complex"@en ;
+  gsoc:isPartOf bcs:bc-ultramafic_igneous_rock ;
 .
 bcs:JackassMountainGroup
-  a gsgu:Group ;
-  gsoc:hasConstituent  bcs:JackassMountainGroup-clastic_sandstone ;
+  rdf:type gsgu:Group ;
   rdfs:label "Jackass Mountain Group"@en ;
+  gsoc:hasConstituent bcs:JackassMountainGroup-clastic_sandstone ;
 .
 bcs:JackassMountainGroup-clastic_sandstone
-  a gsrm:Clastic_Sandstone ;
-  gsoc:isPartOf bcs:bc-clastic_sandstone ;
+  rdf:type gsrm:Clastic_Sandstone ;
   rdfs:label "clastic_sandstone lithology in Jackass Mountain Group"@en ;
+  gsoc:isPartOf bcs:bc-clastic_sandstone ;
 .
 bcs:JowettFormation
-  a gsgu:Formation ;
+  rdf:type gsgu:Formation ;
+  rdfs:label "Jowett Formation"@en ;
   gsoc:hasConstituent bcs:JowettFormation-metasomatic_rock ;
   gsoc:hasConstituent bcs:JowettFormation-schist ;
   gsoc:isPartOf bcs:LardeauGroup ;
-  rdfs:label "Jowett Formation"@en ;
 .
 bcs:JowettFormation-metasomatic_rock
-  a gsrm:Metasomatic_Rock ;
-  gsoc:isPartOf bcs:bc-metasomatic_rock ;
+  rdf:type gsrm:Metasomatic_Rock ;
   rdfs:label "metasomatic_rock lithology in Jowett Formation of Lardeau Group"@en ;
+  gsoc:isPartOf bcs:bc-metasomatic_rock ;
 .
 bcs:JowettFormation-schist
-  a gsrm:Schist ;
-  gsoc:isPartOf bcs:bc-schist ;
+  rdf:type gsrm:Schist ;
   rdfs:label "schist lithology in Jowett Formation of Lardeau Group"@en ;
+  gsoc:isPartOf bcs:bc-schist ;
 .
 bcs:KamloopsGroup
-  a gsgu:Group ;
-  gsoc:hasConstituent  bcs:KamloopsGroup-basalt ;
+  rdf:type gsgu:Group ;
   rdfs:label "Kamloops Group"@en ;
+  gsoc:hasConstituent bcs:KamloopsGroup-basalt ;
 .
 bcs:KamloopsGroup-basalt
-  a gsrm:Basalt ;
-  gsoc:isPartOf bcs:bc-basalt ;
+  rdf:type gsrm:Basalt ;
   rdfs:label "basalt lithology in Kamloops Group"@en ;
+  gsoc:isPartOf bcs:bc-basalt ;
 .
 bcs:KasalkaGroup
-  a gsgu:Group ;
-  gsoc:hasConstituent  bcs:KasalkaGroup-andesite ;
-  gsoc:hasConstituent  bcs:KasalkaGroup-ash_tuff_lapillistone_and_lapilli_tuff ;
-  gsoc:hasConstituent  bcs:KasalkaGroup-basalt ;
-  gsoc:hasConstituent  bcs:KasalkaGroup-clastic_conglomerate ;
-  gsoc:hasConstituent  bcs:KasalkaGroup-dacite ;
-  gsoc:hasConstituent  bcs:KasalkaGroup-granitoid ;
-  gsoc:hasConstituent  bcs:KasalkaGroup-porphyry ;
-  gsoc:hasConstituent  bcs:KasalkaGroup-pyroclastic_rock ;
-  gsoc:hasConstituent  bcs:KasalkaGroup-rhyolitoid ;
-  gsoc:hasConstituent  bcs:KasalkaGroup-trachytoid ;
-  gsoc:hasConstituent  bcs:KasalkaGroup-tuffite ;
-  gsoc:hasConstituent  bcs:KasalkaGroup-wacke ;
+  rdf:type gsgu:Group ;
   rdfs:label "Kasalka Group"@en ;
+  gsoc:hasConstituent bcs:KasalkaGroup-andesite ;
+  gsoc:hasConstituent bcs:KasalkaGroup-ash_tuff_lapillistone_and_lapilli_tuff ;
+  gsoc:hasConstituent bcs:KasalkaGroup-basalt ;
+  gsoc:hasConstituent bcs:KasalkaGroup-clastic_conglomerate ;
+  gsoc:hasConstituent bcs:KasalkaGroup-dacite ;
+  gsoc:hasConstituent bcs:KasalkaGroup-granitoid ;
+  gsoc:hasConstituent bcs:KasalkaGroup-porphyry ;
+  gsoc:hasConstituent bcs:KasalkaGroup-pyroclastic_rock ;
+  gsoc:hasConstituent bcs:KasalkaGroup-rhyolitoid ;
+  gsoc:hasConstituent bcs:KasalkaGroup-trachytoid ;
+  gsoc:hasConstituent bcs:KasalkaGroup-tuffite ;
+  gsoc:hasConstituent bcs:KasalkaGroup-wacke ;
 .
 bcs:KasalkaGroup-andesite
-  a gsrm:Andesite ;
-  gsoc:isPartOf bcs:bc-andesite ;
+  rdf:type gsrm:Andesite ;
   rdfs:label "andesite lithology in Kasalka Group"@en ;
+  gsoc:isPartOf bcs:bc-andesite ;
 .
 bcs:KasalkaGroup-ash_tuff_lapillistone_and_lapilli_tuff
-  a gsrm:Ash_Tuff_Lapillistone_And_Lapilli_Tuff ;
-  gsoc:isPartOf bcs:bc-ash_tuff_lapillistone_and_lapilli_tuff ;
+  rdf:type gsrm:Ash_Tuff_Lapillistone_And_Lapilli_Tuff ;
   rdfs:label "ash_tuff_lapillistone_and_lapilli_tuff lithology in Kasalka Group"@en ;
+  gsoc:isPartOf bcs:bc-ash_tuff_lapillistone_and_lapilli_tuff ;
 .
 bcs:KasalkaGroup-basalt
-  a gsrm:Basalt ;
-  gsoc:isPartOf bcs:bc-basalt ;
+  rdf:type gsrm:Basalt ;
   rdfs:label "basalt lithology in Kasalka Group"@en ;
+  gsoc:isPartOf bcs:bc-basalt ;
 .
 bcs:KasalkaGroup-clastic_conglomerate
-  a gsrm:Clastic_Conglomerate ;
-  gsoc:isPartOf bcs:bc-clastic_conglomerate ;
+  rdf:type gsrm:Clastic_Conglomerate ;
   rdfs:label "clastic_conglomerate lithology in Kasalka Group"@en ;
+  gsoc:isPartOf bcs:bc-clastic_conglomerate ;
 .
 bcs:KasalkaGroup-dacite
-  a gsrm:Dacite ;
-  gsoc:isPartOf bcs:bc-dacite ;
+  rdf:type gsrm:Dacite ;
   rdfs:label "dacite lithology in Kasalka Group"@en ;
+  gsoc:isPartOf bcs:bc-dacite ;
 .
 bcs:KasalkaGroup-granitoid
-  a gsrm:Granitoid ;
-  gsoc:isPartOf bcs:bc-granitoid ;
+  rdf:type gsrm:Granitoid ;
   rdfs:label "granitoid lithology in Kasalka Group"@en ;
+  gsoc:isPartOf bcs:bc-granitoid ;
 .
 bcs:KasalkaGroup-porphyry
-  a gsrm:Porphyry ;
-  gsoc:isPartOf bcs:bc-porphyry ;
+  rdf:type gsrm:Porphyry ;
   rdfs:label "porphyry lithology in Kasalka Group"@en ;
+  gsoc:isPartOf bcs:bc-porphyry ;
 .
 bcs:KasalkaGroup-pyroclastic_rock
-  a gsrm:Pyroclastic_Rock ;
-  gsoc:isPartOf bcs:bc-pyroclastic_rock ;
+  rdf:type gsrm:Pyroclastic_Rock ;
   rdfs:label "pyroclastic_rock lithology in Kasalka Group"@en ;
+  gsoc:isPartOf bcs:bc-pyroclastic_rock ;
 .
 bcs:KasalkaGroup-rhyolitoid
-  a gsrm:Rhyolitoid ;
-  gsoc:isPartOf bcs:bc-rhyolitoid ;
+  rdf:type gsrm:Rhyolitoid ;
   rdfs:label "rhyolitoid lithology in Kasalka Group"@en ;
+  gsoc:isPartOf bcs:bc-rhyolitoid ;
 .
 bcs:KasalkaGroup-trachytoid
-  a gsrm:Trachytoid ;
-  gsoc:isPartOf bcs:bc-trachytoid ;
+  rdf:type gsrm:Trachytoid ;
   rdfs:label "trachytoid lithology in Kasalka Group"@en ;
+  gsoc:isPartOf bcs:bc-trachytoid ;
 .
 bcs:KasalkaGroup-tuffite
-  a gsrm:Tuffite ;
-  gsoc:isPartOf bcs:bc-tuffite ;
+  rdf:type gsrm:Tuffite ;
   rdfs:label "tuffite lithology in Kasalka Group"@en ;
+  gsoc:isPartOf bcs:bc-tuffite ;
 .
 bcs:KasalkaGroup-wacke
-  a gsrm:Wacke ;
-  gsoc:isPartOf bcs:bc-wacke ;
+  rdf:type gsrm:Wacke ;
   rdfs:label "wacke lithology in Kasalka Group"@en ;
+  gsoc:isPartOf bcs:bc-wacke ;
 .
 bcs:KasalkaVolcanics
-  a gsgu:Formation ;
+  rdf:type gsgu:Formation ;
+  rdfs:label "Kasalka Volcanics"@en ;
   gsoc:hasConstituent bcs:KasalkaVolcanics-andesite ;
   gsoc:hasConstituent bcs:KasalkaVolcanics-fine_grained_igneous_rock ;
   gsoc:hasConstituent bcs:KasalkaVolcanics-porphyry ;
-  rdfs:label "Kasalka Volcanics"@en ;
 .
 bcs:KasalkaVolcanics-andesite
-  a gsrm:Andesite ;
-  gsoc:isPartOf bcs:bc-andesite ;
+  rdf:type gsrm:Andesite ;
   rdfs:label "andesite lithology in Kasalka Volcanics"@en ;
+  gsoc:isPartOf bcs:bc-andesite ;
 .
 bcs:KasalkaVolcanics-fine_grained_igneous_rock
-  a gsrm:Fine_Grained_Igneous_Rock ;
-  gsoc:isPartOf bcs:bc-fine_grained_igneous_rock ;
+  rdf:type gsrm:Fine_Grained_Igneous_Rock ;
   rdfs:label "fine_grained_igneous_rock lithology in Kasalka Volcanics"@en ;
+  gsoc:isPartOf bcs:bc-fine_grained_igneous_rock ;
 .
 bcs:KasalkaVolcanics-porphyry
-  a gsrm:Porphyry ;
-  gsoc:isPartOf bcs:bc-porphyry ;
+  rdf:type gsrm:Porphyry ;
   rdfs:label "porphyry lithology in Kasalka Volcanics"@en ;
+  gsoc:isPartOf bcs:bc-porphyry ;
 .
 bcs:LaibFormation
-  a gsgu:Formation ;
+  rdf:type gsgu:Formation ;
+  rdfs:label "Laib Formation"@en ;
   gsoc:hasConstituent bcs:LaibFormation-carbonate_sedimentary_rock ;
   gsoc:hasConstituent bcs:LaibFormation-dolostone ;
   gsoc:hasConstituent bcs:LaibFormation-limestone ;
   gsoc:hasConstituent bcs:LaibFormation-metasomatic_rock ;
   gsoc:hasConstituent bcs:LaibFormation-phyllite ;
-  rdfs:label "Laib Formation"@en ;
 .
 bcs:LaibFormation-carbonate_sedimentary_rock
-  a gsrm:Carbonate_Sedimentary_Rock ;
-  gsoc:isPartOf bcs:bc-carbonate_sedimentary_rock ;
+  rdf:type gsrm:Carbonate_Sedimentary_Rock ;
   rdfs:label "carbonate_sedimentary_rock lithology in Laib Formation"@en ;
+  gsoc:isPartOf bcs:bc-carbonate_sedimentary_rock ;
 .
 bcs:LaibFormation-dolostone
-  a gsrm:Dolostone ;
-  gsoc:isPartOf bcs:bc-dolostone ;
+  rdf:type gsrm:Dolostone ;
   rdfs:label "dolostone lithology in Laib Formation"@en ;
+  gsoc:isPartOf bcs:bc-dolostone ;
 .
 bcs:LaibFormation-limestone
-  a gsrm:Limestone ;
-  gsoc:isPartOf bcs:bc-limestone ;
+  rdf:type gsrm:Limestone ;
   rdfs:label "limestone lithology in Laib Formation"@en ;
+  gsoc:isPartOf bcs:bc-limestone ;
 .
 bcs:LaibFormation-metasomatic_rock
-  a gsrm:Metasomatic_Rock ;
-  gsoc:isPartOf bcs:bc-metasomatic_rock ;
+  rdf:type gsrm:Metasomatic_Rock ;
   rdfs:label "metasomatic_rock lithology in Laib Formation"@en ;
+  gsoc:isPartOf bcs:bc-metasomatic_rock ;
 .
 bcs:LaibFormation-phyllite
-  a gsrm:Phyllite ;
-  gsoc:isPartOf bcs:bc-phyllite ;
+  rdf:type gsrm:Phyllite ;
   rdfs:label "phyllite lithology in Laib Formation"@en ;
+  gsoc:isPartOf bcs:bc-phyllite ;
 .
 bcs:LardeauGroup
-  a gsgu:Group ;
-  gsoc:hasPart bcs:IndexFormation ;
+  rdf:type gsgu:Group ;
   rdfs:label "Lardeau Group"@en ;
+  gsoc:hasPart bcs:IndexFormation ;
 .
 bcs:LimitLakePhs
-  a gsgu:Suite ;
+  rdf:type gsgu:Suite ;
+  rdfs:label "Limit Lake Phs"@en ;
   gsoc:hasConstituent bcs:LimitLakePhs-dioritic_rock ;
   gsoc:hasConstituent bcs:LimitLakePhs-granodiorite ;
   gsoc:hasConstituent bcs:LimitLakePhs-monzodioritic_rock ;
   gsoc:hasConstituent bcs:LimitLakePhs-monzonitic_rock ;
-  rdfs:label "Limit Lake Phs"@en ;
 .
 bcs:LimitLakePhs-dioritic_rock
-  a gsrm:Dioritic_Rock ;
-  gsoc:isPartOf bcs:bc-dioritic_rock ;
+  rdf:type gsrm:Dioritic_Rock ;
   rdfs:label "dioritic_rock lithology in Limit Lake Phs"@en ;
+  gsoc:isPartOf bcs:bc-dioritic_rock ;
 .
 bcs:LimitLakePhs-granodiorite
-  a gsrm:Granodiorite ;
-  gsoc:isPartOf bcs:bc-granodiorite ;
+  rdf:type gsrm:Granodiorite ;
   rdfs:label "granodiorite lithology in Limit Lake Phs"@en ;
+  gsoc:isPartOf bcs:bc-granodiorite ;
 .
 bcs:LimitLakePhs-monzodioritic_rock
-  a gsrm:Monzodioritic_Rock ;
-  gsoc:isPartOf bcs:bc-monzodioritic_rock ;
+  rdf:type gsrm:Monzodioritic_Rock ;
   rdfs:label "monzodioritic_rock lithology in Limit Lake Phs"@en ;
+  gsoc:isPartOf bcs:bc-monzodioritic_rock ;
 .
 bcs:LimitLakePhs-monzonitic_rock
-  a gsrm:Monzonitic_Rock ;
-  gsoc:isPartOf bcs:bc-monzonitic_rock ;
+  rdf:type gsrm:Monzonitic_Rock ;
   rdfs:label "monzonitic_rock lithology in Limit Lake Phs"@en ;
+  gsoc:isPartOf bcs:bc-monzonitic_rock ;
 .
 bcs:McknabPhs
-  a gsgu:Suite ;
+  rdf:type gsgu:Suite ;
+  rdfs:label "Mcknab Phs"@en ;
   gsoc:hasConstituent bcs:McknabPhs-andesite ;
   gsoc:hasConstituent bcs:McknabPhs-dioritic_rock ;
   gsoc:hasConstituent bcs:McknabPhs-granodiorite ;
   gsoc:hasConstituent bcs:McknabPhs-tonalite ;
-  rdfs:label "Mcknab Phs"@en ;
 .
 bcs:McknabPhs-andesite
-  a gsrm:Andesite ;
-  gsoc:isPartOf bcs:bc-andesite ;
+  rdf:type gsrm:Andesite ;
   rdfs:label "andesite lithology in Mcknab Phs"@en ;
+  gsoc:isPartOf bcs:bc-andesite ;
 .
 bcs:McknabPhs-dioritic_rock
-  a gsrm:Dioritic_Rock ;
-  gsoc:isPartOf bcs:bc-dioritic_rock ;
+  rdf:type gsrm:Dioritic_Rock ;
   rdfs:label "dioritic_rock lithology in Mcknab Phs"@en ;
+  gsoc:isPartOf bcs:bc-dioritic_rock ;
 .
 bcs:McknabPhs-granodiorite
-  a gsrm:Granodiorite ;
-  gsoc:isPartOf bcs:bc-granodiorite ;
+  rdf:type gsrm:Granodiorite ;
   rdfs:label "granodiorite lithology in Mcknab Phs"@en ;
+  gsoc:isPartOf bcs:bc-granodiorite ;
 .
 bcs:McknabPhs-tonalite
-  a gsrm:Tonalite ;
-  gsoc:isPartOf bcs:bc-tonalite ;
+  rdf:type gsrm:Tonalite ;
   rdfs:label "tonalite lithology in Mcknab Phs"@en ;
+  gsoc:isPartOf bcs:bc-tonalite ;
 .
 bcs:NaglicoFormation
-  a gsgu:Formation ;
+  rdf:type gsgu:Formation ;
+  rdfs:label "Naglico Formation"@en ;
   gsoc:hasConstituent bcs:NaglicoFormation-andesite ;
   gsoc:hasConstituent bcs:NaglicoFormation-ash_tuff_lapillistone_and_lapilli_tuff ;
   gsoc:hasConstituent bcs:NaglicoFormation-basalt ;
@@ -1388,589 +1398,589 @@ bcs:NaglicoFormation
   gsoc:hasConstituent bcs:NaglicoFormation-rhyolitoid ;
   gsoc:hasConstituent bcs:NaglicoFormation-siltstone ;
   gsoc:hasConstituent bcs:NaglicoFormation-wacke ;
-  rdfs:label "Naglico Formation"@en ;
 .
 bcs:NaglicoFormation-andesite
-  a gsrm:Andesite ;
-  gsoc:isPartOf bcs:bc-andesite ;
+  rdf:type gsrm:Andesite ;
   rdfs:label "andesite lithology in Naglico Formation"@en ;
+  gsoc:isPartOf bcs:bc-andesite ;
 .
 bcs:NaglicoFormation-ash_tuff_lapillistone_and_lapilli_tuff
-  a gsrm:Ash_Tuff_Lapillistone_And_Lapilli_Tuff ;
-  gsoc:isPartOf bcs:bc-ash_tuff_lapillistone_and_lapilli_tuff ;
+  rdf:type gsrm:Ash_Tuff_Lapillistone_And_Lapilli_Tuff ;
   rdfs:label "ash_tuff_lapillistone_and_lapilli_tuff lithology in Naglico Formation"@en ;
+  gsoc:isPartOf bcs:bc-ash_tuff_lapillistone_and_lapilli_tuff ;
 .
 bcs:NaglicoFormation-basalt
-  a gsrm:Basalt ;
-  gsoc:isPartOf bcs:bc-basalt ;
+  rdf:type gsrm:Basalt ;
   rdfs:label "basalt lithology in Naglico Formation"@en ;
+  gsoc:isPartOf bcs:bc-basalt ;
 .
 bcs:NaglicoFormation-chlorite_actinolite_epidote_metamorphic_rock
-  a gsrm:Chlorite_Actinolite_Epidote_Metamorphic_Rock ;
-  gsoc:isPartOf bcs:bc-chlorite_actinolite_epidote_metamorphic_rock ;
+  rdf:type gsrm:Chlorite_Actinolite_Epidote_Metamorphic_Rock ;
   rdfs:label "chlorite_actinolite_epidote_metamorphic_rock lithology in Naglico Formation"@en ;
+  gsoc:isPartOf bcs:bc-chlorite_actinolite_epidote_metamorphic_rock ;
 .
 bcs:NaglicoFormation-clastic_conglomerate
-  a gsrm:Clastic_Conglomerate ;
-  gsoc:isPartOf bcs:bc-clastic_conglomerate ;
+  rdf:type gsrm:Clastic_Conglomerate ;
   rdfs:label "clastic_conglomerate lithology in Naglico Formation"@en ;
+  gsoc:isPartOf bcs:bc-clastic_conglomerate ;
 .
 bcs:NaglicoFormation-clastic_sandstone
-  a gsrm:Clastic_Sandstone ;
-  gsoc:isPartOf bcs:bc-clastic_sandstone ;
+  rdf:type gsrm:Clastic_Sandstone ;
   rdfs:label "clastic_sandstone lithology in Naglico Formation"@en ;
+  gsoc:isPartOf bcs:bc-clastic_sandstone ;
 .
 bcs:NaglicoFormation-dacite
-  a gsrm:Dacite ;
-  gsoc:isPartOf bcs:bc-dacite ;
+  rdf:type gsrm:Dacite ;
   rdfs:label "dacite lithology in Naglico Formation"@en ;
+  gsoc:isPartOf bcs:bc-dacite ;
 .
 bcs:NaglicoFormation-dioritic_rock
-  a gsrm:Dioritic_Rock ;
-  gsoc:isPartOf bcs:bc-dioritic_rock ;
+  rdf:type gsrm:Dioritic_Rock ;
   rdfs:label "dioritic_rock lithology in Naglico Formation"@en ;
+  gsoc:isPartOf bcs:bc-dioritic_rock ;
 .
 bcs:NaglicoFormation-granitoid
-  a gsrm:Granitoid ;
-  gsoc:isPartOf bcs:bc-granitoid ;
+  rdf:type gsrm:Granitoid ;
   rdfs:label "granitoid lithology in Naglico Formation"@en ;
+  gsoc:isPartOf bcs:bc-granitoid ;
 .
 bcs:NaglicoFormation-limestone
-  a gsrm:Limestone ;
-  gsoc:isPartOf bcs:bc-limestone ;
+  rdf:type gsrm:Limestone ;
   rdfs:label "limestone lithology in Naglico Formation"@en ;
+  gsoc:isPartOf bcs:bc-limestone ;
 .
 bcs:NaglicoFormation-metasomatic_rock
-  a gsrm:Metasomatic_Rock ;
-  gsoc:isPartOf bcs:bc-metasomatic_rock ;
+  rdf:type gsrm:Metasomatic_Rock ;
   rdfs:label "metasomatic_rock lithology in Naglico Formation"@en ;
+  gsoc:isPartOf bcs:bc-metasomatic_rock ;
 .
 bcs:NaglicoFormation-pyroclastic_rock
-  a gsrm:Pyroclastic_Rock ;
-  gsoc:isPartOf bcs:bc-pyroclastic_rock ;
+  rdf:type gsrm:Pyroclastic_Rock ;
   rdfs:label "pyroclastic_rock lithology in Naglico Formation"@en ;
+  gsoc:isPartOf bcs:bc-pyroclastic_rock ;
 .
 bcs:NaglicoFormation-rhyolitoid
-  a gsrm:Rhyolitoid ;
-  gsoc:isPartOf bcs:bc-rhyolitoid ;
+  rdf:type gsrm:Rhyolitoid ;
   rdfs:label "rhyolitoid lithology in Naglico Formation"@en ;
+  gsoc:isPartOf bcs:bc-rhyolitoid ;
 .
 bcs:NaglicoFormation-siltstone
-  a gsrm:Siltstone ;
-  gsoc:isPartOf bcs:bc-siltstone ;
+  rdf:type gsrm:Siltstone ;
   rdfs:label "siltstone lithology in Naglico Formation"@en ;
+  gsoc:isPartOf bcs:bc-siltstone ;
 .
 bcs:NaglicoFormation-wacke
-  a gsrm:Wacke ;
-  gsoc:isPartOf bcs:bc-wacke ;
+  rdf:type gsrm:Wacke ;
   rdfs:label "wacke lithology in Naglico Formation"@en ;
+  gsoc:isPartOf bcs:bc-wacke ;
 .
 bcs:NanamimoGroup
-  a gsgu:Group ;
-  gsoc:hasConstituent  bcs:NanamimoGroup-clastic_mudstone ;
-  gsoc:hasConstituent  bcs:NanamimoGroup-clastic_sandstone ;
-  gsoc:hasConstituent  bcs:NanamimoGroup-dolostone ;
-  gsoc:hasConstituent  bcs:NanamimoGroup-rock ;
+  rdf:type gsgu:Group ;
   rdfs:label "Nanamimo Group"@en ;
+  gsoc:hasConstituent bcs:NanamimoGroup-clastic_mudstone ;
+  gsoc:hasConstituent bcs:NanamimoGroup-clastic_sandstone ;
+  gsoc:hasConstituent bcs:NanamimoGroup-dolostone ;
+  gsoc:hasConstituent bcs:NanamimoGroup-rock ;
 .
 bcs:NanamimoGroup-clastic_mudstone
-  a gsrm:Clastic_Mudstone ;
-  gsoc:isPartOf bcs:bc-clastic_mudstone ;
+  rdf:type gsrm:Clastic_Mudstone ;
   rdfs:label "clastic_mudstone lithology in Nanamimo Group"@en ;
+  gsoc:isPartOf bcs:bc-clastic_mudstone ;
 .
 bcs:NanamimoGroup-clastic_sandstone
-  a gsrm:Clastic_Sandstone ;
-  gsoc:isPartOf bcs:bc-clastic_sandstone ;
+  rdf:type gsrm:Clastic_Sandstone ;
   rdfs:label "clastic_sandstone lithology in Nanamimo Group"@en ;
+  gsoc:isPartOf bcs:bc-clastic_sandstone ;
 .
 bcs:NanamimoGroup-dolostone
-  a gsrm:Dolostone ;
-  gsoc:isPartOf bcs:bc-dolostone ;
+  rdf:type gsrm:Dolostone ;
   rdfs:label "dolostone lithology in Nanamimo Group"@en ;
+  gsoc:isPartOf bcs:bc-dolostone ;
 .
 bcs:NanamimoGroup-rock
-  a gsrm:Rock ;
-  gsoc:isPartOf bcs:bc-rock ;
+  rdf:type gsrm:Rock ;
   rdfs:label "rock lithology in Nanamimo Group"@en ;
+  gsoc:isPartOf bcs:bc-rock ;
 .
 bcs:NazkoRiver
-  a gsgu:Formation ;
+  rdf:type gsgu:Formation ;
+  rdfs:label "Nazko River"@en ;
   gsoc:hasConstituent bcs:NazkoRiver-clastic_conglomerate ;
   gsoc:hasConstituent bcs:NazkoRiver-clastic_sandstone ;
-  rdfs:label "Nazko River"@en ;
 .
 bcs:NazkoRiver-clastic_conglomerate
-  a gsrm:Clastic_Conglomerate ;
-  gsoc:isPartOf bcs:bc-clastic_conglomerate ;
+  rdf:type gsrm:Clastic_Conglomerate ;
   rdfs:label "clastic_conglomerate lithology in NazkoRiver"@en ;
+  gsoc:isPartOf bcs:bc-clastic_conglomerate ;
 .
 bcs:NazkoRiver-clastic_sandstone
-  a gsrm:Clastic_Sandstone ;
-  gsoc:isPartOf bcs:bc-clastic_sandstone ;
+  rdf:type gsrm:Clastic_Sandstone ;
   rdfs:label "clastic_sandstone lithology in NazkoRiver"@en ;
+  gsoc:isPartOf bcs:bc-clastic_sandstone ;
 .
 bcs:NechakoFormation
-  a gsgu:Formation ;
+  rdf:type gsgu:Formation ;
+  rdfs:label "Nechako Formation"@en ;
   gsoc:hasConstituent bcs:NechakoFormation-andesite ;
   gsoc:hasConstituent bcs:NechakoFormation-basalt ;
   gsoc:hasConstituent bcs:NechakoFormation-dacite ;
   gsoc:hasConstituent bcs:NechakoFormation-rhyolitoid ;
-  rdfs:label "Nechako Formation"@en ;
 .
 bcs:NechakoFormation-andesite
-  a gsrm:Andesite ;
-  gsoc:isPartOf bcs:bc-andesite ;
+  rdf:type gsrm:Andesite ;
   rdfs:label "andesite lithology in Nechako Formation"@en ;
+  gsoc:isPartOf bcs:bc-andesite ;
 .
 bcs:NechakoFormation-basalt
-  a gsrm:Basalt ;
-  gsoc:isPartOf bcs:bc-basalt ;
+  rdf:type gsrm:Basalt ;
   rdfs:label "basalt lithology in Nechako Formation"@en ;
+  gsoc:isPartOf bcs:bc-basalt ;
 .
 bcs:NechakoFormation-dacite
-  a gsrm:Dacite ;
-  gsoc:isPartOf bcs:bc-dacite ;
+  rdf:type gsrm:Dacite ;
   rdfs:label "dacite lithology in Nechako Formation"@en ;
+  gsoc:isPartOf bcs:bc-dacite ;
 .
 bcs:NechakoFormation-rhyolitoid
-  a gsrm:Rhyolitoid ;
-  gsoc:isPartOf bcs:bc-rhyolitoid ;
+  rdf:type gsrm:Rhyolitoid ;
   rdfs:label "rhyolitoid lithology in Nechako Formation"@en ;
+  gsoc:isPartOf bcs:bc-rhyolitoid ;
 .
 bcs:NechakoPlateauGroup
-  a gsgu:Group ;
-  gsoc:hasConstituent  bcs:NechakoPlateauGroup-andesite ;
-  gsoc:hasConstituent  bcs:NechakoPlateauGroup-basalt ;
-  gsoc:hasConstituent  bcs:NechakoPlateauGroup-dacite ;
-  gsoc:hasConstituent  bcs:NechakoPlateauGroup-rhyolitoid ;
+  rdf:type gsgu:Group ;
   rdfs:label "Nechako Plateau Group"@en ;
+  gsoc:hasConstituent bcs:NechakoPlateauGroup-andesite ;
+  gsoc:hasConstituent bcs:NechakoPlateauGroup-basalt ;
+  gsoc:hasConstituent bcs:NechakoPlateauGroup-dacite ;
+  gsoc:hasConstituent bcs:NechakoPlateauGroup-rhyolitoid ;
 .
 bcs:NechakoPlateauGroup-andesite
-  a gsrm:Andesite ;
-  gsoc:isPartOf bcs:bc-andesite ;
+  rdf:type gsrm:Andesite ;
   rdfs:label "andesite lithology in Nechako Plateau Group"@en ;
+  gsoc:isPartOf bcs:bc-andesite ;
 .
 bcs:NechakoPlateauGroup-basalt
-  a gsrm:Basalt ;
-  gsoc:isPartOf bcs:bc-basalt ;
+  rdf:type gsrm:Basalt ;
   rdfs:label "basalt lithology in Nechako Plateau Group"@en ;
+  gsoc:isPartOf bcs:bc-basalt ;
 .
 bcs:NechakoPlateauGroup-dacite
-  a gsrm:Dacite ;
-  gsoc:isPartOf bcs:bc-dacite ;
+  rdf:type gsrm:Dacite ;
   rdfs:label "dacite lithology in Nechako Plateau Group"@en ;
+  gsoc:isPartOf bcs:bc-dacite ;
 .
 bcs:NechakoPlateauGroup-rhyolitoid
-  a gsrm:Rhyolitoid ;
-  gsoc:isPartOf bcs:bc-rhyolitoid ;
+  rdf:type gsrm:Rhyolitoid ;
   rdfs:label "rhyolitoid lithology in Nechako Plateau Group"@en ;
+  gsoc:isPartOf bcs:bc-rhyolitoid ;
 .
 bcs:NelwayFormation
-  a gsgu:Formation ;
-  gsoc:hasConstituent bcs:NelwayFormation-dolostone ;
+  rdf:type gsgu:Formation ;
   rdfs:label "Nelway Formation"@en ;
+  gsoc:hasConstituent bcs:NelwayFormation-dolostone ;
 .
 bcs:NelwayFormation-dolostone
-  a gsrm:Dolostone ;
-  gsoc:isPartOf bcs:bc-dolostone ;
+  rdf:type gsrm:Dolostone ;
   rdfs:label "dolostone lithology in Nelway Formation"@en ;
+  gsoc:isPartOf bcs:bc-dolostone ;
 .
 bcs:NicolCreekFormation
-  a gsgu:Formation ;
+  rdf:type gsgu:Formation ;
+  rdfs:label "Nicol Creek Formation"@en ;
   gsoc:hasConstituent bcs:NicolCreekFormation-basalt ;
   gsoc:hasConstituent bcs:NicolCreekFormation-fine_grained_igneous_rock ;
   gsoc:hasConstituent bcs:NicolCreekFormation-tuffite ;
-  rdfs:label "Nicol Creek Formation"@en ;
 .
 bcs:NicolCreekFormation-basalt
-  a gsrm:Basalt ;
-  gsoc:isPartOf bcs:bc-basalt ;
+  rdf:type gsrm:Basalt ;
   rdfs:label "basalt lithology in Nicol Creek Formation"@en ;
+  gsoc:isPartOf bcs:bc-basalt ;
 .
 bcs:NicolCreekFormation-fine_grained_igneous_rock
-  a gsrm:Fine_Grained_Igneous_Rock ;
-  gsoc:isPartOf bcs:bc-fine_grained_igneous_rock ;
+  rdf:type gsrm:Fine_Grained_Igneous_Rock ;
   rdfs:label "fine_grained_igneous_rock lithology in Nicol Creek Formation"@en ;
+  gsoc:isPartOf bcs:bc-fine_grained_igneous_rock ;
 .
 bcs:NicolCreekFormation-tuffite
-  a gsrm:Tuffite ;
-  gsoc:isPartOf bcs:bc-tuffite ;
+  rdf:type gsrm:Tuffite ;
   rdfs:label "tuffite lithology in Nicol Creek Formation"@en ;
+  gsoc:isPartOf bcs:bc-tuffite ;
 .
 bcs:NicolaGroup
-  a gsgu:Group ;
-  gsoc:hasConstituent  bcs:NicolaGroup-andesite ;
-  gsoc:hasConstituent  bcs:NicolaGroup-arenite ;
-  gsoc:hasConstituent  bcs:NicolaGroup-ash_tuff_lapillistone_and_lapilli_tuff ;
-  gsoc:hasConstituent  bcs:NicolaGroup-basalt ;
-  gsoc:hasConstituent  bcs:NicolaGroup-breccia ;
-  gsoc:hasConstituent  bcs:NicolaGroup-clastic_conglomerate ;
-  gsoc:hasConstituent  bcs:NicolaGroup-clastic_sandstone ;
-  gsoc:hasConstituent  bcs:NicolaGroup-diamictite ;
-  gsoc:hasConstituent  bcs:NicolaGroup-fine_grained_igneous_rock ;
-  gsoc:hasConstituent  bcs:NicolaGroup-limestone ;
-  gsoc:hasConstituent  bcs:NicolaGroup-metasomatic_rock ;
-  gsoc:hasConstituent  bcs:NicolaGroup-non_clastic_siliceous_sedimentary_rock ;
-  gsoc:hasConstituent  bcs:NicolaGroup-phyllite ;
-  gsoc:hasConstituent  bcs:NicolaGroup-porphyry ;
-  gsoc:hasConstituent  bcs:NicolaGroup-quartzite ;
-  gsoc:hasConstituent  bcs:NicolaGroup-siltstone ;
-  gsoc:hasConstituent  bcs:NicolaGroup-tuffite ;
+  rdf:type gsgu:Group ;
   rdfs:label "Nicola Group"@en ;
+  gsoc:hasConstituent bcs:NicolaGroup-andesite ;
+  gsoc:hasConstituent bcs:NicolaGroup-arenite ;
+  gsoc:hasConstituent bcs:NicolaGroup-ash_tuff_lapillistone_and_lapilli_tuff ;
+  gsoc:hasConstituent bcs:NicolaGroup-basalt ;
+  gsoc:hasConstituent bcs:NicolaGroup-breccia ;
+  gsoc:hasConstituent bcs:NicolaGroup-clastic_conglomerate ;
+  gsoc:hasConstituent bcs:NicolaGroup-clastic_sandstone ;
+  gsoc:hasConstituent bcs:NicolaGroup-diamictite ;
+  gsoc:hasConstituent bcs:NicolaGroup-fine_grained_igneous_rock ;
+  gsoc:hasConstituent bcs:NicolaGroup-limestone ;
+  gsoc:hasConstituent bcs:NicolaGroup-metasomatic_rock ;
+  gsoc:hasConstituent bcs:NicolaGroup-non_clastic_siliceous_sedimentary_rock ;
+  gsoc:hasConstituent bcs:NicolaGroup-phyllite ;
+  gsoc:hasConstituent bcs:NicolaGroup-porphyry ;
+  gsoc:hasConstituent bcs:NicolaGroup-quartzite ;
+  gsoc:hasConstituent bcs:NicolaGroup-siltstone ;
+  gsoc:hasConstituent bcs:NicolaGroup-tuffite ;
 .
 bcs:NicolaGroup-andesite
-  a gsrm:Andesite ;
-  gsoc:isPartOf bcs:bc-andesite ;
+  rdf:type gsrm:Andesite ;
   rdfs:label "andesite lithology in Nicola Group"@en ;
+  gsoc:isPartOf bcs:bc-andesite ;
 .
 bcs:NicolaGroup-arenite
-  a gsrm:Arenite ;
-  gsoc:isPartOf bcs:bc-arenite ;
+  rdf:type gsrm:Arenite ;
   rdfs:label "arenite lithology in Nicola Group"@en ;
+  gsoc:isPartOf bcs:bc-arenite ;
 .
 bcs:NicolaGroup-ash_tuff_lapillistone_and_lapilli_tuff
-  a gsrm:Ash_Tuff_Lapillistone_And_Lapilli_Tuff ;
-  gsoc:isPartOf bcs:bc-ash_tuff_lapillistone_and_lapilli_tuff ;
+  rdf:type gsrm:Ash_Tuff_Lapillistone_And_Lapilli_Tuff ;
   rdfs:label "ash_tuff_lapillistone_and_lapilli_tuff lithology in Nicola Group"@en ;
+  gsoc:isPartOf bcs:bc-ash_tuff_lapillistone_and_lapilli_tuff ;
 .
 bcs:NicolaGroup-basalt
-  a gsrm:Basalt ;
-  gsoc:isPartOf bcs:bc-basalt ;
+  rdf:type gsrm:Basalt ;
   rdfs:label "basalt lithology in Nicola Group"@en ;
+  gsoc:isPartOf bcs:bc-basalt ;
 .
 bcs:NicolaGroup-breccia
-  a gsrm:Breccia ;
-  gsoc:isPartOf bcs:bc-breccia ;
+  rdf:type gsrm:Breccia ;
   rdfs:label "breccia lithology in Nicola Group"@en ;
+  gsoc:isPartOf bcs:bc-breccia ;
 .
 bcs:NicolaGroup-clastic_conglomerate
-  a gsrm:Clastic_Conglomerate ;
-  gsoc:isPartOf bcs:bc-clastic_conglomerate ;
+  rdf:type gsrm:Clastic_Conglomerate ;
   rdfs:label "clastic_conglomerate lithology in Nicola Group"@en ;
+  gsoc:isPartOf bcs:bc-clastic_conglomerate ;
 .
 bcs:NicolaGroup-clastic_sandstone
-  a gsrm:Clastic_Sandstone ;
-  gsoc:isPartOf bcs:bc-clastic_sandstone ;
+  rdf:type gsrm:Clastic_Sandstone ;
   rdfs:label "clastic_sandstone lithology in Nicola Group"@en ;
+  gsoc:isPartOf bcs:bc-clastic_sandstone ;
 .
 bcs:NicolaGroup-diamictite
-  a gsrm:Diamictite ;
-  gsoc:isPartOf bcs:bc-diamictite ;
+  rdf:type gsrm:Diamictite ;
   rdfs:label "diamictite lithology in Nicola Group"@en ;
+  gsoc:isPartOf bcs:bc-diamictite ;
 .
 bcs:NicolaGroup-fine_grained_igneous_rock
-  a gsrm:Fine_Grained_Igneous_Rock ;
-  gsoc:isPartOf bcs:bc-fine_grained_igneous_rock ;
+  rdf:type gsrm:Fine_Grained_Igneous_Rock ;
   rdfs:label "fine_grained_igneous_rock lithology in Nicola Group"@en ;
+  gsoc:isPartOf bcs:bc-fine_grained_igneous_rock ;
 .
 bcs:NicolaGroup-limestone
-  a gsrm:Limestone ;
-  gsoc:isPartOf bcs:bc-limestone ;
+  rdf:type gsrm:Limestone ;
   rdfs:label "limestone lithology in Nicola Group"@en ;
+  gsoc:isPartOf bcs:bc-limestone ;
 .
 bcs:NicolaGroup-metasomatic_rock
-  a gsrm:Metasomatic_Rock ;
-  gsoc:isPartOf bcs:bc-metasomatic_rock ;
+  rdf:type gsrm:Metasomatic_Rock ;
   rdfs:label "metasomatic_rock lithology in Nicola Group"@en ;
+  gsoc:isPartOf bcs:bc-metasomatic_rock ;
 .
 bcs:NicolaGroup-non_clastic_siliceous_sedimentary_rock
-  a gsrm:Non_Clastic_Siliceous_Sedimentary_Rock ;
-  gsoc:isPartOf bcs:bc-non_clastic_siliceous_sedimentary_rock ;
+  rdf:type gsrm:Non_Clastic_Siliceous_Sedimentary_Rock ;
   rdfs:label "non_clastic_siliceous_sedimentary_rock lithology in Nicola Group"@en ;
+  gsoc:isPartOf bcs:bc-non_clastic_siliceous_sedimentary_rock ;
 .
 bcs:NicolaGroup-phyllite
-  a gsrm:Phyllite ;
-  gsoc:isPartOf bcs:bc-phyllite ;
+  rdf:type gsrm:Phyllite ;
   rdfs:label "phyllite lithology in Nicola Group"@en ;
+  gsoc:isPartOf bcs:bc-phyllite ;
 .
 bcs:NicolaGroup-porphyry
-  a gsrm:Porphyry ;
-  gsoc:isPartOf bcs:bc-porphyry ;
+  rdf:type gsrm:Porphyry ;
   rdfs:label "porphyry lithology in Nicola Group"@en ;
+  gsoc:isPartOf bcs:bc-porphyry ;
 .
 bcs:NicolaGroup-quartzite
-  a gsrm:Quartzite ;
-  gsoc:isPartOf bcs:bc-quartzite ;
+  rdf:type gsrm:Quartzite ;
   rdfs:label "quartzite lithology in Nicola Group"@en ;
+  gsoc:isPartOf bcs:bc-quartzite ;
 .
 bcs:NicolaGroup-siltstone
-  a gsrm:Siltstone ;
-  gsoc:isPartOf bcs:bc-siltstone ;
+  rdf:type gsrm:Siltstone ;
   rdfs:label "siltstone lithology in Nicola Group"@en ;
+  gsoc:isPartOf bcs:bc-siltstone ;
 .
 bcs:NicolaGroup-tuffite
-  a gsrm:Tuffite ;
-  gsoc:isPartOf bcs:bc-tuffite ;
+  rdf:type gsrm:Tuffite ;
   rdfs:label "tuffite lithology in Nicola Group"@en ;
+  gsoc:isPartOf bcs:bc-tuffite ;
 .
 bcs:NithiPhs-Seriate
-  a gsgu:Formation ;
+  rdf:type gsgu:Formation ;
+  rdfs:label "Nithi Phs (Seriate)"@en ;
   gsoc:hasConstituent bcs:NithiPhs-Seriate-granitoid ;
   gsoc:hasConstituent bcs:NithiPhs-Seriate-monzonitic_rock ;
-  rdfs:label "Nithi Phs (Seriate)"@en ;
 .
 bcs:NithiPhs-Seriate-granitoid
-  a gsrm:Granitoid ;
-  gsoc:isPartOf bcs:bc-granitoid ;
+  rdf:type gsrm:Granitoid ;
   rdfs:label "granitoid lithology in Nithi Phs(Seriate)"@en ;
+  gsoc:isPartOf bcs:bc-granitoid ;
 .
 bcs:NithiPhs-Seriate-monzonitic_rock
-  a gsrm:Monzonitic_Rock ;
-  gsoc:isPartOf bcs:bc-monzonitic_rock ;
+  rdf:type gsrm:Monzonitic_Rock ;
   rdfs:label "monzonitic_rock lithology in Nithi Phs(Seriate)"@en ;
+  gsoc:isPartOf bcs:bc-monzonitic_rock ;
 .
 bcs:OotsaLakeGroup
-  a gsgu:Group ;
-  gsoc:hasConstituent  bcs:OotsaLakeGroup-andesite ;
-  gsoc:hasConstituent  bcs:OotsaLakeGroup-aplite ;
-  gsoc:hasConstituent  bcs:OotsaLakeGroup-ash_tuff_lapillistone_and_lapilli_tuff ;
-  gsoc:hasConstituent  bcs:OotsaLakeGroup-basalt ;
-  gsoc:hasConstituent  bcs:OotsaLakeGroup-chlorite_actinolite_epidote_metamorphic_rock ;
-  gsoc:hasConstituent  bcs:OotsaLakeGroup-clastic_conglomerate ;
-  gsoc:hasConstituent  bcs:OotsaLakeGroup-clastic_sandstone ;
-  gsoc:hasConstituent  bcs:OotsaLakeGroup-dacite ;
-  gsoc:hasConstituent  bcs:OotsaLakeGroup-dioritic_rock ;
-  gsoc:hasConstituent  bcs:OotsaLakeGroup-granitoid ;
-  gsoc:hasConstituent  bcs:OotsaLakeGroup-granodiorite ;
-  gsoc:hasConstituent  bcs:OotsaLakeGroup-metasomatic_rock ;
-  gsoc:hasConstituent  bcs:OotsaLakeGroup-monzodioritic_rock ;
-  gsoc:hasConstituent  bcs:OotsaLakeGroup-monzonitic_rock ;
-  gsoc:hasConstituent  bcs:OotsaLakeGroup-phaneritic_igneous_rock ;
-  gsoc:hasConstituent  bcs:OotsaLakeGroup-porphyry ;
-  gsoc:hasConstituent  bcs:OotsaLakeGroup-pyroclastic_rock ;
-  gsoc:hasConstituent  bcs:OotsaLakeGroup-rhyolitoid ;
-  gsoc:hasConstituent  bcs:OotsaLakeGroup-siltstone ;
-  gsoc:hasConstituent  bcs:OotsaLakeGroup-tuffite ;
+  rdf:type gsgu:Group ;
   rdfs:label "Ootsa Lake Group"@en ;
+  gsoc:hasConstituent bcs:OotsaLakeGroup-andesite ;
+  gsoc:hasConstituent bcs:OotsaLakeGroup-aplite ;
+  gsoc:hasConstituent bcs:OotsaLakeGroup-ash_tuff_lapillistone_and_lapilli_tuff ;
+  gsoc:hasConstituent bcs:OotsaLakeGroup-basalt ;
+  gsoc:hasConstituent bcs:OotsaLakeGroup-chlorite_actinolite_epidote_metamorphic_rock ;
+  gsoc:hasConstituent bcs:OotsaLakeGroup-clastic_conglomerate ;
+  gsoc:hasConstituent bcs:OotsaLakeGroup-clastic_sandstone ;
+  gsoc:hasConstituent bcs:OotsaLakeGroup-dacite ;
+  gsoc:hasConstituent bcs:OotsaLakeGroup-dioritic_rock ;
+  gsoc:hasConstituent bcs:OotsaLakeGroup-granitoid ;
+  gsoc:hasConstituent bcs:OotsaLakeGroup-granodiorite ;
+  gsoc:hasConstituent bcs:OotsaLakeGroup-metasomatic_rock ;
+  gsoc:hasConstituent bcs:OotsaLakeGroup-monzodioritic_rock ;
+  gsoc:hasConstituent bcs:OotsaLakeGroup-monzonitic_rock ;
+  gsoc:hasConstituent bcs:OotsaLakeGroup-phaneritic_igneous_rock ;
+  gsoc:hasConstituent bcs:OotsaLakeGroup-porphyry ;
+  gsoc:hasConstituent bcs:OotsaLakeGroup-pyroclastic_rock ;
+  gsoc:hasConstituent bcs:OotsaLakeGroup-rhyolitoid ;
+  gsoc:hasConstituent bcs:OotsaLakeGroup-siltstone ;
+  gsoc:hasConstituent bcs:OotsaLakeGroup-tuffite ;
 .
 bcs:OotsaLakeGroup-andesite
-  a gsrm:Andesite ;
-  gsoc:isPartOf bcs:bc-andesite ;
+  rdf:type gsrm:Andesite ;
   rdfs:label "andesite lithology in Ootsa Lake Group"@en ;
+  gsoc:isPartOf bcs:bc-andesite ;
 .
 bcs:OotsaLakeGroup-aplite
-  a gsrm:Aplite ;
-  gsoc:isPartOf bcs:bc-aplite ;
+  rdf:type gsrm:Aplite ;
   rdfs:label "aplite lithology in Ootsa Lake Group"@en ;
+  gsoc:isPartOf bcs:bc-aplite ;
 .
 bcs:OotsaLakeGroup-ash_tuff_lapillistone_and_lapilli_tuff
-  a gsrm:Ash_Tuff_Lapillistone_And_Lapilli_Tuff ;
-  gsoc:isPartOf bcs:bc-ash_tuff_lapillistone_and_lapilli_tuff ;
+  rdf:type gsrm:Ash_Tuff_Lapillistone_And_Lapilli_Tuff ;
   rdfs:label "ash_tuff_lapillistone_and_lapilli_tuff lithology in Ootsa Lake Group"@en ;
+  gsoc:isPartOf bcs:bc-ash_tuff_lapillistone_and_lapilli_tuff ;
 .
 bcs:OotsaLakeGroup-basalt
-  a gsrm:Basalt ;
-  gsoc:isPartOf bcs:bc-basalt ;
+  rdf:type gsrm:Basalt ;
   rdfs:label "basalt lithology in Ootsa Lake Group"@en ;
+  gsoc:isPartOf bcs:bc-basalt ;
 .
 bcs:OotsaLakeGroup-chlorite_actinolite_epidote_metamorphic_rock
-  a gsrm:Chlorite_Actinolite_Epidote_Metamorphic_Rock ;
-  gsoc:isPartOf bcs:bc-chlorite_actinolite_epidote_metamorphic_rock ;
+  rdf:type gsrm:Chlorite_Actinolite_Epidote_Metamorphic_Rock ;
   rdfs:label "chlorite_actinolite_epidote_metamorphic_rock lithology in Ootsa Lake Group"@en ;
+  gsoc:isPartOf bcs:bc-chlorite_actinolite_epidote_metamorphic_rock ;
 .
 bcs:OotsaLakeGroup-clastic_conglomerate
-  a gsrm:Clastic_Conglomerate ;
-  gsoc:isPartOf bcs:bc-clastic_conglomerate ;
+  rdf:type gsrm:Clastic_Conglomerate ;
   rdfs:label "clastic_conglomerate lithology in Ootsa Lake Group"@en ;
+  gsoc:isPartOf bcs:bc-clastic_conglomerate ;
 .
 bcs:OotsaLakeGroup-clastic_sandstone
-  a gsrm:Clastic_Sandstone ;
-  gsoc:isPartOf bcs:bc-clastic_sandstone ;
+  rdf:type gsrm:Clastic_Sandstone ;
   rdfs:label "clastic_sandstone lithology in Ootsa Lake Group"@en ;
+  gsoc:isPartOf bcs:bc-clastic_sandstone ;
 .
 bcs:OotsaLakeGroup-dacite
-  a gsrm:Dacite ;
-  gsoc:isPartOf bcs:bc-dacite ;
+  rdf:type gsrm:Dacite ;
   rdfs:label "dacite lithology in Ootsa Lake Group"@en ;
+  gsoc:isPartOf bcs:bc-dacite ;
 .
 bcs:OotsaLakeGroup-dioritic_rock
-  a gsrm:Dioritic_Rock ;
-  gsoc:isPartOf bcs:bc-dioritic_rock ;
+  rdf:type gsrm:Dioritic_Rock ;
   rdfs:label "dioritic_rock lithology in Ootsa Lake Group"@en ;
+  gsoc:isPartOf bcs:bc-dioritic_rock ;
 .
 bcs:OotsaLakeGroup-granitoid
-  a gsrm:Granitoid ;
-  gsoc:isPartOf bcs:bc-granitoid ;
+  rdf:type gsrm:Granitoid ;
   rdfs:label "granitoid lithology in Ootsa Lake Group"@en ;
+  gsoc:isPartOf bcs:bc-granitoid ;
 .
 bcs:OotsaLakeGroup-granodiorite
-  a gsrm:Granodiorite ;
-  gsoc:isPartOf bcs:bc-granodiorite ;
+  rdf:type gsrm:Granodiorite ;
   rdfs:label "granodiorite lithology in Ootsa Lake Group"@en ;
+  gsoc:isPartOf bcs:bc-granodiorite ;
 .
 bcs:OotsaLakeGroup-metasomatic_rock
-  a gsrm:Metasomatic_Rock ;
-  gsoc:isPartOf bcs:bc-metasomatic_rock ;
+  rdf:type gsrm:Metasomatic_Rock ;
   rdfs:label "metasomatic_rock lithology in Ootsa Lake Group"@en ;
+  gsoc:isPartOf bcs:bc-metasomatic_rock ;
 .
 bcs:OotsaLakeGroup-monzodioritic_rock
-  a gsrm:Monzodioritic_Rock ;
-  gsoc:isPartOf bcs:bc-monzodioritic_rock ;
+  rdf:type gsrm:Monzodioritic_Rock ;
   rdfs:label "monzodioritic_rock lithology in Ootsa Lake Group"@en ;
+  gsoc:isPartOf bcs:bc-monzodioritic_rock ;
 .
 bcs:OotsaLakeGroup-monzonitic_rock
-  a gsrm:Monzonitic_Rock ;
-  gsoc:isPartOf bcs:bc-monzonitic_rock ;
+  rdf:type gsrm:Monzonitic_Rock ;
   rdfs:label "monzonitic_rock lithology in Ootsa Lake Group"@en ;
+  gsoc:isPartOf bcs:bc-monzonitic_rock ;
 .
 bcs:OotsaLakeGroup-phaneritic_igneous_rock
-  a gsrm:Phaneritic_Igneous_Rock ;
-  gsoc:isPartOf bcs:bc-phaneritic_igneous_rock ;
+  rdf:type gsrm:Phaneritic_Igneous_Rock ;
   rdfs:label "phaneritic_igneous_rock lithology in Ootsa Lake Group"@en ;
+  gsoc:isPartOf bcs:bc-phaneritic_igneous_rock ;
 .
 bcs:OotsaLakeGroup-porphyry
-  a gsrm:Porphyry ;
-  gsoc:isPartOf bcs:bc-porphyry ;
+  rdf:type gsrm:Porphyry ;
   rdfs:label "porphyry lithology in Ootsa Lake Group"@en ;
+  gsoc:isPartOf bcs:bc-porphyry ;
 .
 bcs:OotsaLakeGroup-pyroclastic_rock
-  a gsrm:Pyroclastic_Rock ;
-  gsoc:isPartOf bcs:bc-pyroclastic_rock ;
+  rdf:type gsrm:Pyroclastic_Rock ;
   rdfs:label "pyroclastic_rock lithology in Ootsa Lake Group"@en ;
+  gsoc:isPartOf bcs:bc-pyroclastic_rock ;
 .
 bcs:OotsaLakeGroup-rhyolitoid
-  a gsrm:Rhyolitoid ;
-  gsoc:isPartOf bcs:bc-rhyolitoid ;
+  rdf:type gsrm:Rhyolitoid ;
   rdfs:label "rhyolitoid lithology in Ootsa Lake Group"@en ;
+  gsoc:isPartOf bcs:bc-rhyolitoid ;
 .
 bcs:OotsaLakeGroup-siltstone
-  a gsrm:Siltstone ;
-  gsoc:isPartOf bcs:bc-siltstone ;
+  rdf:type gsrm:Siltstone ;
   rdfs:label "siltstone lithology in Ootsa Lake Group"@en ;
+  gsoc:isPartOf bcs:bc-siltstone ;
 .
 bcs:OotsaLakeGroup-tuffite
-  a gsrm:Tuffite ;
-  gsoc:isPartOf bcs:bc-tuffite ;
+  rdf:type gsrm:Tuffite ;
   rdfs:label "tuffite lithology in Ootsa Lake Group"@en ;
+  gsoc:isPartOf bcs:bc-tuffite ;
 .
 bcs:PeachLakeIntrSuite
-  a gsgu:Formation ;
-  gsoc:hasConstituent bcs:PeachLakeIntrSuite-monzodioritic_rock ;
+  rdf:type gsgu:Formation ;
   rdfs:label "Peach Lake Intr Suite"@en ;
+  gsoc:hasConstituent bcs:PeachLakeIntrSuite-monzodioritic_rock ;
 .
 bcs:PeachLakeIntrSuite-monzodioritic_rock
-  a gsrm:Monzodioritic_Rock ;
-  gsoc:isPartOf bcs:bc-monzodioritic_rock ;
+  rdf:type gsrm:Monzodioritic_Rock ;
   rdfs:label "monzodioritic_rock lithology in Peach Lake Intrusive suite"@en ;
+  gsoc:isPartOf bcs:bc-monzodioritic_rock ;
 .
 bcs:PhillipsFormation
-  a gsgu:Formation ;
-  gsoc:hasConstituent bcs:PhillipsFormation-clastic_sandstone ;
+  rdf:type gsgu:Formation ;
   rdfs:label "Phillips Formation"@en ;
+  gsoc:hasConstituent bcs:PhillipsFormation-clastic_sandstone ;
 .
 bcs:PhillipsFormation-clastic_sandstone
-  a gsrm:Clastic_Sandstone ;
-  gsoc:isPartOf bcs:bc-clastic_sandstone ;
+  rdf:type gsrm:Clastic_Sandstone ;
   rdfs:label "clastic_sandstone lithology in Phillips Formation"@en ;
+  gsoc:isPartOf bcs:bc-clastic_sandstone ;
 .
 bcs:PinkutPhs
-  a gsgu:Formation ;
-  gsoc:hasConstituent bcs:PinkutPhs-tonalite ;
+  rdf:type gsgu:Formation ;
   rdfs:label "Pinkut Phs"@en ;
+  gsoc:hasConstituent bcs:PinkutPhs-tonalite ;
 .
 bcs:PinkutPhs-tonalite
-  a gsrm:Tonalite ;
-  gsoc:isPartOf bcs:bc-tonalite ;
+  rdf:type gsrm:Tonalite ;
   rdfs:label "tonalite lithology in Pinkut Phs"@en ;
+  gsoc:isPartOf bcs:bc-tonalite ;
 .
 bcs:PopeSucc
-  a gsgu:Formation ;
+  rdf:type gsgu:Formation ;
+  rdfs:label "Pope Succ"@en ;
   gsoc:hasConstituent bcs:PopeSucc-basalt ;
   gsoc:hasConstituent bcs:PopeSucc-dolostone ;
   gsoc:hasConstituent bcs:PopeSucc-limestone ;
   gsoc:hasConstituent bcs:PopeSucc-metasomatic_rock ;
-  rdfs:label "Pope Succ"@en ;
 .
 bcs:PopeSucc-basalt
-  a gsrm:Basalt ;
-  gsoc:isPartOf bcs:bc-basalt ;
+  rdf:type gsrm:Basalt ;
   rdfs:label "basalt lithology in Pope Succ"@en ;
+  gsoc:isPartOf bcs:bc-basalt ;
 .
 bcs:PopeSucc-dolostone
-  a gsrm:Dolostone ;
-  gsoc:isPartOf bcs:bc-dolostone ;
+  rdf:type gsrm:Dolostone ;
   rdfs:label "dolostone lithology in Pope Succ"@en ;
+  gsoc:isPartOf bcs:bc-dolostone ;
 .
 bcs:PopeSucc-limestone
-  a gsrm:Limestone ;
-  gsoc:isPartOf bcs:bc-limestone ;
+  rdf:type gsrm:Limestone ;
   rdfs:label "limestone lithology in Pope Succ"@en ;
+  gsoc:isPartOf bcs:bc-limestone ;
 .
 bcs:PopeSucc-metasomatic_rock
-  a gsrm:Metasomatic_Rock ;
-  gsoc:isPartOf bcs:bc-metasomatic_rock ;
+  rdf:type gsrm:Metasomatic_Rock ;
   rdfs:label "metasomatic_rock lithology in Pope Succ"@en ;
+  gsoc:isPartOf bcs:bc-metasomatic_rock ;
 .
 bcs:PowellCreekVolc
-  a gsgu:Formation ;
+  rdf:type gsgu:Formation ;
+  rdfs:label "Powell Creek Volc"@en ;
   gsoc:hasConstituent bcs:PowellCreekVolc-andesite ;
   gsoc:hasConstituent bcs:PowellCreekVolc-ash_tuff_lapillistone_and_lapilli_tuff ;
   gsoc:hasConstituent bcs:PowellCreekVolc-fine_grained_igneous_rock ;
   gsoc:hasConstituent bcs:PowellCreekVolc-pyroclastic_material ;
   gsoc:hasConstituent bcs:PowellCreekVolc-tuffite ;
-  rdfs:label "Powell Creek Volc"@en ;
 .
 bcs:PowellCreekVolc-andesite
-  a gsrm:Andesite ;
-  gsoc:isPartOf bcs:bc-andesite ;
+  rdf:type gsrm:Andesite ;
   rdfs:label "andesite lithology in Powell Creek Volcanic"@en ;
+  gsoc:isPartOf bcs:bc-andesite ;
 .
 bcs:PowellCreekVolc-ash_tuff_lapillistone_and_lapilli_tuff
-  a gsrm:Ash_Tuff_Lapillistone_And_Lapilli_Tuff ;
-  gsoc:isPartOf bcs:bc-ash_tuff_lapillistone_and_lapilli_tuff ;
+  rdf:type gsrm:Ash_Tuff_Lapillistone_And_Lapilli_Tuff ;
   rdfs:label "ash_tuff_lapillistone_and_lapilli_tuff lithology in Powell Creek Volcanic"@en ;
+  gsoc:isPartOf bcs:bc-ash_tuff_lapillistone_and_lapilli_tuff ;
 .
 bcs:PowellCreekVolc-fine_grained_igneous_rock
-  a gsrm:Fine_Grained_Igneous_Rock ;
-  gsoc:isPartOf bcs:bc-fine_grained_igneous_rock ;
+  rdf:type gsrm:Fine_Grained_Igneous_Rock ;
   rdfs:label "fine_grained_igneous_rock lithology in Powell Creek Volcanic"@en ;
+  gsoc:isPartOf bcs:bc-fine_grained_igneous_rock ;
 .
 bcs:PowellCreekVolc-pyroclastic_material
-  a gsrm:Pyroclastic_Material ;
-  gsoc:isPartOf bcs:bc-pyroclastic_material ;
+  rdf:type gsrm:Pyroclastic_Material ;
   rdfs:label "pyroclastic_material lithology in Powell Creek Volcanic"@en ;
+  gsoc:isPartOf bcs:bc-pyroclastic_material ;
 .
 bcs:PowellCreekVolc-tuffite
-  a gsrm:Tuffite ;
-  gsoc:isPartOf bcs:bc-tuffite ;
+  rdf:type gsrm:Tuffite ;
   rdfs:label "tuffite lithology in Powell CreekVolc"@en ;
+  gsoc:isPartOf bcs:bc-tuffite ;
 .
 bcs:PurcellFormation
-  a gsgu:Formation ;
-  gsoc:hasConstituent bcs:PurcellFormation-basalt ;
+  rdf:type gsgu:Formation ;
   rdfs:label "Purcell Formation"@en ;
+  gsoc:hasConstituent bcs:PurcellFormation-basalt ;
 .
 bcs:PurcellFormation-basalt
-  a gsrm:Basalt ;
-  gsoc:isPartOf bcs:bc-basalt ;
+  rdf:type gsrm:Basalt ;
   rdfs:label "basalt lithology in Purcell Formation"@en ;
+  gsoc:isPartOf bcs:bc-basalt ;
 .
 bcs:PurcellGroup
-  a gsgu:Group ;
+  rdf:type gsgu:Group ;
   rdfs:label "Purcell Group"@en ;
 .
 bcs:ROshowing
-  a gsgu:Alteration_Unit ;
-  gsoc:hasConstituent bcs:ROshowing-metasomatic_rock ;
+  rdf:type gsgu:Alteration_Unit ;
   rdfs:label "RO showing"@en ;
+  gsoc:hasConstituent bcs:ROshowing-metasomatic_rock ;
 .
 bcs:ROshowing-metasomatic_rock
-  a gsrm:Metasomatic_Rock ;
-  gsoc:isPartOf bcs:bc-metasomatic_rock ;
+  rdf:type gsrm:Metasomatic_Rock ;
   rdfs:label "metasomatic_rock lithology in RO showing"@en ;
+  gsoc:isPartOf bcs:bc-metasomatic_rock ;
 .
 bcs:RelayMtGroup
-  a gsgu:Group ;
-  gsoc:hasConstituent  bcs:RelayMtGroup-clastic_sandstone ;
+  rdf:type gsgu:Group ;
   rdfs:label "Relay Mt. Group"@en ;
+  gsoc:hasConstituent bcs:RelayMtGroup-clastic_sandstone ;
 .
 bcs:RelayMtGroup-clastic_sandstone
-  a gsrm:Clastic_Sandstone ;
-  gsoc:isPartOf bcs:bc-clastic_sandstone ;
+  rdf:type gsrm:Clastic_Sandstone ;
   rdfs:label "clastic_sandstone lithology in RelayMt. Group"@en ;
+  gsoc:isPartOf bcs:bc-clastic_sandstone ;
 .
 bcs:RubyrockIgneouscomplex
-  a gsgu:Suite ;
+  rdf:type gsgu:Suite ;
+  rdfs:label "Rubyrock Igneous complex"@en ;
   gsoc:hasConstituent bcs:RubyrockIgneouscomplex-amphibolite ;
   gsoc:hasConstituent bcs:RubyrockIgneouscomplex-basalt ;
   gsoc:hasConstituent bcs:RubyrockIgneouscomplex-chlorite_actinolite_epidote_metamorphic_rock ;
@@ -1978,77 +1988,77 @@ bcs:RubyrockIgneouscomplex
   gsoc:hasConstituent bcs:RubyrockIgneouscomplex-metamorphic_rock ;
   gsoc:hasConstituent bcs:RubyrockIgneouscomplex-quartzite ;
   gsoc:hasConstituent bcs:RubyrockIgneouscomplex-slate ;
-  rdfs:label "Rubyrock Igneous complex"@en ;
 .
 bcs:RubyrockIgneouscomplex-amphibolite
-  a gsrm:Amphibolite ;
-  gsoc:isPartOf bcs:bc-amphibolite ;
+  rdf:type gsrm:Amphibolite ;
   rdfs:label "amphibolite lithology in Rubyrock Igneous complex"@en ;
+  gsoc:isPartOf bcs:bc-amphibolite ;
 .
 bcs:RubyrockIgneouscomplex-basalt
-  a gsrm:Basalt ;
-  gsoc:isPartOf bcs:bc-basalt ;
+  rdf:type gsrm:Basalt ;
   rdfs:label "basalt lithology in Rubyrock Igneous complex"@en ;
+  gsoc:isPartOf bcs:bc-basalt ;
 .
 bcs:RubyrockIgneouscomplex-chlorite_actinolite_epidote_metamorphic_rock
-  a gsrm:Chlorite_Actinolite_Epidote_Metamorphic_Rock ;
-  gsoc:isPartOf bcs:bc-chlorite_actinolite_epidote_metamorphic_rock ;
+  rdf:type gsrm:Chlorite_Actinolite_Epidote_Metamorphic_Rock ;
   rdfs:label "chlorite_actinolite_epidote_metamorphic_rock lithology in Rubyrock Igneous complex"@en ;
+  gsoc:isPartOf bcs:bc-chlorite_actinolite_epidote_metamorphic_rock ;
 .
 bcs:RubyrockIgneouscomplex-dioritic_rock
-  a gsrm:Dioritic_Rock ;
-  gsoc:isPartOf bcs:bc-dioritic_rock ;
+  rdf:type gsrm:Dioritic_Rock ;
   rdfs:label "dioritic_rock lithology in Rubyrock Igneous complex"@en ;
+  gsoc:isPartOf bcs:bc-dioritic_rock ;
 .
 bcs:RubyrockIgneouscomplex-metamorphic_rock
-  a gsrm:Metamorphic_Rock ;
-  gsoc:isPartOf bcs:bc-metamorphic_rock ;
+  rdf:type gsrm:Metamorphic_Rock ;
   rdfs:label "metamorphic_rock lithology in Rubyrock Igneous complex"@en ;
+  gsoc:isPartOf bcs:bc-metamorphic_rock ;
 .
 bcs:RubyrockIgneouscomplex-quartzite
-  a gsrm:Quartzite ;
-  gsoc:isPartOf bcs:bc-quartzite ;
+  rdf:type gsrm:Quartzite ;
   rdfs:label "quartzite lithology in Rubyrock Igneous complex"@en ;
+  gsoc:isPartOf bcs:bc-quartzite ;
 .
 bcs:RubyrockIgneouscomplex-slate
-  a gsrm:Slate ;
-  gsoc:isPartOf bcs:bc-slate ;
+  rdf:type gsrm:Slate ;
   rdfs:label "slate lithology in Rubyrock Igneous complex"@en ;
+  gsoc:isPartOf bcs:bc-slate ;
 .
 bcs:SheratonPhs
-  a gsgu:Suite ;
+  rdf:type gsgu:Suite ;
+  rdfs:label "Sheraton Phs"@en ;
   gsoc:hasConstituent bcs:SheratonPhs-dioritic_rock ;
   gsoc:hasConstituent bcs:SheratonPhs-granodiorite ;
   gsoc:hasConstituent bcs:SheratonPhs-monzodioritic_rock ;
-  rdfs:label "Sheraton Phs"@en ;
 .
 bcs:SheratonPhs-dioritic_rock
-  a gsrm:Dioritic_Rock ;
-  gsoc:isPartOf bcs:bc-dioritic_rock ;
+  rdf:type gsrm:Dioritic_Rock ;
   rdfs:label "dioritic_rock lithology in Sheraton Phs"@en ;
+  gsoc:isPartOf bcs:bc-dioritic_rock ;
 .
 bcs:SheratonPhs-granodiorite
-  a gsrm:Granodiorite ;
-  gsoc:isPartOf bcs:bc-granodiorite ;
+  rdf:type gsrm:Granodiorite ;
   rdfs:label "granodiorite lithology in Sheraton Phs"@en ;
+  gsoc:isPartOf bcs:bc-granodiorite ;
 .
 bcs:SheratonPhs-monzodioritic_rock
-  a gsrm:Monzodioritic_Rock ;
-  gsoc:isPartOf bcs:bc-monzodioritic_rock ;
+  rdf:type gsrm:Monzodioritic_Rock ;
   rdfs:label "monzodioritic_rock lithology in Sheraton Phs"@en ;
+  gsoc:isPartOf bcs:bc-monzodioritic_rock ;
 .
 bcs:Shuswapgneiss
-  a gsgu:Formation ;
-  gsoc:hasConstituent bcs:Shuswapgneiss-metasomatic_rock ;
+  rdf:type gsgu:Formation ;
   rdfs:label "Shuswap gneiss"@en ;
+  gsoc:hasConstituent bcs:Shuswapgneiss-metasomatic_rock ;
 .
 bcs:Shuswapgneiss-metasomatic_rock
-  a gsrm:Metasomatic_Rock ;
-  gsoc:isPartOf bcs:bc-metasomatic_rock ;
+  rdf:type gsrm:Metasomatic_Rock ;
   rdfs:label "metasomatic_rock lithology in Shuswap gneiss"@en ;
+  gsoc:isPartOf bcs:bc-metasomatic_rock ;
 .
 bcs:Silverquick-PowellCreek
-  a gsgu:Formation ;
+  rdf:type gsgu:Formation ;
+  rdfs:label "Silverquick/Powell Creek"@en ;
   gsoc:hasConstituent bcs:Silverquick-PowellCreek-andesite ;
   gsoc:hasConstituent bcs:Silverquick-PowellCreek-clastic_conglomerate ;
   gsoc:hasConstituent bcs:Silverquick-PowellCreek-clastic_sandstone ;
@@ -2057,144 +2067,141 @@ bcs:Silverquick-PowellCreek
   gsoc:hasConstituent bcs:Silverquick-PowellCreek-rock ;
   gsoc:hasConstituent bcs:Silverquick-PowellCreek-siltstone ;
   gsoc:hasConstituent bcs:Silverquick-PowellCreek-tuffite ;
-  rdfs:label "Silverquick/Powell Creek"@en ;
 .
 bcs:Silverquick-PowellCreek-andesite
-  a gsrm:Andesite ;
-  gsoc:isPartOf bcs:bc-andesite ;
+  rdf:type gsrm:Andesite ;
   rdfs:label "andesite lithology in Silverquick/Powell Creek"@en ;
+  gsoc:isPartOf bcs:bc-andesite ;
 .
 bcs:Silverquick-PowellCreek-clastic_conglomerate
-  a gsrm:Clastic_Conglomerate ;
-  gsoc:isPartOf bcs:bc-clastic_conglomerate ;
+  rdf:type gsrm:Clastic_Conglomerate ;
   rdfs:label "clastic_conglomerate lithology in Silverquick/Powell Creek"@en ;
+  gsoc:isPartOf bcs:bc-clastic_conglomerate ;
 .
 bcs:Silverquick-PowellCreek-clastic_sandstone
-  a gsrm:Clastic_Sandstone ;
-  gsoc:isPartOf bcs:bc-clastic_sandstone ;
+  rdf:type gsrm:Clastic_Sandstone ;
   rdfs:label "clastic_sandstone lithology in Silverquick/Powell Creek"@en ;
+  gsoc:isPartOf bcs:bc-clastic_sandstone ;
 .
 bcs:Silverquick-PowellCreek-dioritic_rock
-  a gsrm:Dioritic_Rock ;
-  gsoc:isPartOf bcs:bc-dioritic_rock ;
+  rdf:type gsrm:Dioritic_Rock ;
   rdfs:label "dioritic_rock lithology in Silverquick/Powell Creek"@en ;
+  gsoc:isPartOf bcs:bc-dioritic_rock ;
 .
 bcs:Silverquick-PowellCreek-pyroclastic_material
-  a gsrm:Pyroclastic_Material ;
-  gsoc:isPartOf bcs:bc-pyroclastic_material ;
+  rdf:type gsrm:Pyroclastic_Material ;
   rdfs:label "pyroclastic_material lithology in Silverquick/Powell Creek"@en ;
+  gsoc:isPartOf bcs:bc-pyroclastic_material ;
 .
 bcs:Silverquick-PowellCreek-rock
-  a gsrm:Rock ;
-  gsoc:isPartOf bcs:bc-rock ;
+  rdf:type gsrm:Rock ;
   rdfs:label "rock lithology in Silverquick/Powell Creek"@en ;
+  gsoc:isPartOf bcs:bc-rock ;
 .
 bcs:Silverquick-PowellCreek-siltstone
-  a gsrm:Siltstone ;
-  gsoc:isPartOf bcs:bc-siltstone ;
+  rdf:type gsrm:Siltstone ;
   rdfs:label "siltstone lithology in Silverquick/Powell Creek"@en ;
+  gsoc:isPartOf bcs:bc-siltstone ;
 .
 bcs:Silverquick-PowellCreek-tuffite
-  a gsrm:Tuffite ;
-  gsoc:isPartOf bcs:bc-tuffite ;
+  rdf:type gsrm:Tuffite ;
   rdfs:label "tuffite lithology in Silverquick/Powell Creek"@en ;
+  gsoc:isPartOf bcs:bc-tuffite ;
 .
 bcs:SkeenaGroup
-  a gsgu:Group ;
+  rdf:type gsgu:Group ;
   rdfs:label "Skeena Group"@en ;
 .
 bcs:Skeenasediments
-  a gsgu:Formation ;
-  gsoc:hasConstituent bcs:Skeenasediments-clastic_sandstone ;
+  rdf:type gsgu:Formation ;
   rdfs:label "Skeena sediments"@en ;
+  gsoc:hasConstituent bcs:Skeenasediments-clastic_sandstone ;
 .
 bcs:Skeenasediments-clastic_sandstone
-  a gsrm:Clastic_Sandstone ;
-  gsoc:isPartOf bcs:bc-clastic_sandstone ;
+  rdf:type gsrm:Clastic_Sandstone ;
   rdfs:label "clastic_sandstone lithology in Skeena sediments"@en ;
+  gsoc:isPartOf bcs:bc-clastic_sandstone ;
 .
 bcs:SkinsLakePl
-  a gsgu:Formation ;
+  rdf:type gsgu:Formation ;
+  rdfs:label "Skins Lake Pl"@en ;
   gsoc:hasConstituent bcs:SkinsLakePl-andesite ;
   gsoc:hasConstituent bcs:SkinsLakePl-dacite ;
   gsoc:hasConstituent bcs:SkinsLakePl-porphyry ;
-  rdfs:label "Skins Lake Pl"@en ;
 .
 bcs:SkinsLakePl-andesite
-  a gsrm:Andesite ;
-  gsoc:isPartOf bcs:bc-andesite ;
+  rdf:type gsrm:Andesite ;
   rdfs:label "andesite lithology in Skins Lake Pl"@en ;
+  gsoc:isPartOf bcs:bc-andesite ;
 .
 bcs:SkinsLakePl-dacite
-  a gsrm:Dacite ;
-  gsoc:isPartOf bcs:bc-dacite ;
+  rdf:type gsrm:Dacite ;
   rdfs:label "dacite lithology in Skins Lake Pl"@en ;
+  gsoc:isPartOf bcs:bc-dacite ;
 .
 bcs:SkinsLakePl-porphyry
-  a gsrm:Porphyry ;
-  gsoc:isPartOf bcs:bc-porphyry ;
+  rdf:type gsrm:Porphyry ;
   rdfs:label "porphyry lithology in Skins Lake Pl"@en ;
+  gsoc:isPartOf bcs:bc-porphyry ;
 .
 bcs:SlugLakePhs
-  a gsgu:Suite ;
+  rdf:type gsgu:Suite ;
+  rdfs:label "Slug Lake Phs"@en ;
   gsoc:hasConstituent bcs:SlugLakePhs-dioritic_rock ;
   gsoc:hasConstituent bcs:SlugLakePhs-granitoid ;
   gsoc:hasConstituent bcs:SlugLakePhs-granodiorite ;
-  rdfs:label "Slug Lake Phs"@en ;
 .
 bcs:SlugLakePhs-dioritic_rock
-  a gsrm:Dioritic_Rock ;
-  gsoc:isPartOf bcs:bc-dioritic_rock ;
+  rdf:type gsrm:Dioritic_Rock ;
   rdfs:label "dioritic_rock lithology in Slug Lake Phs"@en ;
+  gsoc:isPartOf bcs:bc-dioritic_rock ;
 .
 bcs:SlugLakePhs-granitoid
-  a gsrm:Granitoid ;
-  gsoc:isPartOf bcs:bc-granitoid ;
+  rdf:type gsrm:Granitoid ;
   rdfs:label "granitoid lithology in Slug Lake Phs"@en ;
+  gsoc:isPartOf bcs:bc-granitoid ;
 .
 bcs:SlugLakePhs-granodiorite
-  a gsrm:Granodiorite ;
-  gsoc:isPartOf bcs:bc-granodiorite ;
+  rdf:type gsrm:Granodiorite ;
   rdfs:label "granodiorite lithology in Slug Lake Phs"@en ;
+  gsoc:isPartOf bcs:bc-granodiorite ;
 .
 bcs:SmithersFormation
-  a gsgu:Formation ;
+  rdf:type gsgu:Formation ;
+  rdfs:label "Smithers Formation"@en ;
   gsoc:hasConstituent bcs:SmithersFormation-clastic_sandstone ;
   gsoc:isPartOf bcs:HazeltonGroup ;
-  rdfs:label "Smithers Formation"@en ;
 .
 bcs:SmithersFormation-clastic_sandstone
-  a gsrm:Clastic_Sandstone ;
-  gsoc:isPartOf bcs:bc-clastic_sandstone ;
+  rdf:type gsrm:Clastic_Sandstone ;
   rdfs:label "clastic_sandstone lithology in Smithers Formation of Hazelton Group"@en ;
+  gsoc:isPartOf bcs:bc-clastic_sandstone ;
 .
 bcs:SnowshoeGroup
-  a gsgu:Group ;
-  gsoc:hasConstituent  bcs:SnowshoeGroup-metamorphic_rock ;
-     ;
-  gsoc:hasConstituent  bcs:SnowshoeGroup-quartzite ;
-     ;
-  gsoc:hasConstituent  bcs:SnowshoeGroup-schist ;
-     ;
+  rdf:type gsgu:Group ;
   rdfs:label "Snowshoe Group"@en ;
+  gsoc:hasConstituent bcs:SnowshoeGroup-metamorphic_rock ;
+  gsoc:hasConstituent bcs:SnowshoeGroup-quartzite ;
+  gsoc:hasConstituent bcs:SnowshoeGroup-schist ;
 .
 bcs:SnowshoeGroup-metamorphic_rock
-  a gsrm:Metamorphic_Rock ;
-  gsoc:isPartOf bcs:bc-metamorphic_rock ;
+  rdf:type gsrm:Metamorphic_Rock ;
   rdfs:label "metamorphic_rock lithology in Snowshoe Group"@en ;
+  gsoc:isPartOf bcs:bc-metamorphic_rock ;
 .
 bcs:SnowshoeGroup-quartzite
-  a gsrm:Quartzite ;
-  gsoc:isPartOf bcs:bc-quartzite ;
+  rdf:type gsrm:Quartzite ;
   rdfs:label "quartzite lithology in Snowshoe Group"@en ;
+  gsoc:isPartOf bcs:bc-quartzite ;
 .
 bcs:SnowshoeGroup-schist
-  a gsrm:Schist ;
-  gsoc:isPartOf bcs:bc-schist ;
+  rdf:type gsrm:Schist ;
   rdfs:label "schist lithology in Snowshoe Group"@en ;
+  gsoc:isPartOf bcs:bc-schist ;
 .
 bcs:SowcheaSucc
-  a gsgu:Formation ;
+  rdf:type gsgu:Formation ;
+  rdfs:label "Sowchea Succ"@en ;
   gsoc:hasConstituent bcs:SowcheaSucc-amphibolite ;
   gsoc:hasConstituent bcs:SowcheaSucc-argillite ;
   gsoc:hasConstituent bcs:SowcheaSucc-basalt ;
@@ -2210,200 +2217,193 @@ bcs:SowcheaSucc
   gsoc:hasConstituent bcs:SowcheaSucc-serpentinite ;
   gsoc:hasConstituent bcs:SowcheaSucc-siltstone ;
   gsoc:hasConstituent bcs:SowcheaSucc-slate ;
-  rdfs:label "Sowchea Succ"@en ;
 .
 bcs:SowcheaSucc-amphibolite
-  a gsrm:Amphibolite ;
-  gsoc:isPartOf bcs:bc-amphibolite ;
+  rdf:type gsrm:Amphibolite ;
   rdfs:label "amphibolite lithology in Sowchea Succ"@en ;
+  gsoc:isPartOf bcs:bc-amphibolite ;
 .
 bcs:SowcheaSucc-argillite
-  a gsrm:Argillite ;
-  gsoc:isPartOf bcs:bc-argillite ;
+  rdf:type gsrm:Argillite ;
   rdfs:label "argillite lithology in Sowchea Succ"@en ;
+  gsoc:isPartOf bcs:bc-argillite ;
 .
 bcs:SowcheaSucc-basalt
-  a gsrm:Basalt ;
-  gsoc:isPartOf bcs:bc-basalt ;
+  rdf:type gsrm:Basalt ;
   rdfs:label "basalt lithology in Sowchea Succ"@en ;
+  gsoc:isPartOf bcs:bc-basalt ;
 .
 bcs:SowcheaSucc-chlorite_actinolite_epidote_metamorphic_rock
-  a gsrm:Chlorite_Actinolite_Epidote_Metamorphic_Rock ;
-  gsoc:isPartOf bcs:bc-chlorite_actinolite_epidote_metamorphic_rock ;
+  rdf:type gsrm:Chlorite_Actinolite_Epidote_Metamorphic_Rock ;
   rdfs:label "chlorite_actinolite_epidote_metamorphic_rock lithology in Sowchea Succ"@en ;
+  gsoc:isPartOf bcs:bc-chlorite_actinolite_epidote_metamorphic_rock ;
 .
 bcs:SowcheaSucc-dioritic_rock
-  a gsrm:Dioritic_Rock ;
-  gsoc:isPartOf bcs:bc-dioritic_rock ;
+  rdf:type gsrm:Dioritic_Rock ;
   rdfs:label "dioritic_rock lithology in Sowchea Succ"@en ;
+  gsoc:isPartOf bcs:bc-dioritic_rock ;
 .
 bcs:SowcheaSucc-granodiorite
-  a gsrm:Granodiorite ;
-  gsoc:isPartOf bcs:bc-granodiorite ;
+  rdf:type gsrm:Granodiorite ;
   rdfs:label "granodiorite lithology in Sowchea Succ"@en ;
+  gsoc:isPartOf bcs:bc-granodiorite ;
 .
 bcs:SowcheaSucc-limestone
-  a gsrm:Limestone ;
-  gsoc:isPartOf bcs:bc-limestone ;
+  rdf:type gsrm:Limestone ;
   rdfs:label "limestone lithology in Sowchea Succ"@en ;
+  gsoc:isPartOf bcs:bc-limestone ;
 .
 bcs:SowcheaSucc-marble
-  a gsrm:Marble ;
-  gsoc:isPartOf bcs:bc-marble ;
+  rdf:type gsrm:Marble ;
   rdfs:label "marble lithology in Sowchea Succ"@en ;
+  gsoc:isPartOf bcs:bc-marble ;
 .
 bcs:SowcheaSucc-metamorphic_rock
-  a gsrm:Metamorphic_Rock ;
-  gsoc:isPartOf bcs:bc-metamorphic_rock ;
+  rdf:type gsrm:Metamorphic_Rock ;
   rdfs:label "metamorphic_rock lithology in Sowchea Succ"@en ;
+  gsoc:isPartOf bcs:bc-metamorphic_rock ;
 .
 bcs:SowcheaSucc-non_clastic_siliceous_sedimentary_rock
-  a gsrm:Non_Clastic_Siliceous_Sedimentary_Rock ;
-  gsoc:isPartOf bcs:bc-non_clastic_siliceous_sedimentary_rock ;
+  rdf:type gsrm:Non_Clastic_Siliceous_Sedimentary_Rock ;
   rdfs:label "non_clastic_siliceous_sedimentary_rock lithology in Sowchea Succ"@en ;
+  gsoc:isPartOf bcs:bc-non_clastic_siliceous_sedimentary_rock ;
 .
 bcs:SowcheaSucc-phyllite
-  a gsrm:Phyllite ;
-  gsoc:isPartOf bcs:bc-phyllite ;
+  rdf:type gsrm:Phyllite ;
   rdfs:label "phyllite lithology in Sowchea Succ"@en ;
+  gsoc:isPartOf bcs:bc-phyllite ;
 .
 bcs:SowcheaSucc-quartzite
-  a gsrm:Quartzite ;
-  gsoc:isPartOf bcs:bc-quartzite ;
+  rdf:type gsrm:Quartzite ;
   rdfs:label "quartzite lithology in Sowchea Succ"@en ;
+  gsoc:isPartOf bcs:bc-quartzite ;
 .
 bcs:SowcheaSucc-serpentinite
-  a gsrm:Serpentinite ;
-  gsoc:isPartOf bcs:bc-serpentinite ;
+  rdf:type gsrm:Serpentinite ;
   rdfs:label "serpentinite lithology in Sowchea Succ"@en ;
+  gsoc:isPartOf bcs:bc-serpentinite ;
 .
 bcs:SowcheaSucc-siltstone
-  a gsrm:Siltstone ;
-  gsoc:isPartOf bcs:bc-siltstone ;
+  rdf:type gsrm:Siltstone ;
   rdfs:label "siltstone lithology in Sowchea Succ"@en ;
+  gsoc:isPartOf bcs:bc-siltstone ;
 .
 bcs:SowcheaSucc-slate
-  a gsrm:Slate ;
-  gsoc:isPartOf bcs:bc-slate ;
+  rdf:type gsrm:Slate ;
   rdfs:label "slate lithology in Sowchea Succ"@en ;
+  gsoc:isPartOf bcs:bc-slate ;
 .
 bcs:SpencesBridgeGroup
-  a gsgu:Group ;
-  gsoc:hasConstituent  bcs:SpencesBridgeGroup-andesite ;
-     ;
-  gsoc:hasConstituent  bcs:SpencesBridgeGroup-ash_tuff_lapillistone_and_lapilli_tuff ;
-     ;
-  gsoc:hasConstituent  bcs:SpencesBridgeGroup-basalt ;
-     ;
-  gsoc:hasConstituent  bcs:SpencesBridgeGroup-clastic_sandstone ;
-     ;
-  gsoc:hasConstituent  bcs:SpencesBridgeGroup-fine_grained_igneous_rock ;
-     ;
-  gsoc:hasConstituent  bcs:SpencesBridgeGroup-pyroclastic_material ;
-     ;
-  gsoc:hasConstituent  bcs:SpencesBridgeGroup-tuffite ;
-     ;
+  rdf:type gsgu:Group ;
   rdfs:label "Spences Bridge Group"@en ;
+  gsoc:hasConstituent bcs:SpencesBridgeGroup-andesite ;
+  gsoc:hasConstituent bcs:SpencesBridgeGroup-ash_tuff_lapillistone_and_lapilli_tuff ;
+  gsoc:hasConstituent bcs:SpencesBridgeGroup-basalt ;
+  gsoc:hasConstituent bcs:SpencesBridgeGroup-clastic_sandstone ;
+  gsoc:hasConstituent bcs:SpencesBridgeGroup-fine_grained_igneous_rock ;
+  gsoc:hasConstituent bcs:SpencesBridgeGroup-pyroclastic_material ;
+  gsoc:hasConstituent bcs:SpencesBridgeGroup-tuffite ;
 .
 bcs:SpencesBridgeGroup-andesite
-  a gsrm:Andesite ;
-  gsoc:isPartOf bcs:bc-andesite ;
+  rdf:type gsrm:Andesite ;
   rdfs:label "andesite lithology in Spences Bridge Group"@en ;
+  gsoc:isPartOf bcs:bc-andesite ;
 .
 bcs:SpencesBridgeGroup-ash_tuff_lapillistone_and_lapilli_tuff
-  a gsrm:Ash_Tuff_Lapillistone_And_Lapilli_Tuff ;
-  gsoc:isPartOf bcs:bc-ash_tuff_lapillistone_and_lapilli_tuff ;
+  rdf:type gsrm:Ash_Tuff_Lapillistone_And_Lapilli_Tuff ;
   rdfs:label "ash_tuff_lapillistone_and_lapilli_tuff lithology in Spences Bridge Group"@en ;
+  gsoc:isPartOf bcs:bc-ash_tuff_lapillistone_and_lapilli_tuff ;
 .
 bcs:SpencesBridgeGroup-basalt
-  a gsrm:Basalt ;
-  gsoc:isPartOf bcs:bc-basalt ;
+  rdf:type gsrm:Basalt ;
   rdfs:label "basalt lithology in Spences Bridge Group"@en ;
+  gsoc:isPartOf bcs:bc-basalt ;
 .
 bcs:SpencesBridgeGroup-clastic_sandstone
-  a gsrm:Clastic_Sandstone ;
-  gsoc:isPartOf bcs:bc-clastic_sandstone ;
+  rdf:type gsrm:Clastic_Sandstone ;
   rdfs:label "clastic_sandstone lithology in Spences Bridge Group"@en ;
+  gsoc:isPartOf bcs:bc-clastic_sandstone ;
 .
 bcs:SpencesBridgeGroup-fine_grained_igneous_rock
-  a gsrm:Fine_Grained_Igneous_Rock ;
-  gsoc:isPartOf bcs:bc-fine_grained_igneous_rock ;
+  rdf:type gsrm:Fine_Grained_Igneous_Rock ;
   rdfs:label "fine_grained_igneous_rock lithology in Spences Bridge Group"@en ;
+  gsoc:isPartOf bcs:bc-fine_grained_igneous_rock ;
 .
 bcs:SpencesBridgeGroup-pyroclastic_material
-  a gsrm:Pyroclastic_Material ;
-  gsoc:isPartOf bcs:bc-pyroclastic_material ;
+  rdf:type gsrm:Pyroclastic_Material ;
   rdfs:label "pyroclastic_material lithology in Spences Bridge Group"@en ;
+  gsoc:isPartOf bcs:bc-pyroclastic_material ;
 .
 bcs:SpencesBridgeGroup-tuffite
-  a gsrm:Tuffite ;
-  gsoc:isPartOf bcs:bc-tuffite ;
+  rdf:type gsrm:Tuffite ;
   rdfs:label "tuffite lithology in Spences Bridge Group"@en ;
+  gsoc:isPartOf bcs:bc-tuffite ;
 .
 bcs:StagLakePlutSuite
-  a gsgu:Formation ;
+  rdf:type gsgu:Formation ;
+  rdfs:label "Stag Lake Plut Suite"@en ;
   gsoc:hasConstituent bcs:StagLakePlutSuite-dacite ;
   gsoc:hasConstituent bcs:StagLakePlutSuite-dioritic_rock ;
   gsoc:hasConstituent bcs:StagLakePlutSuite-gabbroic_rock ;
   gsoc:hasConstituent bcs:StagLakePlutSuite-rhyolitoid ;
-  rdfs:label "Stag Lake Plut Suite"@en ;
 .
 bcs:StagLakePlutSuite-dacite
-  a gsrm:Dacite ;
-  gsoc:isPartOf bcs:bc-dacite ;
+  rdf:type gsrm:Dacite ;
   rdfs:label "dacite lithology in Stag Lake Plut Suite"@en ;
+  gsoc:isPartOf bcs:bc-dacite ;
 .
 bcs:StagLakePlutSuite-dioritic_rock
-  a gsrm:Dioritic_Rock ;
-  gsoc:isPartOf bcs:bc-dioritic_rock ;
+  rdf:type gsrm:Dioritic_Rock ;
   rdfs:label "dioritic_rock lithology in Stag Lake Plut Suite"@en ;
+  gsoc:isPartOf bcs:bc-dioritic_rock ;
 .
 bcs:StagLakePlutSuite-gabbroic_rock
-  a gsrm:Gabbroic_Rock ;
-  gsoc:isPartOf bcs:bc-gabbroic_rock ;
+  rdf:type gsrm:Gabbroic_Rock ;
   rdfs:label "gabbroic_rock lithology in Stag Lake Plut Suite"@en ;
+  gsoc:isPartOf bcs:bc-gabbroic_rock ;
 .
 bcs:StagLakePlutSuite-rhyolitoid
-  a gsrm:Rhyolitoid ;
-  gsoc:isPartOf bcs:bc-rhyolitoid ;
+  rdf:type gsrm:Rhyolitoid ;
   rdfs:label "rhyolitoid lithology in Stag Lake Plut Suite"@en ;
+  gsoc:isPartOf bcs:bc-rhyolitoid ;
 .
 bcs:StellakoPhs
-  a gsgu:Suite ;
+  rdf:type gsgu:Suite ;
+  rdfs:label "Stellako Phs"@en ;
   gsoc:hasConstituent bcs:StellakoPhs-dioritic_rock ;
   gsoc:hasConstituent bcs:StellakoPhs-granitoid ;
   gsoc:hasConstituent bcs:StellakoPhs-granodiorite ;
   gsoc:hasConstituent bcs:StellakoPhs-monzodioritic_rock ;
   gsoc:hasConstituent bcs:StellakoPhs-monzonitic_rock ;
-  rdfs:label "Stellako Phs"@en ;
 .
 bcs:StellakoPhs-dioritic_rock
-  a gsrm:Dioritic_Rock ;
-  gsoc:isPartOf bcs:bc-dioritic_rock ;
+  rdf:type gsrm:Dioritic_Rock ;
   rdfs:label "dioritic_rock lithology in Stellako Phs"@en ;
+  gsoc:isPartOf bcs:bc-dioritic_rock ;
 .
 bcs:StellakoPhs-granitoid
-  a gsrm:Granitoid ;
-  gsoc:isPartOf bcs:bc-granitoid ;
+  rdf:type gsrm:Granitoid ;
   rdfs:label "granitoid lithology in Stellako Phs"@en ;
+  gsoc:isPartOf bcs:bc-granitoid ;
 .
 bcs:StellakoPhs-granodiorite
-  a gsrm:Granodiorite ;
-  gsoc:isPartOf bcs:bc-granodiorite ;
+  rdf:type gsrm:Granodiorite ;
   rdfs:label "granodiorite lithology in Stellako Phs"@en ;
+  gsoc:isPartOf bcs:bc-granodiorite ;
 .
 bcs:StellakoPhs-monzodioritic_rock
-  a gsrm:Monzodioritic_Rock ;
-  gsoc:isPartOf bcs:bc-monzodioritic_rock ;
+  rdf:type gsrm:Monzodioritic_Rock ;
   rdfs:label "monzodioritic_rock lithology in Stellako Phs"@en ;
+  gsoc:isPartOf bcs:bc-monzodioritic_rock ;
 .
 bcs:StellakoPhs-monzonitic_rock
-  a gsrm:Monzonitic_Rock ;
-  gsoc:isPartOf bcs:bc-monzonitic_rock ;
+  rdf:type gsrm:Monzonitic_Rock ;
   rdfs:label "monzonitic_rock lithology in Stellako Phs"@en ;
+  gsoc:isPartOf bcs:bc-monzonitic_rock ;
 .
 bcs:SternCkPhs
-  a gsgu:Suite ;
+  rdf:type gsgu:Suite ;
+  rdfs:label "Stern Ck Phs"@en ;
   gsoc:hasConstituent bcs:SternCkPhs-amphibolite ;
   gsoc:hasConstituent bcs:SternCkPhs-andesite ;
   gsoc:hasConstituent bcs:SternCkPhs-basalt ;
@@ -2412,192 +2412,190 @@ bcs:SternCkPhs
   gsoc:hasConstituent bcs:SternCkPhs-granitoid ;
   gsoc:hasConstituent bcs:SternCkPhs-granodiorite ;
   gsoc:hasConstituent bcs:SternCkPhs-syenitic_rock ;
-  rdfs:label "Stern Ck Phs"@en ;
 .
 bcs:SternCkPhs-amphibolite
-  a gsrm:Amphibolite ;
-  gsoc:isPartOf bcs:bc-amphibolite ;
+  rdf:type gsrm:Amphibolite ;
   rdfs:label "amphibolite lithology in SternCk Phs"@en ;
+  gsoc:isPartOf bcs:bc-amphibolite ;
 .
 bcs:SternCkPhs-andesite
-  a gsrm:Andesite ;
-  gsoc:isPartOf bcs:bc-andesite ;
+  rdf:type gsrm:Andesite ;
   rdfs:label "andesite lithology in SternCk Phs"@en ;
+  gsoc:isPartOf bcs:bc-andesite ;
 .
 bcs:SternCkPhs-basalt
-  a gsrm:Basalt ;
-  gsoc:isPartOf bcs:bc-basalt ;
+  rdf:type gsrm:Basalt ;
   rdfs:label "basalt lithology in SternCk Phs"@en ;
+  gsoc:isPartOf bcs:bc-basalt ;
 .
 bcs:SternCkPhs-dacite
-  a gsrm:Dacite ;
-  gsoc:isPartOf bcs:bc-dacite ;
+  rdf:type gsrm:Dacite ;
   rdfs:label "dacite lithology in SternCk Phs"@en ;
+  gsoc:isPartOf bcs:bc-dacite ;
 .
 bcs:SternCkPhs-dioritic_rock
-  a gsrm:Dioritic_Rock ;
-  gsoc:isPartOf bcs:bc-dioritic_rock ;
+  rdf:type gsrm:Dioritic_Rock ;
   rdfs:label "dioritic_rock lithology in SternCk Phs"@en ;
+  gsoc:isPartOf bcs:bc-dioritic_rock ;
 .
 bcs:SternCkPhs-granitoid
-  a gsrm:Granitoid ;
-  gsoc:isPartOf bcs:bc-granitoid ;
+  rdf:type gsrm:Granitoid ;
   rdfs:label "granitoid lithology in SternCk Phs"@en ;
+  gsoc:isPartOf bcs:bc-granitoid ;
 .
 bcs:SternCkPhs-granodiorite
-  a gsrm:Granodiorite ;
-  gsoc:isPartOf bcs:bc-granodiorite ;
+  rdf:type gsrm:Granodiorite ;
   rdfs:label "granodiorite lithology in SternCk Phs"@en ;
+  gsoc:isPartOf bcs:bc-granodiorite ;
 .
 bcs:SternCkPhs-syenitic_rock
-  a gsrm:Syenitic_Rock ;
-  gsoc:isPartOf bcs:bc-syenitic_rock ;
+  rdf:type gsrm:Syenitic_Rock ;
   rdfs:label "syenitic_rock lithology in SternCk Phs"@en ;
+  gsoc:isPartOf bcs:bc-syenitic_rock ;
 .
 bcs:Stikine
-  a gsgu:Formation ;
-  gsoc:hasConstituent bcs:Stikine-limestone ;
+  rdf:type gsgu:Formation ;
   rdfs:label "Stikine"@en ;
+  gsoc:hasConstituent bcs:Stikine-limestone ;
 .
 bcs:Stikine-limestone
-  a gsrm:Limestone ;
-  gsoc:isPartOf bcs:bc-limestone ;
+  rdf:type gsrm:Limestone ;
   rdfs:label "limestone lithology in Stikine"@en ;
+  gsoc:isPartOf bcs:bc-limestone ;
 .
 bcs:StuhiniGroup
-  a gsgu:Group ;
-  gsoc:hasConstituent  bcs:StuhiniGroup-clastic_sedimentary_rock ;
-     ;
+  rdf:type gsgu:Group ;
   rdfs:label "Stuhini Group"@en ;
+  gsoc:hasConstituent bcs:StuhiniGroup-clastic_sedimentary_rock ;
 .
 bcs:StuhiniGroup-clastic_sedimentary_rock
-  a gsrm:Clastic_Sedimentary_Rock ;
-  gsoc:isPartOf bcs:bc-clastic_sedimentary_rock ;
+  rdf:type gsrm:Clastic_Sedimentary_Rock ;
   rdfs:label "clastic_sedimentary_rock lithology in Stuhini Group"@en ;
+  gsoc:isPartOf bcs:bc-clastic_sedimentary_rock ;
 .
 bcs:SugarloafPhs
-  a gsgu:Suite ;
+  rdf:type gsgu:Suite ;
+  rdfs:label "Sugarloaf Phs"@en ;
   gsoc:hasConstituent bcs:SugarloafPhs-basalt ;
   gsoc:hasConstituent bcs:SugarloafPhs-granitoid ;
-  rdfs:label "Sugarloaf Phs"@en ;
 .
 bcs:SugarloafPhs-basalt
-  a gsrm:Basalt ;
-  gsoc:isPartOf bcs:bc-basalt ;
+  rdf:type gsrm:Basalt ;
   rdfs:label "basalt lithology in Sugarloaf Phs"@en ;
+  gsoc:isPartOf bcs:bc-basalt ;
 .
 bcs:SugarloafPhs-granitoid
-  a gsrm:Granitoid ;
-  gsoc:isPartOf bcs:bc-granitoid ;
+  rdf:type gsrm:Granitoid ;
   rdfs:label "granitoid lithology in Sugarloaf Phs"@en ;
+  gsoc:isPartOf bcs:bc-granitoid ;
 .
 bcs:TaklaGroup
-  a gsgu:Group ;
-  gsoc:hasConstituent  bcs:TaklaGroup-marble ;
-     ;
+  rdf:type gsgu:Group ;
   rdfs:label "Takla Group"@en ;
+  gsoc:hasConstituent bcs:TaklaGroup-marble ;
 .
 bcs:TaklaGroup-marble
-  a gsrm:Marble ;
-  gsoc:isPartOf bcs:bc-marble ;
+  rdf:type gsrm:Marble ;
   rdfs:label "marble lithology in Takla Group"@en ;
+  gsoc:isPartOf bcs:bc-marble ;
 .
 bcs:TakomkaneBatholith
-  a gsgu:Formation ;
+  rdf:type gsgu:Formation ;
+  rdfs:label "Takomkane Batholith"@en ;
   gsoc:hasConstituent bcs:TakomkaneBatholith-dioritic_rock ;
   gsoc:hasConstituent bcs:TakomkaneBatholith-granitoid ;
   gsoc:hasConstituent bcs:TakomkaneBatholith-granodiorite ;
   gsoc:hasConstituent bcs:TakomkaneBatholith-monzodioritic_rock ;
   gsoc:hasConstituent bcs:TakomkaneBatholith-tonalite ;
-  rdfs:label "Takomkane Batholith"@en ;
 .
 bcs:TakomkaneBatholith-dioritic_rock
-  a gsrm:Dioritic_Rock ;
-  gsoc:isPartOf bcs:bc-dioritic_rock ;
+  rdf:type gsrm:Dioritic_Rock ;
   rdfs:label "dioritic_rock lithology in Takomkane Batholith"@en ;
+  gsoc:isPartOf bcs:bc-dioritic_rock ;
 .
 bcs:TakomkaneBatholith-granitoid
-  a gsrm:Granitoid ;
-  gsoc:isPartOf bcs:bc-granitoid ;
+  rdf:type gsrm:Granitoid ;
   rdfs:label "granitoid lithology in Takomkane Batholith"@en ;
+  gsoc:isPartOf bcs:bc-granitoid ;
 .
 bcs:TakomkaneBatholith-granodiorite
-  a gsrm:Granodiorite ;
-  gsoc:isPartOf bcs:bc-granodiorite ;
+  rdf:type gsrm:Granodiorite ;
   rdfs:label "granodiorite lithology in Takomkane Batholith"@en ;
+  gsoc:isPartOf bcs:bc-granodiorite ;
 .
 bcs:TakomkaneBatholith-monzodioritic_rock
-  a gsrm:Monzodioritic_Rock ;
-  gsoc:isPartOf bcs:bc-monzodioritic_rock ;
+  rdf:type gsrm:Monzodioritic_Rock ;
   rdfs:label "monzodioritic_rock lithology in Takomkane Batholith"@en ;
+  gsoc:isPartOf bcs:bc-monzodioritic_rock ;
 .
 bcs:TakomkaneBatholith-tonalite
-  a gsrm:Tonalite ;
-  gsoc:isPartOf bcs:bc-tonalite ;
+  rdf:type gsrm:Tonalite ;
   rdfs:label "tonalite lithology in Takomkane Batholith"@en ;
+  gsoc:isPartOf bcs:bc-tonalite ;
 .
 bcs:TaltapinMMcomplex
-  a gsgu:Complex ;
+  rdf:type gsgu:Complex ;
+  rdfs:label "Taltapin MM complex"@en ;
   gsoc:hasConstituent bcs:TaltapinMMcomplex-amphibolite ;
   gsoc:hasConstituent bcs:TaltapinMMcomplex-basic_igneous_rock ;
   gsoc:hasConstituent bcs:TaltapinMMcomplex-dioritic_rock ;
   gsoc:hasConstituent bcs:TaltapinMMcomplex-marble ;
   gsoc:hasConstituent bcs:TaltapinMMcomplex-metamorphic_rock ;
   gsoc:hasConstituent bcs:TaltapinMMcomplex-schist ;
-  rdfs:label "Taltapin MM complex"@en ;
 .
 bcs:TaltapinMMcomplex-amphibolite
-  a gsrm:Amphibolite ;
-  gsoc:isPartOf bcs:bc-amphibolite ;
+  rdf:type gsrm:Amphibolite ;
   rdfs:label "amphibolite lithology in Taltapin MM complex"@en ;
+  gsoc:isPartOf bcs:bc-amphibolite ;
 .
 bcs:TaltapinMMcomplex-basic_igneous_rock
-  a gsrm:Basic_Igneous_Rock ;
-  gsoc:isPartOf bcs:bc-basic_igneous_rock ;
+  rdf:type gsrm:Basic_Igneous_Rock ;
   rdfs:label "basic_igneous_rock lithology in Taltapin MM complex"@en ;
+  gsoc:isPartOf bcs:bc-basic_igneous_rock ;
 .
 bcs:TaltapinMMcomplex-dioritic_rock
-  a gsrm:Dioritic_Rock ;
-  gsoc:isPartOf bcs:bc-dioritic_rock ;
+  rdf:type gsrm:Dioritic_Rock ;
   rdfs:label "dioritic_rock lithology in Taltapin MM complex"@en ;
+  gsoc:isPartOf bcs:bc-dioritic_rock ;
 .
 bcs:TaltapinMMcomplex-marble
-  a gsrm:Marble ;
-  gsoc:isPartOf bcs:bc-marble ;
+  rdf:type gsrm:Marble ;
   rdfs:label "marble lithology in Taltapin MM complex"@en ;
+  gsoc:isPartOf bcs:bc-marble ;
 .
 bcs:TaltapinMMcomplex-metamorphic_rock
-  a gsrm:Metamorphic_Rock ;
-  gsoc:isPartOf bcs:bc-metamorphic_rock ;
+  rdf:type gsrm:Metamorphic_Rock ;
   rdfs:label "metamorphic_rock lithology in Taltapin MM complex"@en ;
+  gsoc:isPartOf bcs:bc-metamorphic_rock ;
 .
 bcs:TaltapinMMcomplex-schist
-  a gsrm:Schist ;
-  gsoc:isPartOf bcs:bc-schist ;
+  rdf:type gsrm:Schist ;
   rdfs:label "schist lithology in Taltapin MM complex"@en ;
+  gsoc:isPartOf bcs:bc-schist ;
 .
 bcs:TaylorCreek
-  a gsgu:Formation ;
+  rdf:type gsgu:Formation ;
+  rdfs:label "Taylor Creek"@en ;
   gsoc:hasConstituent bcs:TaylorCreek-andesite ;
   gsoc:hasConstituent bcs:TaylorCreek-fine_grained_igneous_rock ;
-  rdfs:label "Taylor Creek"@en ;
 .
 bcs:TaylorCreek-andesite
-  a gsrm:Andesite ;
-  gsoc:isPartOf bcs:bc-andesite ;
+  rdf:type gsrm:Andesite ;
   rdfs:label "andesite lithology in Taylor Creek"@en ;
+  gsoc:isPartOf bcs:bc-andesite ;
 .
 bcs:TaylorCreek-fine_grained_igneous_rock
-  a gsrm:Fine_Grained_Igneous_Rock ;
-  gsoc:isPartOf bcs:bc-fine_grained_igneous_rock ;
+  rdf:type gsrm:Fine_Grained_Igneous_Rock ;
   rdfs:label "fine_grained_igneous_rock lithology in Taylor Creek"@en ;
+  gsoc:isPartOf bcs:bc-fine_grained_igneous_rock ;
 .
 bcs:TaylorCreekGroup
-  a gsgu:Group ;
+  rdf:type gsgu:Group ;
   rdfs:label "Taylor Creek Group"@en ;
 .
 bcs:TezzeronSeq
-  a gsgu:Formation ;
+  rdf:type gsgu:Formation ;
+  rdfs:label "Tezzeron Seq"@en ;
   gsoc:hasConstituent bcs:TezzeronSeq-ash_tuff_lapillistone_and_lapilli_tuff ;
   gsoc:hasConstituent bcs:TezzeronSeq-basalt ;
   gsoc:hasConstituent bcs:TezzeronSeq-clastic_conglomerate ;
@@ -2605,45 +2603,45 @@ bcs:TezzeronSeq
   gsoc:hasConstituent bcs:TezzeronSeq-gabbroic_rock ;
   gsoc:hasConstituent bcs:TezzeronSeq-siltstone ;
   gsoc:hasConstituent bcs:TezzeronSeq-wacke ;
-  rdfs:label "Tezzeron Seq"@en ;
 .
 bcs:TezzeronSeq-ash_tuff_lapillistone_and_lapilli_tuff
-  a gsrm:Ash_Tuff_Lapillistone_And_Lapilli_Tuff ;
-  gsoc:isPartOf bcs:bc-ash_tuff_lapillistone_and_lapilli_tuff ;
+  rdf:type gsrm:Ash_Tuff_Lapillistone_And_Lapilli_Tuff ;
   rdfs:label "ash_tuff_lapillistone_and_lapilli_tuff lithology in Tezzeron Seq"@en ;
+  gsoc:isPartOf bcs:bc-ash_tuff_lapillistone_and_lapilli_tuff ;
 .
 bcs:TezzeronSeq-basalt
-  a gsrm:Basalt ;
-  gsoc:isPartOf bcs:bc-basalt ;
+  rdf:type gsrm:Basalt ;
   rdfs:label "basalt lithology in Tezzeron Seq"@en ;
+  gsoc:isPartOf bcs:bc-basalt ;
 .
 bcs:TezzeronSeq-clastic_conglomerate
-  a gsrm:Clastic_Conglomerate ;
-  gsoc:isPartOf bcs:bc-clastic_conglomerate ;
+  rdf:type gsrm:Clastic_Conglomerate ;
   rdfs:label "clastic_conglomerate lithology in Tezzeron Seq"@en ;
+  gsoc:isPartOf bcs:bc-clastic_conglomerate ;
 .
 bcs:TezzeronSeq-dioritic_rock
-  a gsrm:Dioritic_Rock ;
-  gsoc:isPartOf bcs:bc-dioritic_rock ;
+  rdf:type gsrm:Dioritic_Rock ;
   rdfs:label "dioritic_rock lithology in Tezzeron Seq"@en ;
+  gsoc:isPartOf bcs:bc-dioritic_rock ;
 .
 bcs:TezzeronSeq-gabbroic_rock
-  a gsrm:Gabbroic_Rock ;
-  gsoc:isPartOf bcs:bc-gabbroic_rock ;
+  rdf:type gsrm:Gabbroic_Rock ;
   rdfs:label "gabbroic_rock lithology in Tezzeron Seq"@en ;
+  gsoc:isPartOf bcs:bc-gabbroic_rock ;
 .
 bcs:TezzeronSeq-siltstone
-  a gsrm:Siltstone ;
-  gsoc:isPartOf bcs:bc-siltstone ;
+  rdf:type gsrm:Siltstone ;
   rdfs:label "siltstone lithology in Tezzeron Seq"@en ;
+  gsoc:isPartOf bcs:bc-siltstone ;
 .
 bcs:TezzeronSeq-wacke
-  a gsrm:Wacke ;
-  gsoc:isPartOf bcs:bc-wacke ;
+  rdf:type gsrm:Wacke ;
   rdfs:label "wacke lithology in Tezzeron Seq"@en ;
+  gsoc:isPartOf bcs:bc-wacke ;
 .
 bcs:ThuyaBatholith
-  a gsgu:Complex ;
+  rdf:type gsgu:Complex ;
+  rdfs:label "Thuya Batholith"@en ;
   gsoc:hasConstituent bcs:ThuyaBatholith-andesite ;
   gsoc:hasConstituent bcs:ThuyaBatholith-dioritic_rock ;
   gsoc:hasConstituent bcs:ThuyaBatholith-granitoid ;
@@ -2651,421 +2649,427 @@ bcs:ThuyaBatholith
   gsoc:hasConstituent bcs:ThuyaBatholith-migmatite ;
   gsoc:hasConstituent bcs:ThuyaBatholith-monzodioritic_rock ;
   gsoc:hasConstituent bcs:ThuyaBatholith-monzonitic_rock ;
-  rdfs:label "Thuya Batholith"@en ;
 .
 bcs:ThuyaBatholith-andesite
-  a gsrm:Andesite ;
-  gsoc:isPartOf bcs:bc-andesite ;
+  rdf:type gsrm:Andesite ;
   rdfs:label "andesite lithology in Thuya Batholith"@en ;
+  gsoc:isPartOf bcs:bc-andesite ;
 .
 bcs:ThuyaBatholith-dioritic_rock
-  a gsrm:Dioritic_Rock ;
-  gsoc:isPartOf bcs:bc-dioritic_rock ;
+  rdf:type gsrm:Dioritic_Rock ;
   rdfs:label "dioritic_rock lithology in Thuya Batholith"@en ;
+  gsoc:isPartOf bcs:bc-dioritic_rock ;
 .
 bcs:ThuyaBatholith-granitoid
-  a gsrm:Granitoid ;
-  gsoc:isPartOf bcs:bc-granitoid ;
+  rdf:type gsrm:Granitoid ;
   rdfs:label "granitoid lithology in Thuya Batholith"@en ;
+  gsoc:isPartOf bcs:bc-granitoid ;
 .
 bcs:ThuyaBatholith-granodiorite
-  a gsrm:Granodiorite ;
-  gsoc:isPartOf bcs:bc-granodiorite ;
+  rdf:type gsrm:Granodiorite ;
   rdfs:label "granodiorite lithology in Thuya Batholith"@en ;
+  gsoc:isPartOf bcs:bc-granodiorite ;
 .
 bcs:ThuyaBatholith-migmatite
-  a gsrm:Migmatite ;
-  gsoc:isPartOf bcs:bc-migmatite ;
+  rdf:type gsrm:Migmatite ;
   rdfs:label "migmatite lithology in Thuya Batholith"@en ;
+  gsoc:isPartOf bcs:bc-migmatite ;
 .
 bcs:ThuyaBatholith-monzodioritic_rock
-  a gsrm:Monzodioritic_Rock ;
-  gsoc:isPartOf bcs:bc-monzodioritic_rock ;
+  rdf:type gsrm:Monzodioritic_Rock ;
   rdfs:label "monzodioritic_rock lithology in Thuya Batholith"@en ;
+  gsoc:isPartOf bcs:bc-monzodioritic_rock ;
 .
 bcs:ThuyaBatholith-monzonitic_rock
-  a gsrm:Monzonitic_Rock ;
-  gsoc:isPartOf bcs:bc-monzonitic_rock ;
+  rdf:type gsrm:Monzonitic_Rock ;
   rdfs:label "monzonitic_rock lithology in Thuya Batholith"@en ;
+  gsoc:isPartOf bcs:bc-monzonitic_rock ;
 .
 bcs:TintagelPhs
-  a gsgu:Suite ;
+  rdf:type gsgu:Suite ;
+  rdfs:label "Tintagel Phs"@en ;
   gsoc:hasConstituent bcs:TintagelPhs-basalt ;
   gsoc:hasConstituent bcs:TintagelPhs-dioritic_rock ;
   gsoc:hasConstituent bcs:TintagelPhs-granitoid ;
   gsoc:hasConstituent bcs:TintagelPhs-granodiorite ;
-  rdfs:label "Tintagel Phs"@en ;
 .
 bcs:TintagelPhs-basalt
-  a gsrm:Basalt ;
-  gsoc:isPartOf bcs:bc-basalt ;
+  rdf:type gsrm:Basalt ;
   rdfs:label "basalt lithology in Tintagel Phs"@en ;
+  gsoc:isPartOf bcs:bc-basalt ;
 .
 bcs:TintagelPhs-dioritic_rock
-  a gsrm:Dioritic_Rock ;
-  gsoc:isPartOf bcs:bc-dioritic_rock ;
+  rdf:type gsrm:Dioritic_Rock ;
   rdfs:label "dioritic_rock lithology in Tintagel Phs"@en ;
+  gsoc:isPartOf bcs:bc-dioritic_rock ;
 .
 bcs:TintagelPhs-granitoid
-  a gsrm:Granitoid ;
-  gsoc:isPartOf bcs:bc-granitoid ;
+  rdf:type gsrm:Granitoid ;
   rdfs:label "granitoid lithology in Tintagel Phs"@en ;
+  gsoc:isPartOf bcs:bc-granitoid ;
 .
 bcs:TintagelPhs-granodiorite
-  a gsrm:Granodiorite ;
-  gsoc:isPartOf bcs:bc-granodiorite ;
+  rdf:type gsrm:Granodiorite ;
   rdfs:label "granodiorite lithology in Tintagel Phs"@en ;
+  gsoc:isPartOf bcs:bc-granodiorite ;
 .
 bcs:TrJm
-  a gsgu:Group ;
+  rdf:type gsgu:Group ;
   rdfs:label "TrJm group"@en ;
 .
 bcs:TrembleurUltramafite
-  a gsgu:Formation ;
+  rdf:type gsgu:Formation ;
+  rdfs:label "Trembleur Ultramafite"@en ;
   gsoc:hasConstituent bcs:TrembleurUltramafite-metamorphic_rock ;
   gsoc:hasConstituent bcs:TrembleurUltramafite-serpentinite ;
   gsoc:hasConstituent bcs:TrembleurUltramafite-ultramafic_igneous_rock ;
-  rdfs:label "Trembleur Ultramafite"@en ;
 .
 bcs:TrembleurUltramafite-metamorphic_rock
-  a gsrm:Metamorphic_Rock ;
-  gsoc:isPartOf bcs:bc-metamorphic_rock ;
+  rdf:type gsrm:Metamorphic_Rock ;
   rdfs:label "metamorphic_rock lithology in Trembleur Ultramafite"@en ;
+  gsoc:isPartOf bcs:bc-metamorphic_rock ;
 .
 bcs:TrembleurUltramafite-serpentinite
-  a gsrm:Serpentinite ;
-  gsoc:isPartOf bcs:bc-serpentinite ;
+  rdf:type gsrm:Serpentinite ;
   rdfs:label "serpentinite lithology in Trembleur Ultramafite"@en ;
+  gsoc:isPartOf bcs:bc-serpentinite ;
 .
 bcs:TrembleurUltramafite-ultramafic_igneous_rock
-  a gsrm:Ultramafic_Igneous_Rock ;
-  gsoc:isPartOf bcs:bc-ultramafic_igneous_rock ;
+  rdf:type gsrm:Ultramafic_Igneous_Rock ;
   rdfs:label "ultramafic_igneous_rock lithology in Trembleur Ultramafite"@en ;
+  gsoc:isPartOf bcs:bc-ultramafic_igneous_rock ;
 .
 bcs:TsalkomFormation
-  a gsgu:Formation ;
+  rdf:type gsgu:Formation ;
+  rdfs:label "Tsalkom Formation"@en ;
   gsoc:hasConstituent bcs:TsalkomFormation-metamorphic_rock ;
   gsoc:hasConstituent bcs:TsalkomFormation-metasomatic_rock ;
-  rdfs:label "Tsalkom Formation"@en ;
 .
 bcs:TsalkomFormation-metamorphic_rock
-  a gsrm:Metamorphic_Rock ;
-  gsoc:isPartOf bcs:bc-metamorphic_rock ;
+  rdf:type gsrm:Metamorphic_Rock ;
   rdfs:label "metamorphic_rock lithology in Tsalkom Formation"@en ;
+  gsoc:isPartOf bcs:bc-metamorphic_rock ;
 .
 bcs:TsalkomFormation-metasomatic_rock
-  a gsrm:Metasomatic_Rock ;
-  gsoc:isPartOf bcs:bc-metasomatic_rock ;
+  rdf:type gsrm:Metasomatic_Rock ;
   rdfs:label "metasomatic_rock lithology in Tsalkom Formation"@en ;
+  gsoc:isPartOf bcs:bc-metasomatic_rock ;
 .
 bcs:Worldstockshowing
-  a gsgu:Alteration_Unit ;
-  gsoc:hasConstituent bcs:Worldstockshowing-metasomatic_rock ;
+  rdf:type gsgu:Alteration_Unit ;
   rdfs:label "Worldstock showing"@en ;
+  gsoc:hasConstituent bcs:Worldstockshowing-metasomatic_rock ;
 .
 bcs:Worldstockshowing-metasomatic_rock
-  a gsrm:Metasomatic_Rock ;
-  gsoc:isPartOf bcs:bc-metasomatic_rock ;
+  rdf:type gsrm:Metasomatic_Rock ;
   rdfs:label "metasomatic_rock lithology in Worldstock showing"@en ;
+  gsoc:isPartOf bcs:bc-metasomatic_rock ;
 .
 bcs:bc-acidic_igneous_rock
-  a gsrm:Acidic_Igneous_Rock ;
+  rdf:type gsrm:Acidic_Igneous_Rock ;
   rdfs:label "acidic_igneous_rock lithology in British Columbia"@en ;
 .
 bcs:bc-amphibolite
-  a gsrm:Amphibolite ;
+  rdf:type gsrm:Amphibolite ;
   rdfs:label "amphibolite lithology in British Columbia"@en ;
 .
 bcs:bc-andesite
-  a gsrm:Andesite ;
+  rdf:type gsrm:Andesite ;
   rdfs:label "andesite lithology in British Columbia"@en ;
 .
 bcs:bc-aplite
-  a gsrm:Aplite ;
+  rdf:type gsrm:Aplite ;
   rdfs:label "aplite lithology in British Columbia"@en ;
 .
 bcs:bc-arenite
-  a gsrm:Arenite ;
+  rdf:type gsrm:Arenite ;
   rdfs:label "arenite lithology in British Columbia"@en ;
 .
 bcs:bc-argillite
-  a gsrm:Argillite ;
+  rdf:type gsrm:Argillite ;
   rdfs:label "argillite lithology in British Columbia"@en ;
 .
 bcs:bc-ash_tuff_lapillistone_and_lapilli_tuff
-  a gsrm:Ash_Tuff_Lapillistone_And_Lapilli_Tuff ;
+  rdf:type gsrm:Ash_Tuff_Lapillistone_And_Lapilli_Tuff ;
   rdfs:label "ash_tuff_lapillistone_and_lapilli_tuff lithology in British Columbia"@en ;
 .
 bcs:bc-basalt
-  a gsrm:Basalt ;
+  rdf:type gsrm:Basalt ;
   rdfs:label "basalt lithology in British Columbia"@en ;
 .
 bcs:bc-basic_igneous_rock
-  a gsrm:Basic_Igneous_Rock ;
+  rdf:type gsrm:Basic_Igneous_Rock ;
   rdfs:label "basic_igneous_rock lithology in British Columbia"@en ;
 .
 bcs:bc-breccia
-  a gsrm:Breccia ;
+  rdf:type gsrm:Breccia ;
   rdfs:label "breccia lithology in British Columbia"@en ;
 .
 bcs:bc-carbonate_sedimentary_rock
-  a gsrm:Carbonate_Sedimentary_Rock ;
+  rdf:type gsrm:Carbonate_Sedimentary_Rock ;
   rdfs:label "carbonate_sedimentary_rock lithology in British Columbia"@en ;
 .
 bcs:bc-chemical_sedimentary_material
-  a gsrm:Chemical_Sedimentary_Material ;
+  rdf:type gsrm:Chemical_Sedimentary_Material ;
   rdfs:label "chemical_sedimentary_material lithology in British Columbia"@en ;
 .
 bcs:bc-chlorite_actinolite_epidote_metamorphic_rock
-  a gsrm:Chlorite_Actinolite_Epidote_Metamorphic_Rock ;
+  rdf:type gsrm:Chlorite_Actinolite_Epidote_Metamorphic_Rock ;
   rdfs:label "chlorite_actinolite_epidote_metamorphic_rock lithology in British Columbia"@en ;
 .
 bcs:bc-clastic_conglomerate
-  a gsrm:Clastic_Conglomerate ;
+  rdf:type gsrm:Clastic_Conglomerate ;
   rdfs:label "clastic_conglomerate lithology in British Columbia"@en ;
 .
 bcs:bc-clastic_mudstone
-  a gsrm:Clastic_Mudstone ;
+  rdf:type gsrm:Clastic_Mudstone ;
   rdfs:label "clastic_mudstone lithology in British Columbia"@en ;
 .
 bcs:bc-clastic_sandstone
-  a gsrm:Clastic_Sandstone ;
+  rdf:type gsrm:Clastic_Sandstone ;
   rdfs:label "clastic_sandstone lithology in British Columbia"@en ;
 .
 bcs:bc-clastic_sedimentary_rock
-  a gsrm:Clastic_Sedimentary_Rock ;
+  rdf:type gsrm:Clastic_Sedimentary_Rock ;
   rdfs:label "clastic_sedimentary_rock lithology in British Columbia"@en ;
 .
 bcs:bc-coal
-  a gsrm:Coal ;
+  rdf:type gsrm:Coal ;
   rdfs:label "coal lithology in British Columbia"@en ;
 .
 bcs:bc-dacite
-  a gsrm:Dacite ;
+  rdf:type gsrm:Dacite ;
   rdfs:label "dacite lithology in British Columbia"@en ;
 .
 bcs:bc-diamictite
-  a gsrm:Diamictite ;
+  rdf:type gsrm:Diamictite ;
   rdfs:label "diamictite lithology in British Columbia"@en ;
 .
 bcs:bc-dioritic_rock
-  a gsrm:Dioritic_Rock ;
+  rdf:type gsrm:Dioritic_Rock ;
   rdfs:label "dioritic_rock lithology in British Columbia"@en ;
 .
 bcs:bc-doleritic_rock
-  a gsrm:Doleritic_Rock ;
+  rdf:type gsrm:Doleritic_Rock ;
   rdfs:label "doleritic_rock lithology in British Columbia"@en ;
 .
 bcs:bc-dolostone
-  a gsrm:Dolostone ;
+  rdf:type gsrm:Dolostone ;
   rdfs:label "dolostone lithology in British Columbia"@en ;
 .
 bcs:bc-exotic_alkaline_rock
-  a gsrm:Exotic_Alkaline_Rock ;
+  rdf:type gsrm:Exotic_Alkaline_Rock ;
   rdfs:label "exotic_alkaline_rock lithology in British Columbia"@en ;
 .
 bcs:bc-fine_grained_igneous_rock
-  a gsrm:Fine_Grained_Igneous_Rock ;
+  rdf:type gsrm:Fine_Grained_Igneous_Rock ;
   rdfs:label "fine_grained_igneous_rock lithology in British Columbia"@en ;
 .
 bcs:bc-gabbroic_rock
-  a gsrm:Gabbroic_Rock ;
+  rdf:type gsrm:Gabbroic_Rock ;
   rdfs:label "gabbroic_rock lithology in British Columbia"@en ;
 .
 bcs:bc-gneiss
-  a gsrm:Gneiss ;
+  rdf:type gsrm:Gneiss ;
   rdfs:label "gneiss lithology in British Columbia"@en ;
 .
 bcs:bc-granitoid
-  a gsrm:Granitoid ;
+  rdf:type gsrm:Granitoid ;
   rdfs:label "granitoid lithology in British Columbia"@en ;
 .
 bcs:bc-granodiorite
-  a gsrm:Granodiorite ;
+  rdf:type gsrm:Granodiorite ;
   rdfs:label "granodiorite lithology in British Columbia"@en ;
 .
 bcs:bc-gravel
-  a gsrm:Gravel ;
+  rdf:type gsrm:Gravel ;
   rdfs:label "gravel lithology in British Columbia"@en ;
 .
 bcs:bc-hornfels
-  a gsrm:Hornfels ;
+  rdf:type gsrm:Hornfels ;
   rdfs:label "hornfels lithology in British Columbia"@en ;
 .
 bcs:bc-igneous_material
-  a gsrm:Igneous_Material ;
+  rdf:type gsrm:Igneous_Material ;
   rdfs:label "igneous_material lithology in British Columbia"@en ;
 .
 bcs:bc-limestone
-  a gsrm:Limestone ;
+  rdf:type gsrm:Limestone ;
   rdfs:label "limestone lithology in British Columbia"@en ;
 .
 bcs:bc-marble
-  a gsrm:Marble ;
+  rdf:type gsrm:Marble ;
   rdfs:label "marble lithology in British Columbia"@en ;
 .
 bcs:bc-massive_sulphide
-  a gsrm:Massive_Sulphide ;
+  rdf:type gsrm:Massive_Sulphide ;
   rdfs:label "massive_sulphide lithology in British Columbia"@en ;
 .
 bcs:bc-metamorphic_rock
-  a gsrm:Metamorphic_Rock ;
+  rdf:type gsrm:Metamorphic_Rock ;
   rdfs:label "metamorphic_rock lithology in British Columbia"@en ;
 .
 bcs:bc-metasomatic_rock
-  a gsrm:Metasomatic_Rock ;
+  rdf:type gsrm:Metasomatic_Rock ;
   rdfs:label "metasomatic_rock lithology in British Columbia"@en ;
 .
 bcs:bc-migmatite
-  a gsrm:Migmatite ;
+  rdf:type gsrm:Migmatite ;
   rdfs:label "migmatite lithology in British Columbia"@en ;
 .
 bcs:bc-monzodioritic_rock
-  a gsrm:Monzodioritic_Rock ;
+  rdf:type gsrm:Monzodioritic_Rock ;
   rdfs:label "monzodioritic_rock lithology in British Columbia"@en ;
 .
 bcs:bc-monzonitic_rock
-  a gsrm:Monzonitic_Rock ;
+  rdf:type gsrm:Monzonitic_Rock ;
   rdfs:label "monzonitic_rock lithology in British Columbia"@en ;
 .
 bcs:bc-mud
-  a gsrm:Mud ;
+  rdf:type gsrm:Mud ;
   rdfs:label "mud lithology in British Columbia"@en ;
 .
 bcs:bc-mylonitic_rock
-  a gsrm:Mylonitic_Rock ;
+  rdf:type gsrm:Mylonitic_Rock ;
   rdfs:label "mylonitic_rock lithology in British Columbia"@en ;
 .
 bcs:bc-non_clastic_siliceous_sedimentary_rock
-  a gsrm:Non_Clastic_Siliceous_Sedimentary_Rock ;
+  rdf:type gsrm:Non_Clastic_Siliceous_Sedimentary_Rock ;
   rdfs:label "non_clastic_siliceous_sedimentary_rock lithology in British Columbia"@en ;
 .
 bcs:bc-orthogneiss
-  a gsrm:Orthogneiss ;
+  rdf:type gsrm:Orthogneiss ;
   rdfs:label "orthogneiss lithology in British Columbia"@en ;
 .
 bcs:bc-paragneiss
-  a gsrm:Paragneiss ;
+  rdf:type gsrm:Paragneiss ;
   rdfs:label "paragneiss lithology in British Columbia"@en ;
 .
 bcs:bc-peridotite
-  a gsrm:Peridotite ;
+  rdf:type gsrm:Peridotite ;
   rdfs:label "peridotite lithology in British Columbia"@en ;
 .
 bcs:bc-phaneritic_igneous_rock
-  a gsrm:Phaneritic_Igneous_Rock ;
+  rdf:type gsrm:Phaneritic_Igneous_Rock ;
   rdfs:label "phaneritic_igneous_rock lithology in British Columbia"@en ;
 .
 bcs:bc-phyllite
-  a gsrm:Phyllite ;
+  rdf:type gsrm:Phyllite ;
   rdfs:label "phyllite lithology in British Columbia"@en ;
 .
 bcs:bc-porphyry
-  a gsrm:Porphyry ;
+  rdf:type gsrm:Porphyry ;
   rdfs:label "porphyry lithology in British Columbia"@en ;
 .
 bcs:bc-pyroclastic_material
-  a gsrm:Pyroclastic_Material ;
+  rdf:type gsrm:Pyroclastic_Material ;
   rdfs:label "pyroclastic_material lithology in British Columbia"@en ;
 .
 bcs:bc-pyroclastic_rock
-  a gsrm:Pyroclastic_Rock ;
+  rdf:type gsrm:Pyroclastic_Rock ;
   rdfs:label "pyroclastic_rock lithology in British Columbia"@en ;
 .
 bcs:bc-quartzite
-  a gsrm:Quartzite ;
+  rdf:type gsrm:Quartzite ;
   rdfs:label "quartzite lithology in British Columbia"@en ;
 .
 bcs:bc-rhyolitoid
-  a gsrm:Rhyolitoid ;
+  rdf:type gsrm:Rhyolitoid ;
   rdfs:label "rhyolitoid lithology in British Columbia"@en ;
 .
 bcs:bc-rock
-  a gsrm:Rock ;
+  rdf:type gsrm:Rock ;
   rdfs:label "rock lithology in British Columbia"@en ;
 .
 bcs:bc-sand
-  a gsrm:Sand ;
+  rdf:type gsrm:Sand ;
   rdfs:label "sand lithology in British Columbia"@en ;
 .
 bcs:bc-schist
-  a gsrm:Schist ;
+  rdf:type gsrm:Schist ;
   rdfs:label "schist lithology in British Columbia"@en ;
 .
 bcs:bc-sedimentary_rock
-  a gsrm:Sedimentary_Rock ;
+  rdf:type gsrm:Sedimentary_Rock ;
   rdfs:label "sedimentary_rock lithology in British Columbia"@en ;
 .
 bcs:bc-serpentinite
-  a gsrm:Serpentinite ;
+  rdf:type gsrm:Serpentinite ;
   rdfs:label "serpentinite lithology in British Columbia"@en ;
 .
 bcs:bc-shale
-  a gsrm:Shale ;
+  rdf:type gsrm:Shale ;
   rdfs:label "shale lithology in British Columbia"@en ;
 .
 bcs:bc-silt
-  a gsrm:Silt ;
+  rdf:type gsrm:Silt ;
   rdfs:label "silt lithology in British Columbia"@en ;
 .
 bcs:bc-siltstone
-  a gsrm:Siltstone ;
+  rdf:type gsrm:Siltstone ;
   rdfs:label "siltstone lithology in British Columbia"@en ;
 .
 bcs:bc-skarn
-  a gsrm:Skarn ;
+  rdf:type gsrm:Skarn ;
   rdfs:label "skarn lithology in British Columbia"@en ;
 .
 bcs:bc-slate
-  a gsrm:Slate ;
+  rdf:type gsrm:Slate ;
   rdfs:label "slate lithology in British Columbia"@en ;
 .
 bcs:bc-syenitic_rock
-  a gsrm:Syenitic_Rock ;
+  rdf:type gsrm:Syenitic_Rock ;
   rdfs:label "syenitic_rock lithology in British Columbia"@en ;
 .
 bcs:bc-tonalite
-  a gsrm:Tonalite ;
+  rdf:type gsrm:Tonalite ;
   rdfs:label "tonalite lithology in British Columbia"@en ;
 .
 bcs:bc-trachytoid
-  a gsrm:Trachytoid ;
+  rdf:type gsrm:Trachytoid ;
   rdfs:label "trachytoid lithology in British Columbia"@en ;
 .
 bcs:bc-tuff_breccia_agglomerate_or_pyroclastic_breccia
-  a gsrm:Tuff_Breccia_Agglomerate_Or_Pyroclastic_Breccia ;
+  rdf:type gsrm:Tuff_Breccia_Agglomerate_Or_Pyroclastic_Breccia ;
   rdfs:label "tuff_breccia_agglomerate_or_pyroclastic_breccia lithology in British Columbia"@en ;
 .
 bcs:bc-tuffite
-  a gsrm:Tuffite ;
+  rdf:type gsrm:Tuffite ;
   rdfs:label "tuffite lithology in British Columbia"@en ;
 .
 bcs:bc-ultramafic_igneous_rock
-  a gsrm:Ultramafic_Igneous_Rock ;
+  rdf:type gsrm:Ultramafic_Igneous_Rock ;
   rdfs:label "ultramafic_igneous_rock lithology in British Columbia"@en ;
 .
 bcs:bc-wacke
-  a gsrm:Wacke ;
+  rdf:type gsrm:Wacke ;
   rdfs:label "wacke lithology in British Columbia"@en ;
 .
 bcs:lJs
-  a gsgu:Formation ;
-  gsoc:hasConstituent bcs:lJs-clastic_sandstone ;
+  rdf:type gsgu:Formation ;
   rdfs:label "lJs"@en ;
+  gsoc:hasConstituent bcs:lJs-clastic_sandstone ;
 .
 bcs:lJs-clastic_sandstone
-  a gsrm:Clastic_Sandstone ;
-  gsoc:isPartOf bcs:bc-clastic_sandstone ;
+  rdf:type gsrm:Clastic_Sandstone ;
   rdfs:label "clastic_sandstone lithology in lJs"@en ;
+  gsoc:isPartOf bcs:bc-clastic_sandstone ;
 .
 bcs:uKSustutGroup
-  a gsgu:Group ;
+  rdf:type gsgu:Group ;
   rdfs:label "Upper Cretaceous Sustut Group"@en ;
 .
 <https://w3id.org/gso/ex-stratlexicon2-bc/ontology>
-  a owl:Ontology ;
-  rdfs:comment "Example encoding density and magnetic susceptibility for some Rock-Material Classes. The rock material in a formation is an instance of the material class that is 'partOf' the 'body' of that kind of material in the re-gion, which is also an instance of the material class. E.g. the wacke con-stituent in the Tezzeron Sequence is an instance of gsrm:Wacke that is part of the 'wacke in British Columbia', which is an instance of gsrm:Wacke. "@en ;
-  rdfs:comment "Stephen M. Richard 2020-06-16"@en ;
-  dct:source  "British Columbia Geological Survey, 2008, Rock Properties Database:  Ministry of Energy, Mines and Petroleum Resources, BC Geological Survey, access online at https://catalogue.data.gov.bc.ca/dataset/2dc8a4f1-c8f8-4603-813e-855af99b7ba5/resource/51f0620a-42cf-458f-821c-bdd895f24fdc/download/of2008-4rpd.xls; see accompanying report http://www.geosciencebc.com/i/pdf/FinalReports/GBCReport_2008-9.pdf" ;
+  rdf:type owl:Ontology ;
+  dct:created "2020-06-16"^^xsd:date ;
+  dct:creator gsoc:stephen_richard ;
+  dct:license <https://creativecommons.org/licenses/by/4.0/legalcode> ;
+  dct:modified "2021-04-15"^^xsd:date ;
+  dct:publisher "ARC Loop3D project;  https://loop3d.org/" ;
+  dct:publisher "Geological Survey of Canada, Natural Resources Canada, Government of Canada" ;
+  dct:rights "Copyright (c) 2021 Government of Canada" ;
+  dct:source "British Columbia Geological Survey, 2008, Rock Properties Database:  Ministry of Energy, Mines and Petroleum Resources, BC Geological Survey, access online at https://catalogue.data.gov.bc.ca/dataset/2dc8a4f1-c8f8-4603-813e-855af99b7ba5/resource/51f0620a-42cf-458f-821c-bdd895f24fdc/download/of2008-4rpd.xls; see accompanying report http://www.geosciencebc.com/i/pdf/FinalReports/GBCReport_2008-9.pdf"@en ;
+  rdfs:comment "Definition of stratigraphic units and grouping, and teh lithologic constituents of a the units. The rock material in a formation is an instance of the material class that is 'partOf' the 'body' of that kind of material in the region, which is also an instance of the material class. E.g. the wacke constituent in the Tezzeron Sequence is an instance of gsrm:Wacke that is part of the 'wacke in British Columbia', which is an instance of gsrm:Wacke. "@en ;
+  rdfs:label "British Columbia stratigraphy example, Geoscience Ontology"@en ;
   owl:imports <https://w3id.org/gso/master/ontology> ;
 .
