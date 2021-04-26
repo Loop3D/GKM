@@ -1,6 +1,8 @@
 # baseURI: https://w3id.org/gso/master/ontology
+# imports: http://topbraid.org/spin/spinowl
 # imports: https://w3id.org/gso/common/ontology
 # imports: https://w3id.org/gso/element/ontology
+# imports: https://w3id.org/gso/feature/ontology
 # imports: https://w3id.org/gso/geologiccontact/ontology
 # imports: https://w3id.org/gso/geologicevent/ontology
 # imports: https://w3id.org/gso/geologicfault/ontology
@@ -31,6 +33,7 @@
 
 @prefix : <https://w3id.org/gso/master/> .
 @prefix dct: <http://purl.org/dc/terms/> .
+@prefix feature: <https://w3id.org/gso/feature/> .
 @prefix gscn: <https://w3id.org/gso/geologiccontact/> .
 @prefix gsel: <https://w3id.org/gso/element/> .
 @prefix gsen: <https://w3id.org/gso/geologicsetting/> .
@@ -62,7 +65,8 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix skos: <http://www.w3.org/2004/02/skos/core#> .   @prefix schema: <https://schema.org/> .
+@prefix schema: <https://schema.org/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix sks: <https://w3id.org/gso/skos/annotation/> .
 @prefix turtle: <http://www.semanticweb.org/owl/owlapi/turtle#> .
 @prefix unit: <http://qudt.org/vocab/unit/> .
@@ -70,20 +74,26 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-
-gsoc:boyan_brodaric rdf:type schema:Person ; rdf:type owl:NamedIndividual ;
-  schema:identifier <https://orcid.org/0000-0002-7987-3810> ;
-  schema:affiliation "Natural Resources Canada, Geological Survey of Canada"  ;
+gsoc:boyan_brodaric
+  rdf:type owl:NamedIndividual ;
+  rdf:type schema:Person ;
   rdfs:comment "e-mail: mailto:boyan.brodaric@canada.ca " ;
-  schema:name "Dr. Boyan Brodaric" ; rdfs:label "Dr. Boyan Brodaric" ;
+  rdfs:label "Dr. Boyan Brodaric" ;
+  schema:affiliation "Natural Resources Canada, Geological Survey of Canada" ;
+  schema:identifier <https://orcid.org/0000-0002-7987-3810> ;
+  schema:name "Dr. Boyan Brodaric" ;
 .
-gsoc:stephen_richard    rdf:type schema:Person ;     rdf:type owl:NamedIndividual ;
-  schema:identifier <https://orcid.org/0000-0001-6041-5302> ;
+gsoc:stephen_richard
+  rdf:type owl:NamedIndividual ;
+  rdf:type schema:Person ;
   rdfs:comment "e-mail: mailto:smrTucson@gmail.com " ;
-  schema:name "Dr. Stephen M. Richard" ; rdfs:label "Dr. Stephen M. Richard" ;
+  rdfs:label "Dr. Stephen M. Richard" ;
+  schema:identifier <https://orcid.org/0000-0001-6041-5302> ;
+  schema:name "Dr. Stephen M. Richard" ;
 .
 gsmaster:ontology
   rdf:type owl:Ontology ;
+  dct:bibliographicCitation "Brodaric, B., and Richard, S.M., 2021, The GeoScience Ontology Reference: Geological Survey of Canada Open File XXXX, 34 p." ;
   dct:created "2020-03-26"^^xsd:date ;
   dct:creator gsoc:boyan_brodaric ;
   dct:creator gsoc:stephen_richard ;
@@ -94,8 +104,10 @@ gsmaster:ontology
   dct:rights "Copyright (c) 2021 Government of Canada" ;
   rdfs:comment "Shell to load all GSO files, except GSO-Feature."@en ;
   rdfs:label "Geoscience Ontology, Master"@en ;
+  owl:imports <http://topbraid.org/spin/spinowl> ;
   owl:imports gsoc:ontology ;
   owl:imports gsel:ontology ;
+  owl:imports feature:ontology ;
   owl:imports gscn:ontology ;
   owl:imports gsev:ontology ;
   owl:imports gsfa:ontology ;
@@ -126,4 +138,3 @@ gsmaster:ontology
   skos:definition "Ontology that imports all components for GSO, except for subtyping of features to base classes, e.g. to Endurant, Perdurant, etc."@en ;
   skos:prefLabel "Geoscience Ontology, Master"@en ;
 .
-
