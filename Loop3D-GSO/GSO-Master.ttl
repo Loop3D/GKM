@@ -83,6 +83,16 @@ gsoc:boyan_brodaric
   schema:identifier <https://orcid.org/0000-0002-7987-3810> ;
   schema:name "Dr. Boyan Brodaric" ;
 .
+gsoc:indirectlyYoungerThan
+  rdf:type owl:ObjectProperty ;
+  rdfs:label "Indirectly younger than"@en ;
+  rdfs:subPropertyOf gsoc:timeYoungerThan ;
+  owl:propertyChainAxiom (
+      gsoc:occupiesTime
+      gsoc:timeYoungerThan
+    ) ;
+  skos:prefLabel "" ;
+.
 gsoc:stephen_richard
   rdf:type owl:NamedIndividual ;
   rdf:type schema:Person ;
@@ -90,6 +100,37 @@ gsoc:stephen_richard
   rdfs:label "Dr. Stephen M. Richard" ;
   schema:identifier <https://orcid.org/0000-0001-6041-5302> ;
   schema:name "Dr. Stephen M. Richard" ;
+.
+gsrl:crosscutBy
+  rdfs:domain [
+      rdf:type owl:Class ;
+      owl:unionOf (
+          [
+            rdf:type owl:Restriction ;
+            owl:onProperty gsoc:hostedBy ;
+            owl:someValuesFrom gsog:Rock_Body ;
+          ]
+          gsog:Rock_Body
+        ) ;
+    ] ;
+  rdfs:range [
+      rdf:type owl:Class ;
+      owl:unionOf (
+          [
+            rdf:type owl:Restriction ;
+            owl:onProperty gsoc:hostedBy ;
+            owl:someValuesFrom gsog:Rock_Body ;
+          ]
+          gsog:Rock_Body
+        ) ;
+    ] ;
+.
+gsgu:Lithodemic_Unit
+  owl:disjointWith gsgu:Lithostratigraphic_Unit ;
+  owl:disjointWith gsgu:Pedostratigraphic_Unit ;
+.
+gsgu:Pedostratigraphic_Unit
+  owl:disjointWith gsgu:Lithodemic_Unit ;
 .
 gsmaster:ontology
   rdf:type owl:Ontology ;

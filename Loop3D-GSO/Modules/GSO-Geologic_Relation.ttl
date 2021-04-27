@@ -36,7 +36,29 @@ gsoc:stephen_richard
 gsrl:crosscutBy
   rdf:type owl:ObjectProperty ;
   rdfs:comment "relationship in with the object Rock_Body or Physical_Feature exhibits field relations demonstrating that it is younger that the subject Rock_Body or Physical_Feature"@en ;
+  rdfs:domain [
+      rdf:type owl:Class ;
+      owl:unionOf (
+          [
+            rdf:type owl:Restriction ;
+            owl:onProperty gsoc:hostedBy ;
+            owl:someValuesFrom gsog:Rock_Body ;
+          ]
+          gsog:Rock_Body
+        ) ;
+    ] ;
   rdfs:label "is cross-cut or truncated by"@en ;
+  rdfs:range [
+      rdf:type owl:Class ;
+      owl:unionOf (
+          [
+            rdf:type owl:Restriction ;
+            owl:onProperty gsoc:hostedBy ;
+            owl:someValuesFrom gsog:Rock_Body ;
+          ]
+          gsog:Rock_Body
+        ) ;
+    ] ;
   rdfs:subPropertyOf gsoc:timeOlderThan ;
   rdfs:subPropertyOf gsog:isGeologicallyRelatedTo ;
   owl:inverseOf gsrl:crosscuts ;
@@ -67,21 +89,45 @@ gsrl:crosscuts
           gsog:Rock_Body
         ) ;
     ] ;
-  rdfs:subPropertyOf gsoc:spatialOverlaps ;
   rdfs:subPropertyOf gsoc:timeYoungerThan ;
   rdfs:subPropertyOf gsog:isGeologicallyRelatedTo ;
 .
 gsrl:intrudedBy
   rdf:type owl:ObjectProperty ;
   rdfs:comment "subject rock body intrudes object rock body. Implies that subject rock body is igneous rock, and that object rock body is older than subject rock body"@en ;
+  rdfs:domain [
+      rdf:type owl:Class ;
+      owl:unionOf (
+          [
+            rdf:type owl:Restriction ;
+            owl:onProperty gsoc:hostedBy ;
+            owl:someValuesFrom gsog:Rock_Body ;
+          ]
+          gsog:Rock_Body
+        ) ;
+    ] ;
   rdfs:label "intrudes"@en ;
+  rdfs:range gsog:Rock_Body ;
   rdfs:subPropertyOf gsrl:crosscutBy ;
   owl:inverseOf gsrl:intrudes ;
 .
 gsrl:intrudes
   rdf:type owl:ObjectProperty ;
   rdfs:comment "subject rock body intrudes object rock body. Implies that subject rock body is igneous rock, and that object rock body is older than subject rock body"@en ;
+  rdfs:domain gsog:Rock_Body ;
   rdfs:label "intrudes"@en ;
+  rdfs:range [
+      rdf:type owl:Class ;
+      owl:unionOf (
+          [
+            rdf:type owl:Restriction ;
+            owl:onProperty gsoc:hostedBy ;
+            owl:someValuesFrom gsog:Rock_Body ;
+          ]
+          gsog:Rock_Body
+        ) ;
+    ] ;
+  rdfs:subPropertyOf gsoc:spatiallyTouches ;
   rdfs:subPropertyOf gsrl:crosscuts ;
   owl:inverseOf gsrl:intrudedBy ;
 .
