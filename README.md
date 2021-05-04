@@ -1,5 +1,4 @@
-# GKM
-Geoscience Ontology documentations  
+#  Geoscience Ontology documentation  
 
 The files in this branch are generated from pyLODE with a github action triggered by pushes to the master branch. 
 
