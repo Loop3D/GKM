@@ -17,15 +17,42 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix skos: <http://www.w3.org/2004/02/skos/core#> .   @prefix schema: <https://schema.org/> .
+@prefix schema: <https://schema.org/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
+gsoc:boyan_brodaric
+  rdf:type owl:NamedIndividual ;
+  rdf:type schema:Person ;
+  rdfs:comment "e-mail: mailto:boyan.brodaric@canada.ca " ;
+  rdfs:label "Dr. Boyan Brodaric" ;
+  schema:affiliation "Natural Resources Canada, Geological Survey of Canada" ;
+  schema:identifier <https://orcid.org/0000-0002-7987-3810> ;
+  schema:name "Dr. Boyan Brodaric" ;
+.
+gsoc:stephen_richard
+  rdf:type owl:NamedIndividual ;
+  rdf:type schema:Person ;
+  rdfs:comment "e-mail: mailto:smrTucson@gmail.com " ;
+  rdfs:label "Dr. Stephen M. Richard" ;
+  schema:identifier <https://orcid.org/0000-0001-6041-5302> ;
+  schema:name "Dr. Stephen M. Richard" ;
+.
 gsfa:Detachment_Fault
   rdf:type owl:Class ;
   dct:source "CGI faulttype SKOS vocabulary 2016-10-19"@en ;
   rdfs:comment "A regional-scale, large displacement, low-angle normal fault."@en ;
   rdfs:label "detachment fault"@en ;
   rdfs:subClassOf gsfa:Low_Angle_Normal_Fault ;
+.
+gsfa:Dextral
+  rdf:type owl:Class ;
+  dct:source "GGIC vocabularies working group (Australia)"@en ;
+  rdfs:comment "In plan view, the side opposite the observer is displaced to the right."@en ;
+  rdfs:comment "Right-lateral separation sense, in plan view, the side opposite the observer appears displaced to the right.,"@en ;
+  rdfs:label "dextral"@en ;
+  rdfs:label "dextre"@fr ;
+  rdfs:subClassOf gsfa:Fault_Movement_Sense ;
 .
 gsfa:Dextral_Strike_Slip_Fault
   rdf:type owl:Class ;
@@ -68,6 +95,13 @@ gsfa:Ductile_Shear_Zone
             ) ;
         ] ;
     ] ;
+.
+gsfa:Extraction
+  rdf:type owl:Class ;
+  dct:source "Froitzheim, N., Pleuger, J. & Nagel, T.J., 2006. Extraction faults. Journal of Structural Geology v28, pp. 1388-1395."@en ;
+  rdfs:comment "Displacement across a fault is substantially in the direction perpendicular to the fault. The fault-parallel displacement is effectively zero."@en ;
+  rdfs:label "extraction"@en ;
+  rdfs:subClassOf gsfa:Fault_Movement_Sense ;
 .
 gsfa:Extraction_Fault
   rdf:type owl:Class ;
@@ -263,12 +297,42 @@ gsfa:Mixed_Extraction_Fault
   rdfs:label "mixed extraction fault"@en ;
   rdfs:subClassOf gsfa:Extraction_Fault ;
 .
+gsfa:No_Movement_Sense
+  rdf:type owl:Class ;
+  dct:source "Froitzheim, N., Pleuger, J. & Nagel, T.J., 2006. Extraction faults. Journal of Structural Geology v28, pp. 1388-1395."@en ;
+  rdfs:comment "The fault-parallel displacement is effectively zero, as in an extraction fault."@en ;
+  rdfs:label "no movement sense"@en ;
+  rdfs:subClassOf gsfa:Fault_Movement_Sense ;
+.
+gsfa:Normal
+  rdf:type owl:Class ;
+  dct:source "GGIC vocabularies working group (Australia)"@en ;
+  rdfs:comment "The hanging wall has been displaced down relative to the footwall, dip of fault usually 45-90 degrees."@en ;
+  rdfs:label "normal"@en ;
+  rdfs:subClassOf gsfa:Fault_Movement_Sense ;
+.
+gsfa:Normal_Dextral
+  rdf:type owl:Class ;
+  dct:source "GGIC vocabularies working group (Australia)"@en ;
+  rdfs:comment "The movement sense includes both normal and dextral components."@en ;
+  rdfs:label "normal dextral"@en ;
+  rdfs:subClassOf gsfa:Dextral ;
+  rdfs:subClassOf gsfa:Normal ;
+.
 gsfa:Normal_Fault
   rdf:type owl:Class ;
   dct:source "CGI faulttype SKOS vocabulary 2016-10-19"@en ;
   rdfs:comment "Fault with dip-parallel displacement component of slip vector more than 10 times the strike-parallel component of the slip vector over more than half recognized extent of the fault, and for which the fault dips consistently in the same direction, and for which the hanging wall has been displaced down relative to the footwall."@en ;
   rdfs:label "normal fault"@en ;
   rdfs:subClassOf gsfa:Fault ;
+.
+gsfa:Normal_Sinistral
+  rdf:type owl:Class ;
+  dct:source "GGIC vocabularies working group (Australia)"@en ;
+  rdfs:comment "The movement sense includes both normal and sinistral components."@en ;
+  rdfs:label "normal sinistral"@en ;
+  rdfs:subClassOf gsfa:Normal ;
+  rdfs:subClassOf gsfa:Sinistral ;
 .
 gsfa:Oblique_Slip
   rdf:type owl:Class ;
@@ -291,12 +355,36 @@ gsfa:Pure_Extraction_Fault
   rdfs:label "pure extraction fault"@en ;
   rdfs:subClassOf gsfa:Extraction_Fault ;
 .
+gsfa:Reverse
+  rdf:type owl:Class ;
+  dct:source "GGIC vocabularies working group (Australia)"@en ;
+  rdfs:comment "The hanging wall has been displaced up relative to the footwall, dip of fault usually greater than 45 degrees."@en ;
+  rdfs:label "inverse"@fr ;
+  rdfs:label "reverse"@en ;
+  rdfs:subClassOf gsfa:Fault_Movement_Sense ;
+.
+gsfa:Reverse_Dextral
+  rdf:type owl:Class ;
+  dct:source "GGIC vocabularies working group (Australia)"@en ;
+  rdfs:comment "The movement sense includes both reverse and dextral components."@en ;
+  rdfs:label "reverse dextral"@en ;
+  rdfs:subClassOf gsfa:Dextral ;
+  rdfs:subClassOf gsfa:Reverse ;
+.
 gsfa:Reverse_Fault
   rdf:type owl:Class ;
   dct:source "CGI faulttype SKOS vocabulary 2016-10-19"@en ;
   rdfs:comment "Fault with dip-parallel displacement component of slip vector more than 10 times the strike-parallel component of the slip vector at at least one location along the mapped trace of the fault, and the fault dips consistently in the same direction with the hanging wall displaced up relative to the footwall over at least half the mapped trace of the fault."@en ;
   rdfs:label "reverse fault"@en ;
   rdfs:subClassOf gsfa:Fault ;
+.
+gsfa:Reverse_Sinistral
+  rdf:type owl:Class ;
+  dct:source "GGIC vocabularies working group (Australia)"@en ;
+  rdfs:comment "The movement sense includes both reverse and sinistral components."@en ;
+  rdfs:label "reverse sinistral"@en ;
+  rdfs:subClassOf gsfa:Reverse ;
+  rdfs:subClassOf gsfa:Sinistral ;
 .
 gsfa:Right_Normal_Fault
   rdf:type owl:Class ;
@@ -318,6 +406,20 @@ gsfa:Scissor_Fault
   rdfs:comment "A fault on which there is increasing offset or separation along the strike from an initial point of no offset, with the opposite sense of offset in the opposite direction."@en ;
   rdfs:label "scissor fault"@en ;
   rdfs:subClassOf gsfa:Fault ;
+.
+gsfa:Scissor_Movement
+  rdf:type owl:Class ;
+  dct:source "Neuendorf et al 2005"@en ;
+  rdfs:comment "A fault on which there is increasing offset or separation along the strike from an initial point of no offset, with reverse offset in the opposite direction."@en ;
+  rdfs:label "scissor"@en ;
+  rdfs:subClassOf gsfa:Fault_Movement_Sense ;
+.
+gsfa:Sinistral
+  rdf:type owl:Class ;
+  dct:source "GGIC vocabularies working group (Australia)"@en ;
+  rdfs:comment "In plan view the side opposite the observer is displaced to the left."@en ;
+  rdfs:label "sinistral"@en ;
+  rdfs:subClassOf gsfa:Fault_Movement_Sense ;
 .
 gsfa:Sinistral_Strike_Slip_Fault
   rdf:type owl:Class ;
@@ -385,58 +487,6 @@ gsfa:Wrench_Fault
   rdfs:subClassOf gsfa:High_Angle_Fault ;
   rdfs:subClassOf gsfa:Strike_Slip_Fault ;
 .
-gsoc:boyan_brodaric rdf:type schema:Person ; rdf:type owl:NamedIndividual ;
-  schema:affiliation "Natural Resources Canada, Geological Survey of Canada"  ;
-  rdfs:comment "e-mail: mailto:boyan.brodaric@canada.ca " ;
-  schema:identifier <https://orcid.org/0000-0002-7987-3810> ;
-  schema:name "Dr. Boyan Brodaric" ; rdfs:label "Dr. Boyan Brodaric" ;
-.
-gsfa:dextral
-  rdf:type owl:Class ;
-  dct:source "GGIC vocabularies working group (Australia)"@en ;
-  rdfs:comment "In plan view, the side opposite the observer is displaced to the right."@en ;
-  rdfs:comment "Right-lateral separation sense, in plan view, the side opposite the observer appears displaced to the right.,"@en ;
-  rdfs:label "dextral"@en ;
-  rdfs:label "dextre"@fr ;
-  rdfs:subClassOf gsfa:Fault_Movement_Sense ;
-.
-gsfa:extraction
-  rdf:type owl:Class ;
-  dct:source "Froitzheim, N., Pleuger, J. & Nagel, T.J., 2006. Extraction faults. Journal of Structural Geology v28, pp. 1388-1395."@en ;
-  rdfs:comment "Displacement across a fault is substantially in the direction perpendicular to the fault. The fault-parallel displacement is effectively zero."@en ;
-  rdfs:label "extraction"@en ;
-  rdfs:subClassOf gsfa:Fault_Movement_Sense ;
-.
-gsfa:no_movement_sense
-  rdf:type owl:Class ;
-  dct:source "Froitzheim, N., Pleuger, J. & Nagel, T.J., 2006. Extraction faults. Journal of Structural Geology v28, pp. 1388-1395."@en ;
-  rdfs:comment "The fault-parallel displacement is effectively zero, as in an extraction fault."@en ;
-  rdfs:label "no movement sense"@en ;
-  rdfs:subClassOf gsfa:Fault_Movement_Sense ;
-.
-gsfa:normal
-  rdf:type owl:Class ;
-  dct:source "GGIC vocabularies working group (Australia)"@en ;
-  rdfs:comment "The hanging wall has been displaced down relative to the footwall, dip of fault usually 45-90 degrees."@en ;
-  rdfs:label "normal"@en ;
-  rdfs:subClassOf gsfa:Fault_Movement_Sense ;
-.
-gsfa:normal_dextral
-  rdf:type owl:Class ;
-  dct:source "GGIC vocabularies working group (Australia)"@en ;
-  rdfs:comment "The movement sense includes both normal and dextral components."@en ;
-  rdfs:label "normal dextral"@en ;
-  rdfs:subClassOf gsfa:dextral ;
-  rdfs:subClassOf gsfa:normal ;
-.
-gsfa:normal_sinistral
-  rdf:type owl:Class ;
-  dct:source "GGIC vocabularies working group (Australia)"@en ;
-  rdfs:comment "The movement sense includes both normal and sinistral components."@en ;
-  rdfs:label "normal sinistral"@en ;
-  rdfs:subClassOf gsfa:normal ;
-  rdfs:subClassOf gsfa:sinistral ;
-.
 gsfa:ontology
   rdf:type owl:Ontology ;
   dct:created "2021-03-26"^^xsd:date ;
@@ -449,6 +499,7 @@ gsfa:ontology
   dct:rights "Copyright (c) 2021 Government of Canada" ;
   rdfs:comment "This module includes extensions for describing faults in more detail. (ie, a summary of movement type and orientation) as defined by the IUGS Commission for Geoscience Information (CGI) Geoscience Terminology Working Group. Although the terms in this vocabulary are in common usage with definitions in standard texts or glossaries like Neuendorf et al. (2005), the definitions here attempt to establish unambiguous criteria to distinguish the categories, and are thus listed with this vocabulary as the source. Adapted from CGI vocabulary for this ontology"@en ;
   rdfs:label "Geoscience Ontology, Faults"@en ;
+  dct:bibliographicCitation "Brodaric, B., and Richard, S.M., 2021, The GeoScience Ontology Reference, Geologic Structure Fault Module: Geological Survey of Canada Open File XXXX, 34 p.";
   owl:imports gsoc:ontology ;
   owl:imports gspr:ontology ;
   owl:imports gsgq:ontology ;
@@ -456,49 +507,6 @@ gsfa:ontology
   owl:imports gsoq:ontology ;
   skos:definition "Geologic faults."@en ;
   skos:prefLabel "Geoscience Ontology, Faults"@en ;
-.
-gsfa:reverse
-  rdf:type owl:Class ;
-  dct:source "GGIC vocabularies working group (Australia)"@en ;
-  rdfs:comment "The hanging wall has been displaced up relative to the footwall, dip of fault usually greater than 45 degrees."@en ;
-  rdfs:label "inverse"@fr ;
-  rdfs:label "reverse"@en ;
-  rdfs:subClassOf gsfa:Fault_Movement_Sense ;
-.
-gsfa:reverse_dextral
-  rdf:type owl:Class ;
-  dct:source "GGIC vocabularies working group (Australia)"@en ;
-  rdfs:comment "The movement sense includes both reverse and dextral components."@en ;
-  rdfs:label "reverse dextral"@en ;
-  rdfs:subClassOf gsfa:dextral ;
-  rdfs:subClassOf gsfa:reverse ;
-.
-gsfa:reverse_sinistral
-  rdf:type owl:Class ;
-  dct:source "GGIC vocabularies working group (Australia)"@en ;
-  rdfs:comment "The movement sense includes both reverse and sinistral components."@en ;
-  rdfs:label "reverse sinistral"@en ;
-  rdfs:subClassOf gsfa:reverse ;
-  rdfs:subClassOf gsfa:sinistral ;
-.
-gsfa:scissor_movement
-  rdf:type owl:Class ;
-  dct:source "Neuendorf et al 2005"@en ;
-  rdfs:comment "A fault on which there is increasing offset or separation along the strike from an initial point of no offset, with reverse offset in the opposite direction."@en ;
-  rdfs:label "scissor"@en ;
-  rdfs:subClassOf gsfa:Fault_Movement_Sense ;
-.
-gsfa:sinistral
-  rdf:type owl:Class ;
-  dct:source "GGIC vocabularies working group (Australia)"@en ;
-  rdfs:comment "In plan view the side opposite the observer is displaced to the left."@en ;
-  rdfs:label "sinistral"@en ;
-  rdfs:subClassOf gsfa:Fault_Movement_Sense ;
-.
-gsoc:stephen_richard    rdf:type schema:Person ;     rdf:type owl:NamedIndividual ;
-  rdfs:comment "e-mail: mailto:smrTucson@gmail.com " ;
-  schema:identifier <https://orcid.org/0000-0001-6041-5302> ;   schema:name "Dr. Stephen M. Richard" ;
-   rdfs:label "Dr. Stephen M. Richard" ;
 .
 gsos:Fracture
   rdf:type owl:Class ;

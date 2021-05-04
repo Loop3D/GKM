@@ -6,7 +6,8 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix skos: <http://www.w3.org/2004/02/skos/core#> .   @prefix schema: <https://schema.org/> .
+@prefix schema: <https://schema.org/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
@@ -64,11 +65,6 @@ skos:definition
   rdf:type owl:AnnotationProperty ;
   rdfs:subPropertyOf gsoc:hasAnnotation ;
 .
-
-gsoc:Shape_Value
-  rdfs:comment "Place holder for category vocabularies to describe the shape of a morphological feature, e.g. fold, fold limb."@en ;
-.
-
 gsoc:Abstract_Endurant
   rdf:type owl:Class ;
   rdfs:comment "Abstract endurants do not occupy space nor time - they are aspatial and atemporal, e.g. numbers and other mathematical objects"@en ;
@@ -1805,6 +1801,7 @@ gsoc:Shape
 .
 gsoc:Shape_Value
   rdf:type owl:Class ;
+  rdfs:comment "Place holder for category vocabularies to describe the shape of a morphological feature, e.g. fold, fold limb."@en ;
   rdfs:label "Morphologic feature shape value"@en ;
   rdfs:subClassOf gsoc:Named_Value ;
   rdfs:subClassOf [
@@ -2571,11 +2568,14 @@ gsoc:adjacentlyDependsOn
   rdfs:subPropertyOf gsoc:spatiallyTouches ;
   rdfs:subPropertyOf gsoc:spatio-temporallyDependsOn ;
 .
-gsoc:boyan_brodaric rdf:type schema:Person ; rdf:type owl:NamedIndividual ;
-  schema:affiliation "Natural Resources Canada, Geological Survey of Canada"  ;
+gsoc:boyan_brodaric
+  rdf:type owl:NamedIndividual ;
+  rdf:type schema:Person ;
   rdfs:comment "e-mail: mailto:boyan.brodaric@canada.ca " ;
-  schema:identifier <https://orcid.org/0000-0002-7987-3810>;
-  schema:name "Dr. Boyan Brodaric" ; rdfs:label "Dr. Boyan Brodaric" ;
+  rdfs:label "Dr. Boyan Brodaric" ;
+  schema:affiliation "Natural Resources Canada, Geological Survey of Canada" ;
+  schema:identifier <https://orcid.org/0000-0002-7987-3810> ;
+  schema:name "Dr. Boyan Brodaric" ;
 .
 gsoc:constantlyGenDependsOn
   rdf:type owl:ObjectProperty ;
@@ -2609,15 +2609,14 @@ gsoc:contains
 gsoc:coveredBy
   rdf:type owl:ObjectProperty ;
   dct:source "https://en.wikipedia.org/wiki/DE-9IM. Based on the seminal works of Egenhofer et al. (1990, 1991),  Cohn et al. (1997), Clementini et al. (1993, 1994)."@en ;
-  rdfs:comment "the boundary of the subject intesects the interior or the boundary of the object region, and the interior of the subject intersects only the interior of the object region.  Every point of the subject region is a point in the interior or the boundary of the object region."@en ;
+  rdfs:comment "the boundary of the subject intersects the interior or the boundary of the object region, and the interior of the subject intersects only the interior of the object region.  Every point of the subject region is a point in the interior or the boundary of the object region."@en ;
   rdfs:subPropertyOf gsoc:isSpatiallyRelatedTo ;
   owl:inverseOf gsoc:covers ;
 .
 gsoc:covers
   rdf:type owl:ObjectProperty ;
   dct:source "https://en.wikipedia.org/wiki/DE-9IM. Based on the seminal works of Egenhofer et al. (1990, 1991),  Cohn et al. (1997), Clementini et al. (1993, 1994)."@en ;
-  rdfs:comment "At least one point of object region lies in subject region,  and no point of object region lies in the exterior of subject region, or every point of object region is a point of (the interior or boundary of) subject region."@en ;
-  rdfs:comment "The interior of the subject region intersects the interior or the boundary of the object region, and the boundary of the subject region intersects the boundary of the object region."@en ;
+  rdfs:comment "At least one point of object region lies in subject region,  and no point of object region lies in the exterior of subject region, or every point of object region is a point of (the interior or boundary of) subject region. Alternative: The interior of the subject region intersects the interior or the boundary of the object region, and the boundary of the subject region intersects the boundary of the object region."@en ;
   rdfs:subPropertyOf gsoc:isSpatiallyRelatedTo ;
 .
 gsoc:crosses
@@ -2724,7 +2723,8 @@ gsoc:hasDataValue
 .
 gsoc:hasDependent
   rdf:type owl:ObjectProperty ;
-  rdfs:comment "Directed relation between a dependee (the thing being relied on) and the dependent (the thing that relies on something)." ;
+  rdfs:comment "Directed relation between a dependee (the thing being relied on) and the dependent (the thing that relies on something)."@en ;
+  rdfs:label "has dependent"@en ;
   rdfs:subPropertyOf gsoc:dependance ;
   owl:inverseOf gsoc:dependsOn ;
 .
@@ -3285,6 +3285,7 @@ gsoc:occupiesTimeIndirectly
 .
 gsoc:ontology
   rdf:type owl:Ontology ;
+  dct:bibliographicCitation "Brodaric, B., and Richard, S.M., 2021, The GeoScience Ontology Reference: Geological Survey of Canada Open File XXXX, 34 p." ;
   dct:created "2020-03-26"^^xsd:date ;
   dct:creator gsoc:boyan_brodaric ;
   dct:creator gsoc:stephen_richard ;
@@ -3400,10 +3401,13 @@ gsoc:staticHosts
   rdfs:subPropertyOf gsoc:hosts ;
   owl:inverseOf gsoc:staticHostedBy ;
 .
-gsoc:stephen_richard    rdf:type schema:Person ;     rdf:type owl:NamedIndividual ;
+gsoc:stephen_richard
+  rdf:type owl:NamedIndividual ;
+  rdf:type schema:Person ;
   rdfs:comment "e-mail: mailto:smrTucson@gmail.com " ;
+  rdfs:label "Dr. Stephen M. Richard" ;
   schema:identifier <https://orcid.org/0000-0001-6041-5302> ;
-  schema:name "Dr. Stephen M. Richard" ; rdfs:label "Dr. Stephen M. Richard" ;
+  schema:name "Dr. Stephen M. Richard" ;
 .
 gsoc:timeContains
   rdf:type owl:ObjectProperty ;
@@ -3480,14 +3484,14 @@ gsoc:timeMeets
   rdf:type owl:ObjectProperty ;
   rdfs:comment "A covers B -- A is immediately younger than B (there are no events between A and B) Same as Allen A meets B."@en ;
   rdfs:comment "One of six binary relations between geologic events defined by Burns (1975)"@en ;
-  rdfs:comment "Source TimeRegion ends at the beginning of the target TimeRegion; there is no intervening time; inverse of age_met_by"@en ;
+  rdfs:comment "Source TimeRegion ends at the beginning of the target TimeRegion; there is no intervening time and boundary instants are distinct; inverse of age_met_by"@en ;
   rdfs:subPropertyOf gsoc:timeDisjoint ;
   rdfs:subPropertyOf gsoc:timeOlderThan ;
   owl:inverseOf gsoc:timeMetBy ;
 .
 gsoc:timeMetBy
   rdf:type owl:ObjectProperty ;
-  rdfs:comment "Source TimeRegion starts at the end of the target TimeRegion; there is no intervening time; inverse of meets"@en ;
+  rdfs:comment "Source TimeRegion starts at the end of the target TimeRegion; there is no intervening time, and the boundary instants are distinct;  inverse of meets"@en ;
   rdfs:subPropertyOf gsoc:timeDisjoint ;
   rdfs:subPropertyOf gsoc:timeYoungerThan ;
 .
@@ -3519,14 +3523,12 @@ gsoc:timeOverlappedBy
   dct:source "https://en.wikipedia.org/wiki/Allen%27s_interval_algebra" ;
   rdfs:comment "Target event starts after source event, and target event ends after source event ends."@en ;
   rdfs:subPropertyOf gsoc:timeIntersects ;
-  rdfs:subPropertyOf gsoc:timeYoungerThan ;
   owl:inverseOf gsoc:timeOverlaps ;
 .
 gsoc:timeOverlaps
   rdf:type owl:ObjectProperty ;
   rdfs:comment "target interval starts before source interval ends, and target inteval ends after source interval. Allen Relation"@en ;
   rdfs:subPropertyOf gsoc:timeIntersects ;
-  rdfs:subPropertyOf gsoc:timeOlderThan ;
 .
 gsoc:timePrecededBy
   rdf:type owl:ObjectProperty ;

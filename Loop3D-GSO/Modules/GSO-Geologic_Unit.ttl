@@ -1,5 +1,7 @@
-﻿# baseURI: https://w3id.org/gso/geologicunit/ontology
+# baseURI: https://w3id.org/gso/geologicunit/ontology
+# imports: http://topbraid.org/spin/spinowl
 # imports: https://w3id.org/gso/common/ontology
+# imports: https://w3id.org/gso/feature/ontology
 # imports: https://w3id.org/gso/geologicfeature/ontology
 # imports: https://w3id.org/gso/geologicprocess/ontology
 # imports: https://w3id.org/gso/geologictime/ontology
@@ -7,6 +9,7 @@
 
 @prefix : <https://w3id.org/gso/geologicunit/ontology#> .
 @prefix dct: <http://purl.org/dc/terms/> .
+@prefix feature: <https://w3id.org/gso/feature/> .
 @prefix gsgf: <https://w3id.org/gso/geologicfeature/> .
 @prefix gsgu: <https://w3id.org/gso/geologicunit/> .
 @prefix gsoc: <https://w3id.org/gso/common/> .
@@ -16,9 +19,26 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix skos: <http://www.w3.org/2004/02/skos/core#> .   @prefix schema: <https://schema.org/> .
+@prefix schema: <https://schema.org/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
+gsoc:boyan_brodaric
+  rdf:type owl:NamedIndividual ;
+  rdf:type schema:Person ;
+  rdfs:comment "e-mail: mailto:boyan.brodaric@canada.ca " ;
+  rdfs:label "Dr. Boyan Brodaric" ;
+  schema:affiliation "Natural Resources Canada, Geological Survey of Canada" ;
+  schema:identifier <https://orcid.org/0000-0002-7987-3810> ;
+  schema:name "Dr. Boyan Brodaric" ;
+.
+gsoc:stephen_richard
+  rdf:type owl:NamedIndividual ;
+  rdf:type schema:Person ;
+  rdfs:comment "e-mail: mailto:smrTucson@gmail.com " ;
+  schema:identifier <https://orcid.org/0000-0001-6041-5302> ;
+  schema:name "Dr. Stephen M. Richard" ;
+.
 gsgf:Stratigraphic_Section
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
@@ -305,12 +325,13 @@ gsgu:Formation
       rdf:type owl:Restriction ;
       owl:allValuesFrom [
           rdf:type owl:Class ;
-          owl:unionOf (
-              gsgu:Bed
-              gsgu:Facies
-              gsgf:Lithosome
-              gsgu:Member
-            ) ;
+          owl:complementOf [
+              rdf:type owl:Class ;
+              owl:unionOf (
+                  gsgu:Group
+                  gsgu:Supergroup
+                ) ;
+            ] ;
         ] ;
       owl:onProperty gsoc:hasPart ;
     ] ;
@@ -348,8 +369,11 @@ gsgu:Group
   rdfs:subClassOf gsgu:Lithostratigraphic_Unit ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
+      owl:allValuesFrom [
+          rdf:type owl:Class ;
+          owl:complementOf gsgu:Supergroup ;
+        ] ;
       owl:onProperty gsoc:hasPart ;
-      owl:someValuesFrom gsgu:Formation ;
     ] ;
 .
 gsgu:Igneous_Facies
@@ -508,11 +532,6 @@ gsgu:Lithostratigraphic_Unit
   rdfs:comment "Geologic unit defined on the basis of observable and distinctive lithologic properties or combination of lithologic properties and stratigraphic relationships. Denotes a particular body of rock."@en ;
   rdfs:label "Lithostratigraphic Unit"@en ;
   rdfs:subClassOf gsgu:Stratigraphic_Unit ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom gsgu:Lithostratigraphic_Unit ;
-      owl:onProperty gsoc:hasPart ;
-    ] ;
 .
 gsgu:Magnetostratigraphic_Unit
   rdf:type owl:Class ;
@@ -568,11 +587,14 @@ gsgu:Member
       rdf:type owl:Restriction ;
       owl:allValuesFrom [
           rdf:type owl:Class ;
-          owl:unionOf (
-              gsgu:Bed
-              gsgu:Facies
-              gsgf:Lithosome
-            ) ;
+          owl:complementOf [
+              rdf:type owl:Class ;
+              owl:unionOf (
+                  gsgu:Formation
+                  gsgu:Group
+                  gsgu:Supergroup
+                ) ;
+            ] ;
         ] ;
       owl:onProperty gsoc:hasPart ;
     ] ;
@@ -926,31 +948,24 @@ gsgu:Zeolite_Metamorphic_Facies
 .
 gsgu:ontology
   rdf:type owl:Ontology ;
+  dct:bibliographicCitation "Brodaric, B., and Richard, S.M., 2021, The GeoScience Ontology Reference, Geologic Unit Module: Geological Survey of Canada Open File XXXX, 34 p." ;
   dct:created "2021-03-26"^^xsd:date ;
-  dct:creator gsoc:stephen_richard ;
   dct:creator gsoc:boyan_brodaric ;
+  dct:creator gsoc:stephen_richard ;
   dct:license <https://creativecommons.org/licenses/by/4.0/legalcode> ;
-  dct:rights  "Copyright (c) 2021 Government of Canada" ; 
   dct:modified "2021-03-26"^^xsd:date ;
   dct:publisher "ARC Loop3D project;  https://loop3d.org/" ;
   dct:publisher "Geological Survey of Canada, Natural Resources Canada, Government of Canada" ;
+  dct:rights "Copyright (c) 2021 Government of Canada" ;
   rdfs:comment "This ontology specifies concepts for description of Geologic Unit, adopted from the IUGS Commission for Geoscience Information (CGI) Geoscience Terminology Working Group. These classes and properties extend the base GSO-Geology ontology for more detailed descriptions. Unit types are differentiated based on their defining lithological, stratigraphic, or other physical properties."@en ;
   rdfs:label "Geoscience Ontology, Geologic Unit"@en ;
+  owl:imports <http://topbraid.org/spin/spinowl> ;
   owl:imports gsoc:ontology ;
+  owl:imports feature:ontology ;
   owl:imports gsgf:ontology ;
   owl:imports gspr:ontology ;
   owl:imports gst:ontology ;
   owl:imports gsog:ontology ;
   skos:definition "Shared elements for geoscience ontology"@en ;
   skos:prefLabel "Geoscience Ontology, Geologic Unit"@en ;
-.
-gsoc:boyan_brodaric rdf:type schema:Person ; rdf:type owl:NamedIndividual ;
-  schema:affiliation "Natural Resources Canada, Geological Survey of Canada"  ;
-  rdfs:comment "e-mail: mailto:boyan.brodaric@canada.ca " ;
-  schema:identifier <https://orcid.org/0000-0002-7987-3810> ;
-  schema:name "Dr. Boyan Brodaric" ; rdfs:label "Dr. Boyan Brodaric" ;
-.
-gsoc:stephen_richard    rdf:type schema:Person ;     rdf:type owl:NamedIndividual ;
-  rdfs:comment "e-mail: mailto:smrTucson@gmail.com " ;
-  schema:identifier <https://orcid.org/0000-0001-6041-5302> ;   schema:name "Dr. Stephen M. Richard" ;
 .
