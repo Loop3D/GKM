@@ -173,6 +173,17 @@ gsog:Geologic_Event
       owl:onProperty gsoc:hasConstituent ;
       owl:someValuesFrom gsog:Geologic_Process ;
     ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:hasParticipant ;
+      owl:someValuesFrom [
+          rdf:type owl:Class ;
+          owl:unionOf (
+              gsog:Geologic_Material
+              gsog:Geologic_Object
+            ) ;
+        ] ;
+    ] ;
 .
 gsog:Geologic_Material
   rdf:type owl:Class ;
@@ -301,6 +312,17 @@ gsog:Geologic_Process
   rdfs:comment "A process that has inputs and or outputs that are part of the Earth System"@en ;
   rdfs:label "Geologic Process"@en ;
   rdfs:subClassOf gsoc:Process ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:hasParticipant ;
+      owl:someValuesFrom [
+          rdf:type owl:Class ;
+          owl:unionOf (
+              gsog:Geologic_Material
+              gsog:Geologic_Object
+            ) ;
+        ] ;
+    ] ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
       owl:onProperty gsoc:isConstituentOf ;
