@@ -11,7 +11,8 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix skos: <http://www.w3.org/2004/02/skos/core#> .   @prefix schema: <https://schema.org/> .
+@prefix schema: <https://schema.org/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 gsoc:Element
@@ -19,16 +20,22 @@ gsoc:Element
   owl:disjointWith gsog:Rock_Grain_Material ;
   owl:disjointWith gsog:Rock_Material ;
 .
-gsoc:boyan_brodaric rdf:type schema:Person ; rdf:type owl:NamedIndividual ;
-  schema:identifier <https://orcid.org/0000-0002-7987-3810> ;
-  schema:affiliation "Natural Resources Canada, Geological Survey of Canada"  ;
+gsoc:boyan_brodaric
+  rdf:type owl:NamedIndividual ;
+  rdf:type schema:Person ;
   rdfs:comment "e-mail: mailto:boyan.brodaric@canada.ca " ;
-  schema:name "Dr. Boyan Brodaric" ; rdfs:label "Dr. Boyan Brodaric" ;
+  rdfs:label "Dr. Boyan Brodaric" ;
+  schema:affiliation "Natural Resources Canada, Geological Survey of Canada" ;
+  schema:identifier <https://orcid.org/0000-0002-7987-3810> ;
+  schema:name "Dr. Boyan Brodaric" ;
 .
-gsoc:stephen_richard    rdf:type schema:Person ;     rdf:type owl:NamedIndividual ;
-  schema:identifier <https://orcid.org/0000-0001-6041-5302> ;
+gsoc:stephen_richard
+  rdf:type owl:NamedIndividual ;
+  rdf:type schema:Person ;
   rdfs:comment "e-mail: mailto:smrTucson@gmail.com " ;
-  schema:name "Dr. Stephen M. Richard" ; rdfs:label "Dr. Stephen M. Richard" ;
+  rdfs:label "Dr. Stephen M. Richard" ;
+  schema:identifier <https://orcid.org/0000-0001-6041-5302> ;
+  schema:name "Dr. Stephen M. Richard" ;
 .
 gsog:Additive_Process
   rdf:type owl:Class ;
@@ -166,6 +173,17 @@ gsog:Geologic_Event
       owl:onProperty gsoc:hasConstituent ;
       owl:someValuesFrom gsog:Geologic_Process ;
     ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:hasParticipant ;
+      owl:someValuesFrom [
+          rdf:type owl:Class ;
+          owl:unionOf (
+              gsog:Geologic_Material
+              gsog:Geologic_Object
+            ) ;
+        ] ;
+    ] ;
 .
 gsog:Geologic_Material
   rdf:type owl:Class ;
@@ -294,6 +312,17 @@ gsog:Geologic_Process
   rdfs:comment "A process that has inputs and or outputs that are part of the Earth System"@en ;
   rdfs:label "Geologic Process"@en ;
   rdfs:subClassOf gsoc:Process ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:hasParticipant ;
+      owl:someValuesFrom [
+          rdf:type owl:Class ;
+          owl:unionOf (
+              gsog:Geologic_Material
+              gsog:Geologic_Object
+            ) ;
+        ] ;
+    ] ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
       owl:onProperty gsoc:isConstituentOf ;
