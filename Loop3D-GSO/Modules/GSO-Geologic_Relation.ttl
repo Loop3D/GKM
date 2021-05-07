@@ -47,7 +47,29 @@ gsrl:crosscutBy
           gsog:Rock_Body
         ) ;
     ] ;
+  rdfs:domain [
+      rdf:type owl:Class ;
+      owl:unionOf (
+          [
+            rdf:type owl:Restriction ;
+            owl:onProperty gsoc:hostedBy ;
+            owl:someValuesFrom gsog:Rock_Body ;
+          ]
+          gsog:Rock_Body
+        ) ;
+    ] ;
   rdfs:label "is cross-cut or truncated by"@en ;
+  rdfs:range [
+      rdf:type owl:Class ;
+      owl:unionOf (
+          [
+            rdf:type owl:Restriction ;
+            owl:onProperty gsoc:hostedBy ;
+            owl:someValuesFrom gsog:Rock_Body ;
+          ]
+          gsog:Rock_Body
+        ) ;
+    ] ;
   rdfs:range [
       rdf:type owl:Class ;
       owl:unionOf (
@@ -146,7 +168,7 @@ gsrl:litparlitintrudes
 .
 gsrl:ontology
   rdf:type owl:Ontology ;
-  dct:bibliographicCitation "Brodaric, B., and Richard, S.M., 2021, The GeoScience Ontology Reference: Geological Survey of Canada Open File 8796, 34 p., https://doi.org/10.4095/328296";
+  dct:bibliographicCitation "Brodaric, B., and Richard, S.M., 2021, The GeoScience Ontology Reference: Geological Survey of Canada Open File 8796, 34 p., https://doi.org/10.4095/328296" ;
   dct:created "2021-03-26"^^xsd:date ;
   dct:creator gsoc:boyan_brodaric ;
   dct:creator gsoc:stephen_richard ;
@@ -154,13 +176,14 @@ gsrl:ontology
   dct:modified "2021-03-26"^^xsd:date ;
   dct:publisher "ARC Loop3D project;  https://loop3d.org/" ;
   dct:publisher "Geological Survey of Canada, Natural Resources Canada, Government of Canada" ;
-    schema:codeRepository "https://github.com/Loop3D/GKM";  dct:rights  "Copyright (c) 2021 Government of Canada" ;
+  dct:rights "Copyright (c) 2021 Government of Canada" ;
   rdfs:label "Geologic Relation"@en ;
   owl:imports gsoc:ontology ;
   owl:imports gsos:ontology ;
   owl:imports gsog:ontology ;
   skos:definition "Defines kinds of associations between geoscience classes. Domains and Ranges generally not constrained in this version."@en ;
   skos:prefLabel "Geoscience Ontology, Geologic reference system"@en ;
+  schema:codeRepository "https://github.com/Loop3D/GKM" ;
 .
 gsrl:overlies
   rdf:type owl:ObjectProperty ;
