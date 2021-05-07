@@ -1,6 +1,6 @@
 # Geoscience Knowledge manager
 
-Release 1.0.0 OWL source Dataset in text/ttl files : [![DOI](https://zenodo.org/badge/175226659.svg)](https://zenodo.org/badge/latestdoi/175226659)
+Release 1.0.0 OWL source Dataset in text/ttl files :  [![DOI](https://zenodo.org/badge/175226659.svg)](https://zenodo.org/badge/latestdoi/175226659)
 
 
 This repository contains public work items related to development of the ontology and knowledge base for the Loop 3D geology project.
