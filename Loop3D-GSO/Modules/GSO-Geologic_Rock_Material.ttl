@@ -12,23 +12,28 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix skos: <http://www.w3.org/2004/02/skos/core#> .   
 @prefix schema: <https://schema.org/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-gsoc:boyan_brodaric rdf:type schema:Person ; rdf:type owl:NamedIndividual ;
-  schema:identifier <https://orcid.org/0000-0002-7987-3810> ;
-  schema:affiliation "Natural Resources Canada, Geological Survey of Canada"  ;
+gsoc:boyan_brodaric
+  rdf:type owl:NamedIndividual ;
+  rdf:type schema:Person ;
   rdfs:comment "e-mail: mailto:boyan.brodaric@canada.ca " ;
-  schema:name "Dr. Boyan Brodaric" ; rdfs:label "Dr. Boyan Brodaric" ;
+  rdfs:label "Dr. Boyan Brodaric" ;
+  schema:affiliation "Natural Resources Canada, Geological Survey of Canada" ;
+  schema:identifier <https://orcid.org/0000-0002-7987-3810> ;
+  schema:name "Dr. Boyan Brodaric" ;
 .
-gsoc:stephen_richard    rdf:type schema:Person ;     rdf:type owl:NamedIndividual ;
-  schema:identifier <https://orcid.org/0000-0001-6041-5302> ;
+gsoc:stephen_richard
+  rdf:type owl:NamedIndividual ;
+  rdf:type schema:Person ;
   rdfs:comment "e-mail: mailto:smrTucson@gmail.com " ;
-  schema:name "Dr. Stephen M. Richard" ; rdfs:label "Dr. Stephen M. Richard" ;
+  rdfs:label "Dr. Stephen M. Richard" ;
+  schema:identifier <https://orcid.org/0000-0001-6041-5302> ;
+  schema:name "Dr. Stephen M. Richard" ;
 .
-
 gsrm:Acidic_Igneous_Material
   rdf:type owl:Class ;
   dct:source "after LeMaitre et al. 2002"@en ;
@@ -1360,7 +1365,7 @@ gsrm:Mud
 gsrm:Mud_Size_Sediment
   rdf:type owl:Class ;
   dct:source "based on SLTTs 2004; Neuendorf et al. 2005; particle sizes defined from Krumbein phi scale (W C Krumbein and L L Sloss, Stratigraphy and Sedimentation, 2nd edition, Freeman, San Francisco, 1963; Krumbein and Pettijohn, 1938, Manual of Sedimentary Petrography: New York, Appleton Century Co., Inc.)"@en ;
-  rdfs:comment "Sediment consisting of less than 30 percent gravel-size (2 mm) particles and with a mud-size to sand-size particle ratio greater than 1. Clasts may be of any composition or origin."@en ;
+  rdfs:comment "Sediment consisting of less than 30 percent gravel-size (2 mm) particles and with a mud-size to sand-size particle ratio greater than 1. Clasts may be of any composition or origin.  BGS  (Hallsworth and Knox, 1999, p. 9) define the  'upper size limit of mud ... at 32 micrometers (.032 mm)', but Wentworth scale and Krumbein scale put boundary at .064 or .062 mm (inidistinguishable difference in rocks...) BGS 'mud-grade sediment' or sedimentary rock definition is 'over 75% of the clasts smaller than  .032 mm', which is narrower than the definition here."@en ;
   rdfs:label "mud size sediment"@en ;
   rdfs:subClassOf gsrm:Sediment ;
 .
@@ -1887,8 +1892,8 @@ gsrm:Siliceous_Ooze
 .
 gsrm:Silt
   rdf:type owl:Class ;
-  dct:source "based on SLTTs 2004; Neuendorf et al. 2005; particle size from Wentworth grade scale"@en ;
-  rdfs:comment "Mud that consists of greater than 50 percent silt-size grains."@en ;
+  dct:source "based on SLTTs 2004; Neuendorf et al. 2005; particle size from Wentworth grade scale."@en ;
+  rdfs:comment "Mud that consists of greater than 50 percent silt-size grains. Silt size is between .004 and .063 mm. Note that BGS definition of silt grade is .004 to .032 μm, includes only half if the Wentworth size range. Fortunately, in lithified rocks that have undergone any diagnesis, grain size distinctions in this size range are questionable."@en ;
   rdfs:label "silt"@en ;
   rdfs:subClassOf gsrm:Mud ;
   skos:altLabel "loess"@en ;
@@ -2258,6 +2263,7 @@ gsrm:not_altered_rock
 .
 gsrm:ontology
   rdf:type owl:Ontology ;
+  dct:bibliographicCitation "Brodaric, B., and Richard, S.M., 2021, The GeoScience Ontology Reference: Geological Survey of Canada Open File 8796, 34 p., https://doi.org/10.4095/328296" ;
   dct:created "2021-03-26"^^xsd:date ;
   dct:creator gsoc:boyan_brodaric ;
   dct:creator gsoc:stephen_richard ;
@@ -2265,15 +2271,15 @@ gsrm:ontology
   dct:modified "2021-03-26"^^xsd:date ;
   dct:publisher "ARC Loop3D project;  https://loop3d.org/" ;
   dct:publisher "Geological Survey of Canada, Natural Resources Canada, Government of Canada" ;
-    schema:codeRepository "https://github.com/Loop3D/GKM";  dct:rights  "Copyright (c) 2021 Government of Canada" ;
+  dct:rights "Copyright (c) 2021 Government of Canada" ;
+  dct:source "<http://resource.geosciml.org/classifierScheme/cgi/2016.01/simplelithology>" ;
   rdfs:comment "Rock type categories modified from CGI SimpleLithology; properties based on GeoSciML v3.2 conceptual model. Scope includes gso Rock_Material and gso Granular Material. GSO granular material is analogous to GeoSciMLv3.2 compound material particle geometry description.  "@en ;
   rdfs:label "Geoscience Ontology, Rock Types" ;
-  dct:bibliographicCitation "Brodaric, B., and Richard, S.M., 2021, The GeoScience Ontology Reference: Geological Survey of Canada Open File 8796, 34 p., https://doi.org/10.4095/328296";
   owl:imports gsoc:ontology ;
   owl:imports gsog:ontology ;
   skos:definition "Kinds of rock material."@en ;
   skos:prefLabel "Geoscience Ontology, Rock Types"@en ;
-  dct:source "<http://resource.geosciml.org/classifierScheme/cgi/2016.01/simplelithology>" ;
+  schema:codeRepository "https://github.com/Loop3D/GKM" ;
 .
 gsrm:phyllic_altered_rock
   rdf:type owl:Class ;
