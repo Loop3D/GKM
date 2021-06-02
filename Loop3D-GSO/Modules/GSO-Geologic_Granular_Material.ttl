@@ -10,19 +10,26 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix skos: <http://www.w3.org/2004/02/skos/core#> .   @prefix schema: <https://schema.org/> .
+@prefix schema: <https://schema.org/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-gsoc:boyan_brodaric rdf:type schema:Person ; rdf:type owl:NamedIndividual ;
-  schema:identifier <https://orcid.org/0000-0002-7987-3810> ;
-  schema:affiliation "Natural Resources Canada, Geological Survey of Canada"  ;
+gsoc:boyan_brodaric
+  rdf:type owl:NamedIndividual ;
+  rdf:type schema:Person ;
   rdfs:comment "e-mail: mailto:boyan.brodaric@canada.ca " ;
-  schema:name "Dr. Boyan Brodaric" ; rdfs:label "Dr. Boyan Brodaric" ;
+  rdfs:label "Dr. Boyan Brodaric" ;
+  schema:affiliation "Natural Resources Canada, Geological Survey of Canada" ;
+  schema:identifier <https://orcid.org/0000-0002-7987-3810> ;
+  schema:name "Dr. Boyan Brodaric" ;
 .
-gsoc:stephen_richard    rdf:type schema:Person ;     rdf:type owl:NamedIndividual ;
-  schema:identifier <https://orcid.org/0000-0001-6041-5302> ;
+gsoc:stephen_richard
+  rdf:type owl:NamedIndividual ;
+  rdf:type schema:Person ;
   rdfs:comment "e-mail: mailto:smrTucson@gmail.com " ;
-  schema:name "Dr. Stephen M. Richard" ; rdfs:label "Dr. Stephen M. Richard" ;
+  rdfs:label "Dr. Stephen M. Richard" ;
+  schema:identifier <https://orcid.org/0000-0001-6041-5302> ;
+  schema:name "Dr. Stephen M. Richard" ;
 .
 gsog:Rock_Grain_Material
   rdf:type owl:Class ;
@@ -38,6 +45,20 @@ gsgm:Aggregate_NonClastic_Particle_Material
   rdfs:comment "Granular material consisting of non-clastic particles that are composed of an aggregation of particles."@en ;
   rdfs:label "Aggregate non clastic particle material"@en ;
   rdfs:subClassOf gsgm:Crystallized_Particle_Material ;
+.
+gsgm:Angular
+  rdf:type owl:Class ;
+  dct:source "Powers, M. C., 1953 A new roundness scale for sedimentary particles. Journal of Sedimentary Petrology, v. 23, p. 117-119"@en ;
+  rdfs:comment "A clastic sedimentary particle showing very little or no evidence of abrasion, with all of its edges and corners sharp, such as blocks with numerous (15-30) secondary corners and a roundness value between 0.17 and 0.25 (midpoint at 0.21)."@en ;
+  rdfs:label "angular"@en ;
+  rdfs:subClassOf gsgm:Grain_Roundness_Value ;
+.
+gsgm:Anhedral
+  rdf:type owl:Class ;
+  dct:source "MacKenzie, W.S., Donaldson, C.H. & Guilford, C., 1982. Atlas of igneous rocks and their textures. John Wiley & Sons, New York"@en ;
+  rdfs:comment "Crystalline particles in a rock lack well-developed crystal faces, usually referring to igneous or metamorphic grains"@en ;
+  rdfs:label "anhedral"@en ;
+  rdfs:subClassOf gsgm:Grain_Roundness_Value ;
 .
 gsgm:Autoclastic_Particle_Material
   rdf:type owl:Class ;
@@ -73,11 +94,35 @@ gsgm:Bleb_Particle_Material
   rdfs:label "bleb particle material"@en ;
   rdfs:subClassOf gsog:Rock_Grain_Material ;
 .
+gsgm:Boulder_Size
+  rdf:type owl:Class ;
+  rdfs:label "Boulder size"@en ;
+  rdfs:subClassOf gsgm:Grain_Size_Value ;
+  skos:definition "phi scale less than -8; Size range (metric) greater than 256 mm; Size range (approx. inches) greater than 10.1 in"@en ;
+.
 gsgm:Clastic_Granular_Material
   rdf:type owl:Class ;
   rdfs:comment "Granular material consisting of particles that have been transported by surficial processes and are constituents in clastic sedimentary rock/sediment or volcaniclastic rock/sediment --conglomerate clast types, sand components, clay matrix."@en ;
   rdfs:label "Clastic particle material"@en ;
   rdfs:subClassOf gsgm:Granular_Particle_Material ;
+.
+gsgm:Clay_Size
+  rdf:type owl:Class ;
+  rdfs:label "Clay size "@en ;
+  rdfs:subClassOf gsgm:Mud_Size ;
+  skos:definition "phi scale 10 to 8; Size range (metric) .0001 to .004 mm"@en ;
+.
+gsgm:Coarse_Gravel
+  rdf:type owl:Class ;
+  rdfs:label "Coarse gravel size"@en ;
+  rdfs:subClassOf gsgm:Pebble_Size ;
+  skos:definition "phi scale 0 to -6; Size range (metric) 2 to 64 mm; Size range (approx. inches) .08 to 2.5 in"@en ;
+.
+gsgm:Coarse_Sand
+  rdf:type owl:Class ;
+  rdfs:label "Coarse sand size"@en ;
+  rdfs:subClassOf gsgm:Sand_Size ;
+  skos:definition "phi scale 1 to 0; Size range (metric) .5 to 1 mm; Size range (approx. inches) .02 to .039 in"@en ;
 .
 gsgm:Coated_Particle_Material
   rdf:type owl:Class ;
@@ -85,6 +130,12 @@ gsgm:Coated_Particle_Material
   rdfs:comment "Granular material consisting of particles that have coats or layers of foreign material, usually fine mud-sized and occasionally recrystallized, that form concentric or overlapping shells around a core of rock, shell, peloidal, or intraclastic material. (eg: oolith, pisolith)"@en ;
   rdfs:label "coated particle particle material"@en ;
   rdfs:subClassOf gsgm:Clastic_Granular_Material ;
+.
+gsgm:Cobble_Size
+  rdf:type owl:Class ;
+  rdfs:label "Cobble size"@en ;
+  rdfs:subClassOf gsgm:Grain_Size_Value ;
+  skos:definition "phi scale -6 to -8; Size range (metric) 64 to 256 mm; Size range (approx. inches) 2.5 to 10.1 in"@en ;
 .
 gsgm:Cognate_Volcanic_Particle_Material
   rdf:type owl:Class ;
@@ -134,12 +185,26 @@ gsgm:Deformation_Related_Particle_Material
   rdfs:label "Deformation-related particle material"@en ;
   rdfs:subClassOf gsgm:Granular_Particle_Material ;
 .
+gsgm:Diffuse
+  rdf:type owl:Class ;
+  dct:source "SLTTs 2004"@en ;
+  rdfs:comment "Particles in aggregate have diffuse, ill-defined boundaries"@en ;
+  rdfs:label "diffuse"@en ;
+  rdfs:subClassOf gsgm:Grain_Roundness_Value ;
+.
 gsgm:Epiclastic_Particle_Material
   rdf:type owl:Class ;
   dct:source "Schmid 1981, NADM SLTTs 2004"@en ;
   rdfs:comment "Granular material consisting of grains or fragments produced by weathering and erosion of a pre-existing rock mass. Consists of particles whose origin as a fragment is a result of surface (sedimentary, weathering...) processes. 'Crystals, crystal fragments, glass and rock fragments that have been liberated from any type of pre-existing consolidated rock (volcanic or non-volcanic) by weathering or erosion and transported from the site of origin by gravity, air, water, or ice' [Schmid, 1981]. Distinguished from intraclast in that epiclast is derived from a pre-existing rock from outside the basin of deposition (NADM SLTTs 2004) before introduction into a clastic rock material."@en ;
   rdfs:label "epiclastic particle material"@en ;
   rdfs:subClassOf gsgm:Clastic_Granular_Material ;
+.
+gsgm:Euhedral
+  rdf:type owl:Class ;
+  dct:source "MacKenzie, W.S., Donaldson, C.H. & Guilford, C., 1982. Atlas of igneous rocks and their textures. John Wiley & Sons, New York"@en ;
+  rdfs:comment "Crystalline particles in a rock are mostly bounded by perfect crystal faces, usually referring to igneous or metamorphoc grains"@en ;
+  rdfs:label "euhedral"@en ;
+  rdfs:subClassOf gsgm:Grain_Roundness_Value ;
 .
 gsgm:Fecal_Pellet_Particle_Material
   rdf:type owl:Class ;
@@ -154,6 +219,18 @@ gsgm:Fiamme_Particle_Material
   rdfs:comment "Granular material consisting of lens-shaped bodies, usually mm to cm thick, and centimeters to 1-2 decimeters long, typically seen on surfaces of some pyroclastic rocks. The name fiamme comes from the Italian word for flames, describing their shape. The term is descriptive and non-genetic. Generally interpreted to form by the collapse of pumice fragments during welding in a hot pyroclastic deposit."@en ;
   rdfs:label "fiamme particle material"@en ;
   rdfs:subClassOf gsgm:Pyroclastic_Particle_Material ;
+.
+gsgm:Fine_Gravel
+  rdf:type owl:Class ;
+  rdfs:label "fine gravel size"@en ;
+  rdfs:subClassOf gsgm:Pebble_Size ;
+  skos:definition "phi scale -2 to -3; Size range (metric) 4 to 8 mm; Size range (approx. inches) 0.157 to 0.31 in"@en ;
+.
+gsgm:Fine_Sand_Size
+  rdf:type owl:Class ;
+  rdfs:label "Fine sand size"@en ;
+  rdfs:subClassOf gsgm:Sand_Size ;
+  skos:definition "phi scale 3 to 2; Size range (metric) .125 to .250 mm; Size range (approx. inches) .0049 to .01 in"@en ;
 .
 gsgm:Fluidal_Pyroclastic_Particle_Material
   rdf:type owl:Class ;
@@ -218,12 +295,33 @@ gsgm:Grain_Size
       owl:onProperty gsoc:isQualityOf ;
     ] ;
 .
+gsgm:Grain_Size_Value
+  rdf:type owl:Class ;
+  dct:source "Krumbein, W. C. (1934). 'Size frequency distributions of sediments'. Journal of Sedimentary Petrology. 2 (4).  doi:10.1306/D4268EB9-2B26-11D7-8648000102C1865D." ;
+  dct:source "Wentworth, C. K. (1922). 'A Scale of Grade and Class Terms for Clastic Sediments'. The Journal of Geology. 30 (5): 377–392. doi:10.1086/622910. JSTOR 30063207. " ;
+  rdfs:comment "value space to describe particle size in granular aggregates."@en ;
+  rdfs:label "Grain Size Value "@en ;
+  rdfs:subClassOf gsoc:Named_Value ;
+.
 gsgm:Granular_Particle_Material
   rdf:type owl:Class ;
   dct:source "NADM SLTTs 2004"@en ;
   rdfs:comment "Material consisting of a collection of pre-existing objects (particles, grains) before incorporation into a particulate aggregate. \\...a component of solid material that has the form of grains, clasts, fragments, or whole objects of any size, shape, composition, texture, and structure.\\ (NADMSC SLTTs, 2004)"@en ;
   rdfs:label "Granular particle material"@en ;
   rdfs:subClassOf gsog:Rock_Grain_Material ;
+.
+gsgm:Granule_Size
+  rdf:type owl:Class ;
+  rdfs:label "Granule size"@en ;
+  rdfs:subClassOf gsgm:Gravel_Size ;
+  skos:altLabel "very fine gravel"@en ;
+  skos:definition "phi scale -1 to -2; Size range (metric) 2 to 4 mm; Size range (approx. inches) .079 to .157 in"@en ;
+.
+gsgm:Gravel_Size
+  rdf:type owl:Class ;
+  rdfs:label "Gravel size"@en ;
+  rdfs:subClassOf gsgm:Grain_Size_Value ;
+  skos:definition "phi scale -1 to -6; Size range (metric) 2 to 64 mm; Size range (approx. inches) .079 to 2.5 in"@en ;
 .
 gsgm:Hydroclastic_Particle_Material
   rdf:type owl:Class ;
@@ -259,6 +357,18 @@ gsgm:Material_Fossil_Particle_Material
   rdfs:label "material fossil material"@en ;
   rdfs:subClassOf gsgm:Bioclastic_Particle_Material ;
 .
+gsgm:Medium_Gravel
+  rdf:type owl:Class ;
+  rdfs:label "Medium gravel size"@en ;
+  rdfs:subClassOf gsgm:Pebble_Size ;
+  skos:definition "phi scale -3 to -4; Size range (metric) 8 to 16 mm; Size range (approx. inches) .157 to .31 in"@en ;
+.
+gsgm:Medium_Sand_Size
+  rdf:type owl:Class ;
+  rdfs:label "Medium sand size"@en ;
+  rdfs:subClassOf gsgm:Sand_Size ;
+  skos:definition "phi scale 2 to 1; Size range (metric) .25 to .50 mm; Size range (approx. inches) .01 to .02 in"@en ;
+.
 gsgm:Micrite
   rdf:type owl:Class ;
   rdfs:comment "Granular material consisting of carbonate mud with individual particles mostly less than 4 microns maximum diameter; might be of biogenic, biochemical or physiochemical origin. Constituent of a carbonate rock.  (Folk, 1959; Chilingar et al 1967 (https://doi.org/10.1016/S0070-4571(08)70844-6); Bissell and Chilingar, 1967; Neuendor et al., 2005)"@en ;
@@ -277,6 +387,12 @@ gsgm:Mineral_Epiclastic_Particle_Material
   rdfs:comment "material consisting of epiclastic particles that are individual mineral grains"@en ;
   rdfs:label "Mineral epiclastic particle material "@en ;
   rdfs:subClassOf gsgm:Epiclastic_Particle_Material ;
+.
+gsgm:Mud_Size
+  rdf:type owl:Class ;
+  rdfs:label "Mud size"@en ;
+  rdfs:subClassOf gsgm:Grain_Size_Value ;
+  skos:definition "phi scale 20 to 4; Size range (metric) .001 to .063 mm"@en ;
 .
 gsgm:Oncoid_Particle_Material
   rdf:type owl:Class ;
@@ -328,6 +444,12 @@ gsgm:Particle_Sorting
       owl:onProperty gsoc:isQualityOf ;
     ] ;
 .
+gsgm:Pebble_Size
+  rdf:type owl:Class ;
+  rdfs:label "Pebble size"@en ;
+  rdfs:subClassOf gsgm:Gravel_Size ;
+  skos:definition "phi scale -2 to -6; Size range (metric) 4 to 32 mm; Size range (approx. inches) .157 to 2.5 in"@en ;
+.
 gsgm:Peloid_Particle_Material
   rdf:type owl:Class ;
   dct:source "Neuendorf et al., 2005"@en ;
@@ -349,12 +471,46 @@ gsgm:Pyroclastic_Particle_Material
   rdfs:label "Pyroclastic particle material"@en ;
   rdfs:subClassOf gsgm:Granular_Particle_Material ;
 .
+gsgm:Resorbed
+  rdf:type owl:Class ;
+  dct:source "Neuendorf, K.K.E, Mehl, J.P. & Jackson, J.A. (eds), 2005. Glossary of geology, 5th Edition. American Geological Institute, Alexandria, 779 p."@en ;
+  rdfs:comment "Particles have smooth, embayed boundaries caused by resorption by the host magma"@en ;
+  rdfs:label "resorbed"@en ;
+  rdfs:subClassOf gsgm:Grain_Roundness_Value ;
+.
 gsgm:Reworked_Pyroclastic_Particle_Material
   rdf:type owl:Class ;
   dct:source "Gillespie and Styles 1999"@en ;
   rdfs:comment "Granular material consisting of fragments formed as a direct result of volcanic activity and reworked by sedimentary processes."@en ;
   rdfs:label "reworked pyroclastic particle material"@en ;
   rdfs:subClassOf gsgm:Clastic_Granular_Material ;
+.
+gsgm:Rounded
+  rdf:type owl:Class ;
+  dct:source "Powers, M. C., 1953 A new roundness scale for sedimentary particles. Journal of Sedimentary Petrology, v. 23, p. 117-119"@en ;
+  rdfs:comment "A clastic sedimentary particle whose original edges and corners have been smoothed off to rather broad curves and whose original faces are almost completely removed by abrasion (although some comparatively flat surfaces may be present), such as a pebble with a roundness value between 0.49 and 0.70 (midpoint at 0.59) and few (0-5) and greatly subdued secondary corners. The original shape is still readily apparent."@en ;
+  rdfs:label "rounded"@en ;
+  rdfs:subClassOf gsgm:Grain_Roundness_Value ;
+.
+gsgm:Sand_Size
+  rdf:type owl:Class ;
+  rdfs:label "Sand size"@en ;
+  rdfs:subClassOf gsgm:Grain_Size_Value ;
+  skos:definition "phi scale 4 to -1; Size range (metric) .063 to 2 mm; Size range (approx. inches) .0025 to .079 in"@en ;
+.
+gsgm:Shape_Not_Specified
+  rdf:type owl:Class ;
+  dct:source "<http://resource.geosciml.org/classifierscheme/cgi/2016.01/particleshape>" ;
+  rdfs:comment "Shape property may have any value. Use in normative definitions where shape may take any value."@en ;
+  rdfs:label "any shape"@en ;
+  rdfs:subClassOf gsgm:Grain_Roundness_Value ;
+.
+gsgm:Silt_Size
+  rdf:type owl:Class ;
+  rdfs:comment "Subdivisions of silt size not included here."@en ;
+  rdfs:label "Silt size "@en ;
+  rdfs:subClassOf gsgm:Mud_Size ;
+  skos:definition "phi scale 8 to 4; Size range (metric) .0039 to 063 mm; Size range (approx. inches) .00015 to .0025 in"@en ;
 .
 gsgm:Single_Crystal_Particle_Material
   rdf:type owl:Class ;
@@ -374,6 +530,27 @@ gsgm:Spherulitic_Particle_Material
   rdfs:comment "Granular material consisting of rounded or spherical masses of acicular or fibrous mineral, typically in glassy siliceous lava."@en ;
   rdfs:label "Spherulitic particle material"@en ;
   rdfs:subClassOf gsgm:Aggregate_NonClastic_Particle_Material ;
+.
+gsgm:Sub_Angular
+  rdf:type owl:Class ;
+  dct:source "Powers, M. C., 1953 A new roundness scale for sedimentary particles. Journal of Sedimentary Petrology, v. 23, p. 117-119"@en ;
+  rdfs:comment "A clastic sedimentary particle showing definite effects of slight abrasion, retaining its original general form, and having faces that are virtually untouched and edges and corners that are rounded off to some extent, such as a glacial boulder with numerous (10-20) secondary corners and a roundness value between 0.25 and 0.35 (midpoint at 0.300)."@en ;
+  rdfs:label "sub-angular"@en ;
+  rdfs:subClassOf gsgm:Grain_Roundness_Value ;
+.
+gsgm:Sub_Rounded
+  rdf:type owl:Class ;
+  dct:source "Powers, M. C., 1953 A new roundness scale for sedimentary particles. Journal of Sedimentary Petrology, v. 23, p. 117-119"@en ;
+  rdfs:comment "A clastic sedimentary particle showing considerable but incomplete abrasion and an original general form that is still discernible, and having many of its edges and corners noticeably rounded off to smooth curves, such as a cobble with a reduced number (5-10) of secondary corners, a considerably reduced area of the original faces, and a roundness value between 0.35 and 0.49 (midpoint at 0.41)."@en ;
+  rdfs:label "sub-rounded"@en ;
+  rdfs:subClassOf gsgm:Grain_Roundness_Value ;
+.
+gsgm:Subhedral
+  rdf:type owl:Class ;
+  dct:source "MacKenzie, W.S., Donaldson, C.H. & Guilford, C., 1982. Atlas of igneous rocks and their textures. John Wiley & Sons, New York"@en ;
+  rdfs:comment "Crystalline particles in a rock are partly bounded by crystal faces, usually referring to igneous or metamorphic grains"@en ;
+  rdfs:label "subhedral"@en ;
+  rdfs:subClassOf gsgm:Grain_Roundness_Value ;
 .
 gsgm:Syngenetic_Particle_Material
   rdf:type owl:Class ;
@@ -396,36 +573,41 @@ gsgm:Ventrifact_Particle_Material
   rdfs:label "ventrifact particle material"@en ;
   rdfs:subClassOf gsgm:Clastic_Granular_Material ;
 .
-gsgm:angular
+gsgm:Very_Angular
   rdf:type owl:Class ;
   dct:source "Powers, M. C., 1953 A new roundness scale for sedimentary particles. Journal of Sedimentary Petrology, v. 23, p. 117-119"@en ;
-  rdfs:comment "A clastic sedimentary particle showing very little or no evidence of abrasion, with all of its edges and corners sharp, such as blocks with numerous (15-30) secondary corners and a roundness value between 0.17 and 0.25 (midpoint at 0.21)."@en ;
-  rdfs:label "angular"@en ;
+  rdfs:comment "A clastic sedimentary particle with a roundness value between 0.12 and 0.17 (midpoint at 0.14)."@en ;
+  rdfs:label "very angular"@en ;
   rdfs:subClassOf gsgm:Grain_Roundness_Value ;
 .
-gsgm:anhedral
+gsgm:Very_Coarse_Gravel
   rdf:type owl:Class ;
-  dct:source "MacKenzie, W.S., Donaldson, C.H. & Guilford, C., 1982. Atlas of igneous rocks and their textures. John Wiley & Sons, New York"@en ;
-  rdfs:comment "Crystalline particles in a rock lack well-developed crystal faces, usually referring to igneous or metamorphic grains"@en ;
-  rdfs:label "anhedral"@en ;
-  rdfs:subClassOf gsgm:Grain_Roundness_Value ;
+  rdfs:label "very coarse gravel size "@en ;
+  rdfs:subClassOf gsgm:Pebble_Size ;
+  skos:definition "phi scale -5 to -6; Size range (metric) 32 to 64 mm; Size range (approx. inches) 1.26 to 2.5 in"@en ;
 .
-gsgm:diffuse
+gsgm:Very_Coarse_Sand
   rdf:type owl:Class ;
-  dct:source "SLTTs 2004"@en ;
-  rdfs:comment "Particles in aggregate have diffuse, ill-defined boundaries"@en ;
-  rdfs:label "diffuse"@en ;
-  rdfs:subClassOf gsgm:Grain_Roundness_Value ;
+  rdfs:label "Very coarse sand size"@en ;
+  rdfs:subClassOf gsgm:Sand_Size ;
+  skos:definition "phi scale 0 to -1; Size range (metric) 1 to 2 mm; Size range (approx. inches) .039 to .079 in"@en ;
 .
-gsgm:euhedral
+gsgm:Very_Fine_Sand_Size
   rdf:type owl:Class ;
-  dct:source "MacKenzie, W.S., Donaldson, C.H. & Guilford, C., 1982. Atlas of igneous rocks and their textures. John Wiley & Sons, New York"@en ;
-  rdfs:comment "Crystalline particles in a rock are mostly bounded by perfect crystal faces, usually referring to igneous or metamorphoc grains"@en ;
-  rdfs:label "euhedral"@en ;
+  rdfs:label "Very fine sand size"@en ;
+  rdfs:subClassOf gsgm:Sand_Size ;
+  skos:definition "phi scale 4 to 3; Size range (metric) .063 to .125 mm; Size range (approx. inches) .0025 to .0049 in"@en ;
+.
+gsgm:Well_Rounded
+  rdf:type owl:Class ;
+  dct:source "Powers, M. C., 1953 A new roundness scale for sedimentary particles. Journal of Sedimentary Petrology, v. 23, p. 117-119"@en ;
+  rdfs:comment "A clastic sedimentary particle whose original faces, edges, and corners have been destroyed by abrasion and whose entire surface consists of broad curves without any flat areas, specif. said of a particle with no secondary corners and a roundness value between 0.70 and 1.00 (midpoint at 0.84). The original shape may be suggested by the present form of the particle."@en ;
+  rdfs:label "well rounded"@en ;
   rdfs:subClassOf gsgm:Grain_Roundness_Value ;
 .
 gsgm:ontology
   rdf:type owl:Ontology ;
+  dct:bibliographicCitation "Brodaric, B., and Richard, S.M., 2021, The GeoScience Ontology Reference: Geological Survey of Canada Open File 8796, 34 p., https://doi.org/10.4095/328296" ;
   dct:created "2020-08-03"^^xsd:date ;
   dct:created "2021-03-26"^^xsd:date ;
   dct:creator gsoc:boyan_brodaric ;
@@ -435,68 +617,12 @@ gsgm:ontology
   dct:modified "2021-03-26"^^xsd:date ;
   dct:publisher "ARC Loop3D project;  https://loop3d.org/" ;
   dct:publisher "Geological Survey of Canada, Natural Resources Canada, Government of Canada" ;
-    schema:codeRepository "https://github.com/Loop3D/GKM";  dct:rights  "Copyright (c) 2021 Government of Canada" ;
+  dct:rights "Copyright (c) 2021 Government of Canada" ;
   rdfs:comment "This file contains the categories for describing granular materials-- constituents in a rock material that are a particular kind of particle, defined based on genesis and internal characteristics of the particles. The scheme is intended to be indepenent of the mineralogy of the particles to the extent possible.  Based in part on the 2016 SKOS-RDF version of the CGI  IUGS Commission for Geoscience Information (CGI) Geoscience Terminology Working Group Composition Category vocabulary. Terms to specify the nature of individual particles of each constituent in an aggregation, based mostly on their genesis. Examples include clasts, crystals, material fossil. Constituent type is determined based on the nature of the particles, and ideally is independent of the relationship between particles in a rock material aggregation (which would be roles)."@en ;
   rdfs:label "Geoscience Ontology, Granular constituents"@en ;
   owl:imports gsoc:ontology ;
   owl:imports gsog:ontology ;
-  dct:bibliographicCitation "Brodaric, B., and Richard, S.M., 2021, The GeoScience Ontology Reference: Geological Survey of Canada Open File 8796, 34 p., https://doi.org/10.4095/328296"; 
   skos:definition "Constituent particles constituting rock materials"@en ;
   skos:prefLabel "Geoscience Ontology, Granular Constituents"@en ;
-.
-gsgm:resorbed
-  rdf:type owl:Class ;
-  dct:source "Neuendorf, K.K.E, Mehl, J.P. & Jackson, J.A. (eds), 2005. Glossary of geology, 5th Edition. American Geological Institute, Alexandria, 779 p."@en ;
-  rdfs:comment "Particles have smooth, embayed boundaries caused by resorption by the host magma"@en ;
-  rdfs:label "resorbed"@en ;
-  rdfs:subClassOf gsgm:Grain_Roundness_Value ;
-.
-gsgm:rounded
-  rdf:type owl:Class ;
-  dct:source "Powers, M. C., 1953 A new roundness scale for sedimentary particles. Journal of Sedimentary Petrology, v. 23, p. 117-119"@en ;
-  rdfs:comment "A clastic sedimentary particle whose original edges and corners have been smoothed off to rather broad curves and whose original faces are almost completely removed by abrasion (although some comparatively flat surfaces may be present), such as a pebble with a roundness value between 0.49 and 0.70 (midpoint at 0.59) and few (0-5) and greatly subdued secondary corners. The original shape is still readily apparent."@en ;
-  rdfs:label "rounded"@en ;
-  rdfs:subClassOf gsgm:Grain_Roundness_Value ;
-.
-gsgm:shape_not_specified
-  rdf:type owl:Class ;
-  dct:source "<http://resource.geosciml.org/classifierscheme/cgi/2016.01/particleshape>" ;
-  rdfs:comment "Shape property may have any value. Use in normative definitions where shape may take any value."@en ;
-  rdfs:label "any shape"@en ;
-  rdfs:subClassOf gsgm:Grain_Roundness_Value ;
-.
-gsgm:sub_angular
-  rdf:type owl:Class ;
-  dct:source "Powers, M. C., 1953 A new roundness scale for sedimentary particles. Journal of Sedimentary Petrology, v. 23, p. 117-119"@en ;
-  rdfs:comment "A clastic sedimentary particle showing definite effects of slight abrasion, retaining its original general form, and having faces that are virtually untouched and edges and corners that are rounded off to some extent, such as a glacial boulder with numerous (10-20) secondary corners and a roundness value between 0.25 and 0.35 (midpoint at 0.300)."@en ;
-  rdfs:label "sub-angular"@en ;
-  rdfs:subClassOf gsgm:Grain_Roundness_Value ;
-.
-gsgm:sub_rounded
-  rdf:type owl:Class ;
-  dct:source "Powers, M. C., 1953 A new roundness scale for sedimentary particles. Journal of Sedimentary Petrology, v. 23, p. 117-119"@en ;
-  rdfs:comment "A clastic sedimentary particle showing considerable but incomplete abrasion and an original general form that is still discernible, and having many of its edges and corners noticeably rounded off to smooth curves, such as a cobble with a reduced number (5-10) of secondary corners, a considerably reduced area of the original faces, and a roundness value between 0.35 and 0.49 (midpoint at 0.41)."@en ;
-  rdfs:label "sub-rounded"@en ;
-  rdfs:subClassOf gsgm:Grain_Roundness_Value ;
-.
-gsgm:subhedral
-  rdf:type owl:Class ;
-  dct:source "MacKenzie, W.S., Donaldson, C.H. & Guilford, C., 1982. Atlas of igneous rocks and their textures. John Wiley & Sons, New York"@en ;
-  rdfs:comment "Crystalline particles in a rock are partly bounded by crystal faces, usually referring to igneous or metamorphic grains"@en ;
-  rdfs:label "subhedral"@en ;
-  rdfs:subClassOf gsgm:Grain_Roundness_Value ;
-.
-gsgm:very_angular
-  rdf:type owl:Class ;
-  dct:source "Powers, M. C., 1953 A new roundness scale for sedimentary particles. Journal of Sedimentary Petrology, v. 23, p. 117-119"@en ;
-  rdfs:comment "A clastic sedimentary particle with a roundness value between 0.12 and 0.17 (midpoint at 0.14)."@en ;
-  rdfs:label "very angular"@en ;
-  rdfs:subClassOf gsgm:Grain_Roundness_Value ;
-.
-gsgm:well_rounded
-  rdf:type owl:Class ;
-  dct:source "Powers, M. C., 1953 A new roundness scale for sedimentary particles. Journal of Sedimentary Petrology, v. 23, p. 117-119"@en ;
-  rdfs:comment "A clastic sedimentary particle whose original faces, edges, and corners have been destroyed by abrasion and whose entire surface consists of broad curves without any flat areas, specif. said of a particle with no secondary corners and a roundness value between 0.70 and 1.00 (midpoint at 0.84). The original shape may be suggested by the present form of the particle."@en ;
-  rdfs:label "well rounded"@en ;
-  rdfs:subClassOf gsgm:Grain_Roundness_Value ;
+  schema:codeRepository "https://github.com/Loop3D/GKM" ;
 .
