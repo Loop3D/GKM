@@ -1,1022 +1,860 @@
-# baseURI: https://w3id.org/gso/geology/ontology
-# imports: https://w3id.org/gso/common/ontology
-# imports: https://w3id.org/gso/perdurant/ontology
-
 @prefix : <https://w3id.org/gso/geology/> .
 @prefix dct: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix gscn: <https://w3id.org/gso/geologiccontact/> .
 @prefix gsoc: <https://w3id.org/gso/common/> .
 @prefix gsog: <https://w3id.org/gso/geology/> .
 @prefix gspd: <https://w3id.org/gso/perdurant/> .
-@prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix schema: <https://schema.org/> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
-@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix schema: <https://schema.org/> .
+@base <https://w3id.org/gso/geology/ontology> .
 
-gsoc:Element
-  owl:disjointWith gsog:Mineral_Material ;
-  owl:disjointWith gsog:Rock_Grain_Material ;
-  owl:disjointWith gsog:Rock_Material ;
-.
-gsoc:boyan_brodaric
-  rdf:type owl:NamedIndividual ;
-  rdf:type schema:Person ;
-  rdfs:comment "e-mail: mailto:boyan.brodaric@canada.ca " ;
-  rdfs:label "Dr. Boyan Brodaric" ;
-  schema:affiliation "Natural Resources Canada, Geological Survey of Canada" ;
-  schema:identifier <https://orcid.org/0000-0002-7987-3810> ;
-  schema:name "Dr. Boyan Brodaric" ;
-.
-gsoc:stephen_richard
-  rdf:type owl:NamedIndividual ;
-  rdf:type schema:Person ;
-  rdfs:comment "e-mail: mailto:smrTucson@gmail.com " ;
-  rdfs:label "Dr. Stephen M. Richard" ;
-  schema:identifier <https://orcid.org/0000-0001-6041-5302> ;
-  schema:name "Dr. Stephen M. Richard" ;
-.
-gsog:Additive_Process
-  rdf:type owl:Class ;
-  rdfs:comment "A geologic process that adds material to some geologic material or object."@en ;
-  rdfs:label "Additive Process"@en ;
-  rdfs:subClassOf gsog:Geologic_Process ;
-.
-gsog:Deformation
-  rdf:type owl:Class ;
-  rdfs:comment "A geologic process that deforms the material of some geologic material or ob-ject. Includes strain and translation. Includes translation of rock bodies, and strain-related processes resulting in changes to the shape of a rock body, including folding, faulting, shearing, or fabric development. Deformation may be either brittle or ductile."@en ;
-  rdfs:label "Deformation Process"@en ;
-  rdfs:subClassOf gsog:Geologic_Process ;
-.
-gsog:Fluid_Geologic_Material
-  rdf:type owl:Class ;
-  rdfs:comment "An amount of geologic fluid. Includes all forms of geologic fluids including lava, molten rock, gases, etc." ;
-  rdfs:subClassOf gsog:Geologic_Material ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:onProperty gsoc:hasPart ;
-      owl:someValuesFrom [
-          rdf:type owl:Class ;
-          owl:intersectionOf (
-              gsoc:Fluid_Matter
-              [
-                rdf:type owl:Restriction ;
-                owl:onProperty gsoc:hasRole ;
-                owl:someValuesFrom [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty gsoc:hasQuality ;
-                    owl:someValuesFrom [
-                        rdf:type owl:Restriction ;
-                        owl:onProperty gsoc:hasValue ;
-                        owl:someValuesFrom gsoc:Dominant_Proportion ;
-                      ] ;
-                  ] ;
-              ]
-            ) ;
-        ] ;
-    ] ;
-  owl:disjointWith gsog:Solid_Geologic_Material ;
-  owl:equivalentClass [
-      rdf:type owl:Class ;
-      owl:intersectionOf (
-          gsog:Geologic_Material
-          [
-            rdf:type owl:Restriction ;
-            owl:onProperty gsoc:hasPart ;
-            owl:someValuesFrom [
-                rdf:type owl:Class ;
-                owl:intersectionOf (
-                    gsoc:Fluid_Matter
-                    [
-                      rdf:type owl:Restriction ;
-                      owl:onProperty gsoc:hasRole ;
-                      owl:someValuesFrom [
-                          rdf:type owl:Restriction ;
-                          owl:onProperty gsoc:hasQuality ;
-                          owl:someValuesFrom [
-                              rdf:type owl:Restriction ;
-                              owl:onProperty gsoc:hasValue ;
-                              owl:someValuesFrom gsoc:Dominant_Proportion ;
-                            ] ;
-                        ] ;
-                    ]
-                  ) ;
-              ] ;
-          ]
-        ) ;
-    ] ;
-.
-gsog:GSSA
-  rdf:type owl:Class ;
-  rdfs:comment "Global Standard Stratigraphic Age: a geological time date defined by the International Stratigraphic Commission, based on assertion of a time point and loosely (weakly) affiliated with some rock body related to e.g. age date(s) or a field observation(s)."@en ;
-  rdfs:comment "add SHACL rule that GSSA may not have property Simple_Uncertainty"@en ;
-  rdfs:label "GSSA"@en ;
-  rdfs:subClassOf gsog:Geologic_Time_Date ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom gspd:Assertion ;
-      owl:onProperty gsoc:determinedBy ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:onProperty gsoc:isEssentialPartOf ;
-      owl:someValuesFrom gsog:Geologic_Time_Boundary ;
-    ] ;
-  owl:disjointWith gsog:Geologic_Time_Point ;
-.
-gsog:Generic_Geologic_Time_Unit
-  rdf:type owl:Class ;
-  rdfs:comment "A generic geologic time interval (e.g. Jurassic) having specific manifestations (e.g. Jurassic 2017). The specific manifestations are its essential parts, while the generic interval is the whole.  These time intervals are largely defined by their position between other intervals, without necessarily specifying their bounding time instants. Generic geologic time intervals such as Jurassic are not types (classes) for practical and ontological reasons. Practically, it would imply a cumbersome and complex multi-level ontology: time ranks such as Period would be metatypes (following biological ranks such as Species; Carvalho & Almeida 2016) that instantiate time intervals such as Jurassic, that in turn instantiate Jurassic 2017. It would also be more complex to specify e.g. Jurassic (a type) as the age of a formation (an individual), due to non-instantiation relation between an individual and a type. Ontologically, it would imply Jurassic is not a time span, which is contrary to stratigraphic codes that consider Jurassic (as a geochronologic unit) to be an actual chunk of time: \"...units of geologic time... represent [a] span of time ...\" (NACSM 2005) and \"Geochronologic units are units of time...\" (Murphy & Salvador 1998). For these reasons, generic geologic time intervals, such as Jurassic, are considered in GSO to be individuals with essential parts, such as Jurassic 2017. However, it remains somewhat of an open question whether this characterization is indeed best."@en ;
-  rdfs:subClassOf gsog:Geologic_Time_Interval ;
-  rdfs:subClassOf [
-      rdf:type owl:Class ;
-      owl:complementOf [
-          rdf:type owl:Restriction ;
-          owl:onProperty gsoc:hasEssentialPart ;
-          owl:someValuesFrom gsog:Generic_Geologic_Time_Unit ;
-        ] ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Class ;
-      owl:complementOf [
-          rdf:type owl:Restriction ;
-          owl:onProperty gsoc:hasStaticPart ;
-          owl:someValuesFrom gsoc:Time_Interval ;
-        ] ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom gsog:Generic_Geologic_Time_Unit ;
-      owl:onProperty gsoc:nextTimeInterval ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom gsog:Generic_Geologic_Time_Unit ;
-      owl:onProperty gsoc:previousTimeInterval ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:onProperty gsoc:hasEssentialPart ;
-      owl:someValuesFrom gsog:Specific_Geologic_Time_Unit ;
-    ] ;
-  owl:disjointWith gsog:Geologic_Time_Scale ;
-  owl:disjointWith gsog:Specific_Geologic_Time_Unit ;
-.
-gsog:Geologic_Event
-  rdf:type owl:Class ;
-  rdfs:comment "When something happens, events are the ‘what’ of the happening, and processes are the ‘how’. E.g. the Trans-Hudson Orogeny (event) caused by a subduction (process). The relation between events and processes is constitution: events are constituted by processes, and processes constitute events. Geologic processes and events have at least one geologic endurant as participant, i.e. a happening cannot occur unless it happens to something. Events can only have events as parts."@en ;
-  rdfs:label "Geologic Event"@en ;
-  rdfs:subClassOf gsoc:Event ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:onProperty gsoc:hasConstituent ;
-      owl:someValuesFrom gsog:Geologic_Process ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:onProperty gsoc:hasParticipant ;
-      owl:someValuesFrom [
-          rdf:type owl:Class ;
-          owl:unionOf (
-              gsog:Geologic_Material
-              gsog:Geologic_Object
-            ) ;
-        ] ;
-    ] ;
-.
-gsog:Geologic_Material
-  rdf:type owl:Class ;
-  rdfs:comment "An amount of matter primarily (dominantly) having parts created by geologic processes. Can include minor parts that are not of geologic origin, such as organic material, and can be solid, fluid, or a mix."@en ;
-  rdfs:subClassOf gsoc:Amount_Of_Matter ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:onProperty gsoc:hasPart ;
-      owl:someValuesFrom [
-          rdf:type owl:Class ;
-          owl:intersectionOf (
-              [
-                rdf:type owl:Restriction ;
-                owl:onProperty gsoc:hasRole ;
-                owl:someValuesFrom [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty gsoc:hasQuality ;
-                    owl:someValuesFrom [
-                        rdf:type owl:Restriction ;
-                        owl:allValuesFrom gsoc:Dominant_Proportion ;
-                        owl:onProperty gsoc:hasValue ;
-                      ] ;
-                  ] ;
-              ]
-              [
-                rdf:type owl:Restriction ;
-                owl:onProperty gsoc:isOutputOf ;
-                owl:someValuesFrom [
-                    rdf:type owl:Class ;
-                    owl:unionOf (
-                        gsog:Geologic_Process
-                        gsog:Geologic_Event
-                      ) ;
-                  ] ;
-              ]
-            ) ;
-        ] ;
-    ] ;
-  owl:disjointWith gsog:Geologic_Object ;
-  owl:equivalentClass [
-      rdf:type owl:Class ;
-      owl:intersectionOf (
-          gsoc:Amount_Of_Matter
-          [
-            rdf:type owl:Restriction ;
-            owl:onProperty gsoc:hasPart ;
-            owl:someValuesFrom [
-                rdf:type owl:Class ;
-                owl:intersectionOf (
-                    [
-                      rdf:type owl:Restriction ;
-                      owl:onProperty gsoc:hasRole ;
-                      owl:someValuesFrom [
-                          rdf:type owl:Restriction ;
-                          owl:onProperty gsoc:hasQuality ;
-                          owl:someValuesFrom [
-                              rdf:type owl:Restriction ;
-                              owl:allValuesFrom gsoc:Dominant_Proportion ;
-                              owl:onProperty gsoc:hasValue ;
-                            ] ;
-                        ] ;
-                    ]
-                    [
-                      rdf:type owl:Restriction ;
-                      owl:onProperty gsoc:isOutputOf ;
-                      owl:someValuesFrom [
-                          rdf:type owl:Class ;
-                          owl:unionOf (
-                              gsog:Geologic_Process
-                              gsog:Geologic_Event
-                            ) ;
-                        ] ;
-                    ]
-                  ) ;
-              ] ;
-          ]
-        ) ;
-    ] ;
-.
-gsog:Geologic_Object
-  rdf:type owl:Class ;
-  rdfs:comment "A material object constituted by some geological material. Is generically dependent on some geologic process or event, for which the object is an output - it cannot exist without being output by the geologic processes or events."@en ;
-  rdfs:label "Geologic Object"@en ;
-  rdfs:subClassOf gsoc:Material_Object ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom gsog:Geologic_Material ;
-      owl:onProperty gsoc:hasConstituent ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:onProperty gsoc:hasConstituent ;
-      owl:someValuesFrom gsog:Geologic_Material ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:onProperty gsoc:isOutputOf ;
-      owl:someValuesFrom [
-          rdf:type owl:Class ;
-          owl:unionOf (
-              gsog:Geologic_Process
-              gsog:Geologic_Event
-            ) ;
-        ] ;
-    ] ;
-  owl:disjointWith gsog:Geologic_Material ;
-  owl:equivalentClass [
-      rdf:type owl:Class ;
-      owl:intersectionOf (
-          gsoc:Material_Object
-          [
-            rdf:type owl:Restriction ;
-            owl:allValuesFrom gsog:Geologic_Material ;
-            owl:onProperty gsoc:hasConstituent ;
-          ]
-          [
-            rdf:type owl:Restriction ;
-            owl:onProperty gsoc:hasConstituent ;
-            owl:someValuesFrom gsog:Geologic_Material ;
-          ]
-        ) ;
-    ] ;
-.
-gsog:Geologic_Process
-  rdf:type owl:Class ;
-  rdfs:comment "A process that has inputs and or outputs that are part of the Earth System"@en ;
-  rdfs:label "Geologic Process"@en ;
-  rdfs:subClassOf gsoc:Process ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:onProperty gsoc:hasParticipant ;
-      owl:someValuesFrom [
-          rdf:type owl:Class ;
-          owl:unionOf (
-              gsog:Geologic_Material
-              gsog:Geologic_Object
-            ) ;
-        ] ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:onProperty gsoc:isConstituentOf ;
-      owl:someValuesFrom gsog:Geologic_Event ;
-    ] ;
-.
-gsog:Geologic_Structure
-  rdf:type owl:Class ;
-  rdfs:comment "A pattern in a rock body (foliation, fold), or a feature occurring between rock bodies (contact, fracture).  GeoSciML 3.2: A configuration of matter in the Earth based on describable inhomogeneity, pattern, or fracture in a Rock Body. The identity of a GeologicStructure is independent of the material that is the substrate for the structure.  Includes sedimentary structures."@en ;
-  rdfs:label "Geologic Structure"@en ;
-  rdfs:subClassOf gsoc:Endurant_Feature ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:onProperty gsoc:hostedBy ;
-      owl:someValuesFrom gsog:Rock_Body ;
-    ] ;
-.
-gsog:Geologic_Time_Boundary
-  rdf:type owl:Class ;
-  rdfs:comment "A temporal feature that is the boundary between two Geologic time Intervals. Is generically dependent on a date, so can possibly change or could possibly have been a different date - e.g. the end of the Anthropocene is the current moment, which changes with each moment, and the start of the Anthropocene could have been a different time if Erath history was different."@en ;
-  rdfs:label "Geologic Time Boundary"@en ;
-  rdfs:subClassOf gsoc:Temporal_Boundary ;
-  rdfs:subClassOf gsog:Geologic_Time_Feature ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:onProperty gsoc:hasEssentialPart ;
-      owl:someValuesFrom gsog:Geologic_Time_Date ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:onProperty gsoc:staticHostedBy ;
-      owl:someValuesFrom gsog:Geologic_Time_Interval ;
-    ] ;
-  owl:disjointWith gsog:Geologic_Time_Date ;
-  owl:disjointWith gsog:Geologic_Time_Interval ;
-.
-gsog:Geologic_Time_Date
-  rdf:type owl:Class ;
-  rdfs:comment "A temporal coordinate value, located either by a point position (with uncertainty) on a time line, specified by a numeric coordinate (generally MYPB, but definitions of 'present' vary). Can be a GSSA if the numeric time coordinate is arbitrarily assigned.  Probably should specify a Temporal Reference System used to assign coordinate values."@en ;
-  rdfs:label "Geologic Time Date"@en ;
-  rdfs:subClassOf gsoc:Time_Instant_Feature ;
-  rdfs:subClassOf gsog:Geologic_Time_Feature ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:onClass [
-          rdf:type owl:Class ;
-          owl:intersectionOf (
-              gsoc:Time_Instant
-              [
-                rdf:type owl:Class ;
-                owl:complementOf gsog:Geologic_Time_Feature ;
-              ]
-            ) ;
-        ] ;
-      owl:onProperty gsoc:hasStaticPart ;
-      owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-    ] ;
-  owl:disjointWith gsog:Geologic_Time_Boundary ;
-  owl:disjointWith gsog:Geologic_Time_Interval ;
-  owl:equivalentClass [
-      rdf:type owl:Class ;
-      owl:intersectionOf (
-          gsoc:Time_Instant_Feature
-          gsog:Geologic_Time_Feature
-          [
-            rdf:type owl:Restriction ;
-            owl:onClass [
-                rdf:type owl:Class ;
-                owl:intersectionOf (
-                    gsoc:Time_Instant
-                    [
-                      rdf:type owl:Class ;
-                      owl:complementOf gsog:Geologic_Time_Feature ;
-                    ]
-                  ) ;
-              ] ;
-            owl:onProperty gsoc:hasStaticPart ;
-            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-          ]
-        ) ;
-    ] ;
-.
-gsog:Geologic_Time_Feature
-  rdf:type owl:Class ;
-  rdfs:comment "Any geological temporal feature, including a geologic date, time interval, or time boundary. All geologic time features are dependent one some rock body, strongly or weakly."@en ;
-  rdfs:subClassOf gsoc:Temporal_Feature ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:onProperty gsoc:hostedBy ;
-      owl:someValuesFrom gsog:Rock_Body ;
-    ] ;
-  owl:equivalentClass [
-      rdf:type owl:Class ;
-      owl:intersectionOf (
-          gsoc:Temporal_Feature
-          [
-            rdf:type owl:Restriction ;
-            owl:onProperty gsoc:hostedBy ;
-            owl:someValuesFrom gsog:Rock_Body ;
-          ]
-        ) ;
-    ] ;
-.
-gsog:Geologic_Time_Interval
-  rdf:type owl:Class ;
-  rdfs:comment "A time interval dependent on some rock body and having parts that are (geologic) time intervals. There are 3 primary types of geologic time intervals - these are not comprehensive (i.e. there could be additional types): generic (e.g. Jurassic), specific (e.g. Jurassic 2017), and time scale (ISC 2017)."@en ;
-  rdfs:subClassOf gsoc:Time_Interval_Feature ;
-  rdfs:subClassOf gsog:Geologic_Time_Feature ;
-  rdfs:subClassOf [
-      rdf:type owl:Class ;
-      owl:complementOf [
-          rdf:type owl:Restriction ;
-          owl:onProperty gsoc:hasPart ;
-          owl:someValuesFrom gsog:Geologic_Time_Scale ;
-        ] ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom gsog:Geologic_Time_Feature ;
-      owl:onProperty gsoc:timeFinishedBy ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom gsog:Geologic_Time_Feature ;
-      owl:onProperty gsoc:timeStartedBy ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:onProperty gsoc:hasEssentialPart ;
-      owl:someValuesFrom [
-          rdf:type owl:Class ;
-          owl:unionOf (
-              gsog:Geologic_Time_Interval
-              gsoc:Time_Interval
-            ) ;
-        ] ;
-    ] ;
-  owl:disjointWith gsog:Geologic_Time_Boundary ;
-  owl:disjointWith gsog:Geologic_Time_Date ;
-  owl:equivalentClass [
-      rdf:type owl:Class ;
-      owl:intersectionOf (
-          gsoc:Time_Interval_Feature
-          [
-            rdf:type owl:Restriction ;
-            owl:onProperty gsoc:hostedBy ;
-            owl:someValuesFrom gsog:Rock_Body ;
-          ]
-        ) ;
-    ] ;
-.
-gsog:Geologic_Time_Point
-  rdf:type owl:Class ;
-  rdfs:comment "Hosted by a contact (low-dimension feature), which itself is hosted by an event that caused the contact, by a stratigraphic point, and by a stratigraphic section containing the point."@en ;
-  rdfs:subClassOf gsog:Geologic_Time_Date ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:onProperty gsoc:determinedBy ;
-      owl:someValuesFrom gsoc:Low_Dimension_Feature ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:onProperty gsoc:isEssentialPartOf ;
-      owl:someValuesFrom gsog:Geologic_Time_Boundary ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:onProperty gsoc:staticHostedBy ;
-      owl:someValuesFrom gsoc:Low_Dimension_Feature ;
-    ] ;
-  owl:disjointWith gsog:GSSA ;
-.
-gsog:Geologic_Time_Scale
-  rdf:type owl:Class ;
-  rdfs:comment "A time scale is a geologic time inteval in GSO - it is a rock-dependent span of time that is internally divided into other rock-dependent spans of time following a certain topology (after Simon & Cox, 2010). Rock-dependence implies it is intrinsically tied to a specific rock object (e.g. the Earth's rock mass) and internal subdivision implies it is a collection of other geologic time intervals. Moreoever, any change to the parts of the collection results in a different time scale - this implies geologic time intervals cannot be essential parts of a time scale without being static parts (see Brodaric et al, 2019 for types of parts). Time scales are also not part of other time scales, nor part of specific or generic geologic time intervals. This is primarily to maintain internal temporal topology, though this constraint could be relaxed if use-cases warrant. Aligned generally with (Cox and Richard, 2010)."@en ;
-  rdfs:label "Geologic Time Scale"@en ;
-  rdfs:subClassOf gsog:Geologic_Time_Interval ;
-  rdfs:subClassOf [
-      rdf:type owl:Class ;
-      owl:unionOf (
-          [
-            rdf:type owl:Class ;
-            owl:complementOf [
-                rdf:type owl:Restriction ;
-                owl:onProperty gsoc:hasEssentialPart ;
-                owl:someValuesFrom gsog:Geologic_Time_Interval ;
-              ] ;
-          ]
-          [
-            rdf:type owl:Restriction ;
-            owl:onProperty gsoc:hasStaticPart ;
-            owl:someValuesFrom gsog:Geologic_Time_Interval ;
-          ]
-        ) ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:onClass gsog:Rock_Body ;
-      owl:onProperty gsoc:staticHostedBy ;
-      owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:onProperty gsoc:hasStaticPart ;
-      owl:someValuesFrom gsog:Geologic_Time_Interval ;
-    ] ;
-  owl:disjointWith gsog:Generic_Geologic_Time_Unit ;
-  owl:disjointWith gsog:Specific_Geologic_Time_Unit ;
-.
-gsog:Geologic_Unit
-  rdf:type owl:Class ;
-  rdfs:comment "A rock object that is contextual or possibly fragmented into several distinct pieces (i.e. not self-connected). Contextual here means the object cannot moved to another location without losing identity: such moving would imply a different origin process and different surrounding rocks."@en ;
-  rdfs:subClassOf gsog:Rock_Object ;
-  rdfs:subClassOf [
-      rdf:type owl:Class ;
-      owl:complementOf gsog:Specific_Rock_Object ;
-    ] ;
-  owl:disjointWith gsog:Specific_Rock_Object ;
-  owl:equivalentClass [
-      rdf:type owl:Class ;
-      owl:intersectionOf (
-          gsog:Rock_Object
-          [
-            rdf:type owl:Class ;
-            owl:complementOf gsog:Specific_Rock_Object ;
-          ]
-        ) ;
-    ] ;
-.
-gsog:Mineral_Material
-  rdf:type owl:Class ;
-  rdfs:comment "An amount of mineral: denotes a single mineral (a unit cell) or an aggregation of single minerals. All subtypes of Mineral currently denote an aggregation, e.g. Quartz denotes an aggregation of quartz unit cells."@en ;
-  rdfs:comment "\"A mineral is an element or chemical compound that is normally crystalline and that has been formed as a result of geological processes.\" Nickel, Ernest H. (1995), The definition of a mineral,  The Canadian Mineralogist. 33 (3): 689-90."@en ;
-  rdfs:label "Mineral"@en ;
-  rdfs:subClassOf gsog:Solid_Geologic_Material ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom gsoc:Element ;
-      owl:onProperty gsoc:hasConstituent ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom [
-          rdf:type owl:Class ;
-          owl:intersectionOf (
-              gsoc:Material_Endurant
-              [
-                rdf:type owl:Class ;
-                owl:complementOf [
-                    rdf:type owl:Class ;
-                    owl:unionOf (
-                        gsog:Mineral_Material
-                        gsoc:Element
-                        gsog:Mineraloid_Material
-                      ) ;
-                  ] ;
-              ]
-            ) ;
-        ] ;
-      owl:onProperty gsoc:isConstituentOf ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom [
-          rdf:type owl:Class ;
-          owl:unionOf (
-              gsog:Mineral_Material
-              gsoc:Element
-            ) ;
-        ] ;
-      owl:onProperty gsoc:hasPart ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:onProperty gsoc:hasConstituent ;
-      owl:someValuesFrom gsoc:Element ;
-    ] ;
-  owl:disjointWith gsoc:Element ;
-  owl:disjointWith gsog:Mineraloid_Material ;
-  owl:disjointWith gsog:Rock_Grain_Material ;
-  owl:disjointWith gsog:Rock_Material ;
-.
-gsog:Mineraloid_Material
-  rdf:type owl:Class ;
-  rdfs:comment "An amount of amorphous material; commonly the product of rapid cooling of melted material. Includes natural glasses in Earth and extraterrestrial material, some biogenic mineral products, and anthromophomorphic manufactured material."@en ;
-  rdfs:label "Mineraloid"@en ;
-  rdfs:subClassOf gsog:Solid_Geologic_Material ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom gsoc:Element ;
-      owl:onProperty gsoc:hasConstituent ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom [
-          rdf:type owl:Class ;
-          owl:intersectionOf (
-              gsoc:Material_Endurant
-              [
-                rdf:type owl:Class ;
-                owl:complementOf [
-                    rdf:type owl:Class ;
-                    owl:unionOf (
-                        gsog:Mineral_Material
-                        gsoc:Element
-                        gsog:Mineraloid_Material
-                      ) ;
-                  ] ;
-              ]
-            ) ;
-        ] ;
-      owl:onProperty gsoc:isConstituentOf ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom [
-          rdf:type owl:Class ;
-          owl:unionOf (
-              gsog:Mineraloid_Material
-              gsoc:Element
-            ) ;
-        ] ;
-      owl:onProperty gsoc:hasPart ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:onProperty gsoc:hasConstituent ;
-      owl:someValuesFrom gsoc:Element ;
-    ] ;
-  owl:disjointWith gsoc:Element ;
-  owl:disjointWith gsog:Mineral_Material ;
-  owl:disjointWith gsog:Rock_Grain_Material ;
-  owl:disjointWith gsog:Rock_Material ;
-.
-gsog:Rock_Body
-  rdf:type owl:Class ;
-  rdfs:comment "A material endurant constituent by solid geologic material or that is such a material"@en ;
-  rdfs:label "Rock Body"@en ;
-  rdfs:subClassOf gsoc:Material_Endurant ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:onProperty gsoc:externallyGenDependsOn ;
-      owl:someValuesFrom [
-          rdf:type owl:Class ;
-          owl:unionOf (
-              gsog:Geologic_Process
-              gsog:Geologic_Event
-            ) ;
-        ] ;
-    ] ;
-  owl:equivalentClass [
-      rdf:type owl:Class ;
-      owl:intersectionOf (
-          gsoc:Material_Endurant
-          [
-            rdf:type owl:Class ;
-            owl:unionOf (
-                gsog:Rock_Object
-                gsog:Solid_Geologic_Material
-              ) ;
-          ]
-        ) ;
-    ] ;
-.
-gsog:Rock_Body_Boundary
-  rdf:type owl:Class ;
-  rdfs:comment "a physical boundary hosted by a rock body.The exterior-facing material of a rock body.  A rock body boundary can have a thickness physical property"@en ;
-  rdfs:label "Rock Body Boundary"@en ;
-  rdfs:subClassOf gsoc:Material_Boundary ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom gsog:Rock_Body ;
-      owl:onProperty gsoc:hasEssentialPart ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:onProperty gsoc:hostedBy ;
-      owl:someValuesFrom gsog:Rock_Body ;
-    ] ;
-.
-gsog:Rock_Grain_Material
-  rdf:type owl:Class ;
-  rdfs:comment "A Rock_Material constituent consisting of particles that share a set of characteristics, e.g. genesis, particle size (distribution), mineralogy, shape.  For example. the quartz sand that is a constituent in a sandstone, or the feldspar phenocrysts that are a constituent in a granite."@en ;
-  rdfs:comment "An amount of rock grains: a single grain or an aggregation of grains. All current subtypes refer to an aggregation of rock grains."@en ;
-  rdfs:comment "Particle is defined as a 'General term, used without restriction as to shape composition or internal structure, for a separable or distinct unit in a [Rock_Material]'. (Neuendorf et al, 2005)."@en ;
-  rdfs:label "Rock Grain Material"@en ;
-  rdfs:subClassOf gsog:Solid_Geologic_Material ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom [
-          rdf:type owl:Class ;
-          owl:intersectionOf (
-              gsoc:Material_Endurant
-              [
-                rdf:type owl:Class ;
-                owl:complementOf [
-                    rdf:type owl:Class ;
-                    owl:unionOf (
-                        gsog:Rock_Grain_Material
-                        gsog:Mineral_Material
-                        gsoc:Element
-                        gsog:Mineraloid_Material
-                      ) ;
-                  ] ;
-              ]
-            ) ;
-        ] ;
-      owl:onProperty gsoc:isConstituentOf ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom [
-          rdf:type owl:Class ;
-          owl:unionOf (
-              gsog:Rock_Grain_Material
-              gsog:Mineral_Material
-              gsog:Mineraloid_Material
-              gsoc:Element
-            ) ;
-        ] ;
-      owl:onProperty gsoc:hasPart ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom [
-          rdf:type owl:Class ;
-          owl:unionOf (
-              gsog:Rock_Grain_Material
-              gsog:Mineral_Material
-              gsog:Mineraloid_Material
-              gsoc:Element
-              gsog:Rock_Material
-            ) ;
-        ] ;
-      owl:onProperty gsoc:hasPart ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:onProperty gsoc:hasConstituent ;
-      owl:someValuesFrom [
-          rdf:type owl:Class ;
-          owl:unionOf (
-              gsoc:Element
-              gsog:Mineraloid_Material
-              gsog:Mineral_Material
-            ) ;
-        ] ;
-    ] ;
-  owl:disjointWith gsoc:Element ;
-  owl:disjointWith gsog:Mineral_Material ;
-  owl:disjointWith gsog:Mineraloid_Material ;
-  owl:disjointWith gsog:Rock_Material ;
-.
-gsog:Rock_Material
-  rdf:type owl:Class ;
-  dct:source "Based on NADM C1 2004 and CGI Simple_Lithology vocabulary"@en ;
-  rdfs:comment "An amount of rock material: consisting of an aggregation of grains composed of mineral, glass, or other rock material. General concept for any rock, sediment, or other solid constituent of the Earth.  This is the 'top' of the lithology hierarchy comprised of standard rock names, and should be used to indicate 'any rock or unconsolidated lithic material'."@en ;
-  rdfs:label "Rock Material"@en ;
-  rdfs:subClassOf gsog:Solid_Geologic_Material ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom [
-          rdf:type owl:Class ;
-          owl:intersectionOf (
-              gsoc:Material_Endurant
-              [
-                rdf:type owl:Class ;
-                owl:complementOf gsoc:Amount_Of_Matter ;
-              ]
-            ) ;
-        ] ;
-      owl:onProperty gsoc:isConstituentOf ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:onProperty gsoc:hasConstituent ;
-      owl:someValuesFrom [
-          rdf:type owl:Class ;
-          owl:unionOf (
-              gsoc:Element
-              gsog:Mineraloid_Material
-              gsog:Rock_Grain_Material
-              gsog:Mineral_Material
-            ) ;
-        ] ;
-    ] ;
-  owl:disjointWith gsoc:Element ;
-  owl:disjointWith gsog:Mineral_Material ;
-  owl:disjointWith gsog:Mineraloid_Material ;
-  owl:disjointWith gsog:Rock_Grain_Material ;
-.
-gsog:Rock_Object
-  rdf:type owl:Class ;
-  rdfs:comment "A geologic object constitited only by some solid geologic material."@en ;
-  rdfs:subClassOf gsog:Geologic_Object ;
-  rdfs:subClassOf gsog:Rock_Body ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom gsog:Solid_Geologic_Material ;
-      owl:onProperty gsoc:hasConstituent ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:onProperty gsoc:hasConstituent ;
-      owl:someValuesFrom gsog:Solid_Geologic_Material ;
-    ] ;
-  owl:equivalentClass [
-      rdf:type owl:Class ;
-      owl:intersectionOf (
-          gsog:Geologic_Object
-          [
-            rdf:type owl:Restriction ;
-            owl:allValuesFrom gsog:Solid_Geologic_Material ;
-            owl:onProperty gsoc:hasConstituent ;
-          ]
-          [
-            rdf:type owl:Restriction ;
-            owl:onProperty gsoc:hasConstituent ;
-            owl:someValuesFrom gsog:Solid_Geologic_Material ;
-          ]
-        ) ;
-    ] ;
-.
-gsog:Solid_Geologic_Material
-  rdf:type owl:Class ;
-  rdfs:comment "An amount of geological material primarily constituted by solids."@en ;
-  rdfs:subClassOf gsoc:Solid_Matter ;
-  rdfs:subClassOf gsog:Geologic_Material ;
-  rdfs:subClassOf gsog:Rock_Body ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:onProperty gsoc:hasPart ;
-      owl:someValuesFrom [
-          rdf:type owl:Class ;
-          owl:intersectionOf (
-              gsoc:Solid_Matter
-              [
-                rdf:type owl:Restriction ;
-                owl:onProperty gsoc:hasRole ;
-                owl:someValuesFrom [
-                    rdf:type owl:Restriction ;
-                    owl:onProperty gsoc:hasQuality ;
-                    owl:someValuesFrom [
-                        rdf:type owl:Restriction ;
-                        owl:onProperty gsoc:hasValue ;
-                        owl:someValuesFrom gsoc:Dominant_Proportion ;
-                      ] ;
-                  ] ;
-              ]
-            ) ;
-        ] ;
-    ] ;
-  owl:disjointWith gsog:Fluid_Geologic_Material ;
-  owl:equivalentClass [
-      rdf:type owl:Class ;
-      owl:intersectionOf (
-          gsog:Geologic_Material
-          [
-            rdf:type owl:Restriction ;
-            owl:onProperty gsoc:hasPart ;
-            owl:someValuesFrom [
-                rdf:type owl:Class ;
-                owl:intersectionOf (
-                    gsoc:Solid_Matter
-                    [
-                      rdf:type owl:Restriction ;
-                      owl:onProperty gsoc:hasRole ;
-                      owl:someValuesFrom [
-                          rdf:type owl:Restriction ;
-                          owl:onProperty gsoc:hasQuality ;
-                          owl:someValuesFrom [
-                              rdf:type owl:Restriction ;
-                              owl:onProperty gsoc:hasValue ;
-                              owl:someValuesFrom gsoc:Dominant_Proportion ;
-                            ] ;
-                        ] ;
-                    ]
-                  ) ;
-              ] ;
-          ]
-        ) ;
-    ] ;
-.
-gsog:Specific_Geologic_Time_Unit
-  rdf:type owl:Class ;
-  rdfs:comment "A time interval defined by specifying geologic time boundaries. E.g. Jurassic 2017 (but not Jurassic). Geologic in the sense that the interval is either referenced to some particular rock body, or its boundaries (started_by, finished_by) are referenced to (hosted by) stratigraphic points, which are dependent on some rock body (e.g. a stratigraphic section)."@en ;
-  rdfs:label "Geologic Time Interval"@en ;
-  rdfs:subClassOf gsog:Geologic_Time_Interval ;
-  rdfs:subClassOf [
-      rdf:type owl:Class ;
-      owl:complementOf [
-          rdf:type owl:Restriction ;
-          owl:onProperty gsoc:hasEssentialPart ;
-          owl:someValuesFrom gsog:Geologic_Time_Interval ;
-        ] ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom gsog:Specific_Geologic_Time_Unit ;
-      owl:onProperty gsoc:nextTimeInterval ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom gsog:Specific_Geologic_Time_Unit ;
-      owl:onProperty gsoc:previousTimeInterval ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:onClass gsoc:Time_Interval ;
-      owl:onProperty gsoc:hasStaticPart ;
-      owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:onClass gsog:Geologic_Time_Boundary ;
-      owl:onProperty gsoc:hasStaticPart ;
-      owl:qualifiedCardinality "2"^^xsd:nonNegativeInteger ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:onClass gsog:Rock_Body ;
-      owl:onProperty gsoc:staticHostedBy ;
-      owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-    ] ;
-  owl:disjointWith gsog:Generic_Geologic_Time_Unit ;
-  owl:disjointWith gsog:Geologic_Time_Scale ;
-.
-gsog:Specific_Rock_Object
-  rdf:type owl:Class ;
-  rdfs:comment "These are rock objects that retain identity if moved (i.e. non-contextual) and depend on a single (self-connected) unified material e.g. Boulder, Crystal, Fossil (rock material)."@en ;
-  rdfs:subClassOf gsog:Rock_Object ;
-  rdfs:subClassOf [
-      rdf:type owl:Class ;
-      owl:complementOf [
-          rdf:type owl:Restriction ;
-          owl:onProperty gsoc:spatio-temporallyDependsOn ;
-          owl:someValuesFrom gsog:Rock_Object ;
-        ] ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:onProperty gsoc:isOutputOf ;
-      owl:someValuesFrom [
-          rdf:type owl:Class ;
-          owl:unionOf (
-              gsog:Geologic_Process
-              gsog:Geologic_Event
-            ) ;
-        ] ;
-    ] ;
-  owl:disjointWith gsog:Geologic_Unit ;
-.
-gsog:Subtractive_Process
-  rdf:type owl:Class ;
-  rdfs:comment "A geologic process that removes material from some geologic material or object."@en ;
-  rdfs:label "Subtractive Process"@en ;
-  rdfs:subClassOf gsog:Geologic_Process ;
-.
-gsog:Transformation
-  rdf:type owl:Class ;
-  rdfs:comment "A geologic process that changes the material of some geologic material or object. Includes metamorphism, metasomatism, alteration, weathering."@en ;
-  rdfs:label "Transformation Process"@en ;
-  rdfs:subClassOf gsog:Geologic_Process ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom gsoc:Amount_Of_Matter ;
-      owl:onProperty gsoc:hasInput ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom gsoc:Amount_Of_Matter ;
-      owl:onProperty gsoc:hasOutput ;
-    ] ;
-.
-gsog:isGeologicallyRelatedTo
-  rdf:type owl:ObjectProperty ;
-  rdfs:label "geologically related to"@en ;
-  rdfs:subPropertyOf gsoc:isRelatedTo ;
-.
-gsog:ontology
-  rdf:type owl:Ontology ;
-  dct:bibliographicCitation "Brodaric, B., and Richard, S.M., 2021, The GeoScience Ontology Reference: Geological Survey of Canada Open File 8796, 34 p., https://doi.org/10.4095/328296";
-  dct:created "2020-03-26"^^xsd:date ;
-  dct:creator gsoc:boyan_brodaric ;
-  dct:creator gsoc:stephen_richard ;
-  dct:license <https://creativecommons.org/licenses/by/4.0/legalcode> ;
-  dct:modified "2021-03-26"^^xsd:date ;
-  dct:publisher "ARC Loop3D project;  https://loop3d.org/" ;
-  dct:publisher "Geological Survey of Canada, Natural Resources Canada, Government of Canada" ;
-    schema:codeRepository "https://github.com/Loop3D/GKM";  dct:rights  "Copyright (c) 2021 Government of Canada" ;
-  rdfs:comment "Base geologic types and relations"@en ;
-  rdfs:label "Geoscience Ontology, Geology"@en ;
-  owl:imports gsoc:ontology ;
-  owl:imports gspd:ontology ;
-  skos:definition "Base geologic types and relations"@en ;
-  skos:prefLabel "Geoscience Ontology, Geology"@en ;
-.
+<https://w3id.org/gso/geology/ontology> rdf:type owl:Ontology ;
+                                         owl:imports gsoc:ontology ,
+                                                     gspd:ontology ;
+                                         dct:bibliographicCitation "Brodaric, B., and Richard, S.M., 2021, The GeoScience Ontology Reference: Geological Survey of Canada Open File 8796, 34 p., https://doi.org/10.4095/328296" ;
+                                         dct:created "2020-03-26"^^xsd:date ;
+                                         dct:creator gsoc:boyan_brodaric ,
+                                                     gsoc:stephen_richard ;
+                                         dct:license <https://creativecommons.org/licenses/by/4.0/legalcode> ;
+                                         dct:modified "2021-03-26"^^xsd:date ;
+                                         dct:publisher "ARC Loop3D project;  https://loop3d.org/" ,
+                                                       "Geological Survey of Canada, Natural Resources Canada, Government of Canada" ;
+                                         dct:rights "Copyright (c) 2021 Government of Canada" ;
+                                         rdfs:comment "Base geologic types and relations"@en ;
+                                         rdfs:label "Geoscience Ontology, Geology"@en ;
+                                         skos:prefLabel "Geoscience Ontology, Geology"@en ;
+                                         schema:codeRepository "https://github.com/Loop3D/GKM" .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  https://w3id.org/gso/geology/isGeologicallyRelatedTo
+gsog:isGeologicallyRelatedTo rdf:type owl:ObjectProperty ;
+                             rdfs:subPropertyOf gsoc:isRelatedTo ;
+                             rdfs:label "geologically related to"@en .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  https://w3id.org/gso/common/Element
+gsoc:Element owl:disjointWith gsog:Mineral_Material ,
+                              gsog:Mineraloid_Material ,
+                              gsog:Rock_Grain_Material ,
+                              gsog:Rock_Material .
+
+
+###  https://w3id.org/gso/geology/Additive_Process
+gsog:Additive_Process rdf:type owl:Class ;
+                      rdfs:subClassOf gsog:Geologic_Process ;
+                      rdfs:comment "A geologic process that adds material to some geologic material or object."@en ;
+                      rdfs:label "Additive Process"@en .
+
+
+###  https://w3id.org/gso/geology/Deformation
+gsog:Deformation rdf:type owl:Class ;
+                 rdfs:subClassOf gsog:Geologic_Process ;
+                 rdfs:comment "A geologic process that deforms the material of some geologic material or ob-ject. Includes strain and translation. Includes translation of rock bodies, and strain-related processes resulting in changes to the shape of a rock body, including folding, faulting, shearing, or fabric development. Deformation may be either brittle or ductile."@en ;
+                 rdfs:label "Deformation Process"@en .
+
+
+###  https://w3id.org/gso/geology/Fluid_Geologic_Material
+gsog:Fluid_Geologic_Material rdf:type owl:Class ;
+                             owl:equivalentClass [ owl:intersectionOf ( gsog:Geologic_Material
+                                                                        [ rdf:type owl:Restriction ;
+                                                                          owl:onProperty gsoc:hasPart ;
+                                                                          owl:someValuesFrom [ owl:intersectionOf ( gsoc:Fluid_Matter
+                                                                                                                    [ rdf:type owl:Restriction ;
+                                                                                                                      owl:onProperty gsoc:hasRole ;
+                                                                                                                      owl:someValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                                                           owl:onProperty gsoc:hasQuality ;
+                                                                                                                                           owl:someValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                                                                                owl:onProperty gsoc:hasValue ;
+                                                                                                                                                                owl:someValuesFrom gsoc:Dominant_Proportion
+                                                                                                                                                              ]
+                                                                                                                                         ]
+                                                                                                                    ]
+                                                                                                                  ) ;
+                                                                                               rdf:type owl:Class
+                                                                                             ]
+                                                                        ]
+                                                                      ) ;
+                                                   rdf:type owl:Class
+                                                 ] ;
+                             rdfs:subClassOf gsog:Geologic_Material ,
+                                             [ rdf:type owl:Restriction ;
+                                               owl:onProperty gsoc:hasPart ;
+                                               owl:someValuesFrom [ owl:intersectionOf ( gsoc:Fluid_Matter
+                                                                                         [ rdf:type owl:Restriction ;
+                                                                                           owl:onProperty gsoc:hasRole ;
+                                                                                           owl:someValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                                owl:onProperty gsoc:hasQuality ;
+                                                                                                                owl:someValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                                                     owl:onProperty gsoc:hasValue ;
+                                                                                                                                     owl:someValuesFrom gsoc:Dominant_Proportion
+                                                                                                                                   ]
+                                                                                                              ]
+                                                                                         ]
+                                                                                       ) ;
+                                                                    rdf:type owl:Class
+                                                                  ]
+                                             ] ;
+                             owl:disjointWith gsog:Solid_Geologic_Material ;
+                             rdfs:comment "An amount of geologic fluid. Includes all forms of geologic fluids including lava, molten rock, gases, etc." .
+
+
+###  https://w3id.org/gso/geology/GSSA
+gsog:GSSA rdf:type owl:Class ;
+          rdfs:subClassOf gsog:Geologic_Time_Date ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty gsoc:isEssentialPartOf ;
+                            owl:someValuesFrom gsog:Geologic_Time_Boundary
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty gsoc:determinedBy ;
+                            owl:allValuesFrom gspd:Assertion
+                          ] ;
+          owl:disjointWith gsog:Geologic_Time_Point ;
+          rdfs:comment "Global Standard Stratigraphic Age: a geological time date defined by the International Stratigraphic Commission, based on assertion of a time point and loosely (weakly) affiliated with some rock body related to e.g. age date(s) or a field observation(s)."@en ,
+                       "add SHACL rule that GSSA may not have property Simple_Uncertainty"@en ;
+          rdfs:label "GSSA"@en .
+
+
+###  https://w3id.org/gso/geology/Generic_Geologic_Time_Unit
+gsog:Generic_Geologic_Time_Unit rdf:type owl:Class ;
+                                rdfs:subClassOf gsog:Geologic_Time_Interval ,
+                                                [ rdf:type owl:Class ;
+                                                  owl:complementOf [ rdf:type owl:Restriction ;
+                                                                     owl:onProperty gsoc:hasEssentialPart ;
+                                                                     owl:someValuesFrom gsog:Generic_Geologic_Time_Unit
+                                                                   ]
+                                                ] ,
+                                                [ rdf:type owl:Class ;
+                                                  owl:complementOf [ rdf:type owl:Restriction ;
+                                                                     owl:onProperty gsoc:hasStaticPart ;
+                                                                     owl:someValuesFrom gsoc:Time_Interval
+                                                                   ]
+                                                ] ,
+                                                [ rdf:type owl:Restriction ;
+                                                  owl:onProperty gsoc:hasEssentialPart ;
+                                                  owl:someValuesFrom gsog:Specific_Geologic_Time_Unit
+                                                ] ,
+                                                [ rdf:type owl:Restriction ;
+                                                  owl:onProperty gsoc:nextTimeInterval ;
+                                                  owl:allValuesFrom gsog:Generic_Geologic_Time_Unit
+                                                ] ,
+                                                [ rdf:type owl:Restriction ;
+                                                  owl:onProperty gsoc:previousTimeInterval ;
+                                                  owl:allValuesFrom gsog:Generic_Geologic_Time_Unit
+                                                ] ;
+                                owl:disjointWith gsog:Geologic_Time_Scale ,
+                                                 gsog:Specific_Geologic_Time_Unit ;
+                                rdfs:comment "A generic geologic time interval (e.g. Jurassic) having specific manifestations (e.g. Jurassic 2017). The specific manifestations are its essential parts, while the generic interval is the whole.  These time intervals are largely defined by their position between other intervals, without necessarily specifying their bounding time instants. Generic geologic time intervals such as Jurassic are not types (classes) for practical and ontological reasons. Practically, it would imply a cumbersome and complex multi-level ontology: time ranks such as Period would be metatypes (following biological ranks such as Species; Carvalho & Almeida 2016) that instantiate time intervals such as Jurassic, that in turn instantiate Jurassic 2017. It would also be more complex to specify e.g. Jurassic (a type) as the age of a formation (an individual), due to non-instantiation relation between an individual and a type. Ontologically, it would imply Jurassic is not a time span, which is contrary to stratigraphic codes that consider Jurassic (as a geochronologic unit) to be an actual chunk of time: \"...units of geologic time... represent [a] span of time ...\" (NACSM 2005) and \"Geochronologic units are units of time...\" (Murphy & Salvador 1998). For these reasons, generic geologic time intervals, such as Jurassic, are considered in GSO to be individuals with essential parts, such as Jurassic 2017. However, it remains somewhat of an open question whether this characterization is indeed best."@en ;
+                                rdfs:label "Generic Geologic Time Interval"@en .
+
+
+###  https://w3id.org/gso/geology/Geologic_Event
+gsog:Geologic_Event rdf:type owl:Class ;
+                    rdfs:subClassOf gsoc:Event ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty gsoc:hasConstituent ;
+                                      owl:someValuesFrom gsog:Geologic_Process
+                                    ] ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty gsoc:hasParticipant ;
+                                      owl:someValuesFrom [ rdf:type owl:Class ;
+                                                           owl:unionOf ( gsog:Geologic_Material
+                                                                         gsog:Geologic_Object
+                                                                       )
+                                                         ]
+                                    ] ;
+                    rdfs:comment "When something happens, events are the ‘what’ of the happening, and processes are the ‘how’. E.g. the Trans-Hudson Orogeny (event) caused by a subduction (process). The relation between events and processes is constitution: events are constituted by processes, and processes constitute events. Geologic processes and events have at least one geologic endurant as participant, i.e. a happening cannot occur unless it happens to something. Events can only have events as parts."@en ;
+                    rdfs:label "Geologic Event"@en .
+
+
+###  https://w3id.org/gso/geology/Geologic_Material
+gsog:Geologic_Material rdf:type owl:Class ;
+                       owl:equivalentClass [ owl:intersectionOf ( gsoc:Amount_Of_Matter
+                                                                  [ rdf:type owl:Restriction ;
+                                                                    owl:onProperty gsoc:hasPart ;
+                                                                    owl:someValuesFrom [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                                                                                owl:onProperty gsoc:hasRole ;
+                                                                                                                owl:someValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                                                     owl:onProperty gsoc:hasQuality ;
+                                                                                                                                     owl:someValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                                                                          owl:onProperty gsoc:hasValue ;
+                                                                                                                                                          owl:allValuesFrom gsoc:Dominant_Proportion
+                                                                                                                                                        ]
+                                                                                                                                   ]
+                                                                                                              ]
+                                                                                                              [ rdf:type owl:Restriction ;
+                                                                                                                owl:onProperty gsoc:isOutputOf ;
+                                                                                                                owl:someValuesFrom [ rdf:type owl:Class ;
+                                                                                                                                     owl:unionOf ( gsog:Geologic_Event
+                                                                                                                                                   gsog:Geologic_Process
+                                                                                                                                                 )
+                                                                                                                                   ]
+                                                                                                              ]
+                                                                                                            ) ;
+                                                                                         rdf:type owl:Class
+                                                                                       ]
+                                                                  ]
+                                                                ) ;
+                                             rdf:type owl:Class
+                                           ] ;
+                       rdfs:subClassOf gsoc:Amount_Of_Matter ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty gsoc:hasPart ;
+                                         owl:someValuesFrom [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                                                     owl:onProperty gsoc:hasRole ;
+                                                                                     owl:someValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                          owl:onProperty gsoc:hasQuality ;
+                                                                                                          owl:someValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                                               owl:onProperty gsoc:hasValue ;
+                                                                                                                               owl:allValuesFrom gsoc:Dominant_Proportion
+                                                                                                                             ]
+                                                                                                        ]
+                                                                                   ]
+                                                                                   [ rdf:type owl:Restriction ;
+                                                                                     owl:onProperty gsoc:isOutputOf ;
+                                                                                     owl:someValuesFrom [ rdf:type owl:Class ;
+                                                                                                          owl:unionOf ( gsog:Geologic_Event
+                                                                                                                        gsog:Geologic_Process
+                                                                                                                      )
+                                                                                                        ]
+                                                                                   ]
+                                                                                 ) ;
+                                                              rdf:type owl:Class
+                                                            ]
+                                       ] ;
+                       owl:disjointWith gsog:Geologic_Object ;
+                       rdfs:comment "An amount of matter primarily (dominantly) having parts created by geologic processes. Can include minor parts that are not of geologic origin, such as organic material, and can be solid, fluid, or a mix."@en .
+
+
+###  https://w3id.org/gso/geology/Geologic_Object
+gsog:Geologic_Object rdf:type owl:Class ;
+                     owl:equivalentClass [ owl:intersectionOf ( gsoc:Material_Object
+                                                                [ rdf:type owl:Restriction ;
+                                                                  owl:onProperty gsoc:hasConstituent ;
+                                                                  owl:someValuesFrom gsog:Geologic_Material
+                                                                ]
+                                                                [ rdf:type owl:Restriction ;
+                                                                  owl:onProperty gsoc:hasConstituent ;
+                                                                  owl:allValuesFrom gsog:Geologic_Material
+                                                                ]
+                                                              ) ;
+                                           rdf:type owl:Class
+                                         ] ;
+                     rdfs:subClassOf gsoc:Material_Object ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty gsoc:hasConstituent ;
+                                       owl:someValuesFrom gsog:Geologic_Material
+                                     ] ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty gsoc:isOutputOf ;
+                                       owl:someValuesFrom [ rdf:type owl:Class ;
+                                                            owl:unionOf ( gsog:Geologic_Event
+                                                                          gsog:Geologic_Process
+                                                                        )
+                                                          ]
+                                     ] ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty gsoc:hasConstituent ;
+                                       owl:allValuesFrom gsog:Geologic_Material
+                                     ] ;
+                     rdfs:comment "A material object constituted by some geological material. Is generically dependent on some geologic process or event, for which the object is an output - it cannot exist without being output by the geologic processes or events."@en ;
+                     rdfs:label "Geologic Object"@en .
+
+
+###  https://w3id.org/gso/geology/Geologic_Process
+gsog:Geologic_Process rdf:type owl:Class ;
+                      rdfs:subClassOf gsoc:Process ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty gsoc:hasParticipant ;
+                                        owl:someValuesFrom [ rdf:type owl:Class ;
+                                                             owl:unionOf ( gsog:Geologic_Material
+                                                                           gsog:Geologic_Object
+                                                                         )
+                                                           ]
+                                      ] ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty gsoc:isConstituentOf ;
+                                        owl:someValuesFrom gsog:Geologic_Event
+                                      ] ;
+                      rdfs:comment "A process that has inputs and or outputs that are part of the Earth System"@en ;
+                      rdfs:label "Geologic Process"@en .
+
+
+###  https://w3id.org/gso/geology/Geologic_Structure
+gsog:Geologic_Structure rdf:type owl:Class ;
+                        rdfs:subClassOf gsoc:Endurant_Feature ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty gsoc:hostedBy ;
+                                          owl:someValuesFrom gsog:Rock_Body
+                                        ] ;
+                        rdfs:comment "A pattern in a rock body (foliation, fold), or a feature occurring between rock bodies (contact, fracture).  GeoSciML 3.2: A configuration of matter in the Earth based on describable inhomogeneity, pattern, or fracture in a Rock Body. The identity of a GeologicStructure is independent of the material that is the substrate for the structure.  Includes sedimentary structures."@en ;
+                        rdfs:label "Geologic Structure"@en .
+
+
+###  https://w3id.org/gso/geology/Geologic_Time_Boundary
+gsog:Geologic_Time_Boundary rdf:type owl:Class ;
+                            rdfs:subClassOf gsoc:Temporal_Boundary ,
+                                            gsog:Geologic_Time_Feature ,
+                                            [ rdf:type owl:Restriction ;
+                                              owl:onProperty gsoc:hasEssentialPart ;
+                                              owl:someValuesFrom gsog:Geologic_Time_Date
+                                            ] ,
+                                            [ rdf:type owl:Restriction ;
+                                              owl:onProperty gsoc:staticHostedBy ;
+                                              owl:someValuesFrom gsog:Geologic_Time_Interval
+                                            ] ;
+                            owl:disjointWith gsog:Geologic_Time_Date ,
+                                             gsog:Geologic_Time_Interval ;
+                            rdfs:comment "A temporal feature that is the boundary between two Geologic time Intervals. Is generically dependent on a date, so can possibly change or could possibly have been a different date - e.g. the end of the Anthropocene is the current moment, which changes with each moment, and the start of the Anthropocene could have been a different time if Erath history was different."@en ;
+                            rdfs:label "Geologic Time Boundary"@en .
+
+
+###  https://w3id.org/gso/geology/Geologic_Time_Date
+gsog:Geologic_Time_Date rdf:type owl:Class ;
+                        owl:equivalentClass [ owl:intersectionOf ( gsoc:Time_Instant_Feature
+                                                                   gsog:Geologic_Time_Feature
+                                                                   [ rdf:type owl:Restriction ;
+                                                                     owl:onProperty gsoc:hasStaticPart ;
+                                                                     owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                     owl:onClass [ owl:intersectionOf ( gsoc:Time_Instant
+                                                                                                        [ rdf:type owl:Class ;
+                                                                                                          owl:complementOf gsog:Geologic_Time_Feature
+                                                                                                        ]
+                                                                                                      ) ;
+                                                                                   rdf:type owl:Class
+                                                                                 ]
+                                                                   ]
+                                                                 ) ;
+                                              rdf:type owl:Class
+                                            ] ;
+                        rdfs:subClassOf gsoc:Time_Instant_Feature ,
+                                        gsog:Geologic_Time_Feature ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty gsoc:hasStaticPart ;
+                                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                          owl:onClass [ owl:intersectionOf ( gsoc:Time_Instant
+                                                                             [ rdf:type owl:Class ;
+                                                                               owl:complementOf gsog:Geologic_Time_Feature
+                                                                             ]
+                                                                           ) ;
+                                                        rdf:type owl:Class
+                                                      ]
+                                        ] ;
+                        owl:disjointWith gsog:Geologic_Time_Interval ;
+                        rdfs:comment "A temporal coordinate value, located either by a point position (with uncertainty) on a time line, specified by a numeric coordinate (generally MYPB, but definitions of 'present' vary). Can be a GSSA if the numeric time coordinate is arbitrarily assigned.  Probably should specify a Temporal Reference System used to assign coordinate values."@en ;
+                        rdfs:label "Geologic Time Date"@en .
+
+
+###  https://w3id.org/gso/geology/Geologic_Time_Feature
+gsog:Geologic_Time_Feature rdf:type owl:Class ;
+                           owl:equivalentClass [ owl:intersectionOf ( gsoc:Temporal_Feature
+                                                                      [ rdf:type owl:Restriction ;
+                                                                        owl:onProperty gsoc:hostedBy ;
+                                                                        owl:someValuesFrom gsog:Rock_Body
+                                                                      ]
+                                                                    ) ;
+                                                 rdf:type owl:Class
+                                               ] ;
+                           rdfs:subClassOf gsoc:Temporal_Feature ,
+                                           [ rdf:type owl:Restriction ;
+                                             owl:onProperty gsoc:hostedBy ;
+                                             owl:someValuesFrom gsog:Rock_Body
+                                           ] ;
+                           rdfs:comment "Any geological temporal feature, including a geologic date, time interval, or time boundary. All geologic time features are dependent one some rock body, strongly or weakly."@en .
+
+
+###  https://w3id.org/gso/geology/Geologic_Time_Interval
+gsog:Geologic_Time_Interval rdf:type owl:Class ;
+                            owl:equivalentClass [ owl:intersectionOf ( gsoc:Time_Interval_Feature
+                                                                       [ rdf:type owl:Restriction ;
+                                                                         owl:onProperty gsoc:hostedBy ;
+                                                                         owl:someValuesFrom gsog:Rock_Body
+                                                                       ]
+                                                                     ) ;
+                                                  rdf:type owl:Class
+                                                ] ;
+                            rdfs:subClassOf gsoc:Time_Interval_Feature ,
+                                            gsog:Geologic_Time_Feature ,
+                                            [ rdf:type owl:Class ;
+                                              owl:complementOf [ rdf:type owl:Restriction ;
+                                                                 owl:onProperty gsoc:hasPart ;
+                                                                 owl:someValuesFrom gsog:Geologic_Time_Scale
+                                                               ]
+                                            ] ,
+                                            [ rdf:type owl:Restriction ;
+                                              owl:onProperty gsoc:hasEssentialPart ;
+                                              owl:someValuesFrom [ rdf:type owl:Class ;
+                                                                   owl:unionOf ( gsoc:Time_Interval
+                                                                                 gsog:Geologic_Time_Interval
+                                                                               )
+                                                                 ]
+                                            ] ,
+                                            [ rdf:type owl:Restriction ;
+                                              owl:onProperty gsoc:timeFinishedBy ;
+                                              owl:allValuesFrom gsog:Geologic_Time_Feature
+                                            ] ,
+                                            [ rdf:type owl:Restriction ;
+                                              owl:onProperty gsoc:timeStartedBy ;
+                                              owl:allValuesFrom gsog:Geologic_Time_Feature
+                                            ] ;
+                            rdfs:comment "A time interval dependent on some rock body and having parts that are (geologic) time intervals. There are 3 primary types of geologic time intervals - these are not comprehensive (i.e. there could be additional types): generic (e.g. Jurassic), specific (e.g. Jurassic 2017), and time scale (ISC 2017)."@en ;
+                            rdfs:label "Geologic Time Interval"@en .
+
+
+###  https://w3id.org/gso/geology/Geologic_Time_Point
+gsog:Geologic_Time_Point rdf:type owl:Class ;
+                         rdfs:subClassOf gsog:Geologic_Time_Date ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty gsoc:determinedBy ;
+                                           owl:someValuesFrom gsoc:Low_Dimension_Feature
+                                         ] ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty gsoc:isEssentialPartOf ;
+                                           owl:someValuesFrom gsog:Geologic_Time_Boundary
+                                         ] ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty gsoc:staticHostedBy ;
+                                           owl:someValuesFrom gsoc:Low_Dimension_Feature
+                                         ] ;
+                         rdfs:comment "Hosted by a contact (low-dimension feature), which itself is hosted by an event that caused the contact, by a stratigraphic point, and by a stratigraphic section containing the point."@en .
+
+
+###  https://w3id.org/gso/geology/Geologic_Time_Scale
+gsog:Geologic_Time_Scale rdf:type owl:Class ;
+                         rdfs:subClassOf gsog:Geologic_Time_Interval ,
+                                         [ rdf:type owl:Class ;
+                                           owl:unionOf ( [ rdf:type owl:Class ;
+                                                           owl:complementOf [ rdf:type owl:Restriction ;
+                                                                              owl:onProperty gsoc:hasEssentialPart ;
+                                                                              owl:someValuesFrom gsog:Geologic_Time_Interval
+                                                                            ]
+                                                         ]
+                                                         [ rdf:type owl:Restriction ;
+                                                           owl:onProperty gsoc:hasStaticPart ;
+                                                           owl:someValuesFrom gsog:Geologic_Time_Interval
+                                                         ]
+                                                       )
+                                         ] ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty gsoc:hasStaticPart ;
+                                           owl:someValuesFrom gsog:Geologic_Time_Interval
+                                         ] ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty gsoc:staticHostedBy ;
+                                           owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                           owl:onClass gsog:Rock_Body
+                                         ] ;
+                         owl:disjointWith gsog:Specific_Geologic_Time_Unit ;
+                         rdfs:comment "A time scale is a geologic time inteval in GSO - it is a rock-dependent span of time that is internally divided into other rock-dependent spans of time following a certain topology (after Simon & Cox, 2010). Rock-dependence implies it is intrinsically tied to a specific rock object (e.g. the Earth's rock mass) and internal subdivision implies it is a collection of other geologic time intervals. Moreoever, any change to the parts of the collection results in a different time scale - this implies geologic time intervals cannot be essential parts of a time scale without being static parts (see Brodaric et al, 2019 for types of parts). Time scales are also not part of other time scales, nor part of specific or generic geologic time intervals. This is primarily to maintain internal temporal topology, though this constraint could be relaxed if use-cases warrant. Aligned generally with (Cox and Richard, 2010)."@en ;
+                         rdfs:label "Geologic Time Scale"@en .
+
+
+###  https://w3id.org/gso/geology/Geologic_Unit
+gsog:Geologic_Unit rdf:type owl:Class ;
+                   owl:equivalentClass [ owl:intersectionOf ( gsog:Rock_Object
+                                                              [ rdf:type owl:Class ;
+                                                                owl:complementOf gsog:Specific_Rock_Object
+                                                              ]
+                                                            ) ;
+                                         rdf:type owl:Class
+                                       ] ;
+                   rdfs:subClassOf gsog:Rock_Object ,
+                                   [ rdf:type owl:Class ;
+                                     owl:complementOf gsog:Specific_Rock_Object
+                                   ] ;
+                   owl:disjointWith gsog:Specific_Rock_Object ;
+                   rdfs:comment "A rock object that is contextual or possibly fragmented into several distinct pieces (i.e. not self-connected). Contextual here means the object cannot moved to another location without losing identity: such moving would imply a different origin process and different surrounding rocks."@en .
+
+
+###  https://w3id.org/gso/geology/Mineral_Material
+gsog:Mineral_Material rdf:type owl:Class ;
+                      rdfs:subClassOf gsog:Solid_Geologic_Material ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty gsoc:hasConstituent ;
+                                        owl:someValuesFrom gsoc:Element
+                                      ] ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty gsoc:hasConstituent ;
+                                        owl:allValuesFrom gsoc:Element
+                                      ] ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty gsoc:hasPart ;
+                                        owl:allValuesFrom [ rdf:type owl:Class ;
+                                                            owl:unionOf ( gsoc:Element
+                                                                          gsog:Mineral_Material
+                                                                        )
+                                                          ]
+                                      ] ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty gsoc:isConstituentOf ;
+                                        owl:allValuesFrom [ owl:intersectionOf ( gsoc:Material_Endurant
+                                                                                 [ rdf:type owl:Class ;
+                                                                                   owl:complementOf [ rdf:type owl:Class ;
+                                                                                                      owl:unionOf ( gsoc:Element
+                                                                                                                    gsog:Mineral_Material
+                                                                                                                    gsog:Mineraloid_Material
+                                                                                                                  )
+                                                                                                    ]
+                                                                                 ]
+                                                                               ) ;
+                                                            rdf:type owl:Class
+                                                          ]
+                                      ] ;
+                      owl:disjointWith gsog:Mineraloid_Material ,
+                                       gsog:Rock_Grain_Material ,
+                                       gsog:Rock_Material ;
+                      rdfs:comment "\"A mineral is an element or chemical compound that is normally crystalline and that has been formed as a result of geological processes.\" Nickel, Ernest H. (1995), The definition of a mineral,  The Canadian Mineralogist. 33 (3): 689-90."@en ,
+                                   "An amount of mineral: denotes a single mineral (a unit cell) or an aggregation of single minerals. All subtypes of Mineral currently denote an aggregation, e.g. Quartz denotes an aggregation of quartz unit cells."@en ;
+                      rdfs:label "Mineral"@en .
+
+
+###  https://w3id.org/gso/geology/Mineraloid_Material
+gsog:Mineraloid_Material rdf:type owl:Class ;
+                         rdfs:subClassOf gsog:Solid_Geologic_Material ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty gsoc:hasConstituent ;
+                                           owl:someValuesFrom gsoc:Element
+                                         ] ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty gsoc:hasConstituent ;
+                                           owl:allValuesFrom gsoc:Element
+                                         ] ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty gsoc:hasPart ;
+                                           owl:allValuesFrom [ rdf:type owl:Class ;
+                                                               owl:unionOf ( gsoc:Element
+                                                                             gsog:Mineraloid_Material
+                                                                           )
+                                                             ]
+                                         ] ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty gsoc:isConstituentOf ;
+                                           owl:allValuesFrom [ owl:intersectionOf ( gsoc:Material_Endurant
+                                                                                    [ rdf:type owl:Class ;
+                                                                                      owl:complementOf [ rdf:type owl:Class ;
+                                                                                                         owl:unionOf ( gsoc:Element
+                                                                                                                       gsog:Mineral_Material
+                                                                                                                       gsog:Mineraloid_Material
+                                                                                                                     )
+                                                                                                       ]
+                                                                                    ]
+                                                                                  ) ;
+                                                               rdf:type owl:Class
+                                                             ]
+                                         ] ;
+                         owl:disjointWith gsog:Rock_Grain_Material ,
+                                          gsog:Rock_Material ;
+                         rdfs:comment "An amount of amorphous material; commonly the product of rapid cooling of melted material. Includes natural glasses in Earth and extraterrestrial material, some biogenic mineral products, and anthromophomorphic manufactured material."@en ;
+                         rdfs:label "Mineraloid"@en .
+
+
+###  https://w3id.org/gso/geology/Rock_Body
+gsog:Rock_Body rdf:type owl:Class ;
+               owl:equivalentClass [ owl:intersectionOf ( gsoc:Material_Endurant
+                                                          [ rdf:type owl:Class ;
+                                                            owl:unionOf ( gsog:Rock_Object
+                                                                          gsog:Solid_Geologic_Material
+                                                                        )
+                                                          ]
+                                                        ) ;
+                                     rdf:type owl:Class
+                                   ] ;
+               rdfs:subClassOf gsoc:Material_Endurant ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty gsoc:externallyGenDependsOn ;
+                                 owl:someValuesFrom [ rdf:type owl:Class ;
+                                                      owl:unionOf ( gsog:Geologic_Event
+                                                                    gsog:Geologic_Process
+                                                                  )
+                                                    ]
+                               ] ;
+               rdfs:comment "A material endurant constituent by solid geologic material or that is such a material"@en ;
+               rdfs:label "Rock Body"@en .
+
+
+###  https://w3id.org/gso/geology/Rock_Body_Boundary
+gsog:Rock_Body_Boundary rdf:type owl:Class ;
+                        rdfs:subClassOf gsoc:Material_Boundary ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty gsoc:hostedBy ;
+                                          owl:someValuesFrom gsog:Rock_Body
+                                        ] ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty gsoc:hasEssentialPart ;
+                                          owl:allValuesFrom gsog:Rock_Body
+                                        ] ;
+                        rdfs:comment "a physical boundary hosted by a rock body.The exterior-facing material of a rock body.  A rock body boundary can have a thickness physical property"@en ;
+                        rdfs:label "Rock Body Boundary"@en .
+
+
+###  https://w3id.org/gso/geology/Rock_Grain_Material
+gsog:Rock_Grain_Material rdf:type owl:Class ;
+                         rdfs:subClassOf gsog:Solid_Geologic_Material ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty gsoc:hasConstituent ;
+                                           owl:someValuesFrom [ rdf:type owl:Class ;
+                                                                owl:unionOf ( gsoc:Element
+                                                                              gsog:Mineral_Material
+                                                                              gsog:Mineraloid_Material
+                                                                            )
+                                                              ]
+                                         ] ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty gsoc:hasPart ;
+                                           owl:allValuesFrom [ rdf:type owl:Class ;
+                                                               owl:unionOf ( gsoc:Element
+                                                                             gsog:Mineral_Material
+                                                                             gsog:Mineraloid_Material
+                                                                             gsog:Rock_Grain_Material
+                                                                           )
+                                                             ]
+                                         ] ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty gsoc:hasPart ;
+                                           owl:allValuesFrom [ rdf:type owl:Class ;
+                                                               owl:unionOf ( gsoc:Element
+                                                                             gsog:Mineral_Material
+                                                                             gsog:Mineraloid_Material
+                                                                             gsog:Rock_Grain_Material
+                                                                             gsog:Rock_Material
+                                                                           )
+                                                             ]
+                                         ] ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty gsoc:isConstituentOf ;
+                                           owl:allValuesFrom [ owl:intersectionOf ( gsoc:Material_Endurant
+                                                                                    [ rdf:type owl:Class ;
+                                                                                      owl:complementOf [ rdf:type owl:Class ;
+                                                                                                         owl:unionOf ( gsoc:Element
+                                                                                                                       gsog:Mineral_Material
+                                                                                                                       gsog:Mineraloid_Material
+                                                                                                                       gsog:Rock_Grain_Material
+                                                                                                                     )
+                                                                                                       ]
+                                                                                    ]
+                                                                                  ) ;
+                                                               rdf:type owl:Class
+                                                             ]
+                                         ] ;
+                         owl:disjointWith gsog:Rock_Material ;
+                         rdfs:comment "A Rock_Material constituent consisting of particles that share a set of characteristics, e.g. genesis, particle size (distribution), mineralogy, shape.  For example. the quartz sand that is a constituent in a sandstone, or the feldspar phenocrysts that are a constituent in a granite."@en ,
+                                      "An amount of rock grains: a single grain or an aggregation of grains. All current subtypes refer to an aggregation of rock grains."@en ,
+                                      "Particle is defined as a 'General term, used without restriction as to shape composition or internal structure, for a separable or distinct unit in a [Rock_Material]'. (Neuendorf et al, 2005)."@en ;
+                         rdfs:label "Rock Grain Material"@en .
+
+
+###  https://w3id.org/gso/geology/Rock_Material
+gsog:Rock_Material rdf:type owl:Class ;
+                   rdfs:subClassOf gsog:Solid_Geologic_Material ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty gsoc:hasConstituent ;
+                                     owl:someValuesFrom [ rdf:type owl:Class ;
+                                                          owl:unionOf ( gsoc:Element
+                                                                        gsog:Mineral_Material
+                                                                        gsog:Mineraloid_Material
+                                                                        gsog:Rock_Grain_Material
+                                                                      )
+                                                        ]
+                                   ] ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty gsoc:isConstituentOf ;
+                                     owl:allValuesFrom [ owl:intersectionOf ( gsoc:Material_Endurant
+                                                                              [ rdf:type owl:Class ;
+                                                                                owl:complementOf gsoc:Amount_Of_Matter
+                                                                              ]
+                                                                            ) ;
+                                                         rdf:type owl:Class
+                                                       ]
+                                   ] ;
+                   dct:source "Based on NADM C1 2004 and CGI Simple_Lithology vocabulary"@en ;
+                   rdfs:comment "An amount of rock material: consisting of an aggregation of grains composed of mineral, glass, or other rock material. General concept for any rock, sediment, or other solid constituent of the Earth.  This is the 'top' of the lithology hierarchy comprised of standard rock names, and should be used to indicate 'any rock or unconsolidated lithic material'."@en ;
+                   rdfs:label "Rock Material"@en .
+
+
+###  https://w3id.org/gso/geology/Rock_Object
+gsog:Rock_Object rdf:type owl:Class ;
+                 owl:equivalentClass [ owl:intersectionOf ( gsog:Geologic_Object
+                                                            [ rdf:type owl:Restriction ;
+                                                              owl:onProperty gsoc:hasConstituent ;
+                                                              owl:someValuesFrom gsog:Solid_Geologic_Material
+                                                            ]
+                                                            [ rdf:type owl:Restriction ;
+                                                              owl:onProperty gsoc:hasConstituent ;
+                                                              owl:allValuesFrom gsog:Solid_Geologic_Material
+                                                            ]
+                                                          ) ;
+                                       rdf:type owl:Class
+                                     ] ;
+                 rdfs:subClassOf gsog:Geologic_Object ,
+                                 gsog:Rock_Body ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty gsoc:hasConstituent ;
+                                   owl:someValuesFrom gsog:Solid_Geologic_Material
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty gsoc:hasConstituent ;
+                                   owl:allValuesFrom gsog:Solid_Geologic_Material
+                                 ] ;
+                 rdfs:comment "A geologic object constitited only by some solid geologic material."@en .
+
+
+###  https://w3id.org/gso/geology/Solid_Geologic_Material
+gsog:Solid_Geologic_Material rdf:type owl:Class ;
+                             owl:equivalentClass [ owl:intersectionOf ( gsog:Geologic_Material
+                                                                        [ rdf:type owl:Restriction ;
+                                                                          owl:onProperty gsoc:hasPart ;
+                                                                          owl:someValuesFrom [ owl:intersectionOf ( gsoc:Solid_Matter
+                                                                                                                    [ rdf:type owl:Restriction ;
+                                                                                                                      owl:onProperty gsoc:hasRole ;
+                                                                                                                      owl:someValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                                                           owl:onProperty gsoc:hasQuality ;
+                                                                                                                                           owl:someValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                                                                                owl:onProperty gsoc:hasValue ;
+                                                                                                                                                                owl:someValuesFrom gsoc:Dominant_Proportion
+                                                                                                                                                              ]
+                                                                                                                                         ]
+                                                                                                                    ]
+                                                                                                                  ) ;
+                                                                                               rdf:type owl:Class
+                                                                                             ]
+                                                                        ]
+                                                                      ) ;
+                                                   rdf:type owl:Class
+                                                 ] ;
+                             rdfs:subClassOf gsoc:Solid_Matter ,
+                                             gsog:Geologic_Material ,
+                                             gsog:Rock_Body ,
+                                             [ rdf:type owl:Restriction ;
+                                               owl:onProperty gsoc:hasPart ;
+                                               owl:someValuesFrom [ owl:intersectionOf ( gsoc:Solid_Matter
+                                                                                         [ rdf:type owl:Restriction ;
+                                                                                           owl:onProperty gsoc:hasRole ;
+                                                                                           owl:someValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                                owl:onProperty gsoc:hasQuality ;
+                                                                                                                owl:someValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                                                     owl:onProperty gsoc:hasValue ;
+                                                                                                                                     owl:someValuesFrom gsoc:Dominant_Proportion
+                                                                                                                                   ]
+                                                                                                              ]
+                                                                                         ]
+                                                                                       ) ;
+                                                                    rdf:type owl:Class
+                                                                  ]
+                                             ] ;
+                             rdfs:comment "An amount of geological material primarily constituted by solids."@en .
+
+
+###  https://w3id.org/gso/geology/Specific_Geologic_Time_Unit
+gsog:Specific_Geologic_Time_Unit rdf:type owl:Class ;
+                                 rdfs:subClassOf gsog:Geologic_Time_Interval ,
+                                                 [ rdf:type owl:Class ;
+                                                   owl:complementOf [ rdf:type owl:Restriction ;
+                                                                      owl:onProperty gsoc:hasEssentialPart ;
+                                                                      owl:someValuesFrom gsog:Geologic_Time_Interval
+                                                                    ]
+                                                 ] ,
+                                                 [ rdf:type owl:Restriction ;
+                                                   owl:onProperty gsoc:nextTimeInterval ;
+                                                   owl:allValuesFrom gsog:Specific_Geologic_Time_Unit
+                                                 ] ,
+                                                 [ rdf:type owl:Restriction ;
+                                                   owl:onProperty gsoc:previousTimeInterval ;
+                                                   owl:allValuesFrom gsog:Specific_Geologic_Time_Unit
+                                                 ] ,
+                                                 [ rdf:type owl:Restriction ;
+                                                   owl:onProperty gsoc:hasStaticPart ;
+                                                   owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                   owl:onClass gsoc:Time_Interval
+                                                 ] ,
+                                                 [ rdf:type owl:Restriction ;
+                                                   owl:onProperty gsoc:hasStaticPart ;
+                                                   owl:qualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+                                                   owl:onClass gsog:Geologic_Time_Boundary
+                                                 ] ,
+                                                 [ rdf:type owl:Restriction ;
+                                                   owl:onProperty gsoc:staticHostedBy ;
+                                                   owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                   owl:onClass gsog:Rock_Body
+                                                 ] ;
+                                 rdfs:comment "A time interval defined by specifying geologic time boundaries. E.g. Jurassic 2017 (but not Jurassic). Geologic in the sense that the interval is either referenced to some particular rock body, or its boundaries (started_by, finished_by) are referenced to (hosted by) stratigraphic points, which are dependent on some rock body (e.g. a stratigraphic section)."@en ;
+                                 rdfs:label "Specific Geologic Time Interval"@en .
+
+
+###  https://w3id.org/gso/geology/Specific_Rock_Object
+gsog:Specific_Rock_Object rdf:type owl:Class ;
+                          rdfs:subClassOf gsog:Rock_Object ,
+                                          [ rdf:type owl:Class ;
+                                            owl:complementOf [ rdf:type owl:Restriction ;
+                                                               owl:onProperty gsoc:spatio-temporallyDependsOn ;
+                                                               owl:someValuesFrom gsog:Rock_Object
+                                                             ]
+                                          ] ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty gsoc:isOutputOf ;
+                                            owl:someValuesFrom [ rdf:type owl:Class ;
+                                                                 owl:unionOf ( gsog:Geologic_Event
+                                                                               gsog:Geologic_Process
+                                                                             )
+                                                               ]
+                                          ] ;
+                          rdfs:comment "These are rock objects that retain identity if moved (i.e. non-contextual) and depend on a single (self-connected) unified material e.g. Boulder, Crystal, Fossil (rock material)."@en .
+
+
+###  https://w3id.org/gso/geology/Subtractive_Process
+gsog:Subtractive_Process rdf:type owl:Class ;
+                         rdfs:subClassOf gsog:Geologic_Process ;
+                         rdfs:comment "A geologic process that removes material from some geologic material or object."@en ;
+                         rdfs:label "Subtractive Process"@en .
+
+
+###  https://w3id.org/gso/geology/Transformation
+gsog:Transformation rdf:type owl:Class ;
+                    rdfs:subClassOf gsog:Geologic_Process ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty gsoc:hasInput ;
+                                      owl:allValuesFrom gsoc:Amount_Of_Matter
+                                    ] ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty gsoc:hasOutput ;
+                                      owl:allValuesFrom gsoc:Amount_Of_Matter
+                                    ] ;
+                    rdfs:comment "A geologic process that changes the material of some geologic material or object. Includes metamorphism, metasomatism, alteration, weathering."@en ;
+                    rdfs:label "Transformation Process"@en .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  https://w3id.org/gso/common/boyan_brodaric
+gsoc:boyan_brodaric rdf:type owl:NamedIndividual ,
+                             schema:Person ;
+                    rdfs:comment "e-mail: mailto:boyan.brodaric@canada.ca " ;
+                    rdfs:label "Dr. Boyan Brodaric" ;
+                    schema:affiliation "Natural Resources Canada, Geological Survey of Canada" ;
+                    schema:identifier <https://orcid.org/0000-0002-7987-3810> ;
+                    schema:name "Dr. Boyan Brodaric" .
+
+
+###  https://w3id.org/gso/common/stephen_richard
+gsoc:stephen_richard rdf:type owl:NamedIndividual ,
+                              schema:Person ;
+                     rdfs:comment "e-mail: mailto:smrTucson@gmail.com " ;
+                     rdfs:label "Dr. Stephen M. Richard" ;
+                     schema:identifier <https://orcid.org/0000-0001-6041-5302> ;
+                     schema:name "Dr. Stephen M. Richard" .
+
+
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
