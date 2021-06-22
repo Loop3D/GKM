@@ -1,0 +1,129 @@
+# baseURI: https://w3id.org/gso/ex-hammersly/ontology
+# imports: https://w3id.org/gso/master/ontology
+
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix feature: <https://w3id.org/gso/feature/> .
+@prefix gscn: <https://w3id.org/gso/geologiccontact/> .
+@prefix gsel: <https://w3id.org/gso/element/> .
+@prefix gsen: <https://w3id.org/gso/geologicsetting/> .
+@prefix gsev: <https://w3id.org/gso/geologicevent/> .
+@prefix gsfa: <https://w3id.org/gso/geologicfault/> .
+@prefix gsfd: <https://w3id.org/gso/geologicfold/> .
+@prefix gsfo: <https://w3id.org/gso/geologicfoliation/> .
+@prefix gsgf: <https://w3id.org/gso/geologicfeature/> .
+@prefix gsgm: <https://w3id.org/gso/granularmaterial/> .
+@prefix gsgq: <https://w3id.org/gso/geologicquality/> .
+@prefix gsgu: <https://w3id.org/gso/geologicunit/> .
+@prefix gsmaster: <https://w3id.org/gso/master/> .
+@prefix gsmin: <https://w3id.org/gso/mineral/> .
+@prefix gsoc: <https://w3id.org/gso/common/> .
+@prefix gsog: <https://w3id.org/gso/geology/> .
+@prefix gsoh: <https://w3id.org/gso/hydrology/> .
+@prefix gsol: <https://w3id.org/gso/geologiclineation/> .
+@prefix gsoq: <https://w3id.org/gso/quality/> .
+@prefix gsor: <https://w3id.org/gso/geologicrole/> .
+@prefix gsos: <https://w3id.org/gso/geologicstructure/> .
+@prefix gspd: <https://w3id.org/gso/perdurant/> .
+@prefix gspr: <https://w3id.org/gso/geologicprocess/> .
+@prefix gsrl: <https://w3id.org/gso/geologicrelation/> .
+@prefix gsrm: <https://w3id.org/gso/rockmaterial/> .
+@prefix gsro: <https://w3id.org/gso/rockobject/> .
+@prefix gsrs: <https://w3id.org/gso/geologicreferencesystem/> .
+@prefix gst: <https://w3id.org/gso/geologictime/> .
+@prefix gstime: <https://w3id.org/gso/ischart/> .
+@prefix ham: <https://w3id.org/gso/ex-hammersly#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <https://schema.org/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sks: <https://w3id.org/gso/skos/annotation/> .
+@prefix turtle: <http://www.semanticweb.org/owl/owlapi/turtle#> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+@prefix uom: <https://w3id.org/gso/qudt/voc/> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+gsoc:stephen_richard
+  rdf:type owl:NamedIndividual ;
+  rdf:type schema:Person ;
+  rdfs:comment "e-mail: mailto:smrTucson@gmail.com " ;
+  rdfs:label "Dr. Stephen M. Richard" ;
+  schema:identifier <https://orcid.org/0000-0001-6041-5302> ;
+  schema:name "Dr. Stephen M. Richard" ;
+.
+ham:poly_125
+  rdf:type gsgf:Outcrop ;
+  rdfs:comment "this is a feature, defined by intersection of earth surface and a rock body. Actually a rock body part, but we're not splitting those hairs at this point. Use -hosted- relation to link to earth surface, and -hasEssentialPart- to link to rock body (the geologic unit that crops out)"@en ;
+  gsoc:hasEssentialPart ham:unit_4104 ;
+  gsoc:hostedBy <http://www.ogc.org/def/earthsurface> ;
+  gsoc:occupiesSpaceDirectly [
+      rdf:type gsoc:Spatial_Region_3D ;
+      gsoc:hasQuality [
+          rdf:type gsoc:Spatial_Location ;
+          gsoc:hasValue [
+              rdf:type gsoc:WKT_Value ;
+              rdfs:comment "geometry is a 2-d boundary trace on the map projection horizon; wkt needs to include the map projection SRS" ;
+              gsoc:hasValue "MultiPolygon (((514855.39821617695270106 7506149.94117030967026949, 514607.09123670257395133 7506056.43013930507004261, 514322.82156601478345692 7505934.41881508287042379, 513652.80106257658917457 7505772.40879598073661327, ... skip a bunch, 501074.44102734833722934 7499125.26131783053278923, 500940.46015988098224625 7499036.75007271580398083, 500879.67993403720902279 7498973.74965021759271622, 500693.84777228627353907 7499210.24115024879574776, 500528.32044021826004609 7499088.24161230865865946, 500366.96940655121579766 7498983.74024535529315472, 500224.61018346477067098 7498889.24017206486314535, 500082.20029294589767233 7498756.24032201990485191, 500000 7498715.09844470117241144, 500000 7500076.07257310207933187)))" ;
+            ] ;
+        ] ;
+    ] ;
+.
+ham:unit_4104
+  rdf:type gsgu:Formation ;
+  dct:source "Warchola et al., 2018, https://doi.org/10.1016/j.precamres.2018.07.015" ;
+  dct:source "https://asud.ga.gov.au/search-stratigraphic-units/results/2227" ;
+  rdfs:label "Boolgeeda Iron Formation"@en ;
+  skos:definition "Fine-grained, finely laminated, dark grey-brown to black flaggy iron-formation, minor chert, jaspilite, shale; metamorphosed. sediment deposited between 2.45 and 2.22 Ga. Boolgeeda deposition is interpreted to have taken place under shallow water, oxic conditions overlying anoxic ferruginous deep water. Intermittent periods of oxidative weathering led to influxes of redox sensitive trace elements from land as continental sulfide minerals were weathered."@en ;
+  skos:notation "P_-HAo-ci" ;
+  gsoc:hasConstituent [
+      rdf:type gsrm:Iron_Rich_Sedimentary_Rock ;
+      rdfs:name "iron formation" ;
+    ] ;
+  gsoc:isPartOf [
+      rdf:type gsgu:Group ;
+      rdfs:comment "If entire stratigraphic column were represented in rdf, this would be URI for the Hammersly Group" ;
+      rdfs:label "Hamersley Group" ;
+    ] ;
+  gsoc:occupiesTimeIndirectly gst:SiderianPeriod ;
+  gsoc:occupiesTimeIndirectly [
+      rdf:type gsog:Geologic_Time_Interval ;
+      gsoc:hasQuality [
+          rdf:type gsoc:Time_Interval_Location ;
+          gsoc:hasValue [
+              rdf:type gsoc:Temporal_Range ;
+              gsoc:hasEndValue [
+                  rdf:type gsoc:Time_Numeric_Value ;
+                  dct:source "https://asud.ga.gov.au/search-stratigraphic-units/results/2227" ;
+                  rdfs:comment "Age method:isotopic, U/Pb-Pb/Pb ion probe" ;
+                  rdfs:label "2445 +/- 5" ;
+                  gsoc:hasDataValue 2445 ;
+                ] ;
+              gsoc:hasStartValue [
+                  rdf:type gsoc:Time_Numeric_Value ;
+                  dct:source "https://asud.ga.gov.au/search-stratigraphic-units/results/2227" ;
+                  gsoc:hasDataValue 2451 ;
+                ] ;
+            ] ;
+        ] ;
+    ] ;
+  gsrl:stratOverlies [
+      rdf:type gsoc:Formation ;
+      rdfs:label "Woongarra Rhyolite" ;
+    ] ;
+.
+<https://w3id.org/gso/ex-hammersly/ontology>
+  rdf:type owl:Ontology ;
+  dct:created "2021-06-16"^^xsd:date ;
+  dct:creator gsoc:stephen_richard ;
+  dct:license <https://creativecommons.org/licenses/by/4.0/legalcode> ;
+  dct:modified "2021-06-16"^^xsd:date ;
+  dct:publisher "ARC Loop3D project;  https://loop3d.org/" ;
+  dct:publisher "Geological Survey of Canada, Natural Resources Canada, Government of Canada" ;
+  dct:rights "Copyright (c) 2021 Government of Canada" ;
+  dct:source ""@en ;
+  rdfs:comment "Definition "@en ;
+  rdfs:label "Test representation of data for Hammersly 3-D model"@en ;
+  owl:imports gsmaster:ontology ;
+  schema:codeRepository "https://github.com/Loop3D/GKM" ;
+.
