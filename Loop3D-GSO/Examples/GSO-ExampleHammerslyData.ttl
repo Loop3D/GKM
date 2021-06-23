@@ -44,6 +44,9 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
+<http://www.ogc.org/def/earthsurface>
+  rdf:type gsoc:Planetary_Surface ;
+.
 gsoc:stephen_richard
   rdf:type owl:NamedIndividual ;
   rdf:type schema:Person ;
@@ -52,11 +55,70 @@ gsoc:stephen_richard
   schema:identifier <https://orcid.org/0000-0001-6041-5302> ;
   schema:name "Dr. Stephen M. Richard" ;
 .
+ham:MoonaFault
+  rdf:type gsfa:High_Angle_Fault ;
+  rdfs:label "Moona Fault"@en ;
+.
+ham:basejeerinah
+  rdf:type gsgf:Rock_Body_Bottom ;
+  rdfs:label "base of Jeerinah Formation" ;
+.
+ham:fault_3496
+  rdf:type gsfa:High_Angle_Fault ;
+  rdfs:label "Fault 3496"@en ;
+.
+ham:fault_A1
+  rdf:type gsfa:High_Angle_Fault ;
+  rdfs:label "Fault A1"@en ;
+.
+ham:fault_A2
+  rdf:type gsfa:High_Angle_Fault ;
+  rdfs:label "Fault A2"@en ;
+.
+ham:faulttrace_11445
+  rdf:type gsfa:Fault ;
+  rdfs:label "Fault trace 11445 "@en ;
+  gsoc:staticHostedBy <http://www.ogc.org/def/earthsurface> ;
+  gsoc:isPartOf ham:fault_A1 ;
+.
+ham:faulttrace_15546
+  rdf:type gsfa:Fault ;
+  rdfs:label "Fault trace 15546 "@en ;
+  gsoc:staticHostedBy <http://www.ogc.org/def/earthsurface> ;
+  gsoc:isPartOf ham:fault_A2 ;
+.
+ham:faulttrace_3496
+  rdf:type gsfa:Fault ;
+  rdfs:label "Fault or shear zone trace"@en ;
+  gsoc:isPartOf ham:fault_3496 ;
+  gsoc:occupiesSpaceDirectly [
+      rdf:type gsoc:Spatial_Region_3D ;
+      gsoc:hasQuality [
+          rdf:type gsoc:Spatial_Location ;
+          gsoc:hasValue [
+              rdf:type gsoc:WKT_Value ;
+              rdfs:comment "geometry is a 2-d boundary trace on the map projection horizon; wkt needs to include the map projection SRS"@en ;
+              gsoc:hasValue "MultiLineString ((529739.13473061460535973 7490000, 528977.92851386324036866 7490769.53031005058437586, 528182.86951453203801066 7492066.0296756885945797, 527790.8076460676966235 7492539.02315779030323029, 527475.04337437252979726 7492999.02684152312576771, 527088.25041355867870152 7493236.51080705039203167, 526531.36511283926665783 7493812.51387743651866913, 526241.48968921939376742 7494361.51259949430823326, 526035.07836963713634759 7495088.00375302601605654, 525796.65808711282443255 7495764.01378773897886276, 525855.19764379435218871 7496044.01467371545732021, 525794.77713101357221603 7496712.51283814944326878, 525856.83559772779699415 7497705.0160570964217186, 525757.75103566725738347 7498272.01408907771110535, 525089.15708681265823543 7499446.52318718098104, 524596.27588007843587548 7500098.51540906727313995, 524512.80164158740080893 7500182.00755983963608742, 524248.587900617683772 7500447.01979160308837891, 523887.39582505845464766 7500808.99943622667342424, 523814.80919091677060351 7500861.50106208492070436, 523576.89012020186055452 7501033.50114163663238287, 523090.5919463072787039 7501408.48978086374700069, 522521.98180311493342742 7501847.49948717840015888, 522422.25158683065092191 7501924.49156486894935369, 522189.26567997899837792 7502103.99834994599223137))" ;
+            ] ;
+        ] ;
+    ] ;
+  gsoc:staticHostedBy <http://www.ogc.org/def/earthsurface> ;
+  gsrl:spatiallyTouches ham:faulttrace_7439 ;
+  gsrl:spatiallyTruncates ham:faulttrace_11445 ;
+  gsrl:spatiallyTruncates ham:faulttrace_15546 ;
+.
+ham:faulttrace_7439
+  rdf:type gsfa:Fault ;
+  rdfs:label "Fault trace Moona Fault "@en ;
+  gsoc:staticHostedBy <http://www.ogc.org/def/earthsurface> ;
+  gsoc:isPartOf ham:MoonaFault ;
+  gsrl:crosscuts ham:basejeerinah ;
+.
 ham:poly_125
   rdf:type gsgf:Outcrop ;
   rdfs:comment "this is a feature, defined by intersection of earth surface and a rock body. Actually a rock body part, but we're not splitting those hairs at this point. Use -hosted- relation to link to earth surface, and -hasEssentialPart- to link to rock body (the geologic unit that crops out)"@en ;
-  gsoc:hasEssentialPart ham:unit_4104 ;
-  gsoc:hostedBy <http://www.ogc.org/def/earthsurface> ;
+  gsoc:staticHostedBy <http://www.ogc.org/def/earthsurface> ;
+  gsoc:hostedBy ham:unit_boolgeeda ;
   gsoc:occupiesSpaceDirectly [
       rdf:type gsoc:Spatial_Region_3D ;
       gsoc:hasQuality [
@@ -69,7 +131,7 @@ ham:poly_125
         ] ;
     ] ;
 .
-ham:unit_4104
+ham:unit_boolgeeda
   rdf:type gsgu:Formation ;
   dct:source "Warchola et al., 2018, https://doi.org/10.1016/j.precamres.2018.07.015" ;
   dct:source "https://asud.ga.gov.au/search-stratigraphic-units/results/2227" ;
@@ -78,8 +140,9 @@ ham:unit_4104
   skos:notation "P_-HAo-ci" ;
   gsoc:hasConstituent [
       rdf:type gsrm:Iron_Rich_Sedimentary_Rock ;
-      rdfs:name "iron formation" ;
+      rdfs:label "iron formation" ;
     ] ;
+  gsoc:isPartOf ham:unit_hammersley ;
   gsoc:isPartOf [
       rdf:type gsgu:Group ;
       rdfs:comment "If entire stratigraphic column were represented in rdf, this would be URI for the Hammersly Group" ;
@@ -107,10 +170,77 @@ ham:unit_4104
             ] ;
         ] ;
     ] ;
-  gsrl:stratOverlies [
-      rdf:type gsoc:Formation ;
-      rdfs:label "Woongarra Rhyolite" ;
-    ] ;
+  gsrl:stratOverlies ham:unit_woongarra ;
+.
+ham:unit_brockman
+  rdf:type gsgu:Formation ;
+  rdfs:label "Brockman Iron Formation"@en ;
+  gsoc:isPartOf ham:unit_hammersley ;
+  gsrl:stratOverlies ham:unit_mtmcraesylvia ;
+.
+ham:unit_bunjinah
+  rdf:type gsgu:Formation ;
+  rdfs:label "Bunjinah Formation"@en ;
+  gsoc:isPartOf ham:unit_fortescue ;
+  gsrl:stratOverlies ham:unit_pyradie ;
+.
+ham:unit_fortescue
+  rdf:type gsgu:Group ;
+  rdfs:label "Fortescue Group"@en ;
+.
+ham:unit_hammersley
+  rdf:type gsgu:Group ;
+  rdfs:label "Hamersley Group"@en ;
+  gsrl:stratOverlies ham:unit_fortescue ;
+.
+ham:unit_jeerinah
+  rdf:type gsgu:Formation ;
+  rdfs:comment "Turner syncline map shows undivided Fortescue Group interlayered with Jeerinah Formation" ;
+  rdfs:label "Jeerinah Formation"@en ;
+  gsoc:hasPart ham:basejeerinah ;
+  gsoc:isPartOf ham:unit_fortescue ;
+  gsrl:stratOverlies ham:unit_bunjinah ;
+.
+ham:unit_marramamba
+  rdf:type gsgu:Formation ;
+  rdfs:label "Marra Mamba Iron Formation"@en ;
+  gsoc:isPartOf ham:unit_hammersley ;
+  gsrl:stratOverlies ham:unit_jeerinah ;
+.
+ham:unit_mtmcraesylvia
+  rdf:type gsgu:Formation ;
+  rdfs:label "Mount McRae Shale and Mount Sylvia Formation"@en ;
+  gsoc:isPartOf ham:unit_hammersley ;
+  gsrl:stratOverlies ham:unit_wittenoom ;
+.
+ham:unit_pyradie
+  rdf:type gsgu:Formation ;
+  rdfs:label "Pyradie Formation"@en ;
+  gsoc:isPartOf ham:unit_fortescue ;
+.
+ham:unit_turee
+  rdf:type gsgu:Group ;
+  rdfs:label "Turee Creek Group"@en ;
+  gsrl:stratOverlies ham:unit_boolgeeda ;
+  gsrl:stratOverlies ham:unit_hammersley ;
+.
+ham:unit_weeliwolli
+  rdf:type gsgu:Formation ;
+  rdfs:label "Weeli Wolli Formation"@en ;
+  gsoc:isPartOf ham:unit_hammersley ;
+  gsrl:stratOverlies ham:unit_brockman ;
+.
+ham:unit_wittenoom
+  rdf:type gsgu:Formation ;
+  rdfs:label "Wittenoom Formation"@en ;
+  gsoc:isPartOf ham:unit_hammersley ;
+  gsrl:stratOverlies ham:unit_marramamba ;
+.
+ham:unit_woongarra
+  rdf:type gsgu:Formation ;
+  rdfs:label "Woongarra Rhyolite"@en ;
+  gsoc:isPartOf ham:unit_hammersley ;
+  gsrl:stratOverlies ham:unit_weeliwolli ;
 .
 <https://w3id.org/gso/ex-hammersly/ontology>
   rdf:type owl:Ontology ;
@@ -123,7 +253,7 @@ ham:unit_4104
   dct:rights "Copyright (c) 2021 Government of Canada" ;
   dct:source ""@en ;
   rdfs:comment "Definition "@en ;
-  rdfs:label "Test representation of data for Hammersly 3-D model"@en ;
+  rdfs:label "Test representation of data for Hammersly 3-D model, Turner syncline area"@en ;
   owl:imports gsmaster:ontology ;
   schema:codeRepository "https://github.com/Loop3D/GKM" ;
 .
