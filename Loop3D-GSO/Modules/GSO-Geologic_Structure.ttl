@@ -14,9 +14,27 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix skos: <http://www.w3.org/2004/02/skos/core#> .   @prefix schema: <https://schema.org/> .
+@prefix schema: <https://schema.org/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
+gsoc:boyan_brodaric
+  rdf:type owl:NamedIndividual ;
+  rdf:type schema:Person ;
+  rdfs:comment "e-mail: mailto:boyan.brodaric@canada.ca " ;
+  rdfs:label "Dr. Boyan Brodaric" ;
+  schema:affiliation "Natural Resources Canada, Geological Survey of Canada" ;
+  schema:identifier <https://orcid.org/0000-0002-7987-3810> ;
+  schema:name "Dr. Boyan Brodaric" ;
+.
+gsoc:stephen_richard
+  rdf:type owl:NamedIndividual ;
+  rdf:type schema:Person ;
+  rdfs:comment "e-mail: mailto:smrTucson@gmail.com " ;
+  rdfs:label "Dr. Stephen M. Richard" ;
+  schema:identifier <https://orcid.org/0000-0001-6041-5302> ;
+  schema:name "Dr. Stephen M. Richard" ;
+.
 gsos:Bedding
   rdf:type owl:Class ;
   rdfs:comment "Bedding as a fabric representing the average orientation of paleodepositional surface should be encoded through the foliationType; might apply to bedding that is layering or a foliation without layering (e.g. clast alignment in amalgamated beds)."@en ;
@@ -76,7 +94,7 @@ gsos:Fabric
   rdf:type owl:Class ;
   dct:source "Hobbs BE, Means WD, & Williams PF. (1976). An outline of structural geology. John Wiley & sons, p.73. ;  Twiss RJ and Moores EM. (2007). Structural Geology, 2nd Edition, WH Freeman and Co., p.497; Wikipedia https://en.wikipedia.org/wiki/Fabric_(geology); Neuendorf et al., 2005, AGI Glossary of Geology; Sander, 1930."@en ;
   rdfs:comment "A pattern in a rock body. Emerges from the relation between parts (including constituents) of the rock."@en ;
-  rdfs:comment "The spatial and geometric configuration of all the elements that make it up. Describes the shape and characteristics of individual parts of a rock and the manner in which the parts are distributed and oriented. In sedimentary rocks, the fabric developed depends on the depositional environment and can provide information on current directions at the time of deposition. In structural geology, fabrics may provide information on both the orientation and magnitude of the strains that have affected a particular piece of deformed rock."@en ;
+  rdfs:comment "The spatial and geometric configuration of elements within a Rock_Body. Describes the shape and characteristics of individual parts of a rock and the manner in which the parts are distributed and oriented. In sedimentary rocks, the fabric developed depends on the depositional environment and can provide information on current directions at the time of deposition. In structural geology, fabrics may provide information on both the orientation and magnitude of the strains that have affected a particular piece of deformed rock."@en ;
   rdfs:label "Fabric "@en ;
   rdfs:subClassOf gsoc:Pattern_Feature ;
   rdfs:subClassOf gsog:Geologic_Structure ;
@@ -185,14 +203,9 @@ gsos:Sedimentary_Structure
   rdfs:label "Sedimentary Structure  "@en ;
   rdfs:subClassOf gsog:Geologic_Structure ;
 .
-gsoc:boyan_brodaric rdf:type schema:Person ; rdf:type owl:NamedIndividual ;
-  schema:affiliation "Natural Resources Canada, Geological Survey of Canada"  ;
-  rdfs:comment "e-mail: mailto:boyan.brodaric@canada.ca " ;
-  schema:identifier <https://orcid.org/0000-0002-7987-3810> ;
-  schema:name "Dr. Boyan Brodaric" ; rdfs:label "Dr. Boyan Brodaric" ;
-.
 gsos:ontology
   rdf:type owl:Ontology ;
+  dct:bibliographicCitation "Brodaric, B., and Richard, S.M., 2021, The GeoScience Ontology Reference, Geologic Structure: Geological Survey of Canada Open File 8796, 34 p., https://doi.org/10.4095/328296" ;
   dct:created "2021-03-26"^^xsd:date ;
   dct:creator gsoc:boyan_brodaric ;
   dct:creator gsoc:stephen_richard ;
@@ -200,19 +213,14 @@ gsos:ontology
   dct:modified "2021-03-26"^^xsd:date ;
   dct:publisher "ARC Loop3D project;  https://loop3d.org/" ;
   dct:publisher "Geological Survey of Canada, Natural Resources Canada, Government of Canada" ;
-    schema:codeRepository "https://github.com/Loop3D/GKM";  dct:rights  "Copyright (c) 2021 Government of Canada" ;
+  dct:rights "Copyright (c) 2021 Government of Canada" ;
   rdfs:comment "Geological structures"@en ;
   rdfs:label "Geoscience Ontology, Geological Structure"@en ;
-  dct:bibliographicCitation "Brodaric, B., and Richard, S.M., 2021, The GeoScience Ontology Reference, Geologic Structure: Geological Survey of Canada Open File 8796, 34 p., https://doi.org/10.4095/328296";
   owl:imports gsoc:ontology ;
   owl:imports gsgq:ontology ;
   owl:imports gsog:ontology ;
   owl:imports gsoq:ontology ;
   skos:definition "Basic geologic structures for Geoscience Ontology; more specific structure types are in associated structure modules for faults, folds, fabrics."@en ;
   skos:prefLabel "Geoscience Ontology, Geological Structure"@en ;
-.
-gsoc:stephen_richard    rdf:type schema:Person ;     rdf:type owl:NamedIndividual ;
-  rdfs:comment "e-mail: mailto:smrTucson@gmail.com " ;
-  schema:identifier <https://orcid.org/0000-0001-6041-5302> ;   schema:name "Dr. Stephen M. Richard" ;
-   rdfs:label "Dr. Stephen M. Richard" ;
+  schema:codeRepository "https://github.com/Loop3D/GKM" ;
 .
