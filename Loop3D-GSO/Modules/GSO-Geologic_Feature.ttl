@@ -11,19 +11,26 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix skos: <http://www.w3.org/2004/02/skos/core#> .   @prefix schema: <https://schema.org/> .
+@prefix schema: <https://schema.org/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-gsoc:boyan_brodaric rdf:type schema:Person ; rdf:type owl:NamedIndividual ;
-  schema:identifier <https://orcid.org/0000-0002-7987-3810> ;
-  schema:affiliation "Natural Resources Canada, Geological Survey of Canada"  ;
+gsoc:boyan_brodaric
+  rdf:type owl:NamedIndividual ;
+  rdf:type schema:Person ;
   rdfs:comment "e-mail: mailto:boyan.brodaric@canada.ca " ;
-  schema:name "Dr. Boyan Brodaric" ; schema:name "Dr. Boyan Brodaric" ; rdfs:label "Dr. Boyan Brodaric" ;
+  rdfs:label "Dr. Boyan Brodaric" ;
+  schema:affiliation "Natural Resources Canada, Geological Survey of Canada" ;
+  schema:identifier <https://orcid.org/0000-0002-7987-3810> ;
+  schema:name "Dr. Boyan Brodaric" ;
 .
-gsoc:stephen_richard    rdf:type schema:Person ;     rdf:type owl:NamedIndividual ;
-  schema:identifier <https://orcid.org/0000-0001-6041-5302> ;
+gsoc:stephen_richard
+  rdf:type owl:NamedIndividual ;
+  rdf:type schema:Person ;
   rdfs:comment "e-mail: mailto:smrTucson@gmail.com " ;
-  schema:name "Dr. Stephen M. Richard" ; rdfs:label "Dr. Stephen M. Richard" ;
+  rdfs:label "Dr. Stephen M. Richard" ;
+  schema:identifier <https://orcid.org/0000-0001-6041-5302> ;
+  schema:name "Dr. Stephen M. Richard" ;
 .
 gsgf:Amygdule
   rdf:type owl:Class ;
@@ -123,7 +130,7 @@ gsgf:Lithosome
   rdf:type owl:Class ;
   dct:source "CGI rockbodypart vocabulary 2016-11-21 "@en ;
   rdfs:comment "A kind of rock body that has multiple occurrences in a single geologic unit. A mass of rock of uniform character, characterized by geometry, composition, and internal structure. (http://inspire.ec.europa.eu/codelist/CompositionPartRoleValue/lithosome)"@en ;
-  rdfs:comment "Generally denotes rock mass that is the product of a particular rock forming process or related sequence of processes in the containing unit. Example--bouma sequence, point bar sequence. A particular lithosome may be characterized by the presence of blocks, but blocks are not treated as kinds of lithosome because the internal character of the blocks is determined by a separate genetic sequence from the described unit."@en ;
+  rdfs:comment "Generally denotes rock mass that is the product of a particular rock forming process or related sequence of processes in the containing unit. Example--bouma sequence, point bar sequence. A particular lithosome may be characterized by the presence of blocks, but blocks are not treated as kinds of lithosome because the internal character of the blocks is determined by a separate genetic sequence from the described unit. As used here, distinguish from 'facies' in that a gsgu:Facies is a kind of geologic unit (has identity and stratigraphic context), likely characterized by one or more typical lithosomes such as point bar sequence, overbank sequence, bouma sequence."@en ;
   rdfs:comment "In the AGI glossary (Neuendorf et al 2005) and usage found on the World Wide Web, lithosome typically denotes relatively uniform and distinctive bodies of sediment that intertongue with one another. (e.g. https://geoinfo.nmt.edu/resources/water/amp/brochures/Koning_lithS_lithA_PP_presentation.pdf; http://www.kgs.ku.edu/Publications/Bulletins/169/Dott/).   This vocabulary generalizes the concept defined in Neuendorf et al 2005 to include bodies of igneous or metamorphic rock as well as sedimentary rock. NADM SLTTs (2004) used the term 'lithotope' with similar meaning for sedimentary rocks."@en ;
   rdfs:comment "Lithosome is considered a kind of Integral feature, where the host is a geologic unit, and the focal is the defining lithologic characteristics of the lithosome."@en ;
   rdfs:label "Lithosome "@en ;
@@ -153,7 +160,7 @@ gsgf:Miarolitic_Cavity
 .
 gsgf:Outcrop
   rdf:type owl:Class ;
-  rdfs:comment "A boundary between a rock body and the Earth's atmosphere or a water body."@en ;
+  rdfs:comment "The thin crust of a rock body at the surface of a planet."@en ;
   rdfs:label "Outcrop"@en ;
   rdfs:subClassOf gsog:Rock_Body_Boundary ;
 .
@@ -243,6 +250,7 @@ gsgf:Vug
 .
 gsgf:ontology
   rdf:type owl:Ontology ;
+  dct:bibliographicCitation "Brodaric, B., and Richard, S.M., 2021, The GeoScience Ontology Reference: Geological Survey of Canada Open File 8796, 34 p., https://doi.org/10.4095/328296" ;
   dct:created "2021-03-26"^^xsd:date ;
   dct:creator gsoc:boyan_brodaric ;
   dct:creator gsoc:stephen_richard ;
@@ -250,12 +258,12 @@ gsgf:ontology
   dct:modified "2021-03-26"^^xsd:date ;
   dct:publisher "ARC Loop3D project;  https://loop3d.org/" ;
   dct:publisher "Geological Survey of Canada, Natural Resources Canada, Government of Canada" ;
-    schema:codeRepository "https://github.com/Loop3D/GKM";  dct:rights  "Copyright (c) 2021 Government of Canada" ;
+  dct:rights "Copyright (c) 2021 Government of Canada" ;
   rdfs:comment "Ontology to define geological features that are not structures"@en ;
-  dct:bibliographicCitation "Brodaric, B., and Richard, S.M., 2021, The GeoScience Ontology Reference: Geological Survey of Canada Open File 8796, 34 p., https://doi.org/10.4095/328296"; 
   rdfs:label "Geoscience Ontology, Geologic Features"@en ;
   owl:imports gsoc:ontology ;
   owl:imports gsog:ontology ;
   skos:definition "Ontology to define geological features that are not structures"@en ;
   skos:prefLabel "Geoscience Ontology, Geologic Features"@en ;
+  schema:codeRepository "https://github.com/Loop3D/GKM" ;
 .
