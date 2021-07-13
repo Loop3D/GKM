@@ -14,9 +14,27 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix skos: <http://www.w3.org/2004/02/skos/core#> .   @prefix schema: <https://schema.org/> .
+@prefix schema: <https://schema.org/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
+gsoc:boyan_brodaric
+  rdf:type owl:NamedIndividual ;
+  rdf:type schema:Person ;
+  rdfs:comment "e-mail: mailto:boyan.brodaric@canada.ca " ;
+  rdfs:label "Dr. Boyan Brodaric" ;
+  schema:affiliation "Natural Resources Canada, Geological Survey of Canada" ;
+  schema:identifier <https://orcid.org/0000-0002-7987-3810> ;
+  schema:name "Dr. Boyan Brodaric" ;
+.
+gsoc:stephen_richard
+  rdf:type owl:NamedIndividual ;
+  rdf:type schema:Person ;
+  rdfs:comment "e-mail: mailto:smrTucson@gmail.com " ;
+  rdfs:label "Dr. Stephen M. Richard" ;
+  schema:identifier <https://orcid.org/0000-0001-6041-5302> ;
+  schema:name "Dr. Stephen M. Richard" ;
+.
 gscn:Alteration_Facies_Contact
   rdf:type owl:Class ;
   dct:source "CGI contacttype SKOS vocabulary 2012-11-24"@en ;
@@ -69,7 +87,7 @@ gscn:Contact
       rdf:type owl:Restriction ;
       owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
       owl:onClass gsog:Rock_Body_Boundary ;
-      owl:onProperty gsoc:hostedBy ;
+      owl:onProperty gsoc:staticHostedBy ;
     ] ;
 .
 gscn:Deformation_Zone_Contact
@@ -339,14 +357,9 @@ gscn:Weathering_Contact
   rdfs:label "weathering contact"@en ;
   rdfs:subClassOf gscn:Lithogenetic_Contact ;
 .
-gsoc:boyan_brodaric rdf:type schema:Person ; rdf:type owl:NamedIndividual ;
-  schema:affiliation "Natural Resources Canada, Geological Survey of Canada"  ;
-  rdfs:comment "e-mail: mailto:boyan.brodaric@canada.ca " ;
-  schema:identifier <https://orcid.org/0000-0002-7987-3810> ;
-  schema:name "Dr. Boyan Brodaric" ; rdfs:label "Dr. Boyan Brodaric" ;
-.
 gscn:ontology
   rdf:type owl:Ontology ;
+  dct:bibliographicCitation "Brodaric, B., and Richard, S.M., 2021, The GeoScience Ontology Reference: Geological Survey of Canada Open File 8796, 34 p., https://doi.org/10.4095/328296" ;
   dct:created "2021-03-26"^^xsd:date ;
   dct:creator gsoc:boyan_brodaric ;
   dct:creator gsoc:stephen_richard ;
@@ -356,9 +369,8 @@ gscn:ontology
   dct:modified "2021-03-26"^^xsd:date ;
   dct:publisher "ARC Loop3D project;  https://loop3d.org/" ;
   dct:publisher "Geological Survey of Canada, Natural Resources Canada, Government of Canada" ;
-    schema:codeRepository "https://github.com/Loop3D/GKM";  dct:rights  "Copyright (c) 2021 Government of Canada" ;
+  dct:rights "Copyright (c) 2021 Government of Canada" ;
   rdfs:comment "This vocabulary specifies Contact Type types, primarily taken from the IUGS Commission for Geoscience Information (CGI) Geoscience Terminology Working Group. Originally designed for use in the contactType property in GeoSciML Contact elements, adopt here as subClasses of gscn:Contact to harmonize with this ontology."@en ;
-  dct:bibliographicCitation "Brodaric, B., and Richard, S.M., 2021, The GeoScience Ontology Reference: Geological Survey of Canada Open File 8796, 34 p., https://doi.org/10.4095/328296";
   rdfs:label "Geoscience Ontology, Contact"@en ;
   owl:imports gsoc:ontology ;
   owl:imports gsgf:ontology ;
@@ -366,13 +378,8 @@ gscn:ontology
   owl:imports gsoq:ontology ;
   skos:definition "Geologic contact types"@en ;
   skos:prefLabel "Geoscience Ontology, Contact"@en ;
+  schema:codeRepository "https://github.com/Loop3D/GKM" ;
 .
-gsoc:stephen_richard    rdf:type schema:Person ;     rdf:type owl:NamedIndividual ;
-  rdfs:comment "e-mail: mailto:smrTucson@gmail.com " ;
-  schema:identifier <https://orcid.org/0000-0001-6041-5302> ;   schema:name "Dr. Stephen M. Richard" ;
-   rdfs:label "Dr. Stephen M. Richard" ;
-.
-
 gsgf:Boundary_Stratotype
   rdf:type owl:Class ;
   rdfs:subClassOf [
