@@ -47,17 +47,6 @@ gsrl:crosscutBy
           gsog:Rock_Body
         ) ;
     ] ;
-  rdfs:domain [
-      rdf:type owl:Class ;
-      owl:unionOf (
-          [
-            rdf:type owl:Restriction ;
-            owl:onProperty gsoc:hostedBy ;
-            owl:someValuesFrom gsog:Rock_Body ;
-          ]
-          gsog:Rock_Body
-        ) ;
-    ] ;
   rdfs:label "is cross-cut or truncated by"@en ;
   rdfs:range [
       rdf:type owl:Class ;
@@ -70,18 +59,7 @@ gsrl:crosscutBy
           gsog:Rock_Body
         ) ;
     ] ;
-  rdfs:range [
-      rdf:type owl:Class ;
-      owl:unionOf (
-          [
-            rdf:type owl:Restriction ;
-            owl:onProperty gsoc:hostedBy ;
-            owl:someValuesFrom gsog:Rock_Body ;
-          ]
-          gsog:Rock_Body
-        ) ;
-    ] ;
-  rdfs:subPropertyOf gsoc:timeOlderThan ;
+  rdfs:subPropertyOf gsoc:timePrecedes ;
   rdfs:subPropertyOf gsog:isGeologicallyRelatedTo ;
   owl:inverseOf gsrl:crosscuts ;
 .
@@ -111,7 +89,7 @@ gsrl:crosscuts
           gsog:Rock_Body
         ) ;
     ] ;
-  rdfs:subPropertyOf gsoc:timeYoungerThan ;
+  rdfs:subPropertyOf gsoc:timePrecededBy ;
   rdfs:subPropertyOf gsog:isGeologicallyRelatedTo ;
 .
 gsrl:intrudedBy
@@ -187,7 +165,7 @@ gsrl:ontology
 .
 gsrl:overlies
   rdf:type owl:ObjectProperty ;
-  rdfs:comment "Relationship between rock bodies in which subject body is above and in contact with the object body in geographic reference system (the object might or might not be younger than the subject). Generally applied to stratified rock bodies.   subclass from meets"@en ;
+  rdfs:comment "Relationship between rock bodies in which subject body is above and in contact with the object body in geographic reference system (the object might or might not be younger than the subject). Generally applied to stratified rock bodies."@en ;
   rdfs:domain gsog:Rock_Body ;
   rdfs:label "overlies "@en ;
   rdfs:range gsog:Rock_Body ;
@@ -206,7 +184,7 @@ gsrl:overprintedBy
         ) ;
     ] ;
   rdfs:label "overprinted by"@en ;
-  rdfs:subPropertyOf gsoc:timeOlderThan ;
+  rdfs:subPropertyOf gsoc:timePrecedes ;
   rdfs:subPropertyOf gsog:isGeologicallyRelatedTo ;
   owl:inverseOf gsrl:overprints ;
 .
@@ -221,7 +199,7 @@ gsrl:overprints
           gsog:Rock_Body
         ) ;
     ] ;
-  rdfs:subPropertyOf gsoc:timeYoungerThan ;
+  rdfs:subPropertyOf gsoc:timePrecededBy ;
   rdfs:subPropertyOf gsog:isGeologicallyRelatedTo ;
 .
 gsrl:stratOverlies
@@ -230,8 +208,8 @@ gsrl:stratOverlies
   rdfs:domain gsog:Rock_Body ;
   rdfs:label "overlies "@en ;
   rdfs:range gsog:Rock_Body ;
-  rdfs:subPropertyOf gsoc:timeYoungerThan ;
-  rdfs:subPropertyOf gsrl:overlies ;
+  rdfs:subPropertyOf gsoc:timePrecededBy ;
+  rdfs:subPropertyOf gsog:isGeologicallyRelatedTo ;
   owl:inverseOf gsrl:stratUnderlies ;
 .
 gsrl:stratUnderlies
@@ -240,8 +218,8 @@ gsrl:stratUnderlies
   rdfs:domain gsog:Rock_Body ;
   rdfs:label "underlies "@en ;
   rdfs:range gsog:Rock_Body ;
-  rdfs:subPropertyOf gsoc:timeOlderThan ;
-  rdfs:subPropertyOf gsrl:underlies ;
+  rdfs:subPropertyOf gsoc:timePrecedes ;
+  rdfs:subPropertyOf gsog:isGeologicallyRelatedTo ;
 .
 gsrl:underlies
   rdf:type owl:ObjectProperty ;
