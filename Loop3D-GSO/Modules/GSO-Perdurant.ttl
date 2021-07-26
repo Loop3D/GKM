@@ -8,9 +8,26 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix skos: <http://www.w3.org/2004/02/skos/core#> .   @prefix schema: <https://schema.org/> .
+@prefix schema: <https://schema.org/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
+gsoc:boyan_brodaric
+  rdf:type owl:NamedIndividual ;
+  rdf:type schema:Person ;
+  rdfs:comment "e-mail: mailto:boyan.brodaric@canada.ca " ;
+  rdfs:label "Dr. Boyan Brodaric" ;
+  schema:affiliation "Natural Resources Canada, Geological Survey of Canada" ;
+  schema:identifier <https://orcid.org/0000-0002-7987-3810> ;
+  schema:name "Dr. Boyan Brodaric" ;
+.
+gsoc:stephen_richard
+  rdf:type owl:NamedIndividual ;
+  rdf:type schema:Person ;
+  rdfs:comment "e-mail: mailto:smrTucson@gmail.com " ;
+  schema:identifier <https://orcid.org/0000-0001-6041-5302> ;
+  schema:name "Dr. Stephen M. Richard" ;
+.
 gspd:Assertion
   rdf:type owl:Class ;
   rdfs:comment "Determination by agreeement or convention. No evidence required, but there should be an identified authority making the assertion." ;
@@ -61,7 +78,7 @@ gspd:Minimum_Value_Calculation
 .
 gspd:Observation
   rdf:type owl:Class ;
-  rdfs:comment "An event that results in the direct determination of the value of some property; typically will haveConstituent relation so a Measurement_Activity that describes the observation process."@en ;
+  rdfs:comment "An event that results in the direct determination of the value of some property; typically will haveConstituent relation to an Observation_Process that describes the method of determination."@en ;
   rdfs:label "Observation "@en ;
   rdfs:subClassOf gspd:Determining_Event ;
   rdfs:subClassOf [
@@ -87,14 +104,9 @@ gspd:Statistical_Calculation
       owl:someValuesFrom gsoc:Unit_Of_Measure ;
     ] ;
 .
-gsoc:boyan_brodaric rdf:type schema:Person ; rdf:type owl:NamedIndividual ;
-  schema:affiliation "Natural Resources Canada, Geological Survey of Canada"  ;
-  rdfs:comment "e-mail: mailto:boyan.brodaric@canada.ca " ;
-  schema:identifier <https://orcid.org/0000-0002-7987-3810> ;
-  schema:name "Dr. Boyan Brodaric" ; rdfs:label "Dr. Boyan Brodaric" ;
-.
 gspd:ontology
   rdf:type owl:Ontology ;
+  dct:bibliographicCitation "Brodaric, B., and Richard, S.M., 2021, The GeoScience Ontology Reference: Geological Survey of Canada Open File 8796, 34 p., https://doi.org/10.4095/328296" ;
   dct:created "2021-03-26"^^xsd:date ;
   dct:creator gsoc:boyan_brodaric ;
   dct:creator gsoc:stephen_richard ;
@@ -102,14 +114,10 @@ gspd:ontology
   dct:modified "2021-03-26"^^xsd:date ;
   dct:publisher "ARC Loop3D project;  https://loop3d.org/" ;
   dct:publisher "Geological Survey of Canada, Natural Resources Canada, Government of Canada" ;
-    schema:codeRepository "https://github.com/Loop3D/GKM";  dct:rights  "Copyright (c) 2021 Government of Canada" ;
+  dct:rights "Copyright (c) 2021 Government of Canada" ;
   rdfs:label "Geoscience Ontology, Perdurant"@en ;
   owl:imports gsoc:ontology ;
-    dct:bibliographicCitation "Brodaric, B., and Richard, S.M., 2021, The GeoScience Ontology Reference: Geological Survey of Canada Open File 8796, 34 p., https://doi.org/10.4095/328296"; 
   skos:definition "Basic types of Perdurants. Perdurants (AKA occurrences) include things such as time regions, events, processes, phenomena, or activities."@en ;
   skos:prefLabel "Geoscience Ontology, Perdurant"@en ;
-.
-gsoc:stephen_richard    rdf:type schema:Person ;     rdf:type owl:NamedIndividual ;
-  rdfs:comment "e-mail: mailto:smrTucson@gmail.com " ;
-  schema:identifier <https://orcid.org/0000-0001-6041-5302> ;   schema:name "Dr. Stephen M. Richard" ;
+  schema:codeRepository "https://github.com/Loop3D/GKM" ;
 .
