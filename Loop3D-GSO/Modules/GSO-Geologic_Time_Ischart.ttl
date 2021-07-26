@@ -6,8 +6,10 @@
 @prefix : <https://w3id.org/gso/ischart/> .
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix gscn: <https://w3id.org/gso/geologiccontact/> .
+@prefix gsgf: <https://w3id.org/gso/geologicfeature/> .
 @prefix gsoc: <https://w3id.org/gso/common/> .
 @prefix gsog: <https://w3id.org/gso/geology/> .
+@prefix gspd: <https://w3id.org/gso/perdurant/> .
 @prefix gst: <https://w3id.org/gso/geologictime/> .
 @prefix gstime: <https://w3id.org/gso/ischart/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
@@ -33,6 +35,21 @@ gsoc:stephen_richard
   rdfs:comment "e-mail: mailto:smrTucson@gmail.com " ;
   schema:identifier <https://orcid.org/0000-0001-6041-5302> ;
   schema:name "Dr. Stephen M. Richard" ;
+.
+gst:CarboniferousPeriod
+  gsoc:timeFinishedBy gst:PennsylvanianSub-period ;
+  gsoc:timeStartedBy gst:MississippianSub-period ;
+.
+gst:MississippianSub-period
+  dct:description "The Devonian-Carboniferous transition is marked by major perturbations in the geosphere (palaeoclimate, geochemical cycles, relative sea-level changes) and biosphere (extinctions and radiations) (e.g. Carmichael et al., 2016; Kaiser et al., 2015; Kalvoda et al., 2019; Marshall et al., 2020; Rakociński et al., 2020, 2021). The name Hangenberg Crisis has been coined for this time of major changes. Hence, a good understanding of the dynamics of the crisis is important for any definition of the DCB. The geoscience community has to agree when this crisis starts and when it ends. ...The Hangenberg extinction is not a single short event, which would mark a perfect point in time. It corresponds to a timespan starting in the very latest Devonian and reaching (slightly) into the earliest Carboniferous. It offers a very good tool to approximately place the Devonian-Carboniferous boundary, but its time-span is too long for high-precision chronology. The ICS commission is  testing a possible position of the Devonian/Carboniferous Boundary based on a timeline defined by 'the base of the Protognathodus kockeli conodont Zone, the end of the Devonian mass extinction and beginning of the Carboniferous radiation, and the top of a major regression (top of Hangenberg Sandstone)' that is slightly lower that the currently defined GSSP.  (Aretz and Corradini, 2021)"@en ;
+  dct:source "Markus Aretz and Carlo Corradini, 2021, Global review of the Devonian-Carboniferous Boundary: an introduction: Palaeobiodiversity and Palaeoenvironments volume 101, pages285–293  https://doi.org/10.1007/s12549-021-00499-8." ;
+.
+gst:PennsylvanianSub-period
+  dct:description "The beginning of the Pennsylvania  coincides with a significant mid-Carboniferous glaciation and sea-level drop."@en ;
+  dct:source "Davydov, V.I., Korn, D., and Schmitz, M.D., 2012, The Carboniferous Period,  in Gradstein et al., The Geologic Time Scale 2012, v. 2, Elsevier, p. 603-651." ;
+.
+gst:TournaisianAge
+  gsoc:timeStarts gst:MississippianSub-period ;
 .
 gstime:Aalenian2004
   rdf:type gst:Age ;
@@ -1329,27 +1346,13 @@ gstime:BaseCapitanianSP2001
 .
 gstime:BaseCarboniferous2004
   rdf:type gsog:Geologic_Time_Boundary ;
-  dct:source "Gradstein, Ogg, Smith, 2004, A Geologic Time Scale 2004"@en ;
+  dct:description "The position of the boundary in the biostratigraphic sequence was established near the \"classic\" base of the Gattendorfia Zone: 'This new definition is at the first appearance of the conodont Siphondella sulcata within the evolutionary lineage from Siphonodella praesulcata to Siphonodella sulcata...'(Paproth and Streel,1984, p.5). This recommendation was submitted by R.H.Lane (USA), C.A.Sandberg (USA), and W.Ziegler (Germany) and was accepted in 1979 by the Working Group on the Devonian-Carboniferous Boundary. The boundary intention is to coincide with 'the end of the Devonian mass extinction and beginning of the Carboniferous radiation. (Paparoth et al., 1991)."@en ;
+  dct:source "Markus Aretz and Carlo Corradini, 2021, Global review of the Devonian-Carboniferous Boundary: an introduction: Palaeobiodiversity and Palaeoenvironments volume 101, pages285–293  https://doi.org/10.1007/s12549-021-00499-8." ;
+  dct:source "Paproth, E., Feist, R. and Flajs, G., 1991, Decision on the Devonian-Carboniferous boundary stratotype: Episodes v. 14, no. 4, p. 331-336." ;
   rdfs:label "Base of Carboniferous"@en ;
   gsoc:hasEssentialPart [
       rdf:type gsog:Geologic_Time_Point ;
-      gsoc:hasStaticPart [
-          rdf:type gsoc:Time_Instant ;
-          gsoc:hasQuality [
-              rdf:type gsoc:Time_Instant_Location ;
-              gsoc:hasStaticValue [
-                  rdf:type gsoc:Time_Numeric_Value ;
-                  gsoc:hasDataValue 359.2 ;
-                  gsoc:hasQuality [
-                      rdf:type gsoc:Uncertainty ;
-                      gsoc:hasDataValue 2.5 ;
-                    ] ;
-                  gsoc:hasUOM [
-                      rdf:type unit:MegaYR ;
-                    ] ;
-                ] ;
-            ] ;
-        ] ;
+      gsoc:hasStaticPart gstime:baseCarboniferousNumericAge2004 ;
       gsoc:staticHostedBy gstime:BaseCarboniferousSP1990 ;
     ] ;
   gsoc:isPartOf gstime:isc2004-04 ;
@@ -1383,9 +1386,11 @@ gstime:BaseCarboniferous2017
 .
 gstime:BaseCarboniferousSP1990
   rdf:type gscn:GSSP ;
-  dct:source "Episodes 14/4, p. 331 336, 1991 "@en ;
-  rdfs:comment "Newsletters on Stratigraphy, 43/2, p. 195 205, 2009 "@en ;
-  rdfs:comment "base of Bed 89 in Trench E’, (but FAD now known to be at base of Bed 85), La Serre, France"@en ;
+  dct:description "The position of the boundary in the biostratigraphic sequence was established near the \"classic\" base of the Gattendorfia Zone: 'This new definition is at the first appearance of the conodont Siphondella sulcata within the evolutionary lineage from Siphonodella praesulcata to Siphonodella sulcata...'(Paproth and Streel,1984, p.5). This recommendation was submitted by R.H.Lane (USA), C.A.Sandberg (USA), and W.Ziegler (Germany) and was accepted in 1979 by the Working Group on the Devonian-Carboniferous Boundary. The boundary intention is to coincide with 'the end of the Devonian mass extinction and beginning of the Carboniferous radiation. (Paparoth et al., 1991)."@en ;
+  dct:source "Markus Aretz and Carlo Corradini, 2021, Global review of the Devonian-Carboniferous Boundary: an introduction: Palaeobiodiversity and Palaeoenvironments volume 101, pages285–293  https://doi.org/10.1007/s12549-021-00499-8." ;
+  dct:source "Paproth, E., Feist, R. and Flajs, G., 1991, Decision on the Devonian-Carboniferous boundary stratotype: Episodes v. 14, no. 4, p. 331-336." ;
+  rdfs:comment "Based on new conodont data, the Devonian/Carboniferous boundary GSSP at La Serre requires re-positioning. The La Serre trench E section (Montagne Noire, France) was selected as global D/C boundary stratotype, because it was assumed to be the only section that shows the evolutionary lineage from Siphonodella praesulcata to S. sulcata. However, this section cannot be regarded as an ideal stratotype, because the boundary was fixed within an oolitic sequence, and conodonts and other fossils are reworked. New data show that the first occurrence of the index fossil S. sulcata is much earlier than previously reported, which indicates that the base of the Carboniferous has to be fixed at an older stratigraphical level. Also, the co-occurrence of S. praesulcata and S. sulcata above a facies break shows that the evolutionary lineage from S. praesulcata to S. sulcata, which was previously claimed for the definition of the D/C boundary, is obviously absent at La Serre. Consequently, the GSSP position either needs to be re-located at La Serre, or a new stratotype section must be designated. (Kaiser, Sandra I., 2009, The Devonian/Carboniferous boundary stratotype section (La Serre, France) revisited: Newsletters on Stratigraphy, 43/2, p. 195-205, https://www.schweizerbart.de/papers/nos/detail/43/72810/The_Devonian_Carboniferous_boundary_stratotype_sec )"@en ;
+  rdfs:comment "base of Bed 89 in Trench E’, (but FAD now known to be at base of Bed 85), La Serre, France. The definition of the GSSP does not include an estimation of its temporal position (age in Ma)."@en ;
   rdfs:label "GSSP Base of Carboniferous - Mississippian - Tournaisian"@en ;
   rdfs:seeAlso <http://www.stratigraphy.org/GSSP/Tournaisian.pdf> ;
   rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
@@ -2517,6 +2522,7 @@ gstime:BaseGzhelian2004
           rdf:type gsoc:Time_Instant ;
           gsoc:hasQuality [
               rdf:type gsoc:Time_Instant_Location ;
+              gsoc:determinedBy gstime:carboniferousDateCalibration2004 ;
               gsoc:hasStaticValue [
                   rdf:type gsoc:Time_Numeric_Value ;
                   gsoc:hasDataValue 303.9 ;
@@ -3843,27 +3849,13 @@ gstime:BaseMiddleJurassicSP2000
 .
 gstime:BaseMiddleMississippian2004
   rdf:type gsog:Geologic_Time_Boundary ;
-  dct:source "Gradstein, Ogg, Smith, 2004, A Geologic Time Scale 2004"@en ;
+  dct:source "Davydov, V., Wardlaw, B.R., and Gradstein, F.M., 2004, The Carboniferous Period, in Gradstein et al., A Geologic Time Scale 2004: Cambridge University Press, p. 244-248."@en ;
+  rdfs:comment "GSSP at Penchong was proposed in 2003, but not formally accepted;  construction of the 2004 time scale for the Tournaisian-Visean are based on assumption that conodont zones in this interval have equal duration, and 'intuitive scaling of stages primarily based on evolution of foraminifera' (Davydov et al, 2004 p244)" ;
   rdfs:label "Base of Middle Mississippian - Visean"@en ;
   gsoc:hasEssentialPart [
       rdf:type gsog:Geologic_Time_Point ;
-      gsoc:hasStaticPart [
-          rdf:type gsoc:Time_Instant ;
-          gsoc:hasQuality [
-              rdf:type gsoc:Time_Instant_Location ;
-              gsoc:hasStaticValue [
-                  rdf:type gsoc:Time_Numeric_Value ;
-                  gsoc:hasDataValue 345.3 ;
-                  gsoc:hasQuality [
-                      rdf:type gsoc:Uncertainty ;
-                      gsoc:hasDataValue 2.1 ;
-                    ] ;
-                  gsoc:hasUOM [
-                      rdf:type unit:MegaYR ;
-                    ] ;
-                ] ;
-            ] ;
-        ] ;
+      gsoc:hasStaticPart gstime:baseViseanNumericAge2004 ;
+      gsoc:staticHostedBy "" ;
     ] ;
   gsoc:isPartOf gstime:isc2004-04 ;
 .
@@ -3971,13 +3963,14 @@ gstime:BaseMiddleOrdovicianSP2007
 gstime:BaseMiddlePennsylvanian2004
   rdf:type gsog:Geologic_Time_Boundary ;
   dct:source "Gradstein, Ogg, Smith, 2004, A Geologic Time Scale 2004"@en ;
-  rdfs:label "Base of Middle Pennsylvanian"@en ;
+  rdfs:label "Base of Middle Pennsylvanian, Moscovian"@en ;
   gsoc:hasEssentialPart [
       rdf:type gsog:Geologic_Time_Point ;
       gsoc:hasStaticPart [
           rdf:type gsoc:Time_Instant ;
           gsoc:hasQuality [
               rdf:type gsoc:Time_Instant_Location ;
+              gsoc:determinedBy gstime:carboniferousDateCalibration2004 ;
               gsoc:hasStaticValue [
                   rdf:type gsoc:Time_Numeric_Value ;
                   gsoc:hasDataValue 311.7 ;
@@ -4507,13 +4500,14 @@ gstime:BasePaleoarchean2004
 gstime:BasePennsylvanian2004
   rdf:type gsog:Geologic_Time_Boundary ;
   dct:source "Gradstein, Ogg, Smith, 2004, A Geologic Time Scale 2004"@en ;
-  rdfs:label "Base of Pennsylvanian"@en ;
+  rdfs:label "Base of Pennsylvanian, Bashkirian"@en ;
   gsoc:hasEssentialPart [
       rdf:type gsog:Geologic_Time_Point ;
       gsoc:hasStaticPart [
           rdf:type gsoc:Time_Instant ;
           gsoc:hasQuality [
               rdf:type gsoc:Time_Instant_Location ;
+              gsoc:determinedBy gstime:carboniferousDateCalibration2004 ;
               gsoc:hasStaticValue [
                   rdf:type gsoc:Time_Numeric_Value ;
                   gsoc:hasDataValue 318.1 ;
@@ -4662,27 +4656,35 @@ gstime:BasePhanerozoic2017
   rdfs:label "Base of Phanerozoic"@en ;
   gsoc:hasEssentialPart [
       rdf:type gsog:Geologic_Time_Point ;
-      gsoc:hasStaticPart [
-          rdf:type gsoc:Time_Instant ;
-          gsoc:hasQuality [
-              rdf:type gsoc:Time_Instant_Location ;
-              gsoc:hasStaticValue [
-                  rdf:type gsoc:Time_Numeric_Value ;
-                  gsoc:hasDataValue "541"^^xsd:decimal ;
-                  gsoc:hasQuality [
-                      rdf:type gsoc:Uncertainty ;
-                      gsoc:hasDataValue 1.0 ;
-                    ] ;
-                  gsoc:hasUOM [
-                      rdf:type unit:MegaYR ;
-                    ] ;
-                ] ;
-            ] ;
-        ] ;
+      gsoc:hasStaticPart gstime:BasePhanerozoicNumericAge2012 ;
       gsoc:staticHostedBy gstime:BasePhanerozoicSP1992 ;
     ] ;
   gsoc:isPartOf gstime:isc2017-02 ;
   gsoc:isPartOf gstime:isc2020-01 ;
+.
+gstime:BasePhanerozoicNumericAge2012
+  rdf:type gsoc:Time_Instant ;
+  rdfs:label "541.0 +/- 0.63" ;
+  gsoc:determinedBy [
+      rdf:type gspd:Calculation ;
+      dct:source "Peng, S., Babcock, L.E., and Cooper, R.A., 2012, The Cambrian Period,  in Gradstein et al., The Geologic Time Scale 2012, v. 2, Elsevier, p. 474." ;
+      rdfs:description "Based on consideration of U-Pb ages from volcanic ash layers near the boundary in Namibia and Oman; exact statistical procedure to get the numeric value and uncertainty is not explained in the text."@en ;
+      rdfs:label "Estimation of temporal position" ;
+    ] ;
+  gsoc:hasQuality [
+      rdf:type gsoc:Time_Instant_Location ;
+      gsoc:hasStaticValue [
+          rdf:type gsoc:Time_Numeric_Value ;
+          gsoc:hasDataValue "541"^^xsd:decimal ;
+          gsoc:hasQuality [
+              rdf:type gsoc:Uncertainty ;
+              gsoc:hasDataValue 1.0 ;
+            ] ;
+          gsoc:hasUOM [
+              rdf:type unit:MegaYR ;
+            ] ;
+        ] ;
+    ] ;
 .
 gstime:BasePhanerozoicSP1992
   rdf:type gscn:GSSP ;
@@ -6125,6 +6127,7 @@ gstime:BaseUpperMississippian2004
           rdf:type gsoc:Time_Instant ;
           gsoc:hasQuality [
               rdf:type gsoc:Time_Instant_Location ;
+              gsoc:determinedBy gstime:carboniferousDateCalibration2004 ;
               gsoc:hasStaticValue [
                   rdf:type gsoc:Time_Numeric_Value ;
                   gsoc:hasDataValue 326.4 ;
@@ -6248,6 +6251,7 @@ gstime:BaseUpperPennsylvanian2004
           rdf:type gsoc:Time_Instant ;
           gsoc:hasQuality [
               rdf:type gsoc:Time_Instant_Location ;
+              gsoc:determinedBy gstime:carboniferousDateCalibration2004 ;
               gsoc:hasStaticValue [
                   rdf:type gsoc:Time_Numeric_Value ;
                   gsoc:hasDataValue 306.35 ;
@@ -6459,6 +6463,15 @@ gstime:BaseValanginianSP2004
   rdfs:label "Stratotype Point Base of Albian"@en ;
   rdfs:seeAlso <https://stratigraphy.org/gssps/> ;
 .
+gstime:BaseViseanSP1967
+  rdf:type gscn:Stratigraphic_Point ;
+  dct:description "The base of bed 141, the first black limestone intercalation (“Calcaires et Marbres Noirs”) in the Leffe facies at the Bastion section in the historical type area. This level coincides with the first occurrence of the calcareous foraminifer genus Eoparastaffella (Conil et al., 1969), less than 1 m below the entry of the conodont Gnathodus homopunctatus (Groessens & Noel, 1977)." ;
+  dct:source "CONIL, R. (coll. AUSTIN, R.L., LYS, M. & RHODES, F.H.T.), 1969. La limite des etages tournaisien et viséen au stratotype de l'assise de Dinant. Bulletin de la Societe belge de Geologie, 77 (1): 39-74" ;
+  dct:source "SCCS, 1969. General discussion of the Subcommission on Carboniferous Stratigraphy. Comptes rendus du 5e Congres International de Stratigraphie et de Geologie du Carbonifere, Sheffield, 1967, 1: 185-189" ;
+  rdfs:comment "This definition of the base of the Viséan was found to be unsatisfactory due to the peculiar palaeogeographical context of the Dinant region at the time of the Tournaisian-Viséan transition (Hance, L., Poty, E., Devuyst, F-X, 2006, Visean: Geolgoica Belgica, v. 91, no1-2, p55-62, accessed at https://popups.uliege.be/1374-8505/index.php?id=1094&file=1.  The disappearance of deeper-water 'Torunaisian' conodonts and teh entry of shallow water 'Visean' foraminifer in this section appears to be an ecological event related to a sea-level drop, of questionable global chronostratigraphic significance (Davydov et al, 2004)"@en ;
+  rdfs:label "Stratotype base Visean 1967"@en ;
+  owl:versionInfo "1967" ;
+.
 gstime:BaseWenlock2004
   rdf:type gsog:Geologic_Time_Boundary ;
   dct:source "Gradstein, Ogg, Smith, 2004, A Geologic Time Scale 2004"@en ;
@@ -6587,7 +6600,7 @@ gstime:BaseWordianSP2001
 .
 gstime:BaseWuliuan2020
   rdf:type gsog:Geologic_Time_Boundary ;
-  rdfs:comment "Note the date estimate has not changed, but GSSP is ratified as a reference for this boundary"@en ;
+  rdfs:comment "Base is the lowest occurrence of the cosmopolitan oryctocephalid trilobite Oryctocephalus indicus. Note the date estimate has not changed, but GSSP is ratified as a reference for this boundary"@en ;
   rdfs:label "Base of Wuliuan Age"@en ;
   gsoc:hasEssentialPart [
       rdf:type gsog:Geologic_Time_Point ;
@@ -7345,6 +7358,16 @@ gstime:Cisuralian2017
   gsoc:timeStartedBy gstime:BasePermian2017 ;
   gsoc:timeStarts gstime:Permian2017 ;
 .
+gstime:CompositeSectionTemporalCalibration
+  rdf:type gspd:Observation_Process ;
+  dct:description "Alignment of a composite standard stratigraphic section with temporal coordinates using geochronologic data, e.g. isotopic ages, astronomic cycles."@en ;
+  rdfs:label "Composite section temporal calibration "@en ;
+  skos:prefLabel "Composite section temporal calibration  "@en ;
+.
+gstime:CompositeStandardSectionCarboniferousPermian2004
+  rdf:type gsgf:Stratigraphic_Section ;
+  rdfs:label "Composite Standard Section for Carboniferous and Permian, 2004" ;
+.
 gstime:Coniacian2004
   rdf:type gst:Age ;
   rdf:type gsog:Specific_Geologic_Time_Unit ;
@@ -7952,7 +7975,7 @@ gstime:Gelasian2004
   rdfs:comment "older bound -2.588 Ma"@en ;
   rdfs:comment "younger bound -1.806 Ma"@en ;
   rdfs:label "Gelasian Age"@en ;
-  gsoc:isPartOf gst:GelasianAge ;
+  gsoc:isPartOf gst:GelasianAge2009 ;
   gsoc:isPartOf gstime:isc2004-04 ;
   gsoc:previousTimeInterval gstime:Piacenzian2004 ;
   gsoc:timeFinishedBy gstime:BasePleistocene2004 ;
@@ -7964,7 +7987,7 @@ gstime:Gelasian2017
   rdfs:comment "older bound -2.58 Ma"@en ;
   rdfs:comment "younger bound -1.80 Ma"@en ;
   rdfs:label "Gelasian Age"@en ;
-  gsoc:isPartOf gst:GelasianAge ;
+  gsoc:isPartOf gst:GelasianAge2009 ;
   gsoc:isPartOf gstime:isc2017-02 ;
   gsoc:isPartOf gstime:isc2020-01 ;
   gsoc:nextTimeInterval gstime:Calabrian2017 ;
@@ -8036,6 +8059,14 @@ gstime:Gorstian2017
   gsoc:timeFinishedBy gstime:BaseLudfordian2017 ;
   gsoc:timeStartedBy gstime:BaseLudlow2017 ;
   gsoc:timeStarts gstime:Ludlow2017 ;
+.
+gstime:GraphicCorrelation
+  rdf:type gspd:Observation_Process ;
+  dct:description "A method for integrating biostratigraphic data from multiple stratigraphic sections to develop a composite section that most accuratly represent the ranges of fossils. Involves construction of an x–y crossplot on which biostratigraphic data (tops, bases, abundance/diversity events) recorded by measured stratigraphic position in one section (y-axis) may be matched to like occurrences in a composite standard section (x-axis). Based on the array of data points, a preferred overall correlation can be defined by one or more line segments. Points falling on the line(s) of correlation are interpreted to be synchronous markers; those off the line(s), diachronous (https://wiki.aapg.org/Quantitative_biostratigraphy). Addition of data from multiple sections refines the position of biostratigraphic events.  The composite section can then be used as a reference section containing all stratigraphic correlation events, with taxon ranges aproximating their true range in time most consistent with the data from the input sections."@en ;
+  dct:source "Gradstein, F.M., Cooper, R.A., Sadler, P.M., 2004, Biostratigraphy: time scales from graphic and quantitiative methods, in Gradstein et al., eds, A geologic Time Scale, 2004: Cambridge University Press, p. 49-51." ;
+  dct:source "Shaw, A., B., 1964, Time in Stratigraphy: New York, McGraw-Hill, 365 p." ;
+  rdfs:label "Graphic correlation "@en ;
+  skos:prefLabel "Graphic correlation "@en ;
 .
 gstime:Greenlandian2020
   rdf:type gst:Age ;
@@ -9642,7 +9673,7 @@ gstime:Neogene2004
   rdfs:comment "older bound -23.03 Ma"@en ;
   rdfs:comment "younger bound -0 Ma"@en ;
   rdfs:label "Neogene Period"@en ;
-  gsoc:isPartOf gst:NeogenePeriod ;
+  gsoc:isPartOf gst:NeogenePeriod1995 ;
   gsoc:isPartOf gstime:isc2004-04 ;
   gsoc:previousTimeInterval gstime:Chattian2004 ;
   gsoc:previousTimeInterval gstime:Oligocene2004 ;
@@ -9658,7 +9689,7 @@ gstime:Neogene2017
   rdfs:comment "older bound -23.03 Ma"@en ;
   rdfs:comment "younger bound -2.58 Ma"@en ;
   rdfs:label "Neogene Period"@en ;
-  gsoc:isPartOf gst:NeogenePeriod ;
+  gsoc:isPartOf gst:NeogenePeriod1995 ;
   gsoc:isPartOf gstime:isc2017-02 ;
   gsoc:isPartOf gstime:isc2020-01 ;
   gsoc:nextTimeInterval gstime:Gelasian2017 ;
@@ -10590,7 +10621,7 @@ gstime:Quaternary2017
   rdfs:comment "older bound -2.58 Ma"@en ;
   rdfs:comment "younger bound -0.0 Ma"@en ;
   rdfs:label "Quaternary Period"@en ;
-  gsoc:isPartOf gst:QuaternaryPeriod ;
+  gsoc:isPartOf gst:QuaternaryPeriod2009 ;
   gsoc:isPartOf gstime:isc2017-02 ;
   gsoc:isPartOf gstime:isc2020-01 ;
   gsoc:previousTimeInterval gstime:Neogene2017 ;
@@ -11997,6 +12028,55 @@ gstime:Zanclean2004
   gsoc:timeStarts gstime:Pliocene2004 ;
   gsoc:timeStarts gstime:Pliocene2017 ;
 .
+gstime:baseCarboniferousNumericAge2004
+  rdf:type gsoc:Time_Instant ;
+  dct:source "Davydov, V., Wardlaw, B.R., and Gradstein, F.M., 2004, The Carboniferous Period, in Gradstein et al., A Geologic Time Scale 2004: Cambridge University Press, p. 244-248." ;
+  rdfs:comment "Numeric temporal position of base of Carboniferous - Mississippian - Tournaisian"@en ;
+  rdfs:label "359.2 +/- 2.5 Ma" ;
+  gsoc:hasQuality [
+      rdf:type gsoc:Time_Instant_Location ;
+      gsoc:determinedBy gstime:carboniferousDateCalibration2004 ;
+      gsoc:hasStaticValue [
+          rdf:type gsoc:Time_Numeric_Value ;
+          gsoc:hasDataValue 359.2 ;
+          gsoc:hasQuality [
+              rdf:type gsoc:Uncertainty ;
+              gsoc:hasDataValue 2.5 ;
+            ] ;
+          gsoc:hasUOM [
+              rdf:type unit:MegaYR ;
+            ] ;
+        ] ;
+    ] ;
+.
+gstime:baseViseanNumericAge2004
+  rdf:type gsoc:Time_Instant ;
+  dct:source "Davydov, V., Wardlaw, B.R., and Gradstein, F.M., 2004, The Carboniferous Period, in Gradstein et al., A Geologic Time Scale 2004: Cambridge University Press, p. 244-248." ;
+  gsoc:hasQuality [
+      rdf:type gsoc:Time_Instant_Location ;
+      gsoc:determinedBy gstime:carboniferousDateCalibration2004 ;
+      gsoc:hasStaticValue [
+          rdf:type gsoc:Time_Numeric_Value ;
+          gsoc:hasDataValue 345.3 ;
+          gsoc:hasQuality [
+              rdf:type gsoc:Uncertainty ;
+              gsoc:hasDataValue 2.1 ;
+            ] ;
+          gsoc:hasUOM [
+              rdf:type unit:MegaYR ;
+            ] ;
+        ] ;
+    ] ;
+.
+gstime:carboniferousDateCalibration2004
+  rdf:type gspd:Calculation ;
+  dct:description "Composite section constructed by graphic correlation, from most of type and key sections of Serpukhovian through Gzhelian in the Russian Platform and Ural Mountains, and from Donetz Basin, Central Asia, Timan-Pechora, Spitsbergen, Cantabrian Mountains, and subsurface of Barents Sea. Total of 40 sections were composited. Fossil groups used include foraminifera (70% of data), conodonts (25% of data), and ammmonoid species and genera (~5% of data).  Composite section scale adjusted with 'intuitive scaling of stages primarily based  on evolution of foraminifera.' For Tournaisian and Visean, scaling based on assumption of equal duration of conodont zones.  Assignment of temporal positions for stage boundaries based on 19 radiometric ages. See sections 15.3.3 and 15.3.4 in Davydov et al, 2004."@en ;
+  dct:source "Davydov, V., Wardlaw, B.R., and Gradstein, F.M., 2004, The Carboniferous Period, in Gradstein et al., A Geologic Time Scale 2004: Cambridge University Press, p. 244-248." ;
+  rdfs:label "Carboniferous stage boundary age assignment  "@en ;
+  skos:prefLabel "Carboniferous stage boundary age assignment    "@en ;
+  gsoc:hasConstituent gstime:CompositeSectionTemporalCalibration ;
+  gsoc:hasConstituent gstime:GraphicCorrelation ;
+.
 gstime:isc2004-04
   rdf:type gsog:Geologic_Time_Scale ;
   rdfs:comment "RDF/OWL representation of the 2004-04 edition of the International Chronostratigraphic Chart from the International Commission on Stratigraphy. encoded using OWL implementation from GSO. Adapted from Cox&Richard OWL GeologicTime ontology"@en ;
@@ -12110,6 +12190,7 @@ gstime:isc2020-01
 .
 gstime:ontology
   rdf:type owl:Ontology ;
+  dct:bibliographicCitation "Brodaric, B., and Richard, S.M., 2021, The GeoScience Ontology Reference: Geological Survey of Canada Open File 8796, 34 p., https://doi.org/10.4095/328296" ;
   dct:created "2021-03-26"^^xsd:date ;
   dct:creator gsoc:boyan_brodaric ;
   dct:creator gsoc:stephen_richard ;
@@ -12117,12 +12198,12 @@ gstime:ontology
   dct:modified "2021-03-26"^^xsd:date ;
   dct:publisher "ARC Loop3D project;  https://loop3d.org/" ;
   dct:publisher "Geological Survey of Canada, Natural Resources Canada, Government of Canada" ;
-    schema:codeRepository "https://github.com/Loop3D/GKM";  dct:rights  "Copyright (c) 2021 Government of Canada" ;
+  dct:rights "Copyright (c) 2021 Government of Canada" ;
   rdfs:comment "This ontology defines time intervals for specific time scale instance, ics 2020, ics2017 and ics2004, using the timescale implementation in the LOOP3D geology.ttl module. Adapted for Loop3D geoscience ontology by SMR 2019-11-15"@en ;
   rdfs:label "Geologic Timescale Elements For  International Chronostratigraphic Chart 2004,2017, 2020"@en ;
-  dct:bibliographicCitation "Brodaric, B., and Richard, S.M., 2021, The GeoScience Ontology Reference: Geological Survey of Canada Open File 8796, 34 p., https://doi.org/10.4095/328296";
   owl:imports gst:ontology ;
   owl:imports gsog:ontology ;
   owl:imports <https://w3id.org/gso/qudt/voc/ontology> ;
   skos:prefLabel "Geoscience Ontology, Geologic Timescale Elements"@en ;
+  schema:codeRepository "https://github.com/Loop3D/GKM" ;
 .
