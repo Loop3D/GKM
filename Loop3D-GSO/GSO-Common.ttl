@@ -2429,6 +2429,7 @@ gsoc:Time_Interval_Feature
   rdf:type owl:Class ;
   rdfs:comment "" ;
   rdfs:label "Time Interval Feature "@en ;
+  rdfs:seeAlso <http://www.cidoc-crm.org/entity/e4-period/version-7.1.1> ;
   rdfs:subClassOf gsoc:Temporal_Feature ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
@@ -2472,6 +2473,7 @@ gsoc:Time_Region
   rdf:type owl:Class ;
   rdfs:comment "A chunk of time, either an instant or interval, with a temporal location quality."@en ;
   rdfs:label "Time Region"@en ;
+  rdfs:seeAlso <time:TemporalEntity> ;
   rdfs:subClassOf gsoc:Perdurant ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
@@ -2703,7 +2705,7 @@ gsoc:exemplification
 gsoc:exemplifies
   rdf:type owl:IrreflexiveProperty ;
   rdf:type owl:ObjectProperty ;
-  rdfs:comment "Directed relation between an exemple and the thing being exemplfied."@en ;
+  rdfs:comment "Directed relation between an example and the thing being exemplfied."@en ;
   rdfs:subPropertyOf gsoc:exemplification ;
   owl:inverseOf gsoc:isExemplifiedBy ;
 .
@@ -3329,7 +3331,7 @@ gsoc:reference
   rdf:type owl:IrreflexiveProperty ;
   rdf:type owl:ObjectProperty ;
   rdf:type owl:SymmetricProperty ;
-  rdfs:comment "Undircted relation between an entity and its reference system"@en ;
+  rdfs:comment "Undirected relation between an entity and its reference system"@en ;
   rdfs:subPropertyOf gsoc:isFundamentallyRelatedTo ;
 .
 gsoc:spaceOccupiedBy
@@ -3414,6 +3416,17 @@ gsoc:timeContains
   rdf:type owl:ObjectProperty ;
   rdf:type owl:TransitiveProperty ;
   rdfs:comment "target interval is completely within the source interval; source begins before target and ends after target. inverse of During. Equivalent to union of OWL Time time:intervalContains and time:inside"@en ;
+  rdfs:domain [
+      rdf:type owl:Class ;
+      owl:unionOf (
+          [
+            rdf:type owl:Restriction ;
+            owl:allValuesFrom gsoc:Time_Interval ;
+            owl:onProperty gsoc:occupiesTime ;
+          ]
+          gsoc:Time_Interval
+        ) ;
+    ] ;
   rdfs:label "contains"@en ;
   rdfs:seeAlso <time:inside> ;
   rdfs:seeAlso <time:intervalContains> ;
@@ -3430,23 +3443,44 @@ gsoc:timeDisjoint
 .
 gsoc:timeDuring
   rdf:type owl:ObjectProperty ;
-  rdfs:comment "interval A is entirely contained in interval B; B starts before A and B ends after A. Allen relation. OWL Time time:intervalDuring is narrower, only relates ProperIntervals."@en ;
+  rdfs:comment "Beginning (directly or indirectly) of subject entity is  younger than the beginning of the object entity, and the end (directly or indirectly) of the subject entity is older than the end of the object entity. Allen relation. OWL Time time:intervalDuring is narrower, only relates ProperIntervals."@en ;
   rdfs:label "during"@en ;
+  rdfs:range [
+      rdf:type owl:Class ;
+      owl:unionOf (
+          [
+            rdf:type owl:Restriction ;
+            owl:allValuesFrom gsoc:Time_Interval ;
+            owl:onProperty gsoc:occupiesTime ;
+          ]
+          gsoc:Time_Interval
+        ) ;
+    ] ;
   rdfs:seeAlso <time:intervalDuring> ;
   rdfs:subPropertyOf gsoc:timeIncludedBy ;
 .
 gsoc:timeEquivalentTo
   rdf:type owl:ObjectProperty ;
   rdf:type owl:SymmetricProperty ;
-  rdfs:comment "A is equivalent to B if they represent expressions of the same Time_Region. Same as Allen A Equals B.   One of six binary relations between geologic events defined by Burns (1975). OWL Time time:intervalEquals is narrower, only relates properIntervals."@en ;
+  rdfs:comment "A is equivalent to B if they represent expressions of the same Time_Region. Same as Allen A Equals B.   One of six binary relations between geologic events defined by Burns (1975). OWL Time time:intervalEquals is narrower, only relates properIntervals. Constraint is that the domain and range must both either occupy interval or both occupy instant, or both be instants or intervals."@en ;
   rdfs:label "equals"@en ;
   rdfs:seeAlso <time:intervalEquals> ;
-  rdfs:subPropertyOf gsoc:timeIncludedBy ;
-  rdfs:subPropertyOf gsoc:timeIncludes ;
+  rdfs:subPropertyOf gsoc:timeIntersects ;
 .
 gsoc:timeFinishedBy
   rdf:type owl:ObjectProperty ;
   rdfs:comment "source interval begins before target; source and target end simultaneously; inverse of finishes.  OWL time time:intervalFinsishedBy is narrower, only relates proper intervals."@en ;
+  rdfs:domain [
+      rdf:type owl:Class ;
+      owl:unionOf (
+          [
+            rdf:type owl:Restriction ;
+            owl:allValuesFrom gsoc:Time_Interval ;
+            owl:onProperty gsoc:occupiesTime ;
+          ]
+          gsoc:Time_Interval
+        ) ;
+    ] ;
   rdfs:label "finished by"@en ;
   rdfs:seeAlso <time:intervalFinishedBy> ;
   rdfs:subPropertyOf gsoc:timeIncludes ;
@@ -3456,13 +3490,78 @@ gsoc:timeFinishes
   rdf:type owl:ObjectProperty ;
   rdfs:comment "Target TimeRegion starts before source TimeRegion, and source and target TimeRegion end at the same instant. Allen Relation. Use to assign a younger age boundary for a Time Region (instant or interval)."@en ;
   rdfs:label "finishes"@en ;
+  rdfs:range [
+      rdf:type owl:Class ;
+      owl:unionOf (
+          [
+            rdf:type owl:Restriction ;
+            owl:allValuesFrom gsoc:Time_Interval ;
+            owl:onProperty gsoc:occupiesTime ;
+          ]
+          gsoc:Time_Interval
+        ) ;
+    ] ;
   rdfs:seeAlso <time:intervalFinishes> ;
   rdfs:subPropertyOf gsoc:timeIncludedBy ;
+.
+gsoc:timeHasBeginning
+  rdf:type owl:ObjectProperty ;
+  rdfs:label "has beginning "@en ;
+  rdfs:range [
+      rdf:type owl:Class ;
+      owl:unionOf (
+          [
+            rdf:type owl:Restriction ;
+            owl:allValuesFrom gsoc:Time_Instant ;
+            owl:onProperty gsoc:occupiesTime ;
+          ]
+          gsoc:Time_Instant
+        ) ;
+    ] ;
+  rdfs:subPropertyOf gsoc:timeStartedBy ;
+.
+gsoc:timeHasEnd
+  rdf:type owl:ObjectProperty ;
+  rdfs:domain [
+      rdf:type owl:Class ;
+      owl:unionOf (
+          [
+            rdf:type owl:Restriction ;
+            owl:allValuesFrom gsoc:Time_Interval ;
+            owl:onProperty gsoc:occupiesTime ;
+          ]
+          gsoc:Time_Interval
+        ) ;
+    ] ;
+  rdfs:label "has end "@en ;
+  rdfs:range [
+      rdf:type owl:Class ;
+      owl:unionOf (
+          [
+            rdf:type owl:Restriction ;
+            owl:allValuesFrom gsoc:Time_Instant ;
+            owl:onProperty gsoc:occupiesTime ;
+          ]
+          gsoc:Time_Instant
+        ) ;
+    ] ;
+  rdfs:subPropertyOf gsoc:timeFinishedBy ;
 .
 gsoc:timeIncludedBy
   rdf:type owl:ObjectProperty ;
   rdf:type owl:TransitiveProperty ;
-  rdfs:comment "Beginning (directly or indirectly) of subject entity is the same or younger that the beginning of the object entity, and the end (directly or indirectly) of the subject entity is the same or older than the end of the object entity. Union of timeDuring, timeEquivalentTo, timeFinishes and timeStarts. Time_Region occupied directly or indirectly by the subject does not extend outside the Time_Region occupied directly or indirectly by the object.  OWL Time time:intervalIn is subproperty, restricted to relating intervals, and not including timeEquivalentTo."@en ;
+  rdfs:comment "Beginning (directly or indirectly) of subject entity is the same or younger than the beginning of the object entity, and the end (directly or indirectly) of the subject entity is the same or older than the end of the object entity. Union of timeDuring, timeFinishes and timeStarts. Time_Region occupied directly or indirectly by the subject does not extend outside the Time_Region occupied directly or indirectly by the object.  OWL Time time:intervalIn is subproperty, restricted to relating intervals, and not including timeEquivalentTo."@en ;
+  rdfs:range [
+      rdf:type owl:Class ;
+      owl:unionOf (
+          [
+            rdf:type owl:Restriction ;
+            owl:allValuesFrom gsoc:Time_Interval ;
+            owl:onProperty gsoc:occupiesTime ;
+          ]
+          gsoc:Time_Interval
+        ) ;
+    ] ;
   rdfs:seeAlso <time:intervalIn> ;
   rdfs:subPropertyOf gsoc:timeInclusion ;
   owl:inverseOf gsoc:timeIncludes ;
@@ -3470,20 +3569,32 @@ gsoc:timeIncludedBy
 gsoc:timeIncludes
   rdf:type owl:ObjectProperty ;
   rdf:type owl:TransitiveProperty ;
-  rdfs:comment "Beginning (directly or indirectly) of subject entity is the same or older than the beginning of the object entity, and the end of the subject entity is the same or younger than the end of the object entity. Union of timeContains, timeEquivalentTo, timeFinishedBy and timeStartedBy. Time_Region occupied directly or indirectly by the object does not extend outside the Time_Region occupied directly or indirectly by the subject.  OWL time:hasInside is narrower; doesn't allow timeStartedBy and timeFinishedBy where the object is an instant, or timeEquivalentTo."@en ;
+  rdfs:comment "Beginning (directly or indirectly) of subject entity is the same or older than the beginning of the object entity, and the end of the subject entity is the same or younger than the end of the object entity. Union of timeContains, timeFinishedBy and timeStartedBy. Time_Region occupied directly or indirectly by the object does not extend outside the Time_Region occupied directly or indirectly by the subject.  OWL time:hasInside is narrower; doesn't allow timeStartedBy and timeFinishedBy where the object is an instant, or timeEquivalentTo."@en ;
+  rdfs:domain [
+      rdf:type owl:Class ;
+      owl:unionOf (
+          [
+            rdf:type owl:Restriction ;
+            owl:allValuesFrom gsoc:Time_Interval ;
+            owl:onProperty gsoc:occupiesTime ;
+          ]
+          gsoc:Time_Interval
+        ) ;
+    ] ;
   rdfs:seeAlso <time:hasInside> ;
   rdfs:subPropertyOf gsoc:timeInclusion ;
 .
 gsoc:timeInclusion
   rdf:type owl:ObjectProperty ;
   rdf:type owl:SymmetricProperty ;
+  rdfs:comment "Union of timeIncludedBy and timeIncludes.  Property that relates an interval to a temporal entity (either as subject or object) for which the  Time_Region occupied directly or indirectly by one of the relata does not extend outside the Time_Region occupied directly or indirectly by the other relata."@en ;
   rdfs:subPropertyOf gsoc:timeIntersects ;
 .
 gsoc:timeIncomparableTo
   rdf:type owl:ObjectProperty ;
   rdf:type owl:SymmetricProperty ;
-  rdfs:comment "A is incomparable to be if there is not enough information to determine an age relationship"@en ;
   rdfs:comment "One of six binary relations between geologic events defined by Burns (1975)"@en ;
+  rdfs:comment "Temporal extent of subject is incomparable to temporal extend of object;  there is not enough information to determine an age relationship"@en ;
   rdfs:subPropertyOf gsoc:isTemporallyRelatedTo ;
 .
 gsoc:timeIntersects
@@ -3498,7 +3609,29 @@ gsoc:timeIntersects
 gsoc:timeMeets
   rdf:type owl:ObjectProperty ;
   rdfs:comment "A is immediately younger than B (there are no events between A and B) Same as Allen A meets B. One of six binary relations between geologic events defined by Burns (1975) Subject TimeRegion ends at the beginning of the object TimeRegion; there is no intervening time and boundary instants are coincident; inverse of age_met_by"@en ;
+  rdfs:domain [
+      rdf:type owl:Class ;
+      owl:unionOf (
+          [
+            rdf:type owl:Restriction ;
+            owl:allValuesFrom gsoc:Time_Interval ;
+            owl:onProperty gsoc:occupiesTime ;
+          ]
+          gsoc:Time_Interval
+        ) ;
+    ] ;
   rdfs:label "meets"@en ;
+  rdfs:range [
+      rdf:type owl:Class ;
+      owl:unionOf (
+          [
+            rdf:type owl:Restriction ;
+            owl:allValuesFrom gsoc:Time_Interval ;
+            owl:onProperty gsoc:occupiesTime ;
+          ]
+          gsoc:Time_Interval
+        ) ;
+    ] ;
   rdfs:seeAlso <time:intervalMeets> ;
   rdfs:subPropertyOf gsoc:timeIntersects ;
   rdfs:subPropertyOf gsoc:timePrecedes ;
@@ -3507,7 +3640,29 @@ gsoc:timeMeets
 gsoc:timeMetBy
   rdf:type owl:ObjectProperty ;
   rdfs:comment "Source TimeRegion starts at the end of the target TimeRegion; there is no intervening time, and the boundary instants are coincident;  inverse of meets"@en ;
+  rdfs:domain [
+      rdf:type owl:Class ;
+      owl:unionOf (
+          [
+            rdf:type owl:Restriction ;
+            owl:allValuesFrom gsoc:Time_Interval ;
+            owl:onProperty gsoc:occupiesTime ;
+          ]
+          gsoc:Time_Interval
+        ) ;
+    ] ;
   rdfs:label "met by"@en ;
+  rdfs:range [
+      rdf:type owl:Class ;
+      owl:unionOf (
+          [
+            rdf:type owl:Restriction ;
+            owl:allValuesFrom gsoc:Time_Interval ;
+            owl:onProperty gsoc:occupiesTime ;
+          ]
+          gsoc:Time_Interval
+        ) ;
+    ] ;
   rdfs:seeAlso <time:intervalMetBy> ;
   rdfs:subPropertyOf gsoc:timeIntersects ;
   rdfs:subPropertyOf gsoc:timePrecededBy ;
@@ -3541,8 +3696,30 @@ gsoc:timeOlderThan
 gsoc:timeOverlappedBy
   rdf:type owl:ObjectProperty ;
   dct:source "https://en.wikipedia.org/wiki/Allen%27s_interval_algebra" ;
-  rdfs:comment "Target event starts after source event, and target event ends after source event ends."@en ;
+  rdfs:comment "Relationship only valid between intervals. Object interval starts before subject interval, and object interval ends before subject interval ends."@en ;
+  rdfs:domain [
+      rdf:type owl:Class ;
+      owl:unionOf (
+          [
+            rdf:type owl:Restriction ;
+            owl:allValuesFrom gsoc:Time_Interval ;
+            owl:onProperty gsoc:occupiesTime ;
+          ]
+          gsoc:Time_Interval
+        ) ;
+    ] ;
   rdfs:label "overlapped by"@en ;
+  rdfs:range [
+      rdf:type owl:Class ;
+      owl:unionOf (
+          [
+            rdf:type owl:Restriction ;
+            owl:allValuesFrom gsoc:Time_Interval ;
+            owl:onProperty gsoc:occupiesTime ;
+          ]
+          gsoc:Time_Interval
+        ) ;
+    ] ;
   rdfs:seeAlso <time:intervalOverlappedBy> ;
   rdfs:subPropertyOf gsoc:timeIntersects ;
   owl:inverseOf gsoc:timeOverlaps ;
@@ -3550,7 +3727,29 @@ gsoc:timeOverlappedBy
 gsoc:timeOverlaps
   rdf:type owl:ObjectProperty ;
   rdfs:comment "target interval starts before source interval ends, and target inteval ends after source interval. Allen Relation"@en ;
+  rdfs:domain [
+      rdf:type owl:Class ;
+      owl:unionOf (
+          [
+            rdf:type owl:Restriction ;
+            owl:allValuesFrom gsoc:Time_Interval ;
+            owl:onProperty gsoc:occupiesTime ;
+          ]
+          gsoc:Time_Interval
+        ) ;
+    ] ;
   rdfs:label "overlaps"@en ;
+  rdfs:range [
+      rdf:type owl:Class ;
+      owl:unionOf (
+          [
+            rdf:type owl:Restriction ;
+            owl:allValuesFrom gsoc:Time_Interval ;
+            owl:onProperty gsoc:occupiesTime ;
+          ]
+          gsoc:Time_Interval
+        ) ;
+    ] ;
   rdfs:seeAlso <time:intervalOverlaps> ;
   rdfs:subPropertyOf gsoc:timeIntersects ;
 .
@@ -3568,6 +3767,17 @@ gsoc:timePrecedes
 gsoc:timeStartedBy
   rdf:type owl:ObjectProperty ;
   rdfs:comment "source and target start simultaneously; source interval ends after target; inverse of starts; OWL time is narrower, only relates ProperIntervals"@en ;
+  rdfs:domain [
+      rdf:type owl:Class ;
+      owl:unionOf (
+          [
+            rdf:type owl:Restriction ;
+            owl:allValuesFrom gsoc:Time_Interval ;
+            owl:onProperty gsoc:occupiesTime ;
+          ]
+          gsoc:Time_Interval
+        ) ;
+    ] ;
   rdfs:label "started by"@en ;
   rdfs:seeAlso <time:intervalStartedBy> ;
   rdfs:subPropertyOf gsoc:timeIncludes ;
@@ -3577,6 +3787,17 @@ gsoc:timeStarts
   rdf:type owl:ObjectProperty ;
   rdfs:comment "Source and target TimeRegions start at same instant, target TimeRegion ends after source TimeRegion; Allen Relation. Assign an older age boundary for a time interval. OWL time time:intervalStarts is narrower; only relates ProperIntervals"@en ;
   rdfs:label "starts"@en ;
+  rdfs:range [
+      rdf:type owl:Class ;
+      owl:unionOf (
+          [
+            rdf:type owl:Restriction ;
+            owl:allValuesFrom gsoc:Time_Interval ;
+            owl:onProperty gsoc:occupiesTime ;
+          ]
+          gsoc:Time_Interval
+        ) ;
+    ] ;
   rdfs:seeAlso <time:intervalStarts> ;
   rdfs:subPropertyOf gsoc:timeIncludedBy ;
 .
