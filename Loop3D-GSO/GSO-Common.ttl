@@ -156,6 +156,19 @@ gsoc:Amount_Of_Matter
         ) ;
     ] ;
 .
+gsoc:Calendar_Temporal_Reference_System
+  rdf:type owl:Class ;
+  dct:description "A calendar is a system of organizing days. This is done by giving names to periods of time, typically days, weeks, months and years. A date is the designation of a single, specific day within such a system. Periods in a calendar (such as years and months) are usually, though not necessarily, synchronized with the cycle of the sun or the moon. The most common type of pre-modern calendar was the lunisolar calendar, a lunar calendar that occasionally adds one intercalary month to remain synchronized with the solar year over the long term. Mentioned but not defined in https://www.w3.org/TR/owl-time/"@en ;
+  dct:source "https://en.wikipedia.org/wiki/Calendar" ;
+  rdfs:label "Calendar temporal reference system "@en ;
+  rdfs:subClassOf gsoc:Temporal_Reference_System ;
+.
+gsoc:Clock_Temporal_Reference_System
+  rdf:type owl:Class ;
+  dct:description "Clocks measure temporal positions relative to a daily cycle linked to the revolving of the Earth (or some other planatery object), manifested by the rising and setting of the sun. The timekeeping element in modern clocks is some kind of physical object (resonator) that vibrates or oscillates at a particular frequency, e.g.  a pendulum, tuning fork, quartz crystal.  Clock-based reference systems are typically used in conjuntion with calendar-based systems to report particular dates and times, e.g. ISO 8601. See https://en.wikipedia.org/wiki/Clock"@en ;
+  rdfs:label "Clock-based Temporal Reference System "@en ;
+  rdfs:subClassOf gsoc:Temporal_Reference_System ;
+.
 gsoc:Constituent
   rdf:type owl:Class ;
   rdfs:comment "A part that is a constituent relation to a whole"@en ;
@@ -494,6 +507,13 @@ gsoc:Geographic_Coordinate_System
   rdfs:comment "A coordinate reference system for locating positions relative to the Earth."@en ;
   rdfs:label "Geographic Coordinate System "@en ;
   rdfs:subClassOf gsoc:Physical_Reference_System ;
+.
+gsoc:Hierarchical_Ordinal_Temporal_Reference_System
+  rdf:type owl:Class ;
+  dct:description "An Ordinal Temporal Refence System with a topology that require that if an era is subdivided (hasParts), the parts must be non-overlapping, and cover (in the sense of the gsoc:covers relation) the containing era. Top level eras must cover the domain of validity (temporal extent) for the reference system."@en ;
+  dct:source "Cox SJD, Richard SM (2005) A formal model for the geologic time scale and global stratotype section and point, compatible with geospatial information transfer standards. Geosphere 1:119. doi:10.1130/GES00022.1" ;
+  rdfs:label "Hierarchical, ordinal temporal reference system"@en ;
+  rdfs:subClassOf gsoc:Ordinal_Temporal_Reference_System ;
 .
 gsoc:Hole
   rdf:type owl:Class ;
@@ -1035,6 +1055,13 @@ gsoc:Occurrence_Feature
         ] ;
     ] ;
   owl:disjointWith gsoc:Temporal_Feature ;
+.
+gsoc:Ordinal_Temporal_Reference_System
+  rdf:type owl:Class ;
+  dct:description "A temporal reference system constructed with a sequence of named time ordinal eras.  Various levels of topology might apply. The reference system has some temporal extent of validity defined by the oldest and youngest era boundaries.  Era boundaries are necessarily dependent on events; thus the time ordinal eras are inherently Temporal_Features as defined in this ontology. Topology constraints might require that component eras cover the temporal extent of the system, allow component eras to be subdivided with covering parts (a hierarchical system) or apply other constraints. Generalized from ISO19108 Ordinal Temporal Reference System, which required that the boundaries of intervals are defined by data/time temporal locations."@en ;
+  dct:source "ISO19108 TM_OrdinalReferenceSystem" ;
+  rdfs:label "Ordinal Temporal Reference System "@en ;
+  rdfs:subClassOf gsoc:Temporal_Reference_System ;
 .
 gsoc:Part
   rdf:type owl:Class ;
@@ -2152,9 +2179,15 @@ gsoc:Temporal_Boundary
       owl:someValuesFrom gsoc:Time_Interval_Feature ;
     ] ;
 .
+gsoc:Temporal_Coordinate_System
+  rdf:type owl:Class ;
+  dct:description "Temporal locations defined based on a duration relative to some temporal orgin.  For example, geologic ages under this this system are commonly reported in millions of years before AD1950.  Instanced define an origin and a unit of measure for unit duration (e.g. M.Y., K.Y., years)"@en ;
+  rdfs:label "Temporal Coordinate System "@en ;
+  rdfs:subClassOf gsoc:Temporal_Reference_System ;
+.
 gsoc:Temporal_Feature
   rdf:type owl:Class ;
-  rdfs:comment "A feature for which either the constituent  is a Perdurant"@en ;
+  rdfs:comment "A feature derived from a relation between a time interval and something else.  The feature ontologically depends on both the time interval and the other thing.  For example, the end of an event; event is host, end time is the part.  For a geologic time feature, the host is a rock body, part is chunk of time."@en ;
   rdfs:label "Temporal Feature "@en ;
   rdfs:subClassOf gsoc:Perdurant_Feature ;
   rdfs:subClassOf [
@@ -2261,8 +2294,9 @@ gsoc:Temporal_Range
 .
 gsoc:Temporal_Reference_System
   rdf:type owl:Class ;
-  rdfs:comment "A reference system for temporal values."@en ;
+  rdfs:comment "A reference system for temporal values, use to quantify locations in time. Might be a temporal coordinate system (with an origin, direction, and scale), a calendar-clock combination, or a (possibly hierarchical) ordinal system, such as geologic time scale. the 'isReferenceSystemFor' corresponds to the ISO19108 'domainOfValidity', with the extent limited to a temporal extent (defined by a perdurant, typically a gsoc:Time_Interval)"@en ;
   rdfs:label "Temporal Reference System "@en ;
+  rdfs:seeAlso time:TRS ;
   rdfs:subClassOf gsoc:Reference_System ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
@@ -2885,7 +2919,7 @@ gsoc:hasSetting
   rdfs:subPropertyOf gsoc:isEssentialPartOf ;
   owl:inverseOf gsoc:isSettingFor ;
 .
-gsoc:hasSpatialValue
+gsoc:hasSpatialLocation
   rdf:type owl:ObjectProperty ;
   rdfs:comment "A relation between a non-abstact particular and a spatial location value - still in a test stage; intended as a short-cut for specifying the spatial location of something, but therefore equal to saying that something occupies space (in/directly) and has a spatial location quality with a certain spatial value (in a spatial reference system)."@en ;
   rdfs:label "spatial location value "@en ;
@@ -3136,7 +3170,7 @@ gsoc:isValueOf
 gsoc:location
   rdf:type owl:ObjectProperty ;
   rdf:type owl:SymmetricProperty ;
-  rdfs:comment "A relation between a non-abstact particular and a spatial or temoral location value - still in a test stage; intended as a short-cut for specifying the spatial or temporal location of something, but therefore equal to saying that something occupies space or time (in/directly) and has a spatial/temporal location quality with a certain  value (in a spatial / temporal reference system). Generically depends on the spatial or temporal value."@en ;
+  rdfs:comment "A relation between a non-abstact particular and a spatial or temporal location value - still in a test stage; intended as a short-cut for specifying the spatial or temporal location of something, but therefore equal to saying that something occupies space or time (in/directly) and has a spatial/temporal location quality with a certain  value (in a spatial / temporal reference system). Generically depends on the spatial or temporal value."@en ;
   rdfs:domain [
       rdf:type owl:Class ;
       owl:complementOf gsoc:Abstract_Endurant ;
