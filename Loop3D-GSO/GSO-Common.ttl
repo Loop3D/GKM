@@ -88,20 +88,12 @@ schema:name
   rdf:type owl:AnnotationProperty ;
 .
 
-gsoc:nextTimeInterval
-  owl:equivalentProperty <time:intervalMeets> ;
+gsoc:Time_Interval
+  skos:note "Time intervals are continuous without gaps.  Corresponds to OWL Time time:ProperInterval, A temporal entity with non-zero extent or duration, i.e. for which the value of the beginning and end are different"@en ;
 .
-gsoc:previousTimeInterval
-  owl:equivalentProperty <time:intervalMetBy> ;
-.
-gsoc:timeFinishes
-  owl:inverseOf gsoc:timeFinishedBy ;
-.
-gsoc:timeHasBeginning
-  rdfs:seeAlso <time:hasBeginning> ;
-.
-gsoc:timeStarts
-  owl:inverseOf gsoc:timeStartedBy ;
+gsoc:WKT_Value
+  skos:note """Requirements for WKT Serialization (serialization=WKT)  as defined by Simple Features [ISO 19125-1].   RDFS Datatype: http://www.opengis.net/ont/geosparql#wktLiteral.  All RDFS Literals of type geo:wktLiteral shall consist of an optional URI identifying the coordinate reference system followed by Simple Features Well Known Text (WKT) describing a geometric value. Valid geo:wktLiterals are formed by concatenating a valid, absolute URI as defined in [RFC 2396], one or more spaces (Unicode U+0020 character) as a separator, and a WKT string. The beginning URI identifies the spatial reference system for the geometry. The OGC maintains a set of CRS URIs under the
+http://www.opengis.net/def/crs/ namespace. This leading spatial reference system URI is optional. In the absence of a leading spatial reference system URI, the following spatial reference system URI will be assumed: <http://www.opengis.net/def/crs/OGC/1.3/CRS84> This URI denotes WGS 84 longitude-latitude."""@en ;
 .
 
 gsoc:Abstract_Endurant
@@ -201,13 +193,13 @@ gsoc:Dominant_Proportion
 .
 gsoc:Duration
   rdf:type owl:Class ;
-  rdfs:comment "The length of a time interval in some appropriate temporal reference system, e.g. 1 month or 10 Ma."@en ;
+  rdfs:comment "The length of a time interval in some appropriate temporal reference system, e.g. 1 month or 10 Ma. Value should be a number and unitType e.g. month, day, second..."@en ;
   rdfs:label "Duration "@en ;
   rdfs:subClassOf gsoc:Temporal_Quality ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
       owl:onProperty gsoc:hasValue ;
-      owl:someValuesFrom gsoc:Quality_Value ;
+      owl:someValuesFrom gsoc:Numeric_Value ;
     ] ;
 .
 gsoc:Dynamic_Feature
@@ -264,7 +256,7 @@ gsoc:Element
 .
 gsoc:Endurant
   rdf:type owl:Class ;
-  rdfs:comment "The main characteristic of endurants is that they are fully present at any timepoint they exist, but they can change from one timepoint to another - something can be red at one time, and pink at another time. Endurants have onl;y endurants as parts."@en ;
+  rdfs:comment "The main characteristic of endurants is that they are fully present at any timepoint they exist, but they can change from one timepoint to another - something can be red at one time, and pink at another time. Endurants have only endurants as parts."@en ;
   rdfs:label "Endurant"@en ;
   rdfs:subClassOf gsoc:Particular ;
   rdfs:subClassOf [
@@ -1623,7 +1615,7 @@ gsoc:Quality
 .
 gsoc:Quality_Value
   rdf:type owl:Class ;
-  rdfs:comment "A value of (essential part of) a quality; can be a measured value (e.g. 2.0), named value (e.g. thick), or a range (e.g. 2.0-2.2 or thin-thick). Values exist within a reference system." ;
+  rdfs:comment "A value of (essential part of) a quality; can be a measured value (e.g. 2.0), named value (e.g. thick), or a range (e.g. 2.0-2.2 or thin-thick). Values exist within a reference system."@en ;
   rdfs:label "Quality Value"@en ;
   rdfs:subClassOf gsoc:Inherant ;
   rdfs:subClassOf [
@@ -1658,7 +1650,7 @@ gsoc:Quality_Value
 .
 gsoc:Range_Value
   rdf:type owl:Class ;
-  rdfs:comment "A range value for some quality, e.g. 2.0-3.0 or thin-thick"@en ;
+  rdfs:comment "A range value for some quality, e.g. 2.0-3.0 or thin-thick. The start value must be less than the end value based on the ordinal ranking appropriate to the value type."@en ;
   rdfs:label "Quality Range "@en ;
   rdfs:subClassOf gsoc:Quality_Value ;
   rdfs:subClassOf [
@@ -2048,6 +2040,12 @@ gsoc:Spatial_Region
       owl:intersectionOf (
           gsoc:Physical_Endurant
           [
+            rdf:type owl:Restriction ;
+            owl:onClass gsoc:Spatial_Location ;
+            owl:onProperty gsoc:hasQuality ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+          ]
+          [
             rdf:type owl:Class ;
             owl:complementOf [
                 rdf:type owl:Restriction ;
@@ -2057,22 +2055,10 @@ gsoc:Spatial_Region
           ]
         ) ;
     ] ;
-  owl:equivalentClass [
-      rdf:type owl:Class ;
-      owl:intersectionOf (
-          gsoc:Physical_Endurant
-          [
-            rdf:type owl:Restriction ;
-            owl:onClass gsoc:Spatial_Location ;
-            owl:onProperty gsoc:hasQuality ;
-            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-          ]
-        ) ;
-    ] ;
 .
 gsoc:Spatial_Region_0D
   rdf:type owl:Class ;
-  rdfs:comment "A degenerate spatial region that is a single point." ;
+  rdfs:comment "A degenerate spatial region that is a single point."@en ;
   rdfs:label "1D Spatial Region "@en ;
   rdfs:subClassOf gsoc:Spatial_Region ;
   rdfs:subClassOf [
@@ -2086,7 +2072,7 @@ gsoc:Spatial_Region_0D
 .
 gsoc:Spatial_Region_1D
   rdf:type owl:Class ;
-  rdfs:comment "A spatial region that is defined as a segment of a line." ;
+  rdfs:comment "A spatial region that is defined as a segment of a line."@en ;
   rdfs:label "1D Spatial Region "@en ;
   rdfs:subClassOf gsoc:Spatial_Region ;
   rdfs:subClassOf [
@@ -2290,7 +2276,7 @@ gsoc:Temporal_Quality
 .
 gsoc:Temporal_Range
   rdf:type owl:Class ;
-  rdfs:comment "Quality that specifies a quality value for a Temporal Location that is a time interval with a start and end temporal value"@en ;
+  rdfs:comment "Quality that specifies a quality value for a Temporal Location that is a time interval with start and end temporal values that are not identical. Start must be older than end."@en ;
   rdfs:label "Temporal Range "@en ;
   rdfs:subClassOf gsoc:Range_Value ;
   rdfs:subClassOf [
@@ -2334,7 +2320,7 @@ gsoc:Temporal_Reference_System
 .
 gsoc:Temporal_Value
   rdf:type owl:Class ;
-  rdfs:comment "Quality that specifies a temporal location"@en ;
+  rdfs:comment "Quality that specifies a temporal location.  Can be a dateTime or a numeric temporal coordinate."@en ;
   rdfs:label "Temporal Value "@en ;
   rdfs:subClassOf gsoc:Measure_Value ;
   rdfs:subClassOf [
@@ -2358,6 +2344,7 @@ gsoc:Temporal_Value
           ]
         ) ;
     ] ;
+  skos:note "Corresponds to OWL time time:TemporalPosition, with Measure_Value properties for quality and unit of measure (UOM).  UOM must be consistent with the asserted Temporal Reference System if there is one."@en ;
 .
 gsoc:Temporal_Void
   rdf:type owl:Class ;
@@ -2378,7 +2365,8 @@ gsoc:Temporal_Void
 .
 gsoc:Time_Date_Value
   rdf:type owl:Class ;
-  rdfs:label "A date or time datatype"@en ;
+  rdfs:label "A date or dateTime datatype"@en ;
+  rdfs:seeAlso <time:GeneralDateTimeDescription> ;
   rdfs:subClassOf gsoc:Temporal_Value ;
   rdfs:subClassOf [
       rdf:type owl:Class ;
@@ -2395,6 +2383,7 @@ gsoc:Time_Date_Value
           ]
         ) ;
     ] ;
+  skos:note "representation of date is simplified relative to OWL Time GeneralDateTimeDescription, but could replaced with OWL time elements in future update"@en ;
 .
 gsoc:Time_Instant
   rdf:type owl:Class ;
@@ -2457,8 +2446,6 @@ gsoc:Time_Instant_Location
 gsoc:Time_Interval
   rdf:type owl:Class ;
   rdfs:comment "A region of time that has a duration greater than 0."@en ;
-  rdfs:comment "Corresponds to OWL Time time:ProperInterval, A temporal entity with non-zero extent or duration, i.e. for which the value of the beginning and end are different"@en ;
-  rdfs:comment "Time intervals are continuous without gaps."@en ;
   rdfs:label "Time Interval"@en ;
   rdfs:seeAlso <time:ProperInterval> ;
   rdfs:subClassOf gsoc:Time_Region ;
@@ -2513,6 +2500,7 @@ gsoc:Time_Numeric_Value
   rdf:type owl:Class ;
   rdfs:comment "Quality that specifies a temporal location with a temporal coordinate or an xsd dateTime"@en ;
   rdfs:label "Time Instant Value "@en ;
+  rdfs:seeAlso <time:numericPosition> ;
   rdfs:subClassOf gsoc:Temporal_Value ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
@@ -2569,7 +2557,7 @@ gsoc:Time_Region
 .
 gsoc:Uncertainty
   rdf:type owl:Class ;
-  rdfs:comment "" ;
+  rdfs:comment "quantification of the uncertainty on a measured value; Include a gsoc:determinedBy to indicate the statistical procedure to determine undertinty.  Could be a duration if centered on the reported value, or an interval with lower and upper bound on undertainty interval."@en ;
   rdfs:label "Uncertainty"@en ;
   rdfs:subClassOf gsoc:Nonphysical_Quality ;
   rdfs:subClassOf [
@@ -3079,7 +3067,7 @@ gsoc:isParticipantIn
 gsoc:isPersistentPartOf
   rdf:type owl:ObjectProperty ;
   rdf:type owl:TransitiveProperty ;
-  rdfs:comment "Inverse of hasPersistentPart. Persistent parts temporally co-exist with the whole for the lifespan of the whole, so cannot be misisng but can be exchanged."@en ;
+  rdfs:comment "Inverse of hasPersistentPart. Persistent parts temporally co-exist with the whole for the lifespan of the whole, so cannot be missing but can be exchanged."@en ;
   rdfs:subPropertyOf gsoc:isEssentialPartOf ;
 .
 gsoc:isProducedFrom
@@ -3222,6 +3210,7 @@ gsoc:nextTimeInterval
   rdfs:domain gsoc:Time_Interval ;
   rdfs:range gsoc:Time_Interval ;
   rdfs:subPropertyOf gsoc:timeMeets ;
+  owl:equivalentProperty <time:intervalMeets> ;
 .
 gsoc:occupiedBy
   rdf:type owl:ObjectProperty ;
@@ -3369,6 +3358,7 @@ gsoc:previousTimeInterval
   rdfs:domain gsoc:Time_Interval ;
   rdfs:range gsoc:Time_Interval ;
   rdfs:subPropertyOf gsoc:timeMetBy ;
+  owl:equivalentProperty <time:intervalMetBy> ;
 .
 gsoc:production
   rdf:type owl:IrreflexiveProperty ;
@@ -3554,6 +3544,7 @@ gsoc:timeFinishes
     ] ;
   rdfs:seeAlso <time:intervalFinishes> ;
   rdfs:subPropertyOf gsoc:timeIncludedBy ;
+  owl:inverseOf gsoc:timeFinishedBy ;
 .
 gsoc:timeHasBeginning
   rdf:type owl:ObjectProperty ;
@@ -3569,6 +3560,7 @@ gsoc:timeHasBeginning
           gsoc:Time_Instant
         ) ;
     ] ;
+  rdfs:seeAlso <time:hasBeginning> ;
   rdfs:subPropertyOf gsoc:timeStartedBy ;
 .
 gsoc:timeHasEnd
@@ -3620,7 +3612,7 @@ gsoc:timeIncludedBy
 gsoc:timeIncludes
   rdf:type owl:ObjectProperty ;
   rdf:type owl:TransitiveProperty ;
-  rdfs:comment "Beginning (directly or indirectly) of subject entity is the same or older than the beginning of the object entity, and the end of the subject entity is the same or younger than the end of the object entity. Union of timeContains, timeFinishedBy and timeStartedBy. Time_Region occupied directly or indirectly by the object does not extend outside the Time_Region occupied directly or indirectly by the subject.  OWL time:hasInside is narrower; doesn't allow timeStartedBy and timeFinishedBy where the object is an instant, or timeEquivalentTo."@en ;
+  rdfs:comment "Beginning (directly or indirectly) of subject entity is the same or older than the beginning of the object entity, and the end of the subject entity is the same or younger than the end of the object entity. Union of timeContains, timeFinishedBy and timeStartedBy. Time_Region occupied directly or indirectly by the object does not extend outside the Time_Region occupied directly or indirectly by the subject.  OWL time:inside is narrower; doesn't allow timeStartedBy and timeFinishedBy where the object is an instant, or timeEquivalentTo."@en ;
   rdfs:domain [
       rdf:type owl:Class ;
       owl:unionOf (
@@ -3632,7 +3624,7 @@ gsoc:timeIncludes
           gsoc:Time_Interval
         ) ;
     ] ;
-  rdfs:seeAlso <time:hasInside> ;
+  rdfs:seeAlso <time:inside> ;
   rdfs:subPropertyOf gsoc:timeInclusion ;
 .
 gsoc:timeInclusion
@@ -3851,6 +3843,7 @@ gsoc:timeStarts
     ] ;
   rdfs:seeAlso <time:intervalStarts> ;
   rdfs:subPropertyOf gsoc:timeIncludedBy ;
+  owl:inverseOf gsoc:timeStartedBy ;
 .
 gsoc:timeYoungerThan
   rdf:type owl:ObjectProperty ;
