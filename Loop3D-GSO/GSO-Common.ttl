@@ -87,15 +87,6 @@ schema:identifier
 schema:name
   rdf:type owl:AnnotationProperty ;
 .
-
-gsoc:Time_Interval
-  skos:note "Time intervals are continuous without gaps.  Corresponds to OWL Time time:ProperInterval, A temporal entity with non-zero extent or duration, i.e. for which the value of the beginning and end are different"@en ;
-.
-gsoc:WKT_Value
-  skos:note """Requirements for WKT Serialization (serialization=WKT)  as defined by Simple Features [ISO 19125-1].   RDFS Datatype: http://www.opengis.net/ont/geosparql#wktLiteral.  All RDFS Literals of type geo:wktLiteral shall consist of an optional URI identifying the coordinate reference system followed by Simple Features Well Known Text (WKT) describing a geometric value. Valid geo:wktLiterals are formed by concatenating a valid, absolute URI as defined in [RFC 2396], one or more spaces (Unicode U+0020 character) as a separator, and a WKT string. The beginning URI identifies the spatial reference system for the geometry. The OGC maintains a set of CRS URIs under the
-http://www.opengis.net/def/crs/ namespace. This leading spatial reference system URI is optional. In the absence of a leading spatial reference system URI, the following spatial reference system URI will be assumed: <http://www.opengis.net/def/crs/OGC/1.3/CRS84> This URI denotes WGS 84 longitude-latitude."""@en ;
-.
-
 gsoc:Abstract_Endurant
   rdf:type owl:Class ;
   rdfs:comment "Abstract endurants do not occupy space nor time - they are aspatial and atemporal, e.g. numbers and other mathematical objects"@en ;
@@ -926,7 +917,6 @@ gsoc:Nonphysical_Morphologic_Feature
       owl:onProperty gsoc:hasEssentialPart ;
       owl:someValuesFrom gsoc:Shape_Value ;
     ] ;
-  owl:disjointWith gsoc:Pattern_Feature ;
 .
 gsoc:Nonphysical_Quality
   rdf:type owl:Class ;
@@ -1156,37 +1146,6 @@ gsoc:Particular
       owl:onProperty gsoc:hasSetting ;
     ] ;
 .
-gsoc:Pattern_Feature
-  rdf:type owl:Class ;
-  rdfs:comment "A feature that denotes a manifestation of a pattern. A pattern in GSO is a relation, in two senses: (1) an abstract pattern is a template, which can be expressed as an n-ary predicate with some variables as relata; (2) a manifested pattern is an occurence of the template in some host, and can be expressed as either (a) an n-ary relation with only constants as relata, or (b) an instance of the reification of this relation (i.e. a Relator instance). E.g. wood grain is hosted by some wood matter and the pattern is the reified relation between its wood fibres. Different wood grains are then different (reified and instantiated) relations between its fibres."@en ;
-  rdfs:subClassOf gsoc:Inherant_Feature ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom gsoc:Relator ;
-      owl:onProperty gsoc:hasEssentialPart ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:onProperty gsoc:hasEssentialPart ;
-      owl:someValuesFrom gsoc:Relator ;
-    ] ;
-  owl:equivalentClass [
-      rdf:type owl:Class ;
-      owl:intersectionOf (
-          gsoc:Inherant_Feature
-          [
-            rdf:type owl:Restriction ;
-            owl:onProperty gsoc:hasEssentialPart ;
-            owl:someValuesFrom gsoc:Relator ;
-          ]
-          [
-            rdf:type owl:Restriction ;
-            owl:allValuesFrom gsoc:Relator ;
-            owl:onProperty gsoc:hasEssentialPart ;
-          ]
-        ) ;
-    ] ;
-.
 gsoc:Pause
   rdf:type owl:Class ;
   rdfs:comment "Pause within an event or process, e.g. Intermission during hockey game or theater performance (host = playing process, constituent = time interval)"@en ;
@@ -1297,7 +1256,7 @@ gsoc:Perdurant_Feature
 .
 gsoc:Physical_Endurant
   rdf:type owl:Class ;
-  rdfs:comment "An endurant that occupies space directly."@en ;
+  rdfs:comment "An endurant that is a chunk of space or occupies some chunk of space directly."@en ;
   rdfs:label "Physical Endurant"@en ;
   rdfs:subClassOf gsoc:Endurant ;
   rdfs:subClassOf [
@@ -2462,6 +2421,7 @@ gsoc:Time_Interval
       owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
     ] ;
   owl:disjointWith gsoc:Time_Instant ;
+  skos:note "Time intervals are continuous without gaps.  Corresponds to OWL Time time:ProperInterval, A temporal entity with non-zero extent or duration, i.e. for which the value of the beginning and end are different"@en ;
 .
 gsoc:Time_Interval_Feature
   rdf:type owl:Class ;
@@ -2607,6 +2567,8 @@ gsoc:WKT_Value
       owl:onProperty gsoc:hasDataValue ;
       owl:someValuesFrom xsd:string ;
     ] ;
+  skos:note """Requirements for WKT Serialization (serialization=WKT)  as defined by Simple Features [ISO 19125-1].   RDFS Datatype: http://www.opengis.net/ont/geosparql#wktLiteral.  All RDFS Literals of type geo:wktLiteral shall consist of an optional URI identifying the coordinate reference system followed by Simple Features Well Known Text (WKT) describing a geometric value. Valid geo:wktLiterals are formed by concatenating a valid, absolute URI as defined in [RFC 2396], one or more spaces (Unicode U+0020 character) as a separator, and a WKT string. The beginning URI identifies the spatial reference system for the geometry. The OGC maintains a set of CRS URIs under the
+http://www.opengis.net/def/crs/ namespace. This leading spatial reference system URI is optional. In the absence of a leading spatial reference system URI, the following spatial reference system URI will be assumed: <http://www.opengis.net/def/crs/OGC/1.3/CRS84> This URI denotes WGS 84 longitude-latitude."""@en ;
 .
 gsoc:Whole
   rdf:type owl:Class ;
