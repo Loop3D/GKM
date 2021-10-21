@@ -1,0 +1,51 @@
+replace gsoc:Time_Date_Value with time:GeneralDurationDescription (https://w3c.github.io/sdw/time/#time:GeneralDurationDescription)
+ 
+ 
+ For a geologic time feature, the host is a rock body, part is chunk of time.   ... is the host the rock body or an event that the rock body participated in?
+ 
+ gsog:Geologic_Time_Boundary is hosted by a contact that is part of a rock body; contact should be participant in boundary event.  generalize:  gsog:Geologic_Time_Feature hostedBy some (gsog:Geologic_Material or gsog:Rock_Body or gsog:Geologic_Structure)
+ 
+ gsoc:Duration  
+ gsoc:hasValue some (gsoc:Numeric_Value  and (gsoc:hasUOM only (hasQuantityKind only time)))  Add unit:QuantityKind with values needed (time, length, Mass Density, Plane angle...)
+ change gsoc:hasValue some gsoc:Numeric_Value from 'some gsoc:Quality_Value'. 
+ 
+ anything with location: make a geosparql geo:Feature (disjoint with geo:Geometry), anything that can have a spatial representation.  has properties geo:hasGeometry and geo:hasDefaultGeometry  geo:hasGeometry range is geo:Geometry. geo:Geometry properties geo:dimension, geo:coordinateDimension, geo:spatialDimension, geo:isEmpty, geo:isSimple, geo:hasSerialization. serialization has subproperties asWKT and asGML
+ 
+ occupiesSpace[gsoc:Spatial_Region] --> hasQuality[gsoc:Spatial_Location] --> gsoc:hasValue[gsoc:WKT_Value] 
+
+ what is range of gsoc:occupiesSpaceDirectly. Currently is gsoc:Material_Endurant, but this doesn't seem to include Endurant_Feature, and Geologic_Structure is a subclass of that, so can't say a contact or fault occupies space directly. 
+ gsog:GSSP.gsoc:occupiesSpaceDirectly[gsoc:Spatial_Region_1D].hasQuality[gsoc:Spatial_Location].gsoc:hasValue[gsoc:WKT_Value].gsoc:hasDataValue (string)
+ gsog:GSSP.gsoc:hasSpatialLocation[gsoc:WKT_Value].gsoc:hasDataValue(string)
+
+this implies gsog:GSSP is a subclass of geo:Feature gsog:GSSP.geo:hasGeometry[geo:Geometry note subclasses for polygon, point, linestring etc in http://schemas.opengis.net/sf/1.0/simple_features_geometries.rdf# ]  then
+		.geo:coordinateDimension[xsd:integer]  1 for point, 2 for line, 
+		.geo:isSimple [True]
+		.geo:asWKT[http://www.opengis.net/ont/geosparql#wktLiteral]
+		
+ 
+ can a gsoc:Spatial_Region gsoc:occupiesTimeIndirectly some gsoc:Time_Region?  It has no material constituents, so it can't participate in process or event. can non-physical endurants participate in process or event?
+ 
+ gsog:Rock_Body_Boundary gsoc:hasEssentialPart gsoc:hasEssentialPart only gsog:Rock_Body.  shouldn't this be gsoc:isEssentialPartOf?  The boundary is part of the body, not the other way round.  
+ 
+ Abstract_Endurant:
+ gsoc:Notional_Endurant  and (not (gsoc:occupiesTime some gsoc:Time_Region))
+ add 'and (not (gsoc:occupiesSpace some gsoc:Spatial_Region))
+ 
+ gsog:Rock_Body gsoc:externallyGenDependsOn some (gsog:Geologic_Event or gsog:Geologic_Process)
+ gsog:Geologic_Material  gsoc:isOutputOf some (gsog:Geologic_Event or gsog:Geologic_Process)
+ both are subclass of gsoc:Material_Endurant.   Seems that restriction as participant in event should be the same.
+ 
+ simplify some property chains?
+ gsog:Specific_Geologic_Time_Unit.timeHasBeginning[gsog:Geologic_Time_Boundary] --> hasEssentialPart[gsoc:Geologic_Time_Point] 
+ 
+ range of gsoc:hasConstituent-- shouldn't the range be gsoc:Amount_Of_Matter
+ is there a corresponding property (subproperty of hasPart) that has range (Material_Object or Physical_Feature) 
+ 
+ 
+ --> hasStaticPart[gsoc:Time_Instant] --> hasQuality[gsoc:Time_Instant_Location] --> hasStaticValue[gsoc:Time_Numeric_Value]
+ ***** note timeHasBeginning range is (gsoc:occupiesTime only gsoc:Time_Instant) or gsoc:Time_Instant.  
+ Geologic_Time_Point hasStaticPart time instant, not occupiesTime
+ GSSA should be subclass of Time_Instant
+ 
+ --> gsoc:staticHostedBy[gscn:Chronostratigraphic_Contact]
+  --> gsoc:staticHostedBy[gscn:GSSP]  -- location, partOf Chronostratigraphic_Contact

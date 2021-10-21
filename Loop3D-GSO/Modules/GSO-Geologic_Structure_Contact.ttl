@@ -56,11 +56,11 @@ gscn:Buttress_Unconformity
   rdfs:label "buttress unconformity"@en ;
   rdfs:subClassOf gscn:Unconformable_Contact ;
 .
-gscn:Chronostratigraphic_Zone_Contact
+gscn:Chronostratigraphic_Contact
   rdf:type owl:Class ;
-  dct:source "FGDC"@en ;
-  rdfs:comment "A contact between bodies of material having different ages of origin."@en ;
-  rdfs:label "chronostratigraphic-zone contact"@en ;
+  dct:source "Federal Geographic Data Committee, 2006, FGDC Digital Cartographic Standard for Geologic Map Symbolization: Reston, Va., Federal Geographic Data Committee Document Number FGDC-STD-013-2006, 290 p., 2 plates;  p. A-31-1, ref. 31.23." ;
+  rdfs:comment "A contact between bodies of material having different ages of origin. The temporal boundary represented by the zone contact is typically associated with some 'guide' event, such as a magnetic field reversal or fossil first appearance datum. If the event instance is implemented, link with Chronostratigraphic_Contact gsoc:isOutputOf ..event...."@en ;
+  rdfs:label "Chronostratigraphic-zone contact"@en ;
   rdfs:subClassOf gscn:Contact ;
 .
 gscn:Conductivity_Contact
@@ -127,9 +127,14 @@ gscn:Faulted_Contact
 .
 gscn:GSSP
   rdf:type owl:Class ;
-  rdfs:comment "GSSP is dependent on some particular geologic event that is manifested globally in the stratigraphic record." ;
+  rdfs:comment "GSSP is dependent on some particular geologic event that is manifested globally in the stratigraphic record.  At least one of the host Rock_Body_Boundary objects must be a participant in the host Geologic_Event"@en ;
   rdfs:label "GSSP "@en ;
   rdfs:subClassOf gscn:Stratigraphic_Point ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:isPartOf ;
+      owl:someValuesFrom gscn:Chronostratigraphic_Contact ;
+    ] ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
       owl:onProperty gsoc:staticHostedBy ;
@@ -311,7 +316,7 @@ gscn:Seismic_Contact
 .
 gscn:Stratigraphic_Point
   rdf:type owl:Class ;
-  rdfs:comment "A spatially restricted part of a Contact feature, typically located by a point location. "@en ;
+  rdfs:comment "A spatially restricted part of a Contact feature in a particular stratigraphic section, typically located by a point location."@en ;
   rdfs:label "Stratigraphic Point"@en ;
   rdfs:subClassOf gscn:Contact ;
   rdfs:subClassOf [
@@ -329,11 +334,6 @@ gscn:Stratigraphic_Point
       rdf:type owl:Restriction ;
       owl:onProperty gsoc:isPartOf ;
       owl:someValuesFrom gscn:Contact ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:onProperty gsoc:staticHostedBy ;
-      owl:someValuesFrom gsgf:Stratigraphic_Section ;
     ] ;
 .
 gscn:Unconformable_Contact
