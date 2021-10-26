@@ -20,8 +20,8 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <http://resource.geosciml.org/ontology/timescale/gts>
-  a voaf:Vocabulary ;
-  a owl:Ontology ;
+  rdf:type voaf:Vocabulary ;
+  rdf:type owl:Ontology ;
   dcterms:contributor <https://orcid.org/0000-0001-6041-5302> ;
   dcterms:created "2011-01-01"^^xsd:date ;
   dcterms:creator <https://orcid.org/0000-0002-3884-3420> ;
@@ -45,24 +45,24 @@ The permitted nesting relationships between eras of different ranks are axiomati
   sdo:codeRepository <https://github.com/CGI-IUGS/timescale-ont> ;
 .
 gts:Age
-  a owl:Class ;
+  rdf:type owl:Class ;
   rdfs:label "Age" ;
   rdfs:subClassOf gts:GeochronologicEra ;
   rdfs:subClassOf [
-      a owl:Restriction ;
+      rdf:type owl:Restriction ;
       owl:hasValue rank:Age ;
       owl:onProperty gts:rank ;
     ] ;
   rdfs:subClassOf [
-      a owl:Restriction ;
+      rdf:type owl:Restriction ;
       owl:onClass gts:Epoch ;
       owl:onProperty time:intervalIn ;
       owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
     ] ;
   rdfs:subClassOf [
-      a owl:Restriction ;
+      rdf:type owl:Restriction ;
       owl:onClass [
-          a owl:Class ;
+          rdf:type owl:Class ;
           owl:unionOf (
               gts:Epoch
               gts:Age
@@ -77,9 +77,9 @@ gts:Age
       owl:qualifiedCardinality "0"^^xsd:nonNegativeInteger ;
     ] ;
   rdfs:subClassOf [
-      a owl:Restriction ;
+      rdf:type owl:Restriction ;
       owl:onClass [
-          a owl:Class ;
+          rdf:type owl:Class ;
           owl:unionOf (
               gts:Epoch
               gts:Age
@@ -94,9 +94,9 @@ gts:Age
       owl:qualifiedCardinality "0"^^xsd:nonNegativeInteger ;
     ] ;
   rdfs:subClassOf [
-      a owl:Restriction ;
+      rdf:type owl:Restriction ;
       owl:onClass [
-          a owl:Class ;
+          rdf:type owl:Class ;
           owl:unionOf (
               gts:Epoch
               gts:Age
@@ -134,36 +134,36 @@ isc:Calabrian
 """ ;
 .
 gts:Eon
-  a owl:Class ;
+  rdf:type owl:Class ;
   rdfs:label "Eon" ;
   rdfs:subClassOf gts:GeochronologicEra ;
   rdfs:subClassOf [
-      a owl:Restriction ;
+      rdf:type owl:Restriction ;
       owl:hasValue rank:Eon ;
       owl:onProperty gts:rank ;
     ] ;
   rdfs:subClassOf [
-      a owl:Restriction ;
+      rdf:type owl:Restriction ;
       owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
       owl:onClass gts:Super-Eon ;
       owl:onProperty time:intervalIn ;
     ] ;
   rdfs:subClassOf [
-      a owl:Restriction ;
+      rdf:type owl:Restriction ;
       owl:onClass gts:Era ;
       owl:onProperty time:intervalFinishedBy ;
       owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
     ] ;
   rdfs:subClassOf [
-      a owl:Restriction ;
+      rdf:type owl:Restriction ;
       owl:onClass gts:Era ;
       owl:onProperty time:intervalStartedBy ;
       owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
     ] ;
   rdfs:subClassOf [
-      a owl:Restriction ;
+      rdf:type owl:Restriction ;
       owl:onClass [
-          a owl:Class ;
+          rdf:type owl:Class ;
           owl:unionOf (
               gts:Eon
               gts:Super-Eon
@@ -173,9 +173,9 @@ gts:Eon
       owl:qualifiedCardinality "0"^^xsd:nonNegativeInteger ;
     ] ;
   rdfs:subClassOf [
-      a owl:Restriction ;
+      rdf:type owl:Restriction ;
       owl:onClass [
-          a owl:Class ;
+          rdf:type owl:Class ;
           owl:unionOf (
               gts:Eon
               gts:Super-Eon
@@ -185,9 +185,9 @@ gts:Eon
       owl:qualifiedCardinality "0"^^xsd:nonNegativeInteger ;
     ] ;
   rdfs:subClassOf [
-      a owl:Restriction ;
+      rdf:type owl:Restriction ;
       owl:onClass [
-          a owl:Class ;
+          rdf:type owl:Class ;
           owl:unionOf (
               gts:Eon
               gts:Super-Eon
@@ -197,7 +197,7 @@ gts:Eon
       owl:qualifiedCardinality "0"^^xsd:nonNegativeInteger ;
     ] ;
   rdfs:subClassOf [
-      a owl:Restriction ;
+      rdf:type owl:Restriction ;
       owl:onProperty time:intervalContains ;
       owl:someValuesFrom gts:Era ;
     ] ;
@@ -232,30 +232,30 @@ isc:Proterozoic
 .""" ;
 .
 gts:Epoch
-  a owl:Class ;
+  rdf:type owl:Class ;
   rdfs:label "Epoch" ;
   rdfs:subClassOf gts:GeochronologicEra ;
   rdfs:subClassOf [
-      a owl:Restriction ;
+      rdf:type owl:Restriction ;
       owl:hasValue rank:Epoch ;
       owl:onProperty gts:rank ;
     ] ;
   rdfs:subClassOf [
-      a owl:Restriction ;
+      rdf:type owl:Restriction ;
       owl:onClass gts:Age ;
       owl:onProperty time:intervalFinishedBy ;
       owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
     ] ;
   rdfs:subClassOf [
-      a owl:Restriction ;
+      rdf:type owl:Restriction ;
       owl:onClass gts:Age ;
       owl:onProperty time:intervalStartedBy ;
       owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
     ] ;
   rdfs:subClassOf [
-      a owl:Restriction ;
+      rdf:type owl:Restriction ;
       owl:onClass [
-          a owl:Class ;
+          rdf:type owl:Class ;
           owl:unionOf (
               gts:Eon
               gts:Era
@@ -269,9 +269,9 @@ gts:Epoch
       owl:qualifiedCardinality "0"^^xsd:nonNegativeInteger ;
     ] ;
   rdfs:subClassOf [
-      a owl:Restriction ;
+      rdf:type owl:Restriction ;
       owl:onClass [
-          a owl:Class ;
+          rdf:type owl:Class ;
           owl:unionOf (
               gts:Eon
               gts:Era
@@ -285,9 +285,9 @@ gts:Epoch
       owl:qualifiedCardinality "0"^^xsd:nonNegativeInteger ;
     ] ;
   rdfs:subClassOf [
-      a owl:Restriction ;
+      rdf:type owl:Restriction ;
       owl:onClass [
-          a owl:Class ;
+          rdf:type owl:Class ;
           owl:unionOf (
               gts:Eon
               gts:Era
@@ -301,9 +301,9 @@ gts:Epoch
       owl:qualifiedCardinality "0"^^xsd:nonNegativeInteger ;
     ] ;
   rdfs:subClassOf [
-      a owl:Restriction ;
+      rdf:type owl:Restriction ;
       owl:onClass [
-          a owl:Class ;
+          rdf:type owl:Class ;
           owl:unionOf (
               gts:Period
               gts:Sub-Period
@@ -313,7 +313,7 @@ gts:Epoch
       owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
     ] ;
   rdfs:subClassOf [
-      a owl:Restriction ;
+      rdf:type owl:Restriction ;
       owl:onProperty time:intervalContains ;
       owl:someValuesFrom gts:Age ;
     ] ;
@@ -351,36 +351,36 @@ isc:Cisuralian
 """ ;
 .
 gts:Era
-  a owl:Class ;
+  rdf:type owl:Class ;
   rdfs:label "Era" ;
   rdfs:subClassOf gts:GeochronologicEra ;
   rdfs:subClassOf [
-      a owl:Restriction ;
+      rdf:type owl:Restriction ;
       owl:hasValue rank:Era ;
       owl:onProperty gts:rank ;
     ] ;
   rdfs:subClassOf [
-      a owl:Restriction ;
+      rdf:type owl:Restriction ;
       owl:onClass gts:Eon ;
       owl:onProperty time:intervalIn ;
       owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
     ] ;
   rdfs:subClassOf [
-      a owl:Restriction ;
+      rdf:type owl:Restriction ;
       owl:onClass gts:Period ;
       owl:onProperty time:intervalFinishedBy ;
       owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
     ] ;
   rdfs:subClassOf [
-      a owl:Restriction ;
+      rdf:type owl:Restriction ;
       owl:onClass gts:Period ;
       owl:onProperty time:intervalStartedBy ;
       owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
     ] ;
   rdfs:subClassOf [
-      a owl:Restriction ;
+      rdf:type owl:Restriction ;
       owl:onClass [
-          a owl:Class ;
+          rdf:type owl:Class ;
           owl:unionOf (
               gts:Super-Eon
               gts:Eon
@@ -391,9 +391,9 @@ gts:Era
       owl:qualifiedCardinality "0"^^xsd:nonNegativeInteger ;
     ] ;
   rdfs:subClassOf [
-      a owl:Restriction ;
+      rdf:type owl:Restriction ;
       owl:onClass [
-          a owl:Class ;
+          rdf:type owl:Class ;
           owl:unionOf (
               gts:Super-Eon
               gts:Eon
@@ -404,9 +404,9 @@ gts:Era
       owl:qualifiedCardinality "0"^^xsd:nonNegativeInteger ;
     ] ;
   rdfs:subClassOf [
-      a owl:Restriction ;
+      rdf:type owl:Restriction ;
       owl:onClass [
-          a owl:Class ;
+          rdf:type owl:Class ;
           owl:unionOf (
               gts:Super-Eon
               gts:Eon
@@ -417,7 +417,7 @@ gts:Era
       owl:qualifiedCardinality "0"^^xsd:nonNegativeInteger ;
     ] ;
   rdfs:subClassOf [
-      a owl:Restriction ;
+      rdf:type owl:Restriction ;
       owl:onProperty time:intervalContains ;
       owl:someValuesFrom gts:Period ;
     ] ;
@@ -450,11 +450,11 @@ isc:Mesoproterozoic
 """ ;
 .
 gts:EraCode
-  a rdfs:Datatype ;
+  rdf:type rdfs:Datatype ;
   rdfs:isDefinedBy <http://resource.geosciml.org/ontology/timescale/gts> ;
   rdfs:label "Era code" ;
   owl:equivalentClass [
-      a rdfs:Datatype ;
+      rdf:type rdfs:Datatype ;
       owl:onDatatype xsd:string ;
       owl:withRestrictions (
           [
@@ -466,12 +466,12 @@ gts:EraCode
 isc:Calabrian  skos:notation \"a1.1.1.1.2.3\"^^gts:EraCode .""" ;
 .
 gts:GeochronologicBoundary
-  a owl:Class ;
+  rdf:type owl:Class ;
   rdfs:isDefinedBy <http://resource.geosciml.org/ontology/timescale/gts> ;
   rdfs:label "Geochronologic Boundary"@en ;
   rdfs:subClassOf thors:EraBoundary ;
   rdfs:subClassOf [
-      a owl:Restriction ;
+      rdf:type owl:Restriction ;
       owl:allValuesFrom gts:StratigraphicPoint ;
       owl:onProperty gts:stratotype ;
     ] ;
@@ -492,22 +492,22 @@ isc:BaseJurassic
 .""" ;
 .
 gts:GeochronologicEra
-  a owl:Class ;
+  rdf:type owl:Class ;
   rdfs:isDefinedBy <http://resource.geosciml.org/ontology/timescale/gts> ;
   rdfs:label "Geochronologic Era"@en ;
   rdfs:subClassOf thors:Era ;
   rdfs:subClassOf [
-      a owl:Restriction ;
+      rdf:type owl:Restriction ;
       owl:allValuesFrom gts:StratigraphicSection ;
       owl:onProperty gts:stratotype ;
     ] ;
   rdfs:subClassOf [
-      a owl:Restriction ;
+      rdf:type owl:Restriction ;
       owl:cardinality "1"^^xsd:nonNegativeInteger ;
       owl:onProperty gts:rank ;
     ] ;
   rdfs:subClassOf [
-      a owl:Restriction ;
+      rdf:type owl:Restriction ;
       owl:onProperty skos:notation ;
       owl:someValuesFrom gts:EraCode ;
     ] ;
@@ -528,7 +528,7 @@ isc:Mesozoic
 """ ;
 .
 gts:GeochronologicEraRank
-  a rdfs:Class ;
+  rdf:type rdfs:Class ;
   rdfs:isDefinedBy <http://resource.geosciml.org/ontology/timescale/gts> ;
   rdfs:label "Geochronologic Era Rank"@en ;
   rdfs:subClassOf skos:Concept ;
@@ -541,19 +541,19 @@ rank:Period
 .""" ;
 .
 gts:GeologicTimescale
-  a owl:Class ;
+  rdf:type owl:Class ;
   rdfs:isDefinedBy <http://resource.geosciml.org/ontology/timescale/gts> ;
   rdfs:label "Geologic Timescale"@en ;
   rdfs:subClassOf thors:ReferenceSystem ;
   rdfs:subClassOf [
-      a owl:Restriction ;
+      rdf:type owl:Restriction ;
       owl:allValuesFrom gts:GeochronologicEra ;
       owl:onProperty thors:component ;
     ] ;
   rdfs:subClassOf [
-      a owl:Restriction ;
+      rdf:type owl:Restriction ;
       owl:allValuesFrom [
-          a owl:Class ;
+          rdf:type owl:Class ;
           owl:unionOf (
               gts:GeochronologicBoundary
               gts:NumericEraBoundary
@@ -577,12 +577,12 @@ ts:gts2019
 """ ;
 .
 gts:NumericEraBoundary
-  a owl:Class ;
+  rdf:type owl:Class ;
   rdfs:isDefinedBy <http://resource.geosciml.org/ontology/timescale/gts> ;
   rdfs:label "Numeric Era Boundary"@en ;
   rdfs:subClassOf thors:EraBoundary ;
   rdfs:subClassOf [
-      a owl:Restriction ;
+      rdf:type owl:Restriction ;
       owl:cardinality "1"^^xsd:nonNegativeInteger ;
       owl:onProperty gts:status ;
     ] ;
@@ -601,36 +601,36 @@ isc:BaseProterozoic
 .""" ;
 .
 gts:Period
-  a owl:Class ;
+  rdf:type owl:Class ;
   rdfs:label "Period"@en ;
   rdfs:subClassOf gts:GeochronologicEra ;
   rdfs:subClassOf [
-      a owl:Restriction ;
+      rdf:type owl:Restriction ;
       owl:hasValue rank:Period ;
       owl:onProperty gts:rank ;
     ] ;
   rdfs:subClassOf [
-      a owl:Restriction ;
+      rdf:type owl:Restriction ;
       owl:onClass gts:Epoch ;
       owl:onProperty time:intervalFinishedBy ;
       owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
     ] ;
   rdfs:subClassOf [
-      a owl:Restriction ;
+      rdf:type owl:Restriction ;
       owl:onClass gts:Epoch ;
       owl:onProperty time:intervalStartedBy ;
       owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
     ] ;
   rdfs:subClassOf [
-      a owl:Restriction ;
+      rdf:type owl:Restriction ;
       owl:onClass gts:Era ;
       owl:onProperty time:intervalIn ;
       owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
     ] ;
   rdfs:subClassOf [
-      a owl:Restriction ;
+      rdf:type owl:Restriction ;
       owl:onClass [
-          a owl:Class ;
+          rdf:type owl:Class ;
           owl:unionOf (
               gts:Super-Eon
               gts:Eon
@@ -642,9 +642,9 @@ gts:Period
       owl:qualifiedCardinality "0"^^xsd:nonNegativeInteger ;
     ] ;
   rdfs:subClassOf [
-      a owl:Restriction ;
+      rdf:type owl:Restriction ;
       owl:onClass [
-          a owl:Class ;
+          rdf:type owl:Class ;
           owl:unionOf (
               gts:Super-Eon
               gts:Eon
@@ -656,9 +656,9 @@ gts:Period
       owl:qualifiedCardinality "0"^^xsd:nonNegativeInteger ;
     ] ;
   rdfs:subClassOf [
-      a owl:Restriction ;
+      rdf:type owl:Restriction ;
       owl:onClass [
-          a owl:Class ;
+          rdf:type owl:Class ;
           owl:unionOf (
               gts:Super-Eon
               gts:Eon
@@ -670,7 +670,7 @@ gts:Period
       owl:qualifiedCardinality "0"^^xsd:nonNegativeInteger ;
     ] ;
   rdfs:subClassOf [
-      a owl:Restriction ;
+      rdf:type owl:Restriction ;
       owl:onProperty time:intervalContains ;
       owl:someValuesFrom gts:Epoch ;
     ] ;
@@ -698,29 +698,29 @@ isc:Stenian
 .""" ;
 .
 gts:StratigraphicEvent
-  a owl:Class ;
+  rdf:type owl:Class ;
   rdfs:comment "A subclass of Geologic Event (placeholder) " ;
   rdfs:isDefinedBy <http://resource.geosciml.org/ontology/timescale/gts> ;
   rdfs:label "Stratigraphic Event"@en ;
   skos:definition "Geologic event correlated with a specified stratotype. " ;
 .
 gts:StratigraphicPoint
-  a owl:Class ;
+  rdf:type owl:Class ;
   rdfs:isDefinedBy <http://resource.geosciml.org/ontology/timescale/gts> ;
   rdfs:label "Stratigraphic Point"@en ;
   rdfs:subClassOf sosa:Sample ;
   rdfs:subClassOf [
-      a owl:Restriction ;
+      rdf:type owl:Restriction ;
       owl:cardinality "1"^^xsd:nonNegativeInteger ;
       owl:onProperty gts:correlationEvent ;
     ] ;
   rdfs:subClassOf [
-      a owl:Restriction ;
+      rdf:type owl:Restriction ;
       owl:cardinality "1"^^xsd:nonNegativeInteger ;
       owl:onProperty gts:status ;
     ] ;
   rdfs:subClassOf [
-      a owl:Restriction ;
+      rdf:type owl:Restriction ;
       owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
       owl:onProperty gts:ratifiedGSSP ;
     ] ;
@@ -742,53 +742,53 @@ isc:BaseJurassicSP
 .""" ;
 .
 gts:StratigraphicSection
-  a owl:Class ;
+  rdf:type owl:Class ;
   rdfs:isDefinedBy <http://resource.geosciml.org/ontology/timescale/gts> ;
   rdfs:label "Stratigraphic Section"@en ;
   rdfs:subClassOf sosa:Sample ;
   rdfs:subClassOf [
-      a owl:Restriction ;
+      rdf:type owl:Restriction ;
       owl:cardinality "1"^^xsd:nonNegativeInteger ;
       owl:onProperty gts:geologicDescription ;
     ] ;
   rdfs:subClassOf [
-      a owl:Restriction ;
+      rdf:type owl:Restriction ;
       owl:cardinality "1"^^xsd:nonNegativeInteger ;
       owl:onProperty gts:geologicSetting ;
     ] ;
   skos:definition "An agreed stratigraphic section, which hosts a stratigraphic point that is used to calibrate the temporal position (age) of a boundary within the geologic timescale. " ;
 .
 gts:Sub-Period
-  a owl:Class ;
+  rdf:type owl:Class ;
   rdfs:label "Sub-Period" ;
   rdfs:subClassOf gts:GeochronologicEra ;
   rdfs:subClassOf [
-      a owl:Restriction ;
+      rdf:type owl:Restriction ;
       owl:hasValue rank:Sub-Period ;
       owl:onProperty gts:rank ;
     ] ;
   rdfs:subClassOf [
-      a owl:Restriction ;
+      rdf:type owl:Restriction ;
       owl:onClass gts:Epoch ;
       owl:onProperty time:intervalFinishedBy ;
       owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
     ] ;
   rdfs:subClassOf [
-      a owl:Restriction ;
+      rdf:type owl:Restriction ;
       owl:onClass gts:Epoch ;
       owl:onProperty time:intervalStartedBy ;
       owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
     ] ;
   rdfs:subClassOf [
-      a owl:Restriction ;
+      rdf:type owl:Restriction ;
       owl:onClass gts:Period ;
       owl:onProperty time:intervalIn ;
       owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
     ] ;
   rdfs:subClassOf [
-      a owl:Restriction ;
+      rdf:type owl:Restriction ;
       owl:onClass [
-          a owl:Class ;
+          rdf:type owl:Class ;
           owl:unionOf (
               gts:Super-Eon
               gts:Eon
@@ -801,9 +801,9 @@ gts:Sub-Period
       owl:qualifiedCardinality "0"^^xsd:nonNegativeInteger ;
     ] ;
   rdfs:subClassOf [
-      a owl:Restriction ;
+      rdf:type owl:Restriction ;
       owl:onClass [
-          a owl:Class ;
+          rdf:type owl:Class ;
           owl:unionOf (
               gts:Super-Eon
               gts:Eon
@@ -816,9 +816,9 @@ gts:Sub-Period
       owl:qualifiedCardinality "0"^^xsd:nonNegativeInteger ;
     ] ;
   rdfs:subClassOf [
-      a owl:Restriction ;
+      rdf:type owl:Restriction ;
       owl:onClass [
-          a owl:Class ;
+          rdf:type owl:Class ;
           owl:unionOf (
               gts:Super-Eon
               gts:Eon
@@ -831,7 +831,7 @@ gts:Sub-Period
       owl:qualifiedCardinality "0"^^xsd:nonNegativeInteger ;
     ] ;
   rdfs:subClassOf [
-      a owl:Restriction ;
+      rdf:type owl:Restriction ;
       owl:onProperty time:intervalContains ;
       owl:someValuesFrom gts:Epoch ;
     ] ;
@@ -865,41 +865,41 @@ isc:Mississippian
 .""" ;
 .
 gts:Super-Eon
-  a owl:Class ;
+  rdf:type owl:Class ;
   rdfs:label "Super-Eon" ;
   rdfs:subClassOf gts:GeochronologicEra ;
   rdfs:subClassOf [
-      a owl:Restriction ;
+      rdf:type owl:Restriction ;
       owl:onClass gts:Eon ;
       owl:onProperty time:intervalFinishedBy ;
       owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
     ] ;
   rdfs:subClassOf [
-      a owl:Restriction ;
+      rdf:type owl:Restriction ;
       owl:onClass gts:Eon ;
       owl:onProperty time:intervalStartedBy ;
       owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
     ] ;
   rdfs:subClassOf [
-      a owl:Restriction ;
+      rdf:type owl:Restriction ;
       owl:onClass gts:Super-Eon ;
       owl:onProperty time:intervalContains ;
       owl:qualifiedCardinality "0"^^xsd:nonNegativeInteger ;
     ] ;
   rdfs:subClassOf [
-      a owl:Restriction ;
+      rdf:type owl:Restriction ;
       owl:onClass gts:Super-Eon ;
       owl:onProperty time:intervalFinishedBy ;
       owl:qualifiedCardinality "0"^^xsd:nonNegativeInteger ;
     ] ;
   rdfs:subClassOf [
-      a owl:Restriction ;
+      rdf:type owl:Restriction ;
       owl:onClass gts:Super-Eon ;
       owl:onProperty time:intervalStartedBy ;
       owl:qualifiedCardinality "0"^^xsd:nonNegativeInteger ;
     ] ;
   rdfs:subClassOf [
-      a owl:Restriction ;
+      rdf:type owl:Restriction ;
       owl:onProperty time:intervalContains ;
       owl:someValuesFrom gts:Eon ;
     ] ;
@@ -930,7 +930,7 @@ isc:Precambrian
 .""" ;
 .
 gts:boundaryLevel
-  a owl:DatatypeProperty ;
+  rdf:type owl:DatatypeProperty ;
   rdfs:comment "the level within the section of the point characterizing the boundary" ;
   rdfs:domain gts:StratigraphicPoint ;
   rdfs:isDefinedBy <http://resource.geosciml.org/ontology/timescale/gts> ;
@@ -948,7 +948,7 @@ isc:BaseBathonianSP
 .""" ;
 .
 gts:correlationEvent
-  a owl:DatatypeProperty ;
+  rdf:type owl:DatatypeProperty ;
   rdfs:comment "the stratigraphic event that is intended to be represented by this stratigraphic point" ;
   rdfs:domain gts:StratigraphicPoint ;
   rdfs:isDefinedBy <http://resource.geosciml.org/ontology/timescale/gts> ;
@@ -966,10 +966,10 @@ isc:BaseBathonianSP
 .""" ;
 .
 gts:event
-  a owl:ObjectProperty ;
+  rdf:type owl:ObjectProperty ;
   rdfs:comment "stratigraphic event corresponding with this boundary or point" ;
   rdfs:domain [
-      a owl:Class ;
+      rdf:type owl:Class ;
       owl:unionOf (
           gts:GeochronologicBoundary
           gts:StratigraphicPoint
@@ -980,21 +980,21 @@ gts:event
   rdfs:range gts:StratigraphicEvent ;
 .
 gts:geologicDescription
-  a owl:DatatypeProperty ;
+  rdf:type owl:DatatypeProperty ;
   rdfs:domain gts:StratigraphicSection ;
   rdfs:isDefinedBy <http://resource.geosciml.org/ontology/timescale/gts> ;
   rdfs:label "geologic description" ;
   skos:definition "geologic description of the stratigraphic section" ;
 .
 gts:geologicSetting
-  a owl:DatatypeProperty ;
+  rdf:type owl:DatatypeProperty ;
   rdfs:domain gts:StratigraphicSection ;
   rdfs:isDefinedBy <http://resource.geosciml.org/ontology/timescale/gts> ;
   rdfs:label "geologic setting" ;
   skos:definition "geologic setting of the stratigraphic section" ;
 .
 gts:positionalUncertainty
-  a owl:ObjectProperty ;
+  rdf:type owl:ObjectProperty ;
   rdfs:domain time:TemporalPosition ;
   rdfs:label "time position uncertainty" ;
   rdfs:range time:TemporalDuration ;
@@ -1008,7 +1008,7 @@ isc:BaseAeronianTime
 .""" ;
 .
 gts:rank
-  a owl:ObjectProperty ;
+  rdf:type owl:ObjectProperty ;
   rdfs:comment """Elements of all ranks are included in the class 'gts:GeochronologicEra'. 
 The rank may be indicated by membership of a sub-class, or is indicated using the 'gts:rank' property.""" ;
   rdfs:domain gts:GeochronologicEra ;
@@ -1025,10 +1025,10 @@ isc:Aalenian
 .""" ;
 .
 gts:ratifiedGSSP
-  a owl:DatatypeProperty ;
+  rdf:type owl:DatatypeProperty ;
   rdfs:comment "flag to indicate the status of the calibration details of a geochronologic boundary - 'true' if ratified by ICS" ;
   rdfs:domain [
-      a owl:Class ;
+      rdf:type owl:Class ;
       owl:unionOf (
           gts:StratigraphicPoint
           gts:GeochronologicBoundary
@@ -1050,7 +1050,7 @@ isc:BaseBathonianSP
 .""" ;
 .
 gts:representsBoundary
-  a owl:ObjectProperty ;
+  rdf:type owl:ObjectProperty ;
   rdfs:comment "geochronologic boundary corresponding with this stratigraphic point" ;
   rdfs:domain gts:StratigraphicPoint ;
   rdfs:isDefinedBy <http://resource.geosciml.org/ontology/timescale/gts> ;
@@ -1058,7 +1058,7 @@ gts:representsBoundary
   rdfs:range gts:GeochronologicBoundary ;
 .
 gts:representsEra
-  a owl:ObjectProperty ;
+  rdf:type owl:ObjectProperty ;
   rdfs:comment "geochronologic era corresponding with this stratigraphic section" ;
   rdfs:domain gts:StratigraphicSection ;
   rdfs:isDefinedBy <http://resource.geosciml.org/ontology/timescale/gts> ;
@@ -1066,10 +1066,10 @@ gts:representsEra
   rdfs:range gts:GeochronologicEra ;
 .
 gts:status
-  a owl:DatatypeProperty ;
+  rdf:type owl:DatatypeProperty ;
   rdfs:comment "formal ICS status of this boundary and point" ;
   rdfs:domain [
-      a owl:Class ;
+      rdf:type owl:Class ;
       owl:unionOf (
           gts:NumericEraBoundary
           gts:StratigraphicPoint
@@ -1091,10 +1091,10 @@ isc:BaseBathonianSP
 .""" ;
 .
 gts:stratotype
-  a owl:ObjectProperty ;
+  rdf:type owl:ObjectProperty ;
   rdfs:comment "the characteristic stratigraphic point or section corresponding with a geochronologic concept" ;
   rdfs:domain [
-      a owl:Class ;
+      rdf:type owl:Class ;
       owl:unionOf (
           gts:GeochronologicBoundary
           gts:GeochronologicEra
@@ -1103,7 +1103,7 @@ gts:stratotype
   rdfs:isDefinedBy <http://resource.geosciml.org/ontology/timescale/gts> ;
   rdfs:label "stratotype" ;
   rdfs:range [
-      a owl:Class ;
+      rdf:type owl:Class ;
       owl:unionOf (
           gts:StratigraphicPoint
           gts:StratigraphicSection
@@ -1131,50 +1131,50 @@ rank:
   skos:member rank:Super-Eon ;
 .
 rank:Age
-  a gts:GeochronologicEraRank ;
-  a skos:Concept ;
+  rdf:type gts:GeochronologicEraRank ;
+  rdf:type skos:Concept ;
   rdfs:label "Age" ;
 .
 rank:Eon
-  a gts:GeochronologicEraRank ;
-  a skos:Concept ;
+  rdf:type gts:GeochronologicEraRank ;
+  rdf:type skos:Concept ;
   rdfs:label "Eon" ;
 .
 rank:Epoch
-  a gts:GeochronologicEraRank ;
-  a skos:Concept ;
+  rdf:type gts:GeochronologicEraRank ;
+  rdf:type skos:Concept ;
   rdfs:label "Epoch" ;
 .
 rank:Era
-  a gts:GeochronologicEraRank ;
-  a skos:Concept ;
+  rdf:type gts:GeochronologicEraRank ;
+  rdf:type skos:Concept ;
   rdfs:label "Era" ;
 .
 rank:Period
-  a gts:GeochronologicEraRank ;
-  a skos:Concept ;
+  rdf:type gts:GeochronologicEraRank ;
+  rdf:type skos:Concept ;
   rdfs:label "Period" ;
 .
 rank:Sub-Period
-  a gts:GeochronologicEraRank ;
-  a skos:Concept ;
+  rdf:type gts:GeochronologicEraRank ;
+  rdf:type skos:Concept ;
   rdfs:label "Sub-Period" ;
 .
 rank:Super-Eon
-  a gts:GeochronologicEraRank ;
-  a skos:Concept ;
+  rdf:type gts:GeochronologicEraRank ;
+  rdf:type skos:Concept ;
   rdfs:label "Super-Eon" ;
 .
 <https://orcid.org/0000-0001-6041-5302>
-  a owl:NamedIndividual ;
-  a sdo:Person ;
+  rdf:type owl:NamedIndividual ;
+  rdf:type sdo:Person ;
   sdo:email <mailto:smrTucson@gmail.com> ;
   sdo:identifier "https://orcid.org/0000-0001-6041-5302"^^xsd:anyURI ;
   sdo:name "Stephen M Richard"@en ;
 .
 <https://orcid.org/0000-0002-3884-3420>
-  a owl:NamedIndividual ;
-  a sdo:Person ;
+  rdf:type owl:NamedIndividual ;
+  rdf:type sdo:Person ;
   sdo:affiliation [
       sdo:identifier "http://catalogue.linked.data.gov.au/org/csiro"^^xsd:anyURI ;
       sdo:name "CSIRO" ;
