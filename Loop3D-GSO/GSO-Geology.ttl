@@ -170,7 +170,6 @@ gsog:Generic_Geologic_Time_Unit
       owl:onProperty gsoc:hasEssentialPart ;
       owl:someValuesFrom gsog:Specific_Geologic_Time_Unit ;
     ] ;
-  owl:disjointWith gsog:Geologic_Time_Scale ;
   owl:disjointWith gsog:Specific_Geologic_Time_Unit ;
 .
 gsog:Geologic_Event
@@ -436,18 +435,10 @@ gsog:Geologic_Time_Feature
 .
 gsog:Geologic_Time_Interval
   rdf:type owl:Class ;
-  rdfs:comment "A time interval dependent on some rock body and having parts that are (geologic) time intervals. There are 3 primary types of geologic time intervals - these are not comprehensive (i.e. there could be additional types): generic (e.g. Jurassic), specific (e.g. Jurassic 2017), and time scale (ISC 2017)."@en ;
+  rdfs:comment "A time interval dependent on some rock body and having parts that are (geologic) time intervals. There are 2 primary types of geologic time intervals - these are not comprehensive (i.e. there could be additional types): generic (e.g. Jurassic), specific (e.g. Jurassic 2017). Geologic time intervals are defined in the context of an ordinal time reference system--intervals defined in a temporal topology that specifies a preceding and succeeding interval for each interval (except the first and last), and defines a covering set of intervals for the extent of the reference system. Intervals might have subintervals, but the set of subintervals defined on any interval must cover that interval (no gaps). The generic time intervals define such a topology without defining concrete boundaries for the intervals. Specific intervals define boundaries anchored in the geologic record with assigned temporal positions based on some set of data (observations, e.g. age dates)."@en ;
   rdfs:label "Geologic Time Interval"@en ;
   rdfs:subClassOf gsoc:Time_Interval_Feature ;
   rdfs:subClassOf gsog:Geologic_Time_Feature ;
-  rdfs:subClassOf [
-      rdf:type owl:Class ;
-      owl:complementOf [
-          rdf:type owl:Restriction ;
-          owl:onProperty gsoc:hasPart ;
-          owl:someValuesFrom gsog:Geologic_Time_Scale ;
-        ] ;
-    ] ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
       owl:allValuesFrom gsog:Geologic_Time_Feature ;
@@ -500,42 +491,6 @@ gsog:Geologic_Time_Point
       owl:onProperty gsoc:staticHostedBy ;
       owl:someValuesFrom gsoc:Low_Dimension_Feature ;
     ] ;
-.
-gsog:Geologic_Time_Scale
-  rdf:type owl:Class ;
-  rdfs:comment "A time scale is a geologic time inteval in GSO - it is a rock-dependent span of time that is internally divided into other rock-dependent spans of time following a certain topology (after Simon & Cox, 2010). Rock-dependence implies it is intrinsically tied to a specific rock object (e.g. the Earth's rock mass) and internal subdivision implies it is a collection of other geologic time intervals. Moreoever, any change to the parts of the collection results in a different time scale - this implies geologic time intervals cannot be essential parts of a time scale without being static parts (see Brodaric et al, 2019 for types of parts). Time scales are also not part of other time scales, nor part of specific or generic geologic time intervals. This is primarily to maintain internal temporal topology, though this constraint could be relaxed if use-cases warrant. Aligned generally with (Cox and Richard, 2010)."@en ;
-  rdfs:label "Geologic Time Scale"@en ;
-  rdfs:subClassOf gsog:Geologic_Time_Interval ;
-  rdfs:subClassOf [
-      rdf:type owl:Class ;
-      owl:unionOf (
-          [
-            rdf:type owl:Class ;
-            owl:complementOf [
-                rdf:type owl:Restriction ;
-                owl:onProperty gsoc:hasEssentialPart ;
-                owl:someValuesFrom gsog:Geologic_Time_Interval ;
-              ] ;
-          ]
-          [
-            rdf:type owl:Restriction ;
-            owl:onProperty gsoc:hasStaticPart ;
-            owl:someValuesFrom gsog:Geologic_Time_Interval ;
-          ]
-        ) ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:onClass gsog:Rock_Body ;
-      owl:onProperty gsoc:staticHostedBy ;
-      owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:onProperty gsoc:hasStaticPart ;
-      owl:someValuesFrom gsog:Geologic_Time_Interval ;
-    ] ;
-  owl:disjointWith gsog:Specific_Geologic_Time_Unit ;
 .
 gsog:Geologic_Time_Scale_1
   rdf:type owl:Class ;
