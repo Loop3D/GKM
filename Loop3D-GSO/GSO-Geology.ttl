@@ -33,7 +33,7 @@ gsoc:boyan_brodaric
 .
 gsoc:hasComponent
   rdf:type owl:ObjectProperty ;
-  rdfs:domain gsoc:Ordinal_Temporal_Reference_System ;
+  rdfs:domain gsoc:Ordinal_Time_Interval_Collection ;
   rdfs:label "has component "@en ;
   rdfs:range gsoc:Perdurant_Feature ;
   rdfs:subPropertyOf gsoc:isRelatedTo ;
@@ -136,7 +136,7 @@ gsog:GSSA
 .
 gsog:Generic_Geologic_Time_Unit
   rdf:type owl:Class ;
-  rdfs:comment "A generic geologic time interval (e.g. Jurassic) having specific manifestations (e.g. Jurassic 2017). The specific manifestations are its essential parts, while the generic interval is the whole.  These time intervals are largely defined by their position between other intervals, without necessarily specifying their bounding time instants. Generic geologic time intervals such as Jurassic are not types (classes) for practical and ontological reasons. Practically, it would imply a cumbersome and complex multi-level ontology: time ranks such as Period would be metatypes (following biological ranks such as Species; Carvalho & Almeida 2016) that instantiate time intervals such as Jurassic, that in turn instantiate Jurassic 2017. It would also be more complex to specify e.g. Jurassic (a type) as the age of a formation (an individual), due to non-instantiation relation between an individual and a type. Ontologically, it would imply Jurassic is not a time span, which is contrary to stratigraphic codes that consider Jurassic (as a geochronologic unit) to be an actual chunk of time: \"...units of geologic time... represent [a] span of time ...\" (NACSM 2005) and \"Geochronologic units are units of time...\" (Murphy & Salvador 1998). For these reasons, generic geologic time intervals, such as Jurassic, are considered in GSO to be individuals with essential parts, such as Jurassic 2017. However, it remains somewhat of an open question whether this characterization is indeed best."@en ;
+  rdfs:comment "Generic geologic time intervals such as Jurassic are not types (classes) for practical and ontological reasons.   Practically, it would imply a cumbersome and complex multi-level ontology: time ranks such as Period would be metatypes (following biological ranks such as Species; Carvalho & Almeida 2016) that instantiate time intervals such as Jurassic, that in turn instantiate Jurassic 2017. It would also be more complex to specify e.g. Jurassic (a type) as the age of a formation (an individual), due to non-instantiation relation between an individual and a type. Ontologically, it would imply Jurassic is not a time span, which is contrary to stratigraphic codes that consider Jurassic (as a geochronologic unit) to be an actual chunk of time: \"...units of geologic time... represent [a] span of time ...\" (NACSM 2005) and \"Geochronologic units are units of time...\" (Murphy & Salvador 1998).   For these reasons, generic geologic time intervals, such as Jurassic, are considered in GSO to be individuals with essential parts, such as Jurassic 2017. The specific manifestations are its essential parts, while the generic interval is the whole.   However, it remains somewhat of an open question whether this characterization is indeed best."@en ;
   rdfs:label "Generic Geologic Time Interval"@en ;
   rdfs:subClassOf gsog:Geologic_Time_Interval ;
   rdfs:subClassOf [
@@ -435,7 +435,7 @@ gsog:Geologic_Time_Feature
 .
 gsog:Geologic_Time_Interval
   rdf:type owl:Class ;
-  rdfs:comment "A time interval dependent on some rock body and having parts that are (geologic) time intervals. There are 2 primary types of geologic time intervals - these are not comprehensive (i.e. there could be additional types): generic (e.g. Jurassic), specific (e.g. Jurassic 2017). Geologic time intervals are defined in the context of an ordinal time reference system--intervals defined in a temporal topology that specifies a preceding and succeeding interval for each interval (except the first and last), and defines a covering set of intervals for the extent of the reference system. Intervals might have subintervals, but the set of subintervals defined on any interval must cover that interval (no gaps). The generic time intervals define such a topology without defining concrete boundaries for the intervals. Specific intervals define boundaries anchored in the geologic record with assigned temporal positions based on some set of data (observations, e.g. age dates)."@en ;
+  rdfs:comment "A time interval related to the history of the Earth, having parts that are (geologic) time intervals. There are 2 primary types of geologic time intervals - these are not comprehensive (i.e. there could be additional types): generic (e.g. Jurassic), specific (e.g. Jurassic 2017). The generic time intervals define such a topology without defining concrete boundaries for the intervals. Specific intervals define boundaries anchored in the geologic record with assigned temporal positions based on some set of data (observations, e.g. age dates)."@en ;
   rdfs:label "Geologic Time Interval"@en ;
   rdfs:subClassOf gsoc:Time_Interval_Feature ;
   rdfs:subClassOf gsog:Geologic_Time_Feature ;
@@ -492,16 +492,16 @@ gsog:Geologic_Time_Point
       owl:someValuesFrom gsoc:Low_Dimension_Feature ;
     ] ;
 .
-gsog:Geologic_Time_Scale_1
+gsog:Geologic_Time_Scale
   rdf:type owl:Class ;
-  dct:description "a hierarchical ordinal temporal reference system for which the events bounding the eras occurred on Earth and are anchored to manifestation in the geologic record.  The component eras must be gsog:Geologic_Time_Intervals."@en ;
+  dct:description "A hierarchical ordinal time interval collection for which the events bounding the intervals occurred on Earth and are anchored to manifestation in the geologic record.  The part intervals must be gsog:Geologic_Time_Intervals."@en ;
   rdfs:label "Geologic time scale"@en ;
-  rdfs:subClassOf gsoc:Hierarchical_Ordinal_Temporal_Reference_System ;
+  rdfs:subClassOf gsoc:Hierarchical_Ordinal_Time_Interval_Collection ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
       owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
       owl:onClass gsog:Geologic_Time_Interval ;
-      owl:onProperty gsoc:hasComponent ;
+      owl:onProperty gsoc:timeIncludes ;
     ] ;
 .
 gsog:Geologic_Unit
