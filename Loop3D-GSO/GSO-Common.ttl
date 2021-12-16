@@ -87,6 +87,25 @@ schema:identifier
 schema:name
   rdf:type owl:AnnotationProperty ;
 .
+
+rdfs:description
+  rdf:type owl:AnnotationProperty ;
+  rdfs:subPropertyOf gsoc:hasAnnotation ;
+.
+gsoc:Time_Interval
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:timeHasBeginning ;
+      owl:someValuesFrom gsoc:Time_Instant ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:timeHasEnd ;
+      owl:someValuesFrom gsoc:Time_Instant ;
+    ] ;
+.
+
+
 gsoc:Abstract_Endurant
   rdf:type owl:Class ;
   rdfs:comment "Abstract endurants do not occupy space nor time - they are aspatial and atemporal, e.g. numbers and other mathematical objects"@en ;
