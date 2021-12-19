@@ -1,0 +1,173 @@
+# baseURI: https://w3id.org/gso/gso-gts/ontology
+# imports: http://resource.geosciml.org/ontology/timescale/gts
+# imports: http://resource.geosciml.org/ontology/timescale/thors
+# imports: http://www.w3.org/2006/time
+# imports: http://www.w3.org/ns/sosa/
+# imports: https://w3id.org/gso/geologictime/ontology
+# imports: https://w3id.org/gso/ischart/ontology
+
+@prefix : <https://w3id.org/gso/gso-gts/> .
+@prefix dbp: <http://dbpedia.org/resource/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix gscn: <https://w3id.org/gso/geologiccontact/> .
+@prefix gsgu: <https://w3id.org/gso/geologicunit/> .
+@prefix gsoc: <https://w3id.org/gso/common/> .
+@prefix gsog: <https://w3id.org/gso/geology/> .
+@prefix gst: <https://w3id.org/gso/geologictime/> .
+@prefix gts: <http://resource.geosciml.org/ontology/timescale/gts#> .
+@prefix ischart: <https://w3id.org/gso/ischart/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <https://schema.org/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix thors: <http://resource.geosciml.org/ontology/timescale/thors#> .
+@prefix time: <http://www.w3.org/2006/time#> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+gts:GeochronologicBoundary
+  rdfs:comment "#subclass of thors:EraBoundary, stratotype only stratigraphicPoint." ;
+  owl:equivalentClass gsog:Geologic_Time_Boundary ;
+.
+gts:GeochronologicEra
+  rdfs:comment "#gts era has gts:rank, gts:stratotype (optional), and skos:notation, subclass from thors:Era" ;
+  owl:equivalentClass gsog:Geologic_Time_Interval ;
+.
+gts:GeologicTimescale
+  owl:equivalentClass gsog:Geologic_Time_Scale ;
+.
+gts:NumericEraBoundary
+  rdfs:comment "in practice the classes have the same extension" ;
+  owl:equivalentClass gsog:GSSA ;
+.
+thors:Era
+  rdfs:comment "gsoc:timeHasBeginning | gsoc:timeHasEnd some  gsoc:Temporal_Boundary.  thors:Era has thors:begin and :end properties with range thors:EraBoundary, but both properties are listed as deprecated. use gsoc:Temporal_Boundary because the time instants are coupled to the Era they bound, making them features." ;
+  owl:subClassOf gsoc:Time_Interval_Feature ;
+.
+thors:EraBoundary
+  rdfs:subClassOf gsoc:Temporal_Boundary ;
+.
+thors:component
+  rdfs:comment "range of thors:component is thors:Era, domain is referenceSystem. Use to indentify intervals that are included in a a thors:ReferenceSystem." ;
+  rdfs:subPropertyOf gsoc:timeIncludes ;
+.
+thors:referencePoint
+  rdfs:comment "gsoc:timeHasBeginning | gsoc:timeHasEnd some  gsoc:Temporal_Boundary. thors referencePOint are thors:EraBoundary objects. domain is referenc system." ;
+  owl:equivalentProperty gsoc:timeHasBeginning ;
+.
+time:Instant
+  owl:sameAs gsoc:Time_Instant ;
+.
+time:ProperInterval
+  owl:sameAs gsoc:Time_Interval ;
+.
+time:TRS
+  rdfs:subClassOf gsoc:Temporal_Reference_System ;
+.
+time:TemporalEntity
+  rdf:type owl:thing ;
+  rdfs:comment "all time:TemporalEntity are gsoc:Time_Region, but not vice versa" ;
+  rdfs:subClassOf gsoc:Time_Region ;
+.
+time:inside
+  rdfs:comment " time:inside is narrower; doesn't allow timeStartedBy and timeFinishedBy where the object is an instant, or timeEquivalentTo." ;
+  owl:subPropertyOf gsoc:timeContains ;
+  owl:subPropertyOf gsoc:timeIncludes ;
+.
+time:intervalAfter
+  rdfs:subPropertyOf gsoc:timeYoungerThan ;
+.
+time:intervalBefore
+  rdfs:subPropertyOf gsoc:timeOlderThan ;
+.
+time:intervalContains
+  owl:subPropertyOf gsoc:timeContains ;
+.
+time:intervalDisjoint
+  rdfs:subPropertyOf gsoc:timeDisjoint ;
+.
+time:intervalDuring
+  rdfs:comment " OWL Time time:intervalDuring is narrower, only relates ProperIntervals."@en ;
+  owl:subPropertyOf gsoc:timeDuring ;
+.
+time:intervalEquals
+  rdfs:comment "OWL Time time:intervalEquals is narrower-only relates intervals.. GSO allow interval or instant, direct or indirect." ;
+  owl:subPropertyOf gsoc:timeEquivalentTo ;
+.
+time:intervalFinishedBy
+  rdfs:comment "OWL time time:intervalFinsishedBy is narrower, only finishing time entity can only be interval time_region. GSO allow interval or instant, direct or indirect." ;
+  owl:subPropertyOf gsoc:timeFinishedBy ;
+.
+time:intervalFinishes
+  rdfs:comment "OWL time time:Finishes is narrower, only finishing time entity can only be interval time_region. GSO allow interval or instant, direct or indirect." ;
+  owl:subPropertyOf gsoc:timeFinishes ;
+.
+time:intervalIn
+  rdfs:comment ".  OWL Time time:intervalIn is subproperty, restricted to relating intervals, and not including timeEquivalentTo" ;
+  owl:subPropertyOf gsoc:timeIncludedBy ;
+.
+time:intervalStartedBy
+  owl:subPropertyOf gsoc:timeStartedBy ;
+.
+time:intervalStarts
+  rdfs:comment "OWL time time:intervalStarts is narrower; only relates ProperInterval" ;
+  owl:subPropertyOf gsoc:timeStarts ;
+.
+gsoc:Temporal_Value
+  rdfs:subClassOf time:TemporalPosition ;
+.
+gsoc:Time_Interval_Reference_System
+  rdfs:subClassOf thors:ReferenceSystem ;
+.
+gsoc:Time_Numeric_Value
+  rdfs:comment "rdfs:subClassOf (time:TimePosition and (time:numericPosition exactly 1)) ;.  range of timePosition allows nominal position with a string value. In GSO this would need to be a timeInterval that is included in a Time_Interval_Reference_System" ;
+  rdfs:subClassOf time:TimePosition ;
+.
+gsoc:hostedBy
+  rdf:type owl:ObjectProperty ;
+.
+gsoc:nextTimeInterval
+  owl:equivalentProperty time:intervalMeets ;
+.
+gsoc:timeContains
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment "Equivalent to union of OWL Time time:intervalContains and time:inside" ;
+.
+gst:Age
+  owl:equivalentClass gts:Age ;
+.
+gst:Eon
+  owl:equivalentClass gts:Eon ;
+.
+gst:Epoch
+  owl:equivalentClass gts:Epoch ;
+.
+gst:Era
+  owl:equivalentClass gts:Era ;
+.
+gst:Period
+  owl:equivalentClass gts:Period ;
+.
+gst:Supereon
+  owl:equivalentClass gts:Supereon ;
+.
+gsgu:Chronostratigraphic_Unit
+  rdf:type owl:Thing ;
+  <http://www.w3.org/2000/01/rdf-schema#Comment:> "no gts: equivalent?" ;
+.
+gsog:Generic_Geologic_Time_Unit
+  rdf:type owl:Thing ;
+.
+:ontology
+  rdf:type owl:Ontology ;
+  dct:created "2021-12-18"^^xsd:date ;
+  rdfs:comment "construct to map gso time classes and properties to owl:time, gts, and thors" ;
+  owl:imports <http://resource.geosciml.org/ontology/timescale/gts> ;
+  owl:imports <http://resource.geosciml.org/ontology/timescale/thors> ;
+  owl:imports <http://www.w3.org/2006/time> ;
+  owl:imports <http://www.w3.org/ns/sosa/> ;
+  owl:imports gst:ontology ;
+  owl:imports ischart:ontology ;
+.
