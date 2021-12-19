@@ -31,7 +31,6 @@ gsoc:boyan_brodaric
   schema:identifier <https://orcid.org/0000-0002-7987-3810> ;
   schema:name "Dr. Boyan Brodaric" ;
 .
-
 gsoc:stephen_richard
   rdf:type owl:NamedIndividual ;
   rdf:type schema:Person ;
@@ -165,6 +164,7 @@ gsog:Generic_Geologic_Time_Unit
       owl:someValuesFrom gsog:Specific_Geologic_Time_Unit ;
     ] ;
   owl:disjointWith gsog:Specific_Geologic_Time_Unit ;
+  skos:definition "A time interval related to the history of the Earth, defined by a position between other intervals, without necessarily specifying bounding time boundaries. Based on observations of stratigraphic sequences before the advent of isotopic dating-- ordering relation between intervals based on stratigraphic sequence, with correlations and subdivisions based on fossil content (or lithostratigraphic correlation in some cases)."@en ;
 .
 gsog:Geologic_Event
   rdf:type owl:Class ;
@@ -344,7 +344,7 @@ gsog:Geologic_Structure
 .
 gsog:Geologic_Time_Boundary
   rdf:type owl:Class ;
-  rdfs:comment "A temporal feature that is the boundary between two Geologic time Intervals. Is generically dependent on a date, so can possibly change or could possibly have been a different date - e.g. the end of the Anthropocene is the current moment, which changes with each moment, and the start of the Anthropocene could have been a different time if Earth history was different. The boundary is hosted by some rock body."@en ;
+  rdfs:comment "A temporal feature that is the boundary between two Geologic time Intervals. Is generically dependent on a date, so can possibly change or could possibly have been a different date - e.g. the end of the Anthropocene is the current moment, which changes with each moment, and the start of the Anthropocene could have been a different time if Earth history was different. Time boundaries are hosted by a Chronostratigraphic_Contact, which has an implicit dependence on the Rock Body containing the younger Rock Body Boundary at the contact."@en ;
   rdfs:label "Geologic Time Boundary"@en ;
   rdfs:subClassOf gsoc:Temporal_Boundary ;
   rdfs:subClassOf gsog:Geologic_Time_Feature ;
@@ -363,7 +363,7 @@ gsog:Geologic_Time_Boundary
 .
 gsog:Geologic_Time_Date
   rdf:type owl:Class ;
-  rdfs:comment "A temporal coordinate value, located either by a point position (with uncertainty) on a time line, specified by a numeric coordinate (generally MYPB, but definitions of 'present' vary). Can be a GSSA if the numeric time coordinate is arbitrarily assigned.  Probably should specify a Temporal Reference System used to assign coordinate values."@en ;
+  rdfs:comment "temporal coordinate value, located either by a point position (with uncertainty) on a time line, specified by a numeric coordinate (generally MYPB, but definitions of 'present' vary). Can be a GSSA if the numeric time coordinate is arbitrarily assigned.  Probably should specify a Temporal Reference System used to assign coordinate values."@en ;
   rdfs:label "Geologic Time Date"@en ;
   rdfs:subClassOf gsoc:Time_Instant_Feature ;
   rdfs:subClassOf gsog:Geologic_Time_Feature ;
@@ -408,7 +408,7 @@ gsog:Geologic_Time_Date
 .
 gsog:Geologic_Time_Feature
   rdf:type owl:Class ;
-  rdfs:comment "Any geological temporal feature, including a geologic date, time interval, or time boundary. All geologic time features are dependent on (via. the 'hostedBy' objectProperty) some rock body, strongly or weakly. Time boundaries are hosted by a Chronostratigraphic_Contact, which has an implicit dependence on the Rock Body containing the younger Rock Body Boundary at the contact."@en ;
+  rdfs:comment "Any geological temporal feature, including a geologic date, time interval, or time boundary. All geologic time features are dependent on (via. the 'hostedBy' objectProperty) some rock body, strongly or weakly."@en ;
   rdfs:subClassOf gsoc:Temporal_Feature ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
@@ -466,6 +466,18 @@ gsog:Geologic_Time_Interval
         ) ;
     ] ;
 .
+gsog:Geologic_Time_Interval_Collection
+  rdf:type owl:Class ;
+  rdfs:label "Geologic Time Interval Collection"@en ;
+  rdfs:subClassOf gsoc:Hierarchical_Ordinal_Time_Interval_Collection ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:allValuesFrom gsog:Geologic_Time_Interval ;
+      owl:onProperty gsoc:timeIncludes ;
+    ] ;
+  skos:definition "A hierarchical ordinalt Time interval collection with intervals related to the history of the Earth. Defines a temporal topology, but not specific boundary stratigraphic points and date estimates. Not a temporal reference system; defines younger, older, contains relations between intervals, but can not answer quantitative questions like 'how much younger'."@en ;
+  skos:prefLabel "Geologic Time Interval Collection"@en ;
+.
 gsog:Geologic_Time_Point
   rdf:type owl:Class ;
   rdfs:comment "Hosted by a contact (low-dimension feature), which itself is hosted by an event that caused the contact, by a stratigraphic point, and by a stratigraphic section containing the point."@en ;
@@ -488,13 +500,13 @@ gsog:Geologic_Time_Point
 .
 gsog:Geologic_Time_Scale
   rdf:type owl:Class ;
-  dct:description "A hierarchical ordinal time interval collection for which the events bounding the intervals occurred on Earth and are anchored to manifestation in the geologic record.  The part intervals must be gsog:Geologic_Time_Intervals."@en ;
+  dct:description "A hierarchical ordinal time interval collection for which the events bounding the intervals occurred on Earth and are anchored to manifestation in the geologic record that have associated gsog:Geologic_Time_Boundaries.  The part intervals must be gsog:Specific_Geologic_Time_Unit. Because the contained intervals have boundaries that are located in a temporal coodinate system, the time scale can serve as a temporal reference system."@en ;
   rdfs:label "Geologic time scale"@en ;
-  rdfs:subClassOf gsoc:Hierarchical_Ordinal_Time_Interval_Collection ;
+  rdfs:subClassOf gsog:Geologic_Time_Interval_Collection ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
       owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
-      owl:onClass gsog:Geologic_Time_Interval ;
+      owl:onClass gsog:Specific_Geologic_Time_Unit ;
       owl:onProperty gsoc:timeIncludes ;
     ] ;
 .

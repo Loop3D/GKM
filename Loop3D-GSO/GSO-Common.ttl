@@ -50,6 +50,10 @@ dct:source
 rdfs:comment
   rdfs:subPropertyOf gsoc:hasAnnotation ;
 .
+rdfs:description
+  rdf:type owl:AnnotationProperty ;
+  rdfs:subPropertyOf gsoc:hasAnnotation ;
+.
 rdfs:label
   rdfs:subPropertyOf gsoc:hasAnnotation ;
 .
@@ -87,29 +91,6 @@ schema:identifier
 schema:name
   rdf:type owl:AnnotationProperty ;
 .
-
-rdfs:description
-  rdf:type owl:AnnotationProperty ;
-  rdfs:subPropertyOf gsoc:hasAnnotation ;
-.
-gsoc:Ordinal_Time_Interval_Collection
-  rdfs:comment "example: the reigns of the pharoahs of ancient Egypt, the intervals defined by a sequence of events in a crime scene, sequence of geologic intervals recorded in a stratigraphic column."@en ;
-.
-
-gsoc:Time_Interval
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:onProperty gsoc:timeHasBeginning ;
-      owl:someValuesFrom gsoc:Time_Instant ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:onProperty gsoc:timeHasEnd ;
-      owl:someValuesFrom gsoc:Time_Instant ;
-    ] ;
-.
-
-
 gsoc:Abstract_Endurant
   rdf:type owl:Class ;
   rdfs:comment "Abstract endurants do not occupy space nor time - they are aspatial and atemporal, e.g. numbers and other mathematical objects"@en ;
@@ -1082,6 +1063,7 @@ gsoc:Ordinal_Time_Interval_Collection
   rdf:type owl:Class ;
   dct:description "A a sequence of named time intervals with a partial ordering between intervals and no overlap between intervals.  Various levels of topology might apply; gaps might exist between the included intervals. The collection has some temporal extent defined by the oldest and youngest included intervals.   Topology constraints might require that component intervals cover the temporal extent of the collection, or allow component eras to be subdivided with covering parts (a hierarchical system) or apply other constraints. Generalized from ISO19108 Ordinal Temporal Reference System, which required that the boundaries of intervals are defined by data/time temporal locations."@en ;
   dct:source "ISO19108 TM_OrdinalReferenceSystem" ;
+  rdfs:comment "example: the reigns of the pharoahs of ancient Egypt, the intervals defined by a sequence of events in a crime scene, sequence of geologic intervals recorded in a stratigraphic column."@en ;
   rdfs:label "Ordinal time interval collection"@en ;
   rdfs:subClassOf gsoc:Time_Interval_Collection ;
 .
@@ -2204,6 +2186,30 @@ gsoc:Temporal_Gap
       owl:onProperty gsoc:hostedBy ;
     ] ;
 .
+gsoc:Temporal_Interval_Reference_System
+  rdf:type owl:Class ;
+  rdfs:label "Time Interval Reference System"@en ;
+  rdfs:subClassOf gsoc:Temporal_Reference_System ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+      owl:onClass [
+          rdf:type owl:Class ;
+          owl:intersectionOf (
+              gsoc:Time_Interval
+              [
+                rdf:type owl:Restriction ;
+                owl:onClass gsoc:Time_Interval_Location ;
+                owl:onProperty gsoc:hasQuality ;
+                owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+              ]
+            ) ;
+        ] ;
+      owl:onProperty gsoc:timeIncludes ;
+    ] ;
+  skos:definition "A temporal reference system defined by a collection of named time intervals that have temporal positions assigned to interval boundaries using a calendar, clock or temporal coordinate system."@en ;
+  skos:prefLabel "Time Interval Reference System"@en ;
+.
 gsoc:Temporal_Location
   rdf:type owl:Class ;
   rdfs:comment "The location of a time region within a temporal reference system. Has temporal values such as 21 Jan 2020 or 100 Ma - 200 Ma."@en ;
@@ -2369,8 +2375,7 @@ gsoc:Time_Date_Value
 .
 gsoc:Time_Instant
   rdf:type owl:Class ;
-  rdfs:comment "A time instant is a point in time."@en ;
-  rdfs:comment "Corresponds to OWL time time:Instant, a temporal entity with zero extent or duration"@en ;
+  rdfs:comment "A time instant is a point in time. Corresponds to OWL time time: Instant, a temporal entity with zero extent or duration.  The temporal value of the time location might be unknown for time instant feature bound to events for which the temporal position is unknown."@en ;
   rdfs:label "Time Instant"@en ;
   rdfs:subClassOf gsoc:Time_Region ;
   rdfs:subClassOf [
@@ -2394,7 +2399,7 @@ gsoc:Time_Instant
 .
 gsoc:Time_Instant_Feature
   rdf:type owl:Class ;
-  rdfs:comment "" ;
+  rdfs:comment "A temporal feature that is essentially a time instant, defined by dependency on some other entity, e.g. a time interval to which it is a boundary, a particulary event, or some material entity that is evidence of an event."@en ;
   rdfs:label "Time Instant Feature "@en ;
   rdfs:subClassOf gsoc:Temporal_Feature ;
   rdfs:subClassOf [
@@ -2411,7 +2416,7 @@ gsoc:Time_Instant_Feature
 .
 gsoc:Time_Instant_Location
   rdf:type owl:Class ;
-  rdfs:comment "quality that specifies the temporal coordinates of a time instant in some temporal reference system"@en ;
+  rdfs:comment "quality that specifies the temporal coordinates of a time instant in some temporal reference system; The reference system is defined as a property of the Temporal_Value."@en ;
   rdfs:label "Time Instant Location"@en ;
   rdfs:subClassOf gsoc:Temporal_Location ;
   rdfs:subClassOf [
@@ -2442,6 +2447,16 @@ gsoc:Time_Interval
       owl:onClass gsoc:Time_Interval_Location ;
       owl:onProperty gsoc:specificallyDependsOn ;
       owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:timeHasBeginning ;
+      owl:someValuesFrom gsoc:Time_Instant ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:timeHasEnd ;
+      owl:someValuesFrom gsoc:Time_Instant ;
     ] ;
   owl:disjointWith gsoc:Time_Instant ;
   skos:note "Time intervals are continuous without gaps.  Corresponds to OWL Time time:ProperInterval, A temporal entity with non-zero extent or duration, i.e. for which the value of the beginning and end are different"@en ;
@@ -2993,7 +3008,7 @@ gsoc:hasYoungerHost
 gsoc:hostedBy
   rdf:type owl:ObjectProperty ;
   rdf:type owl:TransitiveProperty ;
-  rdfs:comment "The relation of hosting a feature, such the material object that hosts a hole."@en ;
+  rdfs:comment "The relation of hosting a feature, e.g.  the material object that hosts a hole."@en ;
   rdfs:domain gsoc:Feature ;
   rdfs:subPropertyOf gsoc:genericallyDependsOn ;
   owl:inverseOf gsoc:hosts ;
