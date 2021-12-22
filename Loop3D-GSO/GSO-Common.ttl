@@ -506,8 +506,8 @@ gsoc:hasStaticValue rdf:type owl:ObjectProperty ;
 ###  https://w3id.org/gso/common/hasUOM
 gsoc:hasUOM rdf:type owl:ObjectProperty ;
             rdfs:subPropertyOf gsoc:hasQuality ;
-            rdfs:domain gsoc:Measure_Value ;
-            rdfs:range gsoc:Unit_Of_Measure_Value ;
+            rdfs:domain gsoc:Numeric_Value ;
+            rdfs:range gsoc:Unit_Of_Measure ;
             rdfs:comment "top level property for assigning property values; subtype for associating values with measurement units "@en .
 
 
@@ -807,13 +807,6 @@ gsoc:occupiesSpace rdf:type owl:ObjectProperty ;
                    rdfs:subPropertyOf gsoc:occupies ,
                                       gsoc:spatiallyEquals ;
                    owl:inverseOf gsoc:spaceOccupiedBy ;
-                   rdfs:domain [ rdf:type owl:Class ;
-                                 owl:complementOf [ rdf:type owl:Class ;
-                                                    owl:unionOf ( gsoc:Notional_Endurant
-                                                                  gsoc:Spatial_Region
-                                                                )
-                                                  ]
-                               ] ;
                    rdfs:range gsoc:Spatial_Region ;
                    rdfs:comment "Occupation of a region of space, directly or indirectly"@en .
 
@@ -822,7 +815,6 @@ gsoc:occupiesSpace rdf:type owl:ObjectProperty ;
 gsoc:occupiesSpaceDirectly rdf:type owl:ObjectProperty ;
                            rdfs:subPropertyOf gsoc:occupiesSpace ;
                            owl:inverseOf gsoc:spaceOccupiedDirectlyBy ;
-                           rdf:type owl:TransitiveProperty ;
                            rdfs:domain gsoc:Material_Endurant ;
                            rdfs:range gsoc:Spatial_Region ;
                            rdfs:comment "The occupation of a spatial region by a material endurant."@en .
@@ -1502,19 +1494,15 @@ gsoc:Dynamic_Feature rdf:type owl:Class ;
 ###  https://w3id.org/gso/common/Element
 gsoc:Element rdf:type owl:Class ;
              rdfs:subClassOf gsoc:Amount_Of_Matter ,
+                             [ rdf:type owl:Class ;
+                               owl:complementOf [ rdf:type owl:Restriction ;
+                                                  owl:onProperty gsoc:isConstituentOf ;
+                                                  owl:someValuesFrom gsoc:Element
+                                                ]
+                             ] ,
                              [ rdf:type owl:Restriction ;
                                owl:onProperty gsoc:hasPart ;
                                owl:allValuesFrom gsoc:Element
-                             ] ,
-                             [ rdf:type owl:Restriction ;
-                               owl:onProperty gsoc:isConstituentOf ;
-                               owl:allValuesFrom [ owl:intersectionOf ( gsoc:Material_Endurant
-                                                                        [ rdf:type owl:Class ;
-                                                                          owl:complementOf gsoc:Element
-                                                                        ]
-                                                                      ) ;
-                                                   rdf:type owl:Class
-                                                 ]
                              ] ;
              rdfs:comment "An amount of elements: either a single atom or an aggregation of atoms of a particular element. All subtypes currently refer to an aggregation of atoms of a single element. An element is a species of atom having the same number of protons in its atomic nuclei (that is, the same atomic number, or Z). https://en.wikipedia.org/wiki/Chemical_element."@en ;
              rdfs:label "Element"@en .
@@ -1575,14 +1563,6 @@ gsoc:Endurant_Feature rdf:type owl:Class ;
 
 ###  https://w3id.org/gso/common/Event
 gsoc:Event rdf:type owl:Class ;
-           owl:equivalentClass [ owl:intersectionOf ( gsoc:Perdurant
-                                                      [ rdf:type owl:Restriction ;
-                                                        owl:onProperty gsoc:hasConstituent ;
-                                                        owl:someValuesFrom gsoc:Process
-                                                      ]
-                                                    ) ;
-                                 rdf:type owl:Class
-                               ] ;
            rdfs:subClassOf gsoc:Perdurant ,
                            [ rdf:type owl:Restriction ;
                              owl:onProperty gsoc:hasConstituent ;
@@ -1595,10 +1575,6 @@ gsoc:Event rdf:type owl:Class ;
                            [ rdf:type owl:Restriction ;
                              owl:onProperty gsoc:occupiesTimeDirectly ;
                              owl:someValuesFrom gsoc:Time_Region
-                           ] ,
-                           [ rdf:type owl:Restriction ;
-                             owl:onProperty gsoc:hasPart ;
-                             owl:allValuesFrom gsoc:Event
                            ] ;
            owl:disjointWith gsoc:Process ,
                             gsoc:Time_Region ;
@@ -1608,15 +1584,7 @@ gsoc:Event rdf:type owl:Class ;
 
 ###  https://w3id.org/gso/common/Event_Feature
 gsoc:Event_Feature rdf:type owl:Class ;
-                   rdfs:subClassOf gsoc:Occurrence_Feature ,
-                                   [ rdf:type owl:Restriction ;
-                                     owl:onProperty gsoc:hasEssentialPart ;
-                                     owl:someValuesFrom gsoc:Event
-                                   ] ,
-                                   [ rdf:type owl:Restriction ;
-                                     owl:onProperty gsoc:hasEssentialPart ;
-                                     owl:allValuesFrom gsoc:Event
-                                   ] ;
+                   rdfs:subClassOf gsoc:Occurrence_Feature ;
                    rdfs:comment "" ;
                    rdfs:label "Event Feature "@en .
 
@@ -1957,16 +1925,6 @@ gsoc:Material_Morphological_Feature rdf:type owl:Class ;
 
 ###  https://w3id.org/gso/common/Material_Object
 gsoc:Material_Object rdf:type owl:Class ;
-                     owl:equivalentClass [ owl:intersectionOf ( gsoc:Material_Endurant
-                                                                [ rdf:type owl:Class ;
-                                                                  owl:complementOf [ rdf:type owl:Restriction ;
-                                                                                     owl:onProperty gsoc:hasQuality ;
-                                                                                     owl:someValuesFrom gsoc:State_Of_Matter
-                                                                                   ]
-                                                                ]
-                                                              ) ;
-                                           rdf:type owl:Class
-                                         ] ;
                      rdfs:subClassOf gsoc:Material_Endurant ,
                                      [ rdf:type owl:Class ;
                                        owl:complementOf [ rdf:type owl:Restriction ;
@@ -1999,10 +1957,6 @@ gsoc:Measure_Value rdf:type owl:Class ;
                                      owl:someValuesFrom gsoc:Uncertainty
                                    ] ,
                                    [ rdf:type owl:Restriction ;
-                                     owl:onProperty gsoc:hasUOM ;
-                                     owl:someValuesFrom gsoc:Unit_Of_Measure_Value
-                                   ] ,
-                                   [ rdf:type owl:Restriction ;
                                      owl:onProperty gsoc:hasDataValue ;
                                      owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
                                      owl:onDataRange xsd:anySimpleType
@@ -2023,13 +1977,6 @@ gsoc:Minor_Proportion rdf:type owl:Class ;
 
 ###  https://w3id.org/gso/common/Named_Value
 gsoc:Named_Value rdf:type owl:Class ;
-                 owl:equivalentClass [ rdf:type owl:Class ;
-                                       owl:complementOf [ rdf:type owl:Class ;
-                                                          owl:unionOf ( gsoc:Measure_Value
-                                                                        gsoc:Range_Value
-                                                                      )
-                                                        ]
-                                     ] ;
                  rdfs:subClassOf gsoc:Quality_Value ;
                  owl:disjointWith gsoc:Range_Value ;
                  rdfs:comment "A named value of some quality,e.g. thin or thick."@en .
@@ -2037,23 +1984,7 @@ gsoc:Named_Value rdf:type owl:Class ;
 
 ###  https://w3id.org/gso/common/Nonphysical_Endurant
 gsoc:Nonphysical_Endurant rdf:type owl:Class ;
-                          owl:equivalentClass [ owl:intersectionOf ( gsoc:Endurant
-                                                                     [ rdf:type owl:Class ;
-                                                                       owl:complementOf [ rdf:type owl:Restriction ;
-                                                                                          owl:onProperty gsoc:occupiesSpaceDirectly ;
-                                                                                          owl:someValuesFrom gsoc:Spatial_Region
-                                                                                        ]
-                                                                     ]
-                                                                   ) ;
-                                                rdf:type owl:Class
-                                              ] ;
                           rdfs:subClassOf gsoc:Endurant ,
-                                          [ rdf:type owl:Class ;
-                                            owl:complementOf [ rdf:type owl:Restriction ;
-                                                               owl:onProperty gsoc:occupiesSpaceDirectly ;
-                                                               owl:someValuesFrom gsoc:Spatial_Region
-                                                             ]
-                                          ] ,
                                           [ rdf:type owl:Restriction ;
                                             owl:onProperty gsoc:hasPart ;
                                             owl:allValuesFrom gsoc:Nonphysical_Endurant
@@ -2132,13 +2063,16 @@ gsoc:Nonphysical_Quality rdf:type owl:Class ;
 
 ###  https://w3id.org/gso/common/Nonphysical_Reference_System
 gsoc:Nonphysical_Reference_System rdf:type owl:Class ;
-                                  owl:equivalentClass [ owl:intersectionOf ( gsoc:Reference_System
-                                                                             [ rdf:type owl:Restriction ;
-                                                                               owl:onProperty gsoc:isReferenceSystemFor ;
-                                                                               owl:someValuesFrom gsoc:Nonphysical_Quality
-                                                                             ]
-                                                                           ) ;
-                                                        rdf:type owl:Class
+                                  owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                        owl:onProperty gsoc:isReferenceSystemFor ;
+                                                        owl:someValuesFrom [ owl:intersectionOf ( gsoc:Quality_Value
+                                                                                                  [ rdf:type owl:Restriction ;
+                                                                                                    owl:onProperty gsoc:isValueOf ;
+                                                                                                    owl:someValuesFrom gsoc:Nonphysical_Quality
+                                                                                                  ]
+                                                                                                ) ;
+                                                                             rdf:type owl:Class
+                                                                           ]
                                                       ] ;
                                   rdfs:subClassOf gsoc:Reference_System ,
                                                   [ rdf:type owl:Restriction ;
@@ -2152,23 +2086,7 @@ gsoc:Nonphysical_Reference_System rdf:type owl:Class ;
 
 ###  https://w3id.org/gso/common/Notional_Endurant
 gsoc:Notional_Endurant rdf:type owl:Class ;
-                       owl:equivalentClass [ owl:intersectionOf ( gsoc:Nonphysical_Endurant
-                                                                  [ rdf:type owl:Class ;
-                                                                    owl:complementOf [ rdf:type owl:Restriction ;
-                                                                                       owl:onProperty gsoc:occupiesSpace ;
-                                                                                       owl:someValuesFrom gsoc:Spatial_Region
-                                                                                     ]
-                                                                  ]
-                                                                ) ;
-                                             rdf:type owl:Class
-                                           ] ;
                        rdfs:subClassOf gsoc:Nonphysical_Endurant ,
-                                       [ rdf:type owl:Class ;
-                                         owl:complementOf [ rdf:type owl:Restriction ;
-                                                            owl:onProperty gsoc:occupiesSpace ;
-                                                            owl:someValuesFrom gsoc:Spatial_Region
-                                                          ]
-                                       ] ,
                                        [ rdf:type owl:Restriction ;
                                          owl:onProperty gsoc:hasPart ;
                                          owl:allValuesFrom gsoc:Notional_Endurant
@@ -2388,26 +2306,6 @@ gsoc:Perdurant_Feature rdf:type owl:Class ;
 
 ###  https://w3id.org/gso/common/Physical_Endurant
 gsoc:Physical_Endurant rdf:type owl:Class ;
-                       owl:equivalentClass [ owl:intersectionOf ( gsoc:Endurant
-                                                                  [ rdf:type owl:Class ;
-                                                                    owl:unionOf ( gsoc:Spatial_Region
-                                                                                  [ rdf:type owl:Restriction ;
-                                                                                    owl:onProperty gsoc:occupiesSpaceDirectly ;
-                                                                                    owl:someValuesFrom gsoc:Spatial_Region
-                                                                                  ]
-                                                                                )
-                                                                  ]
-                                                                ) ;
-                                             rdf:type owl:Class
-                                           ] ,
-                                           [ owl:intersectionOf ( gsoc:Endurant
-                                                                  [ rdf:type owl:Restriction ;
-                                                                    owl:onProperty gsoc:hasQuality ;
-                                                                    owl:allValuesFrom gsoc:Physical_Quality
-                                                                  ]
-                                                                ) ;
-                                             rdf:type owl:Class
-                                           ] ;
                        rdfs:subClassOf gsoc:Endurant ,
                                        [ rdf:type owl:Restriction ;
                                          owl:onProperty gsoc:constantlySpecDependsOn ;
@@ -2487,13 +2385,16 @@ gsoc:Physical_Quality rdf:type owl:Class ;
 
 ###  https://w3id.org/gso/common/Physical_Reference_System
 gsoc:Physical_Reference_System rdf:type owl:Class ;
-                               owl:equivalentClass [ owl:intersectionOf ( gsoc:Reference_System
-                                                                          [ rdf:type owl:Restriction ;
-                                                                            owl:onProperty gsoc:isReferenceSystemFor ;
-                                                                            owl:someValuesFrom gsoc:Temporal_Quality
-                                                                          ]
-                                                                        ) ;
-                                                     rdf:type owl:Class
+                               owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                     owl:onProperty gsoc:isReferenceSystemFor ;
+                                                     owl:someValuesFrom [ owl:intersectionOf ( gsoc:Quality_Value
+                                                                                               [ rdf:type owl:Restriction ;
+                                                                                                 owl:onProperty gsoc:isValueOf ;
+                                                                                                 owl:someValuesFrom gsoc:Physical_Quality
+                                                                                               ]
+                                                                                             ) ;
+                                                                          rdf:type owl:Class
+                                                                        ]
                                                    ] ;
                                rdfs:subClassOf gsoc:Reference_System ,
                                                [ rdf:type owl:Restriction ;
@@ -2635,10 +2536,6 @@ gsoc:Quality rdf:type owl:Class ;
                                owl:someValuesFrom gsoc:Quality_Value
                              ] ,
                              [ rdf:type owl:Restriction ;
-                               owl:onProperty gsoc:hasPart ;
-                               owl:allValuesFrom gsoc:Quality_Value
-                             ] ,
-                             [ rdf:type owl:Restriction ;
                                owl:onProperty gsoc:hasValue ;
                                owl:allValuesFrom gsoc:Quality_Value
                              ] ,
@@ -2674,11 +2571,7 @@ gsoc:Quality_Value rdf:type owl:Class ;
                                      owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
                                      owl:onClass gsoc:Quality
                                    ] ;
-                   owl:disjointWith gsoc:Role ,
-                                    [ rdf:type owl:Restriction ;
-                                      owl:onProperty gsoc:hasPart ;
-                                      owl:someValuesFrom gsoc:Particular
-                                    ] ;
+                   owl:disjointWith gsoc:Role ;
                    rdfs:comment "A value of (essential part of) a quality; can be a measured value (e.g. 2.0), named value (e.g. thick), or a range (e.g. 2.0-2.2 or thin-thick). Values exist within a reference system."@en ;
                    rdfs:label "Quality Value"@en .
 
@@ -2755,13 +2648,6 @@ gsoc:Reference_System rdf:type owl:Class ;
 
 ###  https://w3id.org/gso/common/Relator
 gsoc:Relator rdf:type owl:Class ;
-             owl:equivalentClass [ rdf:type owl:Class ;
-                                   owl:complementOf [ rdf:type owl:Class ;
-                                                      owl:unionOf ( gsoc:Inherant
-                                                                    gsoc:Notional_Endurant
-                                                                  )
-                                                    ]
-                                 ] ;
              rdfs:subClassOf gsoc:Nonphysical_Endurant ,
                              [ rdf:type owl:Restriction ;
                                owl:onProperty gsoc:hasPart ;
@@ -2985,35 +2871,10 @@ gsoc:Spatial_Location rdf:type owl:Class ;
 
 ###  https://w3id.org/gso/common/Spatial_Region
 gsoc:Spatial_Region rdf:type owl:Class ;
-                    owl:equivalentClass [ owl:intersectionOf ( gsoc:Physical_Endurant
-                                                               [ rdf:type owl:Class ;
-                                                                 owl:complementOf [ rdf:type owl:Restriction ;
-                                                                                    owl:onProperty gsoc:hasConstituent ;
-                                                                                    owl:someValuesFrom gsoc:Material_Endurant
-                                                                                  ]
-                                                               ]
-                                                               [ rdf:type owl:Restriction ;
-                                                                 owl:onProperty gsoc:hasQuality ;
-                                                                 owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                                                                 owl:onClass gsoc:Spatial_Location
-                                                               ]
-                                                             ) ;
-                                          rdf:type owl:Class
-                                        ] ;
                     rdfs:subClassOf gsoc:Physical_Endurant ,
-                                    [ rdf:type owl:Class ;
-                                      owl:complementOf [ rdf:type owl:Restriction ;
-                                                         owl:onProperty gsoc:hasConstituent ;
-                                                         owl:someValuesFrom gsoc:Material_Endurant
-                                                       ]
-                                    ] ,
                                     [ rdf:type owl:Restriction ;
                                       owl:onProperty gsoc:hasPart ;
                                       owl:allValuesFrom gsoc:Spatial_Region
-                                    ] ,
-                                    [ rdf:type owl:Restriction ;
-                                      owl:onProperty gsoc:spaceOccupiedDirectlyBy ;
-                                      owl:allValuesFrom gsoc:Material_Endurant
                                     ] ,
                                     [ rdf:type owl:Restriction ;
                                       owl:onProperty gsoc:hasQuality ;
@@ -3265,13 +3126,16 @@ gsoc:Temporal_Range rdf:type owl:Class ;
 
 ###  https://w3id.org/gso/common/Temporal_Reference_System
 gsoc:Temporal_Reference_System rdf:type owl:Class ;
-                               owl:equivalentClass [ owl:intersectionOf ( gsoc:Reference_System
-                                                                          [ rdf:type owl:Restriction ;
-                                                                            owl:onProperty gsoc:isReferenceSystemFor ;
-                                                                            owl:someValuesFrom gsoc:Perdurant
-                                                                          ]
-                                                                        ) ;
-                                                     rdf:type owl:Class
+                               owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                     owl:onProperty gsoc:isReferenceSystemFor ;
+                                                     owl:someValuesFrom [ owl:intersectionOf ( gsoc:Quality_Value
+                                                                                               [ rdf:type owl:Restriction ;
+                                                                                                 owl:onProperty gsoc:isValueOf ;
+                                                                                                 owl:someValuesFrom gsoc:Temporal_Quality
+                                                                                               ]
+                                                                                             ) ;
+                                                                          rdf:type owl:Class
+                                                                        ]
                                                    ] ;
                                rdfs:subClassOf gsoc:Reference_System ,
                                                [ rdf:type owl:Restriction ;
@@ -3393,17 +3257,20 @@ gsoc:Time_Instant_Location rdf:type owl:Class ;
 gsoc:Time_Interval rdf:type owl:Class ;
                    rdfs:subClassOf gsoc:Time_Region ,
                                    [ rdf:type owl:Restriction ;
+                                     owl:onProperty gsoc:hasQuality ;
+                                     owl:someValuesFrom gsoc:Duration
+                                   ] ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty gsoc:hasQuality ;
+                                     owl:someValuesFrom gsoc:Time_Interval_Location
+                                   ] ,
+                                   [ rdf:type owl:Restriction ;
                                      owl:onProperty gsoc:timeHasBeginning ;
                                      owl:someValuesFrom gsoc:Time_Instant
                                    ] ,
                                    [ rdf:type owl:Restriction ;
                                      owl:onProperty gsoc:timeHasEnd ;
                                      owl:someValuesFrom gsoc:Time_Instant
-                                   ] ,
-                                   [ rdf:type owl:Restriction ;
-                                     owl:onProperty gsoc:hasQuality ;
-                                     owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                                     owl:onClass gsoc:Time_Interval_Location
                                    ] ;
                    rdfs:comment "A region of time that has a duration greater than 0."@en ;
                    rdfs:label "Time Interval"@en ;
@@ -3445,10 +3312,6 @@ gsoc:Time_Interval_Feature rdf:type owl:Class ;
 ###  https://w3id.org/gso/common/Time_Interval_Location
 gsoc:Time_Interval_Location rdf:type owl:Class ;
                             rdfs:subClassOf gsoc:Temporal_Location ,
-                                            [ rdf:type owl:Restriction ;
-                                              owl:onProperty gsoc:hasQuality ;
-                                              owl:someValuesFrom gsoc:Duration
-                                            ] ,
                                             [ rdf:type owl:Restriction ;
                                               owl:onProperty gsoc:hasValue ;
                                               owl:someValuesFrom gsoc:Temporal_Range
@@ -3581,12 +3444,6 @@ gsoc:Whole rdf:type owl:Class ;
 #################################################################
 #    Individuals
 #################################################################
-
-###  https://w3id.org/gso/common/Earth
-gsoc:Earth rdf:type owl:NamedIndividual ,
-                    gsoc:Material_Object ;
-           rdfs:comment "The Earth"@en .
-
 
 ###  https://w3id.org/gso/common/boyan_brodaric
 gsoc:boyan_brodaric rdf:type owl:NamedIndividual ,
