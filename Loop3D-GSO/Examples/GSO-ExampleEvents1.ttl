@@ -1,6 +1,7 @@
 # baseURI: https://w3id.org/gso/ex-event1/ontology
 # imports: https://w3id.org/gso/master/ontology
 
+@prefix dct: <http://purl.org/dc/terms/> .
 @prefix evn1: <https://w3id.org/gso/ex-event1#> .
 @prefix gsen: <https://w3id.org/gso/geologicsetting/> .
 @prefix gsoc: <https://w3id.org/gso/common/> .
@@ -9,162 +10,14 @@
 @prefix gspd: <https://w3id.org/gso/perdurant/> .
 @prefix gspr: <https://w3id.org/gso/geologicprocess/> .
 @prefix gstime: <https://w3id.org/gso/ischart/> .
-
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix turtle: <http://www.semanticweb.org/owl/owlapi/turtle#> .
-@prefix dct: <http://purl.org/dc/terms/> .
-@prefix skos: <http://www.w3.org/2004/02/skos/core#> .   
 @prefix schema: <https://schema.org/> .
-@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix turtle: <http://www.semanticweb.org/owl/owlapi/turtle#> .
 @prefix unit: <http://qudt.org/vocab/unit/> .
-
-evn1:Cretaceous90Ma
-  a gsoc:Time_Instant ;
-  gsoc:hasQuality [
-      a gsoc:Time_Instant_Location ;
-      gsoc:hasStaticValue [
-          a gsoc:Time_Numeric_Value ;
-          gsoc:hasQuality [
-              a gsoc:Uncertainty ;
-			  gsoc:hasValue [
-				a gsoc:Numeric_Value ;
-				gsoc:hasDataValue "8"^^xsd:decimal ;
-				gsoc:hasUOM [ a unit:MegaYR ] 
-            ]
-		  ];
-          gsoc:hasUOM [  a unit:MegaYR  ] ;
-          gsoc:hasDataValue "90"^^xsd:decimal ;
-        ] ;
-    ] ;
-  rdfs:label "90 +/- 8 Ma"@en ;
-.
-evn1:Cretaceous_dike_intrusion
-  a gsog:Geologic_Event ;
-  gsoc:occupiesTimeDirectly evn1:Cretaceous90Ma ;
-  gsoc:hasConstituent [
-      a gspr:Intrusion_Process ;
-    ] ;
-  gsoc:timeYoungerThan evn1:Kg_Intrusion ;
-  gsoc:hasSetting [
-      a gsen:Upper_Continental_Crust_Setting ;
-    ] ;
-  rdfs:label "90 Ma Dike Intrusion"@en ;
-.
-evn1:Date110Ma
-  a gsoc:Time_Numeric_Value ;
-  gsoc:determinedBy evn1:upbconcordantanalysis ;
-  gsoc:hasQuality [
-      a gsoc:Uncertainty ;
-	  gsoc:hasValue [
-		a gsoc:Numeric_Value;
-        gsoc:hasDataValue "9"^^xsd:decimal ]
-    ] ;
-  gsoc:hasUOM [a unit:MegaYR   ] ;
-  gsoc:hasDataValue "110"^^xsd:decimal ;
-  rdfs:label "Cretaceous 110 +|- 9 Ma Age Date"@en ;
-.
-evn1:HsGenesis
-  a gsog:Geologic_Event ;
-  gsoc:occupiesTimeDirectly gstime:Holocene2017 ;
-  gsoc:hasConstituent [
-      a gspr:Deposition ;
-      rdfs:label "process of sedimentary deposition"@en ;
-    ] ;
-  gsoc:timeYoungerThan evn1:MsGenesis ;
-  gsoc:hasSetting [
-      a gsen:Alluvial_Fan_Setting ;
-    ] ;
-  rdfs:comment "Deposition of Holocene sediments"@en ;
-  rdfs:label "Holocene age"@en ;
-  rdfs:label "Holocene sediment deposition"@en ;
-.
-evn1:JsGenesis
-  a gsog:Geologic_Event ;
-  gsoc:occupiesTimeDirectly gstime:Jurassic2017 ;
-  gsoc:hasConstituent [
-      a gspr:Deposition ;
-    ] ;
-  gsoc:timeYoungerThan evn1:Pre_Jurassic_Erosion ;
-  gsoc:hasSetting [
-      a gsen:Coastal_Plain_Setting ;
-    ] ;
-  gsoc:hasSetting [
-      a gsen:Inner_Neritic_Setting ;
-    ] ;
-  gsoc:hasSetting [
-      a gsen:Shoreline_Setting ;
-    ] ;
-  rdfs:label "Jurassic Age"@en ;
-  rdfs:label "Jurassic sediment Deposition"@en ;
-.
-evn1:Kg_Intrusion
-  a gsog:Geologic_Event ;
-  gsoc:occupiesTimeDirectly [
-      a gsoc:Time_Instant ;
-      gsoc:hasQuality [
-          a gsoc:Time_Instant_Location ;
-          gsoc:hasStaticValue evn1:Date110Ma ;
-        ] ;
-    ] ;
-  gsoc:hasConstituent [
-      a gspr:Intrusion_Process ;
-    ] ;
-  gsoc:timeYoungerThan evn1:JsGenesis ;
-  gsoc:hasSetting [
-      a gsen:Middle_Continental_Crust_Setting ;
-    ] ;
-  rdfs:label "Cretaceous Intrusion Event"@en ;
-.
-evn1:MsGenesis
-  a gsog:Geologic_Event ;
-  gsoc:occupiesTimeDirectly gstime:Miocene2004 ;
-  gsoc:hasConstituent [
-      a gspr:Deposition ;
-    ] ;
-  gsoc:timeYoungerThan evn1:Cretaceous_dike_intrusion ;
-  gsoc:hasSetting [
-      a gsen:Lacustrine_Setting ;
-    ] ;
-  rdfs:label "Miocene sediment Deposition"@en ;
-.
-evn1:Pre_Cretaceous_Burial
-  a gsog:Geologic_Event ;
-  rdfs:comment "Burial of Js to depth of Kg intrusion, must predate Kg "@en ;
-  rdfs:label "Pre Kg burial "@en ;
-.
-evn1:Pre_Jurassic_Erosion
-  a gsog:Geologic_Event ;
-  gsoc:occupiesTimeDirectly [
-      a gsoc:Time_Interval ;
-      gsoc:timeFinishedBy gstime:Triassic2017 ;
-      gsoc:timeStartedBy gstime:Silurian2017 ;
-    ] ;
-  gsoc:hasConstituent [
-      a gspr:Erosion ;
-    ] ;
-  rdfs:comment "Erosional unroofing of tilted Xm, Cb, Os and Ss "@en ;
-  rdfs:label "Pre Jurassic Erosion "@en ;
-.
-evn1:Pre_Miocene_Erosion
-  a gsog:Geologic_Event ;
-  gsoc:timeOlderThan evn1:MsGenesis ;
-  gsoc:timeYoungerThan evn1:Cretaceous_dike_intrusion ;
-  rdfs:comment "Erosional unroofing of Kg and Js "@en ;
-  rdfs:label "Pre Miocene Erosion "@en ;
-.
-<https://w3id.org/gso/ex-event1/ontology>
-  a owl:Ontology ;
-  dct:creator gsoc:stephen_richard ;
-  dct:license <https://creativecommons.org/licenses/by/4.0/legalcode> ;
-  dct:modified "2021-04-15"^^xsd:date ;
-  dct:publisher "ARC Loop3D project;  https://loop3d.org/" ;
-  dct:publisher "Geological Survey of Canada, Natural Resources Canada,  Government of Canada" ;
-    schema:codeRepository "https://github.com/Loop3D/GKM";  dct:rights  "Copyright (c) 2021 Government of Canada" ;
-  rdfs:label "Example geologic events, GeoScience Ontology"@en ;
-  owl:imports <https://w3id.org/gso/master/ontology> ;
-.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 gsoc:stephen_richard
   rdf:type owl:NamedIndividual ;
@@ -174,8 +27,160 @@ gsoc:stephen_richard
   schema:identifier <https://orcid.org/0000-0001-6041-5302> ;
   schema:name "Dr. Stephen M. Richard" ;
 .
-
+evn1:Cretaceous90Ma
+  rdf:type gsoc:Time_Instant ;
+  rdfs:label "90 +/- 8 Ma"@en ;
+  gsoc:hasQuality [
+      rdf:type gsoc:Time_Instant_Location ;
+      gsoc:hasStaticValue [
+          rdf:type gsoc:Time_Numeric_Value ;
+          gsoc:hasDataValue "90"^^xsd:decimal ;
+          gsoc:hasQuality [
+              rdf:type gsoc:Uncertainty ;
+              gsoc:hasValue [
+                  rdf:type gsoc:Numeric_Value ;
+                  gsoc:hasDataValue "8"^^xsd:decimal ;
+                  gsoc:hasUOM [
+                      rdf:type unit:MegaYR ;
+                    ] ;
+                ] ;
+            ] ;
+          gsoc:hasUOM [
+              rdf:type unit:MegaYR ;
+            ] ;
+        ] ;
+    ] ;
+.
+evn1:Cretaceous_dike_intrusion
+  rdf:type gsog:Geologic_Event ;
+  rdfs:label "90 Ma Dike Intrusion"@en ;
+  gsoc:hasConstituent [
+      rdf:type gspr:Intrusion_Process ;
+    ] ;
+  gsoc:hasSetting [
+      rdf:type gsen:Upper_Continental_Crust_Setting ;
+    ] ;
+  gsoc:occupiesTimeDirectly evn1:Cretaceous90Ma ;
+  gsoc:timeYoungerThan evn1:Kg_Intrusion ;
+.
+evn1:Date110Ma
+  rdf:type gsoc:Time_Numeric_Value ;
+  rdfs:label "Cretaceous 110 +|- 9 Ma Age Date"@en ;
+  gsoc:determinedBy evn1:upbconcordantanalysis ;
+  gsoc:hasDataValue "110"^^xsd:decimal ;
+  gsoc:hasQuality [
+      rdf:type gsoc:Uncertainty ;
+      gsoc:hasValue [
+          rdf:type gsoc:Numeric_Value ;
+          gsoc:hasDataValue "9"^^xsd:decimal ;
+        ] ;
+    ] ;
+  gsoc:hasUOM [
+      rdf:type unit:MegaYR ;
+    ] ;
+.
+evn1:HsGenesis
+  rdf:type gsog:Geologic_Event ;
+  rdfs:comment "Deposition of Holocene sediments"@en ;
+  rdfs:label "Holocene age"@en ;
+  rdfs:label "Holocene sediment deposition"@en ;
+  gsoc:hasConstituent [
+      rdf:type gspr:Deposition ;
+      rdfs:label "process of sedimentary deposition"@en ;
+    ] ;
+  gsoc:hasSetting [
+      rdf:type gsen:Alluvial_Fan_Setting ;
+    ] ;
+  gsoc:occupiesTimeDirectly gstime:Holocene2017 ;
+  gsoc:timeYoungerThan evn1:MsGenesis ;
+.
+evn1:JsGenesis
+  rdf:type gsog:Geologic_Event ;
+  rdfs:label "Jurassic Age"@en ;
+  rdfs:label "Jurassic sediment Deposition"@en ;
+  gsoc:hasConstituent [
+      rdf:type gspr:Deposition ;
+    ] ;
+  gsoc:hasSetting [
+      rdf:type gsen:Coastal_Plain_Setting ;
+    ] ;
+  gsoc:hasSetting [
+      rdf:type gsen:Inner_Neritic_Setting ;
+    ] ;
+  gsoc:hasSetting [
+      rdf:type gsen:Shoreline_Setting ;
+    ] ;
+  gsoc:occupiesTimeDirectly gstime:Jurassic2012 ;
+  gsoc:timeYoungerThan evn1:Pre_Jurassic_Erosion ;
+.
+evn1:Kg_Intrusion
+  rdf:type gsog:Geologic_Event ;
+  rdfs:label "Cretaceous Intrusion Event"@en ;
+  gsoc:hasConstituent [
+      rdf:type gspr:Intrusion_Process ;
+    ] ;
+  gsoc:hasSetting [
+      rdf:type gsen:Middle_Continental_Crust_Setting ;
+    ] ;
+  gsoc:occupiesTimeDirectly [
+      rdf:type gsoc:Time_Instant ;
+      gsoc:hasQuality [
+          rdf:type gsoc:Time_Instant_Location ;
+          gsoc:hasStaticValue evn1:Date110Ma ;
+        ] ;
+    ] ;
+  gsoc:timeYoungerThan evn1:JsGenesis ;
+.
+evn1:MsGenesis
+  rdf:type gsog:Geologic_Event ;
+  rdfs:label "Miocene sediment Deposition"@en ;
+  gsoc:hasConstituent [
+      rdf:type gspr:Deposition ;
+    ] ;
+  gsoc:hasSetting [
+      rdf:type gsen:Lacustrine_Setting ;
+    ] ;
+  gsoc:occupiesTimeDirectly gstime:Miocene2004 ;
+  gsoc:timeYoungerThan evn1:Cretaceous_dike_intrusion ;
+.
+evn1:Pre_Cretaceous_Burial
+  rdf:type gsog:Geologic_Event ;
+  rdfs:comment "Burial of Js to depth of Kg intrusion, must predate Kg "@en ;
+  rdfs:label "Pre Kg burial "@en ;
+.
+evn1:Pre_Jurassic_Erosion
+  rdf:type gsog:Geologic_Event ;
+  rdfs:comment "Erosional unroofing of tilted Xm, Cb, Os and Ss "@en ;
+  rdfs:label "Pre Jurassic Erosion "@en ;
+  gsoc:hasConstituent [
+      rdf:type gspr:Erosion ;
+    ] ;
+  gsoc:occupiesTimeDirectly [
+      rdf:type gsoc:Time_Interval ;
+      gsoc:timeFinishedBy gstime:Triassic2017 ;
+      gsoc:timeStartedBy gstime:Silurian2012 ;
+    ] ;
+.
+evn1:Pre_Miocene_Erosion
+  rdf:type gsog:Geologic_Event ;
+  rdfs:comment "Erosional unroofing of Kg and Js "@en ;
+  rdfs:label "Pre Miocene Erosion "@en ;
+  gsoc:timeOlderThan evn1:MsGenesis ;
+  gsoc:timeYoungerThan evn1:Cretaceous_dike_intrusion ;
+.
 evn1:upbconcordantanalysis
-  a gspd:Determining_Event ;
+  rdf:type gspd:Determining_Event ;
   rdfs:label "U-Pb isotopic analysis, concordant"@en ;
+.
+<https://w3id.org/gso/ex-event1/ontology>
+  rdf:type owl:Ontology ;
+  dct:creator gsoc:stephen_richard ;
+  dct:license <https://creativecommons.org/licenses/by/4.0/legalcode> ;
+  dct:modified "2021-04-15"^^xsd:date ;
+  dct:publisher "ARC Loop3D project;  https://loop3d.org/" ;
+  dct:publisher "Geological Survey of Canada, Natural Resources Canada,  Government of Canada" ;
+  dct:rights "Copyright (c) 2021 Government of Canada" ;
+  rdfs:label "Example geologic events, GeoScience Ontology"@en ;
+  owl:imports <https://w3id.org/gso/master/ontology> ;
+  schema:codeRepository "https://github.com/Loop3D/GKM" ;
 .

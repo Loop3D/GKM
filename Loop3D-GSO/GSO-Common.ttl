@@ -50,6 +50,10 @@ dct:source
 rdfs:comment
   rdfs:subPropertyOf gsoc:hasAnnotation ;
 .
+rdfs:description
+  rdf:type owl:AnnotationProperty ;
+  rdfs:subPropertyOf gsoc:hasAnnotation ;
+.
 rdfs:label
   rdfs:subPropertyOf gsoc:hasAnnotation ;
 .
@@ -158,7 +162,7 @@ gsoc:Amount_Of_Matter
 .
 gsoc:Calendar_Temporal_Reference_System
   rdf:type owl:Class ;
-  dct:description "A calendar is a system of organizing days. This is done by giving names to periods of time, typically days, weeks, months and years. A date is the designation of a single, specific day within such a system. Periods in a calendar (such as years and months) are usually, though not necessarily, synchronized with the cycle of the sun or the moon. The most common type of pre-modern calendar was the lunisolar calendar, a lunar calendar that occasionally adds one intercalary month to remain synchronized with the solar year over the long term. Mentioned but not defined in https://www.w3.org/TR/owl-time/"@en ;
+  dct:description "A calendar is a system of organizing days. This is done by giving names to periods of time, typically days, weeks, months and years. A temporal location is the designation of a single, specific day within such a system. Periods in a calendar (such as years and months) are usually, though not necessarily, synchronized with the cycle of the sun or the moon.  Mentioned but not defined in https://www.w3.org/TR/owl-time/"@en ;
   dct:source "https://en.wikipedia.org/wiki/Calendar" ;
   rdfs:label "Calendar temporal reference system "@en ;
   rdfs:subClassOf gsoc:Temporal_Reference_System ;
@@ -508,12 +512,12 @@ gsoc:Geographic_Coordinate_System
   rdfs:label "Geographic Coordinate System "@en ;
   rdfs:subClassOf gsoc:Physical_Reference_System ;
 .
-gsoc:Hierarchical_Ordinal_Temporal_Reference_System
+gsoc:Hierarchical_Ordinal_Time_Interval_Collection
   rdf:type owl:Class ;
-  dct:description "An Ordinal Temporal Refence System with a topology that require that if an era is subdivided (hasParts), the parts must be non-overlapping, and cover (in the sense of the gsoc:covers relation) the containing era. Top level eras must cover the domain of validity (temporal extent) for the reference system."@en ;
+  dct:description "A Time Interval Collection with a topology such that if an interval is subdivided (timeIncludes), the parts must be non-overlapping, and cover (in the sense of the gsoc:covers relation) the containing interval. Top level intervals must cover the domain of validity (temporal extent) for the Interval Collection (no gaps or overlap). The topology  specifies that every interval has a preceding and succeeding interval  (except the begin and end intervals). The set of subintervals defined on any interval must cover that interval (no gaps)."@en ;
   dct:source "Cox SJD, Richard SM (2005) A formal model for the geologic time scale and global stratotype section and point, compatible with geospatial information transfer standards. Geosphere 1:119. doi:10.1130/GES00022.1" ;
-  rdfs:label "Hierarchical, ordinal temporal reference system"@en ;
-  rdfs:subClassOf gsoc:Ordinal_Temporal_Reference_System ;
+  rdfs:label "Hierarchical, ordinal time interval collection"@en ;
+  rdfs:subClassOf gsoc:Ordinal_Time_Interval_Collection ;
 .
 gsoc:Hole
   rdf:type owl:Class ;
@@ -1055,12 +1059,13 @@ gsoc:Occurrence_Feature
     ] ;
   owl:disjointWith gsoc:Temporal_Feature ;
 .
-gsoc:Ordinal_Temporal_Reference_System
+gsoc:Ordinal_Time_Interval_Collection
   rdf:type owl:Class ;
-  dct:description "A temporal reference system constructed with a sequence of named time ordinal eras.  Various levels of topology might apply. The reference system has some temporal extent of validity defined by the oldest and youngest era boundaries.  Era boundaries are necessarily dependent on events; thus the time ordinal eras are inherently Temporal_Features as defined in this ontology. Topology constraints might require that component eras cover the temporal extent of the system, allow component eras to be subdivided with covering parts (a hierarchical system) or apply other constraints. Generalized from ISO19108 Ordinal Temporal Reference System, which required that the boundaries of intervals are defined by data/time temporal locations."@en ;
+  dct:description "A a sequence of named time intervals with a partial ordering between intervals and no overlap between intervals.  Various levels of topology might apply; gaps might exist between the included intervals. The collection has some temporal extent defined by the oldest and youngest included intervals.   Topology constraints might require that component intervals cover the temporal extent of the collection, or allow component eras to be subdivided with covering parts (a hierarchical system) or apply other constraints. Generalized from ISO19108 Ordinal Temporal Reference System, which required that the boundaries of intervals are defined by data/time temporal locations."@en ;
   dct:source "ISO19108 TM_OrdinalReferenceSystem" ;
-  rdfs:label "Ordinal Temporal Reference System "@en ;
-  rdfs:subClassOf gsoc:Temporal_Reference_System ;
+  rdfs:comment "example: the reigns of the pharoahs of ancient Egypt, the intervals defined by a sequence of events in a crime scene, sequence of geologic intervals recorded in a stratigraphic column."@en ;
+  rdfs:label "Ordinal time interval collection"@en ;
+  rdfs:subClassOf gsoc:Time_Interval_Collection ;
 .
 gsoc:Part
   rdf:type owl:Class ;
@@ -2143,7 +2148,7 @@ gsoc:Temporal_Boundary
 .
 gsoc:Temporal_Coordinate_System
   rdf:type owl:Class ;
-  dct:description "Temporal locations defined based on a duration relative to some temporal orgin.  For example, geologic ages under this this system are commonly reported in millions of years before AD1950.  Instanced define an origin and a unit of measure for unit duration (e.g. M.Y., K.Y., years)"@en ;
+  dct:description "Temporal locations defined based on a duration relative to some temporal orgin.  For example, geologic ages under this this system are commonly reported in millions of years before AD1950.  Instances define an origin and a unit of measure for unit duration (e.g. M.Y., K.Y., years)"@en ;
   rdfs:label "Temporal Coordinate System "@en ;
   rdfs:subClassOf gsoc:Temporal_Reference_System ;
 .
@@ -2180,6 +2185,30 @@ gsoc:Temporal_Gap
         ] ;
       owl:onProperty gsoc:hostedBy ;
     ] ;
+.
+gsoc:Temporal_Interval_Reference_System
+  rdf:type owl:Class ;
+  rdfs:label "Time Interval Reference System"@en ;
+  rdfs:subClassOf gsoc:Temporal_Reference_System ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+      owl:onClass [
+          rdf:type owl:Class ;
+          owl:intersectionOf (
+              gsoc:Time_Interval
+              [
+                rdf:type owl:Restriction ;
+                owl:onClass gsoc:Time_Interval_Location ;
+                owl:onProperty gsoc:hasQuality ;
+                owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+              ]
+            ) ;
+        ] ;
+      owl:onProperty gsoc:timeIncludes ;
+    ] ;
+  skos:definition "A temporal reference system defined by a collection of named time intervals that have temporal positions assigned to interval boundaries using a calendar, clock or temporal coordinate system."@en ;
+  skos:prefLabel "Time Interval Reference System"@en ;
 .
 gsoc:Temporal_Location
   rdf:type owl:Class ;
@@ -2346,8 +2375,7 @@ gsoc:Time_Date_Value
 .
 gsoc:Time_Instant
   rdf:type owl:Class ;
-  rdfs:comment "A time instant is a point in time."@en ;
-  rdfs:comment "Corresponds to OWL time time:Instant, a temporal entity with zero extent or duration"@en ;
+  rdfs:comment "A time instant is a point in time. Corresponds to OWL time time: Instant, a temporal entity with zero extent or duration.  The temporal value of the time location might be unknown for time instant feature bound to events for which the temporal position is unknown."@en ;
   rdfs:label "Time Instant"@en ;
   rdfs:subClassOf gsoc:Time_Region ;
   rdfs:subClassOf [
@@ -2371,7 +2399,7 @@ gsoc:Time_Instant
 .
 gsoc:Time_Instant_Feature
   rdf:type owl:Class ;
-  rdfs:comment "" ;
+  rdfs:comment "A temporal feature that is essentially a time instant, defined by dependency on some other entity, e.g. a time interval to which it is a boundary, a particulary event, or some material entity that is evidence of an event."@en ;
   rdfs:label "Time Instant Feature "@en ;
   rdfs:subClassOf gsoc:Temporal_Feature ;
   rdfs:subClassOf [
@@ -2388,7 +2416,7 @@ gsoc:Time_Instant_Feature
 .
 gsoc:Time_Instant_Location
   rdf:type owl:Class ;
-  rdfs:comment "quality that specifies the temporal coordinates of a time instant in some temporal reference system"@en ;
+  rdfs:comment "quality that specifies the temporal coordinates of a time instant in some temporal reference system; The reference system is defined as a property of the Temporal_Value."@en ;
   rdfs:label "Time Instant Location"@en ;
   rdfs:subClassOf gsoc:Temporal_Location ;
   rdfs:subClassOf [
@@ -2420,12 +2448,44 @@ gsoc:Time_Interval
       owl:onProperty gsoc:specificallyDependsOn ;
       owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
     ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:timeHasBeginning ;
+      owl:someValuesFrom gsoc:Time_Instant ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:timeHasEnd ;
+      owl:someValuesFrom gsoc:Time_Instant ;
+    ] ;
   owl:disjointWith gsoc:Time_Instant ;
   skos:note "Time intervals are continuous without gaps.  Corresponds to OWL Time time:ProperInterval, A temporal entity with non-zero extent or duration, i.e. for which the value of the beginning and end are different"@en ;
 .
+gsoc:Time_Interval_Collection
+  rdf:type owl:Class ;
+  rdfs:comment "A set of time intervals. Must have a start and finish interval. A time interval collection can be used as a temporal reference system if the interval boundaries have temporal positions assigned in some temporal reference system. In the most general case the ordinal relationship between the intervals might be unknown, and interval might overlap or have temporal gaps between them."@en ;
+  rdfs:label "Time Interval Collection"@en ;
+  rdfs:subClassOf gsoc:Time_Region ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+      owl:onClass gsoc:Time_Interval ;
+      owl:onProperty gsoc:timeIncludes ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:timeFinishedBy ;
+      owl:someValuesFrom gsoc:Time_Interval ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:timeStartedBy ;
+      owl:someValuesFrom gsoc:Time_Interval ;
+    ] ;
+.
 gsoc:Time_Interval_Feature
   rdf:type owl:Class ;
-  rdfs:comment "" ;
+  rdfs:comment "A time region defined by its binding to some event or physical manifestion of a set of events or processs, e.g. the lifetime of Henry VIII, the eruption of Mt. Vesuvius."@en ;
   rdfs:label "Time Interval Feature "@en ;
   rdfs:seeAlso <http://www.cidoc-crm.org/entity/e4-period/version-7.1.1> ;
   rdfs:subClassOf gsoc:Temporal_Feature ;
@@ -2768,7 +2828,7 @@ gsoc:hasEndValue
 .
 gsoc:hasEssentialPart
   rdf:type owl:ObjectProperty ;
-  rdfs:comment "The whole is generically dependent on this part, which must be present at some time during the whole, but not necessarilly all times, and can be exchanged - all without loss of identity for the whole."@en ;
+  rdfs:comment "The whole is generically dependent on this part, which must be present at some time during the whole, but not necessarily all times, and can be exchanged - all without loss of identity for the whole."@en ;
   rdfs:subPropertyOf gsoc:genericallyDependsOn ;
   rdfs:subPropertyOf gsoc:hasPart ;
   owl:inverseOf gsoc:isEssentialPartOf ;
@@ -2797,7 +2857,7 @@ gsoc:hasInput
 gsoc:hasOlderHost
   rdf:type owl:ObjectProperty ;
   rdf:type owl:TransitiveProperty ;
-  rdfs:comment "The host is older than the hosted entity."@en ;
+  rdfs:comment "The hosted entity is the younger boundary of the host; applies to contacts (hosted by rock body) and temporal boundaries (hosted by time intervals)"@en ;
   rdfs:subPropertyOf gsoc:timePrecededBy ;
 .
 gsoc:hasOutput
@@ -2942,13 +3002,13 @@ gsoc:hasValue
 gsoc:hasYoungerHost
   rdf:type owl:ObjectProperty ;
   rdf:type owl:TransitiveProperty ;
-  rdfs:comment "The host is younger than the hosted entity."@en ;
+  rdfs:comment "The hosted entity is the older boundary of the host; applies to contacts (hosted by rock body) and temporal boundaries (hosted by time intervals)"@en ;
   rdfs:subPropertyOf gsoc:timePrecedes ;
 .
 gsoc:hostedBy
   rdf:type owl:ObjectProperty ;
   rdf:type owl:TransitiveProperty ;
-  rdfs:comment "The relation of hosting a feature, such the material object that hosts a hole."@en ;
+  rdfs:comment "The relation of hosting a feature, e.g.  the material object that hosts a hole."@en ;
   rdfs:domain gsoc:Feature ;
   rdfs:subPropertyOf gsoc:genericallyDependsOn ;
   owl:inverseOf gsoc:hosts ;
@@ -3114,7 +3174,7 @@ gsoc:isStaticValueOf
 gsoc:isTemporallyRelatedTo
   rdf:type owl:ObjectProperty ;
   rdf:type owl:SymmetricProperty ;
-  rdfs:comment "Most general undirected temporal relation holding between non-abstract things, that exist in time. Temporal relationships occurr between things that directly or indirectly occupy temporal regions - the association is evaluated on the regions being occupied, but the domain and range are the occupying entities"@en ;
+  rdfs:comment "Most general undirected temporal relation holding between non-abstract things that exist in time. Temporal relationships hold between things that directly or indirectly occupy temporal regions - the association is evaluated on the regions being occupied, but the domain and range are the occupying entities"@en ;
   rdfs:domain [
       rdf:type owl:Class ;
       owl:complementOf gsoc:Abstract_Endurant ;
