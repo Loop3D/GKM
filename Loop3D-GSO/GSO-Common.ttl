@@ -76,6 +76,15 @@ skos:definition
   rdf:type owl:AnnotationProperty ;
   rdfs:subPropertyOf gsoc:hasAnnotation ;
 .
+skos:historyNote
+  rdf:type owl:AnnotationProperty ;
+.
+skos:note
+  rdf:type owl:AnnotationProperty ;
+.
+skos:prefLabel
+  rdf:type owl:AnnotationProperty ;
+.
 schema:Person
   rdf:type owl:Class ;
 .
@@ -219,34 +228,23 @@ gsoc:Dynamic_Feature
         ) ;
     ] ;
 .
-gsoc:Earth
-  rdf:type owl:NamedIndividual ;
-  rdf:type gsoc:Material_Object ;
-  rdfs:comment "The Earth"@en ;
-.
 gsoc:Element
   rdf:type owl:Class ;
   rdfs:comment "An amount of elements: either a single atom or an aggregation of atoms of a particular element. All subtypes currently refer to an aggregation of atoms of a single element. An element is a species of atom having the same number of protons in its atomic nuclei (that is, the same atomic number, or Z). https://en.wikipedia.org/wiki/Chemical_element."@en ;
   rdfs:label "Element"@en ;
   rdfs:subClassOf gsoc:Amount_Of_Matter ;
   rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom gsoc:Element ;
-      owl:onProperty gsoc:hasPart ;
+      rdf:type owl:Class ;
+      owl:complementOf [
+          rdf:type owl:Restriction ;
+          owl:onProperty gsoc:isConstituentOf ;
+          owl:someValuesFrom gsoc:Element ;
+        ] ;
     ] ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
-      owl:allValuesFrom [
-          rdf:type owl:Class ;
-          owl:intersectionOf (
-              gsoc:Material_Endurant
-              [
-                rdf:type owl:Class ;
-                owl:complementOf gsoc:Element ;
-              ]
-            ) ;
-        ] ;
-      owl:onProperty gsoc:isConstituentOf ;
+      owl:allValuesFrom gsoc:Element ;
+      owl:onProperty gsoc:hasPart ;
     ] ;
 .
 gsoc:Endurant
@@ -318,23 +316,6 @@ gsoc:Event
   rdfs:subClassOf gsoc:Perdurant ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
-      owl:allValuesFrom gsoc:Event ;
-      owl:onProperty gsoc:hasPart ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:onClass gsoc:Time_Region ;
-      owl:onProperty gsoc:genericallyDependsOn ;
-      owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:onClass gsoc:Time_Region ;
-      owl:onProperty gsoc:occupiesTimeDirectly ;
-      owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
       owl:onProperty gsoc:hasConstituent ;
       owl:someValuesFrom gsoc:Process ;
     ] ;
@@ -343,35 +324,19 @@ gsoc:Event
       owl:onProperty gsoc:hasParticipant ;
       owl:someValuesFrom gsoc:Endurant ;
     ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:occupiesTimeDirectly ;
+      owl:someValuesFrom gsoc:Time_Region ;
+    ] ;
   owl:disjointWith gsoc:Process ;
   owl:disjointWith gsoc:Time_Region ;
-  owl:equivalentClass [
-      rdf:type owl:Class ;
-      owl:intersectionOf (
-          gsoc:Perdurant
-          [
-            rdf:type owl:Restriction ;
-            owl:onProperty gsoc:hasConstituent ;
-            owl:someValuesFrom gsoc:Process ;
-          ]
-        ) ;
-    ] ;
 .
 gsoc:Event_Feature
   rdf:type owl:Class ;
   rdfs:comment "" ;
   rdfs:label "Event Feature "@en ;
   rdfs:subClassOf gsoc:Occurrence_Feature ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom gsoc:Event ;
-      owl:onProperty gsoc:hasEssentialPart ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:onProperty gsoc:hasEssentialPart ;
-      owl:someValuesFrom gsoc:Event ;
-    ] ;
 .
 gsoc:Example
   rdf:type owl:Class ;
@@ -766,20 +731,6 @@ gsoc:Material_Object
       owl:onProperty gsoc:hasConstituent ;
       owl:someValuesFrom gsoc:Amount_Of_Matter ;
     ] ;
-  owl:equivalentClass [
-      rdf:type owl:Class ;
-      owl:intersectionOf (
-          gsoc:Material_Endurant
-          [
-            rdf:type owl:Class ;
-            owl:complementOf [
-                rdf:type owl:Restriction ;
-                owl:onProperty gsoc:hasQuality ;
-                owl:someValuesFrom gsoc:State_Of_Matter ;
-              ] ;
-          ]
-        ) ;
-    ] ;
 .
 gsoc:Measure_Value
   rdf:type owl:Class ;
@@ -796,11 +747,6 @@ gsoc:Measure_Value
       rdf:type owl:Restriction ;
       owl:onProperty gsoc:hasQuality ;
       owl:someValuesFrom gsoc:Uncertainty ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:onProperty gsoc:hasUOM ;
-      owl:someValuesFrom gsoc:Unit_Of_Measure_Value ;
     ] ;
   owl:disjointWith gsoc:Named_Value ;
   owl:disjointWith gsoc:Range_Value ;
@@ -829,30 +775,12 @@ gsoc:Named_Value
   rdfs:comment "A named value of some quality,e.g. thin or thick."@en ;
   rdfs:subClassOf gsoc:Quality_Value ;
   owl:disjointWith gsoc:Range_Value ;
-  owl:equivalentClass [
-      rdf:type owl:Class ;
-      owl:complementOf [
-          rdf:type owl:Class ;
-          owl:unionOf (
-              gsoc:Measure_Value
-              gsoc:Range_Value
-            ) ;
-        ] ;
-    ] ;
 .
 gsoc:Nonphysical_Endurant
   rdf:type owl:Class ;
   rdfs:comment "An endurant that does not occupy space directly, but might occupy space indirectly or not occupy space at all. Indirect spatial occupants have physical endurant parts or are ontologically dependent on physical endurants. Examples of things that indirectly occupy some space, due to such ontological dependence, include physical qualities (my height) and physical relators (reified physical relations). It even includes thoughts, poems, digital files, and datasets, whose existence is tied to being manifest in some physical object (brain, book, storage media). Also includes fictional entities such as unicorns, which must be so manifested to exist."@en ;
   rdfs:label "Nonphysical Endurant"@en ;
   rdfs:subClassOf gsoc:Endurant ;
-  rdfs:subClassOf [
-      rdf:type owl:Class ;
-      owl:complementOf [
-          rdf:type owl:Restriction ;
-          owl:onProperty gsoc:occupiesSpaceDirectly ;
-          owl:someValuesFrom gsoc:Spatial_Region ;
-        ] ;
-    ] ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
       owl:allValuesFrom gsoc:Nonphysical_Endurant ;
@@ -864,20 +792,6 @@ gsoc:Nonphysical_Endurant
       owl:onProperty gsoc:hasQuality ;
     ] ;
   owl:disjointWith gsoc:Physical_Endurant ;
-  owl:equivalentClass [
-      rdf:type owl:Class ;
-      owl:intersectionOf (
-          gsoc:Endurant
-          [
-            rdf:type owl:Class ;
-            owl:complementOf [
-                rdf:type owl:Restriction ;
-                owl:onProperty gsoc:occupiesSpaceDirectly ;
-                owl:someValuesFrom gsoc:Spatial_Region ;
-              ] ;
-          ]
-        ) ;
-    ] ;
 .
 gsoc:Nonphysical_Feature
   rdf:type owl:Class ;
@@ -963,15 +877,19 @@ gsoc:Nonphysical_Reference_System
   owl:disjointWith gsoc:Physical_Reference_System ;
   owl:disjointWith gsoc:Temporal_Reference_System ;
   owl:equivalentClass [
-      rdf:type owl:Class ;
-      owl:intersectionOf (
-          gsoc:Reference_System
-          [
-            rdf:type owl:Restriction ;
-            owl:onProperty gsoc:isReferenceSystemFor ;
-            owl:someValuesFrom gsoc:Nonphysical_Quality ;
-          ]
-        ) ;
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:isReferenceSystemFor ;
+      owl:someValuesFrom [
+          rdf:type owl:Class ;
+          owl:intersectionOf (
+              gsoc:Quality_Value
+              [
+                rdf:type owl:Restriction ;
+                owl:onProperty gsoc:isValueOf ;
+                owl:someValuesFrom gsoc:Nonphysical_Quality ;
+              ]
+            ) ;
+        ] ;
     ] ;
 .
 gsoc:Notional_Endurant
@@ -980,33 +898,11 @@ gsoc:Notional_Endurant
   rdfs:label "Notional Endurant "@en ;
   rdfs:subClassOf gsoc:Nonphysical_Endurant ;
   rdfs:subClassOf [
-      rdf:type owl:Class ;
-      owl:complementOf [
-          rdf:type owl:Restriction ;
-          owl:onProperty gsoc:occupiesSpace ;
-          owl:someValuesFrom gsoc:Spatial_Region ;
-        ] ;
-    ] ;
-  rdfs:subClassOf [
       rdf:type owl:Restriction ;
       owl:allValuesFrom gsoc:Notional_Endurant ;
       owl:onProperty gsoc:hasPart ;
     ] ;
   owl:disjointWith gsoc:Relator ;
-  owl:equivalentClass [
-      rdf:type owl:Class ;
-      owl:intersectionOf (
-          gsoc:Nonphysical_Endurant
-          [
-            rdf:type owl:Class ;
-            owl:complementOf [
-                rdf:type owl:Restriction ;
-                owl:onProperty gsoc:occupiesSpace ;
-                owl:someValuesFrom gsoc:Spatial_Region ;
-              ] ;
-          ]
-        ) ;
-    ] ;
 .
 gsoc:Numeric_Value
   rdf:type owl:Class ;
@@ -1158,15 +1054,14 @@ gsoc:Pause
   rdfs:subClassOf gsoc:Temporal_Void ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
-      owl:onClass [
+      owl:onProperty gsoc:hostedBy ;
+      owl:someValuesFrom [
           rdf:type owl:Class ;
           owl:unionOf (
               gsoc:Event
               gsoc:Process
             ) ;
         ] ;
-      owl:onProperty gsoc:hostedBy ;
-      owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
     ] ;
 .
 gsoc:Perdurant
@@ -1205,19 +1100,12 @@ gsoc:Perdurant
     ] ;
   owl:equivalentClass [
       rdf:type owl:Class ;
-      owl:intersectionOf (
-          gsoc:Particular
+      owl:unionOf (
+          gsoc:Time_Region
           [
-            rdf:type owl:Class ;
-            owl:unionOf (
-                gsoc:Time_Region
-                [
-                  rdf:type owl:Restriction ;
-                  owl:onClass gsoc:Time_Region ;
-                  owl:onProperty gsoc:occupiesTimeDirectly ;
-                  owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                ]
-              ) ;
+            rdf:type owl:Restriction ;
+            owl:onProperty gsoc:occupiesTimeDirectly ;
+            owl:someValuesFrom gsoc:Time_Region ;
           ]
         ) ;
     ] ;
@@ -1284,34 +1172,6 @@ gsoc:Physical_Endurant
       owl:onProperty gsoc:occupiesTimeIndirectly ;
       owl:someValuesFrom gsoc:Time_Region ;
     ] ;
-  owl:equivalentClass [
-      rdf:type owl:Class ;
-      owl:intersectionOf (
-          gsoc:Endurant
-          [
-            rdf:type owl:Class ;
-            owl:unionOf (
-                gsoc:Spatial_Region
-                [
-                  rdf:type owl:Restriction ;
-                  owl:onProperty gsoc:occupiesSpaceDirectly ;
-                  owl:someValuesFrom gsoc:Spatial_Region ;
-                ]
-              ) ;
-          ]
-        ) ;
-    ] ;
-  owl:equivalentClass [
-      rdf:type owl:Class ;
-      owl:intersectionOf (
-          gsoc:Endurant
-          [
-            rdf:type owl:Restriction ;
-            owl:allValuesFrom gsoc:Physical_Quality ;
-            owl:onProperty gsoc:hasQuality ;
-          ]
-        ) ;
-    ] ;
 .
 gsoc:Physical_Feature
   rdf:type owl:Class ;
@@ -1350,12 +1210,6 @@ gsoc:Physical_Gap
   rdfs:comment "A physical void with a scattered (disconnected) host, consisting of the spaces between the scattered parts of the host. e.g. porosity in a rock.   {@en}"@en ;
   rdfs:label "Gap"@en ;
   rdfs:subClassOf gsoc:Physical_Void ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
-      owl:onClass gsoc:Material_Endurant ;
-      owl:onProperty gsoc:hostedBy ;
-    ] ;
 .
 gsoc:Physical_Quality
   rdf:type owl:Class ;
@@ -1394,15 +1248,19 @@ gsoc:Physical_Reference_System
     ] ;
   owl:disjointWith gsoc:Temporal_Reference_System ;
   owl:equivalentClass [
-      rdf:type owl:Class ;
-      owl:intersectionOf (
-          gsoc:Reference_System
-          [
-            rdf:type owl:Restriction ;
-            owl:onProperty gsoc:isReferenceSystemFor ;
-            owl:someValuesFrom gsoc:Temporal_Quality ;
-          ]
-        ) ;
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:isReferenceSystemFor ;
+      owl:someValuesFrom [
+          rdf:type owl:Class ;
+          owl:intersectionOf (
+              gsoc:Quality_Value
+              [
+                rdf:type owl:Restriction ;
+                owl:onProperty gsoc:isValueOf ;
+                owl:someValuesFrom gsoc:Physical_Quality ;
+              ]
+            ) ;
+        ] ;
     ] ;
 .
 gsoc:Physical_Void
@@ -1460,20 +1318,13 @@ gsoc:Process
     ] ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
-      owl:onClass gsoc:Time_Region ;
-      owl:onProperty gsoc:genericallyDependsOn ;
-      owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:onClass gsoc:Time_Region ;
-      owl:onProperty gsoc:occupiesTimeDirectly ;
-      owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
       owl:onProperty gsoc:hasParticipant ;
       owl:someValuesFrom gsoc:Endurant ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:occupiesTimeDirectly ;
+      owl:someValuesFrom gsoc:Time_Region ;
     ] ;
   owl:disjointWith gsoc:Time_Region ;
   owl:equivalentClass [
@@ -1545,11 +1396,6 @@ gsoc:Quality
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
       owl:allValuesFrom gsoc:Quality_Value ;
-      owl:onProperty gsoc:hasPart ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom gsoc:Quality_Value ;
       owl:onProperty gsoc:hasValue ;
     ] ;
   rdfs:subClassOf [
@@ -1594,11 +1440,6 @@ gsoc:Quality_Value
       owl:someValuesFrom gsoc:Reference_System ;
     ] ;
   owl:disjointWith gsoc:Role ;
-  owl:disjointWith [
-      rdf:type owl:Restriction ;
-      owl:onProperty gsoc:hasPart ;
-      owl:someValuesFrom gsoc:Particular ;
-    ] ;
   owl:equivalentClass [
       rdf:type owl:Class ;
       owl:intersectionOf (
@@ -1719,12 +1560,6 @@ gsoc:Relator
       owl:onClass gsoc:Role ;
       owl:onProperty gsoc:mutuallySpecDependsOn ;
     ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:minQualifiedCardinality "4"^^xsd:nonNegativeInteger ;
-      owl:onClass gsoc:Particular ;
-      owl:onProperty gsoc:specificallyDependsOn ;
-    ] ;
   owl:disjointWith [
       rdf:type owl:Class ;
       owl:intersectionOf (
@@ -1743,21 +1578,12 @@ gsoc:Relator
           ]
         ) ;
     ] ;
-  owl:equivalentClass [
-      rdf:type owl:Class ;
-      owl:complementOf [
-          rdf:type owl:Class ;
-          owl:unionOf (
-              gsoc:Inherant
-              gsoc:Notional_Endurant
-            ) ;
-        ] ;
-    ] ;
+  skos:note "table restriction  'specificallyDependsOn min 4 Particular' to address OWL DL restriction on cardinality constraints under non-simple properties (i.e. any property in the propoerty hierarchy transtivie closure with a transitive axiom, see https://www.w3.org/TR/owl-syntax/#Property_Hierarchy_and_Simple_Object_Property_Expressions)"@en ;
 .
 gsoc:Role
   rdf:type owl:Class ;
   rdfs:comment "Roles are played by a relata in a relation, e.g. a person plays the role of employee in an employs relation.  The relata playing the role is the RolePlayer and the other relata are RoleObjects. Because a role (Mary as employer, John as employee) is derived from a specific relation, e.g.  Mary employs John, it mutully depends on a specific reified relation instance (Relator - the employment of John by Mary). Roles carry qualities -  indeed, they are are a bundle of qualities."@en ;
-  rdfs:label "Role  "@en ;
+  rdfs:label "Role"@en ;
   rdfs:subClassOf gsoc:Inherant ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
@@ -1976,19 +1802,6 @@ gsoc:Spatial_Region
   rdfs:label "Spatial Region"@en ;
   rdfs:subClassOf gsoc:Physical_Endurant ;
   rdfs:subClassOf [
-      rdf:type owl:Class ;
-      owl:complementOf [
-          rdf:type owl:Restriction ;
-          owl:onProperty gsoc:hasConstituent ;
-          owl:someValuesFrom gsoc:Material_Endurant ;
-        ] ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom gsoc:Material_Endurant ;
-      owl:onProperty gsoc:spaceOccupiedDirectlyBy ;
-    ] ;
-  rdfs:subClassOf [
       rdf:type owl:Restriction ;
       owl:allValuesFrom gsoc:Spatial_Region ;
       owl:onProperty gsoc:hasPart ;
@@ -1998,26 +1811,6 @@ gsoc:Spatial_Region
       owl:onClass gsoc:Spatial_Location ;
       owl:onProperty gsoc:hasQuality ;
       owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-    ] ;
-  owl:equivalentClass [
-      rdf:type owl:Class ;
-      owl:intersectionOf (
-          gsoc:Physical_Endurant
-          [
-            rdf:type owl:Restriction ;
-            owl:onClass gsoc:Spatial_Location ;
-            owl:onProperty gsoc:hasQuality ;
-            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-          ]
-          [
-            rdf:type owl:Class ;
-            owl:complementOf [
-                rdf:type owl:Restriction ;
-                owl:onProperty gsoc:hasConstituent ;
-                owl:someValuesFrom gsoc:Material_Endurant ;
-              ] ;
-          ]
-        ) ;
     ] ;
 .
 gsoc:Spatial_Region_0D
@@ -2175,15 +1968,14 @@ gsoc:Temporal_Gap
   rdfs:subClassOf gsoc:Temporal_Void ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
-      owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
-      owl:onClass [
+      owl:onProperty gsoc:hostedBy ;
+      owl:someValuesFrom [
           rdf:type owl:Class ;
           owl:unionOf (
               gsoc:Event
               gsoc:Process
             ) ;
         ] ;
-      owl:onProperty gsoc:hostedBy ;
     ] ;
 .
 gsoc:Temporal_Interval_Reference_System
@@ -2192,8 +1984,8 @@ gsoc:Temporal_Interval_Reference_System
   rdfs:subClassOf gsoc:Temporal_Reference_System ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
-      owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
-      owl:onClass [
+      owl:onProperty gsoc:timeIncludes ;
+      owl:someValuesFrom [
           rdf:type owl:Class ;
           owl:intersectionOf (
               gsoc:Time_Interval
@@ -2205,7 +1997,6 @@ gsoc:Temporal_Interval_Reference_System
               ]
             ) ;
         ] ;
-      owl:onProperty gsoc:timeIncludes ;
     ] ;
   skos:definition "A temporal reference system defined by a collection of named time intervals that have temporal positions assigned to interval boundaries using a calendar, clock or temporal coordinate system."@en ;
   skos:prefLabel "Time Interval Reference System"@en ;
@@ -2295,15 +2086,19 @@ gsoc:Temporal_Reference_System
       owl:someValuesFrom gsoc:Perdurant ;
     ] ;
   owl:equivalentClass [
-      rdf:type owl:Class ;
-      owl:intersectionOf (
-          gsoc:Reference_System
-          [
-            rdf:type owl:Restriction ;
-            owl:onProperty gsoc:isReferenceSystemFor ;
-            owl:someValuesFrom gsoc:Perdurant ;
-          ]
-        ) ;
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:isReferenceSystemFor ;
+      owl:someValuesFrom [
+          rdf:type owl:Class ;
+          owl:intersectionOf (
+              gsoc:Quality_Value
+              [
+                rdf:type owl:Restriction ;
+                owl:onProperty gsoc:isValueOf ;
+                owl:someValuesFrom gsoc:Temporal_Quality ;
+              ]
+            ) ;
+        ] ;
     ] ;
 .
 gsoc:Temporal_Value
@@ -2389,12 +2184,6 @@ gsoc:Time_Instant
       owl:onProperty gsoc:hasQuality ;
       owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
     ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:onClass gsoc:Time_Instant_Location ;
-      owl:onProperty gsoc:specificallyDependsOn ;
-      owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-    ] ;
   owl:disjointWith gsoc:Time_Interval ;
 .
 gsoc:Time_Instant_Feature
@@ -2438,15 +2227,13 @@ gsoc:Time_Interval
   rdfs:subClassOf gsoc:Time_Region ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
-      owl:onClass gsoc:Time_Interval_Location ;
       owl:onProperty gsoc:hasQuality ;
-      owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:someValuesFrom gsoc:Duration ;
     ] ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
-      owl:onClass gsoc:Time_Interval_Location ;
-      owl:onProperty gsoc:specificallyDependsOn ;
-      owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty gsoc:hasQuality ;
+      owl:someValuesFrom gsoc:Time_Interval_Location ;
     ] ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
@@ -2458,23 +2245,21 @@ gsoc:Time_Interval
       owl:onProperty gsoc:timeHasEnd ;
       owl:someValuesFrom gsoc:Time_Instant ;
     ] ;
-  owl:disjointWith gsoc:Time_Instant ;
   skos:note "Time intervals are continuous without gaps.  Corresponds to OWL Time time:ProperInterval, A temporal entity with non-zero extent or duration, i.e. for which the value of the beginning and end are different"@en ;
 .
 gsoc:Time_Interval_Collection
   rdf:type owl:Class ;
-  rdfs:comment "A set of time intervals. Must have a start and finish interval. A time interval collection can be used as a temporal reference system if the interval boundaries have temporal positions assigned in some temporal reference system. In the most general case the ordinal relationship between the intervals might be unknown, and interval might overlap or have temporal gaps between them."@en ;
+  rdfs:comment "A set of time intervals. Must have a start (oldest) and finish (youngest) interval. A time interval collection can be used as a temporal reference system if the interval boundaries have temporal positions assigned in some temporal reference system. In the most general case the ordinal relationship between the intervals might be unknown, and intervals might overlap or have temporal gaps between them. The timeIncludes property determines the temporal extent of the collection, that is the interval between startedBy and finishedBy (inclusive)."@en ;
   rdfs:label "Time Interval Collection"@en ;
   rdfs:subClassOf gsoc:Time_Region ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
-      owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
-      owl:onClass gsoc:Time_Interval ;
-      owl:onProperty gsoc:timeIncludes ;
+      owl:onProperty gsoc:timeFinishedBy ;
+      owl:someValuesFrom gsoc:Time_Interval ;
     ] ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
-      owl:onProperty gsoc:timeFinishedBy ;
+      owl:onProperty gsoc:timeIncludes ;
       owl:someValuesFrom gsoc:Time_Interval ;
     ] ;
   rdfs:subClassOf [
@@ -2504,11 +2289,6 @@ gsoc:Time_Interval_Location
       rdf:type owl:Restriction ;
       owl:allValuesFrom gsoc:Temporal_Range ;
       owl:onProperty gsoc:hasValue ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:onProperty gsoc:hasQuality ;
-      owl:someValuesFrom gsoc:Duration ;
     ] ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
@@ -2554,12 +2334,6 @@ gsoc:Time_Region
       rdf:type owl:Restriction ;
       owl:onClass gsoc:Temporal_Location ;
       owl:onProperty gsoc:hasQuality ;
-      owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:onClass gsoc:Temporal_Location ;
-      owl:onProperty gsoc:specificallyDependsOn ;
       owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
     ] ;
   owl:equivalentClass [
@@ -2670,7 +2444,6 @@ gsoc:constantlyGenDependsOn
   rdf:type owl:TransitiveProperty ;
   rdfs:comment "Constant generic dependance in which relata are co-temporal, that is, the dependee exists during the lifespan of the dependent."@en ;
   rdfs:subPropertyOf gsoc:genericallyDependsOn ;
-  owl:propertyDisjointWith gsoc:timeDisjoint ;
 .
 gsoc:constantlySpecDependsOn
   rdf:type owl:ObjectProperty ;
@@ -2775,7 +2548,6 @@ gsoc:externallyGenDependsOn
   rdf:type owl:TransitiveProperty ;
   rdfs:comment "External generic ontological dependence in which the dependee is not an internal entity, e.g. is not a quality, role, constituent, or essential part, but is some external entit."@en ;
   rdfs:subPropertyOf gsoc:genericallyDependsOn ;
-  owl:propertyDisjointWith gsoc:hasEssentialPart ;
 .
 gsoc:externallySpecDependsOn
   rdf:type owl:ObjectProperty ;
@@ -2788,6 +2560,7 @@ gsoc:genericallyDependsOn
   rdf:type owl:ObjectProperty ;
   rdf:type owl:TransitiveProperty ;
   rdfs:comment "Directed generic ontological dependence relation in which something relies on something else of a certain type; excludes self-dependence and other edge problematic cases, and is atemporal (relata need not co-exist in time). Note the relation cannot be more explicitly defined in this notation." ;
+  rdfs:label "generically depends on"@en ;
   rdfs:subPropertyOf gsoc:dependsOn ;
 .
 gsoc:hasAnnotation
@@ -2832,7 +2605,6 @@ gsoc:hasEssentialPart
   rdfs:subPropertyOf gsoc:genericallyDependsOn ;
   rdfs:subPropertyOf gsoc:hasPart ;
   owl:inverseOf gsoc:isEssentialPartOf ;
-  owl:propertyDisjointWith gsoc:timeDisjoint ;
 .
 gsoc:hasExample
   rdf:type owl:ObjectProperty ;
@@ -2986,8 +2758,8 @@ gsoc:hasStaticValue
 gsoc:hasUOM
   rdf:type owl:ObjectProperty ;
   rdfs:comment "top level property for assigning property values; subtype for associating values with measurement units "@en ;
-  rdfs:domain gsoc:Measure_Value ;
-  rdfs:range gsoc:Unit_Of_Measure_Value ;
+  rdfs:domain gsoc:Numeric_Value ;
+  rdfs:range gsoc:Unit_Of_Measure ;
   rdfs:subPropertyOf gsoc:hasQuality ;
 .
 gsoc:hasValue
@@ -3232,7 +3004,6 @@ gsoc:nextTimeInterval
   rdfs:domain gsoc:Time_Interval ;
   rdfs:range gsoc:Time_Interval ;
   rdfs:subPropertyOf gsoc:timeMeets ;
-  owl:equivalentProperty <time:intervalMeets> ;
 .
 gsoc:occupiedBy
   rdf:type owl:ObjectProperty ;
@@ -3265,16 +3036,6 @@ gsoc:occupies
 gsoc:occupiesSpace
   rdf:type owl:ObjectProperty ;
   rdfs:comment "Occupation of a region of space, directly or indirectly"@en ;
-  rdfs:domain [
-      rdf:type owl:Class ;
-      owl:complementOf [
-          rdf:type owl:Class ;
-          owl:unionOf (
-              gsoc:Notional_Endurant
-              gsoc:Spatial_Region
-            ) ;
-        ] ;
-    ] ;
   rdfs:range gsoc:Spatial_Region ;
   rdfs:subPropertyOf gsoc:occupies ;
   rdfs:subPropertyOf gsoc:spatiallyEquals ;
@@ -3282,13 +3043,11 @@ gsoc:occupiesSpace
 .
 gsoc:occupiesSpaceDirectly
   rdf:type owl:ObjectProperty ;
-  rdf:type owl:TransitiveProperty ;
   rdfs:comment "The occupation of a spatial region by a material endurant."@en ;
   rdfs:domain gsoc:Material_Endurant ;
   rdfs:range gsoc:Spatial_Region ;
   rdfs:subPropertyOf gsoc:occupiesSpace ;
   owl:inverseOf gsoc:spaceOccupiedDirectlyBy ;
-  owl:propertyDisjointWith gsoc:occupiesSpaceIndirectly ;
 .
 gsoc:occupiesSpaceIndirectly
   rdf:type owl:ObjectProperty ;
@@ -3333,7 +3092,6 @@ gsoc:occupiesTimeDirectly
   rdfs:range gsoc:Time_Region ;
   rdfs:subPropertyOf gsoc:occupiesTime ;
   owl:inverseOf gsoc:timeOccupiedDirectlyBy ;
-  owl:propertyDisjointWith gsoc:occupiesTimeIndirectly ;
 .
 gsoc:occupiesTimeIndirectly
   rdf:type owl:ObjectProperty ;
@@ -3380,7 +3138,6 @@ gsoc:previousTimeInterval
   rdfs:domain gsoc:Time_Interval ;
   rdfs:range gsoc:Time_Interval ;
   rdfs:subPropertyOf gsoc:timeMetBy ;
-  owl:equivalentProperty <time:intervalMetBy> ;
 .
 gsoc:production
   rdf:type owl:IrreflexiveProperty ;
@@ -3422,7 +3179,6 @@ gsoc:spatiallyDisjoint
   rdf:type owl:ObjectProperty ;
   rdf:type owl:SymmetricProperty ;
   rdfs:subPropertyOf gsoc:isSpatiallyRelatedTo ;
-  owl:propertyDisjointWith gsoc:spatio-temporallyDependsOn ;
 .
 gsoc:spatiallyEquals
   rdf:type owl:ObjectProperty ;
@@ -3482,12 +3238,12 @@ gsoc:timeContains
   rdfs:domain [
       rdf:type owl:Class ;
       owl:unionOf (
+          gsoc:Time_Interval
           [
             rdf:type owl:Restriction ;
             owl:allValuesFrom gsoc:Time_Interval ;
             owl:onProperty gsoc:occupiesTime ;
           ]
-          gsoc:Time_Interval
         ) ;
     ] ;
   rdfs:label "contains"@en ;
@@ -3499,10 +3255,9 @@ gsoc:timeContains
 gsoc:timeDisjoint
   rdf:type owl:ObjectProperty ;
   rdf:type owl:SymmetricProperty ;
-  rdfs:comment "The union of Allen Before and After; Age intervals of subject and object do not touch or intersect. Corresponds to http://www.w3.org/2006/time#disjoint defined in https://w3c.github.io/sdw/time-entity-relations"@en ;
+  rdfs:comment "The union of Allen Before and After; Age intervals of subject and object do not touch or intersect. Corresponds to http://www.w3.org/2006/time#disjoint defined in https://w3c.github.io/sdw/time-entity-relations, but can relate intervals to intervals or intervals to instants."@en ;
   rdfs:seeAlso <time:disjoint> ;
   rdfs:subPropertyOf gsoc:isTemporallyRelatedTo ;
-  owl:propertyDisjointWith gsoc:timeOverlappedBy ;
 .
 gsoc:timeDuring
   rdf:type owl:ObjectProperty ;
@@ -3511,12 +3266,12 @@ gsoc:timeDuring
   rdfs:range [
       rdf:type owl:Class ;
       owl:unionOf (
+          gsoc:Time_Interval
           [
             rdf:type owl:Restriction ;
             owl:allValuesFrom gsoc:Time_Interval ;
             owl:onProperty gsoc:occupiesTime ;
           ]
-          gsoc:Time_Interval
         ) ;
     ] ;
   rdfs:seeAlso <time:intervalDuring> ;
@@ -3526,7 +3281,7 @@ gsoc:timeEquivalentTo
   rdf:type owl:ObjectProperty ;
   rdf:type owl:SymmetricProperty ;
   rdfs:comment "A is equivalent to B if they represent expressions of the same Time_Region. Same as Allen A Equals B.   One of six binary relations between geologic events defined by Burns (1975). OWL Time time:intervalEquals is narrower, only relates properIntervals. Constraint is that the domain and range must both either occupy interval or both occupy instant, or both be instants or intervals."@en ;
-  rdfs:label "equals"@en ;
+  rdfs:label "time region equals"@en ;
   rdfs:seeAlso <time:intervalEquals> ;
   rdfs:subPropertyOf gsoc:timeIntersects ;
 .
@@ -3536,12 +3291,12 @@ gsoc:timeFinishedBy
   rdfs:domain [
       rdf:type owl:Class ;
       owl:unionOf (
+          gsoc:Time_Interval
           [
             rdf:type owl:Restriction ;
             owl:allValuesFrom gsoc:Time_Interval ;
             owl:onProperty gsoc:occupiesTime ;
           ]
-          gsoc:Time_Interval
         ) ;
     ] ;
   rdfs:label "finished by"@en ;
@@ -3556,17 +3311,16 @@ gsoc:timeFinishes
   rdfs:range [
       rdf:type owl:Class ;
       owl:unionOf (
+          gsoc:Time_Interval
           [
             rdf:type owl:Restriction ;
             owl:allValuesFrom gsoc:Time_Interval ;
             owl:onProperty gsoc:occupiesTime ;
           ]
-          gsoc:Time_Interval
         ) ;
     ] ;
   rdfs:seeAlso <time:intervalFinishes> ;
   rdfs:subPropertyOf gsoc:timeIncludedBy ;
-  owl:inverseOf gsoc:timeFinishedBy ;
 .
 gsoc:timeHasBeginning
   rdf:type owl:ObjectProperty ;
@@ -3574,12 +3328,12 @@ gsoc:timeHasBeginning
   rdfs:range [
       rdf:type owl:Class ;
       owl:unionOf (
+          gsoc:Time_Instant
           [
             rdf:type owl:Restriction ;
             owl:allValuesFrom gsoc:Time_Instant ;
             owl:onProperty gsoc:occupiesTime ;
           ]
-          gsoc:Time_Instant
         ) ;
     ] ;
   rdfs:seeAlso <time:hasBeginning> ;
@@ -3590,24 +3344,24 @@ gsoc:timeHasEnd
   rdfs:domain [
       rdf:type owl:Class ;
       owl:unionOf (
+          gsoc:Time_Interval
           [
             rdf:type owl:Restriction ;
             owl:allValuesFrom gsoc:Time_Interval ;
             owl:onProperty gsoc:occupiesTime ;
           ]
-          gsoc:Time_Interval
         ) ;
     ] ;
   rdfs:label "has end "@en ;
   rdfs:range [
       rdf:type owl:Class ;
       owl:unionOf (
+          gsoc:Time_Instant
           [
             rdf:type owl:Restriction ;
             owl:allValuesFrom gsoc:Time_Instant ;
             owl:onProperty gsoc:occupiesTime ;
           ]
-          gsoc:Time_Instant
         ) ;
     ] ;
   rdfs:subPropertyOf gsoc:timeFinishedBy ;
@@ -3619,12 +3373,12 @@ gsoc:timeIncludedBy
   rdfs:range [
       rdf:type owl:Class ;
       owl:unionOf (
+          gsoc:Time_Interval
           [
             rdf:type owl:Restriction ;
             owl:allValuesFrom gsoc:Time_Interval ;
             owl:onProperty gsoc:occupiesTime ;
           ]
-          gsoc:Time_Interval
         ) ;
     ] ;
   rdfs:seeAlso <time:intervalIn> ;
@@ -3638,12 +3392,12 @@ gsoc:timeIncludes
   rdfs:domain [
       rdf:type owl:Class ;
       owl:unionOf (
+          gsoc:Time_Interval
           [
             rdf:type owl:Restriction ;
             owl:allValuesFrom gsoc:Time_Interval ;
             owl:onProperty gsoc:occupiesTime ;
           ]
-          gsoc:Time_Interval
         ) ;
     ] ;
   rdfs:seeAlso <time:inside> ;
@@ -3666,10 +3420,9 @@ gsoc:timeIntersects
   rdf:type owl:ObjectProperty ;
   rdf:type owl:SymmetricProperty ;
   rdfs:comment "union of gsoc:timeStartedBy, gsoc:timeFinishedBy, gsoc:timeContains, gsoc:timeEquivalentTo, gsoc:timeDuring, gsoc:timeStarts, gsoc:timeFinishes, gsoc:timeOverlaps, gsoc:timeOverlappedBy, gsoc:timeMeets, gsoc:timeMetBy.  There is some Time_Region that part of the time regions occupied  the subject and object entities. Corresponds to OWL time time:notDisjoint"@en ;
-  rdfs:label "intersects"@en ;
+  rdfs:label "time intersects"@en ;
   rdfs:seeAlso <time:notDisjoint> ;
   rdfs:subPropertyOf gsoc:isTemporallyRelatedTo ;
-  owl:propertyDisjointWith gsoc:timeDisjoint ;
 .
 gsoc:timeMeets
   rdf:type owl:ObjectProperty ;
@@ -3677,24 +3430,24 @@ gsoc:timeMeets
   rdfs:domain [
       rdf:type owl:Class ;
       owl:unionOf (
+          gsoc:Time_Interval
           [
             rdf:type owl:Restriction ;
             owl:allValuesFrom gsoc:Time_Interval ;
             owl:onProperty gsoc:occupiesTime ;
           ]
-          gsoc:Time_Interval
         ) ;
     ] ;
-  rdfs:label "meets"@en ;
+  rdfs:label "time interval meets"@en ;
   rdfs:range [
       rdf:type owl:Class ;
       owl:unionOf (
+          gsoc:Time_Interval
           [
             rdf:type owl:Restriction ;
             owl:allValuesFrom gsoc:Time_Interval ;
             owl:onProperty gsoc:occupiesTime ;
           ]
-          gsoc:Time_Interval
         ) ;
     ] ;
   rdfs:seeAlso <time:intervalMeets> ;
@@ -3708,30 +3461,29 @@ gsoc:timeMetBy
   rdfs:domain [
       rdf:type owl:Class ;
       owl:unionOf (
+          gsoc:Time_Interval
           [
             rdf:type owl:Restriction ;
             owl:allValuesFrom gsoc:Time_Interval ;
             owl:onProperty gsoc:occupiesTime ;
           ]
-          gsoc:Time_Interval
         ) ;
     ] ;
-  rdfs:label "met by"@en ;
+  rdfs:label "time interval met by"@en ;
   rdfs:range [
       rdf:type owl:Class ;
       owl:unionOf (
+          gsoc:Time_Interval
           [
             rdf:type owl:Restriction ;
             owl:allValuesFrom gsoc:Time_Interval ;
             owl:onProperty gsoc:occupiesTime ;
           ]
-          gsoc:Time_Interval
         ) ;
     ] ;
   rdfs:seeAlso <time:intervalMetBy> ;
   rdfs:subPropertyOf gsoc:timeIntersects ;
   rdfs:subPropertyOf gsoc:timePrecededBy ;
-  owl:inverseOf gsoc:timeMeets ;
 .
 gsoc:timeOccupiedBy
   rdf:type owl:ObjectProperty ;
@@ -3765,24 +3517,24 @@ gsoc:timeOverlappedBy
   rdfs:domain [
       rdf:type owl:Class ;
       owl:unionOf (
+          gsoc:Time_Interval
           [
             rdf:type owl:Restriction ;
             owl:allValuesFrom gsoc:Time_Interval ;
             owl:onProperty gsoc:occupiesTime ;
           ]
-          gsoc:Time_Interval
         ) ;
     ] ;
-  rdfs:label "overlapped by"@en ;
+  rdfs:label "time overlapped by"@en ;
   rdfs:range [
       rdf:type owl:Class ;
       owl:unionOf (
+          gsoc:Time_Interval
           [
             rdf:type owl:Restriction ;
             owl:allValuesFrom gsoc:Time_Interval ;
             owl:onProperty gsoc:occupiesTime ;
           ]
-          gsoc:Time_Interval
         ) ;
     ] ;
   rdfs:seeAlso <time:intervalOverlappedBy> ;
@@ -3795,24 +3547,24 @@ gsoc:timeOverlaps
   rdfs:domain [
       rdf:type owl:Class ;
       owl:unionOf (
+          gsoc:Time_Interval
           [
             rdf:type owl:Restriction ;
             owl:allValuesFrom gsoc:Time_Interval ;
             owl:onProperty gsoc:occupiesTime ;
           ]
-          gsoc:Time_Interval
         ) ;
     ] ;
   rdfs:label "overlaps"@en ;
   rdfs:range [
       rdf:type owl:Class ;
       owl:unionOf (
+          gsoc:Time_Interval
           [
             rdf:type owl:Restriction ;
             owl:allValuesFrom gsoc:Time_Interval ;
             owl:onProperty gsoc:occupiesTime ;
           ]
-          gsoc:Time_Interval
         ) ;
     ] ;
   rdfs:seeAlso <time:intervalOverlaps> ;
@@ -3835,12 +3587,12 @@ gsoc:timeStartedBy
   rdfs:domain [
       rdf:type owl:Class ;
       owl:unionOf (
+          gsoc:Time_Interval
           [
             rdf:type owl:Restriction ;
             owl:allValuesFrom gsoc:Time_Interval ;
             owl:onProperty gsoc:occupiesTime ;
           ]
-          gsoc:Time_Interval
         ) ;
     ] ;
   rdfs:label "started by"@en ;
@@ -3855,17 +3607,16 @@ gsoc:timeStarts
   rdfs:range [
       rdf:type owl:Class ;
       owl:unionOf (
+          gsoc:Time_Interval
           [
             rdf:type owl:Restriction ;
             owl:allValuesFrom gsoc:Time_Interval ;
             owl:onProperty gsoc:occupiesTime ;
           ]
-          gsoc:Time_Interval
         ) ;
     ] ;
   rdfs:seeAlso <time:intervalStarts> ;
   rdfs:subPropertyOf gsoc:timeIncludedBy ;
-  owl:inverseOf gsoc:timeStartedBy ;
 .
 gsoc:timeYoungerThan
   rdf:type owl:ObjectProperty ;
