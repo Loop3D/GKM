@@ -807,7 +807,6 @@ gsoc:occupiesSpace rdf:type owl:ObjectProperty ;
                    rdfs:subPropertyOf gsoc:occupies ,
                                       gsoc:spatiallyEquals ;
                    owl:inverseOf gsoc:spaceOccupiedBy ;
-                   rdfs:range gsoc:Spatial_Region ;
                    rdfs:comment "Occupation of a region of space, directly or indirectly"@en .
 
 
@@ -815,8 +814,6 @@ gsoc:occupiesSpace rdf:type owl:ObjectProperty ;
 gsoc:occupiesSpaceDirectly rdf:type owl:ObjectProperty ;
                            rdfs:subPropertyOf gsoc:occupiesSpace ;
                            owl:inverseOf gsoc:spaceOccupiedDirectlyBy ;
-                           rdfs:domain gsoc:Material_Endurant ;
-                           rdfs:range gsoc:Spatial_Region ;
                            rdfs:comment "The occupation of a spatial region by a material endurant."@en .
 
 
@@ -824,10 +821,6 @@ gsoc:occupiesSpaceDirectly rdf:type owl:ObjectProperty ;
 gsoc:occupiesSpaceIndirectly rdf:type owl:ObjectProperty ;
                              rdfs:subPropertyOf gsoc:occupiesSpace ;
                              owl:inverseOf gsoc:spaceOccupiedIndirectlyBy ;
-                             rdfs:domain [ rdf:type owl:Class ;
-                                           owl:complementOf gsoc:Physical_Endurant
-                                         ] ;
-                             rdfs:range gsoc:Spatial_Region ;
                              rdfs:comment "Occupies space indirectly."@en .
 
 
@@ -1148,7 +1141,6 @@ gsoc:timeIncludes rdf:type owl:ObjectProperty ;
 ###  https://w3id.org/gso/common/timeInclusion
 gsoc:timeInclusion rdf:type owl:ObjectProperty ;
                    rdfs:subPropertyOf gsoc:timeIntersects ;
-                   rdf:type owl:SymmetricProperty ;
                    rdfs:comment "Union of timeIncludedBy and timeIncludes.  Property that relates an interval to a temporal entity (either as subject or object) for which the  Time_Region occupied directly or indirectly by one of the relata does not extend outside the Time_Region occupied directly or indirectly by the other relata."@en .
 
 
@@ -1362,7 +1354,7 @@ gsoc:timeYoungerThan rdf:type owl:ObjectProperty ;
 ###  https://w3id.org/gso/common/hasDataValue
 gsoc:hasDataValue rdf:type owl:DatatypeProperty ;
                   rdfs:domain gsoc:Measure_Value ;
-                  rdfs:range xsd:anySimpleType ;
+                  rdfs:range rdfs:Literal ;
                   rdfs:comment "Directed relation between a measure value and a simple data type - xsd:anySimpleType - e.g. as a number, string, or date."@en .
 
 
@@ -1494,15 +1486,18 @@ gsoc:Dynamic_Feature rdf:type owl:Class ;
 ###  https://w3id.org/gso/common/Element
 gsoc:Element rdf:type owl:Class ;
              rdfs:subClassOf gsoc:Amount_Of_Matter ,
-                             [ rdf:type owl:Class ;
-                               owl:complementOf [ rdf:type owl:Restriction ;
-                                                  owl:onProperty gsoc:isConstituentOf ;
-                                                  owl:someValuesFrom gsoc:Element
-                                                ]
-                             ] ,
                              [ rdf:type owl:Restriction ;
                                owl:onProperty gsoc:hasPart ;
                                owl:allValuesFrom gsoc:Element
+                             ] ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty gsoc:isConstituentOf ;
+                               owl:allValuesFrom [ rdf:type owl:Class ;
+                                                   owl:unionOf ( gsoc:Fluid_Matter
+                                                                 gsoc:Material_Object
+                                                                 gsoc:Solid_Matter
+                                                               )
+                                                 ]
                              ] ;
              rdfs:comment "An amount of elements: either a single atom or an aggregation of atoms of a particular element. All subtypes currently refer to an aggregation of atoms of a single element. An element is a species of atom having the same number of protons in its atomic nuclei (that is, the same atomic number, or Z). https://en.wikipedia.org/wiki/Chemical_element."@en ;
              rdfs:label "Element"@en .
@@ -1510,19 +1505,10 @@ gsoc:Element rdf:type owl:Class ;
 
 ###  https://w3id.org/gso/common/Endurant
 gsoc:Endurant rdf:type owl:Class ;
-              owl:equivalentClass [ rdf:type owl:Class ;
-                                    owl:unionOf ( gsoc:Nonphysical_Endurant
-                                                  gsoc:Physical_Endurant
-                                                )
-                                  ] ;
               rdfs:subClassOf gsoc:Particular ,
                               [ rdf:type owl:Restriction ;
                                 owl:onProperty gsoc:hasPart ;
                                 owl:allValuesFrom gsoc:Endurant
-                              ] ,
-                              [ rdf:type owl:Restriction ;
-                                owl:onProperty gsoc:occupiesTimeIndirectly ;
-                                owl:allValuesFrom gsoc:Time_Region
                               ] ;
               owl:disjointWith gsoc:Perdurant ;
               rdfs:comment "The main characteristic of endurants is that they are fully present at any timepoint they exist, but they can change from one timepoint to another - something can be red at one time, and pink at another time. Endurants have only endurants as parts."@en ;
@@ -1873,6 +1859,10 @@ gsoc:Material_Endurant rdf:type owl:Class ;
                                            ] ;
                        rdfs:subClassOf gsoc:Physical_Endurant ,
                                        [ rdf:type owl:Restriction ;
+                                         owl:onProperty gsoc:hasConstituent ;
+                                         owl:someValuesFrom gsoc:Amount_Of_Matter
+                                       ] ,
+                                       [ rdf:type owl:Restriction ;
                                          owl:onProperty gsoc:occupiesSpaceDirectly ;
                                          owl:someValuesFrom gsoc:Spatial_Region_3D
                                        ] ,
@@ -1931,10 +1921,6 @@ gsoc:Material_Object rdf:type owl:Class ;
                                                           owl:onProperty gsoc:isConstituentOf ;
                                                           owl:someValuesFrom gsoc:Amount_Of_Matter
                                                         ]
-                                     ] ,
-                                     [ rdf:type owl:Restriction ;
-                                       owl:onProperty gsoc:hasConstituent ;
-                                       owl:someValuesFrom gsoc:Amount_Of_Matter
                                      ] ;
                      rdfs:comment "Material Objects things constituted by some amounty of matter, but are not an amount of matter themselves, nor can constitute matter."@en ;
                      rdfs:label "Material Object"@en .
@@ -1945,8 +1931,7 @@ gsoc:Measure_Value rdf:type owl:Class ;
                    owl:equivalentClass [ owl:intersectionOf ( gsoc:Quality_Value
                                                               [ rdf:type owl:Restriction ;
                                                                 owl:onProperty gsoc:hasDataValue ;
-                                                                owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                                                                owl:onDataRange xsd:anySimpleType
+                                                                owl:allValuesFrom rdfs:Literal
                                                               ]
                                                             ) ;
                                          rdf:type owl:Class
@@ -1958,8 +1943,7 @@ gsoc:Measure_Value rdf:type owl:Class ;
                                    ] ,
                                    [ rdf:type owl:Restriction ;
                                      owl:onProperty gsoc:hasDataValue ;
-                                     owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                                     owl:onDataRange xsd:anySimpleType
+                                     owl:allValuesFrom rdfs:Literal
                                    ] ;
                    owl:disjointWith gsoc:Named_Value ,
                                     gsoc:Range_Value ;
@@ -1988,12 +1972,7 @@ gsoc:Nonphysical_Endurant rdf:type owl:Class ;
                                           [ rdf:type owl:Restriction ;
                                             owl:onProperty gsoc:hasPart ;
                                             owl:allValuesFrom gsoc:Nonphysical_Endurant
-                                          ] ,
-                                          [ rdf:type owl:Restriction ;
-                                            owl:onProperty gsoc:hasQuality ;
-                                            owl:allValuesFrom gsoc:Nonphysical_Quality
                                           ] ;
-                          owl:disjointWith gsoc:Physical_Endurant ;
                           rdfs:comment "An endurant that does not occupy space directly, but might occupy space indirectly or not occupy space at all. Indirect spatial occupants have physical endurant parts or are ontologically dependent on physical endurants. Examples of things that indirectly occupy some space, due to such ontological dependence, include physical qualities (my height) and physical relators (reified physical relations). It even includes thoughts, poems, digital files, and datasets, whose existence is tied to being manifest in some physical object (brain, book, storage media). Also includes fictional entities such as unicorns, which must be so manifested to exist."@en ;
                           rdfs:label "Nonphysical Endurant"@en .
 
@@ -2038,27 +2017,19 @@ gsoc:Nonphysical_Morphologic_Feature rdf:type owl:Class ;
 
 ###  https://w3id.org/gso/common/Nonphysical_Quality
 gsoc:Nonphysical_Quality rdf:type owl:Class ;
-                         owl:equivalentClass [ owl:intersectionOf ( gsoc:Quality
-                                                                    [ rdf:type owl:Restriction ;
-                                                                      owl:onProperty gsoc:isQualityOf ;
-                                                                      owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                                                                      owl:onClass gsoc:Nonphysical_Endurant
-                                                                    ]
-                                                                  ) ;
-                                               rdf:type owl:Class
+                         owl:equivalentClass [ rdf:type owl:Restriction ;
+                                               owl:onProperty gsoc:isQualityOf ;
+                                               owl:someValuesFrom gsoc:Nonphysical_Endurant
                                              ] ;
                          rdfs:subClassOf gsoc:Quality ,
                                          [ rdf:type owl:Restriction ;
                                            owl:onProperty gsoc:isQualityOf ;
-                                           owl:allValuesFrom gsoc:Nonphysical_Endurant
+                                           owl:someValuesFrom gsoc:Nonphysical_Endurant
                                          ] ,
                                          [ rdf:type owl:Restriction ;
                                            owl:onProperty gsoc:isQualityOf ;
-                                           owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                                           owl:onClass gsoc:Nonphysical_Endurant
-                                         ] ;
-                         owl:disjointWith gsoc:Physical_Quality ,
-                                          gsoc:Temporal_Quality .
+                                           owl:allValuesFrom gsoc:Nonphysical_Endurant
+                                         ] .
 
 
 ###  https://w3id.org/gso/common/Nonphysical_Reference_System
@@ -2264,10 +2235,6 @@ gsoc:Perdurant rdf:type owl:Class ;
                                                                          owl:onClass gsoc:Temporal_Quality
                                                                        ]
                                                    ]
-                               ] ,
-                               [ rdf:type owl:Restriction ;
-                                 owl:onProperty gsoc:occupiesSpaceIndirectly ;
-                                 owl:allValuesFrom gsoc:Spatial_Region
                                ] ;
                rdfs:comment "A perdurant is something that is not fully present at any timepoint, in the sense that an event, process or temporal interval exists over time, while an endurant exists in time. Perdurants are  time regions, such as an interval or instant of time, or they are things that occur in time, such as events or processes. Perdurants have only perdurant parts, and can only have fixed qualities that have unchanging values (e.g. the duration of a time interval); if there is some quality that apparently changes for the perdurant, it is a fixed quality of a part of the perdurant, but is not a quality of the perdurant itself (e.g. the intensity of a process varies over the whole process, but has fixed values for certain time-indexed parts of the process)."@en ;
                rdfs:label "Perdurant"@en .
@@ -2363,20 +2330,14 @@ gsoc:Physical_Gap rdf:type owl:Class ;
 
 ###  https://w3id.org/gso/common/Physical_Quality
 gsoc:Physical_Quality rdf:type owl:Class ;
-                      owl:equivalentClass [ owl:intersectionOf ( gsoc:Quality
-                                                                 [ rdf:type owl:Restriction ;
-                                                                   owl:onProperty gsoc:isQualityOf ;
-                                                                   owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                                                                   owl:onClass gsoc:Physical_Endurant
-                                                                 ]
-                                                               ) ;
-                                            rdf:type owl:Class
+                      owl:equivalentClass [ rdf:type owl:Restriction ;
+                                            owl:onProperty gsoc:isQualityOf ;
+                                            owl:someValuesFrom gsoc:Physical_Endurant
                                           ] ;
                       rdfs:subClassOf gsoc:Quality ,
                                       [ rdf:type owl:Restriction ;
                                         owl:onProperty gsoc:isQualityOf ;
-                                        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                                        owl:onClass gsoc:Physical_Endurant
+                                        owl:someValuesFrom gsoc:Physical_Endurant
                                       ] ;
                       owl:disjointWith gsoc:Temporal_Quality ;
                       rdfs:comment "Quantifiers for dimensions of spatial regions or for location of spatial region in some reference frame."@en ;
@@ -2522,27 +2483,18 @@ gsoc:Proportion_Value rdf:type owl:Class ;
 
 ###  https://w3id.org/gso/common/Quality
 gsoc:Quality rdf:type owl:Class ;
-             owl:equivalentClass [ owl:intersectionOf ( gsoc:Inherant
-                                                        [ rdf:type owl:Restriction ;
-                                                          owl:onProperty gsoc:hasValue ;
-                                                          owl:someValuesFrom gsoc:Quality_Value
-                                                        ]
-                                                      ) ;
-                                   rdf:type owl:Class
-                                 ] ;
              rdfs:subClassOf gsoc:Inherant ,
                              [ rdf:type owl:Restriction ;
                                owl:onProperty gsoc:hasValue ;
                                owl:someValuesFrom gsoc:Quality_Value
                              ] ,
                              [ rdf:type owl:Restriction ;
-                               owl:onProperty gsoc:hasValue ;
-                               owl:allValuesFrom gsoc:Quality_Value
+                               owl:onProperty gsoc:isQualityOf ;
+                               owl:someValuesFrom gsoc:Particular
                              ] ,
                              [ rdf:type owl:Restriction ;
-                               owl:onProperty gsoc:isQualityOf ;
-                               owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                               owl:onClass gsoc:Particular
+                               owl:onProperty gsoc:hasValue ;
+                               owl:allValuesFrom gsoc:Quality_Value
                              ] ;
              owl:disjointWith gsoc:Quality_Value ,
                               gsoc:Role ;
@@ -3086,20 +3038,14 @@ gsoc:Temporal_Location rdf:type owl:Class ;
 
 ###  https://w3id.org/gso/common/Temporal_Quality
 gsoc:Temporal_Quality rdf:type owl:Class ;
-                      owl:equivalentClass [ owl:intersectionOf ( gsoc:Quality
-                                                                 [ rdf:type owl:Restriction ;
-                                                                   owl:onProperty gsoc:isQualityOf ;
-                                                                   owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                                                                   owl:onClass gsoc:Perdurant
-                                                                 ]
-                                                               ) ;
-                                            rdf:type owl:Class
+                      owl:equivalentClass [ rdf:type owl:Restriction ;
+                                            owl:onProperty gsoc:isQualityOf ;
+                                            owl:someValuesFrom gsoc:Perdurant
                                           ] ;
                       rdfs:subClassOf gsoc:Quality ,
                                       [ rdf:type owl:Restriction ;
                                         owl:onProperty gsoc:isQualityOf ;
-                                        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                                        owl:onClass gsoc:Perdurant
+                                        owl:someValuesFrom gsoc:Perdurant
                                       ] ;
                       rdfs:comment "Quality that specifies the temporal location or duration that is the extent of some TimeRegion"@en ;
                       rdfs:label "Temporal Quality"@en .
@@ -3189,18 +3135,11 @@ gsoc:Temporal_Void rdf:type owl:Class ;
 ###  https://w3id.org/gso/common/Time_Date_Value
 gsoc:Time_Date_Value rdf:type owl:Class ;
                      rdfs:subClassOf gsoc:Temporal_Value ,
-                                     [ rdf:type owl:Class ;
-                                       owl:unionOf ( [ rdf:type owl:Restriction ;
-                                                       owl:onProperty gsoc:hasDataValue ;
-                                                       owl:allValuesFrom xsd:date
-                                                     ]
-                                                     [ rdf:type owl:Restriction ;
-                                                       owl:onProperty gsoc:hasDataValue ;
-                                                       owl:allValuesFrom xsd:dateTime
-                                                     ]
-                                                   )
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty gsoc:hasDataValue ;
+                                       owl:allValuesFrom xsd:dateTime
                                      ] ;
-                     rdfs:label "A date or dateTime datatype"@en ;
+                     rdfs:label "dateTime datatype"@en ;
                      rdfs:seeAlso <time:GeneralDateTimeDescription> ;
                      skos:note "representation of date is simplified relative to OWL Time GeneralDateTimeDescription, but could replaced with OWL time elements in future update"@en .
 
