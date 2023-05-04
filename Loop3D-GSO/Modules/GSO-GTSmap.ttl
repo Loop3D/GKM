@@ -55,13 +55,16 @@ thors:component
 .
 thors:referencePoint
   rdfs:comment "gsoc:timeHasBeginning | gsoc:timeHasEnd some  gsoc:Temporal_Boundary. thors referencePOint are thors:EraBoundary objects. domain is referenc system." ;
-  owl:equivalentProperty gsoc:timeHasBeginning ;
+  rdfs:comment "owl:equivalentProperty gsoc:timeHasBeginning ";
+  rdfs:subPropertyOf gsoc:timeHasBeginning ;
 .
 time:Instant
-  owl:sameAs gsoc:Time_Instant ;
+  rdfs:comment "owlsameAs gsoc:Time_Instant";
+    rdfs:subClassOf gsoc:Time_Instant ;
 .
 time:ProperInterval
-  owl:sameAs gsoc:Time_Interval ;
+  rdfs:comment "owl:sameAs gsoc:Time_Interval" ;
+  rdfs:subClassOf gsoc:Time_Interval
 .
 time:TRS
   rdfs:subClassOf gsoc:Temporal_Reference_System ;
@@ -89,11 +92,11 @@ time:intervalDisjoint
   rdfs:subPropertyOf gsoc:timeDisjoint ;
 .
 time:intervalDuring
-  rdfs:comment " OWL Time time:intervalDuring is narrower, only relates ProperIntervals."@en ;
+  rdfs:comment "OWL Time time:intervalDuring is narrower, only relates ProperIntervals."@en ;
   owl:subPropertyOf gsoc:timeDuring ;
 .
 time:intervalEquals
-  rdfs:comment "OWL Time time:intervalEquals is narrower-only relates intervals.. GSO allow interval or instant, direct or indirect." ;
+  rdfs:comment "OWL Time time:intervalEquals is narrower-only relates intervals. GSO allow interval or instant, direct or indirect." ;
   owl:subPropertyOf gsoc:timeEquivalentTo ;
 .
 time:intervalFinishedBy
@@ -127,9 +130,11 @@ gsoc:Time_Numeric_Value
 .
 gsoc:hostedBy
   rdf:type owl:ObjectProperty ;
+  rdfs:comment "this doesn't have any direct mapping into the owl:time, gts:, thors: view of things. It emerges from Boyan's modeling of 'features', which is different from the OGC concept. In practical terms, for the one direct mapping I've tried, it maps to gts:stratotype in the context of a geologic time boundary.";
 .
-gsoc:nextTimeInterval
-  owl:equivalentProperty time:intervalMeets ;
+time:intervalMeets 
+	rdfs:subPropertyOf gsoc:nextTimeInterval;
+	rdfs:comment "gsoc:nextTimeInterval  owl:equivalentProperty time:intervalMeets ;";
 .
 gsoc:timeContains
   rdf:type owl:ObjectProperty ;
@@ -155,15 +160,18 @@ gst:Supereon
 .
 gsgu:Chronostratigraphic_Unit
   rdf:type owl:Thing ;
-  <http://www.w3.org/2000/01/rdf-schema#Comment:> "no gts: equivalent?" ;
+  rdfs:comment "no gts: equivalent?" ;
 .
 gsog:Generic_Geologic_Time_Unit
   rdf:type owl:Thing ;
+    rdfs:comment "no gts: equivalent, but broadly corresponds to gts:GeochronologicEra" ;
 .
 :ontology
   rdf:type owl:Ontology ;
   dct:created "2021-12-18"^^xsd:date ;
+  dct:modified "2023-05-04 SMR change owl:sameAs to rdfs:subClassOf "@en 
   rdfs:comment "construct to map gso time classes and properties to owl:time, gts, and thors" ;
+  skos:historyNote "change owl:sameAs to rdfs:subClassOf "@en ;
   owl:imports <http://resource.geosciml.org/ontology/timescale/gts> ;
   owl:imports <http://resource.geosciml.org/ontology/timescale/thors> ;
   owl:imports <http://www.w3.org/2006/time> ;
