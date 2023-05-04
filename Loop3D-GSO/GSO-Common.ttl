@@ -2148,7 +2148,7 @@ gsoc:Temporal_Void
 .
 gsoc:Time_Date_Value
   rdf:type owl:Class ;
-  rdfs:label "A date or dateTime datatype"@en ;
+  rdfs:label "A temporal position represented with and xml date or dateTime datatype"@en ;
   rdfs:seeAlso <time:GeneralDateTimeDescription> ;
   rdfs:subClassOf gsoc:Temporal_Value ;
   rdfs:subClassOf [
@@ -2298,7 +2298,7 @@ gsoc:Time_Interval_Location
 .
 gsoc:Time_Numeric_Value
   rdf:type owl:Class ;
-  rdfs:comment "Quality that specifies a temporal location with a temporal coordinate or an xsd dateTime"@en ;
+  rdfs:comment "Quality that specifies a temporal location with a temporal coordinate"@en ;
   rdfs:label "Time Instant Value "@en ;
   rdfs:seeAlso <time:numericPosition> ;
   rdfs:subClassOf gsoc:Temporal_Value ;
@@ -2312,7 +2312,7 @@ gsoc:Time_Region
   rdf:type owl:Class ;
   rdfs:comment "A chunk of time, either an instant or interval, with a temporal location quality."@en ;
   rdfs:label "Time Region"@en ;
-  rdfs:seeAlso <time:TemporalEntity> ;
+  rdfs:seeAlso time:TemporalEntity ;
   rdfs:subClassOf gsoc:Perdurant ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
@@ -2351,7 +2351,7 @@ gsoc:Time_Region
 .
 gsoc:Uncertainty
   rdf:type owl:Class ;
-  rdfs:comment "quantification of the uncertainty on a measured value; Include a gsoc:determinedBy to indicate the statistical procedure to determine undertinty.  Could be a duration if centered on the reported value, or an interval with lower and upper bound on undertainty interval."@en ;
+  rdfs:comment "quantification of the uncertainty on a measured value; Include a gsoc:determinedBy to indicate the statistical procedure to determine undertinty.  Could be a duration if centered on the reported value, or an interval with lower and upper bound on the uncertainty interval."@en ;
   rdfs:label "Uncertainty"@en ;
   rdfs:subClassOf gsoc:Nonphysical_Quality ;
   rdfs:subClassOf [
@@ -2615,7 +2615,7 @@ gsoc:hasExample
 .
 gsoc:hasInherant
   rdf:type owl:ObjectProperty ;
-  rdfs:comment "Inverse relation to inheresIn - directed relation between a carrier and the inherant it carries. E.g. between a rock body and a thickness."@en ;
+  rdfs:comment "Inverse relation to inheresIn - directed relation between a carrier and the inherant it carries. E.g. between a rock body and a thickness. Inherent can be a Quality, Quality_Value, or a Role."@en ;
   rdfs:range gsoc:Inherant ;
   rdfs:subPropertyOf gsoc:hasDependent ;
   owl:inverseOf gsoc:inheresIn ;
@@ -2757,8 +2757,14 @@ gsoc:hasStaticValue
 .
 gsoc:hasUOM
   rdf:type owl:ObjectProperty ;
-  rdfs:comment "top level property for assigning property values; subtype for associating values with measurement units "@en ;
-  rdfs:domain gsoc:Numeric_Value ;
+  rdfs:comment "quality of a numeric measured value that asserts the measurement units"@en ;
+  rdfs:domain [
+      rdf:type owl:Class ;
+      owl:unionOf (
+          gsoc:Numeric_Value
+          gsoc:Time_Numeric_Value
+        ) ;
+    ] ;
   rdfs:range gsoc:Unit_Of_Measure ;
   rdfs:subPropertyOf gsoc:hasQuality ;
 .
@@ -3457,7 +3463,7 @@ gsoc:timeMeets
 .
 gsoc:timeMetBy
   rdf:type owl:ObjectProperty ;
-  rdfs:comment "Source TimeRegion starts at the end of the target TimeRegion; there is no intervening time, and the boundary instants are coincident;  inverse of meets"@en ;
+  rdfs:comment "Source Time_Region starts at the end of the target TimeRegion; there is no intervening time, and the boundary instants are coincident;  inverse of meets"@en ;
   rdfs:domain [
       rdf:type owl:Class ;
       owl:unionOf (
