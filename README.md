@@ -3,6 +3,7 @@
 Release 1.0.2 OWL source Dataset in text/ttl files :  [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4743221.svg)](https://zenodo.org/record/4743221)
 
 2021-05-11; Add version 1.0 number in URIs; they will resolve to the current bug fix (e.g. 1.0.2)
+2023-11-14; update pyLODE to generate correct anchors so links to classes work.
 
 This repository contains public work items related to development of the ontology and knowledge base for the Loop 3D geology project.
 
