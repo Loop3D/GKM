@@ -1,16 +1,16 @@
 # Geoscience Knowledge manager
 
-Current release OWL source Dataset in text/ttl files :  [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4743205.svg)](https://doi.org/10.5281/zenodo.4743205)
+Release 1.0.2 OWL source Dataset in text/ttl files :  [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4743221.svg)](https://zenodo.org/record/4743221)
 
-This is the master branch for current development. Release versions are in tags.
+2021-05-11; Add version 1.0 number in URIs; they will resolve to the current bug fix (e.g. 1.0.2)
 
 This repository contains public work items related to development of the ontology and knowledge base for the Loop 3D geology project.
 
 Ontology developed by Boyan M. Brodaric and Stephen M. Richard.
 
-The wiki for this repository contains notes from team meetings. 
+The [wiki for this repository](https://github.com/Loop3D/GKM/wiki) contains notes from team meetings. 
 
-Please add issues or comments on the ontology in the issue tracker.
+Please add issues or comments on the ontology in the [issue tracker](https://github.com/Loop3D/GKM/issues).
 
 
 ## File:
@@ -34,5 +34,3 @@ Please add issues or comments on the ontology in the issue tracker.
 #### other files 
  - **GeologyScenarioForTesting.pptx** (and .pdf) invented cross section that is used for various example documents
  - **EasternRinconMountainsXSec.png** schematic cross section of Eastern Rincon Mountains, Arizona, used for various example documents
-
-test push, try pylode
