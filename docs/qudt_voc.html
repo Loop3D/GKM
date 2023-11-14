@@ -1,14 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html>
+  <head>
     <title>GSO profile of QUDT units of measure</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    
     <style>
         #pylode {
             position: fixed;
             top: 130px;
-            left: -60px;
+            left: -80px;
             font-size: small;
             transform: rotate(-90deg);
             color: grey;
@@ -22,15 +20,44 @@
         #pylode a:hover {
             color: #333;
         }
+        #pylode #p {
+            color: #329545;
+        }
+        #pylode #y {
+            color: #f9cb33;
+        }
+        #pylode #version {
+            font-size: 1.0em;
+        }
 
         .cardinality {
             font-style: italic;
             color: #aa00aa;
         }
 
+        dl {
+            /*border: 1px solid navy;*/
+            /*padding:5px;*/
+        }
+
         dt {
             font-weight: bold;
-            padding: 5px 0 5px 0;
+            padding: 0;
+        }
+
+        dd {
+            margin-bottom: 10px;
+            padding-top: 7px;
+        }
+
+        #metadata ul,
+        #classes ul {
+            list-style-type: none;
+        }
+
+        #metadata ul li,
+        #classes ul li {
+            margin-left: -40px;
         }
 
         ul.hlist {
@@ -92,14 +119,13 @@
         }
         h3 {
             font: 120% sans-serif;
-            margin-top: 3px;
+            margin-top: 20px;
             padding-bottom: 5px;
             border-bottom: 1px solid navy;
         }
         h4 { font: bold 100% sans-serif }
         h5 { font: italic 100% sans-serif }
         h6 { font: small-caps 100% sans-serif }
-
 
         body {
             padding: 2em 70px 2em 70px;
@@ -132,10 +158,9 @@
         .sup-ap,
         .sup-p,
         .sup-ni,
-        .sup-cp,
-        .sup-cl {
+        .sup-con,
+        .sup-col {
             cursor:help;
-            margin-left: 3px;
         }
 
         .sup-c {
@@ -166,14 +191,17 @@
             color:brown;
         }
 
-        .sup-cp {
+        .sup-con {
             color:orange;
         }
 
-        .sup-cl {
+        .sup-col {
             color:darkred;
         }
 
+        sup {
+            margin-left: -3px;
+        }
         code {
             font-size: large;
             color: darkred;
@@ -184,18 +212,111 @@
             color: #336;
             text-decoration: none;
         }
-    </style>
-    
-    <script type="application/ld+json">
-      [
+
+#toc {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 2;
+    height: 100%;
+    overflow-y: auto;
+    padding: 10px;
+    border: solid 1px navy;
+    font-size: small;
+    width: 180px;
+}
+#toc h3 {
+    margin-top: 5px;
+}
+
+#toc ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+#toc .first > li {
+    margin-top: 5px;
+}
+
+#toc .second,
+#toc .third {
+    padding-left: 10px;
+}
+
+#content {
+    width: calc(100% - 150px);
+}
+
+.hover_property {
+    cursor: help;
+    text-decoration: none;
+    border-bottom: dashed 1px;
+}
+
+.setclass {
+    list-style-type: none;
+}
+	</style>
+    <link href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABhklEQVQ4jbWPzStEURjG3yQLirlGKUnKFO45Z+SjmXvnnmthQcpCoVhYmD/AwmJiI3OvZuZc2U3UlKU0/gAslMw9JgvhHxAr2fko7r0jHSsl+TgbTz2Lt5731/MASEiJW9ONml2QyX6rsGalmnT74v8BDf12hxJfpV8d1uwNKUBYszabdFv84L8B9X0rESVmmUup2fme0cVhJWaZHw4NWL1SewEAfDe6H3Dy6Ll456WEJsRZS630MwCAOI20ei5OBpxse5zcBZw8eS4uPpfIuDiCainIg9umBCU0GZzgLZ9Hn31OgoATL+CkLDGB5H1OKj4nFd/FBxUXJ0UZNb4edw/6nLyJXaj5FeCVyPLNIVmYK8TG1IwWb16L1gEACAFV90ftoT8bdOX0EeyY99gxBXZMgRz6qGb1KantAACI0UvE6F5XJqEjpsdURouI0Vt5gGOUkUNnPu7ObGIIMfNaGqDmjDRi9FZldF1lRgYzeqUyeoiY4ag5Iy3RgOYRM8+/M2bG8efsO4hGrpmJseyMAAAAAElFTkSuQmCC" rel="icon" sizes="16x16" type="image/png">
+    <link href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAC40lEQVRYhe2UT0hUQRzHp6Iss1B3VZKIDbbdfW9mnoi4f3zzjkJQeOgS0SEIb1EWBGGlLLu460zQPQM1unUIIjA6rfpm6ZAhHjoIRVQUFUlEbG+euTsdXG1d3VL3bVD4g+9h+L35fT/8fvN7ADgY9aHY5fpIvK82HO9ysu66wxWOzbkjcekKx0a2ALYA/n2AGi3a6ArFezcidziecQygNhhrcUficjP6PwBqtGijKxy/thnVBePHywYoDsFhl53GV8SEcsTx4usCMLUewTVpc23BNvEzm6Neyf1+KcG2vwqwUjgrOJq2JmHftwmkVBRGTvncFodnbI7vChO/FRznCmHsNM7aHM9Yk7Df5iqsLMw9sMNOK2g+jS4IEz0UJv4iuJZb2RltWnB4UZqH6ioGAgAAGe5vtiZhtzDx7OoRadLmeM7m6IRjhnLMW2Vx1bA5GhAmnhIcz6/xNj4Ujsky8UspwfayjDPjsF2Y6L7N8Vzx/BfP+KPg6LbgSqd8DnfJW2CnbaLhfH5ephpqygJYvQU4Z3P82TLRsDDhUTnmrSq+Y3N0Mg+Xldy/zwEAnLMWZ3pHpNExmfLs/t0dOdVcbT0JeKxUwFP2VljjqiE47Jp53LTXNxhsUZjerTByXWX6VZWRs/4bIQ2ACv+UAomgDzLCISNZxAxZKMhIDjLy1JfsaK+I+eGBUBNk5E2x8RogX/PdcDZUqieWTSh5D6nOVKqfhoycUmlHFFIyu5RXqf7AcQDISCpv/tqbMBqK883RtmpISRoxQyJKPgGn3wNk5NEigDFa6hslqV/Kj+FdBQD0bshIDlKSLlVcoWQo36UhR80BAMB73lulMn0EMpJTqD6qJiOt3mho/8GbkT2BZNgDB/V+RI0fkOrT3kRIVQbaDizJm2hdNbINBxwk5xAj3yEjuV9rZ1iIkgxixkLBA83mz8uCjLwoGwAx0vOnFSy5mtR4VTaAQvVORMnwZgSpzkrV/QmdE2tKe46+MQAAAABJRU5ErkJggg==" rel="icon" sizes="32x32" type="image/png">
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <script id="schema.org" type="application/ld+json">
+[
+  {
+    "@id": "https://w3id.org/gso/1.0/common/stephen_richard",
+    "https://schema.org/identifier": [
+      {
+        "@id": "https://orcid.org/0000-0001-6041-5302"
+      }
+    ],
+    "https://schema.org/name": [
+      {
+        "@value": "Dr. Stephen M. Richard"
+      }
+    ]
+  },
+  {
+    "@id": "https://orcid.org/0000-0002-8742-7730",
+    "https://schema.org/name": [
+      {
+        "@value": "Dr. Nicholas J. Car"
+      }
+    ],
+    "https://schema.org/url": [
+      {
+        "@id": "https://surroundaustralia.com"
+      }
+    ]
+  },
   {
     "@id": "https://w3id.org/gso/1.0/qudt/voc/ontology",
     "@type": [
       "https://schema.org/DefinedTermSet"
     ],
+    "https://schema.org/creator": [
+      {
+        "@id": "https://w3id.org/gso/1.0/common/stephen_richard"
+      },
+      {
+        "@id": "https://orcid.org/0000-0002-8742-7730"
+      }
+    ],
+    "https://schema.org/dateCreated": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#date",
+        "@value": "2020-12-04"
+      }
+    ],
+    "https://schema.org/dateModified": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#date",
+        "@value": "2021-02-03"
+      }
+    ],
     "https://schema.org/description": [
       {
-        "@value": "<p>Units from the QUDT ontology used by GSO. Does not import axioms unrelated to organization of the subclass hiearchy</p>"
+        "@language": "en",
+        "@value": "Units from the QUDT ontology used by GSO. Does not import axioms unrelated to organization of the subclass hiearchy"
       }
     ],
     "https://schema.org/license": [
@@ -205,571 +326,753 @@
     ],
     "https://schema.org/name": [
       {
+        "@language": "en",
         "@value": "GSO profile of QUDT units of measure"
+      }
+    ],
+    "https://schema.org/publisher": [
+      {
+        "@id": "http://loop3d.org/"
       }
     ]
   }
 ]
-    </script>
-</head>
-<body>
-  <div id="pylode">made by <a href="http://github.com/rdflib/pyLODE">
-    <span style="color:#329545;">p</span><span style="color:#f9cb33;">y</span>LODE</a>
-    <span style="font-size:smaller;">2.8.6</span>
-  </div>
-  <h1>GSO profile of QUDT units of measure</h1>
-<section id="metadata">
-    <h2 style="display:none;">Metadata</h2>
-    <dl>
-        <dt>URI</dt>
-        <dd><code>https://w3id.org/gso/1.0/qudt/voc/ontology</code></dd>
-        <dt><a class="proplink" href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/publisher">Publisher</a>(s)</dt>
-        <dd>
-            
-    None<br/>
-        </dd>
-        <dt><a class="proplink" href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/creator">Creator</a>(s)</dt>
-        <dd>
-            
-    <a href="https://orcid.org/0000-0001-6041-5302">Dr. Stephen M. Richard</a>
-    <a href="https://orcid.org/0000-0001-6041-5302"><svg width="15px" height="15px" viewBox="0 0 72 72" version="1.1"
-    xmlns="http://www.w3.org/2000/svg"
-    xmlns:xlink="http://www.w3.org/1999/xlink">
-    <title>Orcid logo</title>
-    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="hero" transform="translate(-924.000000, -72.000000)" fill-rule="nonzero">
-            <g id="Group-4">
-                <g id="vector_iD_icon" transform="translate(924.000000, 72.000000)">
-                    <path d="M72,36 C72,55.884375 55.884375,72 36,72 C16.115625,72 0,55.884375 0,36 C0,16.115625 16.115625,0 36,0 C55.884375,0 72,16.115625 72,36 Z" id="Path" fill="#A6CE39"></path>
-                    <g id="Group" transform="translate(18.868966, 12.910345)" fill="#FFFFFF">
-                        <polygon id="Path" points="5.03734929 39.1250878 0.695429861 39.1250878 0.695429861 9.14431787 5.03734929 9.14431787 5.03734929 22.6930505 5.03734929 39.1250878"></polygon>
-                        <path d="M11.409257,9.14431787 L23.1380784,9.14431787 C34.303014,9.14431787 39.2088191,17.0664074 39.2088191,24.1486995 C39.2088191,31.846843 33.1470485,39.1530811 23.1944669,39.1530811 L11.409257,39.1530811 L11.409257,9.14431787 Z M15.7511765,35.2620194 L22.6587756,35.2620194 C32.49858,35.2620194 34.7541226,27.8438084 34.7541226,24.1486995 C34.7541226,18.1301509 30.8915059,13.0353795 22.4332213,13.0353795 L15.7511765,13.0353795 L15.7511765,35.2620194 Z" id="Shape"></path>
-                        <path d="M5.71401206,2.90182329 C5.71401206,4.441452 4.44526937,5.72914146 2.86638958,5.72914146 C1.28750978,5.72914146 0.0187670918,4.441452 0.0187670918,2.90182329 C0.0187670918,1.33420133 1.28750978,0.0745051096 2.86638958,0.0745051096 C4.44526937,0.0745051096 5.71401206,1.36219458 5.71401206,2.90182329 Z" id="Path"></path>
-                    </g>
-                </g>
-            </g>
-        </g>
-    </g>
-</svg></a><br/>
-            
-    <a href="https://orcid.org/0000-0002-8742-7730">Dr. Nicholas J. Car</a>
-    <a href="https://orcid.org/0000-0002-8742-7730"><svg width="15px" height="15px" viewBox="0 0 72 72" version="1.1"
-    xmlns="http://www.w3.org/2000/svg"
-    xmlns:xlink="http://www.w3.org/1999/xlink">
-    <title>Orcid logo</title>
-    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="hero" transform="translate(-924.000000, -72.000000)" fill-rule="nonzero">
-            <g id="Group-4">
-                <g id="vector_iD_icon" transform="translate(924.000000, 72.000000)">
-                    <path d="M72,36 C72,55.884375 55.884375,72 36,72 C16.115625,72 0,55.884375 0,36 C0,16.115625 16.115625,0 36,0 C55.884375,0 72,16.115625 72,36 Z" id="Path" fill="#A6CE39"></path>
-                    <g id="Group" transform="translate(18.868966, 12.910345)" fill="#FFFFFF">
-                        <polygon id="Path" points="5.03734929 39.1250878 0.695429861 39.1250878 0.695429861 9.14431787 5.03734929 9.14431787 5.03734929 22.6930505 5.03734929 39.1250878"></polygon>
-                        <path d="M11.409257,9.14431787 L23.1380784,9.14431787 C34.303014,9.14431787 39.2088191,17.0664074 39.2088191,24.1486995 C39.2088191,31.846843 33.1470485,39.1530811 23.1944669,39.1530811 L11.409257,39.1530811 L11.409257,9.14431787 Z M15.7511765,35.2620194 L22.6587756,35.2620194 C32.49858,35.2620194 34.7541226,27.8438084 34.7541226,24.1486995 C34.7541226,18.1301509 30.8915059,13.0353795 22.4332213,13.0353795 L15.7511765,13.0353795 L15.7511765,35.2620194 Z" id="Shape"></path>
-                        <path d="M5.71401206,2.90182329 C5.71401206,4.441452 4.44526937,5.72914146 2.86638958,5.72914146 C1.28750978,5.72914146 0.0187670918,4.441452 0.0187670918,2.90182329 C0.0187670918,1.33420133 1.28750978,0.0745051096 2.86638958,0.0745051096 C4.44526937,0.0745051096 5.71401206,1.36219458 5.71401206,2.90182329 Z" id="Path"></path>
-                    </g>
-                </g>
-            </g>
-        </g>
-    </g>
-</svg></a><br/>
-        </dd>
-        <dt><a class="proplink" href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/created">Created</a></dt>
-        <dd>2020-12-04</dd>
-        <dt><a class="proplink" href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/modified">Modified</a></dt>
-        <dd>2021-02-03</dd>
-        <dt>Imports</dt>
-        <dd>
-            <a href="https://w3id.org/gso/1.0/common/ontology">gsoc:ontology</a><br/>
-            <a href="https://w3id.org/gso/1.0/skos/annotation/ontology">sks:ontology</a><br/>
-        </dd>
-        <dt>License</dt>
-        <dd><a href="https://creativecommons.org/licenses/by/4.0/legalcode">https://creativecommons.org/licenses/by/4.0/legalcode</a></dd>
-        <dt>Ontology RDF</dt>
-        <dd><a href="E:\GitHub\Loop3DGKM\Loop3D-GSO\Modules\GSO-QUDTvoc.ttl">RDF (turtle)</a></dd>
-    </dl>
-    <h2>Description</h2>
-    <div id="description">
-        <p>Units from the QUDT ontology used by GSO. Does not import axioms unrelated to organization of the subclass hiearchy</p>
-    </div>
-</section>
-<section id="toc">
-    <h2>Table of Contents</h2>
-    <ol>
-        <li><a href="#classes">Classes</a></li>
-        <li><a href="#annotationproperties">Annotation Properties</a></li>
-        <li><a href="#namedindividuals">Named Individuals</a></li>
-        <li><a href="#namespaces">Namespaces</a></li>
-        <li><a href="#legend">Legend</a></li>
-    </ol>
-</section>
-<section id="overview">
-    <h2>Overview</h2>
-    <div class="figure">
-        <div style="width:500px; height:50px; background-color: lightgrey; border:solid 2px grey; padding:10px;margin-bottom:5px; text-align:center;">Pictures say 1,000 words</div>
-        <div class="caption"><strong>Figure 1:</strong> Ontology overview</div>
-    </div>
-</section>
-  <section id="classes">
-    <h2>Classes <span style="float:right; font-size:smaller;"><a href="">&uparrow;</a></span></h2>
-    <ul class="hlist">
-        <li><a href="#Degree">Degree</a></li>
-        <li><a href="#MagneticSusceptibility">Magnetic Susceptibility</a></li>
-        <li><a href="#Metre">Metre</a></li>
-        <li><a href="#MillionYears">Million Years</a></li>
-        <li><a href="#Percent">Percent</a></li>
-        <li><a href="#grampercubiccentimetre">gram per cubic centimetre</a></li>
-        <li><a href="#kilogrampercubicmetre">kilogram per cubic metre</a></li>
-        <li><a href="#millimetre">millimetre</a></li>
-    </ul>
-    <div class="entity class" id="Degree">
-        <h3>Degree<sup title="class" class="sup-c">c</sup></h3>
-        <table>
-            <tr>
-                <th>URI</th>
-                <td><code>http://qudt.org/vocab/unit/DEG</code></td>
-            </tr>
-            <tr>
-                <th>Is Defined By</th>
-                <td>
-                    http://qudt.org/2.1/vocab/unit
-                </td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>
-                    <p>A degree (in full, a degree of arc, arc degree, or arcdegree), usually denoted by (^\circ) (the degree symbol), is a measurement of plane angle, representing 1/360 of a full rotation; one degree is equivalent to  (2\pi /360 rad), (0.017453 rad). It is not an SI unit, as the SI unit for angles is radian, but is an accepted SI unit.</p>
-                </td>
-            </tr>
-            <tr>
-                <th>Super-classes</th>
-                <td>
-                    <a href="https://w3id.org/gso/1.0/common/Unit_Of_Measure_Value">gsoc:Unit_Of_Measure_Value</a><sup class="sup-c" title="class">c</sup><br/>
-                </td>
-            </tr>
-        </table>
-    </div>
-    <div class="entity class" id="grampercubiccentimetre">
-        <h3>gram per cubic centimetre<sup title="class" class="sup-c">c</sup></h3>
-        <table>
-            <tr>
-                <th>URI</th>
-                <td><code>http://qudt.org/vocab/unit/GM-PER-CentiM3</code></td>
-            </tr>
-            <tr>
-                <th>Is Defined By</th>
-                <td>
-                    http://qudt.org/2.1/vocab/unit
-                </td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>
-                    <p>0,001-fold of the SI base unit kilogram divided by the 0.000 001-fold of the power of the SI base unit metre with the exponent 3. Abbreviation g.cm-3</p>
-                </td>
-            </tr>
-            <tr>
-                <th>Super-classes</th>
-                <td>
-                    <a href="https://w3id.org/gso/1.0/common/Unit_Of_Measure_Value">gsoc:Unit_Of_Measure_Value</a><sup class="sup-c" title="class">c</sup><br/>
-                </td>
-            </tr>
-        </table>
-    </div>
-    <div class="entity class" id="kilogrampercubicmetre">
-        <h3>kilogram per cubic metre<sup title="class" class="sup-c">c</sup></h3>
-        <table>
-            <tr>
-                <th>URI</th>
-                <td><code>http://qudt.org/vocab/unit/KiloGM-PER-M3</code></td>
-            </tr>
-            <tr>
-                <th>Is Defined By</th>
-                <td>
-                    http://qudt.org/2.1/vocab/unit
-                </td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>
-                    <p>Kilogram per cubic metre is an SI derived unit of density, defined by mass in kilograms divided by volume in cubic metres. The official SI symbolic abbreviation is (kg \cdot m^{-3}), or equivalently either (kg/m^3).</p>
-                </td>
-            </tr>
-            <tr>
-                <th>Super-classes</th>
-                <td>
-                    <a href="https://w3id.org/gso/1.0/common/Unit_Of_Measure_Value">gsoc:Unit_Of_Measure_Value</a><sup class="sup-c" title="class">c</sup><br/>
-                </td>
-            </tr>
-        </table>
-    </div>
-    <div class="entity class" id="Metre">
-        <h3>Metre<sup title="class" class="sup-c">c</sup></h3>
-        <table>
-            <tr>
-                <th>URI</th>
-                <td><code>http://qudt.org/vocab/unit/M</code></td>
-            </tr>
-            <tr>
-                <th>Is Defined By</th>
-                <td>
-                    http://qudt.org/2.1/vocab/unit
-                </td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>
-                    <p>The metric and SI base unit of distance.  The 17th General Conference on Weights and Measures in 1983 defined the meter as that distance that makes the speed of light in a vacuum equal to exactly 299 792 458 meters per second. The speed of light in a vacuum, (c), is one of the fundamental constants of nature. The meter is equal to approximately 1.093 613 3 yards, 3.280 840 feet, or 39.370 079 inches.</p>
-                </td>
-            </tr>
-            <tr>
-                <th>Super-classes</th>
-                <td>
-                    <a href="https://w3id.org/gso/1.0/common/Unit_Of_Measure_Value">gsoc:Unit_Of_Measure_Value</a><sup class="sup-c" title="class">c</sup><br/>
-                </td>
-            </tr>
-        </table>
-    </div>
-    <div class="entity class" id="MillionYears">
-        <h3>Million Years<sup title="class" class="sup-c">c</sup></h3>
-        <table>
-            <tr>
-                <th>URI</th>
-                <td><code>http://qudt.org/vocab/unit/MegaYR</code></td>
-            </tr>
-            <tr>
-                <th>Is Defined By</th>
-                <td>
-                    http://qudt.org/2.1/vocab/unit
-                </td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>
-                    <p>a unit of time equal to one million, or 1 E6 yr., measured from 1950 as 'present'</p>
-                </td>
-            </tr>
-            <tr>
-                <th>Super-classes</th>
-                <td>
-                    <a href="https://w3id.org/gso/1.0/common/Unit_Of_Measure_Value">gsoc:Unit_Of_Measure_Value</a><sup class="sup-c" title="class">c</sup><br/>
-                </td>
-            </tr>
-        </table>
-    </div>
-    <div class="entity class" id="millimetre">
-        <h3>millimetre<sup title="class" class="sup-c">c</sup></h3>
-        <table>
-            <tr>
-                <th>URI</th>
-                <td><code>http://qudt.org/vocab/unit/MilliM</code></td>
-            </tr>
-            <tr>
-                <th>Is Defined By</th>
-                <td>
-                    http://qudt.org/2.1/vocab/unit
-                </td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>
-                    <p>The millimetre (International spelling as used by the International Bureau of Weights and Measures) or millimeter (American spelling) (SI unit symbol mm) is a unit of length in the metric system, equal to one thousandth of a metre, which is the SI base unit of length. It is equal to 1000 micrometres or 1000000 nanometres. A millimetre is equal to exactly 5/127 (approximately 0.039370) of an inch.</p>
-                </td>
-            </tr>
-            <tr>
-                <th>Super-classes</th>
-                <td>
-                    <a href="https://w3id.org/gso/1.0/common/Unit_Of_Measure_Value">gsoc:Unit_Of_Measure_Value</a><sup class="sup-c" title="class">c</sup><br/>
-                </td>
-            </tr>
-        </table>
-    </div>
-    <div class="entity class" id="Percent">
-        <h3>Percent<sup title="class" class="sup-c">c</sup></h3>
-        <table>
-            <tr>
-                <th>URI</th>
-                <td><code>http://qudt.org/vocab/unit/PERCENT</code></td>
-            </tr>
-            <tr>
-                <th>Is Defined By</th>
-                <td>
-                    http://qudt.org/2.1/vocab/unit
-                </td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>
-                    <p>fraction of a whole, expressed as a fraction of 100, a unitless ratio value</p>
-                </td>
-            </tr>
-            <tr>
-                <th>Super-classes</th>
-                <td>
-                    <a href="https://w3id.org/gso/1.0/common/Unit_Of_Measure_Value">gsoc:Unit_Of_Measure_Value</a><sup class="sup-c" title="class">c</sup><br/>
-                </td>
-            </tr>
-        </table>
-    </div>
-    <div class="entity class" id="MagneticSusceptibility">
-        <h3>Magnetic Susceptibility<sup title="class" class="sup-c">c</sup></h3>
-        <table>
-            <tr>
-                <th>URI</th>
-                <td><code>http://qudt.org/vocab/unit/SUSCEPTIBILITY_MAG</code></td>
-            </tr>
-            <tr>
-                <th>Is Defined By</th>
-                <td>
-                    http://qudt.org/2.1/vocab/unit
-                </td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>
-                    <p>Magnetic susceptibility is a dimensionless proportionality constant that indicates the degree of magnetization of a material in response to an applied magnetic field.  Here M = chi * H. Where M is the magnetization of the material (the magnetic dipole moment per unit volume), measured in amperes per meter, and H is the magnetic field strength, also measured in amperes per meter. Chi is therefore a dimensionless quantity.</p>
-                </td>
-            </tr>
-            <tr>
-                <th>Super-classes</th>
-                <td>
-                    <a href="https://w3id.org/gso/1.0/common/Unit_Of_Measure_Value">gsoc:Unit_Of_Measure_Value</a><sup class="sup-c" title="class">c</sup><br/>
-                </td>
-            </tr>
-        </table>
-    </div>
-</section>
-<section id="annotationproperties">
-    <h2>Annotation Properties <span style="float:right; font-size:smaller;"><a href="">&uparrow;</a></span></h2>
-    <ul class="hlist">
-        <li><a href="#created">created</a></li>
-        <li><a href="#creator">creator</a></li>
-        <li><a href="#description">description</a></li>
-        <li><a href="#modified">modified</a></li>
-        <li><a href="#publisher">publisher</a></li>
-        <li><a href="#relation">relation</a></li>
-        <li><a href="#uri">uri</a></li>
-        <li><a href="#altLabel">altLabel</a></li>
-        <li><a href="#definition">definition</a></li>
-        <li><a href="#prefLabel">prefLabel</a></li>
-    </ul>
-    <div class="entity property" id="created">
-        <h3>created<sup title="annotation property" class="sup-ap">ap</sup></h3>
-        <table>
-            <tr>
-                <th>URI</th>
-                <td><code>http://purl.org/dc/terms/created</code></td>
-            </tr>
-        </table>
-    </div>
-    <div class="entity property" id="creator">
-        <h3>creator<sup title="annotation property" class="sup-ap">ap</sup></h3>
-        <table>
-            <tr>
-                <th>URI</th>
-                <td><code>http://purl.org/dc/terms/creator</code></td>
-            </tr>
-        </table>
-    </div>
-    <div class="entity property" id="description">
-        <h3>description<sup title="annotation property" class="sup-ap">ap</sup></h3>
-        <table>
-            <tr>
-                <th>URI</th>
-                <td><code>http://purl.org/dc/terms/description</code></td>
-            </tr>
-        </table>
-    </div>
-    <div class="entity property" id="modified">
-        <h3>modified<sup title="annotation property" class="sup-ap">ap</sup></h3>
-        <table>
-            <tr>
-                <th>URI</th>
-                <td><code>http://purl.org/dc/terms/modified</code></td>
-            </tr>
-        </table>
-    </div>
-    <div class="entity property" id="publisher">
-        <h3>publisher<sup title="annotation property" class="sup-ap">ap</sup></h3>
-        <table>
-            <tr>
-                <th>URI</th>
-                <td><code>http://purl.org/dc/terms/publisher</code></td>
-            </tr>
-        </table>
-    </div>
-    <div class="entity property" id="relation">
-        <h3>relation<sup title="annotation property" class="sup-ap">ap</sup></h3>
-        <table>
-            <tr>
-                <th>URI</th>
-                <td><code>http://purl.org/dc/terms/relation</code></td>
-            </tr>
-            <tr>
-                <th>Super-properties</th>
-                <td>
-                    <a href="https://w3id.org/gso/1.0/common/hasAnnotation">gsoc:hasAnnotation</a>
-                </td>
-            </tr>
-        </table>
-    </div>
-    <div class="entity property" id="uri">
-        <h3>uri<sup title="annotation property" class="sup-ap">ap</sup></h3>
-        <table>
-            <tr>
-                <th>URI</th>
-                <td><code>http://purl.org/dc/terms/uri</code></td>
-            </tr>
-            <tr>
-                <th>Super-properties</th>
-                <td>
-                    <a href="https://w3id.org/gso/1.0/common/hasAnnotation">gsoc:hasAnnotation</a>
-                </td>
-            </tr>
-        </table>
-    </div>
-    <div class="entity property" id="altLabel">
-        <h3>altLabel<sup title="annotation property" class="sup-ap">ap</sup></h3>
-        <table>
-            <tr>
-                <th>URI</th>
-                <td><code>http://www.w3.org/2004/02/skos/core#altLabel</code></td>
-            </tr>
-        </table>
-    </div>
-    <div class="entity property" id="definition">
-        <h3>definition<sup title="annotation property" class="sup-ap">ap</sup></h3>
-        <table>
-            <tr>
-                <th>URI</th>
-                <td><code>http://www.w3.org/2004/02/skos/core#definition</code></td>
-            </tr>
-        </table>
-    </div>
-    <div class="entity property" id="prefLabel">
-        <h3>prefLabel<sup title="annotation property" class="sup-ap">ap</sup></h3>
-        <table>
-            <tr>
-                <th>URI</th>
-                <td><code>http://www.w3.org/2004/02/skos/core#prefLabel</code></td>
-            </tr>
-        </table>
-    </div>
-</section>
-
-  
-  <section id="namedindividuals">
-    <h2>Named Individuals <span style="float:right; font-size:smaller;"><a href="">&uparrow;</a></span></h2>
-    <ul class="hlist">
-        <li><a href="#0000-0002-8742-7730">0000-0002-8742-7730</a></li>
-        <li><a href="#Dr.StephenM.Richard">Dr. Stephen M. Richard</a></li>
-        <li><a href="#SURROUNDAustraliaPtyLtd">SURROUND Australia Pty Ltd</a></li>
-    </ul>
-    <div class="entity named_individual" id="0000-0002-8742-7730">
-        <h3>0000-0002-8742-7730<sup title="named individual" class="sup-ni">ni</sup></h3>
-        <table>
-            <tr>
-                <th>URI</th>
-                <td>
-                  <code>
-                      https://orcid.org/0000-0002-8742-7730
-                  
-                  </code>
-                </td>
-            </tr>
-            <dt>Classes(s)</dt>
+	</script>
+  </head>
+  <body>
+    <div id="content">
+      <div class="section" id="metadata">
+        <h1>GSO profile of QUDT units of measure</h1>
+        <h2>Metadata</h2>
+        <dl>
+          <div>
+            <dt>
+              <strong>IRI</strong>
+            </dt>
             <dd>
-                <a href="https://schema.org/Person">sdo:Person</a><br/>
+              <code>https://w3id.org/gso/1.0/qudt/voc/ontology</code>
             </dd>
-            <tr>
-                <th>Description</th>
-                <td>
-                    e-mail: mailto:nicholas.car@surroundaustralia.com .  Job Title: Data Systems Architect
-                </td>
-            </tr>
-        </table>
-    </div>
-    <div class="entity named_individual" id="SURROUNDAustraliaPtyLtd">
-        <h3>SURROUND Australia Pty Ltd<sup title="named individual" class="sup-ni">ni</sup></h3>
-        <table>
-            <tr>
-                <th>URI</th>
-                <td>
-                  <code>
-                      https://surroundaustralia.com
-                  
-                  </code>
-                </td>
-            </tr>
-        </table>
-    </div>
-    <div class="entity named_individual" id="Dr.StephenM.Richard">
-        <h3>Dr. Stephen M. Richard<sup title="named individual" class="sup-ni">ni</sup></h3>
-        <table>
-            <tr>
-                <th>URI</th>
-                <td>
-                  <code>
-                      https://w3id.org/gso/1.0/common/stephen_richard
-                  
-                  </code>
-                </td>
-            </tr>
-            <dt>Classes(s)</dt>
+          </div>
+          <div>
+            <dt>
+              <a class="hover_property" href="http://purl.org/dc/terms/title" title="A name given to the resource. Defined in DCMI Metadata Terms">Title</a>
+            </dt>
+            <dd><p>GSO profile of QUDT units of measure</p></dd>
+          </div>
+          <div>
+            <dt>
+              <a class="hover_property" href="http://purl.org/dc/terms/publisher" title="An entity responsible for making the resource available. Defined in DCMI Metadata Terms">Publisher</a>
+            </dt>
             <dd>
-                <a href="https://schema.org/Person">sdo:Person</a><br/>
+              <a href="http://loop3d.org/">http://loop3d.org/</a>
             </dd>
+          </div>
+          <div>
+            <dt>
+              <a class="hover_property" href="http://purl.org/dc/terms/creator" title="An entity responsible for making the resource. Defined in DCMI Metadata Terms">Creator</a>
+            </dt>
+            <dd>
+              <ul>
+                <li>
+                  <a href="https://w3id.org/gso/1.0/common/stephen_richard">gsoc:stephen_richard</a>
+                </li>
+                <li>
+                  <a href="https://orcid.org/0000-0002-8742-7730">ns2:0000-0002-8742-7730</a>
+                </li>
+              </ul>
+            </dd>
+          </div>
+          <div>
+            <dt>
+              <a class="hover_property" href="http://purl.org/dc/terms/created" title="Date of creation of the resource. Defined in DCMI Metadata Terms">Date Created</a>
+            </dt>
+            <dd><p>2020-12-04</p></dd>
+          </div>
+          <div>
+            <dt>
+              <a class="hover_property" href="http://purl.org/dc/terms/modified" title="Date on which the resource was changed. Defined in DCMI Metadata Terms">Date Modified</a>
+            </dt>
+            <dd><p>2021-02-03</p></dd>
+          </div>
+          <div>
+            <dt>
+              <a class="hover_property" href="http://purl.org/dc/terms/license" title="A legal document giving official permission to do something with the resource. Defined in DCMI Metadata Terms">License</a>
+            </dt>
+            <dd>
+              <a href="https://creativecommons.org/licenses/by/4.0/legalcode">ns3:legalcode</a>
+            </dd>
+          </div>
+          <div>
+            <dt>
+              <a class="hover_property" href="http://purl.org/dc/terms/description" title="An account of the resource. Defined in DCMI Metadata Terms">Description</a>
+            </dt>
+            <dd><p>Units from the QUDT ontology used by GSO. Does not import axioms unrelated to organization of the subclass hiearchy</p></dd>
+          </div>
+        </dl>
+      </div>
+      <div class="section" id="classes">
+        <h2>Classes</h2>
+        <div class="property entity" id="DEG">
+          <h3>Degree
+            <sup class="sup-c" title="OWL/RDFS Class">c</sup>
+          </h3>
+          <table>
             <tr>
-                <th>Description</th>
-                <td>
-                    e-mail: mailto:smrTucson@gmail.com 
-                </td>
+              <th>IRI</th>
+              <td>
+                <code>http://qudt.org/vocab/unit/DEG</code>
+              </td>
             </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://www.w3.org/2000/01/rdf-schema#isDefinedBy" title="The definition of the subject resource. Defined in The RDF Schema vocabulary (RDFS)">Is Defined By</a>
+              </th>
+              <td>
+                <a href="http://qudt.org/2.1/vocab/unit">ns4:unit</a>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://purl.org/dc/terms/description" title="An account of the resource. Defined in DCMI Metadata Terms">Description</a>
+              </th>
+              <td><p>A degree (in full, a degree of arc, arc degree, or arcdegree), usually denoted by (^\circ) (the degree symbol), is a measurement of plane angle, representing 1/360 of a full rotation; one degree is equivalent to  (2\pi /360 rad), (0.017453 rad). It is not an SI unit, as the SI unit for angles is radian, but is an accepted SI unit.</p></td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://www.w3.org/2000/01/rdf-schema#subClassOf" title="The subject is a subclass of a class. Defined in The RDF Schema vocabulary (RDFS)">Sub Class Of</a>
+              </th>
+              <td>
+                <a href="https://w3id.org/gso/1.0/common/Unit_Of_Measure_Value">gsoc:Unit_Of_Measure_Value</a>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="property entity" id="GM-PER-CentiM3">
+          <h3>gram per cubic centimetre
+            <sup class="sup-c" title="OWL/RDFS Class">c</sup>
+          </h3>
+          <table>
+            <tr>
+              <th>IRI</th>
+              <td>
+                <code>http://qudt.org/vocab/unit/GM-PER-CentiM3</code>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://www.w3.org/2000/01/rdf-schema#isDefinedBy" title="The definition of the subject resource. Defined in The RDF Schema vocabulary (RDFS)">Is Defined By</a>
+              </th>
+              <td>
+                <a href="http://qudt.org/2.1/vocab/unit">ns4:unit</a>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://purl.org/dc/terms/description" title="An account of the resource. Defined in DCMI Metadata Terms">Description</a>
+              </th>
+              <td><p>0,001-fold of the SI base unit kilogram divided by the 0.000 001-fold of the power of the SI base unit metre with the exponent 3. Abbreviation g.cm-3</p></td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://www.w3.org/2000/01/rdf-schema#subClassOf" title="The subject is a subclass of a class. Defined in The RDF Schema vocabulary (RDFS)">Sub Class Of</a>
+              </th>
+              <td>
+                <a href="https://w3id.org/gso/1.0/common/Unit_Of_Measure_Value">gsoc:Unit_Of_Measure_Value</a>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="property entity" id="KiloGM-PER-M3">
+          <h3>kilogram per cubic metre
+            <sup class="sup-c" title="OWL/RDFS Class">c</sup>
+          </h3>
+          <table>
+            <tr>
+              <th>IRI</th>
+              <td>
+                <code>http://qudt.org/vocab/unit/KiloGM-PER-M3</code>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://www.w3.org/2000/01/rdf-schema#isDefinedBy" title="The definition of the subject resource. Defined in The RDF Schema vocabulary (RDFS)">Is Defined By</a>
+              </th>
+              <td>
+                <a href="http://qudt.org/2.1/vocab/unit">ns4:unit</a>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://purl.org/dc/terms/description" title="An account of the resource. Defined in DCMI Metadata Terms">Description</a>
+              </th>
+              <td><p>Kilogram per cubic metre is an SI derived unit of density, defined by mass in kilograms divided by volume in cubic metres. The official SI symbolic abbreviation is (kg \cdot m^{-3}), or equivalently either (kg/m^3).</p></td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://www.w3.org/2000/01/rdf-schema#subClassOf" title="The subject is a subclass of a class. Defined in The RDF Schema vocabulary (RDFS)">Sub Class Of</a>
+              </th>
+              <td>
+                <a href="https://w3id.org/gso/1.0/common/Unit_Of_Measure_Value">gsoc:Unit_Of_Measure_Value</a>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="property entity" id="M">
+          <h3>MeterMetre
+            <sup class="sup-c" title="OWL/RDFS Class">c</sup>
+          </h3>
+          <table>
+            <tr>
+              <th>IRI</th>
+              <td>
+                <code>http://qudt.org/vocab/unit/M</code>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://www.w3.org/2000/01/rdf-schema#isDefinedBy" title="The definition of the subject resource. Defined in The RDF Schema vocabulary (RDFS)">Is Defined By</a>
+              </th>
+              <td>
+                <a href="http://qudt.org/2.1/vocab/unit">ns4:unit</a>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://purl.org/dc/terms/description" title="An account of the resource. Defined in DCMI Metadata Terms">Description</a>
+              </th>
+              <td><p>The metric and SI base unit of distance.  The 17th General Conference on Weights and Measures in 1983 defined the meter as that distance that makes the speed of light in a vacuum equal to exactly 299 792 458 meters per second. The speed of light in a vacuum, (c), is one of the fundamental constants of nature. The meter is equal to approximately 1.093 613 3 yards, 3.280 840 feet, or 39.370 079 inches.</p></td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://www.w3.org/2000/01/rdf-schema#subClassOf" title="The subject is a subclass of a class. Defined in The RDF Schema vocabulary (RDFS)">Sub Class Of</a>
+              </th>
+              <td>
+                <a href="https://w3id.org/gso/1.0/common/Unit_Of_Measure_Value">gsoc:Unit_Of_Measure_Value</a>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="property entity" id="MegaYR">
+          <h3>Million Years
+            <sup class="sup-c" title="OWL/RDFS Class">c</sup>
+          </h3>
+          <table>
+            <tr>
+              <th>IRI</th>
+              <td>
+                <code>http://qudt.org/vocab/unit/MegaYR</code>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://www.w3.org/2000/01/rdf-schema#isDefinedBy" title="The definition of the subject resource. Defined in The RDF Schema vocabulary (RDFS)">Is Defined By</a>
+              </th>
+              <td>
+                <a href="http://qudt.org/2.1/vocab/unit">ns4:unit</a>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://purl.org/dc/terms/description" title="An account of the resource. Defined in DCMI Metadata Terms">Description</a>
+              </th>
+              <td>
+                <ul>
+                  <li><p>a unit of time equal to one million, or 1 E6 yr., measured from 1950 as 'present'</p></li>
+                  <li><p>1,000,000-fold of the derived unit year.</p></li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://www.w3.org/2000/01/rdf-schema#subClassOf" title="The subject is a subclass of a class. Defined in The RDF Schema vocabulary (RDFS)">Sub Class Of</a>
+              </th>
+              <td>
+                <a href="https://w3id.org/gso/1.0/common/Unit_Of_Measure_Value">gsoc:Unit_Of_Measure_Value</a>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="property entity" id="MilliM">
+          <h3>Millimetermillimetre
+            <sup class="sup-c" title="OWL/RDFS Class">c</sup>
+          </h3>
+          <table>
+            <tr>
+              <th>IRI</th>
+              <td>
+                <code>http://qudt.org/vocab/unit/MilliM</code>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://www.w3.org/2000/01/rdf-schema#isDefinedBy" title="The definition of the subject resource. Defined in The RDF Schema vocabulary (RDFS)">Is Defined By</a>
+              </th>
+              <td>
+                <a href="http://qudt.org/2.1/vocab/unit">ns4:unit</a>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://purl.org/dc/terms/description" title="An account of the resource. Defined in DCMI Metadata Terms">Description</a>
+              </th>
+              <td><p>The millimetre (International spelling as used by the International Bureau of Weights and Measures) or millimeter (American spelling) (SI unit symbol mm) is a unit of length in the metric system, equal to one thousandth of a metre, which is the SI base unit of length. It is equal to 1000 micrometres or 1000000 nanometres. A millimetre is equal to approximately 0.039370 of an inch.</p></td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://www.w3.org/2000/01/rdf-schema#subClassOf" title="The subject is a subclass of a class. Defined in The RDF Schema vocabulary (RDFS)">Sub Class Of</a>
+              </th>
+              <td>
+                <a href="https://w3id.org/gso/1.0/common/Unit_Of_Measure_Value">gsoc:Unit_Of_Measure_Value</a>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="property entity" id="PERCENT">
+          <h3>Percent
+            <sup class="sup-c" title="OWL/RDFS Class">c</sup>
+          </h3>
+          <table>
+            <tr>
+              <th>IRI</th>
+              <td>
+                <code>http://qudt.org/vocab/unit/PERCENT</code>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://www.w3.org/2000/01/rdf-schema#isDefinedBy" title="The definition of the subject resource. Defined in The RDF Schema vocabulary (RDFS)">Is Defined By</a>
+              </th>
+              <td>
+                <a href="http://qudt.org/2.1/vocab/unit">ns4:unit</a>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://purl.org/dc/terms/description" title="An account of the resource. Defined in DCMI Metadata Terms">Description</a>
+              </th>
+              <td>
+                <ul>
+                  <li><p>fraction of a whole, expressed as a fraction of 100, a unitless ratio value</p></li>
+                  <li><p>"Percent" is a unit for  'Dimensionless Ratio' expressed as (\%).</p></li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://www.w3.org/2000/01/rdf-schema#subClassOf" title="The subject is a subclass of a class. Defined in The RDF Schema vocabulary (RDFS)">Sub Class Of</a>
+              </th>
+              <td>
+                <a href="https://w3id.org/gso/1.0/common/Unit_Of_Measure_Value">gsoc:Unit_Of_Measure_Value</a>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="property entity" id="SUSCEPTIBILITY_MAG">
+          <h3>Magnetic Susceptibility
+            <sup class="sup-c" title="OWL/RDFS Class">c</sup>
+          </h3>
+          <table>
+            <tr>
+              <th>IRI</th>
+              <td>
+                <code>http://qudt.org/vocab/unit/SUSCEPTIBILITY_MAG</code>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://www.w3.org/2000/01/rdf-schema#isDefinedBy" title="The definition of the subject resource. Defined in The RDF Schema vocabulary (RDFS)">Is Defined By</a>
+              </th>
+              <td>
+                <a href="http://qudt.org/2.1/vocab/unit">ns4:unit</a>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://purl.org/dc/terms/description" title="An account of the resource. Defined in DCMI Metadata Terms">Description</a>
+              </th>
+              <td><p>Magnetic susceptibility is a dimensionless proportionality constant that indicates the degree of magnetization of a material in response to an applied magnetic field.  Here M = chi * H. Where M is the magnetization of the material (the magnetic dipole moment per unit volume), measured in amperes per meter, and H is the magnetic field strength, also measured in amperes per meter. Chi is therefore a dimensionless quantity.</p></td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://www.w3.org/2000/01/rdf-schema#subClassOf" title="The subject is a subclass of a class. Defined in The RDF Schema vocabulary (RDFS)">Sub Class Of</a>
+              </th>
+              <td>
+                <a href="https://w3id.org/gso/1.0/common/Unit_Of_Measure_Value">gsoc:Unit_Of_Measure_Value</a>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="section" id="annotationproperties">
+        <h2>Annotation Properties</h2>
+        <div class="property entity" id="created">
+          <h3>created
+            <sup class="sup-ap" title="OWL Annotation Property">ap</sup>
+          </h3>
+          <table>
+            <tr>
+              <th>IRI</th>
+              <td>
+                <code>http://purl.org/dc/terms/created</code>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="property entity" id="creator">
+          <h3>creator
+            <sup class="sup-ap" title="OWL Annotation Property">ap</sup>
+          </h3>
+          <table>
+            <tr>
+              <th>IRI</th>
+              <td>
+                <code>http://purl.org/dc/terms/creator</code>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="property entity" id="description">
+          <h3>description
+            <sup class="sup-ap" title="OWL Annotation Property">ap</sup>
+          </h3>
+          <table>
+            <tr>
+              <th>IRI</th>
+              <td>
+                <code>http://purl.org/dc/terms/description</code>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="property entity" id="modified">
+          <h3>modified
+            <sup class="sup-ap" title="OWL Annotation Property">ap</sup>
+          </h3>
+          <table>
+            <tr>
+              <th>IRI</th>
+              <td>
+                <code>http://purl.org/dc/terms/modified</code>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="property entity" id="publisher">
+          <h3>publisher
+            <sup class="sup-ap" title="OWL Annotation Property">ap</sup>
+          </h3>
+          <table>
+            <tr>
+              <th>IRI</th>
+              <td>
+                <code>http://purl.org/dc/terms/publisher</code>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="property entity" id="relation">
+          <h3>relation
+            <sup class="sup-ap" title="OWL Annotation Property">ap</sup>
+          </h3>
+          <table>
+            <tr>
+              <th>IRI</th>
+              <td>
+                <code>http://purl.org/dc/terms/relation</code>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://www.w3.org/2000/01/rdf-schema#subPropertyOf" title="The subject is a subproperty of a property. Defined in The RDF Schema vocabulary (RDFS)">Sub Property Of</a>
+              </th>
+              <td>
+                <a href="https://w3id.org/gso/1.0/common/hasAnnotation">gsoc:hasAnnotation</a>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="property entity" id="uri">
+          <h3>uri
+            <sup class="sup-ap" title="OWL Annotation Property">ap</sup>
+          </h3>
+          <table>
+            <tr>
+              <th>IRI</th>
+              <td>
+                <code>http://purl.org/dc/terms/uri</code>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <a class="hover_property" href="http://www.w3.org/2000/01/rdf-schema#subPropertyOf" title="The subject is a subproperty of a property. Defined in The RDF Schema vocabulary (RDFS)">Sub Property Of</a>
+              </th>
+              <td>
+                <a href="https://w3id.org/gso/1.0/common/hasAnnotation">gsoc:hasAnnotation</a>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="property entity" id="altLabel">
+          <h3>alt label
+            <sup class="sup-ap" title="OWL Annotation Property">ap</sup>
+          </h3>
+          <table>
+            <tr>
+              <th>IRI</th>
+              <td>
+                <code>http://www.w3.org/2004/02/skos/core#altLabel</code>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="property entity" id="definition">
+          <h3>definition
+            <sup class="sup-ap" title="OWL Annotation Property">ap</sup>
+          </h3>
+          <table>
+            <tr>
+              <th>IRI</th>
+              <td>
+                <code>http://www.w3.org/2004/02/skos/core#definition</code>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="property entity" id="prefLabel">
+          <h3>pref label
+            <sup class="sup-ap" title="OWL Annotation Property">ap</sup>
+          </h3>
+          <table>
+            <tr>
+              <th>IRI</th>
+              <td>
+                <code>http://www.w3.org/2004/02/skos/core#prefLabel</code>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div id="namespaces">
+        <h2>Namespaces</h2>
+        <dl>
+          <dt id="dct">dct</dt>
+          <dd>
+            <code>http://purl.org/dc/terms/</code>
+          </dd>
+          <dt id="gsoc">gsoc</dt>
+          <dd>
+            <code>https://w3id.org/gso/1.0/common/</code>
+          </dd>
+          <dt id="ns1">ns1</dt>
+          <dd>
+            <code>https://w3id.org/gso/1.0/qudt/voc/</code>
+          </dd>
+          <dt id="ns2">ns2</dt>
+          <dd>
+            <code>https://orcid.org/</code>
+          </dd>
+          <dt id="ns3">ns3</dt>
+          <dd>
+            <code>https://creativecommons.org/licenses/by/4.0/</code>
+          </dd>
+          <dt id="ns4">ns4</dt>
+          <dd>
+            <code>http://qudt.org/2.1/vocab/</code>
+          </dd>
+          <dt id="owl">owl</dt>
+          <dd>
+            <code>http://www.w3.org/2002/07/owl#</code>
+          </dd>
+          <dt id="prov">prov</dt>
+          <dd>
+            <code>http://www.w3.org/ns/prov#</code>
+          </dd>
+          <dt id="rdf">rdf</dt>
+          <dd>
+            <code>http://www.w3.org/1999/02/22-rdf-syntax-ns#</code>
+          </dd>
+          <dt id="rdfs">rdfs</dt>
+          <dd>
+            <code>http://www.w3.org/2000/01/rdf-schema#</code>
+          </dd>
+          <dt id="schema">schema</dt>
+          <dd>
+            <code>https://schema.org/</code>
+          </dd>
+          <dt id="skos">skos</dt>
+          <dd>
+            <code>http://www.w3.org/2004/02/skos/core#</code>
+          </dd>
+          <dt id="sks">sks</dt>
+          <dd>
+            <code>https://w3id.org/gso/1.0/skos/annotation/</code>
+          </dd>
+          <dt id="unit">unit</dt>
+          <dd>
+            <code>http://qudt.org/vocab/unit/</code>
+          </dd>
+        </dl>
+      </div>
+      <div id="legend">
+        <h2>Legend</h2>
+        <table class="entity">
+          <tr>
+            <td>
+              <sup class="sup-c" title="OWL/RDFS Class">c</sup>
+            </td>
+            <td>Classes</td>
+          </tr>
+          <tr>
+            <td>
+              <sup class="sup-ap" title="OWL Annotation Property">ap</sup>
+            </td>
+            <td>Annotation Properties</td>
+          </tr>
         </table>
+      </div>
     </div>
-</section>
-  
-  <section id="namespaces">
-    <h2>Namespaces <span style="float:right; font-size:smaller;"><a href="">&uparrow;</a></span></h2>
-    <dl>
-        <dt>:</dt>
-        <dd><code>https://w3id.org/gso/1.0/qudt/voc/ontology#</code></dd>
-        <dt>dct</dt>
-        <dd><code>http://purl.org/dc/terms/</code></dd>
-        <dt>gsoc</dt>
-        <dd><code>https://w3id.org/gso/1.0/common/</code></dd>
-        <dt>owl</dt>
-        <dd><code>http://www.w3.org/2002/07/owl#</code></dd>
-        <dt>prov</dt>
-        <dd><code>http://www.w3.org/ns/prov#</code></dd>
-        <dt>qudt</dt>
-        <dd><code>http://qudt.org/schema/qudt/</code></dd>
-        <dt>rdf</dt>
-        <dd><code>http://www.w3.org/1999/02/22-rdf-syntax-ns#</code></dd>
-        <dt>rdfs</dt>
-        <dd><code>http://www.w3.org/2000/01/rdf-schema#</code></dd>
-        <dt>sdo</dt>
-        <dd><code>https://schema.org/</code></dd>
-        <dt>skos</dt>
-        <dd><code>http://www.w3.org/2004/02/skos/core#</code></dd>
-        <dt>sks</dt>
-        <dd><code>https://w3id.org/gso/1.0/skos/annotation/</code></dd>
-        <dt>unit</dt>
-        <dd><code>http://qudt.org/vocab/unit/</code></dd>
-        <dt>xsd</dt>
-        <dd><code>http://www.w3.org/2001/XMLSchema#</code></dd>
-    </dl>
-</section>
-  <section id="legend">
-      <h2>Legend</h2>
-      <table class="entity">
-          <tr><td><sup class="sup-c" title="Classes">c</sup></td><td>Classes</td></tr>
-          <tr><td><sup class="sup-op" title="Object Properties">op</sup></td><td>Object Properties</td></tr>
-          <tr><td><sup class="sup-fp" title="Functional Properties">fp</sup></td><td>Functional Properties</td></tr>
-          <tr><td><sup class="sup-dp" title="Data Properties">dp</sup></td><td>Data Properties</td></tr>
-          <tr><td><sup class="sup-ap" title="Annotation Properties">dp</sup></td><td>Annotation Properties</td></tr>
-          <tr><td><sup class="sup-p" title="Properties">p</sup></td><td>Properties</td></tr>
-          <tr><td><sup class="sup-ni" title="Named Individuals">ni</sup></td><td>Named Individuals</td></tr>
-      </table>
-  </section>
-</body>
+    <div id="pylode">
+      <p>made by 
+        <a href="https://github.com/rdflib/pyLODE">
+          <span id="p">p</span>
+          <span id="y">y</span>
+          <span>LODE</span>
+        </a>
+        <a href="https://github.com/rdflib/pyLODE/release/3.0.1" id="version">3.0.1</a>
+      </p>
+    </div>
+    <div id="toc">
+      <h3>Table of Contents</h3>
+      <ul class="first">
+        <li>
+          <h4>
+            <a href="#metadata">Metadata</a>
+          </h4>
+        </li>
+        <li>
+          <h4>
+            <a href="#classes">Classes</a>
+          </h4>
+          <ul class="second">
+            <li>
+              <a href="#DEG">Degree</a>
+            </li>
+            <li>
+              <a href="#GM-PER-CentiM3">gram per cubic centimetre</a>
+            </li>
+            <li>
+              <a href="#KiloGM-PER-M3">kilogram per cubic metre</a>
+            </li>
+            <li>
+              <a href="#M">MeterMetre</a>
+            </li>
+            <li>
+              <a href="#MegaYR">Million Years</a>
+            </li>
+            <li>
+              <a href="#MilliM">Millimetermillimetre</a>
+            </li>
+            <li>
+              <a href="#PERCENT">Percent</a>
+            </li>
+            <li>
+              <a href="#SUSCEPTIBILITY_MAG">Magnetic Susceptibility</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <h4>
+            <a href="#annotationproperties">Annotation Properties</a>
+          </h4>
+          <ul class="second">
+            <li>
+              <a href="#created">created</a>
+            </li>
+            <li>
+              <a href="#creator">creator</a>
+            </li>
+            <li>
+              <a href="#description">description</a>
+            </li>
+            <li>
+              <a href="#modified">modified</a>
+            </li>
+            <li>
+              <a href="#publisher">publisher</a>
+            </li>
+            <li>
+              <a href="#relation">relation</a>
+            </li>
+            <li>
+              <a href="#uri">uri</a>
+            </li>
+            <li>
+              <a href="#altLabel">alt label</a>
+            </li>
+            <li>
+              <a href="#definition">definition</a>
+            </li>
+            <li>
+              <a href="#prefLabel">pref label</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <h4>
+            <a href="#namespaces">Namespaces</a>
+          </h4>
+          <ul class="second">
+            <li>
+              <a href="#dct">dct</a>
+            </li>
+            <li>
+              <a href="#gsoc">gsoc</a>
+            </li>
+            <li>
+              <a href="#ns1">ns1</a>
+            </li>
+            <li>
+              <a href="#ns2">ns2</a>
+            </li>
+            <li>
+              <a href="#ns3">ns3</a>
+            </li>
+            <li>
+              <a href="#ns4">ns4</a>
+            </li>
+            <li>
+              <a href="#owl">owl</a>
+            </li>
+            <li>
+              <a href="#prov">prov</a>
+            </li>
+            <li>
+              <a href="#rdf">rdf</a>
+            </li>
+            <li>
+              <a href="#rdfs">rdfs</a>
+            </li>
+            <li>
+              <a href="#schema">schema</a>
+            </li>
+            <li>
+              <a href="#skos">skos</a>
+            </li>
+            <li>
+              <a href="#sks">sks</a>
+            </li>
+            <li>
+              <a href="#unit">unit</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <h4>
+            <a href="#legend">Legend</a>
+          </h4>
+          <ul class="second"></ul>
+        </li>
+      </ul>
+    </div>
+  </body>
 </html>
