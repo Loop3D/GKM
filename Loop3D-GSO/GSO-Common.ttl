@@ -55,14 +55,6 @@ gsoc:Abstract_Endurant
   rdfs:comment "Abstract endurants do not occupy space nor time - they are aspatial and atemporal, e.g. numbers and other mathematical objects"@en ;
   rdfs:subClassOf gsoc:Notional_Endurant ;
   rdfs:subClassOf [
-      rdf:type owl:Class ;
-      owl:complementOf [
-          rdf:type owl:Restriction ;
-          owl:onProperty gsoc:occupiesTime ;
-          owl:someValuesFrom gsoc:Time_Region ;
-        ] ;
-    ] ;
-  rdfs:subClassOf [
       rdf:type owl:Restriction ;
       owl:allValuesFrom gsoc:Abstract_Endurant ;
       owl:onProperty gsoc:hasPart ;
@@ -139,16 +131,7 @@ gsoc:Element
     ] ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
-      owl:allValuesFrom [
-          rdf:type owl:Class ;
-          owl:intersectionOf (
-              gsoc:Material_Endurant
-              [
-                rdf:type owl:Class ;
-                owl:complementOf gsoc:Element ;
-              ]
-            ) ;
-        ] ;
+      owl:allValuesFrom gsoc:Material_Endurant ;
       owl:onProperty gsoc:isConstituentOf ;
     ] .
 gsoc:Endurant
@@ -193,11 +176,6 @@ gsoc:Event
   rdfs:comment "A event is the thing that happens (an earthquake), and a process is how it happens (the ground shaking). Events are constituted by processes."@en ;
   rdfs:label "Event"@en ;
   rdfs:subClassOf gsoc:Perdurant ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom gsoc:Event ;
-      owl:onProperty gsoc:hasPart ;
-    ] ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
       owl:onClass gsoc:Time_Region ;
@@ -377,8 +355,7 @@ gsoc:Inherant
       owl:onProperty gsoc:inheresIn ;
       owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
     ] ;
-  owl:disjointWith gsoc:Notional_Endurant ;
-  owl:disjointWith gsoc:Relator .
+  owl:disjointWith gsoc:Notional_Endurant .
 gsoc:Inherant_Feature
   rdf:type owl:Class ;
   rdfs:comment "based on quality inhering in (essential relation) host. The quality is the focal; Quality inheres in both the feature and the host. Morphologic feature -- focal  is a specific shape (river bend, fold)"@en ;
@@ -489,14 +466,6 @@ gsoc:Material_Object
   rdfs:label "Material Object"@en ;
   rdfs:subClassOf gsoc:Material_Endurant ;
   rdfs:subClassOf [
-      rdf:type owl:Class ;
-      owl:complementOf [
-          rdf:type owl:Restriction ;
-          owl:onProperty gsoc:isConstituentOf ;
-          owl:someValuesFrom gsoc:Amount_Of_Matter ;
-        ] ;
-    ] ;
-  rdfs:subClassOf [
       rdf:type owl:Restriction ;
       owl:onProperty gsoc:hasConstituent ;
       owl:someValuesFrom gsoc:Amount_Of_Matter ;
@@ -541,14 +510,6 @@ gsoc:Nonphysical_Endurant
   rdfs:comment "An endurant that does not occupy space directly, but might occupy space indirectly or not occupy space at all. Indirect spatial occupants have physical endurant parts or are ontologically dependent on physical endurants. Examples of things that indirectly occupy some space, due to such ontological dependence, include physical qualities (my height) and physical relators (reified physical relations). It even includes thoughts, poems, digital files, and datasets, whose existence is tied to being manifest in some physical object (brain, book, storage media). Also includes fictional entities such as unicorns, which must be so manifested to exist."@en ;
   rdfs:label "Nonphysical Endurant"@en ;
   rdfs:subClassOf gsoc:Endurant ;
-  rdfs:subClassOf [
-      rdf:type owl:Class ;
-      owl:complementOf [
-          rdf:type owl:Restriction ;
-          owl:onProperty gsoc:occupiesSpaceDirectly ;
-          owl:someValuesFrom gsoc:Spatial_Region ;
-        ] ;
-    ] ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
       owl:allValuesFrom gsoc:Nonphysical_Endurant ;
@@ -613,14 +574,6 @@ gsoc:Notional_Endurant
   rdfs:comment "Notional endurants do not occupy space, neither directly nor indirectly, e.g. ghosts, some dieties, or numbers. Notional endurants may occupy time (e.g. ghosts, assuming ghosts have finite existence), or may not occupy time (e.g. numbers, which are atemporal). Notional endurants can be part of physical things (e.g. when dieties are held to be part of people), but cannot have physical parts (e.g. when dieties do not have people as parts)."@en ;
   rdfs:label "Notional Endurant "@en ;
   rdfs:subClassOf gsoc:Nonphysical_Endurant ;
-  rdfs:subClassOf [
-      rdf:type owl:Class ;
-      owl:complementOf [
-          rdf:type owl:Restriction ;
-          owl:onProperty gsoc:occupiesSpace ;
-          owl:someValuesFrom gsoc:Spatial_Region ;
-        ] ;
-    ] ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
       owl:allValuesFrom gsoc:Notional_Endurant ;
@@ -1036,12 +989,7 @@ gsoc:Quality_Value
       owl:onProperty gsoc:hasReferenceSystem ;
       owl:someValuesFrom gsoc:Reference_System ;
     ] ;
-  owl:disjointWith gsoc:Role ;
-  owl:disjointWith [
-      rdf:type owl:Restriction ;
-      owl:onProperty gsoc:hasPart ;
-      owl:someValuesFrom gsoc:Particular ;
-    ] .
+  owl:disjointWith gsoc:Role .
 gsoc:Range_Value
   rdf:type owl:Class ;
   rdfs:comment "A range value for some quality, e.g. 2.0-3.0 or thin-thick"@en ;
@@ -1112,24 +1060,6 @@ gsoc:Relator
       owl:minQualifiedCardinality "4"^^xsd:nonNegativeInteger ;
       owl:onClass gsoc:Particular ;
       owl:onProperty gsoc:specificallyDependsOn ;
-    ] ;
-  owl:disjointWith [
-      rdf:type owl:Class ;
-      owl:intersectionOf (
-          [
-            rdf:type owl:Class ;
-            owl:complementOf [
-                rdf:type owl:Restriction ;
-                owl:onProperty gsoc:hasStaticPart ;
-                owl:someValuesFrom gsoc:Particular ;
-              ] ;
-          ]
-          [
-            rdf:type owl:Restriction ;
-            owl:onProperty gsoc:hasPart ;
-            owl:someValuesFrom gsoc:Particular ;
-          ]
-        ) ;
     ] .
 gsoc:Role
   rdf:type owl:Class ;
@@ -1197,32 +1127,6 @@ gsoc:Situation
       rdf:type owl:Restriction ;
       owl:onProperty gsoc:hasStaticPart ;
       owl:someValuesFrom gsoc:Particular ;
-    ] ;
-  owl:disjointWith [
-      rdf:type owl:Class ;
-      owl:complementOf [
-          rdf:type owl:Restriction ;
-          owl:onProperty gsoc:hasPart ;
-          owl:someValuesFrom gsoc:Particular ;
-        ] ;
-    ] ;
-  owl:disjointWith [
-      rdf:type owl:Class ;
-      owl:intersectionOf (
-          [
-            rdf:type owl:Class ;
-            owl:complementOf [
-                rdf:type owl:Restriction ;
-                owl:onProperty gsoc:hasStaticPart ;
-                owl:someValuesFrom gsoc:Particular ;
-              ] ;
-          ]
-          [
-            rdf:type owl:Restriction ;
-            owl:onProperty gsoc:hasPart ;
-            owl:someValuesFrom gsoc:Particular ;
-          ]
-        ) ;
     ] .
 gsoc:Situation_Feature
   rdf:type owl:Class ;
@@ -1289,14 +1193,6 @@ gsoc:Spatial_Region
   rdfs:label "Spatial Region"@en ;
   rdfs:subClassOf gsoc:Physical_Endurant ;
   rdfs:subClassOf [
-      rdf:type owl:Class ;
-      owl:complementOf [
-          rdf:type owl:Restriction ;
-          owl:onProperty gsoc:hasConstituent ;
-          owl:someValuesFrom gsoc:Material_Endurant ;
-        ] ;
-    ] ;
-  rdfs:subClassOf [
       rdf:type owl:Restriction ;
       owl:allValuesFrom gsoc:Material_Endurant ;
       owl:onProperty gsoc:spaceOccupiedDirectlyBy ;
@@ -1316,15 +1212,7 @@ gsoc:Spatial_Region_0D
   rdf:type owl:Class ;
   rdfs:comment "A degenerate spatial region that is a single point." ;
   rdfs:label "1D Spatial Region "@en ;
-  rdfs:subClassOf gsoc:Spatial_Region ;
-  rdfs:subClassOf [
-      rdf:type owl:Class ;
-      owl:complementOf [
-          rdf:type owl:Restriction ;
-          owl:onProperty gsoc:hasPart ;
-          owl:someValuesFrom gsoc:Particular ;
-        ] ;
-    ] .
+  rdfs:subClassOf gsoc:Spatial_Region .
 gsoc:Spatial_Region_1D
   rdf:type owl:Class ;
   rdfs:comment "A spatial region that is defined as a segment of a line." ;
@@ -1654,11 +1542,6 @@ gsoc:Time_Interval_Location
       rdf:type owl:Restriction ;
       owl:allValuesFrom gsoc:Temporal_Range ;
       owl:onProperty gsoc:hasValue ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:onProperty gsoc:hasQuality ;
-      owl:someValuesFrom gsoc:Duration ;
     ] ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
@@ -2197,14 +2080,6 @@ gsoc:isSpatiallyRelatedTo
   rdf:type owl:ObjectProperty ;
   rdf:type owl:SymmetricProperty ;
   rdfs:comment "Undirected most general spatial relation." ;
-  rdfs:domain [
-      rdf:type owl:Class ;
-      owl:complementOf gsoc:Notional_Endurant ;
-    ] ;
-  rdfs:range [
-      rdf:type owl:Class ;
-      owl:complementOf gsoc:Notional_Endurant ;
-    ] ;
   rdfs:subPropertyOf gsoc:isRelatedTo .
 gsoc:isStaticPartOf
   rdf:type owl:ObjectProperty ;
@@ -2224,14 +2099,6 @@ gsoc:isTemporallyRelatedTo
   rdf:type owl:ObjectProperty ;
   rdf:type owl:SymmetricProperty ;
   rdfs:comment "Most general undirected temporal relation holding between non-abstract things, that exist in time. Temporal relationships occurr between things that directly or indirectly occupy temporal regions - the association is evaluated on the regions being occupied, but the domain and range are the occupying entities"@en ;
-  rdfs:domain [
-      rdf:type owl:Class ;
-      owl:complementOf gsoc:Abstract_Endurant ;
-    ] ;
-  rdfs:range [
-      rdf:type owl:Class ;
-      owl:complementOf gsoc:Abstract_Endurant ;
-    ] ;
   rdfs:subPropertyOf gsoc:isRelatedTo .
 gsoc:isValueOf
   rdf:type owl:AsymmetricProperty ;
@@ -2246,10 +2113,6 @@ gsoc:location
   rdf:type owl:ObjectProperty ;
   rdf:type owl:SymmetricProperty ;
   rdfs:comment "A relation between a non-abstact particular and a spatial or temoral location value - still in a test stage; intended as a short-cut for specifying the spatial or temporal location of something, but therefore equal to saying that something occupies space or time (in/directly) and has a spatial/temporal location quality with a certain  value (in a spatial / temporal reference system). Generically depends on the spatial or temporal value."@en ;
-  rdfs:domain [
-      rdf:type owl:Class ;
-      owl:complementOf gsoc:Abstract_Endurant ;
-    ] ;
   rdfs:label "location "@en ;
   rdfs:range [
       rdf:type owl:Class ;
@@ -2291,10 +2154,6 @@ gsoc:occupiedBy
 gsoc:occupies
   rdf:type owl:ObjectProperty ;
   rdfs:comment "Occupation of a region of space or time, directly or indirectly"@en ;
-  rdfs:domain [
-      rdf:type owl:Class ;
-      owl:complementOf gsoc:Abstract_Endurant ;
-    ] ;
   rdfs:range [
       rdf:type owl:Class ;
       owl:unionOf (
@@ -2306,19 +2165,8 @@ gsoc:occupies
 gsoc:occupiesSpace
   rdf:type owl:ObjectProperty ;
   rdfs:comment "Occupation of a region of space, directly or indirectly"@en ;
-  rdfs:domain [
-      rdf:type owl:Class ;
-      owl:complementOf [
-          rdf:type owl:Class ;
-          owl:unionOf (
-              gsoc:Notional_Endurant
-              gsoc:Spatial_Region
-            ) ;
-        ] ;
-    ] ;
   rdfs:range gsoc:Spatial_Region ;
   rdfs:subPropertyOf gsoc:occupies ;
-  rdfs:subPropertyOf gsoc:spatiallyEquals ;
   owl:inverseOf gsoc:spaceOccupiedBy .
 gsoc:occupiesSpaceDirectly
   rdf:type owl:ObjectProperty ;
@@ -2330,29 +2178,14 @@ gsoc:occupiesSpaceDirectly
 gsoc:occupiesSpaceIndirectly
   rdf:type owl:ObjectProperty ;
   rdfs:comment "Occupies space indirectly."@en ;
-  rdfs:domain [
-      rdf:type owl:Class ;
-      owl:complementOf gsoc:Physical_Endurant ;
-    ] ;
   rdfs:range gsoc:Spatial_Region ;
   rdfs:subPropertyOf gsoc:occupiesSpace ;
   owl:inverseOf gsoc:spaceOccupiedIndirectlyBy .
 gsoc:occupiesTime
   rdf:type owl:ObjectProperty ;
   rdfs:comment "Occupation of a region of time, directly or indirectly"@en ;
-  rdfs:domain [
-      rdf:type owl:Class ;
-      owl:complementOf [
-          rdf:type owl:Class ;
-          owl:unionOf (
-              gsoc:Abstract_Endurant
-              gsoc:Time_Region
-            ) ;
-        ] ;
-    ] ;
   rdfs:range gsoc:Time_Region ;
   rdfs:subPropertyOf gsoc:occupies ;
-  rdfs:subPropertyOf gsoc:timeEquivalentTo ;
   owl:inverseOf gsoc:timeOccupiedBy .
 gsoc:occupiesTimeDirectly
   rdf:type owl:ObjectProperty ;
@@ -2370,10 +2203,6 @@ gsoc:occupiesTimeDirectly
 gsoc:occupiesTimeIndirectly
   rdf:type owl:ObjectProperty ;
   rdfs:comment "Occupies a temporal region indirectly."@en ;
-  rdfs:domain [
-      rdf:type owl:Class ;
-      owl:complementOf gsoc:Perdurant ;
-    ] ;
   rdfs:range gsoc:Time_Region ;
   rdfs:subPropertyOf gsoc:occupiesTime ;
   owl:inverseOf gsoc:timeOccupiedIndirectlyBy .
