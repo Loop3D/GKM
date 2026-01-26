@@ -335,3 +335,225 @@ python remove_all_equivalentclass.py
 ```
 
 This converts necessary-and-sufficient conditions to just necessary conditions (rdfs:subClassOf), which prevents unintended classification conflicts.
+
+---
+
+## GSO-Geologic_Structure HermiT Fixes
+
+Additional fixes required for GSO-Geologic_Structure module to pass HermiT reasoning.
+
+### Summary of Fixes
+
+| File | Change | Reason |
+|------|--------|--------|
+| `Modules/GSO-Geologic_Quality.ttl` | Dip: `hasQuality` → `hasValue` | Range mismatch: `hasQuality` range is `Quality`, but values were `Quality_Value` subclasses |
+| `Modules/GSO-Geologic_Quality.ttl` | Plunge: `hasQuality` → `hasValue` | Same range mismatch as Dip |
+| `Modules/GSO-Geologic_Quality.ttl` | Removed duplicate `gsgq:Bedding_Pattern` | Canonical definition is in GSO-Geologic_Structure.ttl |
+| `Modules/GSO-Geologic_Quality.ttl` | Removed duplicate `gsgq:Bedding_Style` | Canonical definition is in GSO-Geologic_Structure.ttl |
+| `GSO-Common.ttl` | Pattern_Feature: removed `hasEssentialPart some Relator` | Forced nonphysical Relator part on physical Fabrics |
+| `GSO-Common.ttl` | Pattern_Feature: removed `hasEssentialPart only Relator` | Combined with inherited `some Inherant` from Inherant_Feature, forced Relator existence |
+| `GSO-Common.ttl` | Physical_Quality: expanded `isQualityOf` range | Changed from `exactly 1 Physical_Endurant` to `exactly 1 (Physical_Endurant OR Endurant_Feature)` |
+
+### Detailed Explanations
+
+#### 1. Dip and Plunge Property Mismatch
+
+**Problem:** Both classes used `gsoc:hasQuality` with `someValuesFrom` pointing to `Quality_Value` subclasses:
+
+```turtle
+gsgq:Dip
+  rdfs:subClassOf [
+      owl:onProperty gsoc:hasQuality ;  # WRONG
+      owl:someValuesFrom [ owl:unionOf (Numeric_Value Named_Value Range_Value) ] ;
+    ] ;
+```
+
+- `hasQuality` has range `Quality`
+- `Numeric_Value`, `Named_Value`, `Range_Value` are `Quality_Value` subclasses
+- `Quality` is `owl:disjointWith Quality_Value`
+- This created an impossible constraint
+
+**Fix:** Changed to `gsoc:hasValue` (which has domain `Quality` and range `Quality_Value`), matching the pattern used by `gsgq:Azimuth`.
+
+#### 2. Pattern_Feature Relator Restrictions
+
+**Problem:** Pattern_Feature had two restrictions:
+- `hasEssentialPart only Relator`
+- `hasEssentialPart some Relator` (removed in first pass)
+
+Combined with inherited restrictions from Inherant_Feature (`hasEssentialPart some Inherant`) and Feature (`hasEssentialPart some Particular`), this forced Pattern_Feature to have a Relator as an essential part.
+
+But Fabric (a Pattern_Feature subclass) is physical and hosted by Rock_Body. The conflict:
+- Relator is a `Nonphysical_Endurant`
+- Physical_Endurant has `hasPart only Physical_Endurant`
+- `hasEssentialPart` is subPropertyOf `hasPart`
+- Fabric cannot have both physical-only parts AND a nonphysical Relator
+
+**Fix:** Removed both `hasEssentialPart` restrictions from Pattern_Feature, allowing physical patterns like Fabric to satisfy inherited constraints with physical parts.
+
+#### 3. Physical_Quality isQualityOf Range
+
+**Problem:** The conflict chain:
+1. `gsos:Bedding_Pattern` is a `Physical_Quality`
+2. `Physical_Quality` requires `isQualityOf exactly 1 Physical_Endurant`
+3. `Bedding_Pattern` has `isQualityOf only Bedding`
+4. Therefore Bedding must be a `Physical_Endurant`
+5. But Bedding → Fabric → Pattern_Feature → Inherant_Feature → Nonphysical_Feature
+6. `Nonphysical_Feature` has restrictions requiring nonphysical essential parts
+7. `Physical_Endurant` has `hasPart only Physical_Endurant`
+8. Contradiction: Bedding cannot be both physical (parts-only-physical) and have nonphysical parts
+
+**Fix:** Expanded Physical_Quality to allow qualities of Endurant_Features:
+
+```turtle
+gsoc:Physical_Quality
+  rdfs:subClassOf [
+      owl:onClass [
+          owl:unionOf (
+              gsoc:Physical_Endurant
+              gsoc:Endurant_Feature
+            ) ;
+        ] ;
+      owl:onProperty gsoc:isQualityOf ;
+      owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+    ] ;
+```
+
+This allows Bedding_Pattern to be a Physical_Quality of Bedding (an Endurant_Feature) without forcing Bedding to be a Physical_Endurant.
+
+#### 4. Duplicate Class Removal
+
+Removed `gsgq:Bedding_Pattern` and `gsgq:Bedding_Style` from GSO-Geologic_Quality.ttl. The canonical definitions with `isQualityOf only Bedding` remain in GSO-Geologic_Structure.ttl.
+
+### Classes Fixed
+
+These classes were previously unsatisfiable and should now be satisfiable:
+
+- Bedding_Pattern, Bedding_Style
+- Dip, Dip_Value, Inclined, Gently_Inclined, Moderately_Inclined, Steeply_Inclined, Horizontal_Inclination, Vertical_Inclination
+- Plunge, Plunge_Value, Plunging_Line, Gently_Plunging_Line, Moderately_Plunging_Line, Steeply_Plunging_Line, Horizontal_Line, Vertical_Line
+- Foliation, Lineation
+
+---
+
+## GSO-Geologic_Rock_Object HermiT Fixes
+
+Additional fixes required for GSO-Geologic_Rock_Object module to pass HermiT reasoning.
+
+### Summary of Fixes
+
+| File | Property | Before | After | Reason |
+|------|----------|--------|-------|--------|
+| `GSO-Common.ttl` | `constantlySpecDependsOn` | `subPropertyOf timeIncludedBy` | `subPropertyOf isTemporallyRelatedTo` | Broke unintended inference chain |
+| `GSO-Common.ttl` | `timeStartedBy` | `subPropertyOf timeIncludes` | `subPropertyOf isTemporallyRelatedTo` | Prevented instant/interval conflict |
+| `GSO-Common.ttl` | `timeStarts` | `subPropertyOf timeIncludedBy` | `subPropertyOf isTemporallyRelatedTo` | Same (inverse property) |
+
+### Detailed Explanations
+
+#### 1. constantlySpecDependsOn Subproperty Chain
+
+**Problem:** The property hierarchy created an unintended inference chain:
+
+```
+isQualityOf → inheresIn → constantlySpecDependsOn → timeIncludedBy
+```
+
+This meant if `quality isQualityOf subject`, it inferred `quality timeIncludedBy subject`, which means `subject timeIncludes quality`.
+
+For Epoch with `timeIncludes only Age`, any quality of an Epoch would need to be an Age - impossible for Temporal_Location qualities.
+
+**Fix:** Changed `constantlySpecDependsOn` from `subPropertyOf timeIncludedBy` to `subPropertyOf isTemporallyRelatedTo`. This preserves the semantic meaning (constant dependence implies temporal relatedness) without the specific inclusion inference.
+
+#### 2. timeStartedBy / timeStarts Subproperty Issue
+
+**Problem:** These Allen interval algebra properties had:
+- `timeStartedBy subPropertyOf timeIncludes`
+- `timeStarts subPropertyOf timeIncludedBy`
+
+When epochs "start at" geologic time boundaries (instants), this created conflicts:
+
+1. `Upper_Jurassic_Epoch timeStarts Base_of_Upper_Jurassic`
+2. Via inverse: `Base_of_Upper_Jurassic timeStartedBy Upper_Jurassic_Epoch`
+3. Via subproperty: `Base_of_Upper_Jurassic timeIncludes Upper_Jurassic_Epoch`
+4. Via inverse: `Upper_Jurassic_Epoch timeIncludedBy Base_of_Upper_Jurassic`
+5. But Epoch has `timeIncludedBy only (Eon or Era or Period or Subperiod or Supereon)`
+6. So `Base_of_Upper_Jurassic` must be one of those ranks
+7. But it's a `Geologic_Time_Boundary` → `Temporal_Boundary` → `Time_Instant_Feature`
+8. `Time_Instant_Feature` is disjoint with `Time_Interval_Feature` (which the ranks are)
+9. **Contradiction!**
+
+**Fix:** Changed both properties to `subPropertyOf isTemporallyRelatedTo`. This allows boundaries to be temporally related to intervals without implying inclusion relationships that only make sense for interval-to-interval relations.
+
+### Testing Results
+
+GSO-Geologic_Rock_Object passes HermiT reasoning:
+- Processing time: 646,998 ms (~11 minutes)
+- No unsatisfiable classes
+
+---
+
+## Utility Scripts Location
+
+All Python scripts and reports have been moved to the `ontologyFixes/` subdirectory:
+
+**Scripts:**
+- `check_consistency.py`, `extract_class_properties.py`, `find_inconsistency.py`
+- `find_owl2dl_conflicts.py`, `find_redundant_restrictions.py`
+- `fix_cardinality_nonsimple.py`, `fix_cardinality_to_some.py`, `fix_chain_disjoint.py`
+- `fix_nonsimple_disjoint.py`, `fix_owl2dl_conflicts.py`, `fix_property_regularity.py`
+- `remove_all_equivalentclass.py`, `remove_redundant_restrictions.py`, `visualize_gso.py`
+- `check_owl2dl.py` - Command-line HermiT reasoner (via owlready2)
+- `run_hermit.py` - Direct HermiT JAR runner (requires separate download)
+
+**Reports & Removed Axioms:**
+- `consistency_fixes_log.txt`, `owl2dl_conflicts_report.txt`, `redundant_restrictions_report.txt`
+- `removed_equivalentclass_axioms.txt`, `rock_properties.txt`, `Solid_Geologic_Material_properties.txt`
+- `GSO-Common-removed-axioms.ttl`, `removed_owl2dl_axioms.ttl`, `removed_triples.ttl`
+
+---
+
+## Command-Line HermiT Testing
+
+### check_owl2dl.py
+
+Command-line script to run HermiT reasoner via owlready2 library. Much faster for basic consistency checks than Protégé GUI.
+
+**Usage:**
+```bash
+cd ontologyFixes
+python check_owl2dl.py --merge          # Merge all files and check
+python check_owl2dl.py --merge -o merged.rdf  # Save merged file
+```
+
+**Features:**
+- Merges all TTL files using rdflib (handles multiple ontology modules)
+- Removes owl:imports statements (content already merged locally)
+- Runs HermiT via owlready2's bundled reasoner
+- Reports consistency/inconsistency and unsatisfiable classes
+- Uses 500MB Java heap (configurable via `owlready2.reasoning.JAVA_MEMORY`)
+
+**Dependencies:**
+```bash
+pip install owlready2 rdflib
+```
+
+---
+
+## HermiT Testing Progress
+
+| Module | Status | Time | Notes |
+|--------|--------|------|-------|
+| GSO-Common | PASSED | 119 ms | After OWL 2 DL fixes |
+| GSO-Geologic_Structure | PASSED | - | After quality/pattern fixes |
+| GSO-Geologic_Rock_Object | PASSED | 647 sec | After temporal property fixes |
+| GSO-Geologic_Time | PASSED | 717 sec | No changes needed |
+| GSO-Master (all merged) | INCONSISTENT | 6 sec | Using check_owl2dl.py |
+
+**Remaining modules to test individually:**
+- GSO-Geology, GSO-Feature, GSO-Element
+- GSO-Geologic_Event, GSO-Geologic_Feature, GSO-Geologic_Granular_Material
+- GSO-Geologic_Mineral, GSO-Geologic_Process, GSO-Geologic_Quality
+- GSO-Geologic_Reference_System, GSO-Geologic_Relation, GSO-Geologic_Role
+- GSO-Geologic_Setting, GSO-Geologic_Time_Ischart, GSO-Geologic_Unit
+- GSO-Geologic_Structure_* (Contact, Fault, Fold, Foliation, Lineation)
+- GSO-Hydrology, GSO-Perdurant, GSO-QUDTvoc, GSO-Quality, GSO-skos_annotation

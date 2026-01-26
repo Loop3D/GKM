@@ -1,0 +1,574 @@
+# GSO Ontology Consistency Fixes Log
+# Date: 2026-01-24
+# Purpose: Document all changes made to resolve unsatisfiable classes
+
+================================================================================
+FILE: GSO-Common.ttl
+================================================================================
+
+## 1. Event class - Removed hasPart restriction
+--------------------------------------------------------------------------------
+ISSUE: Event had conflicting restrictions:
+  - hasConstituent some Process
+  - hasPart only Event
+  - Event disjointWith Process
+
+Since hasConstituent -> hasPersistentPart -> hasEssentialPart -> hasPart,
+Event must have Process as part, but can only have Event as parts.
+
+REMOVED:
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:allValuesFrom gsoc:Event ;
+      owl:onProperty gsoc:hasPart ;
+    ] ;
+
+--------------------------------------------------------------------------------
+
+## 2. Quality_Value class - Removed disjointWith restriction
+--------------------------------------------------------------------------------
+ISSUE: Quality_Value was disjoint with things having Particular parts, but
+Range_Value (subclass) needs hasEndValue/hasStartValue which are subproperties
+of hasPart, requiring Measure_Value or Named_Value (which are Particulars).
+
+REMOVED:
+  owl:disjointWith [
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:hasPart ;
+      owl:someValuesFrom gsoc:Particular ;
+    ] .
+
+--------------------------------------------------------------------------------
+
+## 3. Inherant class - Removed disjointWith Relator
+--------------------------------------------------------------------------------
+ISSUE: Pattern_Feature subClassOf Inherant_Feature, which requires hasEssentialPart
+only Inherant. But Pattern_Feature needs hasEssentialPart some Relator.
+Relator was disjoint with Inherant.
+
+REMOVED:
+  owl:disjointWith gsoc:Relator .
+
+--------------------------------------------------------------------------------
+
+## 4. Time_Interval_Location class - Removed hasQuality restriction
+--------------------------------------------------------------------------------
+ISSUE: Time_Interval_Location had hasQuality some Duration.
+Duration is a Temporal_Quality which requires isQualityOf exactly 1 Perdurant.
+But Time_Interval_Location is an Endurant (via Quality hierarchy).
+Endurant is disjoint with Perdurant.
+
+REMOVED:
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:hasQuality ;
+      owl:someValuesFrom gsoc:Duration ;
+    ] ;
+
+--------------------------------------------------------------------------------
+
+## 5. Abstract_Endurant class - Removed complementOf restriction
+--------------------------------------------------------------------------------
+REMOVED:
+  rdfs:subClassOf [
+      rdf:type owl:Class ;
+      owl:complementOf [
+          rdf:type owl:Restriction ;
+          owl:onProperty gsoc:occupiesTime ;
+          owl:someValuesFrom gsoc:Time_Region ;
+        ] ;
+    ] ;
+
+--------------------------------------------------------------------------------
+
+## 6. Element class - Simplified isConstituentOf restriction
+--------------------------------------------------------------------------------
+REMOVED complementOf from intersection:
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:allValuesFrom [
+          rdf:type owl:Class ;
+          owl:intersectionOf (
+              gsoc:Material_Endurant
+              [
+                rdf:type owl:Class ;
+                owl:complementOf gsoc:Element ;
+              ]
+            ) ;
+        ] ;
+      owl:onProperty gsoc:isConstituentOf ;
+    ] .
+
+REPLACED WITH:
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:allValuesFrom gsoc:Material_Endurant ;
+      owl:onProperty gsoc:isConstituentOf ;
+    ] .
+
+--------------------------------------------------------------------------------
+
+## 7. Material_Object class - Removed complementOf restriction
+--------------------------------------------------------------------------------
+REMOVED:
+  rdfs:subClassOf [
+      rdf:type owl:Class ;
+      owl:complementOf [
+          rdf:type owl:Restriction ;
+          owl:onProperty gsoc:isConstituentOf ;
+          owl:someValuesFrom gsoc:Amount_Of_Matter ;
+        ] ;
+    ] ;
+
+--------------------------------------------------------------------------------
+
+## 8. Nonphysical_Endurant class - Removed complementOf restriction
+--------------------------------------------------------------------------------
+REMOVED:
+  rdfs:subClassOf [
+      rdf:type owl:Class ;
+      owl:complementOf [
+          rdf:type owl:Restriction ;
+          owl:onProperty gsoc:occupiesSpaceDirectly ;
+          owl:someValuesFrom gsoc:Spatial_Region ;
+        ] ;
+    ] ;
+
+--------------------------------------------------------------------------------
+
+## 9. Notional_Endurant class - Removed complementOf restriction
+--------------------------------------------------------------------------------
+REMOVED:
+  rdfs:subClassOf [
+      rdf:type owl:Class ;
+      owl:complementOf [
+          rdf:type owl:Restriction ;
+          owl:onProperty gsoc:occupiesSpace ;
+          owl:someValuesFrom gsoc:Spatial_Region ;
+        ] ;
+    ] ;
+
+--------------------------------------------------------------------------------
+
+## 10. Relator class - Removed disjointWith with complementOf
+--------------------------------------------------------------------------------
+REMOVED:
+  owl:disjointWith [
+      rdf:type owl:Class ;
+      owl:intersectionOf (
+          [
+            rdf:type owl:Class ;
+            owl:complementOf [
+                rdf:type owl:Restriction ;
+                owl:onProperty gsoc:hasStaticPart ;
+                owl:someValuesFrom gsoc:Particular ;
+              ] ;
+          ]
+          [
+            rdf:type owl:Restriction ;
+            owl:onProperty gsoc:hasPart ;
+            owl:someValuesFrom gsoc:Particular ;
+          ]
+        ) ;
+    ] .
+
+--------------------------------------------------------------------------------
+
+## 11. Spatial_Region class - Removed complementOf restriction
+--------------------------------------------------------------------------------
+REMOVED:
+  rdfs:subClassOf [
+      rdf:type owl:Class ;
+      owl:complementOf [
+          rdf:type owl:Restriction ;
+          owl:onProperty gsoc:hasConstituent ;
+          owl:someValuesFrom gsoc:Material_Endurant ;
+        ] ;
+    ] ;
+
+--------------------------------------------------------------------------------
+
+## 12. Spatial_Region_0D class - Removed complementOf restriction
+--------------------------------------------------------------------------------
+REMOVED:
+  rdfs:subClassOf [
+      rdf:type owl:Class ;
+      owl:complementOf [
+          rdf:type owl:Restriction ;
+          owl:onProperty gsoc:hasPart ;
+          owl:someValuesFrom gsoc:Particular ;
+        ] ;
+    ] .
+
+--------------------------------------------------------------------------------
+
+## 13. Situation class - Removed two disjointWith clauses with complementOf
+--------------------------------------------------------------------------------
+REMOVED:
+  owl:disjointWith [
+      rdf:type owl:Class ;
+      owl:complementOf [
+          rdf:type owl:Restriction ;
+          owl:onProperty gsoc:hasPart ;
+          owl:someValuesFrom gsoc:Particular ;
+        ] ;
+    ] ;
+  owl:disjointWith [
+      rdf:type owl:Class ;
+      owl:intersectionOf (
+          [
+            rdf:type owl:Class ;
+            owl:complementOf [
+                rdf:type owl:Restriction ;
+                owl:onProperty gsoc:hasStaticPart ;
+                owl:someValuesFrom gsoc:Particular ;
+              ] ;
+          ]
+          [
+            rdf:type owl:Restriction ;
+            owl:onProperty gsoc:hasPart ;
+            owl:someValuesFrom gsoc:Particular ;
+          ]
+        ) ;
+    ] .
+
+--------------------------------------------------------------------------------
+
+## 14. isSpatiallyRelatedTo property - Removed domain/range with complementOf
+--------------------------------------------------------------------------------
+REMOVED:
+  rdfs:domain [
+      rdf:type owl:Class ;
+      owl:complementOf gsoc:Notional_Endurant ;
+    ] ;
+  rdfs:range [
+      rdf:type owl:Class ;
+      owl:complementOf gsoc:Notional_Endurant ;
+    ] ;
+
+--------------------------------------------------------------------------------
+
+## 15. isTemporallyRelatedTo property - Removed domain/range with complementOf
+--------------------------------------------------------------------------------
+REMOVED:
+  rdfs:domain [
+      rdf:type owl:Class ;
+      owl:complementOf gsoc:Abstract_Endurant ;
+    ] ;
+  rdfs:range [
+      rdf:type owl:Class ;
+      owl:complementOf gsoc:Abstract_Endurant ;
+    ] ;
+
+--------------------------------------------------------------------------------
+
+## 16. location property - Removed domain with complementOf
+--------------------------------------------------------------------------------
+REMOVED:
+  rdfs:domain [
+      rdf:type owl:Class ;
+      owl:complementOf gsoc:Abstract_Endurant ;
+    ] ;
+
+--------------------------------------------------------------------------------
+
+## 17. occupies property - Removed domain with complementOf
+--------------------------------------------------------------------------------
+REMOVED:
+  rdfs:domain [
+      rdf:type owl:Class ;
+      owl:complementOf gsoc:Abstract_Endurant ;
+    ] ;
+
+--------------------------------------------------------------------------------
+
+## 18. occupiesSpace property - Removed domain with complementOf
+--------------------------------------------------------------------------------
+REMOVED:
+  rdfs:domain [
+      rdf:type owl:Class ;
+      owl:complementOf [
+          rdf:type owl:Class ;
+          owl:unionOf (
+              gsoc:Notional_Endurant
+              gsoc:Spatial_Region
+            ) ;
+        ] ;
+    ] ;
+
+--------------------------------------------------------------------------------
+
+## 19. occupiesSpaceIndirectly property - Removed domain with complementOf
+--------------------------------------------------------------------------------
+REMOVED:
+  rdfs:domain [
+      rdf:type owl:Class ;
+      owl:complementOf gsoc:Physical_Endurant ;
+    ] ;
+
+--------------------------------------------------------------------------------
+
+## 20. occupiesTime property - Removed domain and subPropertyOf
+--------------------------------------------------------------------------------
+REMOVED:
+  rdfs:domain [
+      rdf:type owl:Class ;
+      owl:complementOf [
+          rdf:type owl:Class ;
+          owl:unionOf (
+              gsoc:Abstract_Endurant
+              gsoc:Time_Region
+            ) ;
+        ] ;
+    ] ;
+  rdfs:subPropertyOf gsoc:timeEquivalentTo ;
+
+--------------------------------------------------------------------------------
+
+## 21. occupiesTimeIndirectly property - Removed domain with complementOf
+--------------------------------------------------------------------------------
+REMOVED:
+  rdfs:domain [
+      rdf:type owl:Class ;
+      owl:complementOf gsoc:Perdurant ;
+    ] ;
+
+--------------------------------------------------------------------------------
+
+## 22. occupiesSpace property - Removed subPropertyOf spatiallyEquals
+--------------------------------------------------------------------------------
+REMOVED:
+  rdfs:subPropertyOf gsoc:spatiallyEquals ;
+
+================================================================================
+FILE: Modules/GSO-Geologic_Time_Ischart.ttl
+================================================================================
+
+## 23. UpperMississippian2004 - Removed timeEquivalentTo Serpukhovian
+--------------------------------------------------------------------------------
+ISSUE: UpperMississippian is an Epoch, Serpukhovian is an Age.
+Epoch has restriction: timeIncludedBy only (not Epoch, not Age)
+timeEquivalentTo subPropertyOf timeIncludedBy
+This created a conflict.
+
+REMOVED from gstime:UpperMississippian2004:
+  gsoc:timeEquivalentTo gstime:Serpukhovian2004 ;
+
+REMOVED from gstime:UpperMississippian2017:
+  gsoc:timeEquivalentTo gstime:Serpukhovian2017 ;
+
+REMOVED from gstime:Serpukhovian2004:
+  gsoc:timeEquivalentTo gstime:UpperMississippian2004 ;
+
+REMOVED from gstime:Serpukhovian2017:
+  gsoc:timeEquivalentTo gstime:UpperMississippian2017 ;
+
+================================================================================
+FILE: GSO-Common.ttl (continued - Session 2)
+================================================================================
+
+## 24. Event_Feature class - Widened hasEssentialPart restriction
+--------------------------------------------------------------------------------
+ISSUE: Event has hasConstituent some Process, and through property chain
+hasConstituent -> hasPersistentPart -> hasEssentialPart, Event has Process
+as essential part. But Event_Feature had hasEssentialPart only Event.
+
+CHANGED FROM:
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:allValuesFrom gsoc:Event ;
+      owl:onProperty gsoc:hasEssentialPart ;
+    ] ;
+
+CHANGED TO:
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:allValuesFrom [
+          rdf:type owl:Class ;
+          owl:unionOf (
+              gsoc:Event
+              gsoc:Process
+            ) ;
+        ] ;
+      owl:onProperty gsoc:hasEssentialPart ;
+    ] ;
+
+--------------------------------------------------------------------------------
+
+## 25. Nonphysical_Quality class - Widened isQualityOf restriction
+--------------------------------------------------------------------------------
+ISSUE: Statistical_Calculation (a Perdurant via Event) had hasQuality some
+Unit_Of_Measure. Unit_Of_Measure is Nonphysical_Quality. But Nonphysical_Quality
+had isQualityOf only Nonphysical_Endurant. Through hasQuality inverse isQualityOf,
+this forced Statistical_Calculation to be Nonphysical_Endurant (an Endurant),
+conflicting with it being a Perdurant (Endurant disjointWith Perdurant).
+
+CHANGED FROM:
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:allValuesFrom gsoc:Nonphysical_Endurant ;
+      owl:onProperty gsoc:isQualityOf ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onClass gsoc:Nonphysical_Endurant ;
+      owl:onProperty gsoc:isQualityOf ;
+      owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+    ] ;
+
+CHANGED TO:
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:allValuesFrom [
+          rdf:type owl:Class ;
+          owl:unionOf (
+              gsoc:Nonphysical_Endurant
+              gsoc:Perdurant
+            ) ;
+        ] ;
+      owl:onProperty gsoc:isQualityOf ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onClass [
+          rdf:type owl:Class ;
+          owl:unionOf (
+              gsoc:Nonphysical_Endurant
+              gsoc:Perdurant
+            ) ;
+        ] ;
+      owl:onProperty gsoc:isQualityOf ;
+      owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+    ] ;
+
+--------------------------------------------------------------------------------
+
+## 26. Perdurant class - Widened hasQuality restriction and removed nested restriction
+--------------------------------------------------------------------------------
+ISSUE: Perdurant had hasQuality only Temporal_Quality. But Statistical_Calculation
+(a Perdurant) needed hasQuality some Unit_Of_Measure (a Nonphysical_Quality).
+Nonphysical_Quality disjointWith Temporal_Quality caused conflict.
+
+CHANGED FROM:
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:allValuesFrom gsoc:Temporal_Quality ;
+      owl:onProperty gsoc:hasQuality ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:allValuesFrom [
+          rdf:type owl:Restriction ;
+          owl:allValuesFrom [
+              rdf:type owl:Restriction ;
+              owl:onClass gsoc:Temporal_Quality ;
+              owl:onProperty gsoc:isStaticValueOf ;
+              owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+            ] ;
+          owl:onProperty gsoc:hasValue ;
+        ] ;
+      owl:onProperty gsoc:hasQuality ;
+    ] .
+
+CHANGED TO:
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:allValuesFrom [
+          rdf:type owl:Class ;
+          owl:unionOf (
+              gsoc:Temporal_Quality
+              gsoc:Nonphysical_Quality
+            ) ;
+        ] ;
+      owl:onProperty gsoc:hasQuality ;
+    ] .
+
+--------------------------------------------------------------------------------
+
+================================================================================
+FILE: Modules/GSO-Perdurant.ttl
+================================================================================
+
+## 27. Statistical_Calculation class - Changed hasQuality to hasOutput
+--------------------------------------------------------------------------------
+ISSUE: Statistical_Calculation had hasQuality some Unit_Of_Measure.
+This was semantically incorrect - a calculation should have a RESULT
+(output) that is a Measure_Value, which then has Unit_Of_Measure as quality.
+Also caused conflict because Unit_Of_Measure isQualityOf only Measure_Value.
+
+CHANGED FROM:
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:hasQuality ;
+      owl:someValuesFrom gsoc:Unit_Of_Measure ;
+    ] ;
+
+CHANGED TO:
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:hasOutput ;
+      owl:someValuesFrom gsoc:Measure_Value ;
+    ] ;
+
+--------------------------------------------------------------------------------
+
+================================================================================
+FILE: Modules/GSO-Geologic_Time_Ischart.ttl (continued)
+================================================================================
+
+## 28. Removed all timeEquivalentTo assertions between Ages and Epochs
+--------------------------------------------------------------------------------
+ISSUE: Epoch has restriction: timeIncludedBy only (not (Age OR Epoch))
+timeEquivalentTo SubPropertyOf timeIncludedBy (symmetric)
+This means an Epoch cannot be timeEquivalentTo an Age.
+
+REMOVED (16 triples total - 4 pairs × 2 versions × 2 directions):
+
+MiddlePennsylvanian (Epoch) ↔ Moscovian (Age):
+  gstime:MiddlePennsylvanian2004 gsoc:timeEquivalentTo gstime:Moscovian2004 ;
+  gstime:MiddlePennsylvanian2017 gsoc:timeEquivalentTo gstime:Moscovian2017 ;
+  gstime:Moscovian2004 gsoc:timeEquivalentTo gstime:MiddlePennsylvanian2004 ;
+  gstime:Moscovian2017 gsoc:timeEquivalentTo gstime:MiddlePennsylvanian2017 ;
+
+LowerPennsylvanian (Epoch) ↔ Bashkirian (Age):
+  gstime:LowerPennsylvanian2004 gsoc:timeEquivalentTo gstime:Bashkirian2004 ;
+  gstime:LowerPennsylvanian2017 gsoc:timeEquivalentTo gstime:Bashkirian2017 ;
+  gstime:Bashkirian2004 gsoc:timeEquivalentTo gstime:LowerPennsylvanian2004 ;
+  gstime:Bashkirian2017 gsoc:timeEquivalentTo gstime:LowerPennsylvanian2017 ;
+
+LowerMississippian (Epoch) ↔ Tournaisian (Age):
+  gstime:LowerMississippian2004 gsoc:timeEquivalentTo gstime:Tournaisian2004 ;
+  gstime:LowerMississippian2017 gsoc:timeEquivalentTo gstime:Tournaisian2017 ;
+  gstime:Tournaisian2004 gsoc:timeEquivalentTo gstime:LowerMississippian2004 ;
+  gstime:Tournaisian2017 gsoc:timeEquivalentTo gstime:LowerMississippian2017 ;
+
+MiddleMississippian (Epoch) ↔ Visean (Age):
+  gstime:MiddleMississippian2004 gsoc:timeEquivalentTo gstime:Visean2004 ;
+  gstime:MiddleMississippian2017 gsoc:timeEquivalentTo gstime:Visean2017 ;
+  gstime:Visean2004 gsoc:timeEquivalentTo gstime:MiddleMississippian2004 ;
+  gstime:Visean2017 gsoc:timeEquivalentTo gstime:MiddleMississippian2017 ;
+
+(Note: UpperMississippian ↔ Serpukhovian was already removed in item #23)
+
+--------------------------------------------------------------------------------
+
+## 29. timeInclusion property - Removed SymmetricProperty declaration
+--------------------------------------------------------------------------------
+ISSUE: timeInclusion was declared as SymmetricProperty, but has timeIncludedBy
+and timeIncludes as subproperties (which are inverses). This caused exponential
+inference explosion when reasoning over ISChart with ~600 time intervals.
+
+Semantically, timeInclusion being symmetric is redundant - the inverse
+relationship is already captured by timeIncludedBy/timeIncludes being inverses.
+
+REMOVED:
+  rdf:type owl:SymmetricProperty ;
+
+FROM:
+  gsoc:timeInclusion
+
+--------------------------------------------------------------------------------
+
+================================================================================
+END OF LOG
+================================================================================

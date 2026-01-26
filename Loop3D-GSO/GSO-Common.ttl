@@ -207,7 +207,13 @@ gsoc:Event_Feature
   rdfs:subClassOf gsoc:Occurrence_Feature ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
-      owl:allValuesFrom gsoc:Event ;
+      owl:allValuesFrom [
+          rdf:type owl:Class ;
+          owl:unionOf (
+              gsoc:Event
+              gsoc:Process
+            ) ;
+        ] ;
       owl:onProperty gsoc:hasEssentialPart ;
     ] ;
   rdfs:subClassOf [
@@ -552,12 +558,24 @@ gsoc:Nonphysical_Quality
   rdfs:subClassOf gsoc:Quality ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
-      owl:allValuesFrom gsoc:Nonphysical_Endurant ;
+      owl:allValuesFrom [
+          rdf:type owl:Class ;
+          owl:unionOf (
+              gsoc:Nonphysical_Endurant
+              gsoc:Perdurant
+            ) ;
+        ] ;
       owl:onProperty gsoc:isQualityOf ;
     ] ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
-      owl:onClass gsoc:Nonphysical_Endurant ;
+      owl:onClass [
+          rdf:type owl:Class ;
+          owl:unionOf (
+              gsoc:Nonphysical_Endurant
+              gsoc:Perdurant
+            ) ;
+        ] ;
       owl:onProperty gsoc:isQualityOf ;
       owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
     ] ;
@@ -685,17 +703,7 @@ gsoc:Particular
 gsoc:Pattern_Feature
   rdf:type owl:Class ;
   rdfs:comment "A feature that denotes a manifestation of a pattern. A pattern in GSO is a relation, in two senses: (1) an abstract pattern is a template, which can be expressed as an n-ary predicate with some variables as relata; (2) a manifested pattern is an occurence of the template in some host, and can be expressed as either (a) an n-ary relation with only constants as relata, or (b) an instance of the reification of this relation (i.e. a Relator instance). E.g. wood grain is hosted by some wood matter and the pattern is the reified relation between its wood fibres. Different wood grains are then different (reified and instantiated) relations between its fibres."@en ;
-  rdfs:subClassOf gsoc:Inherant_Feature ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:allValuesFrom gsoc:Relator ;
-      owl:onProperty gsoc:hasEssentialPart ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
-      owl:onProperty gsoc:hasEssentialPart ;
-      owl:someValuesFrom gsoc:Relator ;
-    ] .
+  rdfs:subClassOf gsoc:Inherant_Feature .
 gsoc:Pause
   rdf:type owl:Class ;
   rdfs:comment "Pause within an event or process, e.g. Intermission during hockey game or theater performance (host = playing process, constituent = time interval)"@en ;
@@ -730,20 +738,12 @@ gsoc:Perdurant
     ] ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
-      owl:allValuesFrom gsoc:Temporal_Quality ;
-      owl:onProperty gsoc:hasQuality ;
-    ] ;
-  rdfs:subClassOf [
-      rdf:type owl:Restriction ;
       owl:allValuesFrom [
-          rdf:type owl:Restriction ;
-          owl:allValuesFrom [
-              rdf:type owl:Restriction ;
-              owl:onClass gsoc:Temporal_Quality ;
-              owl:onProperty gsoc:isStaticValueOf ;
-              owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-            ] ;
-          owl:onProperty gsoc:hasValue ;
+          rdf:type owl:Class ;
+          owl:unionOf (
+              gsoc:Temporal_Quality
+              gsoc:Nonphysical_Quality
+            ) ;
         ] ;
       owl:onProperty gsoc:hasQuality ;
     ] .
@@ -825,7 +825,13 @@ gsoc:Physical_Quality
   rdfs:subClassOf gsoc:Quality ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
-      owl:onClass gsoc:Physical_Endurant ;
+      owl:onClass [
+          rdf:type owl:Class ;
+          owl:unionOf (
+              gsoc:Physical_Endurant
+              gsoc:Endurant_Feature
+            ) ;
+        ] ;
       owl:onProperty gsoc:isQualityOf ;
       owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
     ] ;
@@ -1681,7 +1687,7 @@ gsoc:constantlySpecDependsOn
   rdfs:comment "Constant specific dependence, in which the dependee is co-temporal with the dependent."@en ;
   rdfs:subPropertyOf gsoc:constantlyGenDependsOn ;
   rdfs:subPropertyOf gsoc:specificallyDependsOn ;
-  rdfs:subPropertyOf gsoc:timeIncludedBy .
+  rdfs:subPropertyOf gsoc:isTemporallyRelatedTo .
 gsoc:containedBy
   rdf:type owl:ObjectProperty ;
   dct:source "https://en.wikipedia.org/wiki/DE-9IM. Based on the seminal works of Egenhofer et al. (1990, 1991),  Cohn et al. (1997), Clementini et al. (1993, 1994)."@en ;
@@ -2356,7 +2362,6 @@ gsoc:timeIncludes
   rdfs:subPropertyOf gsoc:timeInclusion .
 gsoc:timeInclusion
   rdf:type owl:ObjectProperty ;
-  rdf:type owl:SymmetricProperty ;
   rdfs:subPropertyOf gsoc:isTemporallyRelatedTo .
 gsoc:timeIncomparableTo
   rdf:type owl:ObjectProperty ;
@@ -2421,13 +2426,13 @@ gsoc:timePrecedes
 gsoc:timeStartedBy
   rdf:type owl:ObjectProperty ;
   rdfs:comment "source and target start simultaneously; source interval ends after target; inverse of starts"@en ;
-  rdfs:subPropertyOf gsoc:timeIncludes ;
+  rdfs:subPropertyOf gsoc:isTemporallyRelatedTo ;
   rdfs:subPropertyOf gsoc:timeIntersects ;
   owl:inverseOf gsoc:timeStarts .
 gsoc:timeStarts
   rdf:type owl:ObjectProperty ;
   rdfs:comment "Source and target TimeRegions start at same instant, target TimeRegion ends after source TimeRegion; Allen Relation. Assign an older age boundary for a time interval."@en ;
-  rdfs:subPropertyOf gsoc:timeIncludedBy ;
+  rdfs:subPropertyOf gsoc:isTemporallyRelatedTo ;
   rdfs:subPropertyOf gsoc:timeIntersects .
 gsoc:timeYoungerThan
   rdf:type owl:ObjectProperty ;

@@ -1,0 +1,304 @@
+# Removed Triples from GSO Ontology
+# Date: 2026-01-24
+# Purpose: Archive of triples removed to fix unsatisfiable classes
+# These triples caused logical contradictions when combined with other axioms
+
+@prefix gsoc: <https://w3id.org/gso/1.0/common/> .
+@prefix gstime: <https://w3id.org/gso/1.0/ischart/> .
+@prefix gst: <https://w3id.org/gso/1.0/geologictime/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# =============================================================================
+# REMOVED FROM GSO-Common.ttl
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# 1. Event - hasPart only Event restriction
+# Conflict: hasConstituent some Process, but hasConstituent subPropertyOf hasPart
+# -----------------------------------------------------------------------------
+gsoc:Event rdfs:subClassOf [
+    rdf:type owl:Restriction ;
+    owl:allValuesFrom gsoc:Event ;
+    owl:onProperty gsoc:hasPart ;
+  ] .
+
+# -----------------------------------------------------------------------------
+# 2. Quality_Value - disjointWith hasPart some Particular
+# Conflict: Range_Value needs hasEndValue/hasStartValue -> hasPart
+# -----------------------------------------------------------------------------
+gsoc:Quality_Value owl:disjointWith [
+    rdf:type owl:Restriction ;
+    owl:onProperty gsoc:hasPart ;
+    owl:someValuesFrom gsoc:Particular ;
+  ] .
+
+# -----------------------------------------------------------------------------
+# 3. Inherant - disjointWith Relator
+# Conflict: Pattern_Feature needs Relator as essential part
+# -----------------------------------------------------------------------------
+gsoc:Inherant owl:disjointWith gsoc:Relator .
+
+# -----------------------------------------------------------------------------
+# 4. Time_Interval_Location - hasQuality some Duration
+# Conflict: Duration needs isQualityOf Perdurant, but Time_Interval_Location is Endurant
+# -----------------------------------------------------------------------------
+gsoc:Time_Interval_Location rdfs:subClassOf [
+    rdf:type owl:Restriction ;
+    owl:onProperty gsoc:hasQuality ;
+    owl:someValuesFrom gsoc:Duration ;
+  ] .
+
+# -----------------------------------------------------------------------------
+# 5. Abstract_Endurant - complementOf occupiesTime restriction
+# -----------------------------------------------------------------------------
+gsoc:Abstract_Endurant rdfs:subClassOf [
+    rdf:type owl:Class ;
+    owl:complementOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty gsoc:occupiesTime ;
+        owl:someValuesFrom gsoc:Time_Region ;
+      ] ;
+  ] .
+
+# -----------------------------------------------------------------------------
+# 6. Element - complementOf in isConstituentOf restriction (simplified)
+# Original had intersection with complementOf Element
+# -----------------------------------------------------------------------------
+gsoc:Element rdfs:subClassOf [
+    rdf:type owl:Restriction ;
+    owl:allValuesFrom [
+        rdf:type owl:Class ;
+        owl:intersectionOf (
+            gsoc:Material_Endurant
+            [
+              rdf:type owl:Class ;
+              owl:complementOf gsoc:Element ;
+            ]
+          ) ;
+      ] ;
+    owl:onProperty gsoc:isConstituentOf ;
+  ] .
+
+# -----------------------------------------------------------------------------
+# 7. Material_Object - complementOf isConstituentOf restriction
+# -----------------------------------------------------------------------------
+gsoc:Material_Object rdfs:subClassOf [
+    rdf:type owl:Class ;
+    owl:complementOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty gsoc:isConstituentOf ;
+        owl:someValuesFrom gsoc:Amount_Of_Matter ;
+      ] ;
+  ] .
+
+# -----------------------------------------------------------------------------
+# 8. Nonphysical_Endurant - complementOf occupiesSpaceDirectly restriction
+# -----------------------------------------------------------------------------
+gsoc:Nonphysical_Endurant rdfs:subClassOf [
+    rdf:type owl:Class ;
+    owl:complementOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty gsoc:occupiesSpaceDirectly ;
+        owl:someValuesFrom gsoc:Spatial_Region ;
+      ] ;
+  ] .
+
+# -----------------------------------------------------------------------------
+# 9. Notional_Endurant - complementOf occupiesSpace restriction
+# -----------------------------------------------------------------------------
+gsoc:Notional_Endurant rdfs:subClassOf [
+    rdf:type owl:Class ;
+    owl:complementOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty gsoc:occupiesSpace ;
+        owl:someValuesFrom gsoc:Spatial_Region ;
+      ] ;
+  ] .
+
+# -----------------------------------------------------------------------------
+# 10. Relator - disjointWith complex expression with complementOf
+# -----------------------------------------------------------------------------
+gsoc:Relator owl:disjointWith [
+    rdf:type owl:Class ;
+    owl:intersectionOf (
+        [
+          rdf:type owl:Class ;
+          owl:complementOf [
+              rdf:type owl:Restriction ;
+              owl:onProperty gsoc:hasStaticPart ;
+              owl:someValuesFrom gsoc:Particular ;
+            ] ;
+        ]
+        [
+          rdf:type owl:Restriction ;
+          owl:onProperty gsoc:hasPart ;
+          owl:someValuesFrom gsoc:Particular ;
+        ]
+      ) ;
+  ] .
+
+# -----------------------------------------------------------------------------
+# 11. Spatial_Region - complementOf hasConstituent restriction
+# -----------------------------------------------------------------------------
+gsoc:Spatial_Region rdfs:subClassOf [
+    rdf:type owl:Class ;
+    owl:complementOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty gsoc:hasConstituent ;
+        owl:someValuesFrom gsoc:Material_Endurant ;
+      ] ;
+  ] .
+
+# -----------------------------------------------------------------------------
+# 12. Spatial_Region_0D - complementOf hasPart restriction
+# -----------------------------------------------------------------------------
+gsoc:Spatial_Region_0D rdfs:subClassOf [
+    rdf:type owl:Class ;
+    owl:complementOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty gsoc:hasPart ;
+        owl:someValuesFrom gsoc:Particular ;
+      ] ;
+  ] .
+
+# -----------------------------------------------------------------------------
+# 13. Situation - two disjointWith clauses with complementOf
+# -----------------------------------------------------------------------------
+gsoc:Situation owl:disjointWith [
+    rdf:type owl:Class ;
+    owl:complementOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty gsoc:hasPart ;
+        owl:someValuesFrom gsoc:Particular ;
+      ] ;
+  ] .
+
+gsoc:Situation owl:disjointWith [
+    rdf:type owl:Class ;
+    owl:intersectionOf (
+        [
+          rdf:type owl:Class ;
+          owl:complementOf [
+              rdf:type owl:Restriction ;
+              owl:onProperty gsoc:hasStaticPart ;
+              owl:someValuesFrom gsoc:Particular ;
+            ] ;
+        ]
+        [
+          rdf:type owl:Restriction ;
+          owl:onProperty gsoc:hasPart ;
+          owl:someValuesFrom gsoc:Particular ;
+        ]
+      ) ;
+  ] .
+
+# -----------------------------------------------------------------------------
+# 14. isSpatiallyRelatedTo - domain/range with complementOf
+# -----------------------------------------------------------------------------
+gsoc:isSpatiallyRelatedTo rdfs:domain [
+    rdf:type owl:Class ;
+    owl:complementOf gsoc:Notional_Endurant ;
+  ] .
+
+gsoc:isSpatiallyRelatedTo rdfs:range [
+    rdf:type owl:Class ;
+    owl:complementOf gsoc:Notional_Endurant ;
+  ] .
+
+# -----------------------------------------------------------------------------
+# 15. isTemporallyRelatedTo - domain/range with complementOf
+# -----------------------------------------------------------------------------
+gsoc:isTemporallyRelatedTo rdfs:domain [
+    rdf:type owl:Class ;
+    owl:complementOf gsoc:Abstract_Endurant ;
+  ] .
+
+gsoc:isTemporallyRelatedTo rdfs:range [
+    rdf:type owl:Class ;
+    owl:complementOf gsoc:Abstract_Endurant ;
+  ] .
+
+# -----------------------------------------------------------------------------
+# 16. location - domain with complementOf
+# -----------------------------------------------------------------------------
+gsoc:location rdfs:domain [
+    rdf:type owl:Class ;
+    owl:complementOf gsoc:Abstract_Endurant ;
+  ] .
+
+# -----------------------------------------------------------------------------
+# 17. occupies - domain with complementOf
+# -----------------------------------------------------------------------------
+gsoc:occupies rdfs:domain [
+    rdf:type owl:Class ;
+    owl:complementOf gsoc:Abstract_Endurant ;
+  ] .
+
+# -----------------------------------------------------------------------------
+# 18. occupiesSpace - domain with complementOf and subPropertyOf
+# -----------------------------------------------------------------------------
+gsoc:occupiesSpace rdfs:domain [
+    rdf:type owl:Class ;
+    owl:complementOf [
+        rdf:type owl:Class ;
+        owl:unionOf (
+            gsoc:Notional_Endurant
+            gsoc:Spatial_Region
+          ) ;
+      ] ;
+  ] .
+
+gsoc:occupiesSpace rdfs:subPropertyOf gsoc:spatiallyEquals .
+
+# -----------------------------------------------------------------------------
+# 19. occupiesSpaceIndirectly - domain with complementOf
+# -----------------------------------------------------------------------------
+gsoc:occupiesSpaceIndirectly rdfs:domain [
+    rdf:type owl:Class ;
+    owl:complementOf gsoc:Physical_Endurant ;
+  ] .
+
+# -----------------------------------------------------------------------------
+# 20. occupiesTime - domain with complementOf and subPropertyOf
+# -----------------------------------------------------------------------------
+gsoc:occupiesTime rdfs:domain [
+    rdf:type owl:Class ;
+    owl:complementOf [
+        rdf:type owl:Class ;
+        owl:unionOf (
+            gsoc:Abstract_Endurant
+            gsoc:Time_Region
+          ) ;
+      ] ;
+  ] .
+
+gsoc:occupiesTime rdfs:subPropertyOf gsoc:timeEquivalentTo .
+
+# -----------------------------------------------------------------------------
+# 21. occupiesTimeIndirectly - domain with complementOf
+# -----------------------------------------------------------------------------
+gsoc:occupiesTimeIndirectly rdfs:domain [
+    rdf:type owl:Class ;
+    owl:complementOf gsoc:Perdurant ;
+  ] .
+
+# =============================================================================
+# REMOVED FROM Modules/GSO-Geologic_Time_Ischart.ttl
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# 22. timeEquivalentTo between Epoch and Age (cross-rank conflict)
+# Epoch restriction: timeIncludedBy only (not Epoch, not Age)
+# timeEquivalentTo subPropertyOf timeIncludedBy
+# -----------------------------------------------------------------------------
+gstime:UpperMississippian2004 gsoc:timeEquivalentTo gstime:Serpukhovian2004 .
+gstime:UpperMississippian2017 gsoc:timeEquivalentTo gstime:Serpukhovian2017 .
+gstime:Serpukhovian2004 gsoc:timeEquivalentTo gstime:UpperMississippian2004 .
+gstime:Serpukhovian2017 gsoc:timeEquivalentTo gstime:UpperMississippian2017 .
+
+# =============================================================================
+# END OF REMOVED TRIPLES
+# =============================================================================

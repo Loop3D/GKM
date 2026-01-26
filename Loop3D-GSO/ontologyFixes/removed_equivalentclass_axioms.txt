@@ -1,0 +1,652 @@
+# Removed 41 owl:equivalentClass statements from GSO-Common.ttl
+# These were removed to achieve OWL 2 DL consistency
+
+# 1.
+owl:equivalentClass [
+      rdf:type owl:Class ;
+      owl:intersectionOf (
+          gsoc:Notional_Endurant
+          [
+            rdf:type owl:Class ;
+            owl:complementOf [
+                rdf:type owl:Restriction ;
+                owl:onProperty gsoc:occupiesTime ;
+                owl:someValuesFrom gsoc:Time_Region ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+
+# 2.
+owl:equivalentClass [
+      rdf:type owl:Class ;
+      owl:intersectionOf (
+          gsoc:Material_Endurant
+          [
+            rdf:type owl:Restriction ;
+            owl:onProperty gsoc:hasQuality ;
+            owl:someValuesFrom gsoc:State_Of_Matter ;
+          ]
+        ) ;
+    ] ;
+
+# 3.
+owl:equivalentClass [
+      rdf:type owl:Class ;
+      owl:intersectionOf (
+          gsoc:Endurant_Feature
+          [
+            rdf:type owl:Restriction ;
+            owl:onProperty gsoc:hostedBy ;
+            owl:someValuesFrom gsoc:Perdurant ;
+          ]
+        ) ;
+    ] ;
+
+# 4.
+owl:equivalentClass [
+      rdf:type owl:Class ;
+      owl:intersectionOf (
+          gsoc:Feature
+          [
+            rdf:type owl:Restriction ;
+            owl:onProperty gsoc:hasEssentialPart ;
+            owl:someValuesFrom gsoc:Endurant ;
+          ]
+          [
+            rdf:type owl:Restriction ;
+            owl:allValuesFrom gsoc:Endurant ;
+            owl:onProperty gsoc:hasEssentialPart ;
+          ]
+        ) ;
+    ] ;
+
+# 5.
+owl:equivalentClass [
+      rdf:type owl:Class ;
+      owl:intersectionOf (
+          gsoc:Perdurant
+          [
+            rdf:type owl:Restriction ;
+            owl:onProperty gsoc:hasConstituent ;
+            owl:someValuesFrom gsoc:Process ;
+          ]
+        ) ;
+    ] ;
+
+# 6.
+owl:equivalentClass [
+      rdf:type owl:Class ;
+      owl:intersectionOf (
+          gsoc:Relator
+          [
+            rdf:type owl:Restriction ;
+            owl:onProperty gsoc:hasStaticPart ;
+            owl:someValuesFrom gsoc:Example ;
+          ]
+        ) ;
+    ] ;
+
+# 7.
+owl:equivalentClass [
+      rdf:type owl:Class ;
+      owl:intersectionOf (
+          gsoc:Amount_Of_Matter
+          [
+            rdf:type owl:Restriction ;
+            owl:onClass [
+                rdf:type owl:Class ;
+                owl:intersectionOf (
+                    gsoc:State_Of_Matter
+                    [
+                      rdf:type owl:Restriction ;
+                      owl:allValuesFrom gsoc:Fluid ;
+                      owl:onProperty gsoc:hasValue ;
+                    ]
+                  ) ;
+              ] ;
+            owl:onProperty gsoc:hasQuality ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+          ]
+        ) ;
+    ] ;
+
+# 8.
+owl:equivalentClass [
+      rdf:type owl:Class ;
+      owl:intersectionOf (
+          gsoc:Physical_Feature
+          [
+            rdf:type owl:Restriction ;
+            owl:onProperty gsoc:hasEssentialPart ;
+            owl:someValuesFrom gsoc:Spatial_Region ;
+          ]
+          [
+            rdf:type owl:Restriction ;
+            owl:allValuesFrom gsoc:Spatial_Region ;
+            owl:onProperty gsoc:hasEssentialPart ;
+          ]
+        ) ;
+    ] ;
+
+# 9.
+owl:equivalentClass [
+      rdf:type owl:Class ;
+      owl:intersectionOf (
+          gsoc:Nonphysical_Endurant
+          [
+            rdf:type owl:Restriction ;
+            owl:onClass gsoc:Particular ;
+            owl:onProperty gsoc:inheresIn ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+          ]
+        ) ;
+    ] ;
+
+# 10.
+owl:equivalentClass [
+      rdf:type owl:Class ;
+      owl:intersectionOf (
+          gsoc:Nonphysical_Feature
+          [
+            rdf:type owl:Restriction ;
+            owl:onProperty gsoc:hasEssentialPart ;
+            owl:someValuesFrom gsoc:Inherant ;
+          ]
+          [
+            rdf:type owl:Restriction ;
+            owl:allValuesFrom gsoc:Inherant ;
+            owl:onProperty gsoc:hasEssentialPart ;
+          ]
+        ) ;
+    ] ;
+
+# 11.
+owl:equivalentClass [
+      rdf:type owl:Class ;
+      owl:intersectionOf (
+          gsoc:Physical_Feature
+          [
+            rdf:type owl:Restriction ;
+            owl:onProperty gsoc:hasEssentialPart ;
+            owl:someValuesFrom gsoc:Material_Endurant ;
+          ]
+          [
+            rdf:type owl:Restriction ;
+            owl:allValuesFrom gsoc:Material_Endurant ;
+            owl:onProperty gsoc:hasEssentialPart ;
+          ]
+        ) ;
+    ] ;
+
+# 12.
+owl:equivalentClass [
+      rdf:type owl:Class ;
+      owl:intersectionOf (
+          gsoc:Material_Endurant
+          [
+            rdf:type owl:Class ;
+            owl:complementOf [
+                rdf:type owl:Restriction ;
+                owl:onProperty gsoc:hasQuality ;
+                owl:someValuesFrom gsoc:State_Of_Matter ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+
+# 13.
+owl:equivalentClass [
+      rdf:type owl:Class ;
+      owl:intersectionOf (
+          gsoc:Quality_Value
+          [
+            rdf:type owl:Restriction ;
+            owl:onDataRange xsd:anySimpleType ;
+            owl:onProperty gsoc:hasDataValue ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+          ]
+        ) ;
+    ] ;
+
+# 14.
+owl:equivalentClass [
+      rdf:type owl:Class ;
+      owl:complementOf [
+          rdf:type owl:Class ;
+          owl:unionOf (
+              gsoc:Measure_Value
+              gsoc:Range_Value
+            ) ;
+        ] ;
+    ] ;
+
+# 15.
+owl:equivalentClass [
+      rdf:type owl:Class ;
+      owl:intersectionOf (
+          gsoc:Endurant_Feature
+          [
+            rdf:type owl:Restriction ;
+            owl:onProperty gsoc:hasEssentialPart ;
+            owl:someValuesFrom gsoc:Nonphysical_Endurant ;
+          ]
+          [
+            rdf:type owl:Restriction ;
+            owl:allValuesFrom gsoc:Nonphysical_Endurant ;
+            owl:onProperty gsoc:hasEssentialPart ;
+          ]
+        ) ;
+    ] ;
+
+# 16.
+owl:equivalentClass [
+      rdf:type owl:Class ;
+      owl:intersectionOf (
+          gsoc:Quality
+          [
+            rdf:type owl:Restriction ;
+            owl:onClass gsoc:Nonphysical_Endurant ;
+            owl:onProperty gsoc:isQualityOf ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+          ]
+        ) ;
+    ] ;
+
+# 17.
+owl:equivalentClass [
+      rdf:type owl:Class ;
+      owl:intersectionOf (
+          gsoc:Reference_System
+          [
+            rdf:type owl:Restriction ;
+            owl:onProperty gsoc:isReferenceSystemFor ;
+            owl:someValuesFrom gsoc:Nonphysical_Quality ;
+          ]
+        ) ;
+    ] ;
+
+# 18.
+owl:equivalentClass [
+      rdf:type owl:Class ;
+      owl:intersectionOf (
+          gsoc:Nonphysical_Endurant
+          [
+            rdf:type owl:Class ;
+            owl:complementOf [
+                rdf:type owl:Restriction ;
+                owl:onProperty gsoc:occupiesSpace ;
+                owl:someValuesFrom gsoc:Spatial_Region ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+
+# 19.
+owl:equivalentClass [
+      rdf:type owl:Class ;
+      owl:intersectionOf (
+          gsoc:Measure_Value
+          [
+            rdf:type owl:Restriction ;
+            owl:allValuesFrom xsd:decimal ;
+            owl:onProperty gsoc:hasDataValue ;
+          ]
+        ) ;
+    ] ;
+
+# 20.
+owl:equivalentClass [
+      rdf:type owl:Class ;
+      owl:intersectionOf (
+          gsoc:Relator
+          [
+            rdf:type owl:Restriction ;
+            owl:onProperty gsoc:hasStaticPart ;
+            owl:someValuesFrom [
+                rdf:type owl:Class ;
+                owl:unionOf (
+                    gsoc:Part
+                    gsoc:Whole
+                  ) ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+
+# 21.
+owl:equivalentClass [
+      rdf:type owl:Class ;
+      owl:intersectionOf (
+          gsoc:Inherant_Feature
+          [
+            rdf:type owl:Restriction ;
+            owl:onProperty gsoc:hasEssentialPart ;
+            owl:someValuesFrom gsoc:Relator ;
+          ]
+          [
+            rdf:type owl:Restriction ;
+            owl:allValuesFrom gsoc:Relator ;
+            owl:onProperty gsoc:hasEssentialPart ;
+          ]
+        ) ;
+    ] ;
+
+# 22.
+owl:equivalentClass [
+      rdf:type owl:Class ;
+      owl:intersectionOf (
+          gsoc:Particular
+          [
+            rdf:type owl:Class ;
+            owl:unionOf (
+                gsoc:Time_Region
+                [
+                  rdf:type owl:Restriction ;
+                  owl:onClass gsoc:Time_Region ;
+                  owl:onProperty gsoc:occupiesTimeDirectly ;
+                  owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                ]
+              ) ;
+          ]
+        ) ;
+    ] ;
+
+# 23.
+owl:equivalentClass [
+      rdf:type owl:Class ;
+      owl:intersectionOf (
+          gsoc:Feature
+          [
+            rdf:type owl:Restriction ;
+            owl:onProperty gsoc:hasEssentialPart ;
+            owl:someValuesFrom gsoc:Perdurant ;
+          ]
+          [
+            rdf:type owl:Restriction ;
+            owl:allValuesFrom gsoc:Perdurant ;
+            owl:onProperty gsoc:hasEssentialPart ;
+          ]
+        ) ;
+    ] ;
+
+# 24.
+owl:equivalentClass [
+      rdf:type owl:Class ;
+      owl:intersectionOf (
+          gsoc:Endurant_Feature
+          [
+            rdf:type owl:Restriction ;
+            owl:onProperty gsoc:hasEssentialPart ;
+            owl:someValuesFrom gsoc:Physical_Endurant ;
+          ]
+          [
+            rdf:type owl:Restriction ;
+            owl:allValuesFrom gsoc:Physical_Endurant ;
+            owl:onProperty gsoc:hasEssentialPart ;
+          ]
+        ) ;
+    ] ;
+
+# 25.
+owl:equivalentClass [
+      rdf:type owl:Class ;
+      owl:intersectionOf (
+          gsoc:Quality
+          [
+            rdf:type owl:Restriction ;
+            owl:onClass gsoc:Physical_Endurant ;
+            owl:onProperty gsoc:isQualityOf ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+          ]
+        ) ;
+    ] ;
+
+# 26.
+owl:equivalentClass [
+      rdf:type owl:Class ;
+      owl:intersectionOf (
+          gsoc:Reference_System
+          [
+            rdf:type owl:Restriction ;
+            owl:onProperty gsoc:isReferenceSystemFor ;
+            owl:someValuesFrom gsoc:Temporal_Quality ;
+          ]
+        ) ;
+    ] ;
+
+# 27.
+owl:equivalentClass [
+      rdf:type owl:Class ;
+      owl:intersectionOf (
+          gsoc:Perdurant
+          [
+            rdf:type owl:Class ;
+            owl:complementOf [
+                rdf:type owl:Class ;
+                owl:unionOf (
+                    gsoc:Event
+                    gsoc:Time_Region
+                  ) ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+
+# 28.
+owl:equivalentClass [
+      rdf:type owl:Class ;
+      owl:intersectionOf (
+          gsoc:Inherant
+          [
+            rdf:type owl:Restriction ;
+            owl:onProperty gsoc:hasValue ;
+            owl:someValuesFrom gsoc:Quality_Value ;
+          ]
+        ) ;
+    ] ;
+
+# 29.
+owl:equivalentClass [
+      rdf:type owl:Class ;
+      owl:intersectionOf (
+          gsoc:Inherant
+          [
+            rdf:type owl:Restriction ;
+            owl:onClass gsoc:Quality ;
+            owl:onProperty gsoc:isValueOf ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+          ]
+        ) ;
+    ] ;
+
+# 30.
+owl:equivalentClass [
+      rdf:type owl:Class ;
+      owl:intersectionOf (
+          gsoc:Quality_Value
+          [
+            rdf:type owl:Restriction ;
+            owl:onProperty gsoc:hasEndValue ;
+            owl:someValuesFrom [
+                rdf:type owl:Class ;
+                owl:unionOf (
+                    gsoc:Measure_Value
+                    gsoc:Named_Value
+                  ) ;
+              ] ;
+          ]
+          [
+            rdf:type owl:Restriction ;
+            owl:onProperty gsoc:hasStartValue ;
+            owl:someValuesFrom [
+                rdf:type owl:Class ;
+                owl:unionOf (
+                    gsoc:Measure_Value
+                    gsoc:Named_Value
+                  ) ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+
+# 31.
+owl:equivalentClass [
+      rdf:type owl:Class ;
+      owl:intersectionOf (
+          gsoc:Notional_Endurant
+          [
+            rdf:type owl:Restriction ;
+            owl:onProperty gsoc:isReferenceSystemFor ;
+            owl:someValuesFrom gsoc:Quality_Value ;
+          ]
+        ) ;
+    ] ;
+
+# 32.
+owl:equivalentClass [
+      rdf:type owl:Class ;
+      owl:intersectionOf (
+          gsoc:Nonphysical_Endurant
+          [
+            rdf:type owl:Class ;
+            owl:complementOf [
+                rdf:type owl:Class ;
+                owl:unionOf (
+                    gsoc:Inherant
+                    gsoc:Notional_Endurant
+                  ) ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+
+# 33.
+owl:equivalentClass [
+      rdf:type owl:Class ;
+      owl:intersectionOf (
+          gsoc:Inherant
+          [
+            rdf:type owl:Class ;
+            owl:complementOf [
+                rdf:type owl:Class ;
+                owl:unionOf (
+                    gsoc:Quality
+                    gsoc:Quality_Value
+                  ) ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+
+# 34.
+owl:equivalentClass [
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:isSettingFor ;
+      owl:someValuesFrom gsoc:Particular ;
+    ] ;
+
+# 35.
+owl:equivalentClass [
+      rdf:type owl:Class ;
+      owl:intersectionOf (
+          gsoc:Feature
+          [
+            rdf:type owl:Restriction ;
+            owl:onProperty gsoc:hasEssentialPart ;
+            owl:someValuesFrom gsoc:Situation ;
+          ]
+        ) ;
+    ] ;
+
+# 36.
+owl:equivalentClass [
+      rdf:type owl:Class ;
+      owl:intersectionOf (
+          gsoc:Amount_Of_Matter
+          [
+            rdf:type owl:Restriction ;
+            owl:onClass [
+                rdf:type owl:Class ;
+                owl:intersectionOf (
+                    gsoc:State_Of_Matter
+                    [
+                      rdf:type owl:Restriction ;
+                      owl:allValuesFrom gsoc:Solid ;
+                      owl:onProperty gsoc:hasValue ;
+                    ]
+                  ) ;
+              ] ;
+            owl:onProperty gsoc:hasQuality ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+          ]
+        ) ;
+    ] ;
+
+# 37.
+owl:equivalentClass [
+      rdf:type owl:Class ;
+      owl:intersectionOf (
+          gsoc:Measure_Value
+          [
+            rdf:type owl:Restriction ;
+            owl:allValuesFrom gsoc:Spatial_Location ;
+            owl:onProperty gsoc:isValueOf ;
+          ]
+        ) ;
+    ] ;
+
+# 38.
+owl:equivalentClass [
+      rdf:type owl:Class ;
+      owl:intersectionOf (
+          gsoc:Quality
+          [
+            rdf:type owl:Restriction ;
+            owl:onClass gsoc:Perdurant ;
+            owl:onProperty gsoc:isQualityOf ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+          ]
+        ) ;
+    ] ;
+
+# 39.
+owl:equivalentClass [
+      rdf:type owl:Class ;
+      owl:intersectionOf (
+          gsoc:Reference_System
+          [
+            rdf:type owl:Restriction ;
+            owl:onProperty gsoc:isReferenceSystemFor ;
+            owl:someValuesFrom gsoc:Perdurant ;
+          ]
+        ) ;
+    ] ;
+
+# 40.
+owl:equivalentClass [
+      rdf:type owl:Class ;
+      owl:intersectionOf (
+          gsoc:Measure_Value
+          [
+            rdf:type owl:Restriction ;
+            owl:allValuesFrom gsoc:Temporal_Location ;
+            owl:onProperty gsoc:isValueOf ;
+          ]
+        ) ;
+    ] ;
+
+# 41.
+owl:equivalentClass [
+      rdf:type owl:Class ;
+      owl:intersectionOf (
+          gsoc:Perdurant
+          [
+            rdf:type owl:Restriction ;
+            owl:onClass gsoc:Temporal_Location ;
+            owl:onProperty gsoc:hasQuality ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+          ]
+        ) ;
+    ] ;
+

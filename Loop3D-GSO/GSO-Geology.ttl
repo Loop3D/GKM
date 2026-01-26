@@ -195,9 +195,6 @@ gsog:Generic_Geologic_Time_Unit a owl:Class ;
         [ a owl:Restriction ;
             owl:allValuesFrom gsog:Generic_Geologic_Time_Unit ;
             owl:onProperty gsoc:previousTimeInterval ],
-        [ a owl:Restriction ;
-            owl:onProperty gsoc:hasEssentialPart ;
-            owl:someValuesFrom gsog:Specific_Geologic_Time_Unit ],
         gsog:Geologic_Time_Interval ;
     owl:disjointWith gsog:Geologic_Time_Scale,
         gsog:Specific_Geologic_Time_Unit .
@@ -292,11 +289,7 @@ gsog:Rock_Object a owl:Class ;
 gsog:Specific_Geologic_Time_Unit a owl:Class ;
     rdfs:label "Geologic Time Interval"@en ;
     rdfs:comment "A time interval defined by specifying geologic time boundaries. E.g. Jurassic 2017 (but not Jurassic). Geologic in the sense that the interval is either referenced to some particular rock body, or its boundaries (started_by, finished_by) are referenced to (hosted by) stratigraphic points, which are dependent on some rock body (e.g. a stratigraphic section)."@en ;
-    rdfs:subClassOf [ a owl:Class ;
-            owl:complementOf [ a owl:Restriction ;
-                    owl:onProperty gsoc:hasEssentialPart ;
-                    owl:someValuesFrom gsog:Geologic_Time_Interval ] ],
-        [ a owl:Restriction ;
+    rdfs:subClassOf [ a owl:Restriction ;
             owl:allValuesFrom gsog:Specific_Geologic_Time_Unit ;
             owl:onProperty gsoc:nextTimeInterval ],
         [ a owl:Restriction ;
@@ -319,7 +312,7 @@ gsog:Specific_Geologic_Time_Unit a owl:Class ;
         gsog:Geologic_Time_Scale .
 
 gsog:Geologic_Time_Feature a owl:Class ;
-    rdfs:comment "Any geological temporal feature, including a geologic date, time interval, or time boundary. All geologic time features are dependent one some rock body, strongly or weakly."@en ;
+    rdfs:comment "Any geological temporal feature, including a geologic date, time interval, or time boundary. All geologic time features are dependent on some rock body, strongly or weakly."@en ;
     rdfs:subClassOf gsoc:Temporal_Feature ;
     owl:equivalentClass [ a owl:Class ;
             owl:intersectionOf ( gsoc:Temporal_Feature [ a owl:Restriction ;
@@ -418,11 +411,7 @@ gsog:Rock_Body a owl:Class ;
 
 gsog:Geologic_Time_Interval a owl:Class ;
     rdfs:comment "A time interval dependent on some rock body and having parts that are (geologic) time intervals. There are 3 primary types of geologic time intervals - these are not comprehensive (i.e. there could be additional types): generic (e.g. Jurassic), specific (e.g. Jurassic 2017), and time scale (ISC 2017)."@en ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:onProperty gsoc:hasEssentialPart ;
-            owl:someValuesFrom [ a owl:Class ;
-                    owl:unionOf ( gsog:Geologic_Time_Interval gsoc:Time_Interval ) ] ],
-        [ a owl:Class ;
+    rdfs:subClassOf [ a owl:Class ;
             owl:complementOf [ a owl:Restriction ;
                     owl:onProperty gsoc:hasPart ;
                     owl:someValuesFrom gsog:Geologic_Time_Scale ] ],

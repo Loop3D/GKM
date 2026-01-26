@@ -77,7 +77,14 @@ gst:Age
       rdf:type owl:Restriction ;
       owl:allValuesFrom [
           rdf:type owl:Class ;
-          owl:complementOf gst:Age ;
+          owl:unionOf (
+              gst:Epoch
+              gst:Subperiod
+              gst:Period
+              gst:Era
+              gst:Eon
+              gst:Supereon
+            ) ;
         ] ;
       owl:onProperty gsoc:timeIncludedBy ;
     ] ;
@@ -1363,32 +1370,20 @@ gst:Eon
   rdfs:subClassOf gsog:Geologic_Time_Interval ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
-      owl:allValuesFrom [
-          rdf:type owl:Class ;
-          owl:complementOf [
-              rdf:type owl:Class ;
-              owl:unionOf (
-                  gst:Era
-                  gst:Period
-                  gst:Subperiod
-                  gst:Epoch
-                  gst:Age
-                ) ;
-            ] ;
-        ] ;
+      owl:allValuesFrom gst:Supereon ;
       owl:onProperty gsoc:timeDuring ;
     ] ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
       owl:allValuesFrom [
           rdf:type owl:Class ;
-          owl:complementOf [
-              rdf:type owl:Class ;
-              owl:unionOf (
-                  gst:Supereon
-                  gst:Eon
-                ) ;
-            ] ;
+          owl:unionOf (
+              gst:Age
+              gst:Epoch
+              gst:Subperiod
+              gst:Period
+              gst:Era
+            ) ;
         ] ;
       owl:onProperty gsoc:timeContains ;
     ] ;
@@ -1407,32 +1402,19 @@ gst:Epoch
       rdf:type owl:Restriction ;
       owl:allValuesFrom [
           rdf:type owl:Class ;
-          owl:complementOf [
-              rdf:type owl:Class ;
-              owl:unionOf (
-                  gst:Epoch
-                  gst:Age
-                ) ;
-            ] ;
+          owl:unionOf (
+              gst:Subperiod
+              gst:Period
+              gst:Era
+              gst:Eon
+              gst:Supereon
+            ) ;
         ] ;
       owl:onProperty gsoc:timeIncludedBy ;
     ] ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
-      owl:allValuesFrom [
-          rdf:type owl:Class ;
-          owl:complementOf [
-              rdf:type owl:Class ;
-              owl:unionOf (
-                  gst:Epoch
-                  gst:Period
-                  gst:Subperiod
-                  gst:Era
-                  gst:Eon
-                  gst:Supereon
-                ) ;
-            ] ;
-        ] ;
+      owl:allValuesFrom gst:Age ;
       owl:onProperty gsoc:timeIncludes ;
     ] ;
   rdfs:subClassOf [
@@ -1449,14 +1431,12 @@ gst:Era
       rdf:type owl:Restriction ;
       owl:allValuesFrom [
           rdf:type owl:Class ;
-          owl:complementOf [
-              rdf:type owl:Class ;
-              owl:unionOf (
-                  gst:Era
-                  gst:Eon
-                  gst:Supereon
-                ) ;
-            ] ;
+          owl:unionOf (
+              gst:Age
+              gst:Epoch
+              gst:Subperiod
+              gst:Period
+            ) ;
         ] ;
       owl:onProperty gsoc:timeContains ;
     ] ;
@@ -1464,16 +1444,10 @@ gst:Era
       rdf:type owl:Restriction ;
       owl:allValuesFrom [
           rdf:type owl:Class ;
-          owl:complementOf [
-              rdf:type owl:Class ;
-              owl:unionOf (
-                  gst:Era
-                  gst:Period
-                  gst:Subperiod
-                  gst:Epoch
-                  gst:Age
-                ) ;
-            ] ;
+          owl:unionOf (
+              gst:Eon
+              gst:Supereon
+            ) ;
         ] ;
       owl:onProperty gsoc:timeDuring ;
     ] ;
@@ -2033,15 +2007,11 @@ gst:Period
       rdf:type owl:Restriction ;
       owl:allValuesFrom [
           rdf:type owl:Class ;
-          owl:complementOf [
-              rdf:type owl:Class ;
-              owl:unionOf (
-                  gst:Period
-                  gst:Era
-                  gst:Eon
-                  gst:Supereon
-                ) ;
-            ] ;
+          owl:unionOf (
+              gst:Age
+              gst:Epoch
+              gst:Subperiod
+            ) ;
         ] ;
       owl:onProperty gsoc:timeIncludes ;
     ] ;
@@ -2049,15 +2019,11 @@ gst:Period
       rdf:type owl:Restriction ;
       owl:allValuesFrom [
           rdf:type owl:Class ;
-          owl:complementOf [
-              rdf:type owl:Class ;
-              owl:unionOf (
-                  gst:Period
-                  gst:Subperiod
-                  gst:Epoch
-                  gst:Age
-                ) ;
-            ] ;
+          owl:unionOf (
+              gst:Era
+              gst:Eon
+              gst:Supereon
+            ) ;
         ] ;
       owl:onProperty gsoc:timeIncludedBy ;
     ] ;
@@ -2285,14 +2251,12 @@ gst:Subperiod
       rdf:type owl:Restriction ;
       owl:allValuesFrom [
           rdf:type owl:Class ;
-          owl:complementOf [
-              rdf:type owl:Class ;
-              owl:unionOf (
-                  gst:Subperiod
-                  gst:Epoch
-                  gst:Age
-                ) ;
-            ] ;
+          owl:unionOf (
+              gst:Period
+              gst:Era
+              gst:Eon
+              gst:Supereon
+            ) ;
         ] ;
       owl:onProperty gsoc:timeDuring ;
     ] ;
@@ -2300,16 +2264,10 @@ gst:Subperiod
       rdf:type owl:Restriction ;
       owl:allValuesFrom [
           rdf:type owl:Class ;
-          owl:complementOf [
-              rdf:type owl:Class ;
-              owl:unionOf (
-                  gst:Subperiod
-                  gst:Period
-                  gst:Era
-                  gst:Eon
-                  gst:Supereon
-                ) ;
-            ] ;
+          owl:unionOf (
+              gst:Epoch
+              gst:Age
+            ) ;
         ] ;
       owl:onProperty gsoc:timeContains ;
     ] ;
@@ -2328,7 +2286,14 @@ gst:Supereon
       rdf:type owl:Restriction ;
       owl:allValuesFrom [
           rdf:type owl:Class ;
-          owl:complementOf gst:Supereon ;
+          owl:unionOf (
+              gst:Eon
+              gst:Era
+              gst:Period
+              gst:Subperiod
+              gst:Epoch
+              gst:Age
+            ) ;
         ] ;
       owl:onProperty gsoc:timeContains ;
     ] ;

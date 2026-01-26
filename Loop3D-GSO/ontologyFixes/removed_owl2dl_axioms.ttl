@@ -1,0 +1,99 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix gsoc: <https://w3id.org/gso/1.0/common/> .
+
+# ============================================================================
+# Axioms removed from GSO-Common.ttl for OWL 2 DL compatibility
+# ============================================================================
+#
+# These axioms were removed because OWL 2 DL does not allow:
+# 1. TransitiveProperty declarations on properties used in cardinality restrictions
+# 2. propertyDisjointWith axioms on non-simple (transitive) properties
+# 3. Property chain axioms that create irregular hierarchies
+#
+# To restore full expressivity (for OWL Full reasoners), add these back.
+# ============================================================================
+
+gsoc:constantlyGenDependsOn rdf:type owl:TransitiveProperty .
+gsoc:constantlySpecDependsOn rdf:type owl:TransitiveProperty .
+gsoc:timeIncludedBy rdf:type owl:TransitiveProperty .
+gsoc:timeIncludes rdf:type owl:TransitiveProperty .
+gsoc:hasPart rdf:type owl:TransitiveProperty .
+gsoc:isPartOf rdf:type owl:TransitiveProperty .
+gsoc:hasPersistentPart rdf:type owl:TransitiveProperty .
+gsoc:isPersistentPartOf rdf:type owl:TransitiveProperty .
+gsoc:hasConstituent rdf:type owl:TransitiveProperty .
+gsoc:isConstituentOf rdf:type owl:TransitiveProperty .
+gsoc:externallyGenDependsOn rdf:type owl:TransitiveProperty .
+gsoc:externallySpecDependsOn rdf:type owl:TransitiveProperty .
+gsoc:spatio-temporallyDependsOn rdf:type owl:TransitiveProperty .
+gsoc:specificallyDependsOn rdf:type owl:TransitiveProperty .
+gsoc:genericallyDependsOn rdf:type owl:TransitiveProperty .
+gsoc:timeOlderThan rdf:type owl:TransitiveProperty .
+gsoc:timeYoungerThan rdf:type owl:TransitiveProperty .
+gsoc:timeContains rdf:type owl:TransitiveProperty .
+gsoc:occupiesSpaceDirectly rdf:type owl:TransitiveProperty .
+gsoc:occupiesTimeDirectly rdf:type owl:TransitiveProperty .
+gsoc:hostedBy rdf:type owl:TransitiveProperty .
+gsoc:hosts rdf:type owl:TransitiveProperty .
+gsoc:hasOlderHost rdf:type owl:TransitiveProperty .
+gsoc:hasYoungerHost rdf:type owl:TransitiveProperty .
+gsoc:staticHostedBy rdf:type owl:TransitiveProperty .
+gsoc:occupiesSpaceDirectly owl:propertyDisjointWith gsoc:occupiesSpaceIndirectly .
+gsoc:occupiesSpaceIndirectly owl:propertyDisjointWith gsoc:occupiesSpaceDirectly .
+gsoc:occupiesTimeDirectly owl:propertyDisjointWith gsoc:occupiesTimeIndirectly .
+gsoc:spatio-temporallyDependsOn owl:propertyDisjointWith gsoc:spatiallyDisjoint .
+gsoc:externallyGenDependsOn owl:propertyDisjointWith gsoc:hasEssentialPart .
+gsoc:hasEssentialPart owl:propertyDisjointWith gsoc:timeDisjoint .
+gsoc:hasReferenceSystem owl:propertyDisjointWith gsoc:isReferenceSystemFor .
+
+# Property chain axiom removed due to irregular property hierarchy
+# (indirectlyYoungerThan is subPropertyOf timeYoungerThan, but chain includes timeYoungerThan on right)
+gsoc:indirectlyYoungerThan owl:propertyChainAxiom ( gsoc:occupiesTime gsoc:timeYoungerThan ) .
+
+# Complex property chain with anonymous restrictions - causes non-simple propagation
+# gsoc:hasSpatialValue owl:propertyChainAxiom (
+#     gsoc:occupiesSpace
+#     [ owl:allValuesFrom gsoc:Spatial_Location ; owl:onProperty gsoc:hasQuality ]
+#     [ owl:allValuesFrom gsoc:Spatial_Value ; owl:onProperty gsoc:hasValue ]
+# ) .
+
+# Overly broad equivalentClass removed - made any Physical Endurant with 1 Spatial Location a Spatial Region
+# gsoc:Spatial_Region owl:equivalentClass [
+#     owl:intersectionOf (
+#         gsoc:Physical_Endurant
+#         [ owl:onClass gsoc:Spatial_Location ; owl:onProperty gsoc:hasQuality ; owl:qualifiedCardinality "1" ]
+#     )
+# ] .
+
+# Second Spatial_Region equivalentClass also removed - too broad, classifies Material Endurants as Spatial Regions
+# gsoc:Spatial_Region owl:equivalentClass [
+#     owl:intersectionOf (
+#         gsoc:Physical_Endurant
+#         [ owl:complementOf [ owl:onProperty gsoc:hasConstituent ; owl:someValuesFrom gsoc:Material_Endurant ] ]
+#     )
+# ] .
+
+# Material_Endurant equivalentClass removed - caused classification conflicts
+# gsoc:Material_Endurant owl:equivalentClass [
+#     owl:intersectionOf ( gsoc:Physical_Endurant [ owl:onProperty gsoc:occupiesSpaceDirectly ; owl:someValuesFrom gsoc:Spatial_Region_3D ] )
+# ] .
+
+# Physical_Endurant equivalentClass #1 removed - too broad
+# gsoc:Physical_Endurant owl:equivalentClass [
+#     owl:intersectionOf ( gsoc:Endurant [ owl:unionOf ( gsoc:Spatial_Region [ owl:onProperty gsoc:occupiesSpaceDirectly ; owl:someValuesFrom gsoc:Spatial_Region ] ) ] )
+# ] .
+
+# Physical_Endurant equivalentClass #2 removed - conflicts with other definitions
+# gsoc:Physical_Endurant owl:equivalentClass [
+#     owl:intersectionOf ( gsoc:Endurant [ owl:allValuesFrom gsoc:Physical_Quality ; owl:onProperty gsoc:hasQuality ] )
+# ] .
+
+# Endurant equivalentClass removed - partition into Physical/Nonphysical caused conflicts
+# gsoc:Endurant owl:equivalentClass [ owl:unionOf ( gsoc:Nonphysical_Endurant gsoc:Physical_Endurant ) ] .
+
+# Nonphysical_Endurant equivalentClass removed - definition conflicted with Physical_Endurant subclasses
+# gsoc:Nonphysical_Endurant owl:equivalentClass [
+#     owl:intersectionOf ( gsoc:Endurant [ owl:complementOf [ owl:onProperty gsoc:occupiesSpaceDirectly ; owl:someValuesFrom gsoc:Spatial_Region ] ] )
+# ] .
