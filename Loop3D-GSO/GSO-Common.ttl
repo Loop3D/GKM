@@ -1432,10 +1432,12 @@ gsoc:Fluid a owl:Class ;
 
 gsoc:Nonphysical_Quality a owl:Class ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom gsoc:Nonphysical_Endurant ;
+            owl:allValuesFrom [ a owl:Class ;
+                owl:unionOf ( gsoc:Nonphysical_Endurant gsoc:Perdurant ) ] ;
             owl:onProperty gsoc:isQualityOf ],
         [ a owl:Restriction ;
-            owl:onClass gsoc:Nonphysical_Endurant ;
+            owl:onClass [ a owl:Class ;
+                owl:unionOf ( gsoc:Nonphysical_Endurant gsoc:Perdurant ) ] ;
             owl:onProperty gsoc:isQualityOf ;
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         gsoc:Quality ;
