@@ -1,8 +1,11 @@
-
+@echo off
+REM Generate pyLODE HTML documentation for GSO ontology modules
+REM Update pylode and gsogit paths for your local environment
 
 set pylode=C:\pyLODE-3.0.1\dist\pyLODE
 set gsogit=C:\Users\smrTu\OneDrive\Documents\GithubC\Loop3D\GKM\Loop3D-GSO
 
+REM === Examples ===
 %pylode%  -o  ..\docs\ex-complexcontact.html %gsogit%\Examples\GSO-ExampleComplexContacts.ttl
 %pylode%  -o  ..\docs\ex-event1.html %gsogit%\Examples\GSO-ExampleEvents1.ttl
 %pylode%  -o  ..\docs\ex-stratlexicon2-bc.html %gsogit%\Examples\GSO-ExampleBritishColumbiaStrat-v2.ttl
@@ -12,19 +15,24 @@ set gsogit=C:\Users\smrTu\OneDrive\Documents\GithubC\Loop3D\GKM\Loop3D-GSO
 %pylode%  -o  ..\docs\foldexample.html %gsogit%\Examples\GSO-ExampleFold.ttl
 %pylode%  -o  ..\docs\ex-formationJs.html %gsogit%\Examples\GSO-ExampleFormationJs.ttl
 %pylode%  -o  ..\docs\ex-ausstratunit.html %gsogit%\Examples\GSO-ExampleGeosciAustraliaStratUnit.ttl
+%pylode%  -o  ..\docs\ex-hammersly.html %gsogit%\Examples\GSO-ExampleHammerslyData.ttl
 %pylode%  -o  ..\docs\ex-history.html %gsogit%\Examples\GSO-ExampleHistory.ttl
 %pylode%  -o  ..\docs\ex-islewightstrat.html %gsogit%\Examples\GSO-ExampleIsleOfWightStrat-pm1.ttl
+%pylode%  -o  ..\docs\ex-islewightstrat-v2.html %gsogit%\Examples\GSO-ExampleIsleOfWightStrat-pm1-v2.ttl
 %pylode%  -o  ..\docs\ex-plutontojiza.html %gsogit%\Examples\GSO-ExampleLaTojizaPluton.ttl
 %pylode%  -o  ..\docs\ex-petrophysics-bc.html %gsogit%\Examples\GSO-ExamplePetrophysicalProperties_v2.ttl
 %pylode%  -o  ..\docs\ex-materialCb.html %gsogit%\Examples\GSO-ExampleRockMaterialBolsaQuartzite.ttl
 %pylode%  -o  ..\docs\ex-roles.html %gsogit%\Examples\GSO-ExampleRoles.ttl
+%pylode%  -o  ..\docs\ex-specificrockobject.html %gsogit%\Examples\GSO-ExampleSpecificRockObject.ttl
 %pylode%  -o  ..\docs\alterationtype-bc.html %gsogit%\Examples\GSO-ExampleVocabularyExtension-Alteration_Type-BC.ttl
 %pylode%  -o  ..\docs\ec-lardeaustrat.html %gsogit%\Examples\GSO-LardeauGroup.ttl
-      
+
+REM === Core ontology files ===
 %pylode%  -o  ..\docs\master.html %gsogit%\GSO-Master.ttl
 %pylode%  -o  ..\docs\common.html %gsogit%\GSO-Common.ttl
 %pylode%  -o  ..\docs\geology.html %gsogit%\GSO-Geology.ttl
-      
+
+REM === Modules ===
 %pylode%  -o  ..\docs\element.html %gsogit%\Modules\GSO-Element.ttl
 %pylode%  -o  ..\docs\feature.html %gsogit%\Modules\GSO-Feature.ttl
 %pylode%  -o  ..\docs\geologicevent.html %gsogit%\Modules\GSO-Geologic_Event.ttl
@@ -47,10 +55,19 @@ set gsogit=C:\Users\smrTu\OneDrive\Documents\GithubC\Loop3D\GKM\Loop3D-GSO
 %pylode%  -o  ..\docs\geologicstructure.html %gsogit%\Modules\GSO-Geologic_Structure.ttl
 %pylode%  -o  ..\docs\ischart.html %gsogit%\Modules\GSO-Geologic_Time_Ischart.ttl
 %pylode%  -o  ..\docs\geologictime.html %gsogit%\Modules\GSO-Geologic_Time.ttl
+%pylode%  -o  ..\docs\geologictimescales.html %gsogit%\Modules\GSO-Geologic_Time_Scales.ttl
+%pylode%  -o  ..\docs\geologictimescales-gts.html %gsogit%\Modules\GSO-Geologic_Time_Scales-GTS.ttl
 %pylode%  -o  ..\docs\geologicunit.html %gsogit%\Modules\GSO-Geologic_Unit.ttl
 %pylode%  -o  ..\docs\hydrology.html %gsogit%\Modules\GSO-Hydrology.ttl
 %pylode%  -o  ..\docs\perdurant.html %gsogit%\Modules\GSO-Perdurant.ttl
 %pylode%  -o  ..\docs\quality.html %gsogit%\Modules\GSO-Quality.ttl
 %pylode%  -o  ..\docs\qudt_voc.html %gsogit%\Modules\GSO-QUDTvoc.ttl
 %pylode%  -o  ..\docs\skos_annotation.html %gsogit%\Modules\GSO-skos_annotation.ttl
+
+REM === SDW mapping files (moved from Modules/) ===
+%pylode%  -o  ..\docs\sdw-gtsmap.html %gsogit%\SDWmapping\GSO-GTSmap.ttl
+%pylode%  -o  ..\docs\sdw-time.html %gsogit%\SDWmapping\W3C-SDW-time.ttl
+%pylode%  -o  ..\docs\sdw-thors.html %gsogit%\SDWmapping\CGI-thors.ttl
+%pylode%  -o  ..\docs\sdw-gts.html %gsogit%\SDWmapping\CGI-gts.ttl
+
 pause
