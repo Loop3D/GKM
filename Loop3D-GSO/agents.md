@@ -504,6 +504,8 @@ All Python scripts and reports have been moved to the `ontologyFixes/` subdirect
 - `remove_all_equivalentclass.py`, `remove_redundant_restrictions.py`, `visualize_gso.py`
 - `check_owl2dl.py` - Command-line HermiT reasoner (via owlready2)
 - `run_hermit.py` - Direct HermiT JAR runner (requires separate download)
+- `test_no_ischart_no_feature.py` - Full GSO test excluding Ischart and Feature modules (CONSISTENT)
+- `test_with_ischart.py` - Full GSO test including Ischart (excludes only Feature)
 
 **Reports & Removed Axioms:**
 - `consistency_fixes_log.txt`, `owl2dl_conflicts_report.txt`, `redundant_restrictions_report.txt`
@@ -723,8 +725,117 @@ This allows time boundaries to be valid `timeIncludes` values (via the `timeFini
 | GSO-Geologic_Time | PASSED | 717 sec | No changes needed |
 | GSO-Geologic_Time_Ischart | FIXED | - | Added Geologic_Time_Boundary to Epoch/Period timeIncludes unions |
 | Full GSO (no Ischart, no Feature) | **CONSISTENT** | 964 sec | All 6,699 classes satisfiable |
-| GSO-Master (all merged) | PENDING | - | Needs test with Ischart fix |
+| Full GSO (with Ischart, no Feature) | PENDING | - | Test started but did not complete within session; HermiT may require extended runtime for 128,757 triples + 664 individuals |
 
 **Remaining:**
-- Test full GSO with Ischart fix to verify the combined fixes work
+- Rerun `test_with_ischart.py` to confirm full GSO consistency with the Ischart fix (Epoch/Period `timeIncludes` union expansion)
 - GSO-Feature module has a known design conflict (Nonphysical_Feature → Nonphysical_Endurant constraint) and should remain excluded from Master imports
+- Explore ontology simplification strategies (see below) on the `Simplify` branch
+
+---
+
+## Ontology Complexity Analysis
+
+Analysis of axiom patterns that contribute to reasoning complexity.
+
+### Axiom Counts
+
+| Axiom Pattern | Count | Impact |
+|---------------|-------|--------|
+| `owl:allValuesFrom` (universal restrictions) | 785 | High — forces reasoner to check ALL instances; primary source of unsatisfiability cascades |
+| `owl:someValuesFrom` (existential restrictions) | 1,250 | Medium — requires witness existence but doesn't constrain other values |
+| `owl:disjointWith` | 317 | High — creates hard boundaries; interacts with universal restrictions to cause unsatisfiability |
+| Time `rdfs:subPropertyOf` relations | 39 | High — `timeIntersects` alone has 10 sub-properties; creates inference chains through `allValuesFrom` |
+| Total classes | 6,614 | — |
+| Total triples (with Ischart) | 128,757 | — |
+| Ischart individuals | 664 | High — combinatorial explosion with time property hierarchy |
+
+### Key Complexity Drivers
+
+1. **Universal restriction cascades**: `allValuesFrom` restrictions on parent classes propagate to ALL subclasses. A single `allValuesFrom` on `Endurant` constrains 3,000+ subclasses.
+
+2. **Property hierarchy amplification**: With 39 time sub-property relations, a single `allValuesFrom` on `timeIncludes` effectively constrains 10+ sub-properties (`timeFinishedBy`, `timeStartedBy`, `timeContains`, etc.).
+
+3. **Disjointness + universal interaction**: When `A allValuesFrom X` and `X disjointWith Y`, any subclass needing `someValuesFrom Y` becomes unsatisfiable. This was the root cause of most of the 117 unsatisfiable classes found during testing.
+
+4. **Quality meta-ontology depth**: The chain `Quality → Inherant → Nonphysical_Endurant` is 4 levels deep. Every Quality class inherits restrictions from all 4 levels, creating complex constraint interactions.
+
+---
+
+## Proposed Simplification Strategies
+
+These strategies aim to reduce reasoning complexity without sacrificing semantic precision. Work should be done on the `Simplify` branch.
+
+### Strategy 1: Replace `allValuesFrom` with `someValuesFrom` (Where Descriptive)
+
+**Target:** ~785 `allValuesFrom` axioms
+
+Many `allValuesFrom` (universal) restrictions serve a descriptive rather than prescriptive role. For example, `Rock hasConstituent only Mineral` describes typical composition but shouldn't logically forbid unusual constituents.
+
+**Approach:**
+- Audit each `allValuesFrom` to determine if it is definitional (must keep) or descriptive (can relax)
+- Replace descriptive universals with `someValuesFrom` (existential)
+- Keep universals that enforce true logical invariants (e.g., `Physical_Endurant hasPart only Physical_Endurant`)
+
+**Trade-off:** Reduces reasoning constraints but allows models that were previously forbidden. Some domain experts may prefer strict universals.
+
+### Strategy 2: Flatten the Quality Meta-Ontology
+
+**Target:** The 4-level chain `Quality → Inherant → Nonphysical_Endurant → Endurant`
+
+**Problem:** Every Quality class inherits restrictions from 4 ancestor levels. The distinction between Quality and Inherant serves a philosophical (BFO/DOLCE) purpose but adds reasoning overhead without geological value.
+
+**Approach:**
+- Collapse `Inherant` into `Quality` (merge the two levels)
+- Move essential `Inherant` restrictions directly to `Quality`
+- Reduce the ancestor chain to 3 levels
+
+**Trade-off:** Diverges from strict BFO/DOLCE alignment but simplifies the most heavily-used branch of the ontology.
+
+### Strategy 3: Flatten Time Property Hierarchy
+
+**Target:** 39 `rdfs:subPropertyOf` relations among time properties
+
+**Problem:** `timeIntersects` has 10 direct sub-properties, each of which may have further sub-properties. Every `allValuesFrom` on a parent property effectively constrains all sub-properties, creating a web of hidden constraints.
+
+**Approach:**
+- Remove intermediate property groupings (e.g., make `timeFinishedBy` and `timeStartedBy` direct sub-properties of `isTemporallyRelatedTo` instead of `timeIncludes`)
+- Keep only the sub-property relations that are logically necessary (e.g., `timeContains subPropertyOf timeIncludes` for true containment)
+
+**Trade-off:** Loses some inferential power (e.g., can no longer infer `timeIncludes` from `timeFinishedBy`), but prevents the constraint amplification that caused the Ischart inconsistency.
+
+### Strategy 4: Separate TBox from ABox
+
+**Target:** `GSO-Geologic_Time_Ischart.ttl` (664 individuals, 9,848 triples)
+
+**Problem:** HermiT's tableau algorithm scales poorly with large numbers of individuals combined with complex TBox axioms. The Ischart individuals represent ~8% of total triples but dominate reasoning time.
+
+**Approach:**
+- Keep class definitions (TBox) in the main ontology files
+- Move individuals (ABox) to separate files loaded only for SPARQL querying
+- Use a lighter reasoner (or no reasoner) for the ABox-heavy files
+
+**Trade-off:** Cannot use DL reasoners to check individual classification, but SPARQL/SHACL validation can catch most data quality issues.
+
+### Strategy 5: Reduce Disjointness Scope
+
+**Target:** 317 `owl:disjointWith` axioms
+
+**Problem:** Disjointness axioms create hard boundaries. Combined with universal restrictions, they are the primary cause of unsatisfiability cascades.
+
+**Approach:**
+- Remove disjointness between sibling classes that don't need strict separation
+- Keep disjointness only where overlap would be a genuine logical error (e.g., `Physical_Endurant disjointWith Nonphysical_Endurant`)
+- Replace broad disjointness with SHACL constraints for softer validation
+
+**Trade-off:** Allows some models that were previously forbidden by disjointness. Reduces the "safety net" that catches modeling errors.
+
+### Strategy Comparison
+
+| Strategy | Complexity Reduction | Semantic Precision | Effort |
+|----------|---------------------|-------------------|--------|
+| 1. allValuesFrom → someValuesFrom | High | Slight loss (descriptive only) | Medium (requires per-axiom audit) |
+| 2. Flatten Quality hierarchy | Medium | Minimal (philosophical only) | Low (structural refactor) |
+| 3. Flatten time properties | High | Moderate (loses some inferences) | Low (property hierarchy edits) |
+| 4. Separate TBox/ABox | High (for reasoning) | None (data unchanged) | Low (file reorganization) |
+| 5. Reduce disjointness | Medium | Moderate (fewer hard constraints) | Medium (requires per-axiom audit) |
