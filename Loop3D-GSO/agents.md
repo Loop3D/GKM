@@ -4,7 +4,7 @@ This document describes the Python tools for visualizing and analyzing the GSO (
 
 ## Scripts
 
-### visualize_gso.py
+### visualize_gso.py (repo root)
 
 Interactive HTML visualization of the GSO class hierarchy with property details.
 
@@ -14,8 +14,8 @@ python visualize_gso.py
 ```
 
 **Output:**
-- `solid_geologic_material_interactive.html` - Interactive D3.js tree viewer (primary)
-- `solid_geologic_material_detailed.svg` - Static SVG overview
+- `visualizeGSO.html` - Interactive D3.js tree viewer (primary)
+- `visualizeGSO_hierarchy.svg` - Static SVG overview
 
 **Features:**
 - Collapsible D3.js tree visualization
@@ -30,7 +30,7 @@ python visualize_gso.py
 | Method | Description |
 |--------|-------------|
 | `load_ontology(base_path)` | Loads all GSO TTL files (core + 27 modules) |
-| `build_complete_relations()` | Builds parent→children mapping for all 6,692 classes |
+| `build_complete_relations()` | Builds parent→children mapping for all 6,718 classes |
 | `extract_hierarchy(root_uri)` | BFS traversal to find subclasses from a root |
 | `get_all_class_properties(uri)` | Collects restrictions from class and all superclasses |
 | `get_property_info(prop_uri)` | Gets domain, range, characteristics, inverse for a property |
@@ -44,82 +44,10 @@ python visualize_gso.py
 | Variable | Description |
 |----------|-------------|
 | `treeData` | Initial tree JSON for D3.js hierarchy |
-| `allProperties` | Property restrictions for all 6,692 classes |
+| `allProperties` | Property restrictions for all 6,718 classes |
 | `subclassRelations` | Complete parent→children mapping for dynamic root selection |
 | `classLabels` | URI→label mapping for all classes |
-| `classComments` | URI→rdfs:comment mapping (1,193 classes have comments) |
-
----
-
-### extract_class_properties.py
-
-Command-line tool to extract and display all OWL properties/restrictions for a specific class.
-
-**Usage:**
-```bash
-python extract_class_properties.py <class_uri_or_prefix>
-```
-
-**Examples:**
-```bash
-python extract_class_properties.py gsrm:Rock
-python extract_class_properties.py gsog:Solid_Geologic_Material
-python extract_class_properties.py https://w3id.org/gso/1.0/geologicrole/Crystal_Role
-```
-
-**Output:** Text report showing:
-- Class label and URI
-- Superclass chain (transitive closure)
-- All restrictions grouped by property
-- Property metadata (domain, range, characteristics, inverse)
-- Restriction type and filler classes
-
----
-
-### find_redundant_restrictions.py
-
-Identifies classes with logically redundant restrictions (same restriction in both rdfs:subClassOf and owl:equivalentClass).
-
-**Usage:**
-```bash
-python find_redundant_restrictions.py
-```
-
-**Output:** `redundant_restrictions_report.txt` containing:
-- Summary of redundant classes by namespace
-- Detailed findings for each class
-- Suggested removals
-
-**Background:**
-- `owl:equivalentClass` implies `rdfs:subClassOf`
-- Having the same restriction in both is logically redundant
-- Safe to remove the `rdfs:subClassOf` assertion
-
----
-
-### remove_redundant_restrictions.py
-
-Removes redundant rdfs:subClassOf restrictions identified by `find_redundant_restrictions.py`.
-
-**Usage:**
-```bash
-python remove_redundant_restrictions.py
-```
-
-**Behavior:**
-1. Creates `.bak` backup files before modifying
-2. Removes redundant restrictions from:
-   - `GSO-Common.ttl`
-   - `GSO-Geology.ttl`
-   - `Modules/GSO-Geologic_Unit.ttl`
-3. Re-serializes using rdflib (formatting changes but semantics preserved)
-
-**To restore backups:**
-```bash
-mv GSO-Common.ttl.bak GSO-Common.ttl
-mv GSO-Geology.ttl.bak GSO-Geology.ttl
-mv Modules/GSO-Geologic_Unit.ttl.bak Modules/GSO-Geologic_Unit.ttl
-```
+| `classComments` | URI→rdfs:comment mapping |
 
 ---
 
@@ -175,24 +103,14 @@ The property extraction traverses the superclass hierarchy to collect all inheri
 
 ## Ontology Statistics
 
-After removing redundant restrictions:
+After all OWL 2 DL fixes (LogicReview branch):
 
 | Metric | Value |
 |--------|-------|
-| Total triples | 129,137 |
-| Total classes | 6,692 |
-| Classes with comments | 1,193 |
-| Redundant restrictions removed | 72 |
-
----
-
-## Files Modified by Redundancy Removal
-
-| File | Redundant Restrictions Removed |
-|------|-------------------------------|
-| GSO-Common.ttl | 43 |
-| GSO-Geology.ttl | 9 |
-| Modules/GSO-Geologic_Unit.ttl | 20 |
+| Total triples | 125,947 |
+| Total classes | 6,743 |
+| Unsatisfiable classes | 0 |
+| Consistency | CONSISTENT |
 
 ---
 
@@ -492,25 +410,26 @@ GSO-Geologic_Rock_Object passes HermiT reasoning:
 
 ---
 
-## Utility Scripts Location
+## Utility Scripts and Files
 
-All Python scripts and reports have been moved to the `ontologyFixes/` subdirectory:
+**Repo root:**
+- `visualize_gso.py` — Interactive GSO class hierarchy viewer (generates `visualizeGSO.html` and `visualizeGSO_hierarchy.svg`)
+- `generatedocs3-fix.bat` — pyLODE HTML documentation generator for all GSO modules
 
-**Scripts:**
-- `check_consistency.py`, `extract_class_properties.py`, `find_inconsistency.py`
-- `find_owl2dl_conflicts.py`, `find_redundant_restrictions.py`
-- `fix_cardinality_nonsimple.py`, `fix_cardinality_to_some.py`, `fix_chain_disjoint.py`
-- `fix_nonsimple_disjoint.py`, `fix_owl2dl_conflicts.py`, `fix_property_regularity.py`
-- `remove_all_equivalentclass.py`, `remove_redundant_restrictions.py`, `visualize_gso.py`
-- `check_owl2dl.py` - Command-line HermiT reasoner (via owlready2)
-- `run_hermit.py` - Direct HermiT JAR runner (requires separate download)
-- `test_no_ischart_no_feature.py` - Full GSO test excluding Ischart and Feature modules (CONSISTENT)
-- `test_with_ischart.py` - Full GSO test including Ischart (excludes only Feature)
+**`ontologyFixes/` directory — test scripts:**
+- `test_no_ischart_no_feature.py` — Full GSO consistency test excluding Ischart and Feature modules (CONSISTENT)
+- `test_with_feature.py` — Full GSO test including Feature module
+- `test_with_ischart.py` — Full GSO test including Ischart module
+- `apply_owl2dl_fixes.py` — Applies OWL 2 DL compatibility fixes
+- `semantic_merge.py` — Semantic merge utility for ontology files
 
-**Reports & Removed Axioms:**
-- `consistency_fixes_log.txt`, `owl2dl_conflicts_report.txt`, `redundant_restrictions_report.txt`
-- `removed_equivalentclass_axioms.txt`, `rock_properties.txt`, `Solid_Geologic_Material_properties.txt`
-- `GSO-Common-removed-axioms.ttl`, `removed_owl2dl_axioms.ttl`, `removed_triples.ttl`
+**`ontologyFixes/` directory — removed axioms and records:**
+- `removed_triples.ttl` — Triples removed during OWL 2 DL fixes
+- `removed_owl2dl_axioms.ttl` — OWL 2 DL incompatible axioms removed
+- `removed_equivalentclass_axioms.txt` — Record of equivalentClass axioms removed
+- `GSO-Common-removed-axioms.ttl` — Axioms removed from GSO-Common.ttl (649 triples; merge back for OWL Full)
+- `consistency_fixes_log.txt` — Log of all consistency fixes applied
+- `common_premerge.ttl` — Pre-merge snapshot of GSO-Common.ttl for reference
 
 ---
 
@@ -522,9 +441,8 @@ Command-line script to run HermiT reasoner via owlready2 library. Much faster fo
 
 **Usage:**
 ```bash
-cd ontologyFixes
-python check_owl2dl.py --merge          # Merge all files and check
-python check_owl2dl.py --merge -o merged.rdf  # Save merged file
+python ontologyFixes/check_owl2dl.py --merge          # Merge all files and check
+python ontologyFixes/check_owl2dl.py --merge -o merged.rdf  # Save merged file
 ```
 
 **Features:**
@@ -634,13 +552,13 @@ The Ischart data is still valid for OWL Full reasoners or SPARQL querying.
 
 ---
 
-## Full GSO Test Results (Without Ischart and Feature)
+## Full GSO Test Results (Without Feature)
 
 ### Status: CONSISTENT (0 unsatisfiable classes)
 
-After applying the fixes described below, testing all GSO modules (excluding Ischart and Feature) with HermiT shows **0 unsatisfiable classes**.
+After applying all fixes (including master merge fixes), testing all GSO modules (excluding Feature) with HermiT shows **0 unsatisfiable classes**.
 
-**Test parameters:** 118,916 triples, 6,699 classes, 5 individuals, 963.5 seconds
+**Test parameters:** 125,947 triples, 6,743 classes, 0 unsatisfiable
 
 ### Root Cause Analysis of 117 Unsatisfiable Classes
 
@@ -715,6 +633,56 @@ This allows time boundaries to be valid `timeIncludes` values (via the `timeFini
 
 ---
 
+## Master Merge Fixes (LogicReview Branch)
+
+After merging master into the LogicReview branch, 15 additional unsatisfiable classes appeared. These were resolved in two groups.
+
+### Fix 1: Bedding_Pattern and Bedding_Style (2 classes)
+
+**Problem:** After merging, `Bedding_Pattern` and `Bedding_Style` in `GSO-Geologic_Quality.ttl` were `Nonphysical_Quality` but had `isQualityOf only Bedding`. The `Nonphysical_Quality` range requires `isQualityOf exactly 1 (Nonphysical_Endurant OR Perdurant)`, and Bedding is neither.
+
+**Fix:** Changed both classes from `Nonphysical_Quality` to `Physical_Quality` in `Modules/GSO-Geologic_Quality.ttl`, and expanded `Nonphysical_Quality` in `GSO-Common.ttl` to allow `Endurant_Feature` in its `isQualityOf` range.
+
+### Fix 2: Transformation hasOutput (13 classes)
+
+**Affected:** Metamorphic_Facies + 10 subclasses + Alteration_Unit + Alteration_Facies
+
+**Root cause:** Master's `GSO-Geology.ttl` narrowed the `Transformation` class restriction from `hasOutput allValuesFrom unionOf(Amount_Of_Matter, Geologic_Object)` to just `hasOutput allValuesFrom Amount_Of_Matter`.
+
+**Chain of conflict:**
+1. `Metamorphic_Process rdfs:subClassOf Transformation`
+2. `Transformation: hasOutput allValuesFrom Amount_Of_Matter` (narrowed by master)
+3. `Metamorphic_Facies: isOutputOf some Metamorphic_Process` — so Metamorphic_Facies must be `Amount_Of_Matter`
+4. `Amount_Of_Matter owl:disjointWith Material_Object`
+5. `Geologic_Unit → Rock_Object → Geologic_Object → Material_Object`
+6. `Alteration_Unit rdfs:subClassOf Geologic_Unit` — must be both `Amount_Of_Matter` and `Material_Object` → **UNSATISFIABLE**
+
+**Fix:** Restored the union in `GSO-Geology.ttl`:
+```turtle
+gsog:Transformation
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:allValuesFrom [
+          rdf:type owl:Class ;
+          owl:unionOf (
+            gsoc:Amount_Of_Matter
+            gsog:Geologic_Object
+          ) ;
+        ] ;
+      owl:onProperty gsoc:hasOutput ;
+    ] ;
+```
+
+### Fix 3: W3C Time Ontology Import Warnings
+
+**Problem:** owlready2 warned about `time#xsdDateTime` and `time#inXSDDateTime` belonging to multiple entity types (`owl:DatatypeProperty` and `owl:DeprecatedProperty`). These came from importing `<http://www.w3.org/2006/time>`.
+
+**Fix:**
+- Removed `owl:imports <http://www.w3.org/2006/time>` from `Modules/GSO-Geologic_Time_Scales.ttl` (didn't use any `time:` entities)
+- Removed the import from `Modules/GSO-Geologic_Time_Scales-GTS.ttl` and added a local `time:TRS` class declaration (used in 16 places)
+
+---
+
 ## HermiT Testing Progress
 
 | Module | Status | Time | Notes |
@@ -724,11 +692,9 @@ This allows time boundaries to be valid `timeIncludes` values (via the `timeFini
 | GSO-Geologic_Rock_Object | PASSED | 647 sec | After temporal property fixes |
 | GSO-Geologic_Time | PASSED | 717 sec | No changes needed |
 | GSO-Geologic_Time_Ischart | FIXED | - | Added Geologic_Time_Boundary to Epoch/Period timeIncludes unions |
-| Full GSO (no Ischart, no Feature) | **CONSISTENT** | 964 sec | All 6,699 classes satisfiable |
-| Full GSO (with Ischart, no Feature) | PENDING | - | Test started but did not complete within session; HermiT may require extended runtime for 128,757 triples + 664 individuals |
+| Full GSO (with Ischart, no Feature) | **CONSISTENT** | - | 125,947 triples, 6,743 classes, 0 unsatisfiable |
 
-**Remaining:**
-- Rerun `test_with_ischart.py` to confirm full GSO consistency with the Ischart fix (Epoch/Period `timeIncludes` union expansion)
+**Notes:**
 - GSO-Feature module has a known design conflict (Nonphysical_Feature → Nonphysical_Endurant constraint) and should remain excluded from Master imports
 - Explore ontology simplification strategies (see below) on the `Simplify` branch
 
@@ -746,8 +712,8 @@ Analysis of axiom patterns that contribute to reasoning complexity.
 | `owl:someValuesFrom` (existential restrictions) | 1,250 | Medium — requires witness existence but doesn't constrain other values |
 | `owl:disjointWith` | 317 | High — creates hard boundaries; interacts with universal restrictions to cause unsatisfiability |
 | Time `rdfs:subPropertyOf` relations | 39 | High — `timeIntersects` alone has 10 sub-properties; creates inference chains through `allValuesFrom` |
-| Total classes | 6,614 | — |
-| Total triples (with Ischart) | 128,757 | — |
+| Total classes | 6,743 | — |
+| Total triples (with Ischart) | 125,947 | — |
 | Ischart individuals | 664 | High — combinatorial explosion with time property hierarchy |
 
 ### Key Complexity Drivers
