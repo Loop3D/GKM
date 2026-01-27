@@ -539,6 +539,180 @@ pip install owlready2 rdflib
 
 ---
 
+## GSO-Geologic_Quality Nonphysical_Quality Fixes
+
+11 classes in `Modules/GSO-Geologic_Quality.ttl` were incorrectly typed as `Physical_Quality` when they should be `Nonphysical_Quality`. Physical qualities require `isQualityOf exactly 1 Physical_Endurant`, but these classes qualify non-physical features (structures, foliations, etc.), causing unsatisfiability.
+
+### Classes Changed
+
+| Class | Reason |
+|-------|--------|
+| `gsgq:Metamorphic_Facies` | Qualifies metamorphic conditions, not physical objects |
+| `gsgq:Metamorphic_Grade` | Qualifies metamorphic conditions |
+| `gsgq:Mineral_Habit` | Qualifies mineral form descriptions |
+| `gsgq:Particle_Geometry_Term` | Qualifies geometric descriptions |
+| `gsgq:Particle_Shape` | Qualifies shape descriptions |
+| `gsgq:Permeability_Quality` | Qualifies permeability descriptions |
+| `gsgq:Porosity_Quality` | Qualifies porosity descriptions |
+| `gsgq:Rock_Alteration_Type` | Qualifies alteration descriptions |
+| `gsgq:Rock_Cement_Type` | Qualifies cement descriptions |
+| `gsgq:Rock_Color` | Qualifies color descriptions |
+| `gsgq:Rock_Texture` | Qualifies texture descriptions |
+
+---
+
+## GSO-Geology.ttl Geologic Time Class Fixes
+
+Three `hasEssentialPart`-related restrictions were removed from geologic time classes in `GSO-Geology.ttl` to resolve unsatisfiability when combined with the Ischart module.
+
+### Summary of Fixes
+
+| Class | Restriction Removed | Reason |
+|-------|---------------------|--------|
+| `gsog:Geologic_Time_Interval` | `hasEssentialPart some (Geologic_Time_Interval OR Time_Interval)` | Conflicted with subclass cardinality restrictions |
+| `gsog:Generic_Geologic_Time_Unit` | `hasEssentialPart some Specific_Geologic_Time_Unit` | Conflicted with disjointness between Generic and Specific |
+| `gsog:Specific_Geologic_Time_Unit` | `complementOf (hasEssentialPart some Geologic_Time_Interval)` | Redundant after removing parent restrictions |
+
+### Detailed Explanation
+
+#### 1. Geologic_Time_Interval hasEssentialPart
+
+**Problem:** `Geologic_Time_Interval` required `hasEssentialPart some (Geologic_Time_Interval OR Time_Interval)`. Since `hasEssentialPart` is a subproperty of `hasPart`, this interacted with restrictions on subclasses:
+
+- `Specific_Geologic_Time_Unit` has `hasStaticPart exactly 1 Time_Interval`
+- `Generic_Geologic_Time_Unit` has `complementOf (hasStaticPart some Time_Interval)`
+
+The `hasEssentialPart` requirement on the parent class created conflicts through the property hierarchy (`hasEssentialPart → hasPersistentPart → hasStaticPart → hasPart`).
+
+**Fix:** Removed the restriction entirely.
+
+#### 2. Generic_Geologic_Time_Unit hasEssentialPart
+
+**Problem:** `Generic_Geologic_Time_Unit` required `hasEssentialPart some Specific_Geologic_Time_Unit`, but Generic and Specific are `owl:disjointWith` each other. Combined with part-type restrictions, this created conflicts when individuals were classified.
+
+**Fix:** Removed the restriction.
+
+#### 3. Specific_Geologic_Time_Unit complementOf
+
+**Problem:** `Specific_Geologic_Time_Unit` had `complementOf (hasEssentialPart some Geologic_Time_Interval)`, asserting that no Specific unit has a Geologic_Time_Interval as an essential part. After removing the parent class restrictions, this constraint became unnecessary and potentially conflicting.
+
+**Fix:** Removed the restriction.
+
+---
+
+## GSO-Geologic_Time_Ischart Known Limitation
+
+### Status: Deferred (HermiT Scale Limitation)
+
+After the Geologic Time class fixes above, the TBox (class definitions) is consistent and all classes are satisfiable. However, when the full `GSO-Geologic_Time_Ischart.ttl` ABox (664 individuals, 9,848 triples) is loaded, HermiT reports INCONSISTENT.
+
+### Investigation Summary
+
+Extensive testing revealed this is a scale/complexity issue with HermiT, not a pure logical error:
+
+| Test | Result | Time |
+|------|--------|------|
+| 1 Scale + 1 Point individual | CONSISTENT | 398s |
+| 2 Scale + 2 Point individuals | CONSISTENT | 506s |
+| All 17 Scale + 32 Point + 615 other individuals | INCONSISTENT | 2-4s |
+
+**Key observations:**
+- Small numbers of Ischart individuals are CONSISTENT but very slow (5-8 minutes each)
+- The full set fails very fast (2-4 seconds), suggesting HermiT's tableau algorithm encounters combinatorial explosion
+- All pairwise type combinations are individually CONSISTENT
+- No single predicate or type assertion is the sole cause
+
+### Recommendation
+
+For OWL 2 DL reasoning, exclude the Ischart import from GSO-Master:
+- Remove `owl:imports gstime:ontology` from `GSO-Master.ttl` (line 130)
+- Or use `test_full_no_ischart.py` to test without Ischart
+
+The Ischart data is still valid for OWL Full reasoners or SPARQL querying.
+
+---
+
+## Full GSO Test Results (Without Ischart and Feature)
+
+### Status: CONSISTENT (0 unsatisfiable classes)
+
+After applying the fixes described below, testing all GSO modules (excluding Ischart and Feature) with HermiT shows **0 unsatisfiable classes**.
+
+**Test parameters:** 118,916 triples, 6,699 classes, 5 individuals, 963.5 seconds
+
+### Root Cause Analysis of 117 Unsatisfiable Classes
+
+The 117 unsatisfiable classes had two distinct root causes:
+
+#### Root Cause 1: GSO-Feature Module (96 classes)
+
+**Affected:** Foliation, Lineation + 72 Foliation subtypes + 22 Lineation subtypes
+
+**Chain of conflict:**
+1. GSO-Feature.ttl defines: `Nonphysical_Feature rdfs:subClassOf Nonphysical_Endurant`
+2. GSO-Common.ttl: `Nonphysical_Endurant: hasQuality only Nonphysical_Quality`
+3. GSO-Geologic_Structure.ttl: `Foliation: hasQuality some Plane_Orientation`
+4. `Plane_Orientation → Orientation → Physical_Quality`
+5. `Physical_Quality owl:disjointWith Nonphysical_Quality`
+6. Foliation inherits `hasQuality only Nonphysical_Quality` (via Feature module chain) but REQUIRES `hasQuality some Plane_Orientation` (a Physical_Quality) → **UNSATISFIABLE**
+
+**Fix:** Removed `owl:imports feature:ontology` from GSO-Master.ttl. The comment on line 106 already said "Shell to load all GSO files, except GSO-Feature" and the Feature module itself says it is not meant to be imported into the master ontology. The import was present contradictorily.
+
+#### Root Cause 2: Fault Quality Classes (21 classes)
+
+**Affected:** 5 root classes (Fault_Movement_Magnitude, Fault_Movement_Sense, Fault_Movement_Vector, Fault_Separation, Fault_Slip) + 16 subclasses
+
+**Chain of conflict (isQualityOf):**
+1. These classes were `Physical_Quality` with `isQualityOf only Displacement`
+2. `Physical_Quality` requires `isQualityOf exactly 1 (Physical_Endurant OR Endurant_Feature)`
+3. `Displacement → Physical_Quality → Quality → Inherant → Nonphysical_Endurant`
+4. Displacement is neither `Physical_Endurant` nor `Endurant_Feature`
+5. The target must be in the union AND must be `Displacement` → **UNSATISFIABLE**
+
+**Fix:** Changed all 5 root classes from `gsoc:Physical_Quality` to `gsoc:Nonphysical_Quality`. Since Displacement IS a `Nonphysical_Endurant` (through the chain above), and `Nonphysical_Quality` requires `isQualityOf exactly 1 (Nonphysical_Endurant OR Perdurant)`, this is now compatible.
+
+**Additional fix for Fault_Movement_Vector:**
+Fault_Movement_Vector also had `hasQuality some Azimuth` and `hasQuality some Plunge`. Since ANY Quality is a `Nonphysical_Endurant` (through `Quality → Inherant → Nonphysical_Endurant`), and `Nonphysical_Endurant` constrains `hasQuality only Nonphysical_Quality`, no Quality instance can have a `Physical_Quality` as its quality. Since Azimuth and Plunge are `Physical_Quality`, the existential requirements made FMV unsatisfiable. Removed the two `hasQuality some` restrictions.
+
+### Summary of Fixes
+
+| File | Change | Classes Fixed |
+|------|--------|---------------|
+| `GSO-Master.ttl` | Removed `owl:imports feature:ontology` | 96 (Foliation/Lineation + subtypes) |
+| `Modules/GSO-Geologic_Structure_Fault.ttl` | 5 classes: `Physical_Quality` → `Nonphysical_Quality` | 20 (5 root + 15 subclasses) |
+| `Modules/GSO-Geologic_Structure_Fault.ttl` | Fault_Movement_Vector: removed `hasQuality some Azimuth/Plunge` | 1 |
+
+---
+
+## GSO-Geologic_Time_Ischart Inconsistency Fix
+
+### Root Cause (confirmed via Protege explanation)
+
+The Ischart module caused an INCONSISTENCY (owl:Thing SubClassOf owl:Nothing) through this chain:
+
+1. `Epoch SubClassOf (timeIncludes only Age)` — all timeIncludes values of an Epoch must be Age
+2. `timeFinishedBy rdfs:subPropertyOf timeIncludes` — timeFinishedBy values count as timeIncludes
+3. `MiddleTriassic2004 rdf:type Epoch` — it's an Epoch instance
+4. `MiddleTriassic2004 timeFinishedBy BaseUpperTriassic2004` — so BaseUpperTriassic2004 is a timeIncludes value, hence must be Age
+5. `BaseUpperTriassic2004 rdf:type Geologic_Time_Boundary` — but it's a boundary
+6. `Geologic_Time_Boundary owl:disjointWith Geologic_Time_Interval` — and Age IS a Geologic_Time_Interval
+7. **CONTRADICTION**: BaseUpperTriassic2004 must be both Age (a Time_Interval) and is Geologic_Time_Boundary (disjoint with Time_Interval)
+
+This pattern affects all Epoch and Period instances that have `timeFinishedBy` assertions pointing to boundaries.
+
+### Fix
+
+Added `gsog:Geologic_Time_Boundary` to the `timeIncludes` allValuesFrom unions in `Modules/GSO-Geologic_Time.ttl`:
+
+| Class | Before | After |
+|-------|--------|-------|
+| `Epoch` | `timeIncludes only Age` | `timeIncludes only (Age OR Geologic_Time_Boundary)` |
+| `Period` | `timeIncludes only (Age OR Epoch OR Subperiod)` | `timeIncludes only (Age OR Epoch OR Subperiod OR Geologic_Time_Boundary)` |
+
+This allows time boundaries to be valid `timeIncludes` values (via the `timeFinishedBy` subproperty chain) without conflicting with the allValuesFrom restrictions.
+
+---
+
 ## HermiT Testing Progress
 
 | Module | Status | Time | Notes |
@@ -547,13 +721,10 @@ pip install owlready2 rdflib
 | GSO-Geologic_Structure | PASSED | - | After quality/pattern fixes |
 | GSO-Geologic_Rock_Object | PASSED | 647 sec | After temporal property fixes |
 | GSO-Geologic_Time | PASSED | 717 sec | No changes needed |
-| GSO-Master (all merged) | INCONSISTENT | 6 sec | Using check_owl2dl.py |
+| GSO-Geologic_Time_Ischart | FIXED | - | Added Geologic_Time_Boundary to Epoch/Period timeIncludes unions |
+| Full GSO (no Ischart, no Feature) | **CONSISTENT** | 964 sec | All 6,699 classes satisfiable |
+| GSO-Master (all merged) | PENDING | - | Needs test with Ischart fix |
 
-**Remaining modules to test individually:**
-- GSO-Geology, GSO-Feature, GSO-Element
-- GSO-Geologic_Event, GSO-Geologic_Feature, GSO-Geologic_Granular_Material
-- GSO-Geologic_Mineral, GSO-Geologic_Process, GSO-Geologic_Quality
-- GSO-Geologic_Reference_System, GSO-Geologic_Relation, GSO-Geologic_Role
-- GSO-Geologic_Setting, GSO-Geologic_Time_Ischart, GSO-Geologic_Unit
-- GSO-Geologic_Structure_* (Contact, Fault, Fold, Foliation, Lineation)
-- GSO-Hydrology, GSO-Perdurant, GSO-QUDTvoc, GSO-Quality, GSO-skos_annotation
+**Remaining:**
+- Test full GSO with Ischart fix to verify the combined fixes work
+- GSO-Feature module has a known design conflict (Nonphysical_Feature → Nonphysical_Endurant constraint) and should remain excluded from Master imports
