@@ -1,5 +1,11 @@
 #!/usr/bin/env python3
-"""Test full GSO ontology (all modules) without Ischart."""
+"""Test full GSO ontology INCLUDING the Feature module but excluding Ischart.
+
+This is a variant of test_no_ischart_no_feature.py that keeps
+GSO-Feature.ttl loaded.  Only GSO-Geologic_Time_Ischart.ttl is
+excluded (known inconsistency with timeFinishedBy/timeIncludes
+property chain).
+"""
 
 import sys
 import os
@@ -21,7 +27,7 @@ owlready2.reasoning.JAVA_MEMORY = 4000
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
-def get_all_ontology_files(base_path, exclude_ischart=True):
+def get_ontology_files(base_path):
     patterns = [
         os.path.join(base_path, "*.ttl"),
         os.path.join(base_path, "Modules", "*.ttl"),
@@ -37,18 +43,30 @@ def get_all_ontology_files(base_path, exclude_ischart=True):
              '-SMR-' not in f and
              '.inconsistent' not in f]
 
-    if exclude_ischart:
-        files = [f for f in files if 'Ischart' not in f and 'ischart' not in f.lower()]
+    # Only exclude Ischart (known inconsistency); Feature IS included
+    excluded = []
+    result = []
+    for f in files:
+        basename = os.path.basename(f).lower()
+        if 'ischart' in basename:
+            excluded.append(f)
+        else:
+            result.append(f)
 
-    return sorted(set(files))
+    return sorted(set(result)), excluded
 
 
 def main():
-    all_files = get_all_ontology_files(BASE_DIR, exclude_ischart=True)
+    all_files, excluded = get_ontology_files(BASE_DIR)
 
-    print(f"Loading {len(all_files)} ontology files (no Ischart):", flush=True)
+    print(f"Loading {len(all_files)} ontology files:", flush=True)
     for f in all_files:
         print(f"  {os.path.basename(f)}", flush=True)
+
+    if excluded:
+        print(f"\nExcluded {len(excluded)} files:", flush=True)
+        for f in excluded:
+            print(f"  {os.path.basename(f)}", flush=True)
 
     g = Graph()
     for f in all_files:
@@ -93,9 +111,11 @@ def main():
 
         elapsed = time.time() - start
         if unsatisfiable:
+            unsat_names = sorted(set(str(c) for c in unsatisfiable))
             print(f"\nResult: UNSATISFIABLE ({len(unsatisfiable)} classes) ({elapsed:.1f}s)", flush=True)
-            for c in unsatisfiable:
-                print(f"  - {c}", flush=True)
+            for name in unsat_names:
+                print(f"  - {name}", flush=True)
+            sys.exit(1)
         else:
             print(f"\nResult: CONSISTENT ({elapsed:.1f}s)", flush=True)
             print(f"All classes are satisfiable!", flush=True)
