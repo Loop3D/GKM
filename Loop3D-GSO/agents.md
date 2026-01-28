@@ -520,35 +520,18 @@ The `hasEssentialPart` requirement on the parent class created conflicts through
 
 ---
 
-## GSO-Geologic_Time_Ischart Known Limitation
+## GSO-Geologic_Time_Ischart Status
 
-### Status: Deferred (HermiT Scale Limitation)
+### Status: CONSISTENT (Fixed)
 
-After the Geologic Time class fixes above, the TBox (class definitions) is consistent and all classes are satisfiable. However, when the full `GSO-Geologic_Time_Ischart.ttl` ABox (664 individuals, 9,848 triples) is loaded, HermiT reports INCONSISTENT.
-
-### Investigation Summary
-
-Extensive testing revealed this is a scale/complexity issue with HermiT, not a pure logical error:
+After changing `timeIncludes` to `timeContains` in the Epoch and Period restrictions (see "GSO-Geologic_Time_Ischart Inconsistency Fix" above), the full GSO ontology including the Ischart module passes HermiT consistency checking.
 
 | Test | Result | Time |
 |------|--------|------|
-| 1 Scale + 1 Point individual | CONSISTENT | 398s |
-| 2 Scale + 2 Point individuals | CONSISTENT | 506s |
-| All 17 Scale + 32 Point + 615 other individuals | INCONSISTENT | 2-4s |
+| Full GSO with Ischart (664 individuals, 9,848 triples) | **CONSISTENT** | **2.27 seconds** |
+| Unsatisfiable classes | **0** | — |
 
-**Key observations:**
-- Small numbers of Ischart individuals are CONSISTENT but very slow (5-8 minutes each)
-- The full set fails very fast (2-4 seconds), suggesting HermiT's tableau algorithm encounters combinatorial explosion
-- All pairwise type combinations are individually CONSISTENT
-- No single predicate or type assertion is the sole cause
-
-### Recommendation
-
-For OWL 2 DL reasoning, exclude the Ischart import from GSO-Master:
-- Remove `owl:imports gstime:ontology` from `GSO-Master.ttl` (line 130)
-- Or use `test_full_no_ischart.py` to test without Ischart
-
-The Ischart data is still valid for OWL Full reasoners or SPARQL querying.
+The `timeContains` fix works because `timeFinishedBy` is a subproperty of `timeIncludes` but NOT of `timeContains`. Boundaries asserted via `timeFinishedBy` no longer trigger the `allValuesFrom` constraints on Epoch and Period.
 
 ---
 
@@ -691,8 +674,8 @@ gsog:Transformation
 | GSO-Geologic_Structure | PASSED | - | After quality/pattern fixes |
 | GSO-Geologic_Rock_Object | PASSED | 647 sec | After temporal property fixes |
 | GSO-Geologic_Time | PASSED | 717 sec | No changes needed |
-| GSO-Geologic_Time_Ischart | FIXED | - | Added Geologic_Time_Boundary to Epoch/Period timeIncludes unions |
-| Full GSO (with Ischart, no Feature) | **CONSISTENT** | - | 125,947 triples, 6,743 classes, 0 unsatisfiable |
+| GSO-Geologic_Time_Ischart | **PASSED** | 2.27 sec | Fixed by changing timeIncludes → timeContains |
+| Full GSO (with Ischart, no Feature) | **CONSISTENT** | 2.27 sec | 136,082 triples, 6,744 classes, 0 unsatisfiable |
 
 **Notes:**
 - GSO-Feature module has a known design conflict (Nonphysical_Feature → Nonphysical_Endurant constraint) and should remain excluded from Master imports
