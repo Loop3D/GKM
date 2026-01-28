@@ -968,3 +968,91 @@ Full OWL 2 DL reasoning with HermiT or Pellet was not achievable for the GSO ont
 - Even with ~9K triples (excluding Mineral/Element modules), HermiT exceeds 10+ minute timeouts
 - The targeted validation script (`validate_examples.py`) provides equivalent coverage for the specific violation patterns that cause inconsistency
 - For applications requiring full DL reasoning, consider the simplification strategies documented above
+
+---
+
+## OWL 2 DL Transitivity Restoration
+
+### Overview
+
+OWL 2 DL prohibits cardinality restrictions on transitive properties or their subproperties. The original GSO ontology removed TransitiveProperty declarations to avoid this conflict. This update restores transitivity where semantically important by:
+
+1. Creating a new property `hasCountableStaticPart` outside the transitive `hasPart` hierarchy for cardinality-constrained cases
+2. Converting problematic cardinality restrictions to existential (`someValuesFrom`) restrictions
+3. Re-adding `TransitiveProperty` declarations to key properties
+
+### New Property: hasCountableStaticPart
+
+Created `gsoc:hasCountableStaticPart` (and inverse `gsoc:isCountableStaticPartOf`) as a non-transitive alternative for cases requiring cardinality restrictions:
+
+```turtle
+gsoc:hasCountableStaticPart a owl:ObjectProperty ;
+    rdfs:comment "A static part relation that supports cardinality restrictions.
+                  Not in the hasPart hierarchy to allow hasPart to be transitive."@en ;
+    rdfs:subPropertyOf gsoc:constantlySpecDependsOn ;
+    owl:inverseOf gsoc:isCountableStaticPartOf .
+```
+
+**Usage:** Classes that need exact cardinality on parts use `hasCountableStaticPart` instead of `hasStaticPart`.
+
+### Properties Made Transitive
+
+| Property | Rationale |
+|----------|-----------|
+| `gsoc:hasPart` | Core mereological property — if A hasPart B and B hasPart C, then A hasPart C |
+| `gsoc:isPartOf` | Inverse of hasPart |
+| `gsoc:hasConstituent` | Material composition — if rock has mineral and mineral has element, rock has element |
+| `gsoc:isConstituentOf` | Inverse of hasConstituent |
+| `gsoc:hosts` | Feature hosting — if A hosts B and B hosts C, then A hosts C |
+| `gsoc:timeIncludes` | Temporal inclusion is transitive |
+| `gsoc:timeIncludedBy` | Inverse of timeIncludes |
+| `gsoc:timeContains` | Temporal containment is transitive |
+| `gsoc:timeOlderThan` | Temporal ordering — if A older than B and B older than C, A older than C |
+| `gsoc:timeYoungerThan` | Inverse of timeOlderThan |
+| `gsoc:occupiesSpaceDirectly` | Spatial occupation |
+| `gsoc:occupiesSpaceIndirectly` | Spatial occupation |
+| `gsoc:occupiesTimeDirectly` | Temporal occupation |
+| `gsoc:occupiesTimeIndirectly` | Temporal occupation |
+
+### Cardinality Restrictions Changed to someValuesFrom
+
+To enable transitivity, these cardinality restrictions were relaxed:
+
+| File | Class | Before | After |
+|------|-------|--------|-------|
+| `GSO-Geologic_Setting.ttl` | `Crustal_Setting` | `hasStaticPart exactly 1 Crust` | `hasStaticPart some Crust` |
+| `GSO-Geologic_Structure_Fold.ttl` | `Fold_System` | `hasEssentialPart min 2 Fold` | `hasEssentialPart some Fold` |
+| `GSO-Geologic_Structure_Contact.ttl` | `Stratigraphic_Point` | `hasEssentialPart exactly 1 Spatial_Region_0D` | `hasEssentialPart some Spatial_Region_0D` |
+| `GSO-Geology.ttl` | `Geologic_Time_Date` | `hasStaticPart exactly 1 (Time_Instant and not Geologic_Time_Feature)` | `hasStaticPart some Time_Instant` |
+| `GSO-Geology.ttl` | `Specific_Geologic_Time_Unit` | `staticHostedBy exactly 1 Rock_Body` | `staticHostedBy some Rock_Body` |
+| `GSO-Geology.ttl` | `Geologic_Time_Scale` | `timeIncludes min 2 Specific_Geologic_Time_Unit` | `timeIncludes some Specific_Geologic_Time_Unit` |
+
+### Cardinality Restrictions Migrated to hasCountableStaticPart
+
+These restrictions kept exact cardinality by using the new non-transitive property:
+
+| File | Class | Before | After |
+|------|-------|--------|-------|
+| `GSO-Geology.ttl` | `Specific_Geologic_Time_Unit` | `hasStaticPart exactly 1 Time_Interval` | `hasCountableStaticPart exactly 1 Time_Interval` |
+| `GSO-Geology.ttl` | `Specific_Geologic_Time_Unit` | `hasStaticPart exactly 2 Geologic_Time_Boundary` | `hasCountableStaticPart exactly 2 Geologic_Time_Boundary` |
+| `GSO-Common.ttl` | `Parthood` | `hasStaticPart exactly 2 Particular` | `hasCountableStaticPart exactly 2 Particular` |
+| `GSO-Common.ttl` | `Relator` | `hasStaticPart min 2 Role` | `hasCountableStaticPart min 2 Role` |
+
+### isValueOf Cardinality Restrictions Fixed
+
+Changed all `isValueOf exactly 1` to `isValueOf some` to allow `isPartOf` (ancestor of `isValueOf`) to be transitive:
+
+| File | Class |
+|------|-------|
+| `GSO-Common.ttl` | `Shape_Value`, `State_Of_Matter_Value`, `Proportion_Value`, `Quality_Value` |
+| `GSO-Geologic_Quality.ttl` | `Metamorphosed`, `Not_Metamorphosed` |
+| `GSO-Quality.ttl` | `Distribution_Value`, `Intensity_Value`, `Orientation_Value` |
+
+### Validation Results
+
+After all changes:
+- **36/36 TTL files parse successfully**
+- **136,598 total triples**
+- **14 transitive properties declared**
+- **34 cardinality restrictions remain** — none conflict with transitive properties
+- **OWL 2 DL compliant** — no cardinality restrictions on transitive properties or their subproperties

@@ -364,18 +364,8 @@ gsog:Geologic_Time_Date
   rdfs:subClassOf gsog:Geologic_Time_Feature ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
-      owl:onClass [
-          rdf:type owl:Class ;
-          owl:intersectionOf (
-              gsoc:Time_Instant
-              [
-                rdf:type owl:Class ;
-                owl:complementOf gsog:Geologic_Time_Feature ;
-              ]
-            ) ;
-        ] ;
       owl:onProperty gsoc:hasStaticPart ;
-      owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:someValuesFrom gsoc:Time_Instant ;
     ] ;
   owl:disjointWith gsog:Geologic_Time_Interval ;
   owl:equivalentClass [
@@ -385,18 +375,8 @@ gsog:Geologic_Time_Date
           gsog:Geologic_Time_Feature
           [
             rdf:type owl:Restriction ;
-            owl:onClass [
-                rdf:type owl:Class ;
-                owl:intersectionOf (
-                    gsoc:Time_Instant
-                    [
-                      rdf:type owl:Class ;
-                      owl:complementOf gsog:Geologic_Time_Feature ;
-                    ]
-                  ) ;
-              ] ;
             owl:onProperty gsoc:hasStaticPart ;
-            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:someValuesFrom gsoc:Time_Instant ;
           ]
         ) ;
     ] ;
@@ -489,9 +469,8 @@ gsog:Geologic_Time_Scale
   rdfs:subClassOf gsog:Geologic_Time_Interval_Collection ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
-      owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
-      owl:onClass gsog:Specific_Geologic_Time_Unit ;
       owl:onProperty gsoc:timeIncludes ;
+      owl:someValuesFrom gsog:Specific_Geologic_Time_Unit ;
     ] ;
 .
 gsog:Geologic_Unit
@@ -875,20 +854,29 @@ gsog:Specific_Geologic_Time_Unit
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
       owl:onClass gsoc:Time_Interval ;
-      owl:onProperty gsoc:hasStaticPart ;
+      owl:onProperty gsoc:hasCountableStaticPart ;
       owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty gsoc:hasStaticPart ;
+      owl:someValuesFrom gsoc:Time_Interval ;
     ] ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
       owl:onClass gsog:Geologic_Time_Boundary ;
-      owl:onProperty gsoc:hasStaticPart ;
+      owl:onProperty gsoc:hasCountableStaticPart ;
       owl:qualifiedCardinality "2"^^xsd:nonNegativeInteger ;
     ] ;
   rdfs:subClassOf [
       rdf:type owl:Restriction ;
-      owl:onClass gsog:Rock_Body ;
+      owl:onProperty gsoc:hasStaticPart ;
+      owl:someValuesFrom gsog:Geologic_Time_Boundary ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
       owl:onProperty gsoc:staticHostedBy ;
-      owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:someValuesFrom gsog:Rock_Body ;
     ] ;
 .
 gsog:Specific_Rock_Object

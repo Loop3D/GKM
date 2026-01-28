@@ -429,7 +429,8 @@ gsoc:staticHostedBy a owl:ObjectProperty ;
         gsoc:specificallyDependsOn ;
     owl:inverseOf gsoc:staticHosts .
 
-gsoc:timeContains a owl:ObjectProperty ;
+gsoc:timeContains a owl:ObjectProperty,
+        owl:TransitiveProperty ;
     rdfs:label "contains"@en ;
     rdfs:comment "target interval is completely within the source interval; source begins before target and ends after target. inverse of During. Equivalent to union of OWL Time time:intervalContains and time:inside"@en ;
     rdfs:domain [ a owl:Class ;
@@ -447,7 +448,8 @@ gsoc:timeIncomparableTo a owl:ObjectProperty,
         "Temporal extent of subject is incomparable to temporal extend of object;  there is not enough information to determine an age relationship"@en ;
     rdfs:subPropertyOf gsoc:isTemporallyRelatedTo .
 
-gsoc:timeOlderThan a owl:ObjectProperty ;
+gsoc:timeOlderThan a owl:ObjectProperty,
+        owl:TransitiveProperty ;
     rdfs:comment "Age associated with subject is entirely prior to age associated with object. Corresponds to http://www.w3.org/2006/time#before"@en,
         "Event A is older than event B if A has occurred prior to B. (Burns, 1975; Mathematical Geology, Vol. 7, No. 4) Equivalent to Allen A Before B."@en ;
     rdfs:seeAlso <time:before> ;
@@ -572,9 +574,8 @@ gsoc:Shape_Value a owl:Class ;
             owl:allValuesFrom gsoc:Shape ;
             owl:onProperty gsoc:isValueOf ],
         [ a owl:Restriction ;
-            owl:onClass gsoc:Shape ;
             owl:onProperty gsoc:isValueOf ;
-            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+            owl:someValuesFrom gsoc:Shape ],
         gsoc:Named_Value .
 
 gsoc:Solid a owl:Class ;
@@ -727,14 +728,16 @@ gsoc:location a owl:ObjectProperty,
             owl:unionOf ( gsoc:Spatial_Value gsoc:Temporal_Value ) ] ;
     rdfs:subPropertyOf gsoc:constantlyGenDependsOn .
 
-gsoc:occupiesSpaceDirectly a owl:ObjectProperty ;
+gsoc:occupiesSpaceDirectly a owl:ObjectProperty,
+        owl:TransitiveProperty ;
     rdfs:comment "The occupation of a spatial region by a material endurant."@en ;
     rdfs:domain gsoc:Material_Endurant ;
     rdfs:range gsoc:Spatial_Region ;
     rdfs:subPropertyOf gsoc:occupiesSpace ;
     owl:inverseOf gsoc:spaceOccupiedDirectlyBy .
 
-gsoc:occupiesSpaceIndirectly a owl:ObjectProperty ;
+gsoc:occupiesSpaceIndirectly a owl:ObjectProperty,
+        owl:TransitiveProperty ;
     rdfs:comment "Occupies space indirectly."@en ;
     rdfs:domain [ a owl:Class ;
             owl:complementOf gsoc:Physical_Endurant ] ;
@@ -873,7 +876,8 @@ gsoc:timeStarts a owl:ObjectProperty ;
     rdfs:seeAlso <time:intervalStarts> ;
     rdfs:subPropertyOf gsoc:isTemporallyRelatedTo .
 
-gsoc:timeYoungerThan a owl:ObjectProperty ;
+gsoc:timeYoungerThan a owl:ObjectProperty,
+        owl:TransitiveProperty ;
     rdfs:comment "Age associated with subject is entirely after the age associated with object. Corresponds to http://www.w3.org/2006/time#after"@en,
         "Event A is younger than event B if A has occurred after  B.  Same as Allen A After B.  (Burns, 1975; Mathematical Geology, Vol. 7, No. 4)"@en ;
     rdfs:seeAlso <time:after> ;
@@ -944,11 +948,14 @@ gsoc:Parthood a owl:Class ;
     rdfs:comment "Reification of the parthood relation (i.e. to be in a whole-part relation)."@en ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:onClass gsoc:Whole ;
-            owl:onProperty gsoc:hasStaticPart ;
+            owl:onProperty gsoc:hasCountableStaticPart ;
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         [ a owl:Restriction ;
             owl:onProperty gsoc:hasStaticPart ;
             owl:someValuesFrom gsoc:Part ],
+        [ a owl:Restriction ;
+            owl:onProperty gsoc:hasStaticPart ;
+            owl:someValuesFrom gsoc:Whole ],
         gsoc:Relator .
 
 gsoc:Physical_Feature a owl:Class ;
@@ -1013,9 +1020,8 @@ gsoc:State_Of_Matter_Value a owl:Class ;
             owl:allValuesFrom gsoc:State_Of_Matter ;
             owl:onProperty gsoc:isValueOf ],
         [ a owl:Restriction ;
-            owl:onClass gsoc:State_Of_Matter ;
             owl:onProperty gsoc:isValueOf ;
-            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+            owl:someValuesFrom gsoc:State_Of_Matter ],
         gsoc:Named_Value .
 
 gsoc:Temporal_Void a owl:Class ;
@@ -1146,7 +1152,8 @@ gsoc:occupiesSpace a owl:ObjectProperty ;
         gsoc:spatiallyEquals ;
     owl:inverseOf gsoc:spaceOccupiedBy .
 
-gsoc:occupiesTimeDirectly a owl:ObjectProperty ;
+gsoc:occupiesTimeDirectly a owl:ObjectProperty,
+        owl:TransitiveProperty ;
     rdfs:comment "The occupation of a time region by a process or event."@en ;
     rdfs:domain [ a owl:Class ;
             owl:unionOf ( gsoc:Event gsoc:Process ) ] ;
@@ -1154,7 +1161,8 @@ gsoc:occupiesTimeDirectly a owl:ObjectProperty ;
     rdfs:subPropertyOf gsoc:occupiesTime ;
     owl:inverseOf gsoc:timeOccupiedDirectlyBy .
 
-gsoc:occupiesTimeIndirectly a owl:ObjectProperty ;
+gsoc:occupiesTimeIndirectly a owl:ObjectProperty,
+        owl:TransitiveProperty ;
     rdfs:comment "Occupies a temporal region indirectly."@en ;
     rdfs:domain [ a owl:Class ;
             owl:complementOf gsoc:Perdurant ] ;
@@ -1197,7 +1205,8 @@ gsoc:timeFinishedBy a owl:ObjectProperty ;
     rdfs:subPropertyOf gsoc:timeIncludes ;
     owl:inverseOf gsoc:timeFinishes .
 
-gsoc:timeIncludedBy a owl:ObjectProperty ;
+gsoc:timeIncludedBy a owl:ObjectProperty,
+        owl:TransitiveProperty ;
     rdfs:comment "Beginning (directly or indirectly) of subject entity is the same or younger than the beginning of the object entity, and the end (directly or indirectly) of the subject entity is the same or older than the end of the object entity. Union of timeDuring, timeFinishes and timeStarts. Time_Region occupied directly or indirectly by the subject does not extend outside the Time_Region occupied directly or indirectly by the object.  OWL Time time:intervalIn is subproperty, restricted to relating intervals, and not including timeEquivalentTo."@en ;
     rdfs:range [ a owl:Class ;
             owl:unionOf ( gsoc:Time_Interval [ a owl:Restriction ;
@@ -1315,7 +1324,8 @@ gsoc:emergesFrom a owl:ObjectProperty ;
     rdfs:range gsoc:Relator ;
     rdfs:subPropertyOf gsoc:externallySpecDependsOn .
 
-gsoc:hasConstituent a owl:ObjectProperty ;
+gsoc:hasConstituent a owl:ObjectProperty,
+        owl:TransitiveProperty ;
     rdfs:comment "Relation between an object and something (the consitituent)  that makes up the object."@en ;
     rdfs:subPropertyOf gsoc:hasPersistentPart ;
     owl:inverseOf gsoc:isConstituentOf .
@@ -1346,7 +1356,8 @@ gsoc:hasRoleObject a owl:ObjectProperty ;
     rdfs:subPropertyOf gsoc:specificallyDependsOn ;
     owl:inverseOf gsoc:isRoleObjectFor .
 
-gsoc:hosts a owl:ObjectProperty ;
+gsoc:hosts a owl:ObjectProperty,
+        owl:TransitiveProperty ;
     rdfs:comment "Direction relation of hosting a feature in which the feature is generically dependent on the host."@en ;
     rdfs:range gsoc:Feature ;
     rdfs:subPropertyOf gsoc:hasDependent .
@@ -1356,7 +1367,8 @@ gsoc:isEssentialPartOf a owl:ObjectProperty ;
     rdfs:subPropertyOf gsoc:hasDependent,
         gsoc:isPartOf .
 
-gsoc:isPartOf a owl:ObjectProperty ;
+gsoc:isPartOf a owl:ObjectProperty,
+        owl:TransitiveProperty ;
     rdfs:comment "Directed relation between a part and whole."@en ;
     rdfs:subPropertyOf gsoc:parthood .
 
@@ -1465,9 +1477,8 @@ gsoc:Proportion_Value a owl:Class ;
             owl:allValuesFrom gsoc:Proportion ;
             owl:onProperty gsoc:isValueOf ],
         [ a owl:Restriction ;
-            owl:onClass gsoc:Proportion ;
             owl:onProperty gsoc:isValueOf ;
-            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+            owl:someValuesFrom gsoc:Proportion ],
         gsoc:Named_Value .
 
 gsoc:Situation a owl:Class ;
@@ -1597,7 +1608,8 @@ gsoc:hasRolePlayer a owl:ObjectProperty ;
     rdfs:domain gsoc:Role ;
     rdfs:subPropertyOf gsoc:inheresIn .
 
-gsoc:isConstituentOf a owl:ObjectProperty ;
+gsoc:isConstituentOf a owl:ObjectProperty,
+        owl:TransitiveProperty ;
     rdfs:comment "Relation between some particular and the object that it makes up."@en ;
     rdfs:subPropertyOf gsoc:isPersistentPartOf .
 
@@ -1610,7 +1622,8 @@ gsoc:specificallyDependsOn a owl:ObjectProperty ;
     rdfs:comment "Directed specific ontological dependence in which something depends on something else, excluding self-dependence and other problematic border cases."@en ;
     rdfs:subPropertyOf gsoc:genericallyDependsOn .
 
-gsoc:timeIncludes a owl:ObjectProperty ;
+gsoc:timeIncludes a owl:ObjectProperty,
+        owl:TransitiveProperty ;
     rdfs:comment "Beginning (directly or indirectly) of subject entity is the same or older than the beginning of the object entity, and the end of the subject entity is the same or younger than the end of the object entity. Union of timeContains, timeFinishedBy and timeStartedBy. Time_Region occupied directly or indirectly by the object does not extend outside the Time_Region occupied directly or indirectly by the subject.  OWL time:inside is narrower; doesn't allow timeStartedBy and timeFinishedBy where the object is an instant, or timeEquivalentTo."@en ;
     rdfs:domain [ a owl:Class ;
             owl:unionOf ( gsoc:Time_Interval [ a owl:Restriction ;
@@ -1834,7 +1847,10 @@ gsoc:Relator a owl:Class ;
         [ a owl:Restriction ;
             owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
             owl:onClass gsoc:Role ;
-            owl:onProperty gsoc:hasStaticPart ],
+            owl:onProperty gsoc:hasCountableStaticPart ],
+        [ a owl:Restriction ;
+            owl:onProperty gsoc:hasStaticPart ;
+            owl:someValuesFrom gsoc:Role ],
         [ a owl:Restriction ;
             owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
             owl:onClass gsoc:Role ;
@@ -1940,6 +1956,15 @@ gsoc:hasStaticPart a owl:ObjectProperty ;
         gsoc:hasPersistentPart ;
     owl:inverseOf gsoc:isStaticPartOf .
 
+gsoc:hasCountableStaticPart a owl:ObjectProperty ;
+    rdfs:comment "A static part relation that supports cardinality restrictions. This property is intentionally NOT a subproperty of hasPart to allow cardinality constraints while hasPart remains transitive. Use this property when you need to count static parts (e.g., 'exactly 1 Whole' or 'min 2 Role')."@en ;
+    rdfs:subPropertyOf gsoc:constantlySpecDependsOn ;
+    owl:inverseOf gsoc:isCountableStaticPartOf .
+
+gsoc:isCountableStaticPartOf a owl:ObjectProperty ;
+    rdfs:comment "Inverse of hasCountableStaticPart."@en ;
+    owl:inverseOf gsoc:hasCountableStaticPart .
+
 gsoc:isSpatiallyRelatedTo a owl:ObjectProperty,
         owl:SymmetricProperty ;
     rdfs:comment "Undirected most general spatial relation." ;
@@ -2004,9 +2029,8 @@ gsoc:Quality_Value a owl:Class ;
     rdfs:label "Quality Value"@en ;
     rdfs:comment "A value of (essential part of) a quality; can be a measured value (e.g. 2.0), named value (e.g. thick), or a range (e.g. 2.0-2.2 or thin-thick). Values exist within a reference system."@en ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:onClass gsoc:Quality ;
             owl:onProperty gsoc:isValueOf ;
-            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+            owl:someValuesFrom gsoc:Quality ],
         [ a owl:Restriction ;
             owl:onProperty gsoc:hasReferenceSystem ;
             owl:someValuesFrom gsoc:Reference_System ],
@@ -2074,7 +2098,8 @@ gsoc:Time_Region a owl:Class ;
             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
         gsoc:Perdurant .
 
-gsoc:hasPart a owl:ObjectProperty ;
+gsoc:hasPart a owl:ObjectProperty,
+        owl:TransitiveProperty ;
     rdfs:comment "Standard directed relation between a whole and a part; the part could be proper or improper."@en ;
     rdfs:subPropertyOf gsoc:parthood ;
     owl:inverseOf gsoc:isPartOf .
