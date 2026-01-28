@@ -1689,7 +1689,10 @@ gsoc:Temporal_Reference_System a owl:Class ;
     rdfs:label "Temporal Reference System "@en ;
     rdfs:comment "A reference system for temporal values, use to quantify locations in time. Might be a temporal coordinate system (with an origin, direction, and scale), a calendar-clock combination, or a (possibly hierarchical) ordinal system, such as geologic time scale. the 'isReferenceSystemFor' corresponds to the ISO19108 'domainOfValidity', with the extent limited to a temporal extent (defined by a perdurant, typically a gsoc:Time_Interval)"@en ;
     rdfs:seeAlso time:TRS ;
-    rdfs:subClassOf gsoc:Reference_System .
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:onProperty gsoc:isReferenceSystemFor ;
+            owl:someValuesFrom gsoc:Temporal_Value ],
+        gsoc:Reference_System .
 
 gsoc:hasDataValue a owl:DatatypeProperty ;
     rdfs:comment "Directed relation between a measure value and a simple data type - xsd:anySimpleType - e.g. as a number, string, or date."@en ;
