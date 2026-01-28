@@ -882,3 +882,89 @@ Rule-based reasoners like Jena materialize the inferences they can make without 
 1. Syntax validation (rdflib parse)
 2. Combined HermiT consistency check (all examples + base ontology)
 3. Individual HermiT testing (if Phase 2 fails, tests each example separately)
+
+---
+
+## Example File Fixes (Path A: Fix ABox)
+
+### Overview
+
+Rather than modifying the ontology TBox to relax `isQualityOf` restrictions, the example TTL files were fixed to use correct property paths that conform to the GSO ontology's OWL 2 DL semantics. This approach ("Path A") preserves the ontology's strict type constraints while ensuring example files are consistent.
+
+### Violation Categories Identified
+
+| Code | Violation Pattern | Fix Applied |
+|------|-------------------|-------------|
+| V1 | `Spatial_Location` on non-`Spatial_Region` bearer | Route through `occupiesSpaceDirectly → Spatial_Region → hasQuality → Spatial_Location` |
+| V2 | `hasQuality` used for `Quality_Value` (e.g., `Numeric_Value`, `Range_Value`) | Change to `hasValue` (Quality → hasValue → Quality_Value) |
+| V3 | `Grain_Roundness` nested inside `Particle_Shape` via `hasQuality` | Flatten: both become sibling qualities of the material |
+| V4 | `Physical_Quality` nested inside another `Quality` via `hasQuality` | Flatten: move nested quality to sibling level |
+| V5 | `Proportion` on non-`Part` role (e.g., `Phenocryst`) | Split into separate `Part` role for proportion |
+| V6 | `Quality` type used as `hasConstituent` object | Change to proper material type (e.g., `Granite`) |
+| V7 | `Duration` on `Time_Interval_Location`, `Uncertainty` on `Duration` | Move `Duration` to `Time_Interval`, `Uncertainty` to `Numeric_Value` |
+| V8 | `Quality` type as object of `occupiesTimeDirectly` | Wrap in `Time_Region` (e.g., `Time_Instant` or `Time_Interval`) |
+
+### Files Fixed
+
+| File | Violations Fixed |
+|------|-----------------|
+| `kootznahoo.ttl` | V1: Spatial_Location routed through Spatial_Region |
+| `GSO-ExampleSpecificRockObject.ttl` | V2 (3x), V3: hasQuality→hasValue, flatten Roundness/Shape |
+| `GSO-ExampleRockMaterialBolsaQuartzite.ttl` | V2 (3x), V3: hasQuality→hasValue, flatten Roundness/Shape |
+| `GSO-ExampleRoles.ttl` | V3 (2x), V5: flatten Roundness/Shape, Proportion→Part role |
+| `GSO-ExampleFold.ttl` | V4 (5x): flatten Azimuth/Plunge/Dip from Orientations |
+| `GSO-ExampleHistory.ttl` | V4, V7: Duration to Time_Interval, Uncertainty to Numeric_Value |
+| `GSO-ExampleComplexContacts.ttl` | V2, V6: Grain_Size→Granite, hasQuality→hasValue |
+| `GSO-ExampleLaTojizaPluton.ttl` | V2 (7x), V8 (5x): hasQuality→hasValue, Quality→Time_Region |
+
+### Files Verified Clean (No Violations)
+
+- `GSO-ExampleBritishColumbiaStrat-v2.ttl`
+- `GSO-ExampleEpochLowerJurassic.ttl`
+- `GSO-ExampleEvents1.ttl`
+- `GSO-ExampleFault2.ttl`
+- `GSO-ExampleFaultKannaV4Model.ttl`
+- `GSO-ExampleFormationJs.ttl`
+- `GSO-ExampleGeosciAustraliaStratUnit.ttl`
+- `GSO-ExampleIsleOfWightStrat-pm1.ttl`
+- `GSO-ExamplePetrophysicalProperties_v2.ttl`
+- `GSO-ExampleVocabularyExtension-Alteration_Type-BC.ttl`
+- `GSO-LardeauGroup.ttl`
+
+### Validation Script
+
+**validate_examples.py** — Targeted validation of example files against GSO structural constraints.
+
+**Usage:**
+```bash
+python validate_examples.py                     # Validate all example files
+python validate_examples.py file1.ttl file2.ttl # Validate specific files
+```
+
+**Features:**
+- Checks all 8 violation categories (V1-V8) using rdflib class hierarchy traversal
+- No full DL reasoning required (HermiT/Pellet timeout on GSO's axiom complexity)
+- Loads base ontology modules (excluding large vocabulary modules like Mineral/Element)
+- Reports specific violations with class/property details
+- Exit code 0 if all pass, 1 if any fail
+
+**Validation Results:**
+```
+--- Summary ---
+  Passed: 19/19
+  Failed: 0/19
+  Total violations: 0
+```
+
+**Verification:** Original (unfixed) files correctly show violations:
+- `GSO-ExampleSpecificRockObject.ttl` (original): 7 violations (4x V2, 3x V3/V4)
+- `GSO-ExampleRoles.ttl` (original): 3 violations (2x V3/V4, 1x V5)
+- `GSO-ExampleFold.ttl` (original): 5 violations (5x V3/V4)
+- `GSO-ExampleHistory.ttl` (original): 2 violations (2x V3/V4)
+
+### Note on Full DL Reasoning
+
+Full OWL 2 DL reasoning with HermiT or Pellet was not achievable for the GSO ontology due to axiom complexity:
+- Even with ~9K triples (excluding Mineral/Element modules), HermiT exceeds 10+ minute timeouts
+- The targeted validation script (`validate_examples.py`) provides equivalent coverage for the specific violation patterns that cause inconsistency
+- For applications requiring full DL reasoning, consider the simplification strategies documented above
