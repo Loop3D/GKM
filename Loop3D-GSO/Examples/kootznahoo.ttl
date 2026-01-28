@@ -23,36 +23,41 @@
 	  owl:imports <https://w3id.org/gso/1.0/master/ontology> ;
 .
 
-xdd:KootznahooFormation 
+xdd:KootznahooFormation
      rdf:type gsgu:Formation ;
 	 rdfs:label "Kootznahoo formation"@en ;
-     gsoc:hasQuality [
-		rdf:type gsoc:Spatial_Location ;
-		#  Spatial_Location can have multiple values, they must all be Spatial_Value or 
-		#    subclass of Spatial_Value.
-        gsoc:hasValue [
-		   rdf:type gsoc:Spatial_Value;
-		   gsoc:hasDataValue "Little Pybus Bay"@en
-		] ;
-        gsoc:hasValue [
-		# WKT_value is subclass of Spatial_Value
-		   rdf:type gsoc:WKT_Value ;   
-		   gsoc:hasDataValue "( POINT -134.13706734 57.24686809  )" ;
-		     #  point (X  Y)   no comma, X first
-		   gsoc:hasReferenceSystem <https://epsg.io/4326> ;
-		     # GKM doesn't define a any properties for gsoc:Geographic_Coordinate_System,
-		     #  so object in triple is URI typed as GCS in separate triple (below)
-		   gsoc:determinedBy [
-              rdf:type xdd:GPS_determination ;
-			  # GPS_determination defined as subclass of gspd:Observation_Process
-              gsoc:hasConstituent xdd:garmin12 ;
-			  rdfs:comment "notes on measurement process"@en
-            ] ;	
-			gsoc:hasQuality [
-				rdf:type gsoc:Uncertainty ; 
-				gsoc:hasDataValue "20"^^xsd:decimal   ;
-				gsoc:hasUOM unit:M ;
-            ] ;
+	 # Spatial_Location must be quality of a Spatial_Region (isQualityOf only Spatial_Region).
+	 # Route through occupiesSpaceDirectly to connect Formation to its Spatial_Region.
+     gsoc:occupiesSpaceDirectly [
+		rdf:type gsoc:Spatial_Region ;
+		gsoc:hasQuality [
+			rdf:type gsoc:Spatial_Location ;
+			#  Spatial_Location can have multiple values, they must all be Spatial_Value or
+			#    subclass of Spatial_Value.
+			gsoc:hasValue [
+			   rdf:type gsoc:Spatial_Value;
+			   gsoc:hasDataValue "Little Pybus Bay"@en
+			] ;
+			gsoc:hasValue [
+			# WKT_value is subclass of Spatial_Value
+			   rdf:type gsoc:WKT_Value ;
+			   gsoc:hasDataValue "( POINT -134.13706734 57.24686809  )" ;
+				 #  point (X  Y)   no comma, X first
+			   gsoc:hasReferenceSystem <https://epsg.io/4326> ;
+				 # GKM doesn't define a any properties for gsoc:Geographic_Coordinate_System,
+				 #  so object in triple is URI typed as GCS in separate triple (below)
+			   gsoc:determinedBy [
+				  rdf:type xdd:GPS_determination ;
+				  # GPS_determination defined as subclass of gspd:Observation_Process
+				  gsoc:hasConstituent xdd:garmin12 ;
+				  rdfs:comment "notes on measurement process"@en
+				] ;
+			   gsoc:hasQuality [
+				  rdf:type gsoc:Uncertainty ;
+				  gsoc:hasDataValue "20"^^xsd:decimal   ;
+				  gsoc:hasUOM unit:M ;
+				] ;
+			] ;
 		] ;
 	  ].
 	 
