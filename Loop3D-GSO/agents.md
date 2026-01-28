@@ -622,14 +622,14 @@ This pattern affects all Epoch and Period instances that have `timeFinishedBy` a
 
 ### Fix
 
-Added `gsog:Geologic_Time_Boundary` to the `timeIncludes` allValuesFrom unions in `Modules/GSO-Geologic_Time.ttl`:
+Changed `timeIncludes` to `timeContains` in the allValuesFrom restrictions in `Modules/GSO-Geologic_Time.ttl`:
 
 | Class | Before | After |
 |-------|--------|-------|
-| `Epoch` | `timeIncludes only Age` | `timeIncludes only (Age OR Geologic_Time_Boundary)` |
-| `Period` | `timeIncludes only (Age OR Epoch OR Subperiod)` | `timeIncludes only (Age OR Epoch OR Subperiod OR Geologic_Time_Boundary)` |
+| `Epoch` | `timeIncludes only Age` | `timeContains only Age` |
+| `Period` | `timeIncludes only (Age OR Epoch OR Subperiod)` | `timeContains only (Age OR Epoch OR Subperiod)` |
 
-This allows time boundaries to be valid `timeIncludes` values (via the `timeFinishedBy` subproperty chain) without conflicting with the allValuesFrom restrictions.
+This works because `timeFinishedBy` is a subproperty of `timeIncludes` but NOT of `timeContains`. The boundaries asserted via `timeFinishedBy` no longer trigger the `allValuesFrom` constraint, which only applies to `timeContains` values. This approach is consistent with how constraints are constructed on other Geologic_Time_Interval subclasses.
 
 ---
 
@@ -1003,7 +1003,6 @@ gsoc:hasCountableStaticPart a owl:ObjectProperty ;
 | `gsoc:isPartOf` | Inverse of hasPart |
 | `gsoc:hasConstituent` | Material composition — if rock has mineral and mineral has element, rock has element |
 | `gsoc:isConstituentOf` | Inverse of hasConstituent |
-| `gsoc:hosts` | Feature hosting — if A hosts B and B hosts C, then A hosts C |
 | `gsoc:timeIncludes` | Temporal inclusion is transitive |
 | `gsoc:timeIncludedBy` | Inverse of timeIncludes |
 | `gsoc:timeContains` | Temporal containment is transitive |
@@ -1013,6 +1012,8 @@ gsoc:hasCountableStaticPart a owl:ObjectProperty ;
 | `gsoc:occupiesSpaceIndirectly` | Spatial occupation |
 | `gsoc:occupiesTimeDirectly` | Temporal occupation |
 | `gsoc:occupiesTimeIndirectly` | Temporal occupation |
+
+**Note:** `gsoc:hosts` is NOT transitive because `gsoc:hostedBy` (its inverse) has cardinality restrictions in GSO-Geologic_Structure.ttl and GSO-Geologic_Structure_Contact.ttl.
 
 ### Cardinality Restrictions Changed to someValuesFrom
 
@@ -1053,6 +1054,7 @@ Changed all `isValueOf exactly 1` to `isValueOf some` to allow `isPartOf` (ances
 After all changes:
 - **36/36 TTL files parse successfully**
 - **136,598 total triples**
-- **14 transitive properties declared**
+- **13 transitive properties declared** (hosts excluded due to hostedBy cardinality restrictions)
 - **34 cardinality restrictions remain** — none conflict with transitive properties
 - **OWL 2 DL compliant** — no cardinality restrictions on transitive properties or their subproperties
+- **HermiT consistency test (without Ischart):** CONSISTENT, 0 unsatisfiable classes
