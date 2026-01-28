@@ -805,3 +805,80 @@ Many `allValuesFrom` (universal) restrictions serve a descriptive rather than pr
 | 3. Flatten time properties | High | Moderate (loses some inferences) | Low (property hierarchy edits) |
 | 4. Separate TBox/ABox | High (for reasoning) | None (data unchanged) | Low (file reorganization) |
 | 5. Reduce disjointness | Medium | Moderate (fewer hard constraints) | Medium (requires per-axiom audit) |
+
+---
+
+## Example Files Consistency Testing
+
+### Status: ALL INCONSISTENT with HermiT (ABox problem)
+
+All 22 example TTL files in the `Examples/` directory were tested for OWL 2 DL consistency with the base GSO ontology (excluding Feature and Ischart modules) using HermiT.
+
+**Phase 1 — Syntax Validation:** All 22 files parse successfully with rdflib. No syntax errors.
+
+**Phase 2 — Combined Test:** INCONSISTENT (5.4s) — 168,471 triples, 6,750 classes, 768 individuals.
+
+**Phase 3 — Individual Testing:** All 22/22 examples are INCONSISTENT, including the smallest (kootznahoo.ttl, 26 triples, 1 Formation individual).
+
+| Example File | Triples | Result | Time |
+|---|---|---|---|
+| GSO-ExampleBritishColumbiaStrat-v2.ttl | 1,914 | INCONSISTENT | 5.9s |
+| GSO-ExampleComplexContacts.ttl | 314 | INCONSISTENT | 6.9s |
+| GSO-ExampleEpochLowerJurassic.ttl | 21 | INCONSISTENT | 8.1s |
+| GSO-ExampleEvents1.ttl | 114 | INCONSISTENT | 9.5s |
+| GSO-ExampleFault2.ttl | 45 | INCONSISTENT | 10.5s |
+| GSO-ExampleFaultKannaV4Model.ttl | 104 | INCONSISTENT | 11.5s |
+| GSO-ExampleFold.ttl | 77 | INCONSISTENT | 13.0s |
+| GSO-ExampleFormationJs.ttl | 148 | INCONSISTENT | 14.2s |
+| GSO-ExampleGeosciAustraliaStratUnit.ttl | 92 | INCONSISTENT | 17.2s |
+| GSO-ExampleHammerslyData.ttl | 148 | INCONSISTENT | 19.4s |
+| GSO-ExampleHistory.ttl | 269 | INCONSISTENT | 17.8s |
+| GSO-ExampleIsleOfWightStrat-pm1-v2.ttl | 2,009 | INCONSISTENT | 19.0s |
+| GSO-ExampleIsleOfWightStrat-pm1.ttl | 1,538 | INCONSISTENT | 20.4s |
+| GSO-ExampleLaTojizaPluton.ttl | 592 | INCONSISTENT | 21.3s |
+| GSO-ExamplePetrophysicalProperties_v2.ttl | 10,854 | INCONSISTENT | 22.9s |
+| GSO-ExampleRockMaterialBolsaQuartzite.ttl | 170 | INCONSISTENT | 24.2s |
+| GSO-ExampleRoles.ttl | 210 | INCONSISTENT | 25.4s |
+| GSO-ExampleSpecificRockObject.ttl | 170 | INCONSISTENT | 27.1s |
+| GSO-ExampleVocab-Alteration_Type-BC.ttl | 43 | INCONSISTENT | 34.9s |
+| GSO-LardeauGroup.ttl | 66 | INCONSISTENT | 37.2s |
+| kootznahoo.ttl | 26 | INCONSISTENT | 40.2s |
+| xgma-geotimeversion.ttl | 23,774 | INCONSISTENT | 42.2s |
+
+### Root Cause
+
+This is not an example-specific problem. The base ontology TBox is satisfiable (0 unsatisfiable classes with HermiT), but when HermiT tries to build a tableau model for **any** named individual, the cascade of existential requirements (`someValuesFrom`) combined with universal restrictions (`allValuesFrom`) and disjointness axioms creates contradictions. This is the same class of issue as the Ischart inconsistency.
+
+When HermiT encounters a named individual (e.g., `xdd:KootznahooFormation rdf:type gsgu:Formation`), it must:
+1. Satisfy all `someValuesFrom` restrictions inherited through the class hierarchy by creating "witness" individuals
+2. Each witness inherits its own constraints, creating more witnesses
+3. The `allValuesFrom` restrictions constrain what types those witnesses can be
+4. `disjointWith` axioms create hard boundaries between types
+5. The expanding web of witnesses eventually violates a disjointness constraint → **INCONSISTENT**
+
+### OWL Full Reasoning Alternatives
+
+OWL Full is undecidable, so no reasoner can guarantee complete reasoning. However, several tools provide practical alternatives to OWL 2 DL tableau reasoning:
+
+**Rule-based / Forward-chaining reasoners:**
+- **Apache Jena (with OWL rules)** — Jena's built-in rule engine supports OWL Full-like inference using forward/backward chaining. It applies RDFS and OWL entailment rules to derive inferred triples without trying to build a complete tableau model. Most practical option for GSO.
+- **RDFox** — High-performance materialization engine. Supports OWL 2 RL (a decidable subset) plus custom Datalog rules. Very fast for large ABoxes. Commercial license.
+- **EYE (Euler Yet another proof Engine)** — A Notation3/N3 reasoner that can handle OWL Full semantics via rules.
+
+**SPARQL/SHACL-based validation (practical for ABox):**
+- **SHACL validators** (e.g., TopBraid SHACL, pySHACL) — Write SHACL shapes expressing the constraints that matter for data quality, then validate individuals against them. More practical than DL reasoning for ABox validation.
+- **SPARQL queries** — Write ASK/SELECT queries to check for specific constraint violations.
+
+**Recommended approach for GSO:**
+1. **Jena** with its OWL reasoner profile for inference (deriving implied triples from examples)
+2. **SHACL** for constraint validation (checking that individuals conform to expected patterns)
+3. **HermiT** for TBox-only consistency checking (class hierarchy, which already passes)
+
+Rule-based reasoners like Jena materialize the inferences they can make without building a complete tableau model, so they do not report the kind of inconsistency that HermiT finds. The trade-off is they won't detect certain types of logical contradictions — but for practical data validation, SHACL constraints are more useful and more targeted.
+
+### Test Script
+
+`test_examples.py` (repo root) — Tests all Example TTL files in three phases:
+1. Syntax validation (rdflib parse)
+2. Combined HermiT consistency check (all examples + base ontology)
+3. Individual HermiT testing (if Phase 2 fails, tests each example separately)
