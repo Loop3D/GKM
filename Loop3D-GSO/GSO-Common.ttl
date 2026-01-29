@@ -432,7 +432,7 @@ gsoc:staticHostedBy a owl:ObjectProperty ;
 gsoc:timeContains a owl:ObjectProperty,
         owl:TransitiveProperty ;
     rdfs:label "contains"@en ;
-    rdfs:comment "target interval is completely within the source interval; source begins before target and ends after target. inverse of During. Equivalent to union of OWL Time time:intervalContains and time:inside"@en ;
+    rdfs:comment "Allen 'contains' relation (strict containment): target Time_Region is completely within source Time_Region with NO boundary coincidence; source begins strictly before target begins, and source ends strictly after target ends. This is narrower than timeIncludes which allows boundary coincidence. Use timeContains in allValuesFrom restrictions when you want to exclude boundary assertions (via timeStartedBy/timeFinishedBy) from triggering the constraint."@en ;
     rdfs:domain [ a owl:Class ;
             owl:unionOf ( gsoc:Time_Interval [ a owl:Restriction ;
                         owl:allValuesFrom gsoc:Time_Interval ;
@@ -786,7 +786,7 @@ gsoc:stephen_richard a owl:NamedIndividual,
 
 gsoc:timeDuring a owl:ObjectProperty ;
     rdfs:label "during"@en ;
-    rdfs:comment "Beginning (directly or indirectly) of subject entity is  younger than the beginning of the object entity, and the end (directly or indirectly) of the subject entity is older than the end of the object entity. Allen relation. OWL Time time:intervalDuring is narrower, only relates ProperIntervals."@en ;
+    rdfs:comment "Allen 'during' relation (strict containment, inverse of timeContains): Source Time_Region is completely within target Time_Region with NO boundary coincidence; source begins strictly after target begins, and source ends strictly before target ends. This is the inverse of timeContains and a subproperty of timeIncludedBy."@en ;
     rdfs:range [ a owl:Class ;
             owl:unionOf ( gsoc:Time_Interval [ a owl:Restriction ;
                         owl:allValuesFrom gsoc:Time_Interval ;
@@ -803,13 +803,13 @@ gsoc:timeEquivalentTo a owl:ObjectProperty,
 
 gsoc:timeFinishes a owl:ObjectProperty ;
     rdfs:label "finishes"@en ;
-    rdfs:comment "Target TimeRegion starts before source TimeRegion, and source and target TimeRegion end at the same instant. Allen Relation. Use to assign a younger age boundary for a Time Region (instant or interval)."@en ;
+    rdfs:comment "Allen 'finishes' relation: Source TimeRegion starts after target TimeRegion begins, and source and target end at the same instant. Source is contained in target with coincident end boundaries. Use to indicate source interval ends at the same time as target interval."@en ;
     rdfs:range [ a owl:Class ;
             owl:unionOf ( gsoc:Time_Interval [ a owl:Restriction ;
                         owl:allValuesFrom gsoc:Time_Interval ;
                         owl:onProperty gsoc:occupiesTime ] ) ] ;
     rdfs:seeAlso <time:intervalFinishes> ;
-    rdfs:subPropertyOf gsoc:timeIncludedBy .
+    rdfs:subPropertyOf gsoc:isTemporallyRelatedTo .
 
 gsoc:timeHasBeginning a owl:ObjectProperty ;
     rdfs:label "has beginning "@en ;
@@ -868,7 +868,7 @@ gsoc:timeOverlaps a owl:ObjectProperty ;
 
 gsoc:timeStarts a owl:ObjectProperty ;
     rdfs:label "starts"@en ;
-    rdfs:comment "Source and target TimeRegions start at same instant, target TimeRegion ends after source TimeRegion; Allen Relation. Assign an older age boundary for a time interval. OWL time time:intervalStarts is narrower; only relates ProperIntervals"@en ;
+    rdfs:comment "Allen 'starts' relation: Source and target TimeRegions start at same instant, but target ends after source. Source is contained in target with coincident start boundaries. NOT a subproperty of timeIncludedBy to allow boundary assertions without triggering allValuesFrom constraints."@en ;
     rdfs:range [ a owl:Class ;
             owl:unionOf ( gsoc:Time_Interval [ a owl:Restriction ;
                         owl:allValuesFrom gsoc:Time_Interval ;
@@ -1196,18 +1196,17 @@ gsoc:timeDisjoint a owl:ObjectProperty,
 
 gsoc:timeFinishedBy a owl:ObjectProperty ;
     rdfs:label "finished by"@en ;
-    rdfs:comment "source interval begins before target; source and target end simultaneously; inverse of timeFinishes.  OWL time time:intervalFinsishedBy is narrower, only relates proper intervals."@en ;
+    rdfs:comment "Allen 'finishedBy' relation: Source interval begins before target, and source and target end at the same instant. Target is contained in source with coincident end boundaries. Inverse of timeFinishes. NOT a subproperty of timeIncludes to allow boundary assertions without triggering allValuesFrom constraints on timeIncludes/timeContains."@en ;
     rdfs:domain [ a owl:Class ;
             owl:unionOf ( gsoc:Time_Interval [ a owl:Restriction ;
                         owl:allValuesFrom gsoc:Time_Interval ;
                         owl:onProperty gsoc:occupiesTime ] ) ] ;
     rdfs:seeAlso <time:intervalFinishedBy> ;
-    rdfs:subPropertyOf gsoc:timeIncludes ;
+    rdfs:subPropertyOf gsoc:isTemporallyRelatedTo ;
     owl:inverseOf gsoc:timeFinishes .
 
-gsoc:timeIncludedBy a owl:ObjectProperty,
-        owl:TransitiveProperty ;
-    rdfs:comment "Beginning (directly or indirectly) of subject entity is the same or younger than the beginning of the object entity, and the end (directly or indirectly) of the subject entity is the same or older than the end of the object entity. Union of timeDuring, timeFinishes and timeStarts. Time_Region occupied directly or indirectly by the subject does not extend outside the Time_Region occupied directly or indirectly by the object.  OWL Time time:intervalIn is subproperty, restricted to relating intervals, and not including timeEquivalentTo."@en ;
+gsoc:timeIncludedBy a owl:ObjectProperty ;
+    rdfs:comment "Inverse of timeIncludes: source Time_Region is completely within target Time_Region. Semantically the union of timeDuring (strict containment), timeStarts, timeFinishes, and timeEquivalentTo. However, for OWL 2 DL compatibility, only timeDuring is a subproperty; timeStarts and timeFinishes are separate properties under isTemporallyRelatedTo."@en ;
     rdfs:range [ a owl:Class ;
             owl:unionOf ( gsoc:Time_Interval [ a owl:Restriction ;
                         owl:allValuesFrom gsoc:Time_Interval ;
@@ -1242,7 +1241,7 @@ gsoc:timeOccupiedDirectlyBy a owl:ObjectProperty ;
 
 gsoc:timeStartedBy a owl:ObjectProperty ;
     rdfs:label "started by"@en ;
-    rdfs:comment "source and target start simultaneously; source interval ends after target; inverse of starts; OWL time is narrower, only relates ProperIntervals"@en ;
+    rdfs:comment "Allen 'startedBy' relation: Source and target start at same instant, but source ends after target. Target is contained in source with coincident start boundaries. Inverse of timeStarts. NOT a subproperty of timeIncludes to allow boundary assertions without triggering allValuesFrom constraints on timeIncludes/timeContains."@en ;
     rdfs:domain [ a owl:Class ;
             owl:unionOf ( gsoc:Time_Interval [ a owl:Restriction ;
                         owl:allValuesFrom gsoc:Time_Interval ;
@@ -1621,9 +1620,8 @@ gsoc:specificallyDependsOn a owl:ObjectProperty ;
     rdfs:comment "Directed specific ontological dependence in which something depends on something else, excluding self-dependence and other problematic border cases."@en ;
     rdfs:subPropertyOf gsoc:genericallyDependsOn .
 
-gsoc:timeIncludes a owl:ObjectProperty,
-        owl:TransitiveProperty ;
-    rdfs:comment "Beginning (directly or indirectly) of subject entity is the same or older than the beginning of the object entity, and the end of the subject entity is the same or younger than the end of the object entity. Union of timeContains, timeFinishedBy and timeStartedBy. Time_Region occupied directly or indirectly by the object does not extend outside the Time_Region occupied directly or indirectly by the subject.  OWL time:inside is narrower; doesn't allow timeStartedBy and timeFinishedBy where the object is an instant, or timeEquivalentTo."@en ;
+gsoc:timeIncludes a owl:ObjectProperty ;
+    rdfs:comment "Broad temporal inclusion: target Time_Region is completely within source Time_Region; source begins at or before target begins, and source ends at or after target ends. Semantically this is the union of timeContains (strict containment), timeStartedBy, timeFinishedBy, and timeEquivalentTo. However, for OWL 2 DL compatibility, only timeContains is a subproperty; timeStartedBy and timeFinishedBy are separate properties under isTemporallyRelatedTo to avoid allValuesFrom constraint violations when boundary instants are asserted."@en ;
     rdfs:domain [ a owl:Class ;
             owl:unionOf ( gsoc:Time_Interval [ a owl:Restriction ;
                         owl:allValuesFrom gsoc:Time_Interval ;
@@ -1980,13 +1978,11 @@ gsoc:Role a owl:Class ;
     rdfs:label "Role"@en ;
     rdfs:comment "Roles are played by a relata in a relation, e.g. a person plays the role of employee in an employs relation.  The relata playing the role is the RolePlayer and the other relata are RoleObjects. Because a role (Mary as employer, John as employee) is derived from a specific relation, e.g.  Mary employs John, it mutully depends on a specific reified relation instance (Relator - the employment of John by Mary). Roles carry qualities -  indeed, they are are a bundle of qualities."@en ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:onClass gsoc:Particular ;
             owl:onProperty gsoc:hasRolePlayer ;
-            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+            owl:someValuesFrom gsoc:Particular ],
         [ a owl:Restriction ;
-            owl:onClass gsoc:Relator ;
             owl:onProperty gsoc:mutuallySpecDependsOn ;
-            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+            owl:someValuesFrom gsoc:Relator ],
         [ a owl:Restriction ;
             owl:onProperty gsoc:hasRoleObject ;
             owl:someValuesFrom gsoc:Particular ],

@@ -1041,3 +1041,117 @@ After all changes:
 - **34 cardinality restrictions remain** — none conflict with transitive properties
 - **OWL 2 DL compliant** — no cardinality restrictions on transitive properties or their subproperties
 - **HermiT consistency test (without Ischart):** CONSISTENT, 0 unsatisfiable classes
+
+---
+
+## Allen Temporal Relations Property Hierarchy (Revised)
+
+### Design Goals
+
+The GSO time properties implement Allen's interval algebra relations with modifications for OWL 2 DL compatibility. The key insight is that `allValuesFrom` restrictions on properties propagate through the subproperty hierarchy, so boundary-coincidence properties (like `timeStartedBy`, `timeFinishedBy`) must NOT be subproperties of `timeIncludes`/`timeContains` to avoid constraint violations when boundary instants are asserted.
+
+### Semantic Definitions
+
+| Property | Allen Relation | Semantics |
+|----------|---------------|-----------|
+| `timeIncludes` | includes (broad) | Target completely within source; boundaries MAY coincide |
+| `timeContains` | contains (strict) | Target strictly within source; source begins BEFORE target, ends AFTER target |
+| `timeStartedBy` | startedBy | Source and target start at same instant; source ends after target |
+| `timeFinishedBy` | finishedBy | Source and target end at same instant; source begins before target |
+| `timeStarts` | starts | Source and target start at same instant; target ends after source |
+| `timeFinishes` | finishes | Source and target end at same instant; target begins before source |
+| `timeDuring` | during | Inverse of contains; source strictly within target |
+
+### Property Hierarchy
+
+```
+isTemporallyRelatedTo (top-level symmetric temporal relation)
+├── timeIntersects (any temporal overlap)
+│   ├── timeEquivalentTo
+│   ├── timeOverlaps / timeOverlappedBy
+│   ├── timeMeets / timeMetBy
+│   └── timeInclusion
+│       ├── timeIncludes (NOT transitive)
+│       │   └── timeContains (transitive, strict containment)
+│       └── timeIncludedBy (NOT transitive)
+│           └── timeDuring (inverse of timeContains)
+├── timeStartedBy / timeStarts (boundary coincidence - NOT under timeIncludes)
+├── timeFinishedBy / timeFinishes (boundary coincidence - NOT under timeIncludes)
+└── timeDisjoint (before/after)
+```
+
+### Changes Made
+
+| Property | Before | After | Reason |
+|----------|--------|-------|--------|
+| `timeIncludes` | TransitiveProperty | NOT transitive | Avoid constraint propagation with allValuesFrom |
+| `timeIncludedBy` | TransitiveProperty | NOT transitive | Inverse of timeIncludes |
+| `timeStartedBy` | subPropertyOf timeIncludes | subPropertyOf isTemporallyRelatedTo | Boundary assertions shouldn't trigger allValuesFrom on timeIncludes |
+| `timeStarts` | subPropertyOf timeIncludedBy | subPropertyOf isTemporallyRelatedTo | Inverse consistency |
+| `timeFinishedBy` | subPropertyOf timeIncludes | subPropertyOf isTemporallyRelatedTo | Boundary assertions shouldn't trigger allValuesFrom on timeIncludes |
+| `timeFinishes` | subPropertyOf timeIncludedBy | subPropertyOf isTemporallyRelatedTo | Inverse consistency |
+| `timeContains` | (unchanged) | subPropertyOf timeIncludes, TransitiveProperty | Strict containment remains transitive |
+| `timeDuring` | (unchanged) | subPropertyOf timeIncludedBy | Inverse of timeContains |
+
+### Usage Pattern
+
+For class restrictions on geologic time intervals:
+
+```turtle
+# Use timeContains (not timeIncludes) when you want ONLY strict containment
+# This excludes boundary assertions via timeStartedBy/timeFinishedBy
+
+gst:Epoch rdfs:subClassOf [
+    owl:allValuesFrom gst:Age ;
+    owl:onProperty gsoc:timeContains ;  # NOT timeIncludes
+] .
+
+# Boundaries can still be asserted without violating the constraint:
+ist:MiddleTriassic2004 gsoc:timeFinishedBy ist:BaseUpperTriassic2004 .
+# This is OK because timeFinishedBy is NOT a subproperty of timeContains
+```
+
+### Crystal_Role Fix
+
+Crystal_Role was unsatisfiable due to a qualified cardinality restriction on the Role class.
+
+**Root Cause:** The Role class had:
+```turtle
+gsoc:Role rdfs:subClassOf [
+    owl:onProperty gsoc:hasRolePlayer ;
+    owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+    owl:onClass gsoc:Particular
+] .
+```
+
+This "exactly 1" restriction conflicted with Crystal_Role's inheritance chain. The hasRoleObject property was already changed to use `someValuesFrom`, so hasRolePlayer should match.
+
+**Fix Applied:** Changed both restrictions on Role class to existential quantification:
+```turtle
+gsoc:Role rdfs:subClassOf [
+    owl:onProperty gsoc:hasRolePlayer ;
+    owl:someValuesFrom gsoc:Particular
+] ,
+[
+    owl:onProperty gsoc:mutuallySpecDependsOn ;
+    owl:someValuesFrom gsoc:Relator
+] .
+```
+
+### Testing Results
+
+**HermiT test on GSO-GeologicTime completed successfully:**
+- **Processing time:** 8,176,671 ms (~136 minutes)
+- **Result:** CONSISTENT
+- **Unsatisfiable classes:** 0
+
+All three previously unsatisfiable classes are now satisfiable:
+- ✓ Geologic_Time_Interval_Collection (fixed by removing timeIncludes transitivity)
+- ✓ Geologic_Time_Scale (fixed by removing timeIncludes transitivity)
+- ✓ Crystal_Role (fixed by changing hasRolePlayer from "exactly 1" to "some")
+
+**Note:** Pellet reasoner gives a false positive inconsistency error:
+```
+InconsistentOntologyException: Intersection of datatypes [decimal, anySimpleType] is inconsistent
+```
+This is a known Pellet limitation with xsd:anySimpleType handling. Use HermiT for accurate consistency checking.
