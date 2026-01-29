@@ -1155,3 +1155,38 @@ All three previously unsatisfiable classes are now satisfiable:
 InconsistentOntologyException: Intersection of datatypes [decimal, anySimpleType] is inconsistent
 ```
 This is a known Pellet limitation with xsd:anySimpleType handling. Use HermiT for accurate consistency checking.
+
+### Contact Module Incompatibility with Ischart
+
+**Issue:** GSO-Geologic_Time_Ischart.ttl uses `gscn:GSSP` to type GSSP instances, but importing the full GSO-Geologic_Structure_Contact module causes immediate unsatisfiability.
+
+**Root Cause:** The Contact module's GSSP class has restrictions:
+```turtle
+gscn:GSSP
+  rdfs:subClassOf gscn:Stratigraphic_Point ;
+  rdfs:subClassOf [
+      owl:onProperty gsoc:isPartOf ;
+      owl:someValuesFrom gscn:Chronostratigraphic_Contact ;
+    ] ;
+  rdfs:subClassOf [
+      owl:onProperty gsoc:staticHostedBy ;
+      owl:someValuesFrom gsog:Geologic_Event ;
+    ] .
+```
+
+These restrictions interact with other axioms (likely in the Stratigraphic_Point hierarchy or Contact class definitions) to create unsatisfiability when combined with the Ischart time scale data.
+
+**Workaround:** Instead of importing the Contact module, Ischart defines a local stub:
+```turtle
+gscn:GSSP
+  rdf:type owl:Class ;
+  rdfs:comment "Global Boundary Stratotype Section and Point..." ;
+  rdfs:label "GSSP"@en .
+```
+
+This provides the class for typing GSSP instances without the problematic restrictions.
+
+**Future Investigation:** The root cause of the incompatibility should be investigated to allow full Contact module import. Likely involves:
+- Restrictions on Stratigraphic_Point or its superclasses
+- Interactions between isPartOf/staticHostedBy and other property hierarchies
+- Possible disjointness axioms in the Contact module
